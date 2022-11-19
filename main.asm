@@ -1,5 +1,8 @@
 lorom
 
+incsrc "registers.asm"
+incsrc "registers_spc.asm"
+
 incsrc "bank_00.asm"
 incsrc "bank_01.asm"
 incsrc "bank_02.asm"

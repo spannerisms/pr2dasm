@@ -3438,170 +3438,197 @@ UNREACH_07E953:
 #_07EA03: db $7E,$FF,$FF,$1F,$1D,$00,$80,$7F
 #_07EA0B: db $00,$28,$00,$00
 
-CODE_07EA0F:
+;===================================================================================================
+
+ROUTINE_07EA0F:
 #_07EA0F: PHB
 #_07EA10: PHK
 #_07EA11: PLB
-#_07EA12: JSR CODE_07EA17
+#_07EA12: JSR .run_vector
 #_07EA15: PLB
 #_07EA16: RTL
 
 
-CODE_07EA17:
+.run_vector:
 #_07EA17: LDX.w $04B8
 #_07EA1A: JSR (PTR16_07EA1E,X)
 #_07EA1D: RTS
 
-
 PTR16_07EA1E:
-#_07EA1E: dw CODE_07EE82
-#_07EA20: dw CODE_07EABB
-#_07EA22: dw CODE_07EAC1
-#_07EA24: dw CODE_07EAC7
-#_07EA26: dw CODE_07EACD
-#_07EA28: dw CODE_07EAD3
-#_07EA2A: dw CODE_07EAD9
-#_07EA2C: dw CODE_07EAA8
-#_07EA2E: dw CODE_07EAAE
-#_07EA30: dw CODE_07EAB4
-#_07EA32: dw CODE_07EABA
-#_07EA34: dw CODE_07EABA
-#_07EA36: dw CODE_07EA9A
-#_07EA38: dw CODE_07EA9A
-#_07EA3A: dw CODE_07EA9B
-#_07EA3C: dw CODE_07EAA1
-#_07EA3E: dw CODE_07EAA1
-#_07EA40: dw CODE_07EAA2
-#_07EA42: dw CODE_07EA6A
-#_07EA44: dw CODE_07EA70
-#_07EA46: dw CODE_07EA76
-#_07EA48: dw CODE_07EA7C
-#_07EA4A: dw CODE_07EA82
-#_07EA4C: dw CODE_07EA88
-#_07EA4E: dw CODE_07EA8E
-#_07EA50: dw CODE_07EA94
-#_07EA52: dw CODE_07EA58
-#_07EA54: dw CODE_07EA5E
-#_07EA56: dw CODE_07EA64
+#_07EA1E: dw ROUTINE_07EE82
+#_07EA20: dw ROUTINE_07EABB
+#_07EA22: dw ROUTINE_07EAC1
+#_07EA24: dw ROUTINE_07EAC7
+#_07EA26: dw ROUTINE_07EACD
+#_07EA28: dw ROUTINE_07EAD3
+#_07EA2A: dw ROUTINE_07EAD9
+#_07EA2C: dw ROUTINE_07EAA8
+#_07EA2E: dw ROUTINE_07EAAE
+#_07EA30: dw ROUTINE_07EAB4
+#_07EA32: dw ROUTINE_07EABA
+#_07EA34: dw ROUTINE_07EABA
+#_07EA36: dw ROUTINE_07EA9A
+#_07EA38: dw ROUTINE_07EA9A
+#_07EA3A: dw ROUTINE_07EA9B
+#_07EA3C: dw ROUTINE_07EAA1
+#_07EA3E: dw ROUTINE_07EAA1
+#_07EA40: dw ROUTINE_07EAA2
+#_07EA42: dw ROUTINE_07EA6A
+#_07EA44: dw ROUTINE_07EA70
+#_07EA46: dw ROUTINE_07EA76
+#_07EA48: dw ROUTINE_07EA7C
+#_07EA4A: dw ROUTINE_07EA82
+#_07EA4C: dw ROUTINE_07EA88
+#_07EA4E: dw ROUTINE_07EA8E
+#_07EA50: dw ROUTINE_07EA94
+#_07EA52: dw ROUTINE_07EA58
+#_07EA54: dw ROUTINE_07EA5E
+#_07EA56: dw ROUTINE_07EA64
 
-CODE_07EA58:
+;===================================================================================================
+
+ROUTINE_07EA58:
 #_07EA58: LDY.w #$ED82
 #_07EA5B: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA5E:
+ROUTINE_07EA5E:
 #_07EA5E: LDY.w #$ED9C
 #_07EA61: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA64:
+ROUTINE_07EA64:
 #_07EA64: LDY.w #$ED9E
 #_07EA67: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA6A:
+ROUTINE_07EA6A:
 #_07EA6A: LDY.w #$ED02
 #_07EA6D: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA70:
+ROUTINE_07EA70:
 #_07EA70: LDY.w #$ED14
 #_07EA73: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA76:
+ROUTINE_07EA76:
 #_07EA76: LDY.w #$ED26
 #_07EA79: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA7C:
+ROUTINE_07EA7C:
 #_07EA7C: LDY.w #$ED38
 #_07EA7F: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA82:
+ROUTINE_07EA82:
 #_07EA82: LDY.w #$ED42
 #_07EA85: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA88:
+ROUTINE_07EA88:
 #_07EA88: LDY.w #$ED4C
 #_07EA8B: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA8E:
+ROUTINE_07EA8E:
 #_07EA8E: LDY.w #$ED5E
 #_07EA91: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA94:
+ROUTINE_07EA94:
 #_07EA94: LDY.w #$ED68
 #_07EA97: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EA9A:
+ROUTINE_07EA9A:
 #_07EA9A: RTS
 
+;===================================================================================================
 
-CODE_07EA9B:
+ROUTINE_07EA9B:
 #_07EA9B: LDY.w #$ECEC
 #_07EA9E: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EAA1:
+ROUTINE_07EAA1:
 #_07EAA1: RTS
 
+;===================================================================================================
 
-CODE_07EAA2:
+ROUTINE_07EAA2:
 #_07EAA2: LDY.w #$ECF8
 #_07EAA5: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EAA8:
+ROUTINE_07EAA8:
 #_07EAA8: LDY.w #$ECBA
 #_07EAAB: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EAAE:
+ROUTINE_07EAAE:
 #_07EAAE: LDY.w #$ECD4
 #_07EAB1: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EAB4:
+ROUTINE_07EAB4:
 #_07EAB4: LDY.w #$ECDE
 #_07EAB7: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EABA:
+ROUTINE_07EABA:
 #_07EABA: RTS
 
+;===================================================================================================
 
-CODE_07EABB:
+ROUTINE_07EABB:
 #_07EABB: LDY.w #$EC66
 #_07EABE: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EAC1:
+ROUTINE_07EAC1:
 #_07EAC1: LDY.w #$EC88
 #_07EAC4: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EAC7:
+ROUTINE_07EAC7:
 #_07EAC7: LDY.w #$EC9A
 #_07EACA: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EACD:
+ROUTINE_07EACD:
 #_07EACD: LDY.w #$ECA4
 #_07EAD0: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EAD3:
+ROUTINE_07EAD3:
 #_07EAD3: LDY.w #$ECAE
 #_07EAD6: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EAD9:
+ROUTINE_07EAD9:
 #_07EAD9: LDY.w #$ECB8
 
 CODE_07EADC:
@@ -3638,7 +3665,7 @@ CODE_07EADC:
 #_07EB28: JSL $3000A9
 #_07EB2C: STA.b $24
 #_07EB2E: LDA.w #$0082
-#_07EB31: JSL CODE_028220
+#_07EB31: JSL ROUTINE_028220
 #_07EB35: PLY
 
 CODE_07EB36:
@@ -3648,175 +3675,200 @@ CODE_07EB36:
 #_07EB3B: TAY
 #_07EB3C: BRA CODE_07EADC
 
-
 CODE_07EB3E:
 #_07EB3E: RTS
 
+;===================================================================================================
 
-CODE_07EB3F:
+ROUTINE_07EB3F:
 #_07EB3F: PHB
 #_07EB40: PHK
 #_07EB41: PLB
-#_07EB42: JSR CODE_07EB47
+#_07EB42: JSR .run_vector
 #_07EB45: PLB
 #_07EB46: RTL
 
 
-CODE_07EB47:
+.run_vector:
 #_07EB47: LDX.w $04B8
 #_07EB4A: JSR (PTR16_07EB4E,X)
 #_07EB4D: RTS
 
-
 PTR16_07EB4E:
-#_07EB4E: dw CODE_07EE82
-#_07EB50: dw CODE_07EBEB
-#_07EB52: dw CODE_07EBF1
-#_07EB54: dw CODE_07EBF7
-#_07EB56: dw CODE_07EBFD
-#_07EB58: dw CODE_07EC03
-#_07EB5A: dw CODE_07EC09
-#_07EB5C: dw CODE_07EBD8
-#_07EB5E: dw CODE_07EBDE
-#_07EB60: dw CODE_07EBE4
-#_07EB62: dw CODE_07EBEA
-#_07EB64: dw CODE_07EBEA
-#_07EB66: dw CODE_07EBCA
-#_07EB68: dw CODE_07EBCA
-#_07EB6A: dw CODE_07EBCB
-#_07EB6C: dw CODE_07EBD1
-#_07EB6E: dw CODE_07EBD1
-#_07EB70: dw CODE_07EBD2
-#_07EB72: dw CODE_07EB9A
-#_07EB74: dw CODE_07EBA0
-#_07EB76: dw CODE_07EBA6
-#_07EB78: dw CODE_07EBAC
-#_07EB7A: dw CODE_07EBB2
-#_07EB7C: dw CODE_07EBB8
-#_07EB7E: dw CODE_07EBBE
-#_07EB80: dw CODE_07EBC4
-#_07EB82: dw CODE_07EB88
-#_07EB84: dw CODE_07EB8E
-#_07EB86: dw CODE_07EB94
+#_07EB4E: dw ROUTINE_07EE82
+#_07EB50: dw ROUTINE_07EBEB
+#_07EB52: dw ROUTINE_07EBF1
+#_07EB54: dw ROUTINE_07EBF7
+#_07EB56: dw ROUTINE_07EBFD
+#_07EB58: dw ROUTINE_07EC03
+#_07EB5A: dw ROUTINE_07EC09
+#_07EB5C: dw ROUTINE_07EBD8
+#_07EB5E: dw ROUTINE_07EBDE
+#_07EB60: dw ROUTINE_07EBE4
+#_07EB62: dw ROUTINE_07EBEA
+#_07EB64: dw ROUTINE_07EBEA
+#_07EB66: dw ROUTINE_07EBCA
+#_07EB68: dw ROUTINE_07EBCA
+#_07EB6A: dw ROUTINE_07EBCB
+#_07EB6C: dw ROUTINE_07EBD1
+#_07EB6E: dw ROUTINE_07EBD1
+#_07EB70: dw ROUTINE_07EBD2
+#_07EB72: dw ROUTINE_07EB9A
+#_07EB74: dw ROUTINE_07EBA0
+#_07EB76: dw ROUTINE_07EBA6
+#_07EB78: dw ROUTINE_07EBAC
+#_07EB7A: dw ROUTINE_07EBB2
+#_07EB7C: dw ROUTINE_07EBB8
+#_07EB7E: dw ROUTINE_07EBBE
+#_07EB80: dw ROUTINE_07EBC4
+#_07EB82: dw ROUTINE_07EB88
+#_07EB84: dw ROUTINE_07EB8E
+#_07EB86: dw ROUTINE_07EB94
 
-CODE_07EB88:
+;===================================================================================================
+
+ROUTINE_07EB88:
 #_07EB88: LDY.w #$ED82
 #_07EB8B: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EB8E:
+ROUTINE_07EB8E:
 #_07EB8E: LDY.w #$ED9C
 #_07EB91: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EB94:
+ROUTINE_07EB94:
 #_07EB94: LDY.w #$ED9E
 #_07EB97: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EB9A:
+ROUTINE_07EB9A:
 #_07EB9A: LDY.w #$ED02
 #_07EB9D: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBA0:
+ROUTINE_07EBA0:
 #_07EBA0: LDY.w #$ED14
 #_07EBA3: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBA6:
+ROUTINE_07EBA6:
 #_07EBA6: LDY.w #$ED26
 #_07EBA9: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBAC:
+ROUTINE_07EBAC:
 #_07EBAC: LDY.w #$ED38
 #_07EBAF: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBB2:
+ROUTINE_07EBB2:
 #_07EBB2: LDY.w #$ED42
 #_07EBB5: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBB8:
+ROUTINE_07EBB8:
 #_07EBB8: LDY.w #$ED4C
 #_07EBBB: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBBE:
+ROUTINE_07EBBE:
 #_07EBBE: LDY.w #$ED5E
 #_07EBC1: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBC4:
+ROUTINE_07EBC4:
 #_07EBC4: LDY.w #$ED68
 #_07EBC7: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBCA:
+ROUTINE_07EBCA:
 #_07EBCA: RTS
 
+;===================================================================================================
 
-CODE_07EBCB:
+ROUTINE_07EBCB:
 #_07EBCB: LDY.w #$ECEC
 #_07EBCE: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBD1:
+ROUTINE_07EBD1:
 #_07EBD1: RTS
 
+;===================================================================================================
 
-CODE_07EBD2:
+ROUTINE_07EBD2:
 #_07EBD2: LDY.w #$ECF8
 #_07EBD5: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBD8:
+ROUTINE_07EBD8:
 #_07EBD8: LDY.w #$ECBA
 #_07EBDB: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBDE:
+ROUTINE_07EBDE:
 #_07EBDE: LDY.w #$ECD4
 #_07EBE1: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBE4:
+ROUTINE_07EBE4:
 #_07EBE4: LDY.w #$ECDE
 #_07EBE7: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBEA:
+ROUTINE_07EBEA:
 #_07EBEA: RTS
 
+;===================================================================================================
 
-CODE_07EBEB:
+ROUTINE_07EBEB:
 #_07EBEB: LDY.w #$EC66
 #_07EBEE: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBF1:
+ROUTINE_07EBF1:
 #_07EBF1: LDY.w #$EC88
 #_07EBF4: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBF7:
+ROUTINE_07EBF7:
 #_07EBF7: LDY.w #$EC9A
 #_07EBFA: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EBFD:
+ROUTINE_07EBFD:
 #_07EBFD: LDY.w #$ECA4
 #_07EC00: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EC03:
+ROUTINE_07EC03:
 #_07EC03: LDY.w #$ECAE
 #_07EC06: JMP CODE_07EC0C
 
+;===================================================================================================
 
-CODE_07EC09:
+ROUTINE_07EC09:
 #_07EC09: LDY.w #$ECB8
 
 CODE_07EC0C:
@@ -3847,7 +3899,7 @@ CODE_07EC0C:
 #_07EC4C: ORA.b $28
 #_07EC4E: STA.l $7E7A10,X
 #_07EC52: PHY
-#_07EC53: JSR CODE_07EFB3
+#_07EC53: JSR ROUTINE_07EFB3
 #_07EC56: PLY
 #_07EC57: LDA.w #$000B
 #_07EC5A: STA.w $04A2
@@ -3858,7 +3910,6 @@ CODE_07EC5D:
 #_07EC5F: ADC.w #$0008
 #_07EC62: TAY
 #_07EC63: BRA CODE_07EC0C
-
 
 CODE_07EC65:
 #_07EC65: RTS
@@ -3908,334 +3959,387 @@ UNREACH_07ECB2:
 #_07ED92: db $00,$2E,$80,$92,$50,$00,$68,$04
 #_07ED9A: db $00,$00,$00,$00,$00,$00
 
-CODE_07EDA0:
+;===================================================================================================
+
+ROUTINE_07EDA0:
 #_07EDA0: PHB
 #_07EDA1: PHK
 #_07EDA2: PLB
-#_07EDA3: JSR CODE_07EDA8
+#_07EDA3: JSR .run_vector
 #_07EDA6: PLB
 #_07EDA7: RTL
 
 
-CODE_07EDA8:
+.run_vector:
 #_07EDA8: LDX.w $04B8
 #_07EDAB: JSR (PTR16_07EDAF,X)
 #_07EDAE: RTS
 
-
 PTR16_07EDAF:
-#_07EDAF: dw CODE_07EE82
-#_07EDB1: dw CODE_07EE50
-#_07EDB3: dw CODE_07EE56
-#_07EDB5: dw CODE_07EE5C
-#_07EDB7: dw CODE_07EE62
-#_07EDB9: dw CODE_07EE68
-#_07EDBB: dw CODE_07EE6E
-#_07EDBD: dw CODE_07EE32
-#_07EDBF: dw CODE_07EE38
-#_07EDC1: dw CODE_07EE3E
-#_07EDC3: dw CODE_07EE44
-#_07EDC5: dw CODE_07EE4A
-#_07EDC7: dw CODE_07EE2B
-#_07EDC9: dw CODE_07EE31
-#_07EDCB: dw CODE_07EE31
-#_07EDCD: dw CODE_07EE31
-#_07EDCF: dw CODE_07EE31
-#_07EDD1: dw CODE_07EE31
-#_07EDD3: dw CODE_07EDFB
-#_07EDD5: dw CODE_07EE01
-#_07EDD7: dw CODE_07EE07
-#_07EDD9: dw CODE_07EE0D
-#_07EDDB: dw CODE_07EE13
-#_07EDDD: dw CODE_07EE19
-#_07EDDF: dw CODE_07EE1F
-#_07EDE1: dw CODE_07EE25
-#_07EDE3: dw CODE_07EDE9
-#_07EDE5: dw CODE_07EDEF
-#_07EDE7: dw CODE_07EDF5
+#_07EDAF: dw ROUTINE_07EE82
+#_07EDB1: dw ROUTINE_07EE50
+#_07EDB3: dw ROUTINE_07EE56
+#_07EDB5: dw ROUTINE_07EE5C
+#_07EDB7: dw ROUTINE_07EE62
+#_07EDB9: dw ROUTINE_07EE68
+#_07EDBB: dw ROUTINE_07EE6E
+#_07EDBD: dw ROUTINE_07EE32
+#_07EDBF: dw ROUTINE_07EE38
+#_07EDC1: dw ROUTINE_07EE3E
+#_07EDC3: dw ROUTINE_07EE44
+#_07EDC5: dw ROUTINE_07EE4A
+#_07EDC7: dw ROUTINE_07EE2B
+#_07EDC9: dw ROUTINE_07EE31
+#_07EDCB: dw ROUTINE_07EE31
+#_07EDCD: dw ROUTINE_07EE31
+#_07EDCF: dw ROUTINE_07EE31
+#_07EDD1: dw ROUTINE_07EE31
+#_07EDD3: dw ROUTINE_07EDFB
+#_07EDD5: dw ROUTINE_07EE01
+#_07EDD7: dw ROUTINE_07EE07
+#_07EDD9: dw ROUTINE_07EE0D
+#_07EDDB: dw ROUTINE_07EE13
+#_07EDDD: dw ROUTINE_07EE19
+#_07EDDF: dw ROUTINE_07EE1F
+#_07EDE1: dw ROUTINE_07EE25
+#_07EDE3: dw ROUTINE_07EDE9
+#_07EDE5: dw ROUTINE_07EDEF
+#_07EDE7: dw ROUTINE_07EDF5
 
-CODE_07EDE9:
+;===================================================================================================
+
+ROUTINE_07EDE9:
 #_07EDE9: LDY.w #$F112
 #_07EDEC: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EDEF:
+ROUTINE_07EDEF:
 #_07EDEF: LDY.w #$F12C
 #_07EDF2: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EDF5:
+ROUTINE_07EDF5:
 #_07EDF5: LDY.w #$F12E
 #_07EDF8: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EDFB:
+ROUTINE_07EDFB:
 #_07EDFB: LDY.w #$F072
 #_07EDFE: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE01:
+ROUTINE_07EE01:
 #_07EE01: LDY.w #$F07C
 #_07EE04: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE07:
+ROUTINE_07EE07:
 #_07EE07: LDY.w #$F08E
 #_07EE0A: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE0D:
+ROUTINE_07EE0D:
 #_07EE0D: LDY.w #$F0A0
 #_07EE10: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE13:
+ROUTINE_07EE13:
 #_07EE13: LDY.w #$F0AA
 #_07EE16: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE19:
+ROUTINE_07EE19:
 #_07EE19: LDY.w #$F0BC
 #_07EE1C: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE1F:
+ROUTINE_07EE1F:
 #_07EE1F: LDY.w #$F0D6
 #_07EE22: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE25:
+ROUTINE_07EE25:
 #_07EE25: LDY.w #$F0E0
 #_07EE28: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE2B:
+ROUTINE_07EE2B:
 #_07EE2B: LDY.w #$F066
 #_07EE2E: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE31:
+ROUTINE_07EE31:
 #_07EE31: RTS
 
+;===================================================================================================
 
-CODE_07EE32:
+ROUTINE_07EE32:
 #_07EE32: LDY.w #$F014
 #_07EE35: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE38:
+ROUTINE_07EE38:
 #_07EE38: LDY.w #$F026
 #_07EE3B: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE3E:
+ROUTINE_07EE3E:
 #_07EE3E: LDY.w #$F038
 #_07EE41: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE44:
+ROUTINE_07EE44:
 #_07EE44: LDY.w #$F04A
 #_07EE47: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE4A:
+ROUTINE_07EE4A:
 #_07EE4A: LDY.w #$F05C
 #_07EE4D: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE50:
+ROUTINE_07EE50:
 #_07EE50: LDY.w #$EFD8
 #_07EE53: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE56:
+ROUTINE_07EE56:
 #_07EE56: LDY.w #$EFDA
 #_07EE59: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE5C:
+ROUTINE_07EE5C:
 #_07EE5C: LDY.w #$EFEC
 #_07EE5F: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE62:
+ROUTINE_07EE62:
 #_07EE62: LDY.w #$EFF6
 #_07EE65: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE68:
+ROUTINE_07EE68:
 #_07EE68: LDY.w #$F000
 #_07EE6B: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE6E:
+ROUTINE_07EE6E:
 #_07EE6E: LDY.w #$F00A
 #_07EE71: JMP CODE_07EADC
 
+;===================================================================================================
 
-CODE_07EE74:
+ROUTINE_07EE74:
 #_07EE74: PHB
 #_07EE75: PHK
 #_07EE76: PLB
-#_07EE77: JSR CODE_07EE7C
+#_07EE77: JSR .run_vector
 #_07EE7A: PLB
 #_07EE7B: RTL
 
 
-CODE_07EE7C:
+.run_vector:
 #_07EE7C: LDX.w $04B8
 #_07EE7F: JSR (PTR16_07EE83,X)
 
-CODE_07EE82:
+;===================================================================================================
+
+ROUTINE_07EE82:
 #_07EE82: RTS
 
-
 PTR16_07EE83:
-#_07EE83: dw CODE_07EE82
-#_07EE85: dw CODE_07EF24
-#_07EE87: dw CODE_07EF2A
-#_07EE89: dw CODE_07EF30
-#_07EE8B: dw CODE_07EF36
-#_07EE8D: dw CODE_07EF3C
-#_07EE8F: dw CODE_07EF42
-#_07EE91: dw CODE_07EF06
-#_07EE93: dw CODE_07EF0C
-#_07EE95: dw CODE_07EF12
-#_07EE97: dw CODE_07EF18
-#_07EE99: dw CODE_07EF1E
-#_07EE9B: dw CODE_07EEFF
-#_07EE9D: dw CODE_07EF05
-#_07EE9F: dw CODE_07EF05
-#_07EEA1: dw CODE_07EF05
-#_07EEA3: dw CODE_07EF05
-#_07EEA5: dw CODE_07EF05
-#_07EEA7: dw CODE_07EECF
-#_07EEA9: dw CODE_07EED5
-#_07EEAB: dw CODE_07EEDB
-#_07EEAD: dw CODE_07EEE1
-#_07EEAF: dw CODE_07EEE7
-#_07EEB1: dw CODE_07EEED
-#_07EEB3: dw CODE_07EEF3
-#_07EEB5: dw CODE_07EEF9
-#_07EEB7: dw CODE_07EEBD
-#_07EEB9: dw CODE_07EEC3
-#_07EEBB: dw CODE_07EEC9
+#_07EE83: dw ROUTINE_07EE82
+#_07EE85: dw ROUTINE_07EF24
+#_07EE87: dw ROUTINE_07EF2A
+#_07EE89: dw ROUTINE_07EF30
+#_07EE8B: dw ROUTINE_07EF36
+#_07EE8D: dw ROUTINE_07EF3C
+#_07EE8F: dw ROUTINE_07EF42
+#_07EE91: dw ROUTINE_07EF06
+#_07EE93: dw ROUTINE_07EF0C
+#_07EE95: dw ROUTINE_07EF12
+#_07EE97: dw ROUTINE_07EF18
+#_07EE99: dw ROUTINE_07EF1E
+#_07EE9B: dw ROUTINE_07EEFF
+#_07EE9D: dw ROUTINE_07EF05
+#_07EE9F: dw ROUTINE_07EF05
+#_07EEA1: dw ROUTINE_07EF05
+#_07EEA3: dw ROUTINE_07EF05
+#_07EEA5: dw ROUTINE_07EF05
+#_07EEA7: dw ROUTINE_07EECF
+#_07EEA9: dw ROUTINE_07EED5
+#_07EEAB: dw ROUTINE_07EEDB
+#_07EEAD: dw ROUTINE_07EEE1
+#_07EEAF: dw ROUTINE_07EEE7
+#_07EEB1: dw ROUTINE_07EEED
+#_07EEB3: dw ROUTINE_07EEF3
+#_07EEB5: dw ROUTINE_07EEF9
+#_07EEB7: dw ROUTINE_07EEBD
+#_07EEB9: dw ROUTINE_07EEC3
+#_07EEBB: dw ROUTINE_07EEC9
 
-CODE_07EEBD:
+;===================================================================================================
+
+ROUTINE_07EEBD:
 #_07EEBD: LDY.w #$F112
 #_07EEC0: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EEC3:
+ROUTINE_07EEC3:
 #_07EEC3: LDY.w #$F12C
 #_07EEC6: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EEC9:
+ROUTINE_07EEC9:
 #_07EEC9: LDY.w #$F12E
 #_07EECC: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EECF:
+ROUTINE_07EECF:
 #_07EECF: LDY.w #$F072
 #_07EED2: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EED5:
+ROUTINE_07EED5:
 #_07EED5: LDY.w #$F07C
 #_07EED8: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EEDB:
+ROUTINE_07EEDB:
 #_07EEDB: LDY.w #$F08E
 #_07EEDE: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EEE1:
+ROUTINE_07EEE1:
 #_07EEE1: LDY.w #$F0A0
 #_07EEE4: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EEE7:
+ROUTINE_07EEE7:
 #_07EEE7: LDY.w #$F0AA
 #_07EEEA: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EEED:
+ROUTINE_07EEED:
 #_07EEED: LDY.w #$F0BC
 #_07EEF0: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EEF3:
+ROUTINE_07EEF3:
 #_07EEF3: LDY.w #$F0D6
 #_07EEF6: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EEF9:
+ROUTINE_07EEF9:
 #_07EEF9: LDY.w #$F0E0
 #_07EEFC: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EEFF:
+ROUTINE_07EEFF:
 #_07EEFF: LDY.w #$F066
 #_07EF02: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF05:
+ROUTINE_07EF05:
 #_07EF05: RTS
 
+;===================================================================================================
 
-CODE_07EF06:
+ROUTINE_07EF06:
 #_07EF06: LDY.w #$F014
 #_07EF09: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF0C:
+ROUTINE_07EF0C:
 #_07EF0C: LDY.w #$F026
 #_07EF0F: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF12:
+ROUTINE_07EF12:
 #_07EF12: LDY.w #$F038
 #_07EF15: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF18:
+ROUTINE_07EF18:
 #_07EF18: LDY.w #$F04A
 #_07EF1B: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF1E:
+ROUTINE_07EF1E:
 #_07EF1E: LDY.w #$F05C
 #_07EF21: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF24:
+ROUTINE_07EF24:
 #_07EF24: LDY.w #$EFD8
 #_07EF27: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF2A:
+ROUTINE_07EF2A:
 #_07EF2A: LDY.w #$EFDA
 #_07EF2D: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF30:
+ROUTINE_07EF30:
 #_07EF30: LDY.w #$EFEC
 #_07EF33: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF36:
+ROUTINE_07EF36:
 #_07EF36: LDY.w #$EFF6
 #_07EF39: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF3C:
+ROUTINE_07EF3C:
 #_07EF3C: LDY.w #$F000
 #_07EF3F: JMP CODE_07EF45
 
+;===================================================================================================
 
-CODE_07EF42:
+ROUTINE_07EF42:
 #_07EF42: LDY.w #$F00A
 
 CODE_07EF45:
@@ -4275,7 +4379,7 @@ CODE_07EF45:
 #_07EF98: ORA.b $28
 #_07EF9A: STA.l $7E7A10,X
 #_07EF9E: PHY
-#_07EF9F: JSR CODE_07EFB3
+#_07EF9F: JSR ROUTINE_07EFB3
 #_07EFA2: PLY
 #_07EFA3: LDA.w #$000B
 #_07EFA6: STA.w $04A2
@@ -4287,12 +4391,12 @@ CODE_07EFA9:
 #_07EFAE: TAY
 #_07EFAF: JMP CODE_07EF45
 
-
 CODE_07EFB2:
 #_07EFB2: RTS
 
+;===================================================================================================
 
-CODE_07EFB3:
+ROUTINE_07EFB3:
 #_07EFB3: LDA.w $0006,Y
 #_07EFB6: AND.w #$00F0
 #_07EFB9: LSR A
@@ -4308,7 +4412,7 @@ CODE_07EFB3:
 #_07EFCC: STA.b $22
 #_07EFCE: LDA.w #$000E
 #_07EFD1: STA.b $24
-#_07EFD3: JSL CODE_0391D3
+#_07EFD3: JSL ROUTINE_0391DB_long
 #_07EFD7: RTS
 
 #_07EFD8: db $00,$00,$80,$6D,$80,$93,$50,$00
@@ -4476,14 +4580,16 @@ UNREACH_07F3A3:
 #_07F473: db $00,$01,$00,$FE,$80,$00,$80,$FE
 #_07F47B: db $80,$FF,$00,$FF,$80,$FE
 
-CODE_07F481:
+;===================================================================================================
+
+ROUTINE_07F481:
 #_07F481: LDA.w #$0000
 #_07F484: STA.w $0520
 #_07F487: STZ.w $0524
 #_07F48A: STZ.w $0526
 #_07F48D: LDA.w #$0009
 #_07F490: STA.w $0522
-#_07F493: JSL CODE_028418
+#_07F493: JSL ResetOBSELandOAM
 #_07F497: LDA.w #$0020
 #_07F49A: STA.w $0512
 #_07F49D: STA.w $0516
@@ -4500,8 +4606,9 @@ CODE_07F481:
 #_07F4C0: INC.w $0500
 #_07F4C3: RTL
 
+;===================================================================================================
 
-CODE_07F4C4:
+ROUTINE_07F4C4:
 #_07F4C4: LDA.w $0506
 #_07F4C7: ASL A
 #_07F4C8: TAX
@@ -4509,57 +4616,58 @@ CODE_07F4C4:
 #_07F4CC: LDA.w $0506
 #_07F4CF: CMP.w #$000F
 #_07F4D2: BCS CODE_07F4D8
-#_07F4D4: JSL CODE_00801A
+#_07F4D4: JSL ROUTINE_00A947_long
 
 CODE_07F4D8:
 #_07F4D8: RTL
 
-
 PTR16_07F4D9:
-#_07F4D9: dw CODE_07F501
-#_07F4DB: dw CODE_07F5D4
-#_07F4DD: dw CODE_07F5E3
-#_07F4DF: dw CODE_07F602
-#_07F4E1: dw CODE_07F60C
-#_07F4E3: dw CODE_07F63A
-#_07F4E5: dw CODE_07F654
-#_07F4E7: dw CODE_07F65D
-#_07F4E9: dw CODE_07F677
-#_07F4EB: dw CODE_07F67E
-#_07F4ED: dw CODE_07F6BD
-#_07F4EF: dw CODE_07F6E5
-#_07F4F1: dw CODE_07F6F9
-#_07F4F3: dw CODE_07F700
-#_07F4F5: dw CODE_07F709
-#_07F4F7: dw CODE_07F718
-#_07F4F9: dw CODE_07F8AE
-#_07F4FB: dw CODE_07F8EC
-#_07F4FD: dw CODE_07F902
-#_07F4FF: dw CODE_07F91F
+#_07F4D9: dw ROUTINE_07F501
+#_07F4DB: dw ROUTINE_07F5D4
+#_07F4DD: dw ROUTINE_07F5E3
+#_07F4DF: dw ROUTINE_07F602
+#_07F4E1: dw ROUTINE_07F60C
+#_07F4E3: dw ROUTINE_07F63A
+#_07F4E5: dw ROUTINE_07F654
+#_07F4E7: dw ROUTINE_07F65D
+#_07F4E9: dw ROUTINE_07F677
+#_07F4EB: dw ROUTINE_07F67E
+#_07F4ED: dw ROUTINE_07F6BD
+#_07F4EF: dw ROUTINE_07F6E5
+#_07F4F1: dw ROUTINE_07F6F9
+#_07F4F3: dw ROUTINE_07F700
+#_07F4F5: dw ROUTINE_07F709
+#_07F4F7: dw ROUTINE_07F718
+#_07F4F9: dw ROUTINE_07F8AE
+#_07F4FB: dw ROUTINE_07F8EC
+#_07F4FD: dw ROUTINE_07F902
+#_07F4FF: dw ROUTINE_07F91F
 
-CODE_07F501:
-#_07F501: JSL CODE_00800A
+;===================================================================================================
+
+ROUTINE_07F501:
+#_07F501: JSL ROUTINE_00D43C_long
 #_07F505: LDA.w #$0000
 #_07F508: LDX.w #$804B
-#_07F50B: JSL CODE_008005
+#_07F50B: JSL ROUTINE_00DBF8_verylong
 #_07F50F: LDA.w #$0007
 #_07F512: LDX.w #$F554
-#_07F515: JSL CODE_008005
-#_07F519: JSL CODE_00800E
+#_07F515: JSL ROUTINE_00DBF8_verylong
+#_07F519: JSL ROUTINE_00D421_long
 #_07F51D: LDA.w #$001F
 #_07F520: STA.w $0524
 #_07F523: LDA.w #$A4CA
 #_07F526: STA.b $20
 #_07F528: LDA.w #$0000
 #_07F52B: STA.b $22
-#_07F52D: JSL CODE_008000
-#_07F531: JSL CODE_008036
+#_07F52D: JSL ROUTINE_00FBCB_verylong
+#_07F531: JSL ROUTINE_00F957_long
 #_07F535: LDA.w #$F92F
 #_07F538: LDX.w #$0007
-#_07F53B: JSL CODE_00802C
-#_07F53F: JSL CODE_00801E
+#_07F53B: JSL ROUTINE_088000_long
+#_07F53F: JSL ROUTINE_00A974_long
 #_07F543: LDA.w #$0018
-#_07F546: JSL CODE_00803E
+#_07F546: JSL ROUTINE_0A8003_long
 #_07F54A: INC.w $056E
 #_07F54D: INC.w $054E
 #_07F550: INC.w $0506
@@ -4576,17 +4684,18 @@ CODE_07F501:
 #_07F594: db $7F,$41,$1F,$39,$00,$80,$7F,$31
 #_07F59C: db $1F,$55,$00,$80,$7F,$28,$00,$00
 
-CODE_07F5A4:
+;===================================================================================================
+
+ROUTINE_07F5A4:
 #_07F5A4: LDA.w #$A931
 #_07F5A7: STA.b $20
 #_07F5A9: LDA.w #$0000
 #_07F5AC: STA.b $22
-#_07F5AE: JSL CODE_008000
+#_07F5AE: JSL ROUTINE_00FBCB_verylong
 #_07F5B2: RTS
 
-
 CODE_07F5B3:
-#_07F5B3: JSL CODE_008031
+#_07F5B3: JSL ROUTINE_088014_long
 #_07F5B7: LDA.l $7E2550
 #_07F5BB: BNE CODE_07F5C0
 #_07F5BD: INC.w $0506
@@ -4594,21 +4703,24 @@ CODE_07F5B3:
 CODE_07F5C0:
 #_07F5C0: RTS
 
+;===================================================================================================
 
-CODE_07F5C1:
+ROUTINE_07F5C1:
 #_07F5C1: LDX.w #$0004
-#_07F5C4: JSL CODE_008047
+#_07F5C4: JSL ROUTINE_00A990_long
 #_07F5C8: RTS
 
+;===================================================================================================
 
-CODE_07F5C9:
+ROUTINE_07F5C9:
 #_07F5C9: LDX.w #$0004
-#_07F5CC: JSL CODE_008043
+#_07F5CC: JSL ROUTINE_00A9A8_long
 #_07F5D0: CMP.w #$00D4
 #_07F5D3: RTS
 
+;===================================================================================================
 
-CODE_07F5D4:
+ROUTINE_07F5D4:
 #_07F5D4: INC.w $0520
 #_07F5D7: LDA.w $0520
 #_07F5DA: CMP.w #$000F
@@ -4618,38 +4730,41 @@ CODE_07F5D4:
 CODE_07F5E2:
 #_07F5E2: RTS
 
+;===================================================================================================
 
-CODE_07F5E3:
-#_07F5E3: JSL CODE_008036
-#_07F5E7: JSL CODE_008031
+ROUTINE_07F5E3:
+#_07F5E3: JSL ROUTINE_00F957_long
+#_07F5E7: JSL ROUTINE_088014_long
 #_07F5EB: LDA.l $7E2550
 #_07F5EF: BNE CODE_07F601
 #_07F5F1: LDA.w #$F9DD
 #_07F5F4: LDX.w #$0007
-#_07F5F7: JSL CODE_00802C
-#_07F5FB: JSR CODE_07F5A4
+#_07F5F7: JSL ROUTINE_088000_long
+#_07F5FB: JSR ROUTINE_07F5A4
 #_07F5FE: INC.w $0506
 
 CODE_07F601:
 #_07F601: RTS
 
+;===================================================================================================
 
-CODE_07F602:
-#_07F602: JSL CODE_008036
-#_07F606: JSR CODE_07F5C1
+ROUTINE_07F602:
+#_07F602: JSL ROUTINE_00F957_long
+#_07F606: JSR ROUTINE_07F5C1
 #_07F609: JMP CODE_07F5B3
 
+;===================================================================================================
 
-CODE_07F60C:
-#_07F60C: JSR CODE_07F5C9
+ROUTINE_07F60C:
+#_07F60C: JSR ROUTINE_07F5C9
 #_07F60F: BCC CODE_07F629
-#_07F611: JSR CODE_07F5A4
+#_07F611: JSR ROUTINE_07F5A4
 #_07F614: LDA.w #$F62A
 #_07F617: STA.b $20
 #_07F619: LDA.w #$0007
 #_07F61C: STA.b $22
-#_07F61E: JSL CODE_00ECE7
-#_07F622: JSL CODE_00ED07
+#_07F61E: JSL ROUTINE_00ECEF_long
+#_07F622: JSL ROUTINE_00ED0F_long
 #_07F626: INC.w $0506
 
 CODE_07F629:
@@ -4658,13 +4773,15 @@ CODE_07F629:
 #_07F62A: db $1F,$56,$00,$80,$7F,$00,$41,$18
 #_07F632: db $06,$00,$80,$7F,$00,$31,$00,$00
 
-CODE_07F63A:
+;===================================================================================================
+
+ROUTINE_07F63A:
 #_07F63A: LDX.w #$07D0
 
 CODE_07F63D:
 #_07F63D: DEX
 #_07F63E: BNE CODE_07F63D
-#_07F640: JSL CODE_00ED07
+#_07F640: JSL ROUTINE_00ED0F_long
 #_07F644: LDA.l $7E2530
 #_07F648: BNE CODE_07F653
 #_07F64A: LDA.w #$0028
@@ -4674,8 +4791,9 @@ CODE_07F63D:
 CODE_07F653:
 #_07F653: RTS
 
+;===================================================================================================
 
-CODE_07F654:
+ROUTINE_07F654:
 #_07F654: DEC.w $0800
 #_07F657: BNE CODE_07F65C
 #_07F659: INC.w $0506
@@ -4683,39 +4801,42 @@ CODE_07F654:
 CODE_07F65C:
 #_07F65C: RTS
 
+;===================================================================================================
 
-CODE_07F65D:
-#_07F65D: JSL CODE_008036
-#_07F661: JSR CODE_07F5C1
+ROUTINE_07F65D:
+#_07F65D: JSL ROUTINE_00F957_long
+#_07F661: JSR ROUTINE_07F5C1
 #_07F664: CMP.w #$0000
 #_07F667: BNE CODE_07F676
 #_07F669: LDA.w #$FB8A
 #_07F66C: LDX.w #$0007
-#_07F66F: JSL CODE_00802C
+#_07F66F: JSL ROUTINE_088000_long
 #_07F673: INC.w $0506
 
 CODE_07F676:
 #_07F676: RTS
 
+;===================================================================================================
 
-CODE_07F677:
-#_07F677: JSL CODE_008036
+ROUTINE_07F677:
+#_07F677: JSL ROUTINE_00F957_long
 #_07F67B: JMP CODE_07F5B3
 
+;===================================================================================================
 
-CODE_07F67E:
-#_07F67E: JSR CODE_07F5C9
+ROUTINE_07F67E:
+#_07F67E: JSR ROUTINE_07F5C9
 #_07F681: BCC CODE_07F6A5
-#_07F683: JSR CODE_07F5A4
+#_07F683: JSR ROUTINE_07F5A4
 #_07F686: LDA.w #$FCE5
 #_07F689: LDX.w #$0007
-#_07F68C: JSL CODE_00802C
+#_07F68C: JSL ROUTINE_088000_long
 #_07F690: LDA.w #$F6A6
 #_07F693: STA.b $20
 #_07F695: LDA.w #$0007
 #_07F698: STA.b $22
-#_07F69A: JSL CODE_00ECE7
-#_07F69E: JSL CODE_00ED07
+#_07F69A: JSL ROUTINE_00ECEF_long
+#_07F69E: JSL ROUTINE_00ED0F_long
 #_07F6A2: INC.w $0506
 
 CODE_07F6A5:
@@ -4725,31 +4846,34 @@ CODE_07F6A5:
 #_07F6AE: db $4A,$00,$80,$7F,$00,$41,$1F,$07
 #_07F6B6: db $00,$80,$7F,$00,$31,$00,$00
 
-CODE_07F6BD:
+;===================================================================================================
+
+ROUTINE_07F6BD:
 #_07F6BD: LDX.w #$07D0
 
 CODE_07F6C0:
 #_07F6C0: DEX
 #_07F6C1: BNE CODE_07F6C0
-#_07F6C3: JSL CODE_008031
-#_07F6C7: JSL CODE_00ED07
+#_07F6C3: JSL ROUTINE_088014_long
+#_07F6C7: JSL ROUTINE_00ED0F_long
 #_07F6CB: LDA.l $7E2550
 #_07F6CF: BNE CODE_07F6E4
 #_07F6D1: LDA.l $7E2530
 #_07F6D5: BNE CODE_07F6E4
 #_07F6D7: LDA.w #$FD00
 #_07F6DA: LDX.w #$0007
-#_07F6DD: JSL CODE_00802C
+#_07F6DD: JSL ROUTINE_088000_long
 #_07F6E1: INC.w $0506
 
 CODE_07F6E4:
 #_07F6E4: RTS
 
+;===================================================================================================
 
-CODE_07F6E5:
-#_07F6E5: JSL CODE_008031
-#_07F6E9: JSL CODE_008036
-#_07F6ED: JSR CODE_07F5C1
+ROUTINE_07F6E5:
+#_07F6E5: JSL ROUTINE_088014_long
+#_07F6E9: JSL ROUTINE_00F957_long
+#_07F6ED: JSR ROUTINE_07F5C1
 #_07F6F0: CMP.w #$0000
 #_07F6F3: BNE CODE_07F6F8
 #_07F6F5: INC.w $0506
@@ -4757,22 +4881,25 @@ CODE_07F6E5:
 CODE_07F6F8:
 #_07F6F8: RTS
 
+;===================================================================================================
 
-CODE_07F6F9:
-#_07F6F9: JSL CODE_008036
+ROUTINE_07F6F9:
+#_07F6F9: JSL ROUTINE_00F957_long
 #_07F6FD: JMP CODE_07F5B3
 
+;===================================================================================================
 
-CODE_07F700:
-#_07F700: JSR CODE_07F5C9
+ROUTINE_07F700:
+#_07F700: JSR ROUTINE_07F5C9
 #_07F703: BCC CODE_07F708
 #_07F705: INC.w $0506
 
 CODE_07F708:
 #_07F708: RTS
 
+;===================================================================================================
 
-CODE_07F709:
+ROUTINE_07F709:
 #_07F709: DEC.w $0520
 #_07F70C: LDA.w $0520
 #_07F70F: BNE CODE_07F717
@@ -4782,9 +4909,10 @@ CODE_07F709:
 CODE_07F717:
 #_07F717: RTS
 
+;===================================================================================================
 
-CODE_07F718:
-#_07F718: JSL CODE_00800A
+ROUTINE_07F718:
+#_07F718: JSL ROUTINE_00D43C_long
 #_07F71C: STZ.w $055E
 #_07F71F: STZ.w $052E
 #_07F722: LDA.w #$00CF
@@ -4795,7 +4923,7 @@ CODE_07F718:
 #_07F731: STA.w $0522
 #_07F734: LDA.w #$0007
 #_07F737: LDX.w #$F797
-#_07F73A: JSL CODE_008005
+#_07F73A: JSL ROUTINE_00DBF8_verylong
 #_07F73E: PHB
 #_07F73F: PEA.w $7E7E
 #_07F742: PLB
@@ -4803,13 +4931,13 @@ CODE_07F718:
 #_07F744: LDX.w #$01FE
 
 CODE_07F747:
-#_07F747: LDA.w $2E00,X
-#_07F74A: STA.w $2A00,X
+#_07F747: LDA.w $7E2E00,X
+#_07F74A: STA.w $7E2A00,X
 #_07F74D: DEX
 #_07F74E: DEX
 #_07F74F: BPL CODE_07F747
 #_07F751: PLB
-#_07F752: JSL CODE_00800E
+#_07F752: JSL ROUTINE_00D421_long
 #_07F756: LDA.w #$001F
 #_07F759: STA.w $0524
 #_07F75C: LDA.w #$0100
@@ -4829,7 +4957,7 @@ CODE_07F747:
 #_07F786: STA.w $0818
 #_07F789: LDA.w #$FDF5
 #_07F78C: LDX.w #$0007
-#_07F78F: JSL CODE_00802C
+#_07F78F: JSL ROUTINE_088000_long
 #_07F793: INC.w $0506
 #_07F796: RTS
 
@@ -4847,14 +4975,17 @@ CODE_07F747:
 #_07F7EF: db $7E,$80,$1F,$48,$00,$2F,$7E,$80
 #_07F7F7: db $00,$00
 
-CODE_07F7F9:
+;===================================================================================================
+
+ROUTINE_07F7F9:
 #_07F7F9: STA.w $0816
 #_07F7FC: LDA.w #$0001
 #_07F7FF: STA.w $0818
 #_07F802: RTS
 
+;===================================================================================================
 
-CODE_07F803:
+ROUTINE_07F803:
 #_07F803: LDA.b $00
 #_07F805: AND.w #$0007
 #_07F808: BNE CODE_07F83F
@@ -4864,13 +4995,13 @@ CODE_07F803:
 #_07F812: CMP.w #$0005
 #_07F815: BNE CODE_07F81D
 #_07F817: LDA.w #$FFFF
-#_07F81A: JSR CODE_07F7F9
+#_07F81A: JSR ROUTINE_07F7F9
 
 CODE_07F81D:
 #_07F81D: CMP.w #$FFFB
 #_07F820: BNE CODE_07F828
 #_07F822: LDA.w #$0001
-#_07F825: JSR CODE_07F7F9
+#_07F825: JSR ROUTINE_07F7F9
 
 CODE_07F828:
 #_07F828: LDA.w $0814
@@ -4908,12 +5039,11 @@ CODE_07F83F:
 #_07F865: LDA.w #$01D0
 #_07F868: BRA CODE_07F86D
 
-
 CODE_07F86A:
 #_07F86A: LDA.w #$01D2
 
 CODE_07F86D:
-#_07F86D: JSL CODE_028220
+#_07F86D: JSL ROUTINE_028220
 #_07F871: LDA.w $0812
 #_07F874: ASL A
 #_07F875: ASL A
@@ -4925,7 +5055,7 @@ CODE_07F86D:
 #_07F87F: LDA.w #$1000
 #_07F882: STA.b $24
 #_07F884: LDA.w #$13B6
-#_07F887: JSL CODE_028220
+#_07F887: JSL ROUTINE_028220
 #_07F88B: LDA.w #$0800
 #_07F88E: STA.b $20
 #_07F890: LDA.w #$0900
@@ -4938,16 +5068,16 @@ CODE_07F86D:
 #_07F8A1: LDA.w #$13B8
 #_07F8A4: BRA CODE_07F8A9
 
-
 CODE_07F8A6:
 #_07F8A6: LDA.w #$13BA
 
 CODE_07F8A9:
-#_07F8A9: JSL CODE_028220
+#_07F8A9: JSL ROUTINE_028220
 #_07F8AD: RTS
 
+;===================================================================================================
 
-CODE_07F8AE:
+ROUTINE_07F8AE:
 #_07F8AE: LDA.b $00
 #_07F8B0: AND.w #$000F
 #_07F8B3: BNE CODE_07F8C3
@@ -4958,9 +5088,11 @@ CODE_07F8AE:
 #_07F8C0: INC.w $0506
 
 CODE_07F8C3:
-#_07F8C3: JSR CODE_07F803
+#_07F8C3: JSR ROUTINE_07F803
 
-CODE_07F8C6:
+;===================================================================================================
+
+ROUTINE_07F8C6:
 #_07F8C6: LDA.b $00
 #_07F8C8: AND.w #$000F
 #_07F8CB: BNE CODE_07F8DE
@@ -4981,11 +5113,12 @@ CODE_07F8DE:
 CODE_07F8EB:
 #_07F8EB: RTS
 
+;===================================================================================================
 
-CODE_07F8EC:
-#_07F8EC: JSR CODE_07F803
-#_07F8EF: JSL CODE_008031
-#_07F8F3: JSR CODE_07F8C6
+ROUTINE_07F8EC:
+#_07F8EC: JSR ROUTINE_07F803
+#_07F8EF: JSL ROUTINE_088014_long
+#_07F8F3: JSR ROUTINE_07F8C6
 #_07F8F6: LDA.w $0510
 #_07F8F9: CMP.w #$01D2
 #_07F8FC: BNE CODE_07F901
@@ -4994,10 +5127,11 @@ CODE_07F8EC:
 CODE_07F901:
 #_07F901: RTS
 
+;===================================================================================================
 
-CODE_07F902:
-#_07F902: JSR CODE_07F803
-#_07F905: JSL CODE_008031
+ROUTINE_07F902:
+#_07F902: JSR ROUTINE_07F803
+#_07F905: JSL ROUTINE_088014_long
 #_07F909: LDA.l $7E2550
 #_07F90D: BNE CODE_07F91E
 #_07F90F: LDA.w #$00FD
@@ -5009,9 +5143,10 @@ CODE_07F902:
 CODE_07F91E:
 #_07F91E: RTS
 
+;===================================================================================================
 
-CODE_07F91F:
-#_07F91F: JSR CODE_07F803
+ROUTINE_07F91F:
+#_07F91F: JSR ROUTINE_07F803
 #_07F922: DEC.w $0800
 #_07F925: BNE CODE_07F92A
 #_07F927: INC.w $0500
@@ -5019,9 +5154,10 @@ CODE_07F91F:
 CODE_07F92A:
 #_07F92A: RTS
 
+;===================================================================================================
 
-CODE_07F92B:
-#_07F92B: JSR CODE_07F803
+ROUTINE_07F92B:
+#_07F92B: JSR ROUTINE_07F803
 #_07F92E: RTL
 
 #_07F92F: db $01,$00,$03,$00,$12,$00,$1C,$00
