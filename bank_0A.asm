@@ -5,322 +5,876 @@ org $0A8000
 
 ;===================================================================================================
 
-ROUTINE_0A8003:
-#_0A8003: JMP ROUTINE_0A802D
+RequestSong:
+#_0A8003: JMP RequestSong_local
 
 ;===================================================================================================
 
-ROUTINE_0A8006:
-#_0A8006: JMP CODE_0A8009
+InitializeAPU:
+#_0A8006: JMP .go
 
-CODE_0A8009:
+.go
 #_0A8009: PHB
 #_0A800A: PHK
 #_0A800B: PLB
-#_0A800C: LDA.w #$853C
+
+#_0A800C: LDA.w #APUDataStart
 #_0A800F: STA.b $20
-#_0A8011: LDA.w #$000A
+
+#_0A8011: LDA.w #APUDataStart>>16
 #_0A8014: STA.b $22
-#_0A8016: JSR ROUTINE_0A80BC
+
+#_0A8016: JSR APUTransfer
+
 #_0A8019: LDA.w #$8000
 #_0A801C: STA.b $20
-#_0A801E: LDA.w #$000B
+
+#_0A801E: LDA.w #(APUDataStart>>16)+1
 #_0A8021: STA.b $22
-#_0A8023: JSR ROUTINE_0A80BC
+
+#_0A8023: JSR APUTransfer
+
 #_0A8026: PLB
 #_0A8027: RTL
 
-#_0A8028: JSL ROUTINE_0A802D
+;===================================================================================================
+
+RequestSong_redundant:
+#_0A8028: JSL RequestSong_local
 #_0A802C: RTL
 
 ;===================================================================================================
 
-ROUTINE_0A802D:
+RequestSong_local:
 #_0A802D: PHB
+
 #_0A802E: PEA.w $0A00
 #_0A8031: PLB
 #_0A8032: PLB
+
 #_0A8033: ASL A
 #_0A8034: TAX
-#_0A8035: LDA.w UNREACH_0A8124,X
+
+#_0A8035: LDA.w MusicPointers,X
 #_0A8038: TAX
+
 #_0A8039: LDA.w $0000,X
 #_0A803C: CMP.l $7E7A0E
-#_0A8040: BEQ CODE_0A804B
+#_0A8040: BEQ .already_loaded
+
 #_0A8042: STA.l $7E7A0E
+
 #_0A8046: PHX
-#_0A8047: JSR ROUTINE_0A8053
+
+#_0A8047: JSR PrepSongPackTransfer
+
 #_0A804A: PLX
 
-CODE_0A804B:
+.already_loaded
 #_0A804B: LDA.w $0002,X
 #_0A804E: STA.w APUIO0
+
 #_0A8051: PLB
 #_0A8052: RTL
 
 ;===================================================================================================
 
-ROUTINE_0A8053:
+PrepSongPackTransfer:
 #_0A8053: LDA.l $7E7A0E
 #_0A8057: TAX
+
 #_0A8058: LDY.w #$0000
 
-CODE_0A805B:
+.next_chunk
 #_0A805B: LDA.w $0000,X
-#_0A805E: BEQ CODE_0A808B
+#_0A805E: BEQ .done
+
 #_0A8060: PHX
 #_0A8061: TYX
-#_0A8062: LDA.l UNREACH_0A808C,X
+
+#_0A8062: LDA.l .type,X
 #_0A8066: STA.w APUIO0
+
 #_0A8069: PLX
+
 #_0A806A: LDA.w $0000,X
 #_0A806D: STA.b $20
+
 #_0A806F: LDA.w $0002,X
 #_0A8072: STA.b $22
+
 #_0A8074: PHX
 #_0A8075: PHY
-#_0A8076: JSL ROUTINE_0A80B8
+
+#_0A8076: JSL APUTransfer_long
+
 #_0A807A: PLY
 #_0A807B: PLX
 
-CODE_0A807C:
+.sync
 #_0A807C: LDA.w APUIO0
 #_0A807F: ORA.w APUIO2
-#_0A8082: BNE CODE_0A807C
+#_0A8082: BNE .sync
+
 #_0A8084: INX
 #_0A8085: INX
 #_0A8086: INX
+
 #_0A8087: INY
 #_0A8088: INY
-#_0A8089: BRA CODE_0A805B
+#_0A8089: BRA .next_chunk
 
-CODE_0A808B:
+.done
 #_0A808B: RTS
 
-UNREACH_0A808C:
-#_0A808C: db $FF,$00,$FF,$00,$FE,$00,$FE,$00
-#_0A8094: db $FE,$00,$FE,$00,$FE,$00,$FE,$00
-#_0A809C: db $FE,$00,$FE,$00,$FE,$00,$FE,$00
-#_0A80A4: db $FE,$00,$FE,$00,$FE,$00,$FE,$00
-#_0A80AC: db $8B,$4B,$AB,$85,$20,$84,$22,$20
-#_0A80B4: db $BC,$80,$AB,$6B
+;---------------------------------------------------------------------------------------------------
+
+; TODO
+.type
+#_0A808C: dw $00FF
+#_0A808E: dw $00FF
+#_0A8090: dw $00FE
+#_0A8092: dw $00FE
+#_0A8094: dw $00FE
+#_0A8096: dw $00FE
+#_0A8098: dw $00FE
+#_0A809A: dw $00FE
+#_0A809C: dw $00FE
+#_0A809E: dw $00FE
+#_0A80A0: dw $00FE
+#_0A80A2: dw $00FE
+#_0A80A4: dw $00FE
+#_0A80A6: dw $00FE
+#_0A80A8: dw $00FE
+#_0A80AA: dw $00FE
+#_0A80AC: dw $4B8B
+#_0A80AE: dw $85AB
+#_0A80B0: dw $8420
+#_0A80B2: dw $2022
+#_0A80B4: dw $80BC
+#_0A80B6: dw $6BAB
 
 ;===================================================================================================
 
-ROUTINE_0A80B8:
-#_0A80B8: JSR ROUTINE_0A80BC
+APUTransfer_long:
+#_0A80B8: JSR APUTransfer
 #_0A80BB: RTL
 
 ;===================================================================================================
 
-ROUTINE_0A80BC:
+APUTransfer:
 #_0A80BC: PHP
 #_0A80BD: REP #$30
+
 #_0A80BF: LDY.w #$0000
 #_0A80C2: LDA.w #$BBAA
 
-CODE_0A80C5:
+.waiting
 #_0A80C5: CMP.w APUIO0
-#_0A80C8: BNE CODE_0A80C5
+#_0A80C8: BNE .waiting
+
 #_0A80CA: SEP #$20
+
 #_0A80CC: LDA.b #$CC
-#_0A80CE: BRA CODE_0A80F6
+#_0A80CE: BRA .start
 
-CODE_0A80D0:
+;---------------------------------------------------------------------------------------------------
+
+.next_transfer
 #_0A80D0: LDA.b [$20],Y
-#_0A80D2: INY
-#_0A80D3: XBA
-#_0A80D4: LDA.b #$00
-#_0A80D6: BRA CODE_0A80E3
 
-CODE_0A80D8:
+#_0A80D2: INY
+
+#_0A80D3: XBA
+
+#_0A80D4: LDA.b #$00
+#_0A80D6: BRA .write_zero
+
+.next_byte
 #_0A80D8: XBA
 #_0A80D9: LDA.b [$20],Y
+
 #_0A80DB: INY
+
 #_0A80DC: XBA
 
-CODE_0A80DD:
+.sync_a
 #_0A80DD: CMP.w APUIO0
-#_0A80E0: BNE CODE_0A80DD
+#_0A80E0: BNE .sync_a
 #_0A80E2: INC A
 
-CODE_0A80E3:
+.write_zero
 #_0A80E3: REP #$20
+
 #_0A80E5: STA.w APUIO0
+
 #_0A80E8: SEP #$20
+
 #_0A80EA: DEX
-#_0A80EB: BNE CODE_0A80D8
+#_0A80EB: BNE .next_byte
 
-CODE_0A80ED:
+.sync_b
 #_0A80ED: CMP.w APUIO0
-#_0A80F0: BNE CODE_0A80ED
+#_0A80F0: BNE .sync_b
 
-CODE_0A80F2:
+.no_zero
 #_0A80F2: ADC.b #$03
-#_0A80F4: BEQ CODE_0A80F2
+#_0A80F4: BEQ .no_zero
 
-CODE_0A80F6:
+;---------------------------------------------------------------------------------------------------
+
+.start
 #_0A80F6: PHA
+
 #_0A80F7: REP #$20
+
 #_0A80F9: LDA.b [$20],Y
 #_0A80FB: INY
 #_0A80FC: INY
+
 #_0A80FD: TAX
+
 #_0A80FE: LDA.b [$20],Y
 #_0A8100: INY
 #_0A8101: INY
 #_0A8102: STA.w APUIO2
+
 #_0A8105: SEP #$20
+
 #_0A8107: CPX.w #$0001
+
 #_0A810A: LDA.b #$00
 #_0A810C: ROL A
 #_0A810D: STA.w APUIO1
 #_0A8110: ADC.b #$7F
+
 #_0A8112: PLA
 #_0A8113: STA.w APUIO0
 #_0A8116: CPX.w #$0001
-#_0A8119: BCC CODE_0A8122
+#_0A8119: BCC .done
 
-CODE_0A811B:
+.sync_c
 #_0A811B: CMP.w APUIO0
-#_0A811E: BNE CODE_0A811B
-#_0A8120: BVS CODE_0A80D0
+#_0A811E: BNE .sync_c
+#_0A8120: BVS .next_transfer
 
-CODE_0A8122:
+.done
 #_0A8122: PLP
 #_0A8123: RTS
 
-#_0A8124: db $70,$81,$74,$81,$78,$81,$7C,$81
-#_0A812C: db $80,$81,$84,$81,$88,$81,$8C,$81
-#_0A8134: db $90,$81,$94,$81,$98,$81,$9C,$81
-#_0A813C: db $A0,$81,$A4,$81,$A8,$81,$AC,$81
-#_0A8144: db $B0,$81,$B4,$81,$B8,$81,$BC,$81
-#_0A814C: db $C0,$81,$C4,$81,$C8,$81,$CC,$81
-#_0A8154: db $D0,$81,$D4,$81,$D8,$81,$70,$81
-#_0A815C: db $DC,$81,$E0,$81,$E4,$81,$E8,$81
-#_0A8164: db $EC,$81,$F0,$81,$F4,$81,$F8,$81
-#_0A816C: db $FC,$81,$00,$82,$04,$82,$00,$00
-#_0A8174: db $04,$82,$01,$00,$2D,$82,$01,$00
-#_0A817C: db $50,$82,$01,$00,$73,$82,$01,$00
-#_0A8184: db $B9,$84,$01,$00,$9C,$82,$01,$00
-#_0A818C: db $E2,$84,$01,$00,$B0,$82,$01,$00
-#_0A8194: db $CD,$82,$01,$00,$F0,$82,$01,$00
-#_0A819C: db $10,$83,$01,$00,$10,$83,$02,$00
-#_0A81A4: db $33,$83,$01,$00,$33,$83,$02,$00
-#_0A81AC: db $56,$83,$01,$00,$56,$83,$02,$00
-#_0A81B4: db $73,$83,$01,$00,$87,$83,$01,$00
-#_0A81BC: db $A4,$83,$01,$00,$C1,$83,$01,$00
-#_0A81C4: db $E1,$83,$01,$00,$10,$83,$03,$00
-#_0A81CC: db $04,$84,$01,$00,$35,$84,$02,$00
-#_0A81D4: db $21,$84,$01,$00,$35,$84,$01,$00
-#_0A81DC: db $5B,$84,$01,$00,$8A,$84,$01,$00
-#_0A81E4: db $E2,$84,$02,$00,$8A,$84,$02,$00
-#_0A81EC: db $05,$85,$01,$00,$1F,$85,$01,$00
-#_0A81F4: db $5B,$84,$02,$00,$B9,$84,$02,$00
-#_0A81FC: db $1F,$85,$02,$00,$1F,$85,$03,$00
-#_0A8204: db $D6,$8B,$0D,$38,$F6,$0E,$2E,$F9
-#_0A820C: db $0D,$AD,$F3,$0E,$A4,$B7,$0C,$96
-#_0A8214: db $C4,$0B,$C9,$B3,$0B,$44,$D7,$0E
-#_0A821C: db $9B,$8F,$0E,$81,$EC,$0E,$8B,$C3
-#_0A8224: db $0D,$8B,$F0,$0E,$A9,$9D,$0E,$00
-#_0A822C: db $00,$00,$80,$0C,$A0,$F6,$0E,$49
-#_0A8234: db $EA,$0C,$AD,$F3,$0E,$C9,$B3,$0B
-#_0A823C: db $4E,$F6,$0C,$96,$C4,$0B,$44,$D7
-#_0A8244: db $0E,$33,$F8,$0A,$81,$EC,$0E,$A7
-#_0A824C: db $A4,$0E,$00,$00,$24,$97,$0D,$84
-#_0A8254: db $F7,$0E,$2E,$F9,$0D,$AD,$F3,$0E
-#_0A825C: db $A4,$B7,$0C,$96,$C4,$0B,$44,$D7
-#_0A8264: db $0E,$33,$F8,$0A,$81,$EC,$0E,$8B
-#_0A826C: db $C3,$0D,$9B,$E4,$0B,$00,$00,$D7
-#_0A8274: db $DD,$0C,$C7,$FF,$0D,$2E,$F9,$0D
-#_0A827C: db $AD,$F3,$0E,$99,$FF,$0B,$96,$C4
-#_0A8284: db $0B,$C9,$B3,$0B,$44,$D7,$0E,$B5
-#_0A828C: db $B8,$0E,$9B,$8F,$0E,$81,$EC,$0E
-#_0A8294: db $46,$E7,$0E,$8B,$F0,$0E,$00,$00
-#_0A829C: db $9A,$B2,$0E,$04,$F9,$0E,$94,$F3
-#_0A82A4: db $0B,$AD,$F3,$0E,$C9,$B3,$0B,$A4
-#_0A82AC: db $B7,$0C,$00,$00,$A1,$E3,$0E,$50
-#_0A82B4: db $F8,$0E,$2E,$F9,$0D,$AD,$F3,$0E
-#_0A82BC: db $A4,$B7,$0C,$96,$C4,$0B,$44,$D7
-#_0A82C4: db $0E,$46,$E7,$0E,$8B,$C3,$0D,$00
-#_0A82CC: db $00,$F1,$87,$0E,$58,$F7,$0E,$A2
-#_0A82D4: db $96,$0E,$9D,$D4,$0B,$AD,$F3,$0E
-#_0A82DC: db $2E,$F9,$0D,$4E,$F6,$0C,$44,$D7
-#_0A82E4: db $0E,$33,$F8,$0A,$9B,$8F,$0E,$81
-#_0A82EC: db $EC,$0E,$00,$00,$7D,$C9,$0E,$B0
-#_0A82F4: db $F7,$0E,$2E,$F9,$0D,$AD,$F3,$0E
-#_0A82FC: db $A4,$B7,$0C,$4E,$F6,$0C,$DB,$9C
-#_0A8304: db $0C,$44,$D7,$0E,$B7,$BE,$0E,$81
-#_0A830C: db $EC,$0E,$00,$00,$6F,$D7,$0D,$28
-#_0A8314: db $F8,$0E,$2E,$F9,$0D,$AD,$F3,$0E
-#_0A831C: db $A4,$B7,$0C,$96,$C4,$0B,$C9,$B3
-#_0A8324: db $0B,$44,$D7,$0E,$33,$F8,$0A,$9B
-#_0A832C: db $8F,$0E,$8B,$C3,$0D,$00,$00,$3B
-#_0A8334: db $E0,$0D,$00,$F7,$0E,$96,$C4,$0B
-#_0A833C: db $AD,$F3,$0E,$2E,$F9,$0D,$A4,$B7
-#_0A8344: db $0C,$9D,$D4,$0B,$44,$D7,$0E,$33
-#_0A834C: db $F8,$0A,$9B,$8F,$0E,$81,$EC,$0E
-#_0A8354: db $00,$00,$99,$AA,$0C,$74,$F8,$0E
-#_0A835C: db $2E,$F9,$0D,$AD,$F3,$0E,$96,$C4
-#_0A8364: db $0B,$A4,$B7,$0C,$44,$D7,$0E,$33
-#_0A836C: db $F8,$0A,$81,$EC,$0E,$00,$00,$DE
-#_0A8374: db $F4,$0E,$44,$F9,$0E,$2E,$F9,$0D
-#_0A837C: db $AD,$F3,$0E,$96,$C4,$0B,$A4,$B7
-#_0A8384: db $0C,$00,$00,$2E,$CE,$0E,$E0,$F8
-#_0A838C: db $0E,$2E,$F9,$0D,$AD,$F3,$0E,$96
-#_0A8394: db $C4,$0B,$A4,$B7,$0C,$44,$D7,$0E
-#_0A839C: db $33,$F8,$0A,$81,$EC,$0E,$00,$00
-#_0A83A4: db $A5,$C4,$0C,$98,$F8,$0E,$86,$CD
-#_0A83AC: db $0D,$07,$F1,$0D,$A4,$B7,$0C,$AD
-#_0A83B4: db $F3,$0E,$44,$D7,$0E,$33,$F8,$0A
-#_0A83BC: db $81,$EC,$0E,$00,$00,$5B,$D1,$0C
-#_0A83C4: db $D8,$F7,$0E,$86,$CD,$0D,$BD,$A2
-#_0A83CC: db $0B,$AD,$F3,$0E,$9D,$D4,$0B,$44
-#_0A83D4: db $D7,$0E,$33,$F8,$0A,$9B,$8F,$0E
-#_0A83DC: db $A9,$9D,$0E,$00,$00,$91,$B8,$0D
-#_0A83E4: db $D0,$F6,$0E,$AD,$F3,$0E,$2E,$F9
-#_0A83EC: db $0D,$07,$F1,$0D,$94,$F3,$0B,$A4
-#_0A83F4: db $B7,$0C,$44,$D7,$0E,$B5,$B8,$0E
-#_0A83FC: db $9B,$8F,$0E,$A9,$9D,$0E,$00,$00
-#_0A8404: db $6B,$A2,$0D,$BC,$F8,$0E,$49,$EA
-#_0A840C: db $0C,$96,$C4,$0B,$9D,$D4,$0B,$AD
-#_0A8414: db $F3,$0E,$44,$D7,$0E,$33,$F8,$0A
-#_0A841C: db $9B,$8F,$0E,$00,$00,$79,$F2,$0E
-#_0A8424: db $5C,$F9,$0E,$2E,$F9,$0D,$AD,$F3
-#_0A842C: db $0E,$A4,$B7,$0C,$96,$C4,$0B,$00
-#_0A8434: db $00,$ED,$E1,$0A,$6C,$F6,$0E,$2E
-#_0A843C: db $F9,$0D,$AD,$F3,$0E,$A4,$B7,$0C
-#_0A8444: db $96,$C4,$0B,$C9,$B3,$0B,$44,$D7
-#_0A844C: db $0E,$33,$F8,$0A,$81,$EC,$0E,$8B
-#_0A8454: db $C3,$0D,$B5,$B8,$0E,$00,$00,$81
-#_0A845C: db $AD,$0D,$4B,$FF,$0D,$2E,$F9,$0D
-#_0A8464: db $AD,$F3,$0E,$A4,$B7,$0C,$39,$EA
-#_0A846C: db $0E,$96,$C4,$0B,$44,$D7,$0E,$B5
-#_0A8474: db $B8,$0E,$A9,$9D,$0E,$00,$80,$0E
-#_0A847C: db $A5,$AB,$0E,$B3,$E8,$0D,$B2,$DF
-#_0A8484: db $0E,$A8,$DB,$0E,$00,$00,$00,$80
-#_0A848C: db $0D,$8B,$FF,$0D,$2E,$F9,$0D,$AD
-#_0A8494: db $F3,$0E,$A4,$B7,$0C,$86,$CD,$0D
-#_0A849C: db $07,$F1,$0D,$9D,$D4,$0B,$44,$D7
-#_0A84A4: db $0E,$B5,$B8,$0E,$9B,$8F,$0E,$00
-#_0A84AC: db $80,$0E,$A5,$AB,$0E,$A9,$9D,$0E
-#_0A84B4: db $A8,$DB,$0E,$00,$00,$C4,$8E,$0C
-#_0A84BC: db $04,$F6,$0E,$2E,$F9,$0D,$AD,$F3
-#_0A84C4: db $0E,$A4,$B7,$0C,$BD,$A2,$0B,$49
-#_0A84CC: db $EA,$0C,$9D,$D4,$0B,$44,$D7,$0E
-#_0A84D4: db $B5,$B8,$0E,$81,$EC,$0E,$A9,$9D
-#_0A84DC: db $0E,$A8,$DB,$0E,$00,$00,$9E,$C4
-#_0A84E4: db $0E,$2C,$F7,$0E,$2E,$F9,$0D,$AD
-#_0A84EC: db $F3,$0E,$A4,$B7,$0C,$C9,$B3,$0B
-#_0A84F4: db $96,$C4,$0B,$44,$D7,$0E,$33,$F8
-#_0A84FC: db $0A,$81,$EC,$0E,$8B,$C3,$0D,$00
-#_0A8504: db $00,$93,$EE,$0E,$24,$F9,$0E,$96
-#_0A850C: db $C4,$0B,$AD,$F3,$0E,$2E,$F9,$0D
-#_0A8514: db $C9,$B3,$0B,$44,$D7,$0E,$8B,$C3
-#_0A851C: db $0D,$00,$00,$BC,$D2,$0E,$00,$F8
-#_0A8524: db $0E,$2E,$F9,$0D,$AD,$F3,$0E,$96
-#_0A852C: db $C4,$0B,$A4,$B7,$0C,$44,$D7,$0E
-#_0A8534: db $33,$F8,$0A,$81,$EC,$0E,$00,$00
+;===================================================================================================
+
+MusicPointers:
+#_0A8124: dw SongPack00
+#_0A8126: dw SongPack01
+#_0A8128: dw SongPack02
+#_0A812A: dw SongPack03
+#_0A812C: dw SongPack04
+#_0A812E: dw SongPack05
+#_0A8130: dw SongPack06
+#_0A8132: dw SongPack07
+#_0A8134: dw SongPack08
+#_0A8136: dw SongPack09
+#_0A8138: dw SongPack0A
+#_0A813A: dw SongPack0B
+#_0A813C: dw SongPack0C
+#_0A813E: dw SongPack0D
+#_0A8140: dw SongPack0E
+#_0A8142: dw SongPack0F
+#_0A8144: dw SongPack10
+#_0A8146: dw SongPack11
+#_0A8148: dw SongPack12
+#_0A814A: dw SongPack13
+#_0A814C: dw SongPack14
+#_0A814E: dw SongPack15
+#_0A8150: dw SongPack16
+#_0A8152: dw SongPack17
+#_0A8154: dw SongPack18
+#_0A8156: dw SongPack19
+#_0A8158: dw SongPack1A
+#_0A815A: dw SongPack1B
+#_0A815C: dw SongPack1C
+#_0A815E: dw SongPack1D
+#_0A8160: dw SongPack1E
+#_0A8162: dw SongPack1F
+#_0A8164: dw SongPack20
+#_0A8166: dw SongPack21
+#_0A8168: dw SongPack22
+#_0A816A: dw SongPack23
+#_0A816C: dw SongPack24
+#_0A816E: dw SongPack25
+
+;===================================================================================================
+
+SongPack00:
+#_0A8170: dw SongData_0A8204, $0000
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack01:
+#_0A8174: dw SongData_0A8204, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack02:
+#_0A8178: dw SongData_0A822D, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack03:
+#_0A817C: dw SongData_0A8250, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack04:
+#_0A8180: dw SongData_0A8273, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack05:
+#_0A8184: dw SongData_0A84B9, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack06:
+#_0A8188: dw SongData_0A829C, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack07:
+#_0A818C: dw SongData_0A84E2, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack08:
+#_0A8190: dw SongData_0A82B0, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack09:
+#_0A8194: dw SongData_0A82CD, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack0A:
+#_0A8198: dw SongData_0A82F0, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack0B:
+#_0A819C: dw SongData_0A8310, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack0C:
+#_0A81A0: dw SongData_0A8310, $0002
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack0D:
+#_0A81A4: dw SongData_0A8333, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack0E:
+#_0A81A8: dw SongData_0A8333, $0002
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack0F:
+#_0A81AC: dw SongData_0A8356, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack10:
+#_0A81B0: dw SongData_0A8356, $0002
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack11:
+#_0A81B4: dw SongData_0A8373, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack12:
+#_0A81B8: dw SongData_0A8387, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack13:
+#_0A81BC: dw SongData_0A83A4, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack14:
+#_0A81C0: dw SongData_0A83C1, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack15:
+#_0A81C4: dw SongData_0A83E1, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack16:
+#_0A81C8: dw SongData_0A8310, $0003
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack17:
+#_0A81CC: dw SongData_0A8404, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack18:
+#_0A81D0: dw SongData_0A8435, $0002
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack19:
+#_0A81D4: dw SongData_0A8421, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack1A:
+#_0A81D8: dw SongData_0A8435, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack1B:
+#_0A81DC: dw SongData_0A845B, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack1C:
+#_0A81E0: dw SongData_0A848A, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack1D:
+#_0A81E4: dw SongData_0A84E2, $0002
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack1E:
+#_0A81E8: dw SongData_0A848A, $0002
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack1F:
+#_0A81EC: dw SongData_0A8505, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack20:
+#_0A81F0: dw SongData_0A851F, $0001
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack21:
+#_0A81F4: dw SongData_0A845B, $0002
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack22:
+#_0A81F8: dw SongData_0A84B9, $0002
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack23:
+#_0A81FC: dw SongData_0A851F, $0002
+
+;---------------------------------------------------------------------------------------------------
+
+SongPack24:
+#_0A8200: dw SongData_0A851F, $0003
+
+;===================================================================================================
+
+SongTransferData_0A8204:
+#_0A8204: dl SongData_0D8BD6
+#_0A8207: dl SongData_0EF638
+#_0A820A: dl SongData_0DF92E
+#_0A820D: dl SongData_0EF3AD
+#_0A8210: dl SongData_0CB7A4
+#_0A8213: dl SongData_0BC496
+#_0A8216: dl SongData_0BB3C9
+#_0A8219: dl SongData_0ED744
+#_0A821C: dl SongData_0E8F9B
+#_0A821F: dl SongData_0EEC81
+#_0A8222: dl SongData_0DC38B
+#_0A8225: dl SongData_0EF08B
+#_0A8228: dl SongData_0E9DA9
+#_0A822B: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A822D:
+#_0A822D: dl SongData_0C8000
+#_0A8230: dl SongData_0EF6A0
+#_0A8233: dl SongData_0CEA49
+#_0A8236: dl SongData_0EF3AD
+#_0A8239: dl SongData_0BB3C9
+#_0A823C: dl SongData_0CF64E
+#_0A823F: dl SongData_0BC496
+#_0A8242: dl SongData_0ED744
+#_0A8245: dl SongData_0AF833
+#_0A8248: dl SongData_0EEC81
+#_0A824B: dl SongData_0EA4A7
+#_0A824E: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8250:
+#_0A8250: dl SongData_0D9724
+#_0A8253: dl SongData_0EF784
+#_0A8256: dl SongData_0DF92E
+#_0A8259: dl SongData_0EF3AD
+#_0A825C: dl SongData_0CB7A4
+#_0A825F: dl SongData_0BC496
+#_0A8262: dl SongData_0ED744
+#_0A8265: dl SongData_0AF833
+#_0A8268: dl SongData_0EEC81
+#_0A826B: dl SongData_0DC38B
+#_0A826E: dl SongData_0BE49B
+#_0A8271: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8273:
+#_0A8273: dl SongData_0CDDD7
+#_0A8276: dl SongData_0DFFC7
+#_0A8279: dl SongData_0DF92E
+#_0A827C: dl SongData_0EF3AD
+#_0A827F: dl SongData_0BFF99
+#_0A8282: dl SongData_0BC496
+#_0A8285: dl SongData_0BB3C9
+#_0A8288: dl SongData_0ED744
+#_0A828B: dl SongData_0EB8B5
+#_0A828E: dl SongData_0E8F9B
+#_0A8291: dl SongData_0EEC81
+#_0A8294: dl SongData_0EE746
+#_0A8297: dl SongData_0EF08B
+#_0A829A: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A829C:
+#_0A829C: dl SongData_0EB29A
+#_0A829F: dl SongData_0EF904
+#_0A82A2: dl SongData_0BF394
+#_0A82A5: dl SongData_0EF3AD
+#_0A82A8: dl SongData_0BB3C9
+#_0A82AB: dl SongData_0CB7A4
+#_0A82AE: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A82B0:
+#_0A82B0: dl SongData_0EE3A1
+#_0A82B3: dl SongData_0EF850
+#_0A82B6: dl SongData_0DF92E
+#_0A82B9: dl SongData_0EF3AD
+#_0A82BC: dl SongData_0CB7A4
+#_0A82BF: dl SongData_0BC496
+#_0A82C2: dl SongData_0ED744
+#_0A82C5: dl SongData_0EE746
+#_0A82C8: dl SongData_0DC38B
+#_0A82CB: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A82CD:
+#_0A82CD: dl SongData_0E87F1
+#_0A82D0: dl SongData_0EF758
+#_0A82D3: dl SongData_0E96A2
+#_0A82D6: dl SongData_0BD49D
+#_0A82D9: dl SongData_0EF3AD
+#_0A82DC: dl SongData_0DF92E
+#_0A82DF: dl SongData_0CF64E
+#_0A82E2: dl SongData_0ED744
+#_0A82E5: dl SongData_0AF833
+#_0A82E8: dl SongData_0E8F9B
+#_0A82EB: dl SongData_0EEC81
+#_0A82EE: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A82F0:
+#_0A82F0: dl SongData_0EC97D
+#_0A82F3: dl SongData_0EF7B0
+#_0A82F6: dl SongData_0DF92E
+#_0A82F9: dl SongData_0EF3AD
+#_0A82FC: dl SongData_0CB7A4
+#_0A82FF: dl SongData_0CF64E
+#_0A8302: dl SongData_0C9CDB
+#_0A8305: dl SongData_0ED744
+#_0A8308: dl SongData_0EBEB7
+#_0A830B: dl SongData_0EEC81
+#_0A830E: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8310:
+#_0A8310: dl SongData_0DD76F
+#_0A8313: dl SongData_0EF828
+#_0A8316: dl SongData_0DF92E
+#_0A8319: dl SongData_0EF3AD
+#_0A831C: dl SongData_0CB7A4
+#_0A831F: dl SongData_0BC496
+#_0A8322: dl SongData_0BB3C9
+#_0A8325: dl SongData_0ED744
+#_0A8328: dl SongData_0AF833
+#_0A832B: dl SongData_0E8F9B
+#_0A832E: dl SongData_0DC38B
+#_0A8331: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8333:
+#_0A8333: dl SongData_0DE03B
+#_0A8336: dl SongData_0EF700
+#_0A8339: dl SongData_0BC496
+#_0A833C: dl SongData_0EF3AD
+#_0A833F: dl SongData_0DF92E
+#_0A8342: dl SongData_0CB7A4
+#_0A8345: dl SongData_0BD49D
+#_0A8348: dl SongData_0ED744
+#_0A834B: dl SongData_0AF833
+#_0A834E: dl SongData_0E8F9B
+#_0A8351: dl SongData_0EEC81
+#_0A8354: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8356:
+#_0A8356: dl SongData_0CAA99
+#_0A8359: dl SongData_0EF874
+#_0A835C: dl SongData_0DF92E
+#_0A835F: dl SongData_0EF3AD
+#_0A8362: dl SongData_0BC496
+#_0A8365: dl SongData_0CB7A4
+#_0A8368: dl SongData_0ED744
+#_0A836B: dl SongData_0AF833
+#_0A836E: dl SongData_0EEC81
+#_0A8371: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8373:
+#_0A8373: dl SongData_0EF4DE
+#_0A8376: dl SongData_0EF944
+#_0A8379: dl SongData_0DF92E
+#_0A837C: dl SongData_0EF3AD
+#_0A837F: dl SongData_0BC496
+#_0A8382: dl SongData_0CB7A4
+#_0A8385: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8387:
+#_0A8387: dl SongData_0ECE2E
+#_0A838A: dl SongData_0EF8E0
+#_0A838D: dl SongData_0DF92E
+#_0A8390: dl SongData_0EF3AD
+#_0A8393: dl SongData_0BC496
+#_0A8396: dl SongData_0CB7A4
+#_0A8399: dl SongData_0ED744
+#_0A839C: dl SongData_0AF833
+#_0A839F: dl SongData_0EEC81
+#_0A83A2: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A83A4:
+#_0A83A4: dl SongData_0CC4A5
+#_0A83A7: dl SongData_0EF898
+#_0A83AA: dl SongData_0DCD86
+#_0A83AD: dl SongData_0DF107
+#_0A83B0: dl SongData_0CB7A4
+#_0A83B3: dl SongData_0EF3AD
+#_0A83B6: dl SongData_0ED744
+#_0A83B9: dl SongData_0AF833
+#_0A83BC: dl SongData_0EEC81
+#_0A83BF: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A83C1:
+#_0A83C1: dl SongData_0CD15B
+#_0A83C4: dl SongData_0EF7D8
+#_0A83C7: dl SongData_0DCD86
+#_0A83CA: dl SongData_0BA2BD
+#_0A83CD: dl SongData_0EF3AD
+#_0A83D0: dl SongData_0BD49D
+#_0A83D3: dl SongData_0ED744
+#_0A83D6: dl SongData_0AF833
+#_0A83D9: dl SongData_0E8F9B
+#_0A83DC: dl SongData_0E9DA9
+#_0A83DF: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A83E1:
+#_0A83E1: dl SongData_0DB891
+#_0A83E4: dl SongData_0EF6D0
+#_0A83E7: dl SongData_0EF3AD
+#_0A83EA: dl SongData_0DF92E
+#_0A83ED: dl SongData_0DF107
+#_0A83F0: dl SongData_0BF394
+#_0A83F3: dl SongData_0CB7A4
+#_0A83F6: dl SongData_0ED744
+#_0A83F9: dl SongData_0EB8B5
+#_0A83FC: dl SongData_0E8F9B
+#_0A83FF: dl SongData_0E9DA9
+#_0A8402: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8404:
+#_0A8404: dl SongData_0DA26B
+#_0A8407: dl SongData_0EF8BC
+#_0A840A: dl SongData_0CEA49
+#_0A840D: dl SongData_0BC496
+#_0A8410: dl SongData_0BD49D
+#_0A8413: dl SongData_0EF3AD
+#_0A8416: dl SongData_0ED744
+#_0A8419: dl SongData_0AF833
+#_0A841C: dl SongData_0E8F9B
+#_0A841F: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8421:
+#_0A8421: dl SongData_0EF279
+#_0A8424: dl SongData_0EF95C
+#_0A8427: dl SongData_0DF92E
+#_0A842A: dl SongData_0EF3AD
+#_0A842D: dl SongData_0CB7A4
+#_0A8430: dl SongData_0BC496
+#_0A8433: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8435:
+#_0A8435: dl SongData_0AE1ED
+#_0A8438: dl SongData_0EF66C
+#_0A843B: dl SongData_0DF92E
+#_0A843E: dl SongData_0EF3AD
+#_0A8441: dl SongData_0CB7A4
+#_0A8444: dl SongData_0BC496
+#_0A8447: dl SongData_0BB3C9
+#_0A844A: dl SongData_0ED744
+#_0A844D: dl SongData_0AF833
+#_0A8450: dl SongData_0EEC81
+#_0A8453: dl SongData_0DC38B
+#_0A8456: dl SongData_0EB8B5
+#_0A8459: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A845B:
+#_0A845B: dl SongData_0DAD81
+#_0A845E: dl SongData_0DFF4B
+#_0A8461: dl SongData_0DF92E
+#_0A8464: dl SongData_0EF3AD
+#_0A8467: dl SongData_0CB7A4
+#_0A846A: dl SongData_0EEA39
+#_0A846D: dl SongData_0BC496
+#_0A8470: dl SongData_0ED744
+#_0A8473: dl SongData_0EB8B5
+#_0A8476: dl SongData_0E9DA9
+#_0A8479: dl SongData_0E8000
+#_0A847C: dl SongData_0EABA5
+#_0A847F: dl SongData_0DE8B3
+#_0A8482: dl SongData_0EDFB2
+#_0A8485: dl SongData_0EDBA8
+#_0A8488: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A848A:
+#_0A848A: dl SongData_0D8000
+#_0A848D: dl SongData_0DFF8B
+#_0A8490: dl SongData_0DF92E
+#_0A8493: dl SongData_0EF3AD
+#_0A8496: dl SongData_0CB7A4
+#_0A8499: dl SongData_0DCD86
+#_0A849C: dl SongData_0DF107
+#_0A849F: dl SongData_0BD49D
+#_0A84A2: dl SongData_0ED744
+#_0A84A5: dl SongData_0EB8B5
+#_0A84A8: dl SongData_0E8F9B
+#_0A84AB: dl SongData_0E8000
+#_0A84AE: dl SongData_0EABA5
+#_0A84B1: dl SongData_0E9DA9
+#_0A84B4: dl SongData_0EDBA8
+#_0A84B7: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A84B9:
+#_0A84B9: dl SongData_0C8EC4
+#_0A84BC: dl SongData_0EF604
+#_0A84BF: dl SongData_0DF92E
+#_0A84C2: dl SongData_0EF3AD
+#_0A84C5: dl SongData_0CB7A4
+#_0A84C8: dl SongData_0BA2BD
+#_0A84CB: dl SongData_0CEA49
+#_0A84CE: dl SongData_0BD49D
+#_0A84D1: dl SongData_0ED744
+#_0A84D4: dl SongData_0EB8B5
+#_0A84D7: dl SongData_0EEC81
+#_0A84DA: dl SongData_0E9DA9
+#_0A84DD: dl SongData_0EDBA8
+#_0A84E0: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A84E2:
+#_0A84E2: dl SongData_0EC49E
+#_0A84E5: dl SongData_0EF72C
+#_0A84E8: dl SongData_0DF92E
+#_0A84EB: dl SongData_0EF3AD
+#_0A84EE: dl SongData_0CB7A4
+#_0A84F1: dl SongData_0BB3C9
+#_0A84F4: dl SongData_0BC496
+#_0A84F7: dl SongData_0ED744
+#_0A84FA: dl SongData_0AF833
+#_0A84FD: dl SongData_0EEC81
+#_0A8500: dl SongData_0DC38B
+#_0A8503: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A8505:
+#_0A8505: dl SongData_0EEE93
+#_0A8508: dl SongData_0EF924
+#_0A850B: dl SongData_0BC496
+#_0A850E: dl SongData_0EF3AD
+#_0A8511: dl SongData_0DF92E
+#_0A8514: dl SongData_0BB3C9
+#_0A8517: dl SongData_0ED744
+#_0A851A: dl SongData_0DC38B
+#_0A851D: dw $0000 ; end
+
+;===================================================================================================
+
+SongTransferData_0A851F:
+#_0A851F: dl SongData_0ED2BC
+#_0A8522: dl SongData_0EF800
+#_0A8525: dl SongData_0DF92E
+#_0A8528: dl SongData_0EF3AD
+#_0A852B: dl SongData_0BC496
+#_0A852E: dl SongData_0CB7A4
+#_0A8531: dl SongData_0ED744
+#_0A8534: dl SongData_0AF833
+#_0A8537: dl SongData_0EEC81
+#_0A853A: dw $0000 ; end
+
+;===================================================================================================
+
+APUDataStart:
 #_0A853C: db $5C,$00,$80,$3D,$00,$A2,$9B,$A6
 #_0A8544: db $F2,$A9,$DE,$AE,$F2,$A9,$DE,$AE
 #_0A854C: db $DE,$AE,$A2,$B4,$A2,$B4,$7F,$BF

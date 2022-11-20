@@ -186,7 +186,10 @@ UNKNOWN_7E0596   = $7E0596
 UNKNOWN_7E0598   = $7E0598
 UNKNOWN_7E059A   = $7E059A
 UNKNOWN_7E059C   = $7E059C
+
+; TODO partner pathing index?
 UNKNOWN_7E059E   = $7E059E
+
 UNKNOWN_7E05A0   = $7E05A0
 UNKNOWN_7E05A2   = $7E05A2
 UNKNOWN_7E05A4   = $7E05A4
@@ -197,27 +200,39 @@ COLDATAQ         = $7E05A6
 UNKNOWN_7E05A8   = $7E05A8
 UNKNOWN_7E05AA   = $7E05AA
 UNKNOWN_7E05AC   = $7E05AC
-UNKNOWN_7E05AE   = $7E05AE
-UNKNOWN_7E05B0   = $7E05B0
-UNKNOWN_7E05B2   = $7E05B2
-UNKNOWN_7E05B4   = $7E05B4
-UNKNOWN_7E05B6   = $7E05B6
-UNKNOWN_7E05B8   = $7E05B8
-UNKNOWN_7E05BA   = $7E05BA
-UNKNOWN_7E05BC   = $7E05BC
+
+
+; Number of items (BCD)
+COINS            = $7E05B0
+KEYS             = $7E05B2
+
+; BCD timer
+; upper 3 nibbles are the actual time
+; lowest nibble is a tick counter/10
+TIMER            = $7E05B4
+
+; BCD score
+SCORE            = $7E05B6
+
 UNKNOWN_7E05BE   = $7E05BE
 UNKNOWN_7E05C2   = $7E05C2
 UNKNOWN_7E05C4   = $7E05C4
 UNKNOWN_7E05C8   = $7E05C8
 UNKNOWN_7E05CA   = $7E05CA
 UNKNOWN_7E05CC   = $7E05CC
-UNKNOWN_7E05CE   = $7E05CE
+
+; Partner mode
+PTMD             = $7E05CE
+
 UNKNOWN_7E05D0   = $7E05D0
 UNKNOWN_7E05D4   = $7E05D4
 UNKNOWN_7E05D6   = $7E05D6
 UNKNOWN_7E05D8   = $7E05D8
 UNKNOWN_7E05DA   = $7E05DA
+
+; TODO some timer for partner/action
 UNKNOWN_7E05DC   = $7E05DC
+
 UNKNOWN_7E05DE   = $7E05DE
 UNKNOWN_7E05E0   = $7E05E0
 UNKNOWN_7E05E2   = $7E05E2
@@ -514,3 +529,8 @@ VMBUFF           = $7E2004
 
 ; CGRAM buffer
 CGRAMQ           = $7E2E00
+
+;===================================================================================================
+
+; APU transfer scratch space
+APUSCR           = $7E7A0E
