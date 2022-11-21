@@ -90,7 +90,12 @@ UNKNOWN_7E04F6   = $7E04F6
 UNKNOWN_7E04FA   = $7E04FA
 UNKNOWN_7E04FC   = $7E04FC
 UNKNOWN_7E04FE   = $7E04FE
-UNKNOWN_7E0500   = $7E0500
+
+;===================================================================================================
+
+; Main game module
+MODULE           = $7E0500
+
 UNKNOWN_7E0506   = $7E0506
 UNKNOWN_7E0508   = $7E0508
 UNKNOWN_7E050A   = $7E050A
@@ -432,11 +437,19 @@ UNKNOWN_7E19E6   = $7E19E6
 UNKNOWN_7E19E8   = $7E19E8
 UNKNOWN_7E19EA   = $7E19EA
 UNKNOWN_7E19EC   = $7E19EC
-UNKNOWN_7E19EE   = $7E19EE
-UNKNOWN_7E19F0   = $7E19F0
-UNKNOWN_7E19F2   = $7E19F2
-UNKNOWN_7E19F4   = $7E19F4
-UNKNOWN_7E19F6   = $7E19F6
+
+; Coordinates
+POCKX            = $7E19EE
+POCKY            = $7E19F0
+
+DOGHP            = $7E19F2
+
+
+LIVES            = $7E19F4
+
+; card level
+POWER            = $7E19F6
+
 UNKNOWN_7E19F8   = $7E19F8
 UNKNOWN_7E19F9   = $7E19F9
 UNKNOWN_7E19FA   = $7E19FA
@@ -525,7 +538,19 @@ VMMAX            = $7E2002
 VMBUFF           = $7E2004
 
 
+;===================================================================================================
+; Text stuff
+;===================================================================================================
 
+MSGMODE          = $7E2550
+
+; Message pointers
+MSGPT1           = $7E2554
+MSGPTR           = $7E2558
+
+; Text speed and countdown timer
+MSGSPD           = $7E256E
+MSGTMR           = $7E2570
 
 ; CGRAM buffer
 CGRAMQ           = $7E2E00

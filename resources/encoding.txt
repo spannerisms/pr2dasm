@@ -1,0 +1,192 @@
+20     [space]
+21     !
+22     bottom of E in EARS
+23     bottom of a in EARS
+24     bottom of r in EARS
+25     %
+26     bottom of s in EARS
+27     '
+28     (
+29     )
+2A     [null]
+2B     "
+2C     ,
+2D     -
+2E     .
+2F     ⏷
+30     0
+31     1
+32     2
+33     3
+34     4
+35     5
+36     6
+37     7
+38     8
+39     9
+3A     :
+3B     [null]
+3C     G
+3D     H
+3E     I
+3F     ?
+40     [null]
+41     [null]
+42     [null]
+43     [null]
+44     [null]
+45     [null]
+46     [null]
+47     [null]
+48     [null]
+49     [null]
+4A     [null]
+4B     [null]
+4C     [null]
+4D     [null]
+4E     [null]
+4F     [null]
+50     [null]
+51     [null]
+52     [null]
+53     [null]
+54     [null]
+55     [null]
+56     [null]
+57     [null]
+58     [null]
+59     [null]
+5A     [null]
+5B     [null]
+5C     [null]
+5D     [null]
+5E     [null]
+5F     [null]
+60     some 1
+61     some 3
+62     some 0
+63     [null]
+64     
+65     
+66     
+67     
+68     
+69     
+6A     top of MAGIC
+6B     top of MAGIC
+6C     top of MAGIC
+6D     top of MAGIC
+6E     top of MAGIC
+6F     top of MAGIC
+70     HUD 0
+71     HUD 1
+72     HUD 2
+73     HUD 3
+74     HUD 4
+75     HUD 5
+76     HUD 6
+77     HUD 7
+78     HUD 8
+79     HUD 9
+7A     bottom of MAGIC
+7B     bottom of MAGIC
+7C     bottom of MAGIC
+7D     bottom of MAGIC
+7E     bottom of MAGIC
+7F     bottom of MAGIC
+80     HUD SCORE
+81     HUD SCORE
+82     HUD SCORE
+83     HUD SCORE
+84     HUD TIME
+85     HUD TIME
+86     HUD TIME
+87     HUD key
+88     HUD =
+89     HUD coin
+8A     top of MAGIC
+8B     top of MAGIC
+8C     bottom of MAGIC
+8D     bottom of MAGIC
+8E     bottom of MAGIC
+8F     bottom of MAGIC
+90     [null]
+91     [null]
+92     [null]
+93     [null]
+94     [null]
+95     [null]
+96     [null]
+97     [null]
+98     [null]
+99     [null]
+9A     [null]
+9B     [null]
+9C     [null]
+9D     [null]
+9E     [null]
+9F     [null]
+A0     █ (character written for space)
+A1     J
+A2     ⌈
+A3     ⌋
+A4     curvy thing
+A5     ・
+A6     K
+A7     L
+A8     M
+A9     N
+AA     O
+AB     P
+AC     Q
+AD     R
+AE     S
+AF     T
+B0     ー
+B1     a
+B2     b
+B3     c
+B4     d
+B5     e
+B6     f
+B7     g
+B8     h
+B9     i
+BA     j
+BB     k
+BC     l
+BD     m
+BE     n
+BF     o
+C0     p
+C1     q
+C2     r
+C3     s
+C4     t
+C5     u
+C6     v
+C7     w
+C8     x
+C9     y
+CA     z
+CB     [garbage]
+CC     [garbage]
+CD     [garbage]
+CE     [garbage]
+CF     [garbage]
+D0     [garbage]
+D1     U
+D2     V
+D3     W
+D4     X
+D5     Y
+D6     Z
+D7     [garbage]
+D8     A
+D9     B
+DA     C
+DB     D
+DC     E
+DD     F
+DE     █
+DF     █

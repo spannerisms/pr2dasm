@@ -3461,7 +3461,7 @@ CODE_039516:
 #_039519: STA.w $04A8
 #_03951C: STZ.b $20
 #_03951E: LDA.w #$0001
-#_039521: JSR ROUTINE_03961E
+#_039521: JSR AddToScore
 
 .exit
 #_039524: RTS
@@ -3633,23 +3633,23 @@ ROUTINE_0395FC:
 CODE_0395FF:
 #_0395FF: LDA.w #$0000
 #_039602: STY.b $20
-#_039604: BRA ROUTINE_03961E
+#_039604: BRA AddToScore
 
 ;===================================================================================================
 
 ROUTINE_039606:
 #_039606: STZ.b $20
-#_039608: BRA ROUTINE_03961E
+#_039608: BRA AddToScore
 
 ;===================================================================================================
 
 ROUTINE_03960A:
 #_03960A: LDA.l $7FE802,X
-#_03960E: BEQ .exit
+#_03960E: BEQ EXIT_039660
 
 ;===================================================================================================
 
-ROUTINE_039610:
+AddToScore_x10:
 #_039610: STZ.b $20
 #_039612: ASL A
 #_039613: ROL.b $20
@@ -3662,7 +3662,7 @@ ROUTINE_039610:
 
 ;===================================================================================================
 
-ROUTINE_03961E:
+AddToScore:
 #_03961E: PHA
 
 #_03961F: JSL ROUTINE_0095C1_long
@@ -3693,19 +3693,21 @@ ROUTINE_03961E:
 #_039645: JSL ROUTINE_0095C1_long
 
 #_039649: CPY.b $34
-#_03964B: BEQ .exit
-#_03964D: BCC .exit
+#_03964B: BEQ EXIT_039660
+#_03964D: BCC EXIT_039660
 
 #_03964F: LDA.w $19F4
 #_039652: CMP.w #$0005
-#_039655: BCS .exit
+#_039655: BCS EXIT_039660
 
 #_039657: INC.w $19F4
 
 #_03965A: LDA.w #$0010
 #_03965D: STA.w $04A4
 
-.exit
+;---------------------------------------------------------------------------------------------------
+
+#EXIT_039660:
 #_039660: RTS
 
 ;===================================================================================================
@@ -3747,26 +3749,26 @@ ROUTINE_039664:
 
 PTR16_039696:
 #_039696: dw ROUTINE_039BA0
-#_039698: dw ROUTINE_0397A1
+#_039698: dw SpriteCollision_ShopDoor
 #_03969A: dw ROUTINE_039BA0
 #_03969C: dw ROUTINE_039BA2
-#_03969E: dw ROUTINE_0397A9
-#_0396A0: dw ROUTINE_039893
-#_0396A2: dw ROUTINE_0398D2
-#_0396A4: dw ROUTINE_039972
-#_0396A6: dw CollectItem_10Coins
-#_0396A8: dw CollectItem_30Coins
-#_0396AA: dw CollectItem_Key
-#_0396AC: dw ROUTINE_039A2E
-#_0396AE: dw ROUTINE_039A58
-#_0396B0: dw ROUTINE_039B0C
-#_0396B2: dw ROUTINE_039A82
-#_0396B4: dw ROUTINE_039893
-#_0396B6: dw ROUTINE_039BB8
-#_0396B8: dw ROUTINE_039BCF
+#_03969E: dw SpriteCollision_Door
+#_0396A0: dw SpriteCollision_Power
+#_0396A2: dw SpriteCollision_Chest
+#_0396A4: dw SpriteCollision_Present
+#_0396A6: dw SpriteCollision_10Coins
+#_0396A8: dw SpriteCollision_30Coins
+#_0396AA: dw SpriteCollision_Key
+#_0396AC: dw SpriteCollision_Robe
+#_0396AE: dw SpriteCollision_Charm
+#_0396B0: dw SpriteCollision_Ears
+#_0396B2: dw SpriteCollision_PartnerChange
+#_0396B4: dw SpriteCollision_Power
+#_0396B6: dw SpriteCollision_EnemyDamage
+#_0396B8: dw SpriteCollision_Projectile
 #_0396BA: dw ROUTINE_0397B6
-#_0396BC: dw ROUTINE_039BCF
-#_0396BE: dw ROUTINE_03978B
+#_0396BC: dw SpriteCollision_Projectile
+#_0396BE: dw SpriteCollision_EnemyHug
 #_0396C0: dw ROUTINE_039783
 
 ;===================================================================================================
@@ -3928,7 +3930,7 @@ ROUTINE_039783:
 
 ;===================================================================================================
 
-ROUTINE_03978B:
+SpriteCollision_EnemyHug:
 #_03978B: TAX
 #_03978C: LDA.w #$019A
 #_03978F: CMP.w $0810,X
@@ -3943,7 +3945,7 @@ ROUTINE_03978B:
 
 ;===================================================================================================
 
-ROUTINE_0397A1:
+SpriteCollision_ShopDoor:
 #_0397A1: TAX
 
 ;===================================================================================================
@@ -3955,7 +3957,7 @@ ROUTINE_0397A2:
 
 ;===================================================================================================
 
-ROUTINE_0397A9:
+SpriteCollision_Door:
 #_0397A9: TAX
 #_0397AA: LDA.w $19CE
 #_0397AD: CMP.w #$00BA
@@ -4105,7 +4107,7 @@ CODE_039878:
 
 ;===================================================================================================
 
-ROUTINE_039893:
+SpriteCollision_Power:
 #_039893: TAX
 #_039894: JSR ROUTINE_03995F
 #_039897: BNE CODE_0398A1
@@ -4116,7 +4118,7 @@ ROUTINE_039893:
 CODE_0398A1:
 #_0398A1: STZ.b $20
 #_0398A3: LDA.w #$0100
-#_0398A6: JSR ROUTINE_039610
+#_0398A6: JSR AddToScore_x10
 #_0398A9: LDA.w #$0000
 #_0398AC: JSR ROUTINE_0396C2
 #_0398AF: LDA.w #$000C
@@ -4139,7 +4141,7 @@ CODE_0398C4:
 
 ;===================================================================================================
 
-ROUTINE_0398D2:
+SpriteCollision_Chest:
 #_0398D2: TAX
 #_0398D3: JSR ROUTINE_0397B7
 #_0398D6: JSR ROUTINE_03993F
@@ -4231,7 +4233,7 @@ CODE_039970:
 
 ;===================================================================================================
 
-ROUTINE_039972:
+SpriteCollision_Present:
 #_039972: TAX
 #_039973: JSR ROUTINE_0397B7
 #_039976: LDA.w $081A,X
@@ -4252,7 +4254,7 @@ CODE_03998B:
 
 ;===================================================================================================
 
-CollectItem_10Coins:
+SpriteCollision_10Coins:
 #_03998E: TAX
 #_03998F: CLC
 #_039990: LDA.w $080A,X
@@ -4279,7 +4281,7 @@ CODE_03999B:
 
 ;===================================================================================================
 
-CollectItem_30Coins:
+SpriteCollision_30Coins:
 #_0399B1: TAX
 #_0399B2: CLC
 #_0399B3: LDA.w $080A,X
@@ -4339,7 +4341,7 @@ ROUTINE_0399ED:
 
 ;===================================================================================================
 
-CollectItem_Key:
+SpriteCollision_Key:
 #_0399FA: TAX
 
 #_0399FB: LDA.w #$0001
@@ -4375,7 +4377,7 @@ CODE_039A25:
 
 ;===================================================================================================
 
-ROUTINE_039A2E:
+SpriteCollision_Robe:
 #_039A2E: TAX
 #_039A2F: JSR ROUTINE_038070
 #_039A32: BNE CODE_039A47
@@ -4403,7 +4405,7 @@ CODE_039A47:
 
 ;===================================================================================================
 
-ROUTINE_039A58:
+SpriteCollision_Charm:
 #_039A58: TAX
 #_039A59: JSR ROUTINE_038070
 #_039A5C: BNE CODE_039A74
@@ -4431,7 +4433,7 @@ CODE_039A74:
 
 ;===================================================================================================
 
-ROUTINE_039A82:
+SpriteCollision_PartnerChange:
 #_039A82: TAX
 #_039A83: JSR ROUTINE_038567
 #_039A86: BNE CODE_039AA0
@@ -4497,7 +4499,7 @@ UNREACH_039AFE:
 
 ;===================================================================================================
 
-ROUTINE_039B0C:
+SpriteCollision_Ears:
 #_039B0C: TAX
 #_039B0D: LDA.w $19CE
 #_039B10: LSR A
@@ -4521,7 +4523,7 @@ CODE_039B2A:
 CODE_039B2F:
 #_039B2F: STZ.b $20
 #_039B31: LDA.w #$0500
-#_039B34: JSR ROUTINE_039610
+#_039B34: JSR AddToScore_x10
 #_039B37: LDA.w #$0040
 #_039B3A: JSR ROUTINE_0396C2
 #_039B3D: BRA CODE_039B4C
@@ -4579,7 +4581,8 @@ ROUTINE_039B92:
 
 ROUTINE_039B94:
 #_039B94: LDA.w #$0300
-#_039B97: JSR ROUTINE_039610
+#_039B97: JSR AddToScore_x10
+
 #_039B9A: LDA.w #$0020
 #_039B9D: JMP ROUTINE_0396C2
 
@@ -4610,7 +4613,7 @@ ROUTINE_039BA2:
 
 ;===================================================================================================
 
-ROUTINE_039BB8:
+SpriteCollision_EnemyDamage:
 #_039BB8: TAX
 
 #_039BB9: LDA.w $0572
@@ -4630,7 +4633,7 @@ ROUTINE_039BB8:
 
 ;===================================================================================================
 
-ROUTINE_039BCF:
+SpriteCollision_Projectile:
 #_039BCF: TAX
 #_039BD0: LDA.w $0572
 #_039BD3: BEQ CODE_039BDB
@@ -4723,13 +4726,13 @@ PTR16_039C5F:
 #_039C69: dw ROUTINE_039D37
 #_039C6B: dw ROUTINE_039D37
 #_039C6D: dw ROUTINE_039D37
-#_039C6F: dw CollectItem_10Coins
-#_039C71: dw CollectItem_30Coins
-#_039C73: dw CollectItem_Key
+#_039C6F: dw SpriteCollision_10Coins
+#_039C71: dw SpriteCollision_30Coins
+#_039C73: dw SpriteCollision_Key
 #_039C75: dw ROUTINE_039D37
 #_039C77: dw ROUTINE_039D37
 #_039C79: dw ROUTINE_039D37
-#_039C7B: dw ROUTINE_039A82
+#_039C7B: dw SpriteCollision_PartnerChange
 #_039C7D: dw ROUTINE_039D37
 #_039C7F: dw ROUTINE_039D4D
 #_039C81: dw ROUTINE_039D7F
@@ -17879,7 +17882,7 @@ CODE_03FE90:
 #_03FE9F: STA.w $081E,X
 #_03FEA2: STZ.b $20
 #_03FEA4: LDA.w #$0100
-#_03FEA7: JSR ROUTINE_039610
+#_03FEA7: JSR AddToScore_x10
 #_03FEAA: LDA.w #$0000
 #_03FEAD: JSR ROUTINE_0396C2
 #_03FEB0: LDA.w #$000C
