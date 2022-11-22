@@ -13,27 +13,34 @@ ROUTINE_06A2B6:
 #_06A2B6: PHB
 #_06A2B7: PHK
 #_06A2B8: PLB
+
 #_06A2B9: STA.b $30
+
 #_06A2BB: LDA.w $05E6
 #_06A2BE: AND.w #$FF80
 #_06A2C1: STA.b $20
+
 #_06A2C3: LDA.w $05E8
 #_06A2C6: AND.w #$FF80
 #_06A2C9: STA.b $22
+
 #_06A2CB: BRA CODE_06A2D2
 
 ;===================================================================================================
 
-ROUTINE_06A2CD:
+#ROUTINE_06A2CD:
 #_06A2CD: PHB
 #_06A2CE: PHK
 #_06A2CF: PLB
+
 #_06A2D0: STA.b $30
 
 CODE_06A2D2:
 #_06A2D2: LDA.w #$000C
 #_06A2D5: STA.b $24
+
 #_06A2D7: JSR ROUTINE_0691E3
+
 #_06A2DA: PLB
 #_06A2DB: RTL
 
@@ -43,16 +50,21 @@ ROUTINE_06A2DC:
 #_06A2DC: PHB
 #_06A2DD: PHK
 #_06A2DE: PLB
+
 #_06A2DF: SEC
+
 #_06A2E0: TXA
 #_06A2E1: SBC.w #$8000
 #_06A2E4: TAX
+
 #_06A2E5: TYA
-#_06A2E6: JSR (PTR16_06A2EB,X)
+
+#_06A2E6: JSR (.vectors,X)
+
 #_06A2E9: PLB
 #_06A2EA: RTL
 
-PTR16_06A2EB:
+.vectors
 #_06A2EB: dw ROUTINE_06FF27
 #_06A2ED: dw ROUTINE_06FF6B
 #_06A2EF: dw ROUTINE_06F83D
@@ -77,6 +89,9 @@ PTR16_06A2EB:
 #_06A36F: db $36,$F5,$58,$F5,$9A,$F4,$01,$F5
 #_06A377: db $27,$F4,$C9,$F4,$91,$F2,$D5,$F1
 #_06A37F: db $0D,$F2,$71,$F2,$D8,$FD,$05,$FE
+
+;===================================================================================================
+
 #_06A387: db $00,$00,$00,$00,$00,$00,$00,$00
 #_06A38F: db $00,$00,$00,$00,$00,$00,$00,$00
 #_06A397: db $00,$00,$00,$00,$7B,$A5,$AE,$A5
@@ -241,13 +256,13 @@ CODE_06A605:
 #_06A608: BCS CODE_06A616
 #_06A60A: JSR ROUTINE_06A57C
 #_06A60D: LDA.l $7E7A52
-#_06A611: BNE CODE_06A619
+#_06A611: BNE .exit
 #_06A613: JMP CODE_06A690
 
 CODE_06A616:
 #_06A616: JMP CODE_06A5C4
 
-CODE_06A619:
+.exit
 #_06A619: RTS
 
 ;===================================================================================================
@@ -256,10 +271,10 @@ ROUTINE_06A61A:
 #_06A61A: TYX
 #_06A61B: LDA.w $19CE
 #_06A61E: CMP.w #$00A4
-#_06A621: BNE CODE_06A626
+#_06A621: BNE .exit
 #_06A623: JSR ROUTINE_068A91
 
-CODE_06A626:
+.exit
 #_06A626: RTS
 
 ;===================================================================================================
@@ -324,13 +339,13 @@ CODE_06A678:
 #_06A67D: LDA.w #$80B0
 #_06A680: STA.w $0810,X
 #_06A683: LDA.l $7E7A52
-#_06A687: BNE CODE_06A68F
+#_06A687: BNE .exit
 #_06A689: JMP CODE_06A690
 
 CODE_06A68C:
 #_06A68C: JMP CODE_06A642
 
-CODE_06A68F:
+.exit
 #_06A68F: RTS
 
 CODE_06A690:
@@ -516,21 +531,21 @@ ROUTINE_06A790:
 #_06A795: ADC.w #$0010
 #_06A798: AND.w #$03FF
 #_06A79B: CMP.w #$0100
-#_06A79E: BCC CODE_06A7B6
+#_06A79E: BCC .exit
 #_06A7A0: CMP.w #$0120
-#_06A7A3: BCS CODE_06A7B6
+#_06A7A3: BCS .exit
 #_06A7A5: LDA.w #$FFF0
 #_06A7A8: STA.l $7FE816,X
 #_06A7AC: LDA.w #$0004
 #_06A7AF: STA.l $7FE818,X
 #_06A7B3: JMP CODE_068A88
 
-CODE_06A7B6:
+.exit
 #_06A7B6: RTS
 
 ;===================================================================================================
 
-ROUTINE_06A7B7:
+Set_04AA_to_0044:
 #_06A7B7: LDA.w #$0044
 #_06A7BA: STA.w $04AA
 #_06A7BD: RTS
@@ -541,7 +556,7 @@ ROUTINE_06A7BE:
 #_06A7BE: TYX
 #_06A7BF: JSR ROUTINE_06B3D3
 #_06A7C2: BNE CODE_06A7CD
-#_06A7C4: JSR ROUTINE_06A7B7
+#_06A7C4: JSR Set_04AA_to_0044
 #_06A7C7: JSR ROUTINE_068558
 #_06A7CA: JSR ROUTINE_068A85
 
@@ -1280,7 +1295,7 @@ CODE_06AC5C:
 #_06AC5C: LDA.w #$1704
 #_06AC5F: JSR ROUTINE_068CE7
 #_06AC62: BNE CODE_06AC69
-#_06AC64: JSR ROUTINE_06AE2C
+#_06AC64: JSR ROUTINE_06AE2F_825A
 #_06AC67: BRA CODE_06AC89
 
 CODE_06AC69:
@@ -1320,7 +1335,7 @@ CODE_06ACA7:
 
 ROUTINE_06ACAA:
 #_06ACAA: JSR ROUTINE_06856E
-#_06ACAD: BNE CODE_06ACCC
+#_06ACAD: BNE .exit
 #_06ACAF: LDA.w #$0000
 #_06ACB2: STA.l $7E7A22
 #_06ACB6: STA.l $7E7A20
@@ -1331,7 +1346,7 @@ ROUTINE_06ACAA:
 #_06ACC6: STA.w $0812,X
 #_06ACC9: JMP ROUTINE_068A85
 
-CODE_06ACCC:
+.exit
 #_06ACCC: RTS
 
 ;===================================================================================================
@@ -1490,7 +1505,7 @@ CODE_06AD9F:
 #_06AD9F: LDA.w #$1703
 #_06ADA2: JSR ROUTINE_068CE7
 #_06ADA5: BNE CODE_06ADAC
-#_06ADA7: JSR ROUTINE_06AE20
+#_06ADA7: JSR ROUTINE_06AE23_8252
 #_06ADAA: BRA CODE_06ADCC
 
 CODE_06ADAC:
@@ -1559,7 +1574,7 @@ UNREACH_06AE0A:
 
 ;===================================================================================================
 
-ROUTINE_06AE20:
+ROUTINE_06AE23_8252:
 #_06AE20: LDA.w #$8252
 
 ;===================================================================================================
@@ -1573,7 +1588,7 @@ ROUTINE_06AE23:
 
 ;===================================================================================================
 
-ROUTINE_06AE2C:
+ROUTINE_06AE2F_825A:
 #_06AE2C: LDA.w #$825A
 
 ;===================================================================================================
@@ -1606,15 +1621,15 @@ CODE_06AE53:
 
 ROUTINE_06AE56:
 #_06AE56: JSR ROUTINE_06856E
-#_06AE59: BNE CODE_06AE6E
+#_06AE59: BNE .exit
 #_06AE5B: JSR ROUTINE_068291
 #_06AE5E: LDA.w #$FC64
 #_06AE61: LDY.w #$0009
-#_06AE64: JSL ROUTINE_08BD70_long
+#_06AE64: JSL ROUTINE_08BD65
 #_06AE68: STZ.w $0850,X
 #_06AE6B: JMP ROUTINE_068A85
 
-CODE_06AE6E:
+.exit
 #_06AE6E: RTS
 
 ;===================================================================================================
@@ -1709,11 +1724,11 @@ ROUTINE_06AEEA:
 #_06AEEA: JSR ROUTINE_06AF67
 #_06AEED: LDA.w $0810,X
 #_06AEF0: CMP.w #$8242
-#_06AEF3: BNE CODE_06AEFB
+#_06AEF3: BNE .exit
 #_06AEF5: LDA.w #$823E
 #_06AEF8: STA.w $0810,X
 
-CODE_06AEFB:
+.exit
 #_06AEFB: RTS
 
 ;===================================================================================================
@@ -1974,10 +1989,10 @@ CODE_06B0B4:
 
 CODE_06B0C1:
 #_06B0C1: CMP.w #$00F0
-#_06B0C4: BCC CODE_06B0C9
+#_06B0C4: BCC .exit
 #_06B0C6: JSR ROUTINE_0685D9
 
-CODE_06B0C9:
+.exit
 #_06B0C9: RTS
 
 CODE_06B0CA:
@@ -2105,11 +2120,11 @@ CODE_06B192:
 #_06B192: JSR ROUTINE_06861E
 #_06B195: PLA
 #_06B196: JSR ROUTINE_06B1B8
-#_06B199: BCC CODE_06B1A1
+#_06B199: BCC .exit
 #_06B19B: JSR ROUTINE_068CDA
 #_06B19E: JSR ROUTINE_0685C0
 
-CODE_06B1A1:
+.exit
 #_06B1A1: RTS
 
 ;===================================================================================================
@@ -2120,11 +2135,11 @@ ROUTINE_06B1A2:
 #_06B1A6: LDY.w #$005A
 #_06B1A9: LDA.w #$2112
 #_06B1AC: JSR ROUTINE_06B1B8
-#_06B1AF: BCC CODE_06B1B7
+#_06B1AF: BCC .exit
 #_06B1B1: LDA.w #$821C
 #_06B1B4: STA.w $0810,X
 
-CODE_06B1B7:
+.exit
 #_06B1B7: RTS
 
 ;===================================================================================================
@@ -2509,11 +2524,11 @@ CODE_06B423:
 
 ROUTINE_06B425:
 #_06B425: JSR ROUTINE_06856E
-#_06B428: BNE CODE_06B45B
+#_06B428: BNE .exit
 #_06B42A: JSR ROUTINE_068291
 #_06B42D: LDA.w #$FE59
 #_06B430: LDY.w #$0005
-#_06B433: JSL ROUTINE_08BD70_long
+#_06B433: JSL ROUTINE_08BD65
 #_06B437: JSR ROUTINE_06B4A8
 #_06B43A: LDA.w #$FFFF
 #_06B43D: STA.w $18E2
@@ -2527,7 +2542,7 @@ ROUTINE_06B425:
 #_06B455: LDA.w #$0039
 #_06B458: STA.w $04AA
 
-CODE_06B45B:
+.exit
 #_06B45B: RTS
 
 ;===================================================================================================
@@ -2548,7 +2563,7 @@ CODE_06B463:
 #_06B472: LDA.w #$EC26
 #_06B475: JSL ROUTINE_00EBF1_long
 #_06B479: JSR ROUTINE_068721
-#_06B47C: JSR ROUTINE_06A7B7
+#_06B47C: JSR Set_04AA_to_0044
 #_06B47F: JSR ROUTINE_068558
 #_06B482: JSR ROUTINE_0685C0
 #_06B485: LDA.w #$0000
@@ -2843,7 +2858,7 @@ CODE_06B62E:
 ROUTINE_06B63A:
 #_06B63A: LDA.w $05A0
 #_06B63D: AND.w #$0003
-#_06B640: BNE CODE_06B668
+#_06B640: BNE .exit
 #_06B642: LDA.w $0806,X
 #_06B645: STA.b $28
 #_06B647: LDA.w #$0008
@@ -2860,7 +2875,7 @@ ROUTINE_06B63A:
 #_06B663: STA.b $24
 #_06B665: JSR ROUTINE_0691E3
 
-CODE_06B668:
+.exit
 #_06B668: RTS
 
 ;===================================================================================================
@@ -3178,10 +3193,10 @@ ROUTINE_06B831:
 ROUTINE_06B837:
 #_06B837: LDA.w #$0040
 #_06B83A: JSR ROUTINE_068313
-#_06B83D: BCS CODE_06B842
+#_06B83D: BCS .exit
 #_06B83F: JMP ROUTINE_068309
 
-CODE_06B842:
+.exit
 #_06B842: RTS
 
 ;===================================================================================================
@@ -3270,7 +3285,7 @@ ROUTINE_06B8B1:
 #_06B8B9: REP #$20
 #_06B8BB: EOR.w $05A0
 #_06B8BE: ROR A
-#_06B8BF: BCC CODE_06B8DC
+#_06B8BF: BCC .exit
 #_06B8C1: DEC.w $0816,X
 #_06B8C4: BNE CODE_06B8C9
 #_06B8C6: JMP ROUTINE_068C8D
@@ -3284,7 +3299,7 @@ CODE_06B8C9:
 #_06B8D6: STA.w $0808,X
 #_06B8D9: JSR ROUTINE_068CC5
 
-CODE_06B8DC:
+.exit
 #_06B8DC: RTS
 
 ;===================================================================================================
@@ -3445,11 +3460,11 @@ ROUTINE_06BA01:
 
 ROUTINE_06BA04:
 #_06BA04: JSR ROUTINE_0685D2
-#_06BA07: BNE CODE_06BA0F
+#_06BA07: BNE .exit
 #_06BA09: LDA.w #$0076
 #_06BA0C: STA.w $04AA
 
-CODE_06BA0F:
+.exit
 #_06BA0F: RTS
 
 ;===================================================================================================
@@ -3770,7 +3785,7 @@ ROUTINE_06BC09:
 CODE_06BC3F:
 #_06BC3F: LDA.w #$FE87
 #_06BC42: LDY.w #$0005
-#_06BC45: JSL ROUTINE_08BD70_long
+#_06BC45: JSL ROUTINE_08BD65
 #_06BC49: LDY.w #$0008
 #_06BC4C: JSR ROUTINE_06BF91
 #_06BC4F: JMP ROUTINE_068C8D
@@ -3806,14 +3821,14 @@ CODE_06BC85:
 
 CODE_06BC87:
 #_06BC87: JSR ROUTINE_06856E
-#_06BC8A: BNE CODE_06BC9B
+#_06BC8A: BNE .exit
 #_06BC8C: LDA.w #$FE00
 #_06BC8F: STA.w $080A,X
 #_06BC92: JSR ROUTINE_06861E
 #_06BC95: JSR ROUTINE_06BC9C
 #_06BC98: JMP ROUTINE_068A8E
 
-CODE_06BC9B:
+.exit
 #_06BC9B: RTS
 
 ;===================================================================================================
@@ -3950,13 +3965,13 @@ CODE_06BD92:
 ROUTINE_06BD95:
 #_06BD95: LDA.w $05A0
 #_06BD98: AND.w #$0003
-#_06BD9B: BNE CODE_06BDA9
+#_06BD9B: BNE .exit
 #_06BD9D: LDA.w #$0080
 #_06BDA0: JSR ROUTINE_06BDAA
 #_06BDA3: LDA.w #$FF80
 #_06BDA6: JSR ROUTINE_06BDAA
 
-CODE_06BDA9:
+.exit
 #_06BDA9: RTS
 
 ;===================================================================================================
@@ -3992,7 +4007,7 @@ CODE_06BDD1:
 #_06BDDF: JSR ROUTINE_0684DD
 #_06BDE2: JSR ROUTINE_06E68D
 #_06BDE5: BMI CODE_06BDF3
-#_06BDE7: JSR ROUTINE_06A7B7
+#_06BDE7: JSR Set_04AA_to_0044
 #_06BDEA: STZ.w $080A,X
 #_06BDED: JSR ROUTINE_068CDA
 #_06BDF0: JSR ROUTINE_0685C6
@@ -4079,11 +4094,11 @@ CODE_06BE6F:
 
 ROUTINE_06BE78:
 #_06BE78: JSR ROUTINE_0685D2
-#_06BE7B: BNE CODE_06BE83
+#_06BE7B: BNE .exit
 #_06BE7D: LDA.w #$0071
 #_06BE80: STA.w $04AA
 
-CODE_06BE83:
+.exit
 #_06BE83: RTS
 
 ;===================================================================================================
@@ -4216,7 +4231,7 @@ CODE_06BF56:
 #_06BF64: BNE CODE_06BF79
 #_06BF66: LDA.w #$FE70
 #_06BF69: LDY.w #$0005
-#_06BF6C: JSL ROUTINE_08BD70_long
+#_06BF6C: JSL ROUTINE_08BD65
 #_06BF70: LDY.w #$0000
 #_06BF73: JSR ROUTINE_06BF91
 #_06BF76: JMP ROUTINE_068C8D
@@ -4489,10 +4504,10 @@ ROUTINE_06C170:
 ROUTINE_06C180:
 #_06C180: LDA.w $05A0
 #_06C183: AND.w #$001F
-#_06C186: BNE CODE_06C18B
+#_06C186: BNE .exit
 #_06C188: JSR ROUTINE_068658
 
-CODE_06C18B:
+.exit
 #_06C18B: RTS
 
 ;===================================================================================================
@@ -4626,11 +4641,11 @@ CODE_06C26E:
 ROUTINE_06C271:
 #_06C271: LDA.w $05A0
 #_06C274: AND.w #$0007
-#_06C277: BNE CODE_06C27F
+#_06C277: BNE .exit
 #_06C279: LDA.w #$0037
 #_06C27C: STA.w $04AA
 
-CODE_06C27F:
+.exit
 #_06C27F: RTS
 
 ;===================================================================================================
@@ -4725,11 +4740,11 @@ CODE_06C2FE:
 ROUTINE_06C319:
 #_06C319: LDA.w $05A0
 #_06C31C: AND.w #$0007
-#_06C31F: BNE CODE_06C327
+#_06C31F: BNE .exit
 #_06C321: LDA.w #$0077
 #_06C324: STA.w $04AA
 
-CODE_06C327:
+.exit
 #_06C327: RTS
 
 ;===================================================================================================
@@ -5040,13 +5055,13 @@ ROUTINE_06C537:
 #_06C537: TYX
 #_06C538: LDA.w $1710
 #_06C53B: CMP.w #$81BA
-#_06C53E: BEQ CODE_06C54C
+#_06C53E: BEQ .exit
 #_06C540: LDA.w #$130E
 #_06C543: STA.w $0806,X
 #_06C546: LDA.w #$8198
 #_06C549: STA.w $0810,X
 
-CODE_06C54C:
+.exit
 #_06C54C: RTS
 
 ;===================================================================================================
@@ -5093,7 +5108,7 @@ ROUTINE_06C574:
 
 ROUTINE_06C587:
 #_06C587: JSR ROUTINE_06856E
-#_06C58A: BNE CODE_06C5F9
+#_06C58A: BNE .exit
 #_06C58C: JSR ROUTINE_068291
 #_06C58F: JSR ROUTINE_0682CB
 #_06C592: STZ.w $080A,X
@@ -5137,10 +5152,10 @@ CODE_06C5BA:
 
 CODE_06C5EF:
 #_06C5EF: LDY.w #$0009
-#_06C5F2: JSL ROUTINE_08BD70_long
+#_06C5F2: JSL ROUTINE_08BD65
 #_06C5F6: JMP ROUTINE_068A8E
 
-CODE_06C5F9:
+.exit
 #_06C5F9: RTS
 
 ;===================================================================================================
@@ -5170,11 +5185,11 @@ ROUTINE_06C610:
 #_06C610: LDA.w #Message_089334
 #_06C613: LDY.w $18E4
 #_06C616: CPY.w #$0008
-#_06C619: BEQ CODE_06C61E
+#_06C619: BEQ .exit
 
 #_06C61B: LDA.w #Message_08943E
 
-CODE_06C61E:
+.exit
 #_06C61E: RTS
 
 ;===================================================================================================
@@ -5432,11 +5447,11 @@ PTR16_06C7A4:
 ROUTINE_06C7B2:
 #_06C7B2: LDA.w $05A0
 #_06C7B5: AND.w #$001F
-#_06C7B8: BNE CODE_06C7C0
+#_06C7B8: BNE .exit
 #_06C7BA: LDA.w #$006F
 #_06C7BD: STA.w $04A2
 
-CODE_06C7C0:
+.exit
 #_06C7C0: RTS
 
 ;===================================================================================================
@@ -5876,7 +5891,7 @@ CODE_06CA89:
 ROUTINE_06CA8F:
 #_06CA8F: TYX
 #_06CA90: LDA.l $7E2530
-#_06CA94: BNE CODE_06CAA6
+#_06CA94: BNE .exit
 #_06CA96: JSR ROUTINE_0692C8
 #_06CA99: PHX
 #_06CA9A: TXY
@@ -5886,7 +5901,7 @@ ROUTINE_06CA8F:
 #_06CAA2: PLX
 #_06CAA3: JMP ROUTINE_068A91
 
-CODE_06CAA6:
+.exit
 #_06CAA6: RTS
 
 ;===================================================================================================
@@ -5894,7 +5909,7 @@ CODE_06CAA6:
 ROUTINE_06CAA7:
 #_06CAA7: TYX
 #_06CAA8: DEC.w $080A,X
-#_06CAAB: BNE CODE_06CABA
+#_06CAAB: BNE .exit
 #_06CAAD: PHX
 #_06CAAE: TXY
 #_06CAAF: LDA.w $0806,Y
@@ -5903,7 +5918,7 @@ ROUTINE_06CAA7:
 #_06CAB6: PLX
 #_06CAB7: JMP ROUTINE_068C8D
 
-CODE_06CABA:
+.exit
 #_06CABA: RTS
 
 ;===================================================================================================
@@ -5926,7 +5941,7 @@ ROUTINE_06CABB:
 ROUTINE_06CAD4:
 #_06CAD4: TYX
 #_06CAD5: DEC.w $0814,X
-#_06CAD8: BNE CODE_06CAE6
+#_06CAD8: BNE .exit
 #_06CADA: PHX
 #_06CADB: TXY
 #_06CADC: LDX.w #$E720
@@ -5934,7 +5949,7 @@ ROUTINE_06CAD4:
 #_06CAE2: PLX
 #_06CAE3: JMP ROUTINE_068C8D
 
-CODE_06CAE6:
+.exit
 #_06CAE6: RTS
 
 ;===================================================================================================
@@ -6177,12 +6192,12 @@ CODE_06CC86:
 #_06CCBF: JSR ROUTINE_068A2D
 #_06CCC2: JMP ROUTINE_068C8D
 
-CODE_06CCC5:
+.exit
 #_06CCC5: RTS
 
 CODE_06CCC6:
 #_06CCC6: JSR ROUTINE_068B71
-#_06CCC9: BCS CODE_06CCC5
+#_06CCC9: BCS .exit
 #_06CCCB: JMP CODE_068DCD
 
 ;===================================================================================================
@@ -6638,7 +6653,7 @@ UNREACH_06CF90:
 ROUTINE_06D21C:
 #_06D21C: TYX
 #_06D21D: LDA.w $0816,X
-#_06D220: BNE CODE_06D238
+#_06D220: BNE .exit
 #_06D222: LDA.w $081E,X
 #_06D225: BEQ CODE_06D22A
 #_06D227: JMP ROUTINE_068A98
@@ -6652,7 +6667,7 @@ CODE_06D22A:
 CODE_06D235:
 #_06D235: JMP ROUTINE_068A98
 
-CODE_06D238:
+.exit
 #_06D238: RTS
 
 ;===================================================================================================
@@ -6715,7 +6730,7 @@ ROUTINE_06D281:
 #_06D29C: PHX
 #_06D29D: LDA.w #$FE8E
 #_06D2A0: LDY.w #$0002
-#_06D2A3: JSL ROUTINE_08BD70_long
+#_06D2A3: JSL ROUTINE_08BD65
 #_06D2A7: PLX
 #_06D2A8: BRA CODE_06D2DA
 
@@ -6827,7 +6842,7 @@ CODE_06D33C:
 ROUTINE_06D34C:
 #_06D34C: TYX
 #_06D34D: LDA.l $7E2530
-#_06D351: BNE CODE_06D368
+#_06D351: BNE .exit
 #_06D353: STZ.w $0816,X
 #_06D356: PHX
 #_06D357: JSR ROUTINE_06D3C6
@@ -6837,7 +6852,7 @@ ROUTINE_06D34C:
 #_06D361: STA.l $7E7A68
 #_06D365: JMP ROUTINE_068A8E
 
-CODE_06D368:
+.exit
 #_06D368: RTS
 
 ;===================================================================================================
@@ -7031,6 +7046,8 @@ UNREACH_06D44A:
 #_06D49E: dw Message_08A702
 #_06D4A0: dw Message_08A6B0
 
+;===================================================================================================
+
 UNREACH_06D4A2:
 #_06D4A2: db $D4,$01,$00,$A0,$00,$C0,$D4,$01
 #_06D4AA: db $08,$80,$40,$80,$00,$80,$38,$1F
@@ -7044,11 +7061,22 @@ UNREACH_06D4C8:
 UNREACH_06D4CA:
 #_06D4CA: db $DC,$01
 
-UNREACH_06D4CC:
-#_06D4CC: db $D9,$3A,$1F,$D8,$01,$D5,$48,$1F
-#_06D4D4: db $E4,$01,$D8,$4A,$1F,$E0,$01,$D4
-#_06D4DC: db $4C,$1F,$EC,$01,$A7,$4E,$1F,$E8
-#_06D4E4: db $01,$AD,$00,$00
+; TODO not sure really...
+ButtonTiles:
+#_06D4CC: dw $3AD9 ; B
+#_06D4CE: dw $D81F ; A
+#_06D4D0: dw $D501 ; Y
+#_06D4D2: dw $1F48 ; 
+#_06D4D4: dw $01E4 ; 
+#_06D4D6: dw $4AD8 ; 
+#_06D4D8: dw $E01F ; 
+#_06D4DA: dw $D401 ; X?
+#_06D4DC: dw $1F4C ; 
+#_06D4DE: dw $01EC ; 
+#_06D4E0: dw $4EA7 ; 
+#_06D4E2: dw $E81F ; 
+#_06D4E4: dw $AD01 ; 
+#_06D4E6: dw $0000
 
 ;===================================================================================================
 
@@ -7291,7 +7319,7 @@ ROUTINE_06D671:
 
 CODE_06D687:
 #_06D687: LDA.w UNREACH_06D4C8,Y
-#_06D68A: BEQ CODE_06D6D2
+#_06D68A: BEQ .exit
 #_06D68C: PHY
 #_06D68D: TAY
 #_06D68E: LDA.w $0000,Y
@@ -7306,7 +7334,7 @@ CODE_06D687:
 #_06D69B: BRA CODE_06D687
 
 CODE_06D69D:
-#_06D69D: LDA.w UNREACH_06D4CC,Y
+#_06D69D: LDA.w ButtonTiles,Y
 #_06D6A0: AND.w #$00FF
 #_06D6A3: STA.l $7E2572
 #_06D6A7: LDA.w UNREACH_06D4CA,Y
@@ -7331,7 +7359,7 @@ CODE_06D6AA:
 #_06D6CD: JSL ROUTINE_028220
 #_06D6D1: PLX
 
-CODE_06D6D2:
+.exit
 #_06D6D2: RTS
 
 ;===================================================================================================
@@ -7363,7 +7391,7 @@ ROUTINE_06D6E3:
 #_06D6FD: STA.l $7E7B38
 #_06D701: LDA.w #$FE97
 #_06D704: LDY.w #$0002
-#_06D707: JSL ROUTINE_08BD70_long
+#_06D707: JSL ROUTINE_08BD65
 #_06D70B: INC.w $0816,X
 
 CODE_06D70E:
@@ -7609,7 +7637,7 @@ UNREACH_06D8B2:
 
 ROUTINE_06D8BE:
 #_06D8BE: LDY.w #$0005
-#_06D8C1: JSL ROUTINE_08BD70_long
+#_06D8C1: JSL ROUTINE_08BD65
 #_06D8C5: RTS
 
 ;===================================================================================================
@@ -7971,7 +7999,7 @@ ROUTINE_06DB70:
 #_06DB7A: JSR ROUTINE_06DBE9
 #_06DB7D: LDA.w LOOSE_OP_06DBA2,Y
 #_06DB80: JSR ROUTINE_06DBE9
-#_06DB83: LDA.w CODE_06DBA8,Y
+#_06DB83: LDA.w .exit,Y
 #_06DB86: JSR ROUTINE_06DBE9
 #_06DB89: LDA.w UNREACH_06DBA9,Y
 #_06DB8C: JSR ROUTINE_06DBE9
@@ -7987,7 +8015,7 @@ CODE_06DBA1:
 #_06DBA4: JSR ROUTINE_06DBE9
 #_06DBA7: PLX
 
-CODE_06DBA8:
+.exit
 #_06DBA8: RTS
 
 UNREACH_06DBA9:
@@ -8015,9 +8043,9 @@ UNREACH_06DBB2:
 
 ROUTINE_06DBE9:
 #_06DBE9: AND.w #$00FF
-#_06DBEC: BEQ CODE_06DC04
+#_06DBEC: BEQ .exit
 #_06DBEE: CMP.w #$0011
-#_06DBF1: BCS CODE_06DC04
+#_06DBF1: BCS .exit
 #_06DBF3: PHX
 #_06DBF4: TAX
 #_06DBF5: SEP #$20
@@ -8027,7 +8055,7 @@ ROUTINE_06DBE9:
 #_06DC01: REP #$20
 #_06DC03: PLX
 
-CODE_06DC04:
+.exit
 #_06DC04: RTS
 
 ;===================================================================================================
@@ -8141,7 +8169,7 @@ ROUTINE_06DCC4:
 
 ROUTINE_06DCC8:
 #_06DCC8: LDA.l $7E7A6C
-#_06DCCC: BNE CODE_06DCDD
+#_06DCCC: BNE .exit
 #_06DCCE: INC A
 #_06DCCF: STA.l $7E7A6C
 #_06DCD3: STY.b $2C
@@ -8149,7 +8177,7 @@ ROUTINE_06DCC8:
 #_06DCD8: STA.b $26
 #_06DCDA: JSR ROUTINE_0696D1
 
-CODE_06DCDD:
+.exit
 #_06DCDD: RTS
 
 ;===================================================================================================
@@ -8165,14 +8193,14 @@ ROUTINE_06DCDE:
 ROUTINE_06DCE8:
 #_06DCE8: TYX
 #_06DCE9: LDA.l $7E7A6C
-#_06DCED: BNE CODE_06DCFC
+#_06DCED: BNE .exit
 #_06DCEF: INC A
 #_06DCF0: STA.l $7E7A6C
 #_06DCF4: LDA.w #$811E
 #_06DCF7: STA.b $26
 #_06DCF9: JSR ROUTINE_0696D1
 
-CODE_06DCFC:
+.exit
 #_06DCFC: RTS
 
 ;===================================================================================================
@@ -8181,7 +8209,7 @@ ROUTINE_06DCFD:
 #_06DCFD: TYX
 #_06DCFE: LDY.w #$0060
 #_06DD01: LDA.l $7E7A6C
-#_06DD05: BNE CODE_06DD1E
+#_06DD05: BNE .exit
 #_06DD07: INC A
 #_06DD08: STA.l $7E7A6C
 #_06DD0C: STY.b $2C
@@ -8192,7 +8220,7 @@ ROUTINE_06DCFD:
 #_06DD19: STA.b $26
 #_06DD1B: JSR ROUTINE_0696D1
 
-CODE_06DD1E:
+.exit
 #_06DD1E: RTS
 
 ;===================================================================================================
@@ -8422,12 +8450,12 @@ CODE_06DEA1:
 ROUTINE_06DEA4:
 #_06DEA4: TYX
 #_06DEA5: LDA.l $7E2530
-#_06DEA9: BNE CODE_06DEB5
+#_06DEA9: BNE .exit
 #_06DEAB: LDA.l $7FE816,X
 #_06DEAF: STA.w $0816,X
 #_06DEB2: JMP ROUTINE_068A8E
 
-CODE_06DEB5:
+.exit
 #_06DEB5: RTS
 
 ;===================================================================================================
@@ -8701,7 +8729,7 @@ ROUTINE_06E022:
 #_06E022: JSR ROUTINE_06856E
 #_06E025: BEQ CODE_06E028
 
-CODE_06E027:
+.exit
 #_06E027: RTS
 
 CODE_06E028:
@@ -8709,7 +8737,7 @@ CODE_06E028:
 #_06E02B: CMP.w #$0058
 #_06E02E: BCC CODE_06E035
 #_06E030: CMP.w #$0064
-#_06E033: BCC CODE_06E027
+#_06E033: BCC .exit
 
 CODE_06E035:
 #_06E035: LDA.w #$0001
@@ -8746,7 +8774,7 @@ CODE_06E083:
 #_06E086: JSR ROUTINE_068721
 #_06E089: LDA.w #$FCF2
 #_06E08C: LDY.w #$0009
-#_06E08F: JSL ROUTINE_08BD70_long
+#_06E08F: JSL ROUTINE_08BD65
 #_06E093: LDA.w #$0006
 #_06E096: JSR ROUTINE_068071
 #_06E099: BEQ CODE_06E09E
@@ -8781,7 +8809,7 @@ ROUTINE_06E0D4:
 #_06E0D5: LDA.l $7E2530
 #_06E0D9: BEQ CODE_06E0DC
 
-CODE_06E0DB:
+.exit
 #_06E0DB: RTS
 
 CODE_06E0DC:
@@ -8792,7 +8820,7 @@ CODE_06E0DC:
 #_06E0E7: LDA.l $7E7A4E
 #_06E0EB: CMP.w #$0021
 #_06E0EE: BCC CODE_06E0F2
-#_06E0F0: BRA CODE_06E0DB
+#_06E0F0: BRA .exit
 
 CODE_06E0F2:
 #_06E0F2: LDA.l $7FE81C,X
@@ -9170,7 +9198,7 @@ CODE_06E37E:
 
 ;===================================================================================================
 
-ROUTINE_06E385:
+ROUTINE_06E388_0280:
 #_06E385: LDA.w #$0280
 
 ;===================================================================================================
@@ -9179,12 +9207,12 @@ ROUTINE_06E388:
 #_06E388: STA.b $20
 #_06E38A: LDA.w $0834,X
 #_06E38D: CMP.b $20
-#_06E38F: BCC CODE_06E39A
+#_06E38F: BCC .exit
 #_06E391: LDA.w #$0020
 #_06E394: LDY.w #$8146
 #_06E397: JSR ROUTINE_06E77B
 
-CODE_06E39A:
+.exit
 #_06E39A: RTS
 
 ;===================================================================================================
@@ -9259,14 +9287,14 @@ ROUTINE_06E3EA:
 #_06E3F0: LDA.l $7FE81A,X
 #_06E3F4: SBC.b $2C
 #_06E3F6: STA.b $20
-#_06E3F8: BEQ CODE_06E42D
+#_06E3F8: BEQ .exit
 #_06E3FA: BPL CODE_06E400
 #_06E3FC: EOR.w #$FFFF
 #_06E3FF: INC A
 
 CODE_06E400:
 #_06E400: CMP.w #$0040
-#_06E403: BCC CODE_06E42D
+#_06E403: BCC .exit
 #_06E405: LDA.b $20
 #_06E407: AND.w #$03FF
 #_06E40A: CMP.w #$0200
@@ -9287,7 +9315,7 @@ CODE_06E41D:
 #_06E426: AND.w #$03FF
 #_06E429: STA.l $7FE81A,X
 
-CODE_06E42D:
+.exit
 #_06E42D: RTS
 
 ;===================================================================================================
@@ -10516,7 +10544,7 @@ ROUTINE_06ECEF:
 #_06ED16: JSR ROUTINE_06EDB9
 #_06ED19: JSR ROUTINE_06868E
 #_06ED1C: CMP.w #$0040
-#_06ED1F: BCS CODE_06ED34
+#_06ED1F: BCS .exit
 #_06ED21: LDA.w #$0000
 #_06ED24: STA.l $7E7B08
 #_06ED28: JMP ROUTINE_068C8D
@@ -10526,7 +10554,7 @@ CODE_06ED2B:
 #_06ED2E: LDA.w #$0170
 #_06ED31: JSR ROUTINE_0684DD
 
-CODE_06ED34:
+.exit
 #_06ED34: RTS
 
 CODE_06ED35:
@@ -10736,7 +10764,7 @@ ROUTINE_06EE8F:
 #_06EE97: JSR ROUTINE_068D41
 #_06EE9A: PLA
 #_06EE9B: CMP.w $0806,X
-#_06EE9E: BEQ CODE_06EECF
+#_06EE9E: BEQ .exit
 #_06EEA0: SEC
 #_06EEA1: LDA.w $0806,X
 #_06EEA4: SBC.w #$0E2A
@@ -10744,7 +10772,7 @@ ROUTINE_06EE8F:
 #_06EEA8: LDA.w UNREACH_06EED0,Y
 #_06EEAB: AND.w #$00FF
 #_06EEAE: CMP.w #$00FF
-#_06EEB1: BEQ CODE_06EECF
+#_06EEB1: BEQ .exit
 #_06EEB3: SEP #$20
 #_06EEB5: XBA
 #_06EEB6: REP #$20
@@ -10759,7 +10787,7 @@ ROUTINE_06EE8F:
 #_06EECA: JSL ROUTINE_00DB57_long
 #_06EECE: PLX
 
-CODE_06EECF:
+.exit
 #_06EECF: RTS
 
 UNREACH_06EED0:
@@ -11264,11 +11292,11 @@ CODE_06F2E8:
 #_06F2F1: JSR ROUTINE_068E2D
 #_06F2F4: AND.w #$00FF
 #_06F2F7: CMP.b $20
-#_06F2F9: BCS CODE_06F300
+#_06F2F9: BCS .exit
 #_06F2FB: INC.b $22
 #_06F2FD: STZ.w $0846,X
 
-CODE_06F300:
+.exit
 #_06F300: RTS
 
 CODE_06F301:
@@ -11299,11 +11327,11 @@ ROUTINE_06F318:
 #_06F319: LDA.w $080C,X
 #_06F31C: SBC.w $19EE
 #_06F31F: LDY.w #$8022
-#_06F322: BCS CODE_06F326
+#_06F322: BCS .exit
 #_06F324: INY
 #_06F325: INY
 
-CODE_06F326:
+.exit
 #_06F326: RTS
 
 ;===================================================================================================
@@ -11311,18 +11339,18 @@ CODE_06F326:
 ROUTINE_06F327:
 #_06F327: LDA.w $0814,X
 #_06F32A: CMP.w #$0001
-#_06F32D: BNE CODE_06F345
+#_06F32D: BNE .exit
 #_06F32F: SEC
 #_06F330: LDA.w $080E,X
 #_06F333: SBC.w #$0300
 #_06F336: CMP.w $0562
-#_06F339: BCC CODE_06F345
+#_06F339: BCC .exit
 #_06F33B: SEC
 #_06F33C: LDA.w $080E,X
 #_06F33F: SBC.w #$0010
 #_06F342: STA.w $080E,X
 
-CODE_06F345:
+.exit
 #_06F345: RTS
 
 ;===================================================================================================
@@ -11449,7 +11477,7 @@ CODE_06F3EE:
 #_06F3EF: STA.w $0840,X
 #_06F3F2: JSR ROUTINE_06FFBB
 #_06F3F5: CMP.w #$0020
-#_06F3F8: BCC CODE_06F41D
+#_06F3F8: BCC .exit
 
 CODE_06F3FA:
 #_06F3FA: JSR ROUTINE_068E2D
@@ -11466,7 +11494,7 @@ CODE_06F3FA:
 #_06F417: STZ.w $0830,X
 #_06F41A: JSR ROUTINE_068A91
 
-CODE_06F41D:
+.exit
 #_06F41D: RTS
 
 ;===================================================================================================
@@ -11621,11 +11649,11 @@ ROUTINE_06F501:
 #_06F509: STA.w $080E,X
 #_06F50C: JSR ROUTINE_06FFBB
 #_06F50F: CMP.w #$0040
-#_06F512: BCC CODE_06F51A
+#_06F512: BCC .exit
 #_06F514: STZ.w $0830,X
 #_06F517: JSR ROUTINE_068A91
 
-CODE_06F51A:
+.exit
 #_06F51A: RTS
 
 ;===================================================================================================
@@ -11970,11 +11998,11 @@ CODE_06F787:
 #_06F7A6: INC.w $0816,X
 #_06F7A9: LDA.w $0816,X
 #_06F7AC: CMP.w #$0002
-#_06F7AF: BCC CODE_06F7B7
+#_06F7AF: BCC .exit
 #_06F7B1: STZ.w $0816,X
 #_06F7B4: JSR ROUTINE_06F7D4
 
-CODE_06F7B7:
+.exit
 #_06F7B7: RTS
 
 ;===================================================================================================
@@ -11983,10 +12011,14 @@ ROUTINE_06F7B8:
 #_06F7B8: LDA.w #$0054
 #_06F7BB: STA.w $04A6
 
+;===================================================================================================
+
 #_06F7BE: PHB
 #_06F7BF: PHK
 #_06F7C0: PLB
+
 #_06F7C1: JSR ROUTINE_06F7D4
+
 #_06F7C4: PLB
 #_06F7C5: RTL
 
@@ -12137,7 +12169,7 @@ ROUTINE_06F895:
 #_06F89D: JSL ROUTINE_08D53E_long
 #_06F8A1: LDA.w #$FE3B
 #_06F8A4: LDY.w #$0005
-#_06F8A7: JSL ROUTINE_08BD70_long
+#_06F8A7: JSL ROUTINE_08BD65
 #_06F8AB: PLX
 #_06F8AC: LDA.w #Message_0890A7
 #_06F8AF: JSR ROUTINE_068591
@@ -12207,7 +12239,7 @@ CODE_06F938:
 #_06F944: PHX
 #_06F945: LDA.w #$FE0F
 #_06F948: LDY.w #$0005
-#_06F94B: JSL ROUTINE_08BD70_long
+#_06F94B: JSL ROUTINE_08BD65
 #_06F94F: PLX
 
 CODE_06F950:
@@ -12383,7 +12415,7 @@ ROUTINE_06FA9F:
 #_06FAA5: CMP.w #$0010
 #_06FAA8: BCC CODE_06FAB3
 #_06FAAA: CMP.w #$0040
-#_06FAAD: BCS CODE_06FABB
+#_06FAAD: BCS .exit
 #_06FAAF: STZ.w $05FA
 #_06FAB2: RTS
 
@@ -12393,7 +12425,7 @@ CODE_06FAB3:
 #_06FAB5: LDA.w UNREACH_06FABC,Y
 #_06FAB8: STA.w $05FA
 
-CODE_06FABB:
+.exit
 #_06FABB: RTS
 
 UNREACH_06FABC:
@@ -12444,10 +12476,10 @@ CODE_06FB16:
 ROUTINE_06FB19:
 #_06FB19: LDY.w $0838,X
 #_06FB1C: CPY.w #$0006
-#_06FB1F: BCS CODE_06FB78
+#_06FB1F: BCS .exit
 #_06FB21: LDA.w $0812,X
 #_06FB24: CMP.w UNREACH_06FBB5,Y
-#_06FB27: BCS CODE_06FB78
+#_06FB27: BCS .exit
 #_06FB29: PHY
 #_06FB2A: PHX
 #_06FB2B: LDX.w #$FBC5
@@ -12482,7 +12514,7 @@ ROUTINE_06FB19:
 #_06FB73: LDA.w #$803A
 #_06FB76: BRA CODE_06FBA2
 
-CODE_06FB78:
+.exit
 #_06FB78: RTS
 
 CODE_06FB79:
@@ -13020,7 +13052,7 @@ ROUTINE_06FF1D:
 ROUTINE_06FF27:
 #_06FF27: TYX
 #_06FF28: LDA.l $7E2530
-#_06FF2C: BNE CODE_06FF54
+#_06FF2C: BNE .exit
 #_06FF2E: STZ.w $0806,X
 #_06FF31: JSR ROUTINE_0692C8
 #_06FF34: PHX
@@ -13036,7 +13068,7 @@ ROUTINE_06FF27:
 #_06FF4E: JSR ROUTINE_068291
 #_06FF51: JSR ROUTINE_0685C0
 
-CODE_06FF54:
+.exit
 #_06FF54: RTS
 
 #_06FF55: db $08,$00,$24,$05,$00,$17,$00,$00
@@ -13047,13 +13079,13 @@ CODE_06FF54:
 
 ROUTINE_06FF6B:
 #_06FF6B: JSR ROUTINE_06856E
-#_06FF6E: BNE CODE_06FF7C
+#_06FF6E: BNE .exit
 #_06FF70: LDA.w #$FFFF
 #_06FF73: STA.w $18E2
 #_06FF76: LDA.w #$800A
 #_06FF79: JMP ROUTINE_0685B9
 
-CODE_06FF7C:
+.exit
 #_06FF7C: RTS
 
 ;===================================================================================================

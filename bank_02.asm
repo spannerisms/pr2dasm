@@ -428,7 +428,7 @@ ROUTINE_028406:
 #_028415: INC A
 #_028416: ASL A
 
-.exit:
+.exit
 #_028417: RTL
 
 ;===================================================================================================
@@ -4082,7 +4082,7 @@ ROUTINE_02EF18:
 CODE_02EF28:
 #_02EF28: STA.w $056A
 #_02EF2B: LDA.l $7E7A2E
-#_02EF2F: BNE CODE_02EF49
+#_02EF2F: BNE .exit
 #_02EF31: CLC
 #_02EF32: LDA.l $7E7A30
 #_02EF36: ADC.l $7E7A34
@@ -4091,7 +4091,7 @@ CODE_02EF28:
 #_02EF42: ADC.w #$0000
 #_02EF45: STA.l $7E7A32
 
-CODE_02EF49:
+.exit
 #_02EF49: RTS
 
 ;===================================================================================================
@@ -4137,13 +4137,13 @@ CODE_02EF72:
 #_02EF8E: BCC CODE_02EF98
 #_02EF90: JSR ROUTINE_02F437
 #_02EF93: JSR ROUTINE_02F472
-#_02EF96: BRA CODE_02EF9E
+#_02EF96: BRA .exit
 
 CODE_02EF98:
 #_02EF98: JSR ROUTINE_02F4AE
 #_02EF9B: JSR ROUTINE_02F4EB
 
-CODE_02EF9E:
+.exit
 #_02EF9E: RTS
 
 ;===================================================================================================
@@ -4166,13 +4166,13 @@ ROUTINE_02EFA0:
 #_02EFB8: BCC CODE_02EFC2
 #_02EFBA: JSR ROUTINE_02F437
 #_02EFBD: JSR ROUTINE_02F472
-#_02EFC0: BRA CODE_02EFC8
+#_02EFC0: BRA .exit
 
 CODE_02EFC2:
 #_02EFC2: JSR ROUTINE_02F4AE
 #_02EFC5: JSR ROUTINE_02F4EB
 
-CODE_02EFC8:
+.exit
 #_02EFC8: RTS
 
 ;===================================================================================================
@@ -4224,7 +4224,7 @@ CODE_02F012:
 #_02F012: STA.w $0566
 #_02F015: STA.w $056A
 #_02F018: LDA.l $7E7A2E
-#_02F01C: BNE CODE_02F036
+#_02F01C: BNE .exit
 #_02F01E: CLC
 #_02F01F: LDA.l $7E7A30
 #_02F023: ADC.l $7E7A34
@@ -4233,7 +4233,7 @@ CODE_02F012:
 #_02F02F: ADC.w #$0000
 #_02F032: STA.l $7E7A32
 
-CODE_02F036:
+.exit
 #_02F036: RTS
 
 ;===================================================================================================
@@ -4295,13 +4295,13 @@ ROUTINE_02F080:
 #_02F0A4: BCC CODE_02F0AE
 #_02F0A6: JSR ROUTINE_02F437
 #_02F0A9: JSR ROUTINE_02F472
-#_02F0AC: BRA CODE_02F0B4
+#_02F0AC: BRA .exit
 
 CODE_02F0AE:
 #_02F0AE: JSR ROUTINE_02F4AE
 #_02F0B1: JSR ROUTINE_02F4EB
 
-CODE_02F0B4:
+.exit
 #_02F0B4: RTS
 
 ;===================================================================================================
@@ -4711,11 +4711,11 @@ ROUTINE_02F34E:
 #_02F350: SEC
 #_02F351: SBC.b $20
 #_02F353: TAY
-#_02F354: BCS CODE_02F35A
+#_02F354: BCS .exit
 #_02F356: EOR.w #$FFFF
 #_02F359: INC A
 
-CODE_02F35A:
+.exit
 #_02F35A: RTS
 
 ;===================================================================================================
@@ -4839,16 +4839,16 @@ ROUTINE_02F437:
 #_02F443: STA.w $1ABE
 #_02F446: JSR ROUTINE_02F34E
 #_02F449: CMP.w #$0080
-#_02F44C: BCC CODE_02F459
+#_02F44C: BCC .exit
 #_02F44E: TYA
 #_02F44F: BPL CODE_02F456
 #_02F451: JSR ROUTINE_02FA88
-#_02F454: BRA CODE_02F459
+#_02F454: BRA .exit
 
 CODE_02F456:
 #_02F456: JSR ROUTINE_02FA7D
 
-CODE_02F459:
+.exit
 #_02F459: RTS
 
 ;===================================================================================================
@@ -4877,16 +4877,16 @@ ROUTINE_02F472:
 #_02F47E: STA.w $1ADE
 #_02F481: JSR ROUTINE_02F34E
 #_02F484: CMP.w #$0080
-#_02F487: BCC CODE_02F495
+#_02F487: BCC .exit
 #_02F489: TYA
 #_02F48A: BPL CODE_02F492
 #_02F48C: JSR ROUTINE_02FAFF
-#_02F48F: JMP CODE_02F495
+#_02F48F: JMP .exit
 
 CODE_02F492:
 #_02F492: JSR ROUTINE_02FAF3
 
-CODE_02F495:
+.exit
 #_02F495: RTS
 
 ;===================================================================================================
@@ -4920,16 +4920,16 @@ ROUTINE_02F4AE:
 #_02F4BB: STA.w $1ACE
 #_02F4BE: JSR ROUTINE_02F34E
 #_02F4C1: CMP.w #$0080
-#_02F4C4: BCC CODE_02F4D2
+#_02F4C4: BCC .exit
 #_02F4C6: TYA
 #_02F4C7: BPL CODE_02F4CF
 #_02F4C9: JSR ROUTINE_02F997
-#_02F4CC: JMP CODE_02F4D2
+#_02F4CC: JMP .exit
 
 CODE_02F4CF:
 #_02F4CF: JSR ROUTINE_02F98C
 
-CODE_02F4D2:
+.exit
 #_02F4D2: RTS
 
 ;===================================================================================================
@@ -4959,16 +4959,16 @@ ROUTINE_02F4EB:
 #_02F4F8: STA.w $1AEE
 #_02F4FB: JSR ROUTINE_02F34E
 #_02F4FE: CMP.w #$0080
-#_02F501: BCC CODE_02F50F
+#_02F501: BCC .exit
 #_02F503: TYA
 #_02F504: BPL CODE_02F50C
 #_02F506: JSR ROUTINE_02FA0E
-#_02F509: JMP CODE_02F50F
+#_02F509: JMP .exit
 
 CODE_02F50C:
 #_02F50C: JSR ROUTINE_02FA02
 
-CODE_02F50F:
+.exit
 #_02F50F: RTS
 
 ;===================================================================================================
@@ -5288,10 +5288,10 @@ CODE_02F711:
 #_02F722: ADC.w #$0020
 #_02F725: TAX
 #_02F726: DEC.w $18C4
-#_02F729: BEQ CODE_02F72E
+#_02F729: BEQ .exit
 #_02F72B: JMP CODE_02F6B7
 
-CODE_02F72E:
+.exit
 #_02F72E: PLB
 #_02F72F: RTS
 
@@ -5415,10 +5415,10 @@ CODE_02F7EE:
 #_02F7FF: ADC.w #$0020
 #_02F802: TAX
 #_02F803: DEC.w $18C4
-#_02F806: BEQ CODE_02F80B
+#_02F806: BEQ .exit
 #_02F808: JMP CODE_02F794
 
-CODE_02F80B:
+.exit
 #_02F80B: PLB
 #_02F80C: RTS
 
@@ -5606,7 +5606,7 @@ ROUTINE_02F953:
 ROUTINE_02F98C:
 #_02F98C: LDA.w $05BE
 #_02F98F: ROR A
-#_02F990: BCS CODE_02F9BE
+#_02F990: BCS EXIT_02F9BE
 #_02F992: LDA.w #$1780
 #_02F995: BNE CODE_02F9A0
 
@@ -5615,7 +5615,7 @@ ROUTINE_02F98C:
 ROUTINE_02F997:
 #_02F997: LDA.w $05BE
 #_02F99A: ROR A
-#_02F99B: BCS CODE_02F9BE
+#_02F99B: BCS EXIT_02F9BE
 #_02F99D: LDA.w #$F800
 
 CODE_02F9A0:
@@ -5630,7 +5630,9 @@ CODE_02F9A0:
 #_02F9B8: JSR ROUTINE_02F730
 #_02F9BB: JSR ROUTINE_02F953
 
-CODE_02F9BE:
+;---------------------------------------------------------------------------------------------------
+
+#EXIT_02F9BE:
 #_02F9BE: RTS
 
 ;===================================================================================================
@@ -5677,7 +5679,7 @@ ROUTINE_02FA02:
 #_02FA02: LDA.w $05BE
 #_02FA05: ROR A
 #_02FA06: ROR A
-#_02FA07: BCS CODE_02FA36
+#_02FA07: BCS EXIT_02FA36
 #_02FA09: LDA.w #$1780
 #_02FA0C: BNE CODE_02FA18
 
@@ -5687,7 +5689,7 @@ ROUTINE_02FA0E:
 #_02FA0E: LDA.w $05BE
 #_02FA11: ROR A
 #_02FA12: ROR A
-#_02FA13: BCS CODE_02FA36
+#_02FA13: BCS EXIT_02FA36
 #_02FA15: LDA.w #$F800
 
 CODE_02FA18:
@@ -5702,7 +5704,9 @@ CODE_02FA18:
 #_02FA30: JSR ROUTINE_02F5BC
 #_02FA33: JSR ROUTINE_02F8E3
 
-CODE_02FA36:
+;---------------------------------------------------------------------------------------------------
+
+#EXIT_02FA36:
 #_02FA36: RTS
 
 ;===================================================================================================
@@ -5749,7 +5753,7 @@ ROUTINE_02FA37:
 ROUTINE_02FA7D:
 #_02FA7D: LDA.w $05BC
 #_02FA80: ROR A
-#_02FA81: BCS CODE_02FAAF
+#_02FA81: BCS EXIT_02FAAF
 #_02FA83: LDA.w #$1780
 #_02FA86: BNE CODE_02FA91
 
@@ -5758,7 +5762,7 @@ ROUTINE_02FA7D:
 ROUTINE_02FA88:
 #_02FA88: LDA.w $05BC
 #_02FA8B: ROR A
-#_02FA8C: BCS CODE_02FAAF
+#_02FA8C: BCS EXIT_02FAAF
 #_02FA8E: LDA.w #$F800
 
 CODE_02FA91:
@@ -5773,7 +5777,9 @@ CODE_02FA91:
 #_02FAA9: JSR ROUTINE_02F653
 #_02FAAC: JSR ROUTINE_02F91A
 
-CODE_02FAAF:
+;---------------------------------------------------------------------------------------------------
+
+#EXIT_02FAAF:
 #_02FAAF: RTS
 
 ;===================================================================================================
@@ -5820,7 +5826,7 @@ ROUTINE_02FAF3:
 #_02FAF3: LDA.w $05BC
 #_02FAF6: ROR A
 #_02FAF7: ROR A
-#_02FAF8: BCS CODE_02FB27
+#_02FAF8: BCS EXIT_02FB27
 #_02FAFA: LDA.w #$1780
 #_02FAFD: BNE CODE_02FB09
 
@@ -5830,7 +5836,7 @@ ROUTINE_02FAFF:
 #_02FAFF: LDA.w $05BC
 #_02FB02: ROR A
 #_02FB03: ROR A
-#_02FB04: BCS CODE_02FB27
+#_02FB04: BCS EXIT_02FB27
 #_02FB06: LDA.w #$F800
 
 CODE_02FB09:
@@ -5845,7 +5851,9 @@ CODE_02FB09:
 #_02FB21: JSR ROUTINE_02F528
 #_02FB24: JSR ROUTINE_02F8AC
 
-CODE_02FB27:
+;---------------------------------------------------------------------------------------------------
+
+#EXIT_02FB27:
 #_02FB27: RTS
 
 ;===================================================================================================
