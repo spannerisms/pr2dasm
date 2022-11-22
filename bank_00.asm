@@ -369,7 +369,7 @@ MainLoop:
 #_008327: ASL A
 #_008328: TAX
 
-#_008329: JSR (UNREACH_009156,X)
+#_008329: JSR (GameModules,X)
 
 #_00832C: NOP
 #_00832D: NOP
@@ -2309,149 +2309,149 @@ UNREACH_00914A:
 
 ;===================================================================================================
 
-UNREACH_009156:
-#_009156: dw $0000
-#_009158: dw $0000
-#_00915A: dw $0000
-#_00915C: dw $0000
-#_00915E: dw $0000
-#_009160: dw $0000
-#_009162: dw $0000
-#_009164: dw $0000
-#_009166: dw $0000
-#_009168: dw $0000
-#_00916A: dw $0000
-#_00916C: dw $0000
-#_00916E: dw $0000
-#_009170: dw $0000
-#_009172: dw $0000
-#_009174: dw $0000
-#_009176: dw $0000
-#_009178: dw $0000
-#_00917A: dw $0000
-#_00917C: dw $0000
-#_00917E: dw $0000
-#_009180: dw $0000
-#_009182: dw $0000
-#_009184: dw $0000
-#_009186: dw $0000
-#_009188: dw $0000
-#_00918A: dw $0000
-#_00918C: dw $0000
-#_00918E: dw $0000
-#_009190: dw $0000
-#_009192: dw $0000
-#_009194: dw $0000
-#_009196: dw $0000
-#_009198: dw $0000
-#_00919A: dw $0000
-#_00919C: dw ROUTINE_00CD21
-#_00919E: dw ROUTINE_00CEA0
-#_0091A0: dw ROUTINE_00D31A
-#_0091A2: dw ROUTINE_00A2B2
-#_0091A4: dw $0000
-#_0091A6: dw $0000
-#_0091A8: dw $0000
-#_0091AA: dw $0000
-#_0091AC: dw $0000
-#_0091AE: dw $0000
-#_0091B0: dw $0000
-#_0091B2: dw $0000
-#_0091B4: dw $0000
-#_0091B6: dw $0000
-#_0091B8: dw $0000
-#_0091BA: dw $0000
-#_0091BC: dw $0000
-#_0091BE: dw ROUTINE_009331
-#_0091C0: dw ROUTINE_009336
-#_0091C2: dw ROUTINE_00933B
-#_0091C4: dw ROUTINE_009350
-#_0091C6: dw ROUTINE_009365
-#_0091C8: dw ROUTINE_009272
-#_0091CA: dw ROUTINE_0092AD
-#_0091CC: dw $0000
-#_0091CE: dw ROUTINE_00C040
-#_0091D0: dw ROUTINE_00C3E1
-#_0091D2: dw ROUTINE_00C40A
-#_0091D4: dw ROUTINE_00C521
-#_0091D6: dw ROUTINE_00CCA5
-#_0091D8: dw ROUTINE_00C8C3
-#_0091DA: dw ROUTINE_00C908
-#_0091DC: dw ROUTINE_00CBAA
-#_0091DE: dw ROUTINE_00C895
-#_0091E0: dw ROUTINE_00C8A0
-#_0091E2: dw ROUTINE_00C8B2
-#_0091E4: dw $0000
-#_0091E6: dw ROUTINE_00933B
-#_0091E8: dw ROUTINE_009350
-#_0091EA: dw ROUTINE_009365
-#_0091EC: dw ROUTINE_00B8E0
-#_0091EE: dw ROUTINE_00B928
-#_0091F0: dw ROUTINE_00B93C
-#_0091F2: dw ROUTINE_00AE8E
-#_0091F4: dw ROUTINE_00AF24
-#_0091F6: dw ROUTINE_00AF75
-#_0091F8: dw ROUTINE_00AFBA
-#_0091FA: dw ROUTINE_00B05A
-#_0091FC: dw ROUTINE_00B07B
-#_0091FE: dw ROUTINE_00B132
-#_009200: dw ROUTINE_00B2AA
-#_009202: dw ROUTINE_00B2C2
-#_009204: dw ROUTINE_00B2D4
-#_009206: dw ROUTINE_00B2E6
-#_009208: dw ROUTINE_00B320
-#_00920A: dw ROUTINE_00B71F
-#_00920C: dw ROUTINE_00B7A0
-#_00920E: dw ROUTINE_00B817
-#_009210: dw ROUTINE_00B853
-#_009212: dw ROUTINE_00AE8D
-#_009214: dw ROUTINE_00AE8D
-#_009216: dw ROUTINE_00AB27
-#_009218: dw ROUTINE_00AB7C
-#_00921A: dw ROUTINE_00AB99
-#_00921C: dw ROUTINE_00ABE6
-#_00921E: dw ROUTINE_00AC00
-#_009220: dw ROUTINE_00AC9A
-#_009222: dw ROUTINE_00ACDF
-#_009224: dw ROUTINE_00ACFB
-#_009226: dw ROUTINE_00AD3B
-#_009228: dw ROUTINE_00AD7C
-#_00922A: dw ROUTINE_00AE3D
-#_00922C: dw ROUTINE_00AE5E
-#_00922E: dw ROUTINE_00A9DF
-#_009230: dw ROUTINE_00AA24
-#_009232: dw ROUTINE_00A335
-#_009234: dw ROUTINE_00A349
-#_009236: dw ROUTINE_00A362
-#_009238: dw $0000
-#_00923A: dw ROUTINE_00A9C0
-#_00923C: dw ROUTINE_00A9D2
-#_00923E: dw ROUTINE_00A9DA
-#_009240: dw ROUTINE_00A04D
-#_009242: dw ROUTINE_00A098
-#_009244: dw ROUTINE_00A169
-#_009246: dw ROUTINE_00A20C
-#_009248: dw ROUTINE_009ECC
-#_00924A: dw ROUTINE_009FA4
-#_00924C: dw ROUTINE_009781
-#_00924E: dw ROUTINE_00988F
-#_009250: dw ROUTINE_009745
-#_009252: dw ROUTINE_00F421
-#_009254: dw ROUTINE_00F431
-#_009256: dw ROUTINE_009781
-#_009258: dw ROUTINE_00988F
-#_00925A: dw ROUTINE_009738
-#_00925C: dw ROUTINE_009744
-#_00925E: dw ROUTINE_00A2CC
-#_009260: dw ROUTINE_00972E
-#_009262: dw ROUTINE_0093A6
-#_009264: dw ROUTINE_00946E
-#_009266: dw ROUTINE_0094DA
-#_009268: dw ROUTINE_0095FF
-#_00926A: dw ROUTINE_009637
-#_00926C: dw ROUTINE_009396
-#_00926E: dw ROUTINE_00939E
-#_009270: dw ROUTINE_00936E
+GameModules:
+#_009156: dw $0000                      ; 0x00
+#_009158: dw $0000                      ; 0x01
+#_00915A: dw $0000                      ; 0x02
+#_00915C: dw $0000                      ; 0x03
+#_00915E: dw $0000                      ; 0x04
+#_009160: dw $0000                      ; 0x05
+#_009162: dw $0000                      ; 0x06
+#_009164: dw $0000                      ; 0x07
+#_009166: dw $0000                      ; 0x08
+#_009168: dw $0000                      ; 0x09
+#_00916A: dw $0000                      ; 0x0A
+#_00916C: dw $0000                      ; 0x0B
+#_00916E: dw $0000                      ; 0x0C
+#_009170: dw $0000                      ; 0x0D
+#_009172: dw $0000                      ; 0x0E
+#_009174: dw $0000                      ; 0x0F
+#_009176: dw $0000                      ; 0x10
+#_009178: dw $0000                      ; 0x11
+#_00917A: dw $0000                      ; 0x12
+#_00917C: dw $0000                      ; 0x13
+#_00917E: dw $0000                      ; 0x14
+#_009180: dw $0000                      ; 0x15
+#_009182: dw $0000                      ; 0x16
+#_009184: dw $0000                      ; 0x17
+#_009186: dw $0000                      ; 0x18
+#_009188: dw $0000                      ; 0x19
+#_00918A: dw $0000                      ; 0x1A
+#_00918C: dw $0000                      ; 0x1B
+#_00918E: dw $0000                      ; 0x1C
+#_009190: dw $0000                      ; 0x1D
+#_009192: dw $0000                      ; 0x1E
+#_009194: dw $0000                      ; 0x1F
+#_009196: dw $0000                      ; 0x20
+#_009198: dw $0000                      ; 0x21
+#_00919A: dw $0000                      ; 0x22
+#_00919C: dw ROUTINE_00CD21             ; 0x23
+#_00919E: dw ROUTINE_00CEA0             ; 0x24
+#_0091A0: dw ROUTINE_00D31A             ; 0x25
+#_0091A2: dw ROUTINE_00A2B2             ; 0x26
+#_0091A4: dw $0000                      ; 0x27
+#_0091A6: dw $0000                      ; 0x28
+#_0091A8: dw $0000                      ; 0x29
+#_0091AA: dw $0000                      ; 0x2A
+#_0091AC: dw $0000                      ; 0x2B
+#_0091AE: dw $0000                      ; 0x2C
+#_0091B0: dw $0000                      ; 0x2D
+#_0091B2: dw $0000                      ; 0x2E
+#_0091B4: dw $0000                      ; 0x2F
+#_0091B6: dw $0000                      ; 0x30
+#_0091B8: dw $0000                      ; 0x31
+#_0091BA: dw $0000                      ; 0x32
+#_0091BC: dw $0000                      ; 0x33
+#_0091BE: dw ROUTINE_009331             ; 0x34
+#_0091C0: dw ROUTINE_009336             ; 0x35
+#_0091C2: dw ROUTINE_00933B             ; 0x36
+#_0091C4: dw ROUTINE_009350             ; 0x37
+#_0091C6: dw ROUTINE_009365             ; 0x38
+#_0091C8: dw ROUTINE_009272             ; 0x39
+#_0091CA: dw ROUTINE_0092AD             ; 0x3A
+#_0091CC: dw $0000                      ; 0x3B
+#_0091CE: dw ROUTINE_00C040             ; 0x3C
+#_0091D0: dw ROUTINE_00C3E1             ; 0x3D
+#_0091D2: dw ROUTINE_00C40A             ; 0x3E
+#_0091D4: dw ROUTINE_00C521             ; 0x3F
+#_0091D6: dw ROUTINE_00CCA5             ; 0x40
+#_0091D8: dw ROUTINE_00C8C3             ; 0x41
+#_0091DA: dw ROUTINE_00C908             ; 0x42
+#_0091DC: dw ROUTINE_00CBAA             ; 0x43
+#_0091DE: dw ROUTINE_00C895             ; 0x44
+#_0091E0: dw ROUTINE_00C8A0             ; 0x45
+#_0091E2: dw ROUTINE_00C8B2             ; 0x46
+#_0091E4: dw $0000                      ; 0x47
+#_0091E6: dw ROUTINE_00933B             ; 0x48
+#_0091E8: dw ROUTINE_009350             ; 0x49
+#_0091EA: dw ROUTINE_009365             ; 0x4A
+#_0091EC: dw ROUTINE_00B8E0             ; 0x4B
+#_0091EE: dw ROUTINE_00B928             ; 0x4C
+#_0091F0: dw ROUTINE_00B93C             ; 0x4D
+#_0091F2: dw ROUTINE_00AE8E             ; 0x4E
+#_0091F4: dw ROUTINE_00AF24             ; 0x4F
+#_0091F6: dw ROUTINE_00AF75             ; 0x50
+#_0091F8: dw ROUTINE_00AFBA             ; 0x51
+#_0091FA: dw ROUTINE_00B05A             ; 0x52
+#_0091FC: dw ROUTINE_00B07B             ; 0x53
+#_0091FE: dw ROUTINE_00B132             ; 0x54
+#_009200: dw ROUTINE_00B2AA             ; 0x55
+#_009202: dw ROUTINE_00B2C2             ; 0x56
+#_009204: dw ROUTINE_00B2D4             ; 0x57
+#_009206: dw ROUTINE_00B2E6             ; 0x58
+#_009208: dw ROUTINE_00B320             ; 0x59
+#_00920A: dw ROUTINE_00B71F             ; 0x5A
+#_00920C: dw ROUTINE_00B7A0             ; 0x5B
+#_00920E: dw ROUTINE_00B817             ; 0x5C
+#_009210: dw ROUTINE_00B853             ; 0x5D
+#_009212: dw ROUTINE_00AE8D             ; 0x5E
+#_009214: dw ROUTINE_00AE8D             ; 0x5F
+#_009216: dw ROUTINE_00AB27             ; 0x60
+#_009218: dw ROUTINE_00AB7C             ; 0x61
+#_00921A: dw ROUTINE_00AB99             ; 0x62
+#_00921C: dw ROUTINE_00ABE6             ; 0x63
+#_00921E: dw ROUTINE_00AC00             ; 0x64
+#_009220: dw ROUTINE_00AC9A             ; 0x65
+#_009222: dw ROUTINE_00ACDF             ; 0x66
+#_009224: dw ROUTINE_00ACFB             ; 0x67
+#_009226: dw ROUTINE_00AD3B             ; 0x68
+#_009228: dw ROUTINE_00AD7C             ; 0x69
+#_00922A: dw ROUTINE_00AE3D             ; 0x6A
+#_00922C: dw ROUTINE_00AE5E             ; 0x6B
+#_00922E: dw ROUTINE_00A9DF             ; 0x6C
+#_009230: dw ROUTINE_00AA24             ; 0x6D
+#_009232: dw ROUTINE_00A335             ; 0x6E
+#_009234: dw ROUTINE_00A349             ; 0x6F
+#_009236: dw ROUTINE_00A362             ; 0x70
+#_009238: dw $0000                      ; 0x71
+#_00923A: dw ROUTINE_00A9C0             ; 0x72
+#_00923C: dw ROUTINE_00A9D2             ; 0x73
+#_00923E: dw ROUTINE_00A9DA             ; 0x74
+#_009240: dw ROUTINE_00A04D             ; 0x75
+#_009242: dw ROUTINE_00A098             ; 0x76
+#_009244: dw ROUTINE_00A169             ; 0x77
+#_009246: dw ROUTINE_00A20C             ; 0x78
+#_009248: dw ROUTINE_009ECC             ; 0x79
+#_00924A: dw ROUTINE_009FA4             ; 0x7A
+#_00924C: dw ROUTINE_009781             ; 0x7B
+#_00924E: dw ROUTINE_00988F             ; 0x7C
+#_009250: dw GamePaused                 ; 0x7D
+#_009252: dw ROUTINE_00F421             ; 0x7E
+#_009254: dw ROUTINE_00F431             ; 0x7F
+#_009256: dw ROUTINE_009781             ; 0x80
+#_009258: dw ROUTINE_00988F             ; 0x81
+#_00925A: dw ROUTINE_009738             ; 0x82
+#_00925C: dw ROUTINE_009744             ; 0x83
+#_00925E: dw ROUTINE_00A2CC             ; 0x84
+#_009260: dw ROUTINE_00972E             ; 0x85
+#_009262: dw ROUTINE_0093A6             ; 0x86
+#_009264: dw ROUTINE_00946E             ; 0x87
+#_009266: dw ROUTINE_0094DA             ; 0x88
+#_009268: dw ROUTINE_0095FF             ; 0x89
+#_00926A: dw ROUTINE_009637             ; 0x8A
+#_00926C: dw ROUTINE_009396             ; 0x8B
+#_00926E: dw ROUTINE_00939E             ; 0x8C
+#_009270: dw ROUTINE_00936E             ; 0x8D
 
 ;===================================================================================================
 
@@ -3126,7 +3126,7 @@ ROUTINE_009744:
 
 ;===================================================================================================
 
-ROUTINE_009745:
+GamePaused:
 #_009745: LDA.w $0520
 #_009748: AND.w #$00F0
 #_00974B: ORA.w #$0007
@@ -5753,7 +5753,7 @@ ROUTINE_00AC00:
 #_00AC1D: TAX
 #_00AC1E: LDA.l UNREACH_08E4C1,X
 #_00AC22: LDX.w #$0008
-#_00AC25: JSL ROUTINE_08877C
+#_00AC25: JSL BeginDialog
 #_00AC29: LDA.l $7E7B28
 #_00AC2D: TAX
 #_00AC2E: LDA.l UNREACH_08E4C1,X
@@ -6190,9 +6190,9 @@ ROUTINE_00AF75:
 #_00AF8A: SBC.w #$0018
 #_00AF8D: CMP.w #$0B80
 #_00AF90: BCS CODE_00AFB0
-#_00AF92: LDA.w #$87F2
-#_00AF95: LDX.w #$0008
-#_00AF98: JSL ROUTINE_08877C
+#_00AF92: LDA.w #Message_0887F2
+#_00AF95: LDX.w #Message_0887F2>>16
+#_00AF98: JSL BeginDialog
 #_00AF9C: LDX.w #$0000
 #_00AF9F: JSL ROUTINE_08D7C4_long
 #_00AFA3: LDA.w #$FFFE
