@@ -257,51 +257,42 @@ UNKNOWN_7E05F6   = $7E05F6
 UNKNOWN_7E0600   = $7E0600
 UNKNOWN_7E0602   = $7E0602
 UNKNOWN_7E0700   = $7E0700
+
+;---------------------------------------------------------------------------------------------------
+; Sprite properties
+;---------------------------------------------------------------------------------------------------
 UNKNOWN_7E0800   = $7E0800
 UNKNOWN_7E0802   = $7E0802
 UNKNOWN_7E0804   = $7E0804
-UNKNOWN_7E0806   = $7E0806
+
+; TODO
+; bit 0 = h flip?
+SPRGFX           = $7E0806
+
 UNKNOWN_7E0808   = $7E0808
-UNKNOWN_7E080A   = $7E080A
-UNKNOWN_7E080B   = $7E080B
-UNKNOWN_7E080C   = $7E080C
-UNKNOWN_7E080E   = $7E080E
-UNKNOWN_7E0810   = $7E0810
+
+SPRZ             = $7E080A
+SPRX             = $7E080C
+SPRY             = $7E080E
+
+SPRID            = $7E0810
 UNKNOWN_7E0812   = $7E0812
 UNKNOWN_7E0814   = $7E0814
 UNKNOWN_7E0816   = $7E0816
 UNKNOWN_7E0818   = $7E0818
-UNKNOWN_7E081A   = $7E081A
+
+
+SPRTIMER         = $7E081A
 UNKNOWN_7E081C   = $7E081C
 UNKNOWN_7E081D   = $7E081D
 UNKNOWN_7E081E   = $7E081E
 UNKNOWN_7E081F   = $7E081F
-UNKNOWN_7E0822   = $7E0822
-UNKNOWN_7E0824   = $7E0824
-UNKNOWN_7E0826   = $7E0826
-UNKNOWN_7E0828   = $7E0828
-UNKNOWN_7E0830   = $7E0830
-UNKNOWN_7E0832   = $7E0832
-UNKNOWN_7E0834   = $7E0834
-UNKNOWN_7E0836   = $7E0836
-UNKNOWN_7E0838   = $7E0838
-UNKNOWN_7E083A   = $7E083A
-UNKNOWN_7E083C   = $7E083C
-UNKNOWN_7E083E   = $7E083E
-UNKNOWN_7E0840   = $7E0840
-UNKNOWN_7E0842   = $7E0842
-UNKNOWN_7E0844   = $7E0844
-UNKNOWN_7E0846   = $7E0846
-UNKNOWN_7E0847   = $7E0847
-UNKNOWN_7E0848   = $7E0848
-UNKNOWN_7E084A   = $7E084A
-UNKNOWN_7E084C   = $7E084C
-UNKNOWN_7E084E   = $7E084E
-UNKNOWN_7E0850   = $7E0850
-UNKNOWN_7E0852   = $7E0852
-UNKNOWN_7E0854   = $7E0854
-UNKNOWN_7E0858   = $7E0858
-UNKNOWN_7E0880   = $7E0880
+
+; misc variables?
+; 7FE816 - prize id for chests
+
+;---------------------------------------------------------------------------------------------------
+
 UNKNOWN_7E0A00   = $7E0A00
 UNKNOWN_7E1044   = $7E1044
 UNKNOWN_7E1510   = $7E1510
@@ -337,6 +328,9 @@ UNKNOWN_7E1782   = $7E1782
 UNKNOWN_7E1784   = $7E1784
 UNKNOWN_7E178E   = $7E178E
 UNKNOWN_7E1792   = $7E1792
+
+;---------------------------------------------------------------------------------------------------
+
 UNKNOWN_7E1800   = $7E1800
 UNKNOWN_7E1840   = $7E1840
 UNKNOWN_7E18CE   = $7E18CE
@@ -356,6 +350,23 @@ UNKNOWN_7E18F8   = $7E18F8
 UNKNOWN_7E18FA   = $7E18FA
 UNKNOWN_7E18FC   = $7E18FC
 UNKNOWN_7E18FE   = $7E18FE
+
+;---------------------------------------------------------------------------------------------------
+; DMA queues, each has 2 transfers
+;---------------------------------------------------------------------------------------------------
+DMA0BANK         = $7E1900
+DMA0SIZE         = $7E1902
+DMA0ADDR         = $7E1904
+DMA0VMA1         = $7E1906
+
+
+
+
+
+
+
+
+
 UNKNOWN_7E1900   = $7E1900
 UNKNOWN_7E1902   = $7E1902
 UNKNOWN_7E1904   = $7E1904

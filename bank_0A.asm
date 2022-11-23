@@ -201,6 +201,7 @@ APUTransfer:
 .sync_a
 #_0A80DD: CMP.w APUIO0
 #_0A80E0: BNE .sync_a
+
 #_0A80E2: INC A
 
 .write_zero
@@ -256,6 +257,7 @@ APUTransfer:
 .sync_c
 #_0A811B: CMP.w APUIO0
 #_0A811E: BNE .sync_c
+
 #_0A8120: BVS .next_transfer
 
 .done
