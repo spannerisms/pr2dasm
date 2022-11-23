@@ -1484,7 +1484,7 @@ ROUTINE_018933:
 
 #_018942: STA.b $24
 
-#_018944: JSL ROUTINE_0391DB_long
+#_018944: JSL PrepEnemySpawn_long
 
 #_018948: RTS
 
@@ -1606,7 +1606,7 @@ ROUTINE_0189EB:
 
 #_018A22: LDX.w #Message_08902C>>16
 #_018A25: LDA.w #Message_08902C
-#_018A28: JSL ROUTINE_088000
+#_018A28: JSL SetMessagePointer
 
 #_018A2C: LDA.w #$FFFE
 #_018A2F: STA.l $7E7B38
@@ -6421,7 +6421,7 @@ ROUTINE_01A724:
 #_01A73F: LDA.w #$000E
 #_01A742: STA.b $24
 
-#_01A744: JSL ROUTINE_0391DB_long
+#_01A744: JSL PrepEnemySpawn_long
 #_01A748: RTS
 
 ;===================================================================================================
@@ -8603,7 +8603,7 @@ UNREACH_01B352:
 ;===================================================================================================
 
 ROUTINE_01B368:
-#_01B368: JSL ROUTINE_088014
+#_01B368: JSL HandleDialog
 
 #_01B36C: LDA.l $7E2550
 #_01B370: BNE CODE_01B378
@@ -10702,7 +10702,7 @@ ROUTINE_01BF5C:
 #_01BF93: LDA.w #$000E
 #_01BF96: STA.b $24
 
-#_01BF98: JSL ROUTINE_0391DB_long
+#_01BF98: JSL PrepEnemySpawn_long
 #_01BF9C: JSR ROUTINE_01AAAA
 #_01BF9F: JSR ROUTINE_01ADD4
 
@@ -14409,7 +14409,7 @@ CODE_01D540:
 #_01D578: LDA.w #$000E
 #_01D57B: STA.b $24
 
-#_01D57D: JSL ROUTINE_0391DB_long
+#_01D57D: JSL PrepEnemySpawn_long
 
 CODE_01D581:
 #_01D581: JSR ROUTINE_01D5BD
@@ -15416,7 +15416,7 @@ CODE_01DB5F:
 #_01DB6D: LDA.w #$000E
 #_01DB70: STA.b $24
 
-#_01DB72: JSL ROUTINE_0391DB_long
+#_01DB72: JSL PrepEnemySpawn_long
 #_01DB76: RTS
 
 ;===================================================================================================
@@ -15685,7 +15685,7 @@ CODE_01DCCE:
 #_01DCE5: LDA.w #$000E
 #_01DCE8: STA.b $24
 
-#_01DCEA: JSL ROUTINE_0391DB_long
+#_01DCEA: JSL PrepEnemySpawn_long
 #_01DCEE: RTS
 
 ;===================================================================================================
@@ -19844,7 +19844,7 @@ CODE_01F4AB:
 #_01F4DC: LDA.w #$000E
 #_01F4DF: STA.b $24
 
-#_01F4E1: JSL ROUTINE_0391DB_long
+#_01F4E1: JSL PrepEnemySpawn_long
 
 CODE_01F4E5:
 #_01F4E5: LDA.w #$0006
@@ -20255,7 +20255,7 @@ ROUTINE_01F6F7:
 
 #_01F751: STA.b $28
 
-#_01F753: JSL ROUTINE_0391DB_long
+#_01F753: JSL PrepEnemySpawn_long
 #_01F757: RTS
 
 ;===================================================================================================
@@ -20310,7 +20310,7 @@ CODE_01F769:
 #_01F79C: LDA.w #$000E
 #_01F79F: STA.b $24
 
-#_01F7A1: JSL ROUTINE_0391DB_long
+#_01F7A1: JSL PrepEnemySpawn_long
 #_01F7A5: PLX
 #_01F7A6: JSR ROUTINE_01F890
 
@@ -20362,7 +20362,7 @@ CODE_01F7D1:
 #_01F7EE: LDA.w #$000C
 #_01F7F1: STA.b $24
 
-#_01F7F3: JSL ROUTINE_0391DB_long
+#_01F7F3: JSL PrepEnemySpawn_long
 #_01F7F7: PLX
 
 CODE_01F7F8:
@@ -20914,7 +20914,7 @@ ROUTINE_01FAF6:
 #_01FB19: LDA.w #$0008
 #_01FB1C: STA.b $24
 
-#_01FB1E: JSL ROUTINE_0391DB_long
+#_01FB1E: JSL PrepEnemySpawn_long
 #_01FB22: RTS
 
 ;===================================================================================================

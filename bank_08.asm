@@ -3,7 +3,7 @@ org $088000
 
 ;===================================================================================================
 
-ROUTINE_088000:
+SetMessagePointer:
 #_088000: PHB
 
 #_088001: PEA.w $7E7E
@@ -21,7 +21,7 @@ ROUTINE_088000:
 
 ;===================================================================================================
 
-ROUTINE_088014:
+HandleDialog:
 #_088014: PHB
 
 #_088015: PEA.w $7E7E
@@ -4227,7 +4227,7 @@ Message_08A828:
 
 ;===================================================================================================
 
-; Use the # button 
+; Use the & button 
 ; for the magic 
 ; cards.
 ; Keep focusing on 
@@ -4260,7 +4260,7 @@ Message_08A861:
 
 ;===================================================================================================
 
-; The # button?
+; The & button?
 Message_08A8BF:
 #_08A8BF: dw $0001, $000B, $0015, $0012 ; TODO
 #_08A8C7: dw $0002, $0000, $0000, $0001 ; TODO
@@ -4275,7 +4275,7 @@ Message_08A8BF:
 
 ;===================================================================================================
 
-; Use the # button 
+; Use the & button 
 ; to wave the magic
 ; wand near the 
 ; enemy.
@@ -4382,7 +4382,7 @@ Message_08A9F4:
 
 ;===================================================================================================
 
-; Use the # button 
+; Use the & button 
 ; only for throwing
 ; your partner.
 ; Your partner will 
@@ -4438,7 +4438,7 @@ Message_08AAAB:
 
 ;===================================================================================================
 
-; Use the # button 
+; Use the & button 
 ; to use magic and 
 ; reverting from 
 ; your partner.
@@ -4894,6 +4894,417 @@ Message_08AFFF:
 #_08B02C: db $20, $BC, $C5, $B3, $BB, $2E           ; « luck.»
 #_08B032: db $04 ; wait for key
 #_08B033: db $00 ; end message
+
+
+;===================================================================================================
+
+; OK,go ahead.
+Message_08B034:
+#_08B034: dw $0001, $0007, $0005, $0012 ; TODO
+#_08B03C: dw $0002, $0000, $0000, $0001 ; TODO
+#_08B044: dw .data, $0000 ; pointer
+
+.data
+#_08B048: db $AA, $A6, $2C, $B7, $BF, $20, $B1, $B8 ; «OK,go ah»
+#_08B050: db $B5, $B1, $B4, $2E                     ; «ead.»
+#_08B054: db $02 ; new line
+#_08B055: db $04 ; wait for key
+#_08B056: db $00 ; end message
+
+;===================================================================================================
+
+; It is the harvest 
+; festival,
+; and Princess Luna 
+; is visiting from 
+; the moon for the 
+; festivities.
+; The entire village,
+; including Pocky and
+; her friends have 
+; also gathered in 
+; the festival square.
+Message_08B057:
+#_08B057: dw $0001, $0006, $0012, $0014 ; TODO
+#_08B05F: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B067: db $6B, $B0 ; pointer
+#_08B069: db $00 ; TODO
+#_08B06A: db $00 ; TODO
+#_08B06B: db $0A, $01 ; TODO
+#_08B06D: db $05, $04 ; set delay
+#_08B06F: db $0B, $01 ; TODO
+#_08B071: db $3E, $C4, $20, $B9, $C3, $20, $C4, $B8 ; «It is th»
+#_08B079: db $B5, $20, $B8, $B1, $C2, $C6, $B5, $C3 ; «e harves»
+#_08B081: db $C4, $20                               ; «t »
+#_08B083: db $02 ; new line
+#_08B084: db $B6, $B5, $C3, $C4, $B9, $C6, $B1, $BC ; «festival»
+#_08B08C: db $2C                                    ; «,»
+#_08B08D: db $02 ; new line
+#_08B08E: db $B1, $BE, $B4, $20, $AB, $C2, $B9, $BE ; «and Prin»
+#_08B096: db $B3, $B5, $C3, $C3, $20, $A7, $C5, $BE ; «cess Lun»
+#_08B09E: db $B1, $20                               ; «a »
+#_08B0A0: db $02 ; new line
+#_08B0A1: db $B9, $C3, $20, $C6, $B9, $C3, $B9, $C4 ; «is visit»
+#_08B0A9: db $B9, $BE, $B7, $20, $B6, $C2, $BF, $BD ; «ing from»
+#_08B0B1: db $20                                    ; « »
+#_08B0B2: db $02 ; new line
+#_08B0B3: db $C4, $B8, $B5, $20, $BD, $BF, $BF, $BE ; «the moon»
+#_08B0BB: db $20, $B6, $BF, $C2, $20, $C4, $B8, $B5 ; « for the»
+#_08B0C3: db $20                                    ; « »
+#_08B0C4: db $02 ; new line
+#_08B0C5: db $B6, $B5, $C3, $C4, $B9, $C6, $B9, $C4 ; «festivit»
+#_08B0CD: db $B9, $B5, $C3, $2E                     ; «ies.»
+#_08B0D1: db $05, $1E ; set delay
+#_08B0D3: db $05, $04 ; set delay
+#_08B0D5: db $05, $3C ; set delay
+#_08B0D7: db $05, $04 ; set delay
+#_08B0D9: db $02 ; new line
+#_08B0DA: db $AF, $B8, $B5, $20, $B5, $BE, $C4, $B9 ; «The enti»
+#_08B0E2: db $C2, $B5, $20, $C6, $B9, $BC, $BC, $B1 ; «re villa»
+#_08B0EA: db $B7, $B5, $2C                          ; «ge,»
+#_08B0ED: db $02 ; new line
+#_08B0EE: db $B9, $BE, $B3, $BC, $C5, $B4, $B9, $BE ; «includin»
+#_08B0F6: db $B7, $20, $AB, $BF, $B3, $BB, $C9, $20 ; «g Pocky »
+#_08B0FE: db $B1, $BE, $B4                          ; «and»
+#_08B101: db $02 ; new line
+#_08B102: db $B8, $B5, $C2, $20, $B6, $C2, $B9, $B5 ; «her frie»
+#_08B10A: db $BE, $B4, $C3, $20, $B8, $B1, $C6, $B5 ; «nds have»
+#_08B112: db $20                                    ; « »
+#_08B113: db $02 ; new line
+#_08B114: db $B1, $BC, $C3, $BF, $20, $B7, $B1, $C4 ; «also gat»
+#_08B11C: db $B8, $B5, $C2, $B5, $B4, $20, $B9, $BE ; «hered in»
+#_08B124: db $20                                    ; « »
+#_08B125: db $02 ; new line
+#_08B126: db $C4, $B8, $B5, $20, $B6, $B5, $C3, $C4 ; «the fest»
+#_08B12E: db $B9, $C6, $B1, $BC, $20, $C3, $C1, $C5 ; «ival squ»
+#_08B136: db $B1, $C2, $B5, $2E                     ; «are.»
+#_08B13A: db $05, $1E ; set delay
+#_08B13C: db $05, $04 ; set delay
+#_08B13E: db $00 ; end message
+
+;===================================================================================================
+
+; Princess Luna is 
+; making her 
+; appearance along 
+; with her rabbit 
+; escorts.
+Message_08B13F:
+#_08B13F: dw $0001, $0006, $0012, $0014 ; TODO
+#_08B147: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B14F: dw .data, $0000 ; pointer
+
+.data
+#_08B153: db $05, $04 ; set delay
+#_08B155: db $03 ; TODO
+#_08B156: db $01, $00, $00 ; TODO
+#_08B159: db $AB, $C2, $B9, $BE, $B3, $B5, $C3, $C3 ; «Princess»
+#_08B161: db $20, $A7, $C5, $BE, $B1, $20, $B9, $C3 ; « Luna is»
+#_08B169: db $20                                    ; « »
+#_08B16A: db $02 ; new line
+#_08B16B: db $BD, $B1, $BB, $B9, $BE, $B7, $20, $B8 ; «making h»
+#_08B173: db $B5, $C2, $20                          ; «er »
+#_08B176: db $02 ; new line
+#_08B177: db $B1, $C0, $C0, $B5, $B1, $C2, $B1, $BE ; «appearan»
+#_08B17F: db $B3, $B5, $20, $B1, $BC, $BF, $BE, $B7 ; «ce along»
+#_08B187: db $20                                    ; « »
+#_08B188: db $02 ; new line
+#_08B189: db $C7, $B9, $C4, $B8, $20, $B8, $B5, $C2 ; «with her»
+#_08B191: db $20, $C2, $B1, $B2, $B2, $B9, $C4, $20 ; « rabbit »
+#_08B199: db $02 ; new line
+#_08B19A: db $B5, $C3, $B3, $BF, $C2, $C4, $C3, $2E ; «escorts.»
+#_08B1A2: db $05, $32 ; set delay
+#_08B1A4: db $05, $04 ; set delay
+#_08B1A6: db $00 ; end message
+
+;===================================================================================================
+
+;        
+Message_08B1A7:
+#_08B1A7: dw .data, $0000 ; pointer
+
+.data
+#_08B1AB: db $03 ; TODO
+#_08B1AC: db $01, $00, $00 ; TODO
+#_08B1AF: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_08B1B6: db $05, $0A ; set delay
+#_08B1B8: db $05, $04 ; set delay
+#_08B1BA: db $03 ; TODO
+#_08B1BB: db $00 ; end message
+
+;===================================================================================================
+
+; Impy :"By the order of our
+;       master,we are 
+;       kidnapping 
+;       Princess Luna."
+Message_08B1BC:
+#_08B1BC: dw $0001, $0003, $0012, $001B ; TODO
+#_08B1C4: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B1CC: dw .data, $0000 ; pointer
+
+.data
+#_08B1D0: db $05, $06 ; set delay
+#_08B1D2: db $3E, $BD, $C0, $C9, $20, $3A, $2B, $D9 ; «Impy :"B»
+#_08B1DA: db $C9, $20, $C4, $B8, $B5, $20, $BF, $C2 ; «y the or»
+#_08B1E2: db $B4, $B5, $C2, $20, $BF, $B6, $20, $BF ; «der of o»
+#_08B1EA: db $C5, $C2                               ; «ur»
+#_08B1EC: db $02 ; new line
+#_08B1ED: db $05, $FF ; set delay
+#_08B1EF: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B1F5: db $05, $06 ; set delay
+#_08B1F7: db $BD, $B1, $C3, $C4, $B5, $C2, $2C, $C7 ; «master,w»
+#_08B1FF: db $B5, $20, $B1, $C2, $B5, $20           ; «e are »
+#_08B205: db $02 ; new line
+#_08B206: db $05, $FF ; set delay
+#_08B208: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B20E: db $05, $06 ; set delay
+#_08B210: db $BB, $B9, $B4, $BE, $B1, $C0, $C0, $B9 ; «kidnappi»
+#_08B218: db $BE, $B7, $20                          ; «ng »
+#_08B21B: db $02 ; new line
+#_08B21C: db $05, $FF ; set delay
+#_08B21E: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B224: db $05, $06 ; set delay
+#_08B226: db $AB, $C2, $B9, $BE, $B3, $B5, $C3, $C3 ; «Princess»
+#_08B22E: db $20, $A7, $C5, $BE, $B1, $2E, $2B      ; « Luna."»
+#_08B235: db $05, $46 ; set delay
+#_08B237: db $05, $06 ; set delay
+#_08B239: db $02 ; new line
+#_08B23A: db $00 ; end message
+
+;===================================================================================================
+
+; Pocky:"Wait!!Who on earth
+;       are you?"
+; Impy :"I am Impy,and 
+;       who are you?"
+; Pocky:"I am Pocky."
+; Impy :"So you are Pocky,
+;       I am sure that we
+;       will meet again."
+Message_08B23B:
+#_08B23B: dw $0001, $0003, $0012, $001B ; TODO
+#_08B243: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B24B: dw .data, $0000 ; pointer
+
+.data
+#_08B24F: db $05, $06 ; set delay
+#_08B251: db $AB, $BF, $B3, $BB, $C9, $3A, $2B, $D3 ; «Pocky:"W»
+#_08B259: db $B1, $B9, $C4, $21, $21, $D3, $B8, $BF ; «ait!!Who»
+#_08B261: db $20, $BF, $BE, $20, $B5, $B1, $C2, $C4 ; « on eart»
+#_08B269: db $B8                                    ; «h»
+#_08B26A: db $02 ; new line
+#_08B26B: db $05, $FF ; set delay
+#_08B26D: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B273: db $05, $06 ; set delay
+#_08B275: db $B1, $C2, $B5, $20, $C9, $BF, $C5, $3F ; «are you?»
+#_08B27D: db $2B                                    ; «"»
+#_08B27E: db $02 ; new line
+#_08B27F: db $05, $28 ; set delay
+#_08B281: db $05, $06 ; set delay
+#_08B283: db $3E, $BD, $C0, $C9, $20, $3A, $2B, $3E ; «Impy :"I»
+#_08B28B: db $20, $B1, $BD, $20, $3E, $BD, $C0, $C9 ; « am Impy»
+#_08B293: db $2C, $B1, $BE, $B4, $20                ; «,and »
+#_08B298: db $02 ; new line
+#_08B299: db $05, $FF ; set delay
+#_08B29B: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B2A1: db $05, $06 ; set delay
+#_08B2A3: db $C7, $B8, $BF, $20, $B1, $C2, $B5, $20 ; «who are »
+#_08B2AB: db $C9, $BF, $C5, $3F, $2B                ; «you?"»
+#_08B2B0: db $02 ; new line
+#_08B2B1: db $05, $32 ; set delay
+#_08B2B3: db $05, $06 ; set delay
+#_08B2B5: db $AB, $BF, $B3, $BB, $C9, $3A, $2B, $3E ; «Pocky:"I»
+#_08B2BD: db $20, $B1, $BD, $20, $AB, $BF, $B3, $BB ; « am Pock»
+#_08B2C5: db $C9, $2E, $2B                          ; «y."»
+#_08B2C8: db $05, $28 ; set delay
+#_08B2CA: db $05, $06 ; set delay
+#_08B2CC: db $02 ; new line
+#_08B2CD: db $3E, $BD, $C0, $C9, $20, $3A, $2B, $AE ; «Impy :"S»
+#_08B2D5: db $BF, $20, $C9, $BF, $C5, $20, $B1, $C2 ; «o you ar»
+#_08B2DD: db $B5, $20, $AB, $BF, $B3, $BB, $C9, $2C ; «e Pocky,»
+#_08B2E5: db $02 ; new line
+#_08B2E6: db $05, $FF ; set delay
+#_08B2E8: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B2EE: db $05, $06 ; set delay
+#_08B2F0: db $3E, $20, $B1, $BD, $20, $C3, $C5, $C2 ; «I am sur»
+#_08B2F8: db $B5, $20, $C4, $B8, $B1, $C4, $20, $C7 ; «e that w»
+#_08B300: db $B5                                    ; «e»
+#_08B301: db $02 ; new line
+#_08B302: db $05, $FF ; set delay
+#_08B304: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B30A: db $05, $06 ; set delay
+#_08B30C: db $C7, $B9, $BC, $BC, $20, $BD, $B5, $B5 ; «will mee»
+#_08B314: db $C4, $20, $B1, $B7, $B1, $B9, $BE, $2E ; «t again.»
+#_08B31C: db $2B                                    ; «"»
+#_08B31D: db $05, $5A ; set delay
+#_08B31F: db $05, $06 ; set delay
+#_08B321: db $03 ; TODO
+#_08B322: db $00 ; end message
+
+;===================================================================================================
+
+; Pocky:"...!!!???"
+Message_08B323:
+#_08B323: dw $0001, $0003, $0012, $001B ; TODO
+#_08B32B: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B333: dw .data, $0000 ; pointer
+
+.data
+#_08B337: db $AB, $BF, $B3, $BB, $C9, $3A, $2B, $2E ; «Pocky:".»
+#_08B33F: db $2E, $2E, $21, $21, $21, $3F, $3F, $3F ; «..!!!???»
+#_08B347: db $2B                                    ; «"»
+#_08B348: db $05, $50 ; set delay
+#_08B34A: db $05, $06 ; set delay
+#_08B34C: db $03 ; TODO
+#_08B34D: db $00 ; end message
+
+;===================================================================================================
+
+; All of a sudden,
+; the festival square
+; lights up,
+; Princess Luna 
+; disappears.
+; Pocky and her 
+; friends go and 
+; consult with the 
+; seven wise people.
+Message_08B34E:
+#_08B34E: dw $0001, $0006, $0012, $0014 ; TODO
+#_08B356: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B35E: dw .data, $0000 ; pointer
+
+.data
+#_08B362: db $05, $06 ; set delay
+#_08B364: db $D8, $BC, $BC, $20, $BF, $B6, $20, $B1 ; «All of a»
+#_08B36C: db $20, $C3, $C5, $B4, $B4, $B5, $BE, $2C ; « sudden,»
+#_08B374: db $02 ; new line
+#_08B375: db $C4, $B8, $B5, $20, $B6, $B5, $C3, $C4 ; «the fest»
+#_08B37D: db $B9, $C6, $B1, $BC, $20, $C3, $C1, $C5 ; «ival squ»
+#_08B385: db $B1, $C2, $B5                          ; «are»
+#_08B388: db $02 ; new line
+#_08B389: db $BC, $B9, $B7, $B8, $C4, $C3, $20, $C5 ; «lights u»
+#_08B391: db $C0, $2C                               ; «p,»
+#_08B393: db $02 ; new line
+#_08B394: db $AB, $C2, $B9, $BE, $B3, $B5, $C3, $C3 ; «Princess»
+#_08B39C: db $20, $A7, $C5, $BE, $B1, $20           ; « Luna »
+#_08B3A2: db $02 ; new line
+#_08B3A3: db $B4, $B9, $C3, $B1, $C0, $C0, $B5, $B1 ; «disappea»
+#_08B3AB: db $C2, $C3, $2E                          ; «rs.»
+#_08B3AE: db $05, $64 ; set delay
+#_08B3B0: db $05, $06 ; set delay
+#_08B3B2: db $02 ; new line
+#_08B3B3: db $AB, $BF, $B3, $BB, $C9, $20, $B1, $BE ; «Pocky an»
+#_08B3BB: db $B4, $20, $B8, $B5, $C2, $20           ; «d her »
+#_08B3C1: db $02 ; new line
+#_08B3C2: db $B6, $C2, $B9, $B5, $BE, $B4, $C3, $20 ; «friends »
+#_08B3CA: db $B7, $BF, $20, $B1, $BE, $B4, $20      ; «go and »
+#_08B3D1: db $02 ; new line
+#_08B3D2: db $B3, $BF, $BE, $C3, $C5, $BC, $C4, $20 ; «consult »
+#_08B3DA: db $C7, $B9, $C4, $B8, $20, $C4, $B8, $B5 ; «with the»
+#_08B3E2: db $20                                    ; « »
+#_08B3E3: db $02 ; new line
+#_08B3E4: db $C3, $B5, $C6, $B5, $BE, $20, $C7, $B9 ; «seven wi»
+#_08B3EC: db $C3, $B5, $20, $C0, $B5, $BF, $C0, $BC ; «se peopl»
+#_08B3F4: db $B5, $2E                               ; «e.»
+#_08B3F6: db $05, $50 ; set delay
+#_08B3F8: db $05, $06 ; set delay
+#_08B3FA: db $00 ; end message
+
+;===================================================================================================
+
+Message_08B3FB:
+#_08B3FB: dw $0001, $0004, $0012, $001B ; TODO
+#_08B403: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B40B: dw .data, $0000 ; pointer
+
+.data
+#_08B40F: db $00 ; end message
+#_08B410: db $00 ; end message
+
+;===================================================================================================
+
+; Magician:"Cooperate with
+;       many of your 
+;       friends."
+; Happy face:"We will help 
+;       you too."
+; Rocky:"You can count
+;       on me!"
+; Pocky:"Thank you.
+;       We will rescue
+;       the Princess."
+Message_08B411:
+#_08B411: dw $0001, $0003, $0012, $001C ; TODO
+#_08B419: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B421: dw .data, $0000 ; pointer
+
+.data
+#_08B425: db $05, $06 ; set delay
+#_08B427: db $A8, $B1, $B7, $B9, $B3, $B9, $B1, $BE ; «Magician»
+#_08B42F: db $3A, $2B, $DA, $BF, $BF, $C0, $B5, $C2 ; «:"Cooper»
+#_08B437: db $B1, $C4, $B5, $20, $C7, $B9, $C4, $B8 ; «ate with»
+#_08B43F: db $02 ; new line
+#_08B440: db $05, $FF ; set delay
+#_08B442: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B448: db $05, $06 ; set delay
+#_08B44A: db $BD, $B1, $BE, $C9, $20, $BF, $B6, $20 ; «many of »
+#_08B452: db $C9, $BF, $C5, $C2, $20                ; «your »
+#_08B457: db $02 ; new line
+#_08B458: db $05, $FF ; set delay
+#_08B45A: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B460: db $05, $06 ; set delay
+#_08B462: db $B6, $C2, $B9, $B5, $BE, $B4, $C3, $2E ; «friends.»
+#_08B46A: db $2B                                    ; «"»
+#_08B46B: db $05, $3C ; set delay
+#_08B46D: db $05, $06 ; set delay
+#_08B46F: db $02 ; new line
+#_08B470: db $3D, $B1, $C0, $C0, $C9, $20, $B6, $B1 ; «Happy fa»
+#_08B478: db $B3, $B5, $3A, $2B, $D3, $B5, $20, $C7 ; «ce:"We w»
+#_08B480: db $B9, $BC, $BC, $20, $B8, $B5, $BC, $C0 ; «ill help»
+#_08B488: db $20                                    ; « »
+#_08B489: db $02 ; new line
+#_08B48A: db $05, $FF ; set delay
+#_08B48C: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B492: db $05, $06 ; set delay
+#_08B494: db $C9, $BF, $C5, $20, $C4, $BF, $BF, $2E ; «you too.»
+#_08B49C: db $2B                                    ; «"»
+#_08B49D: db $05, $50 ; set delay
+#_08B49F: db $05, $06 ; set delay
+#_08B4A1: db $02 ; new line
+#_08B4A2: db $AD, $BF, $B3, $BB, $C9, $3A, $2B, $D5 ; «Rocky:"Y»
+#_08B4AA: db $BF, $C5, $20, $B3, $B1, $BE, $20, $B3 ; «ou can c»
+#_08B4B2: db $BF, $C5, $BE, $C4                     ; «ount»
+#_08B4B6: db $02 ; new line
+#_08B4B7: db $05, $FF ; set delay
+#_08B4B9: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B4BF: db $05, $06 ; set delay
+#_08B4C1: db $BF, $BE, $20, $BD, $B5, $21, $2B      ; «on me!"»
+#_08B4C8: db $05, $50 ; set delay
+#_08B4CA: db $05, $06 ; set delay
+#_08B4CC: db $02 ; new line
+#_08B4CD: db $AB, $BF, $B3, $BB, $C9, $3A, $2B, $AF ; «Pocky:"T»
+#_08B4D5: db $B8, $B1, $BE, $BB, $20, $C9, $BF, $C5 ; «hank you»
+#_08B4DD: db $2E                                    ; «.»
+#_08B4DE: db $02 ; new line
+#_08B4DF: db $05, $FF ; set delay
+#_08B4E1: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B4E7: db $05, $06 ; set delay
+#_08B4E9: db $D3, $B5, $20, $C7, $B9, $BC, $BC, $20 ; «We will »
+#_08B4F1: db $C2, $B5, $C3, $B3, $C5, $B5           ; «rescue»
+#_08B4F7: db $02 ; new line
+#_08B4F8: db $05, $FF ; set delay
+#_08B4FA: db $20, $20, $20, $20, $20, $20           ; «      »
+#_08B500: db $05, $06 ; set delay
+#_08B502: db $C4, $B8, $B5, $20, $AB, $C2, $B9, $BE ; «the Prin»
+#_08B50A: db $B3, $B5, $C3, $C3, $2E, $2B           ; «cess."»
+#_08B510: db $05, $5A ; set delay
+#_08B512: db $05, $06 ; set delay
+#_08B514: db $0B, $00 ; TODO
+#_08B516: db $03 ; TODO
+#_08B517: db $0A, $00 ; TODO
+#_08B519: db $00 ; end message
 
 ;===================================================================================================
 
@@ -7938,7 +8349,7 @@ CODE_08CC56:
 
 ROUTINE_08CC86:
 #_08CC86: JSR ROUTINE_08BAFC
-#_08CC89: JSL ROUTINE_0391DB_long
+#_08CC89: JSL PrepEnemySpawn_long
 #_08CC8D: RTS
 
 #data08CC8E:
@@ -8105,7 +8516,7 @@ CODE_08CDB5:
 
 ROUTINE_08CDD7:
 #_08CDD7: JSR ROUTINE_08BAFC
-#_08CDDA: JSL ROUTINE_0391DB_long
+#_08CDDA: JSL PrepEnemySpawn_long
 #_08CDDE: RTS
 
 #data08CDDF:
@@ -8400,7 +8811,7 @@ CODE_08D0AA:
 
 ROUTINE_08D0DA:
 #_08D0DA: JSR ROUTINE_08BAFC
-#_08D0DD: JSL ROUTINE_0391DB_long
+#_08D0DD: JSL PrepEnemySpawn_long
 #_08D0E1: RTS
 
 ;---------------------------------------------------------------------------------------------------
@@ -9281,7 +9692,7 @@ ROUTINE_08D7BC:
 #_08D7D0: BEQ .exit
 
 #_08D7D2: LDX.w #$0008
-#_08D7D5: JSL ROUTINE_088000
+#_08D7D5: JSL SetMessagePointer
 
 .exit
 #_08D7D9: RTS

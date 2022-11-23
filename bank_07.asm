@@ -4455,7 +4455,7 @@ ROUTINE_07EFB3:
 
 #_07EFCE: LDA.w #$000E
 #_07EFD1: STA.b $24
-#_07EFD3: JSL ROUTINE_0391DB_long
+#_07EFD3: JSL PrepEnemySpawn_long
 #_07EFD7: RTS
 
 #data07EFD8:
@@ -4721,7 +4721,7 @@ ROUTINE_07F501:
 
 #_07F535: LDA.w #data07F92F
 #_07F538: LDX.w #$0007
-#_07F53B: JSL ROUTINE_088000_long
+#_07F53B: JSL SetMessagePointer_long
 #_07F53F: JSL ROUTINE_00A974_long
 
 #_07F543: LDA.w #$0018
@@ -4756,7 +4756,7 @@ ROUTINE_07F5A4:
 #_07F5B2: RTS
 
 CODE_07F5B3:
-#_07F5B3: JSL ROUTINE_088014_long
+#_07F5B3: JSL HandleDialog_long
 
 #_07F5B7: LDA.l $7E2550
 #_07F5BB: BNE .exit
@@ -4799,14 +4799,14 @@ ROUTINE_07F5D4:
 
 ROUTINE_07F5E3:
 #_07F5E3: JSL ROUTINE_00F957_long
-#_07F5E7: JSL ROUTINE_088014_long
+#_07F5E7: JSL HandleDialog_long
 
 #_07F5EB: LDA.l $7E2550
 #_07F5EF: BNE .exit
 
 #_07F5F1: LDA.w #$F9DD
 #_07F5F4: LDX.w #$0007
-#_07F5F7: JSL ROUTINE_088000_long
+#_07F5F7: JSL SetMessagePointer_long
 #_07F5FB: JSR ROUTINE_07F5A4
 #_07F5FE: INC.w $0506
 
@@ -4886,7 +4886,7 @@ ROUTINE_07F65D:
 
 #_07F669: LDA.w #$FB8A
 #_07F66C: LDX.w #$0007
-#_07F66F: JSL ROUTINE_088000_long
+#_07F66F: JSL SetMessagePointer_long
 #_07F673: INC.w $0506
 
 .exit
@@ -4908,7 +4908,7 @@ ROUTINE_07F67E:
 
 #_07F686: LDA.w #$FCE5
 #_07F689: LDX.w #$0007
-#_07F68C: JSL ROUTINE_088000_long
+#_07F68C: JSL SetMessagePointer_long
 
 #_07F690: LDA.w #data07F6A6
 #_07F693: STA.b $20
@@ -4936,7 +4936,7 @@ CODE_07F6C0:
 #_07F6C0: DEX
 #_07F6C1: BNE CODE_07F6C0
 
-#_07F6C3: JSL ROUTINE_088014_long
+#_07F6C3: JSL HandleDialog_long
 #_07F6C7: JSL ROUTINE_00ED0F_long
 
 #_07F6CB: LDA.l $7E2550
@@ -4947,7 +4947,7 @@ CODE_07F6C0:
 
 #_07F6D7: LDA.w #$FD00
 #_07F6DA: LDX.w #$0007
-#_07F6DD: JSL ROUTINE_088000_long
+#_07F6DD: JSL SetMessagePointer_long
 #_07F6E1: INC.w $0506
 
 .exit
@@ -4956,7 +4956,7 @@ CODE_07F6C0:
 ;===================================================================================================
 
 ROUTINE_07F6E5:
-#_07F6E5: JSL ROUTINE_088014_long
+#_07F6E5: JSL HandleDialog_long
 #_07F6E9: JSL ROUTINE_00F957_long
 #_07F6ED: JSR ROUTINE_07F5C1
 #_07F6F0: CMP.w #$0000
@@ -5059,7 +5059,7 @@ CODE_07F747:
 
 #_07F789: LDA.w #$FDF5
 #_07F78C: LDX.w #$0007
-#_07F78F: JSL ROUTINE_088000_long
+#_07F78F: JSL SetMessagePointer_long
 #_07F793: INC.w $0506
 #_07F796: RTS
 
@@ -5246,7 +5246,7 @@ CODE_07F8DE:
 
 ROUTINE_07F8EC:
 #_07F8EC: JSR ROUTINE_07F803
-#_07F8EF: JSL ROUTINE_088014_long
+#_07F8EF: JSL HandleDialog_long
 #_07F8F3: JSR ROUTINE_07F8C6
 
 #_07F8F6: LDA.w $0510
@@ -5262,7 +5262,7 @@ ROUTINE_07F8EC:
 
 ROUTINE_07F902:
 #_07F902: JSR ROUTINE_07F803
-#_07F905: JSL ROUTINE_088014_long
+#_07F905: JSL HandleDialog_long
 
 #_07F909: LDA.l $7E2550
 #_07F90D: BNE .exit
@@ -5295,222 +5295,478 @@ ROUTINE_07F92B:
 #_07F92B: JSR ROUTINE_07F803
 #_07F92E: RTL
 
-#data07F92F:
-#_07F92F: db $01,$00,$03,$00,$12,$00,$1C,$00
-#_07F937: db $03,$00,$00,$00,$00,$00,$00,$00
-#_07F93F: db $43,$F9,$00,$00,$05,$06,$AF,$B8
-#_07F947: db $B5,$20,$C3,$C0,$B5,$BC,$BC,$20
-#_07F94F: db $C4,$B8,$B1,$C4,$20,$B8,$B1,$B4
-#_07F957: db $20,$B2,$B5,$B5,$BE,$20,$B3,$B1
-#_07F95F: db $C3,$C4,$BF,$BE,$20,$DB,$C9,$BE
-#_07F967: db $B1,$B7,$BF,$BE,$20,$C7,$B1,$C3
-#_07F96F: db $20,$C2,$B5,$BD,$BF,$C6,$B5,$B4
-#_07F977: db $20,$B2,$C9,$02,$AB,$BF,$B3,$BB
-#_07F97F: db $C9,$27,$C3,$20,$BD,$B1,$B7,$B9
-#_07F987: db $B3,$20,$B3,$B1,$C2,$B4,$C3,$2E
-#_07F98F: db $05,$46,$05,$06,$02,$DB,$C9,$BE
-#_07F997: db $B1,$B7,$BF,$BE,$20,$C4,$B8,$B5
-#_07F99F: db $BE,$20,$C2,$B5,$C4,$C5,$C2,$BE
-#_07F9A7: db $C3,$20,$C4,$BF,$20,$B8,$B9,$C3
-#_07F9AF: db $02,$BF,$C2,$B9,$B7,$B9,$BE,$B1
-#_07F9B7: db $BC,$20,$C3,$B9,$CA,$B5,$20,$B1
-#_07F9BF: db $BE,$B4,$20,$C2,$B5,$B7,$B1,$B9
-#_07F9C7: db $BE,$C3,$02,$B3,$BF,$BE,$C3,$B3
-#_07F9CF: db $B9,$BF,$C5,$C3,$BE,$B5,$C3,$C3
-#_07F9D7: db $2E,$05,$5A,$05,$06,$00,$01,$00
-#_07F9DF: db $03,$00,$12,$00,$1C,$00,$03,$00
-#_07F9E7: db $00,$00,$00,$00,$00,$00,$F1,$F9
-#_07F9EF: db $00,$00,$05,$06,$03,$01,$00,$00
-#_07F9F7: db $DB,$C9,$BE,$B1,$B7,$BF,$BE,$3A
-#_07F9FF: db $2B,$AB,$C2,$B9,$BE,$B3,$B5,$C3
-#_07FA07: db $C3,$20,$A7,$C5,$BE,$B1,$2C,$02
-#_07FA0F: db $05,$FF,$20,$20,$20,$20,$20,$20
-#_07FA17: db $20,$05,$06,$B8,$BF,$C7,$20,$B3
-#_07FA1F: db $B1,$BE,$20,$3E,$20,$B5,$C6,$B5
-#_07FA27: db $C2,$02,$05,$FF,$20,$20,$20,$20
-#_07FA2F: db $20,$20,$20,$05,$06,$B1,$C0,$BF
-#_07FA37: db $BC,$BF,$B7,$B9,$CA,$B5,$20,$B5
-#_07FA3F: db $BE,$BF,$C5,$B7,$B8,$3F,$2B,$02
-#_07FA47: db $AB,$C2,$B9,$BE,$B3,$B5,$C3,$C3
-#_07FA4F: db $20,$A7,$C5,$BE,$B1,$3A,$2B,$3E
-#_07FA57: db $20,$B4,$BF,$BE,$27,$C4,$20,$B8
-#_07FA5F: db $B1,$C6,$B5,$02,$05,$FF,$20,$20
-#_07FA67: db $20,$20,$20,$20,$20,$05,$06,$B1
-#_07FA6F: db $BE,$C9,$20,$C2,$B9,$B7,$B8,$C4
-#_07FA77: db $20,$C4,$BF,$20,$B2,$BC,$B1,$BD
-#_07FA7F: db $B5,$02,$05,$FF,$20,$20,$20,$20
-#_07FA87: db $20,$20,$20,$05,$06,$C9,$BF,$C5
-#_07FA8F: db $2E,$2B,$05,$28,$05,$06,$02,$AB
-#_07FA97: db $BF,$B3,$BB,$C9,$3A,$2B,$AB,$C2
-#_07FA9F: db $B9,$BE,$B3,$B5,$C3,$C3,$20,$A7
-#_07FAA7: db $C5,$BE,$B1,$2C,$02,$05,$FF,$20
-#_07FAAF: db $20,$20,$20,$20,$20,$20,$05,$06
-#_07FAB7: db $B9,$C4,$27,$C3,$20,$B1,$B2,$BF
-#_07FABF: db $C5,$C4,$20,$C4,$B9,$BD,$B5,$02
-#_07FAC7: db $05,$FF,$20,$20,$20,$20,$20,$20
-#_07FACF: db $20,$05,$06,$C4,$BF,$20,$BC,$B5
-#_07FAD7: db $B1,$C6,$B5,$2E,$2B,$05,$1E,$05
-#_07FADF: db $06,$02,$AB,$C2,$B9,$BE,$B3,$B5
-#_07FAE7: db $C3,$C3,$20,$A7,$C5,$BE,$B1,$3A
-#_07FAEF: db $2B,$AF,$B8,$B1,$C4,$27,$C3,$02
-#_07FAF7: db $05,$FF,$20,$20,$20,$20,$20,$20
-#_07FAFF: db $20,$05,$06,$C2,$B9,$B7,$B8,$C4
-#_07FB07: db $2C,$20,$C7,$B5,$20,$B8,$B1,$C6
-#_07FB0F: db $B5,$20,$C4,$BF,$02,$05,$FF,$20
-#_07FB17: db $20,$20,$20,$20,$20,$20,$05,$06
-#_07FB1F: db $B3,$B5,$BC,$B5,$B2,$C2,$B1,$C4
-#_07FB27: db $B5,$20,$C4,$B8,$B5,$02,$05,$FF
-#_07FB2F: db $20,$20,$20,$20,$20,$20,$20,$05
-#_07FB37: db $06,$B8,$B1,$C2,$C6,$B5,$C3,$C4
-#_07FB3F: db $2E,$2B,$02,$AB,$BF,$B3,$BB,$C9
-#_07FB47: db $3A,$2B,$AF,$B8,$B5,$BE,$20,$C7
-#_07FB4F: db $B5,$20,$C7,$B9,$BC,$BC,$20,$C3
-#_07FB57: db $B5,$B5,$02,$05,$FF,$20,$20,$20
-#_07FB5F: db $20,$20,$20,$20,$05,$06,$C9,$BF
-#_07FB67: db $C5,$20,$B1,$C4,$20,$C4,$B8,$B5
-#_07FB6F: db $02,$05,$FF,$20,$20,$20,$20,$20
-#_07FB77: db $20,$20,$05,$06,$B6,$B5,$C3,$C4
-#_07FB7F: db $B9,$C6,$B1,$BC,$2E,$2B,$05,$3C
-#_07FB87: db $05,$06,$00,$01,$00,$03,$00,$12
-#_07FB8F: db $00,$1C,$00,$03,$00,$00,$00,$00
-#_07FB97: db $00,$00,$00,$9E,$FB,$00,$00,$05
-#_07FB9F: db $06,$03,$01,$00,$00,$3C,$BF,$C2
-#_07FBA7: db $B4,$BF,$BE,$3A,$2B,$D5,$BF,$C5
-#_07FBAF: db $20,$BD,$B1,$B4,$B5,$20,$B9,$C4
-#_07FBB7: db $20,$B2,$B1,$B3,$BB,$2C,$02,$05
-#_07FBBF: db $FF,$20,$20,$20,$20,$20,$20,$20
-#_07FBC7: db $05,$06,$C7,$B8,$B5,$C2,$B5,$20
-#_07FBCF: db $B9,$C3,$20,$AB,$C2,$B9,$BE,$B3
-#_07FBD7: db $B5,$C3,$C3,$02,$05,$FF,$20,$20
-#_07FBDF: db $20,$20,$20,$20,$20,$05,$06,$A7
-#_07FBE7: db $C5,$BE,$B1,$3F,$2B,$02,$AB,$BF
-#_07FBEF: db $B3,$BB,$C9,$3A,$2B,$AE,$B8,$B5
-#_07FBF7: db $20,$C7,$B9,$BC,$BC,$20,$BA,$BF
-#_07FBFF: db $B9,$BE,$20,$C5,$C3,$02,$05,$FF
-#_07FC07: db $20,$20,$20,$20,$20,$20,$20,$05
-#_07FC0F: db $06,$BC,$B1,$C4,$B5,$C2,$20,$B1
-#_07FC17: db $C4,$20,$C4,$B8,$B5,$02,$05,$FF
-#_07FC1F: db $20,$20,$20,$20,$20,$20,$20,$05
-#_07FC27: db $06,$B6,$B5,$C3,$C4,$B9,$C6,$B1
-#_07FC2F: db $BC,$2E,$2B,$02,$3C,$BF,$C2,$B4
-#_07FC37: db $BF,$BE,$3A,$2B,$3E,$20,$C3,$B5
-#_07FC3F: db $B5,$2C,$C4,$B8,$B5,$BE,$20,$BC
-#_07FC47: db $B5,$C4,$27,$C3,$02,$05,$FF,$20
-#_07FC4F: db $20,$20,$20,$20,$20,$20,$05,$06
-#_07FC57: db $B7,$BF,$20,$B2,$B1,$B3,$BB,$20
-#_07FC5F: db $B6,$B9,$C2,$C3,$C4,$2E,$2B,$02
-#_07FC67: db $AD,$BF,$B3,$BB,$C9,$3A,$2B,$AE
-#_07FC6F: db $BF,$C5,$BE,$B4,$C3,$20,$B7,$BF
-#_07FC77: db $BF,$B4,$2C,$02,$05,$FF,$20,$20
-#_07FC7F: db $20,$20,$20,$20,$20,$05,$06,$3E
-#_07FC87: db $27,$BD,$20,$C3,$BF,$20,$B8,$C5
-#_07FC8F: db $BE,$B7,$C2,$C9,$2C,$02,$05,$FF
-#_07FC97: db $20,$20,$20,$20,$20,$20,$20,$05
-#_07FC9F: db $06,$3E,$20,$B6,$B5,$B5,$BC,$20
-#_07FCA7: db $B6,$B1,$B9,$BE,$C4,$2E,$2B,$02
-#_07FCAF: db $AB,$BF,$B3,$BB,$C9,$3A,$2B,$DA
-#_07FCB7: db $BF,$BD,$B5,$20,$BF,$BE,$2C,$20
-#_07FCBF: db $C9,$BF,$C5,$27,$C2,$B5,$02,$05
-#_07FCC7: db $FF,$20,$20,$20,$20,$20,$20,$20
-#_07FCCF: db $05,$06,$B1,$BC,$C7,$B1,$C9,$C3
-#_07FCD7: db $20,$B5,$B1,$C4,$B9,$BE,$B7,$2E
-#_07FCDF: db $2B,$05,$50,$05,$06,$00,$01,$00
-#_07FCE7: db $03,$00,$12,$00,$1C,$00,$03,$00
-#_07FCEF: db $00,$00,$00,$00,$00,$00,$F9,$FC
-#_07FCF7: db $00,$00,$05,$06,$05,$0A,$05,$06
-#_07FCFF: db $00,$01,$00,$03,$00,$12,$00,$1C
-#_07FD07: db $00,$03,$00,$00,$00,$00,$00,$00
-#_07FD0F: db $00,$14,$FD,$00,$00,$03,$01,$00
-#_07FD17: db $00,$05,$06,$AB,$BF,$B3,$BB,$C9
-#_07FD1F: db $20,$B1,$BE,$B4,$20,$B8,$B5,$C2
-#_07FD27: db $20,$B6,$C2,$B9,$B5,$BE,$B4,$C3
-#_07FD2F: db $20,$BC,$B5,$B1,$C6,$B5,$02,$C4
-#_07FD37: db $B8,$B5,$20,$DB,$B5,$BD,$BF,$BE
-#_07FD3F: db $20,$DA,$B1,$C3,$C4,$BC,$B5,$2C
-#_07FD47: db $B1,$BE,$B4,$20,$AB,$BF,$B3,$BB
-#_07FD4F: db $C9,$02,$C3,$B1,$C9,$C3,$20,$B7
-#_07FD57: db $BF,$BF,$B4,$2D,$B2,$C9,$B5,$20
-#_07FD5F: db $C4,$BF,$20,$C4,$B8,$B5,$02,$B6
-#_07FD67: db $C2,$B9,$B5,$BE,$B4,$C3,$20,$C3
-#_07FD6F: db $B8,$B5,$20,$B8,$B1,$C3,$20,$BD
-#_07FD77: db $B5,$C4,$20,$02,$BF,$BE,$20,$C4
-#_07FD7F: db $B8,$B5,$20,$BA,$BF,$C5,$C2,$BE
-#_07FD87: db $B5,$C9,$2E,$02,$AB,$BF,$B3,$BB
-#_07FD8F: db $C9,$20,$C3,$B5,$BE,$B4,$C3,$20
-#_07FD97: db $B8,$B5,$C2,$20,$BE,$B5,$C7,$20
-#_07FD9F: db $B6,$C2,$B9,$B5,$BE,$B4,$C3,$02
-#_07FDA7: db $BF,$B6,$B6,$20,$C7,$B9,$C4,$B8
-#_07FDAF: db $20,$B1,$20,$C3,$BD,$B9,$BC,$B5
-#_07FDB7: db $2E,$02,$05,$50,$05,$06,$AB,$BF
-#_07FDBF: db $B3,$BB,$C9,$20,$B1,$BE,$B4,$20
-#_07FDC7: db $B8,$B5,$C2,$20,$C0,$B1,$C2,$C4
-#_07FDCF: db $BE,$B5,$C2,$C3,$20,$C4,$B8,$B5
-#_07FDD7: db $BE,$02,$B7,$BF,$20,$B2,$B1,$B3
-#_07FDDF: db $BB,$20,$C4,$BF,$20,$C4,$B8,$B5
-#_07FDE7: db $20,$C6,$B9,$BC,$BC,$B1,$B7,$B5
-#_07FDEF: db $2E,$05,$50,$05,$06,$00,$01,$00
-#_07FDF7: db $03,$00,$14,$00,$1C,$00,$03,$00
-#_07FDFF: db $00,$00,$00,$00,$00,$00,$09,$FE
-#_07FE07: db $00,$00,$03,$01,$00,$00,$05,$08
-#_07FE0F: db $3E,$C4,$20,$B8,$B1,$C3,$20,$B2
-#_07FE17: db $B5,$B3,$BF,$BD,$B5,$20,$B4,$B1
-#_07FE1F: db $C2,$BB,$2C,$20,$B1,$BE,$B4,$20
-#_07FE27: db $B1,$02,$B2,$B5,$B1,$C5,$C4,$B9
-#_07FE2F: db $B6,$C5,$BC,$20,$BD,$BF,$BF,$BE
-#_07FE37: db $20,$B9,$C3,$20,$02,$B9,$BE,$20
-#_07FE3F: db $C4,$B8,$B5,$20,$C3,$BB,$C9,$2E
-#_07FE47: db $02,$05,$32,$05,$08,$AB,$BF,$B3
-#_07FE4F: db $BB,$C9,$20,$B1,$BE,$B4,$20,$B8
-#_07FE57: db $B5,$C2,$20,$C0,$B1,$C2,$C4,$BE
-#_07FE5F: db $B5,$C2,$C3,$02,$B3,$BC,$B9,$BD
-#_07FE67: db $B2,$20,$BF,$BE,$20,$3C,$BF,$C2
-#_07FE6F: db $B4,$BF,$BE,$27,$C3,$20,$B2,$B1
-#_07FE77: db $B3,$BB,$20,$B1,$BE,$B4,$02,$B6
-#_07FE7F: db $BC,$C9,$20,$B1,$B3,$C2,$BF,$C3
-#_07FE87: db $C3,$20,$C4,$B8,$B5,$20,$BE,$B9
-#_07FE8F: db $B7,$B8,$C4,$20,$C3,$BB,$C9,$2E
-#_07FE97: db $02,$05,$50,$05,$08,$02,$D8,$20
-#_07FE9F: db $BE,$B9,$B3,$B5,$20,$B2,$C2,$B5
-#_07FEA7: db $B5,$CA,$B5,$20,$B5,$BE,$C6,$B5
-#_07FEAF: db $BC,$BF,$C0,$C3,$02,$C4,$B8,$B5
-#_07FEB7: db $B9,$C2,$20,$B2,$BF,$B4,$B9,$B5
-#_07FEBF: db $C3,$2C,$20,$BD,$B1,$BB,$B9,$BE
-#_07FEC7: db $B7,$20,$C4,$B8,$B5,$BD,$02,$B6
-#_07FECF: db $BF,$C2,$B7,$B5,$C4,$20,$C4,$B8
-#_07FED7: db $B5,$B9,$C2,$20,$C0,$B5,$C2,$B9
-#_07FEDF: db $BC,$BF,$C5,$C3,$02,$B1,$B4,$C6
-#_07FEE7: db $B5,$BE,$C4,$C5,$C2,$B5,$2E,$02
-#_07FEEF: db $05,$5A,$05,$08,$02,$D8,$B6,$C4
-#_07FEF7: db $B5,$C2,$20,$C2,$B5,$C4,$C5,$C2
-#_07FEFF: db $BE,$B9,$BE,$B7,$20,$C4,$BF,$20
-#_07FF07: db $C4,$B8,$B5,$02,$C6,$B9,$BC,$BC
-#_07FF0F: db $B1,$B7,$B5,$2C,$20,$C4,$B8,$B5
-#_07FF17: db $20,$B6,$B5,$C3,$C4,$B9,$C6,$B1
-#_07FF1F: db $BC,$02,$B2,$B5,$B7,$B9,$BE,$C3
-#_07FF27: db $20,$B1,$BE,$B5,$C7,$2C,$20,$B1
-#_07FF2F: db $BE,$B4,$20,$B6,$BF,$C2,$20,$C3
-#_07FF37: db $C5,$C2,$B5,$2C,$02,$C4,$B8,$B5
-#_07FF3F: db $20,$B6,$B5,$C3,$C4,$B9,$C6,$B1
-#_07FF47: db $BC,$20,$C7,$B9,$BC,$BC,$20,$B2
-#_07FF4F: db $B5,$20,$B5,$C6,$B5,$BE,$02,$B2
-#_07FF57: db $B5,$C4,$C4,$B5,$C2,$20,$C4,$B8
-#_07FF5F: db $B9,$C3,$20,$C4,$B9,$BD,$B5,$20
-#_07FF67: db $B1,$C2,$BF,$C5,$BE,$B4,$2E,$02
-#_07FF6F: db $05,$5A,$05,$08,$02,$AF,$B8,$B5
-#_07FF77: db $20,$C4,$B1,$BC,$B5,$20,$BF,$B6
-#_07FF7F: db $20,$AB,$BF,$B3,$BB,$C9,$20,$B1
-#_07FF87: db $BE,$B4,$20,$B8,$B5,$C2,$02,$B6
-#_07FF8F: db $C2,$B9,$B5,$BE,$B4,$C3,$20,$C7
-#_07FF97: db $B9,$BC,$BC,$20,$B3,$BF,$BE,$C4
-#_07FF9F: db $B9,$BE,$C5,$B5,$20,$C4,$BF,$20
-#_07FFA7: db $B2,$B5,$02,$C4,$BF,$BC,$B4,$20
-#_07FFAF: db $B2,$C9,$20,$C4,$B8,$B5,$20,$C6
-#_07FFB7: db $B9,$BC,$BC,$B1,$B7,$B5,$C2,$C3
-#_07FFBF: db $02,$C4,$B8,$C2,$BF,$C5,$B7,$B8
-#_07FFC7: db $BF,$C5,$C4,$20,$C4,$B8,$B5,$20
-#_07FFCF: db $B1,$B7,$B5,$C3,$20,$C4,$BF,$20
-#_07FFD7: db $B3,$BF,$BD,$B5,$2E,$05,$78,$05
-#_07FFDF: db $06,$03,$00,$00,$00,$00,$00,$00
+;===================================================================================================
+
+; The spell that had been cast
+; on Dynagon was removed by
+; Pocky's magic cards.
+; Dynagon then returns to his
+; original size and regains
+; consciousness.
+Message_07F92F:
+#_07F92F: dw $0001, $0003, $0012, $001C ; TODO
+#_07F937: dw $0003, $0000, $0000, $0000 ; TODO
+#_07F93F: dw .data, $0000
+
+.data
+#_07F943: db $05, $06 ; set delay
+#_07F945: db $AF, $B8, $B5, $20, $C3, $C0, $B5, $BC ; «The spel»
+#_07F94D: db $BC, $20, $C4, $B8, $B1, $C4, $20, $B8 ; «l that h»
+#_07F955: db $B1, $B4, $20, $B2, $B5, $B5, $BE, $20 ; «ad been »
+#_07F95D: db $B3, $B1, $C3, $C4, $BF, $BE, $20, $DB ; «caston D»
+#_07F965: db $C9, $BE, $B1, $B7, $BF, $BE, $20, $C7 ; «ynagon w»
+#_07F96D: db $B1, $C3, $20, $C2, $B5, $BD, $BF, $C6 ; «as remov»
+#_07F975: db $B5, $B4, $20, $B2, $C9                ; «ed by»
+#_07F97A: db $02 ; new line
+#_07F97B: db $AB, $BF, $B3, $BB, $C9, $27, $C3, $20 ; «Pocky's »
+#_07F983: db $BD, $B1, $B7, $B9, $B3, $20, $B3, $B1 ; «magic ca»
+#_07F98B: db $C2, $B4, $C3, $2E                     ; «rds.»
+#_07F98F: db $05, $46 ; set delay
+#_07F991: db $05, $06 ; set delay
+#_07F993: db $02 ; new line
+#_07F994: db $DB, $C9, $BE, $B1, $B7, $BF, $BE, $20 ; «Dynagon »
+#_07F99C: db $C4, $B8, $B5, $BE, $20, $C2, $B5, $C4 ; «then ret»
+#_07F9A4: db $C5, $C2, $BE, $C3, $20, $C4, $BF, $20 ; «urns to »
+#_07F9AC: db $B8, $B9, $C3                          ; «his»
+#_07F9AF: db $02 ; new line
+#_07F9B0: db $BF, $C2, $B9, $B7, $B9, $BE, $B1, $BC ; «original»
+#_07F9B8: db $20, $C3, $B9, $CA, $B5, $20, $B1, $BE ; « size an»
+#_07F9C0: db $B4, $20, $C2, $B5, $B7, $B1, $B9, $BE ; «d regain»
+#_07F9C8: db $C3                                    ; «s»
+#_07F9C9: db $02 ; new line
+#_07F9CA: db $B3, $BF, $BE, $C3, $B3, $B9, $BF, $C5 ; «consciou»
+#_07F9D2: db $C3, $BE, $B5, $C3, $C3, $2E           ; «sness.»
+#_07F9D8: db $05, $5A ; set delay
+#_07F9DA: db $05, $06 ; set delay
+#_07F9DC: db $00 ; end message
+
+;===================================================================================================
+
+; Dynagon:"Princess Luna,
+;        how can I ever
+;        apologize enough?"
+; Princess Luna:"I don't have
+;        any right to blame
+;        you."
+; Pocky:"Princess Luna,
+;        it's about time
+;        to leave."
+; Princess Luna:"That's
+;        right, we have to
+;        celebrate the
+;        harvest."
+; Pocky:"Then we will see
+;        you at the
+;        festival."
+Message_07F9DD:
+#_07F9DD: dw $0001, $0003, $0012, $001C ; TODO
+#_07F9E5: dw $0003, $0000, $0000, $0000 ; TODO
+#_07F9ED: dw .data, $0000
+
+.data
+#_07F9F1: db $05, $06 ; set delay
+#_07F9F3: db $03 ; TODO
+#_07F9F4: db $01, $00, $00 ; TODO
+#_07F9F7: db $DB, $C9, $BE, $B1, $B7, $BF, $BE, $3A ; «Dynagon:»
+#_07F9FF: db $2B, $AB, $C2, $B9, $BE, $B3, $B5, $C3 ; «"Princes»
+#_07FA07: db $C3, $20, $A7, $C5, $BE, $B1, $2C      ; «s Luna,»
+#_07FA0E: db $02 ; new line
+#_07FA0F: db $05, $FF ; set delay
+#_07FA11: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FA18: db $05, $06 ; set delay
+#_07FA1A: db $B8, $BF, $C7, $20, $B3, $B1, $BE, $20 ; «how can »
+#_07FA22: db $3E, $20, $B5, $C6, $B5, $C2           ; «I ever»
+#_07FA28: db $02 ; new line
+#_07FA29: db $05, $FF ; set delay
+#_07FA2B: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FA32: db $05, $06 ; set delay
+#_07FA34: db $B1, $C0, $BF, $BC, $BF, $B7, $B9, $CA ; «apologiz»
+#_07FA3C: db $B5, $20, $B5, $BE, $BF, $C5, $B7, $B8 ; «e enough»
+#_07FA44: db $3F, $2B                               ; «?"»
+#_07FA46: db $02 ; new line
+#_07FA47: db $AB, $C2, $B9, $BE, $B3, $B5, $C3, $C3 ; «Princess»
+#_07FA4F: db $20, $A7, $C5, $BE, $B1, $3A, $2B, $3E ; « Luna:"I»
+#_07FA57: db $20, $B4, $BF, $BE, $27, $C4, $20, $B8 ; « don't h»
+#_07FA5F: db $B1, $C6, $B5                          ; «ave»
+#_07FA62: db $02 ; new line
+#_07FA63: db $05, $FF ; set delay
+#_07FA65: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FA6C: db $05, $06 ; set delay
+#_07FA6E: db $B1, $BE, $C9, $20, $C2, $B9, $B7, $B8 ; «any righ»
+#_07FA76: db $C4, $20, $C4, $BF, $20, $B2, $BC, $B1 ; «t to bla»
+#_07FA7E: db $BD, $B5                               ; «me»
+#_07FA80: db $02 ; new line
+#_07FA81: db $05, $FF ; set delay
+#_07FA83: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FA8A: db $05, $06 ; set delay
+#_07FA8C: db $C9, $BF, $C5, $2E, $2B                ; «you."»
+#_07FA91: db $05, $28 ; set delay
+#_07FA93: db $05, $06 ; set delay
+#_07FA95: db $02 ; new line
+#_07FA96: db $AB, $BF, $B3, $BB, $C9, $3A, $2B, $AB ; «Pocky:"P»
+#_07FA9E: db $C2, $B9, $BE, $B3, $B5, $C3, $C3, $20 ; «rincess »
+#_07FAA6: db $A7, $C5, $BE, $B1, $2C                ; «Luna,»
+#_07FAAB: db $02 ; new line
+#_07FAAC: db $05, $FF ; set delay
+#_07FAAE: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FAB5: db $05, $06 ; set delay
+#_07FAB7: db $B9, $C4, $27, $C3, $20, $B1, $B2, $BF ; «it's abo»
+#_07FABF: db $C5, $C4, $20, $C4, $B9, $BD, $B5      ; «ut time»
+#_07FAC6: db $02 ; new line
+#_07FAC7: db $05, $FF ; set delay
+#_07FAC9: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FAD0: db $05, $06 ; set delay
+#_07FAD2: db $C4, $BF, $20, $BC, $B5, $B1, $C6, $B5 ; «to leave»
+#_07FADA: db $2E, $2B                               ; «."»
+#_07FADC: db $05, $1E ; set delay
+#_07FADE: db $05, $06 ; set delay
+#_07FAE0: db $02 ; new line
+#_07FAE1: db $AB, $C2, $B9, $BE, $B3, $B5, $C3, $C3 ; «Princess»
+#_07FAE9: db $20, $A7, $C5, $BE, $B1, $3A, $2B, $AF ; « Luna:"T»
+#_07FAF1: db $B8, $B1, $C4, $27, $C3                ; «hat's»
+#_07FAF6: db $02 ; new line
+#_07FAF7: db $05, $FF ; set delay
+#_07FAF9: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FB00: db $05, $06 ; set delay
+#_07FB02: db $C2, $B9, $B7, $B8, $C4, $2C, $20, $C7 ; «right, w»
+#_07FB0A: db $B5, $20, $B8, $B1, $C6, $B5, $20, $C4 ; «e have t»
+#_07FB12: db $BF                                    ; «o»
+#_07FB13: db $02 ; new line
+#_07FB14: db $05, $FF ; set delay
+#_07FB16: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FB1D: db $05, $06 ; set delay
+#_07FB1F: db $B3, $B5, $BC, $B5, $B2, $C2, $B1, $C4 ; «celebrat»
+#_07FB27: db $B5, $20, $C4, $B8, $B5                ; «e the»
+#_07FB2C: db $02 ; new line
+#_07FB2D: db $05, $FF ; set delay
+#_07FB2F: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FB36: db $05, $06 ; set delay
+#_07FB38: db $B8, $B1, $C2, $C6, $B5, $C3, $C4, $2E ; «harvest.»
+#_07FB40: db $2B                                    ; «"»
+#_07FB41: db $02 ; new line
+#_07FB42: db $AB, $BF, $B3, $BB, $C9, $3A, $2B, $AF ; «Pocky:"T»
+#_07FB4A: db $B8, $B5, $BE, $20, $C7, $B5, $20, $C7 ; «hen we w»
+#_07FB52: db $B9, $BC, $BC, $20, $C3, $B5, $B5      ; «ill see»
+#_07FB59: db $02 ; new line
+#_07FB5A: db $05, $FF ; set delay
+#_07FB5C: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FB63: db $05, $06 ; set delay
+#_07FB65: db $C9, $BF, $C5, $20, $B1, $C4, $20, $C4 ; «you at t»
+#_07FB6D: db $B8, $B5                               ; «he»
+#_07FB6F: db $02 ; new line
+#_07FB70: db $05, $FF ; set delay
+#_07FB72: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FB79: db $05, $06 ; set delay
+#_07FB7B: db $B6, $B5, $C3, $C4, $B9, $C6, $B1, $BC ; «festival»
+#_07FB83: db $2E, $2B                               ; «."»
+#_07FB85: db $05, $3C ; set delay
+#_07FB87: db $05, $06 ; set delay
+#_07FB89: db $00 ; end message
+
+;===================================================================================================
+
+; Gordon:"You made it back,
+;        where is Princess
+;        Luna?"
+; Pocky:"She will join us
+;        later at the
+;        festival."
+; Gordon:"I see,then let's
+;        go back first."
+; Rocky:"Sounds good,
+;        I'm so hungry,
+;        I feel faint."
+; Pocky:"Come on, you're
+;        always eating."
+Message_07FB8A:
+#_07FB8A: dw $0001, $0003, $0012, $001C ; TODO
+#_07FB92: dw $0003, $0000, $0000, $0000 ; TODO
+#_07FB9A: dw .data, $0000
+
+.data
+#_07FB9E: db $05, $06 ; set delay
+#_07FBA0: db $03 ; TODO
+#_07FBA1: db $01, $00, $00 ; TODO
+#_07FBA4: db $3C, $BF, $C2, $B4, $BF, $BE, $3A, $2B ; «Gordon:"»
+#_07FBAC: db $D5, $BF, $C5, $20, $BD, $B1, $B4, $B5 ; «You made»
+#_07FBB4: db $20, $B9, $C4, $20, $B2, $B1, $B3, $BB ; « it back»
+#_07FBBC: db $2C                                    ; «,»
+#_07FBBD: db $02 ; new line
+#_07FBBE: db $05, $FF ; set delay
+#_07FBC0: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FBC7: db $05, $06 ; set delay
+#_07FBC9: db $C7, $B8, $B5, $C2, $B5, $20, $B9, $C3 ; «where is»
+#_07FBD1: db $20, $AB, $C2, $B9, $BE, $B3, $B5, $C3 ; « Princes»
+#_07FBD9: db $C3                                    ; «s»
+#_07FBDA: db $02 ; new line
+#_07FBDB: db $05, $FF ; set delay
+#_07FBDD: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FBE4: db $05, $06 ; set delay
+#_07FBE6: db $A7, $C5, $BE, $B1, $3F, $2B           ; «Luna?"»
+#_07FBEC: db $02 ; new line
+#_07FBED: db $AB, $BF, $B3, $BB, $C9, $3A, $2B, $AE ; «Pocky:"S»
+#_07FBF5: db $B8, $B5, $20, $C7, $B9, $BC, $BC, $20 ; «he will »
+#_07FBFD: db $BA, $BF, $B9, $BE, $20, $C5, $C3      ; «join us»
+#_07FC04: db $02 ; new line
+#_07FC05: db $05, $FF ; set delay
+#_07FC07: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FC0E: db $05, $06 ; set delay
+#_07FC10: db $BC, $B1, $C4, $B5, $C2, $20, $B1, $C4 ; «later at»
+#_07FC18: db $20, $C4, $B8, $B5                     ; « the»
+#_07FC1C: db $02 ; new line
+#_07FC1D: db $05, $FF ; set delay
+#_07FC1F: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FC26: db $05, $06 ; set delay
+#_07FC28: db $B6, $B5, $C3, $C4, $B9, $C6, $B1, $BC ; «festival»
+#_07FC30: db $2E, $2B                               ; «."»
+#_07FC32: db $02 ; new line
+#_07FC33: db $3C, $BF, $C2, $B4, $BF, $BE, $3A, $2B ; «Gordon:"»
+#_07FC3B: db $3E, $20, $C3, $B5, $B5, $2C, $C4, $B8 ; «I see,th»
+#_07FC43: db $B5, $BE, $20, $BC, $B5, $C4, $27, $C3 ; «en let's»
+#_07FC4B: db $02 ; new line
+#_07FC4C: db $05, $FF ; set delay
+#_07FC4E: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FC55: db $05, $06 ; set delay
+#_07FC57: db $B7, $BF, $20, $B2, $B1, $B3, $BB, $20 ; «go back »
+#_07FC5F: db $B6, $B9, $C2, $C3, $C4, $2E, $2B      ; «first."»
+#_07FC66: db $02 ; new line
+#_07FC67: db $AD, $BF, $B3, $BB, $C9, $3A, $2B, $AE ; «Rocky:"S»
+#_07FC6F: db $BF, $C5, $BE, $B4, $C3, $20, $B7, $BF ; «ounds go»
+#_07FC77: db $BF, $B4, $2C                          ; «od,»
+#_07FC7A: db $02 ; new line
+#_07FC7B: db $05, $FF ; set delay
+#_07FC7D: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FC84: db $05, $06 ; set delay
+#_07FC86: db $3E, $27, $BD, $20, $C3, $BF, $20, $B8 ; «I'm so h»
+#_07FC8E: db $C5, $BE, $B7, $C2, $C9, $2C           ; «ungry,»
+#_07FC94: db $02 ; new line
+#_07FC95: db $05, $FF ; set delay
+#_07FC97: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FC9E: db $05, $06 ; set delay
+#_07FCA0: db $3E, $20, $B6, $B5, $B5, $BC, $20, $B6 ; «I feel f»
+#_07FCA8: db $B1, $B9, $BE, $C4, $2E, $2B           ; «aint."»
+#_07FCAE: db $02 ; new line
+#_07FCAF: db $AB, $BF, $B3, $BB, $C9, $3A, $2B, $DA ; «Pocky:"C»
+#_07FCB7: db $BF, $BD, $B5, $20, $BF, $BE, $2C, $20 ; «ome on, »
+#_07FCBF: db $C9, $BF, $C5, $27, $C2, $B5           ; «you're»
+#_07FCC5: db $02 ; new line
+#_07FCC6: db $05, $FF ; set delay
+#_07FCC8: db $20, $20, $20, $20, $20, $20, $20      ; «       »
+#_07FCCF: db $05, $06 ; set delay
+#_07FCD1: db $B1, $BC, $C7, $B1, $C9, $C3, $20, $B5 ; «always e»
+#_07FCD9: db $B1, $C4, $B9, $BE, $B7, $2E, $2B      ; «ating."»
+#_07FCE0: db $05, $50 ; set delay
+#_07FCE2: db $05, $06 ; set delay
+#_07FCE4: db $00 ; end message
+
+;===================================================================================================
+
+Message_07FCE5:
+#_07FCE5: dw $0001, $0003, $0012, $001C ; TODO
+#_07FCED: dw $0003, $0000, $0000, $0000 ; TODO
+#_07FCF5: dw .data, $0000
+
+.data
+#_07FCF9: db $05, $06 ; set delay
+#_07FCFB: db $05, $0A ; set delay
+#_07FCFD: db $05, $06 ; set delay
+#_07FCFF: db $00 ; end message
+
+;===================================================================================================
+
+; Pocky and her friends leave
+; the Demon Castle,and Pocky
+; says good-bye to the
+; friends she has met 
+; on the journey.
+; Pocky sends her new friends
+; off with a smile.
+; Pocky and her partners then
+; go back to the village.
+Message_07FD00:
+#_07FD00: dw $0001, $0003, $0012, $001C ; TODO
+#_07FD08: dw $0003, $0000, $0000, $0000 ; TODO
+#_07FD10: dw .data, $0000
+
+.data
+#_07FD14: db $03 ; TODO
+#_07FD15: db $01, $00, $00 ; TODO
+#_07FD18: db $05, $06 ; set delay
+#_07FD1A: db $AB, $BF, $B3, $BB, $C9, $20, $B1, $BE ; «Pocky an»
+#_07FD22: db $B4, $20, $B8, $B5, $C2, $20, $B6, $C2 ; «d her fr»
+#_07FD2A: db $B9, $B5, $BE, $B4, $C3, $20, $BC, $B5 ; «iends le»
+#_07FD32: db $B1, $C6, $B5                          ; «ave»
+#_07FD35: db $02 ; new line
+#_07FD36: db $C4, $B8, $B5, $20, $DB, $B5, $BD, $BF ; «the Demo»
+#_07FD3E: db $BE, $20, $DA, $B1, $C3, $C4, $BC, $B5 ; «n Castle»
+#_07FD46: db $2C, $B1, $BE, $B4, $20, $AB, $BF, $B3 ; «,and Poc»
+#_07FD4E: db $BB, $C9                               ; «ky»
+#_07FD50: db $02 ; new line
+#_07FD51: db $C3, $B1, $C9, $C3, $20, $B7, $BF, $BF ; «says goo»
+#_07FD59: db $B4, $2D, $B2, $C9, $B5, $20, $C4, $BF ; «d-bye to»
+#_07FD61: db $20, $C4, $B8, $B5                     ; « the»
+#_07FD65: db $02 ; new line
+#_07FD66: db $B6, $C2, $B9, $B5, $BE, $B4, $C3, $20 ; «friends »
+#_07FD6E: db $C3, $B8, $B5, $20, $B8, $B1, $C3, $20 ; «she has »
+#_07FD76: db $BD, $B5, $C4, $20                     ; «met »
+#_07FD7A: db $02 ; new line
+#_07FD7B: db $BF, $BE, $20, $C4, $B8, $B5, $20, $BA ; «on the j»
+#_07FD83: db $BF, $C5, $C2, $BE, $B5, $C9, $2E      ; «ourney.»
+#_07FD8A: db $02 ; new line
+#_07FD8B: db $AB, $BF, $B3, $BB, $C9, $20, $C3, $B5 ; «Pocky se»
+#_07FD93: db $BE, $B4, $C3, $20, $B8, $B5, $C2, $20 ; «nds her »
+#_07FD9B: db $BE, $B5, $C7, $20, $B6, $C2, $B9, $B5 ; «new frie»
+#_07FDA3: db $BE, $B4, $C3                          ; «nds»
+#_07FDA6: db $02 ; new line
+#_07FDA7: db $BF, $B6, $B6, $20, $C7, $B9, $C4, $B8 ; «off with»
+#_07FDAF: db $20, $B1, $20, $C3, $BD, $B9, $BC, $B5 ; « a smile»
+#_07FDB7: db $2E                                    ; «.»
+#_07FDB8: db $02 ; new line
+#_07FDB9: db $05, $50 ; set delay
+#_07FDBB: db $05, $06 ; set delay
+#_07FDBD: db $AB, $BF, $B3, $BB, $C9, $20, $B1, $BE ; «Pocky an»
+#_07FDC5: db $B4, $20, $B8, $B5, $C2, $20, $C0, $B1 ; «d her pa»
+#_07FDCD: db $C2, $C4, $BE, $B5, $C2, $C3, $20, $C4 ; «rtners t»
+#_07FDD5: db $B8, $B5, $BE                          ; «hen»
+#_07FDD8: db $02 ; new line
+#_07FDD9: db $B7, $BF, $20, $B2, $B1, $B3, $BB, $20 ; «go back »
+#_07FDE1: db $C4, $BF, $20, $C4, $B8, $B5, $20, $C6 ; «to the v»
+#_07FDE9: db $B9, $BC, $BC, $B1, $B7, $B5, $2E      ; «illage.»
+#_07FDF0: db $05, $50 ; set delay
+#_07FDF2: db $05, $06 ; set delay
+#_07FDF4: db $00 ; end message
+
+;===================================================================================================
+
+; It has become dark, and a
+; beautiful moon is 
+; in the sky.
+; Pocky and her partners
+; climb on Gordon's back and
+; fly across the night sky.
+; A nice breeze envelops
+; their bodies, making them
+; forget their perilous
+; adventure.
+; After returning to the
+; village, the festival
+; begins anew, and for sure,
+; the festival will be even
+; better this time around.
+; The tale of Pocky and her
+; friends will continue to be
+; told by the villagers
+; throughout the ages to come.
+Message_07FDF5:
+#_07FDF5: dw $0001, $0003, $0014, $001C ; TODO
+#_07FDFD: dw $0003, $0000, $0000, $0000 ; TODO
+#_07FE05: dw .data, $0000
+
+.data
+#_07FE09: db $03 ; TODO
+#_07FE0A: db $01, $00, $00 ; TODO
+#_07FE0D: db $05, $08 ; set delay
+#_07FE0F: db $3E, $C4, $20, $B8, $B1, $C3, $20, $B2 ; «It has b»
+#_07FE17: db $B5, $B3, $BF, $BD, $B5, $20, $B4, $B1 ; «ecome da»
+#_07FE1F: db $C2, $BB, $2C, $20, $B1, $BE, $B4, $20 ; «rk, and »
+#_07FE27: db $B1                                    ; «a»
+#_07FE28: db $02 ; new line
+#_07FE29: db $B2, $B5, $B1, $C5, $C4, $B9, $B6, $C5 ; «beautifu»
+#_07FE31: db $BC, $20, $BD, $BF, $BF, $BE, $20, $B9 ; «l moon i»
+#_07FE39: db $C3, $20                               ; «s »
+#_07FE3B: db $02 ; new line
+#_07FE3C: db $B9, $BE, $20, $C4, $B8, $B5, $20, $C3 ; «in the s»
+#_07FE44: db $BB, $C9, $2E                          ; «ky.»
+#_07FE47: db $02 ; new line
+#_07FE48: db $05, $32 ; set delay
+#_07FE4A: db $05, $08 ; set delay
+#_07FE4C: db $AB, $BF, $B3, $BB, $C9, $20, $B1, $BE ; «Pocky an»
+#_07FE54: db $B4, $20, $B8, $B5, $C2, $20, $C0, $B1 ; «d her pa»
+#_07FE5C: db $C2, $C4, $BE, $B5, $C2, $C3           ; «rtners»
+#_07FE62: db $02 ; new line
+#_07FE63: db $B3, $BC, $B9, $BD, $B2, $20, $BF, $BE ; «climb on»
+#_07FE6B: db $20, $3C, $BF, $C2, $B4, $BF, $BE, $27 ; « Gordon'»
+#_07FE73: db $C3, $20, $B2, $B1, $B3, $BB, $20, $B1 ; «s back a»
+#_07FE7B: db $BE, $B4                               ; «nd»
+#_07FE7D: db $02 ; new line
+#_07FE7E: db $B6, $BC, $C9, $20, $B1, $B3, $C2, $BF ; «fly acro»
+#_07FE86: db $C3, $C3, $20, $C4, $B8, $B5, $20, $BE ; «ss the n»
+#_07FE8E: db $B9, $B7, $B8, $C4, $20, $C3, $BB, $C9 ; «ight sky»
+#_07FE96: db $2E                                    ; «.»
+#_07FE97: db $02 ; new line
+#_07FE98: db $05, $50 ; set delay
+#_07FE9A: db $05, $08 ; set delay
+#_07FE9C: db $02 ; new line
+#_07FE9D: db $D8, $20, $BE, $B9, $B3, $B5, $20, $B2 ; «A nice b»
+#_07FEA5: db $C2, $B5, $B5, $CA, $B5, $20, $B5, $BE ; «reeze en»
+#_07FEAD: db $C6, $B5, $BC, $BF, $C0, $C3           ; «velops»
+#_07FEB3: db $02 ; new line
+#_07FEB4: db $C4, $B8, $B5, $B9, $C2, $20, $B2, $BF ; «their bo»
+#_07FEBC: db $B4, $B9, $B5, $C3, $2C, $20, $BD, $B1 ; «dies, ma»
+#_07FEC4: db $BB, $B9, $BE, $B7, $20, $C4, $B8, $B5 ; «king the»
+#_07FECC: db $BD                                    ; «m»
+#_07FECD: db $02 ; new line
+#_07FECE: db $B6, $BF, $C2, $B7, $B5, $C4, $20, $C4 ; «forget t»
+#_07FED6: db $B8, $B5, $B9, $C2, $20, $C0, $B5, $C2 ; «heir per»
+#_07FEDE: db $B9, $BC, $BF, $C5, $C3                ; «ilous»
+#_07FEE3: db $02 ; new line
+#_07FEE4: db $B1, $B4, $C6, $B5, $BE, $C4, $C5, $C2 ; «adventur»
+#_07FEEC: db $B5, $2E                               ; «e.»
+#_07FEEE: db $02 ; new line
+#_07FEEF: db $05, $5A ; set delay
+#_07FEF1: db $05, $08 ; set delay
+#_07FEF3: db $02 ; new line
+#_07FEF4: db $D8, $B6, $C4, $B5, $C2, $20, $C2, $B5 ; «After re»
+#_07FEFC: db $C4, $C5, $C2, $BE, $B9, $BE, $B7, $20 ; «turning »
+#_07FF04: db $C4, $BF, $20, $C4, $B8, $B5           ; «to the»
+#_07FF0A: db $02 ; new line
+#_07FF0B: db $C6, $B9, $BC, $BC, $B1, $B7, $B5, $2C ; «village,»
+#_07FF13: db $20, $C4, $B8, $B5, $20, $B6, $B5, $C3 ; « the fes»
+#_07FF1B: db $C4, $B9, $C6, $B1, $BC                ; «tival»
+#_07FF20: db $02 ; new line
+#_07FF21: db $B2, $B5, $B7, $B9, $BE, $C3, $20, $B1 ; «begins a»
+#_07FF29: db $BE, $B5, $C7, $2C, $20, $B1, $BE, $B4 ; «new, and»
+#_07FF31: db $20, $B6, $BF, $C2, $20, $C3, $C5, $C2 ; « for sur»
+#_07FF39: db $B5, $2C                               ; «e,»
+#_07FF3B: db $02 ; new line
+#_07FF3C: db $C4, $B8, $B5, $20, $B6, $B5, $C3, $C4 ; «the fest»
+#_07FF44: db $B9, $C6, $B1, $BC, $20, $C7, $B9, $BC ; «ival wil»
+#_07FF4C: db $BC, $20, $B2, $B5, $20, $B5, $C6, $B5 ; «l be eve»
+#_07FF54: db $BE                                    ; «n»
+#_07FF55: db $02 ; new line
+#_07FF56: db $B2, $B5, $C4, $C4, $B5, $C2, $20, $C4 ; «better t»
+#_07FF5E: db $B8, $B9, $C3, $20, $C4, $B9, $BD, $B5 ; «his time»
+#_07FF66: db $20, $B1, $C2, $BF, $C5, $BE, $B4, $2E ; « around.»
+#_07FF6E: db $02 ; new line
+#_07FF6F: db $05, $5A ; set delay
+#_07FF71: db $05, $08 ; set delay
+#_07FF73: db $02 ; new line
+#_07FF74: db $AF, $B8, $B5, $20, $C4, $B1, $BC, $B5 ; «The tale»
+#_07FF7C: db $20, $BF, $B6, $20, $AB, $BF, $B3, $BB ; « of Pock»
+#_07FF84: db $C9, $20, $B1, $BE, $B4, $20, $B8, $B5 ; «y and he»
+#_07FF8C: db $C2                                    ; «r»
+#_07FF8D: db $02 ; new line
+#_07FF8E: db $B6, $C2, $B9, $B5, $BE, $B4, $C3, $20 ; «friends »
+#_07FF96: db $C7, $B9, $BC, $BC, $20, $B3, $BF, $BE ; «will con»
+#_07FF9E: db $C4, $B9, $BE, $C5, $B5, $20, $C4, $BF ; «tinue to»
+#_07FFA6: db $20, $B2, $B5                          ; « be»
+#_07FFA9: db $02 ; new line
+#_07FFAA: db $C4, $BF, $BC, $B4, $20, $B2, $C9, $20 ; «told by »
+#_07FFB2: db $C4, $B8, $B5, $20, $C6, $B9, $BC, $BC ; «the vill»
+#_07FFBA: db $B1, $B7, $B5, $C2, $C3                ; «agers»
+#_07FFBF: db $02 ; new line
+#_07FFC0: db $C4, $B8, $C2, $BF, $C5, $B7, $B8, $BF ; «througho»
+#_07FFC8: db $C5, $C4, $20, $C4, $B8, $B5, $20, $B1 ; «ut the a»
+#_07FFD0: db $B7, $B5, $C3, $20, $C4, $BF, $20, $B3 ; «ges to c»
+#_07FFD8: db $BF, $BD, $B5, $2E                     ; «ome.»
+#_07FFDC: db $05, $78 ; set delay
+#_07FFDE: db $05, $06 ; set delay
+#_07FFE0: db $03 ; TODO
+#_07FFE1: db $00 ; end message
+
+;===================================================================================================
+
+#_07FFE2: db $00,$00,$00,$00,$00
 #_07FFE7: db $00,$00,$00,$00,$00,$00,$00,$00
 #_07FFEF: db $00,$00,$00,$00,$00,$00,$00,$00
 #_07FFF7: db $00,$00,$00,$00,$00,$00,$00,$00

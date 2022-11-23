@@ -119,6 +119,7 @@ ROUTINE_038081:
 ROUTINE_038088:
 #_038088: LDA.l $7FE816,X
 #_03808C: AND.w #$00FF
+
 #_03808F: RTS
 
 ;===================================================================================================
@@ -348,15 +349,15 @@ ROUTINE_038187:
 
 ROUTINE_038194:
 #_038194: CLC
-
 #_038195: LDA.l $7FE818,X
 #_038199: ADC.w $080C,X
 #_03819C: STA.w $080C,X
-#_03819F: CLC
 
+#_03819F: CLC
 #_0381A0: LDA.l $7FE81A,X
 #_0381A4: ADC.w $080E,X
 #_0381A7: STA.w $080E,X
+
 #_0381AA: RTS
 
 ;===================================================================================================
@@ -364,12 +365,12 @@ ROUTINE_038194:
 ROUTINE_0381AB:
 #_0381AB: LDA.w $19CE
 #_0381AE: CMP.w #$0080
-#_0381B1: BCC CODE_0381B8
+#_0381B1: BCC .below_128
 
 #_0381B3: CMP.w #$008C
 #_0381B6: BCC .exit
 
-CODE_0381B8:
+.below_128
 #_0381B8: LDA.w #$00FD
 #_0381BB: STA.w $04A0
 
@@ -390,6 +391,7 @@ ROUTINE_0381BF:
 
 #_0381D0: LDA.b $22
 #_0381D2: STA.l $7FE81A,X
+
 #_0381D6: RTS
 
 ;===================================================================================================
@@ -401,6 +403,7 @@ ROUTINE_0381D7:
 #_0381DE: INC A
 #_0381DF: INC A
 #_0381E0: STA.l $7FE81C,X
+
 #_0381E4: RTS
 
 ;===================================================================================================
@@ -448,7 +451,9 @@ CODE_038222:
 
 #_038229: LDA.w $080A,X
 #_03822C: STA.l $7FE81C,X
+
 #_038230: STZ.w $080A,X
+
 #_038233: JMP ROUTINE_0386EC
 
 ;===================================================================================================
@@ -482,6 +487,7 @@ CODE_03825C:
 #_03825C: JSR ROUTINE_038C85
 
 #_03825F: LDA.w #$0000
+
 #_038262: RTS
 
 ;===================================================================================================
@@ -498,7 +504,8 @@ ROUTINE_038263:
 
 #_038271: LDA.w #$000E
 #_038274: STA.b $24
-#_038276: JMP ROUTINE_0391DB
+
+#_038276: JMP PrepEnemySpawn
 
 ;===================================================================================================
 
@@ -506,7 +513,7 @@ ROUTINE_038279:
 #_038279: LDA.l $7E7A64
 #_03827D: DEC A
 #_03827E: STA.l $7E7A64
-#_038282: BNE FailedToAskForSong:
+#_038282: BNE FailedToAskForSong
 
 #_038284: LDA.w #$001F
 #_038287: BRA AskNicelyForSong
@@ -564,35 +571,39 @@ ROUTINE_0382A7:
 ROUTINE_0382B2:
 #_0382B2: LDA.w $080C,X
 #_0382B5: STA.b $20
-#_0382B7: CLC
 
+#_0382B7: CLC
 #_0382B8: LDA.w $080E,X
 #_0382BB: ADC.w #$0280
 #_0382BE: STA.b $22
+
 #_0382C0: STZ.b $30
+
 #_0382C2: RTS
 
 ;===================================================================================================
 
 ROUTINE_0382C3:
 #_0382C3: CLC
-
 #_0382C4: LDA.w $0560
 #_0382C7: ADC.w #$0800
 #_0382CA: STA.b $20
-#_0382CC: CLC
 
+#_0382CC: CLC
 #_0382CD: LDA.w $0562
 #_0382D0: ADC.w #$0600
 #_0382D3: STA.b $22
+
 #_0382D5: RTS
 
 ;===================================================================================================
 
 ROUTINE_0382D6:
 #_0382D6: STZ.w $084E,X
+
 #_0382D9: INC.w $084C,X
 #_0382DC: INC.w $084C,X
+
 #_0382DF: RTS
 
 ;===================================================================================================
@@ -600,6 +611,7 @@ ROUTINE_0382D6:
 ROUTINE_0382E0:
 #_0382E0: STZ.w $084E,X
 #_0382E3: STZ.w $083C,X
+
 #_0382E6: RTS
 
 ;===================================================================================================
@@ -617,12 +629,15 @@ ROUTINE_0382EA:
 
 ROUTINE_0382F8_0080:
 #_0382F0: LDA.w #$0080
+
 #_0382F3: BRA ROUTINE_0382F8
 
 ;===================================================================================================
 
 ROUTINE_0382F8_0040:
 #_0382F5: LDA.w #$0040
+
+;===================================================================================================
 
 ROUTINE_0382F8:
 #_0382F8: JSR ROUTINE_03830B
@@ -633,32 +648,39 @@ ROUTINE_0382F8:
 .exit
 #_038300: RTS
 
+;===================================================================================================
+
 ROUTINE_038301:
 #_038301: STZ.w $083C,X
+
 #_038304: INC.w $084E,X
 #_038307: INC.w $084E,X
+
 #_03830A: RTS
 
 ;===================================================================================================
 
 ROUTINE_03830B:
 #_03830B: INC.w $083C,X
+
 #_03830E: CMP.w $083C,X
+
 #_038311: RTS
 
 ;===================================================================================================
 
 ROUTINE_038312:
 #_038312: LDA.w #$81B6
-#_038315: JSR ROUTINE_0385B1
+#_038315: JSR Reset_0816_AndSetAIMode
+
 #_038318: INC.w $083E,X
+
 #_03831B: RTS
 
 ;===================================================================================================
 
 ROUTINE_03831C:
 #_03831C: LDA.w #$1400
-
 #_03831F: LDY.w #$1C00
 #_038322: STA.b $24
 #_038324: STY.b $26
@@ -738,7 +760,7 @@ CODE_03837A:
 
 ROUTINE_03839B:
 #_03839B: JSR ROUTINE_0392B7
-#_03839E: JSR ROUTINE_0383C0
+#_03839E: JSR .randomize_offsets
 
 #_0383A1: LDA.w #$001F
 #_0383A4: AND.w $05A0
@@ -754,22 +776,25 @@ ROUTINE_03839B:
 #_0383B5: LDA.b $22
 #_0383B7: ADC.w $080E,X
 #_0383BA: STA.b $22
+
 #_0383BC: JSR ROUTINE_0396D3
 
 .exit
 #_0383BF: RTS
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_0383C0:
-#_0383C0: JSR ROUTINE_038E25
+.randomize_offsets
+#_0383C0: JSR Random
 #_0383C3: AND.w #$01FF
 #_0383C6: SBC.w #$00FF
 #_0383C9: STA.b $20
-#_0383CB: JSR ROUTINE_038E25
+
+#_0383CB: JSR Random
 #_0383CE: AND.w #$01FF
 #_0383D1: SBC.w #$00FF
 #_0383D4: STA.b $22
+
 #_0383D6: RTS
 
 ;===================================================================================================
@@ -783,12 +808,14 @@ ROUTINE_0383D7:
 
 #_0383E2: LDA.w #$0054
 #_0383E5: STA.w $04A6
-#_0383E8: JSR ROUTINE_038E25
+
+#_0383E8: JSR Random
 #_0383EB: AND.w #$03F0
 #_0383EE: SBC.w #$0200
 #_0383F1: ADC.w $080C,X
 #_0383F4: STA.b $20
-#_0383F6: JSR ROUTINE_038E25
+
+#_0383F6: JSR Random
 #_0383F9: AND.w #$03F0
 #_0383FC: SBC.w #$0100
 #_0383FF: ADC.w $080E,X
@@ -802,7 +829,8 @@ ROUTINE_0383D7:
 
 #_03840E: LDA.w #$000C
 #_038411: STA.b $24
-#_038413: JSR ROUTINE_0391DB
+
+#_038413: JSR PrepEnemySpawn
 
 .exit
 #_038416: RTS
@@ -828,8 +856,10 @@ CODE_038426:
 
 ROUTINE_038428:
 #_038428: LDA.w #$0020
+
 #_03842B: PHY
 #_03842C: PHA
+
 #_03842D: JSR ROUTINE_039664
 
 #_038430: LDA.b $22
@@ -855,30 +885,30 @@ CODE_038441:
 
 ;===================================================================================================
 
-ROUTINE_038455_003C:
+Increment_0816_AndCompareTo_003C:
 #_038443: LDA.w #$003C
-#_038446: BRA ROUTINE_038455
+#_038446: BRA Increment_0816_AndCompareTo
 
 ;===================================================================================================
 
-ROUTINE_038455_0078:
+Increment_0816_AndCompareTo_0078:
 #_038448: LDA.w #$0078
-#_03844B: BRA ROUTINE_038455
+#_03844B: BRA Increment_0816_AndCompareTo
 
 ;===================================================================================================
 
-ROUTINE_038455_00B4:
+Increment_0816_AndCompareTo_00B4:
 #_03844D: LDA.w #$00B4
-#_038450: BRA ROUTINE_038455
+#_038450: BRA Increment_0816_AndCompareTo
 
 ;===================================================================================================
 
-ROUTINE_038455_000C:
+Increment_0816_AndCompareTo_000C:
 #_038452: LDA.w #$000C
 
 ;===================================================================================================
 
-ROUTINE_038455:
+Increment_0816_AndCompareTo:
 #_038455: STA.b $20
 
 #_038457: INC.w $0816,X
@@ -954,6 +984,7 @@ CODE_0384A9:
 
 ROUTINE_0384BA:
 #_0384BA: STY.b $24
+
 #_0384BC: TAY
 #_0384BD: BPL CODE_0384C3
 
@@ -973,10 +1004,12 @@ CODE_0384C3:
 #_0384CD: TYA
 #_0384CE: EOR.w #$FFFF
 #_0384D1: INC A
+
 #_0384D2: RTS
 
 CODE_0384D3:
 #_0384D3: TYA
+
 #_0384D4: RTS
 
 ;===================================================================================================
@@ -1063,18 +1096,20 @@ CODE_038544:
 ROUTINE_038550:
 #_038550: LDA.w #$000D
 #_038553: STA.l $7E7A08
+
 #_038557: RTS
 
 ;===================================================================================================
 
-ROUTINE_038558:
+SetSpriteMode_FF01:
 #_038558: LDA.w #$FF01
 #_03855B: STA.w $0800,X
+
 #_03855E: RTS
 
 ;===================================================================================================
 
-ROUTINE_03855F:
+NegateIfCarryClear:
 #_03855F: BCS .exit
 
 #_038561: EOR.w #$FFFF
@@ -1104,7 +1139,7 @@ ROUTINE_038567:
 
 ROUTINE_038574:
 #_038574: PHX
-#_038575: JSL ROUTINE_088014
+#_038575: JSL HandleDialog
 #_038579: PLX
 
 #_03857A: LDA.l $7E2550
@@ -1116,7 +1151,8 @@ ROUTINE_03857F:
 #_03857F: PHX
 
 #_038580: LDX.w #$0008
-#_038583: JSL ROUTINE_088000
+#_038583: JSL SetMessagePointer
+
 #_038587: PLX
 #_038588: RTS
 
@@ -1146,38 +1182,43 @@ ROUTINE_03859E:
 #_0385A7: PLA
 
 #_0385A8: LDX.w #$0008
-#_0385AB: JSL ROUTINE_088000
+#_0385AB: JSL SetMessagePointer
 #_0385AF: PLX
 #_0385B0: RTS
 
 ;===================================================================================================
 
-ROUTINE_0385B1:
+Reset_0816_AndSetAIMode:
 #_0385B1: STA.w $0810,X
 #_0385B4: STZ.w $0816,X
+
 #_0385B7: RTS
 
-ROUTINE_0385B8:
+;===================================================================================================
+
+Reset_0816_AndAdvanceAI_bank:
 #_0385B8: STZ.w $0816,X
+
 #_0385BB: JMP AdvanceAIModeUp
 
 ;===================================================================================================
 
-ROUTINE_0385BE:
+Reset_0816_AndDecrementAI_bank:
 #_0385BE: STZ.w $0816,X
 #_0385C1: JMP AdvanceAIModeDown
 
 ;===================================================================================================
 
-ROUTINE_0385C4:
+Reset_0816_through_081F:
 #_0385C4: STZ.w $0816,X
-#_0385C7: JMP ROUTINE_038CD2
+#_0385C7: JMP Reset_0818_through_081F
 
 ;===================================================================================================
 
 ROUTINE_0385CA:
 #_0385CA: LDA.w $05A0
 #_0385CD: AND.w #$000F
+
 #_0385D0: RTS
 
 ;===================================================================================================
@@ -1225,9 +1266,10 @@ CODE_038601:
 
 ;===================================================================================================
 
-ROUTINE_038616:
+Set_0814_to_FFFF:
 #_038616: LDA.w #$FFFF
 #_038619: STA.w $0814,X
+
 #_03861C: RTS
 
 ;===================================================================================================
@@ -1235,6 +1277,7 @@ ROUTINE_038616:
 ROUTINE_03861D:
 #_03861D: LDA.w $1714
 #_038620: STA.w $0814,X
+
 #_038623: RTS
 
 ;===================================================================================================
@@ -1242,13 +1285,15 @@ ROUTINE_03861D:
 ROUTINE_038624:
 #_038624: LDA.w $170A
 #_038627: STA.w $080A,X
+
 #_03862A: RTS
 
 ;===================================================================================================
 
-ROUTINE_03862B:
+Compare_081C_to_FFFF:
 #_03862B: LDA.w $081C,X
 #_03862E: CMP.w #$FFFF
+
 #_038631: RTS
 
 ;===================================================================================================
@@ -1281,12 +1326,12 @@ ROUTINE_038641:
 ROUTINE_038650:
 #_038650: LDA.w #$8134
 #_038653: STA.b $26
-#_038655: JSR ROUTINE_038666
+#_038655: JSR CacheMyCoordinatesIn20
 #_038658: JMP ROUTINE_0396D3
 
 ;===================================================================================================
 
-ROUTINE_03865B:
+CacheMyCoordinatesIn24:
 #_03865B: LDA.w $080C,X
 #_03865E: STA.b $24
 
@@ -1296,12 +1341,13 @@ ROUTINE_03865B:
 
 ;===================================================================================================
 
-ROUTINE_038666:
+CacheMyCoordinatesIn20:
 #_038666: LDA.w $080C,X
 #_038669: STA.b $20
 
 #_03866B: LDA.w $080E,X
 #_03866E: STA.b $22
+
 #_038670: RTS
 
 ;===================================================================================================
@@ -1312,6 +1358,7 @@ ROUTINE_038671:
 
 #_038676: LDA.w $19F0
 #_038679: STA.b $22
+
 #_03867B: RTS
 
 ;===================================================================================================
@@ -1419,7 +1466,7 @@ ROUTINE_038702:
 #_03870A: PLA
 #_03870B: PLX
 
-#_03870C: JSL ROUTINE_088000
+#_03870C: JSL SetMessagePointer
 
 #_038710: PLX
 
@@ -1448,7 +1495,7 @@ ROUTINE_038721:
 
 ROUTINE_038729:
 #_038729: PHX
-#_03872A: JSL ROUTINE_088014
+#_03872A: JSL HandleDialog
 #_03872E: PLX
 
 #_03872F: LDA.l $7E2550
@@ -1550,10 +1597,10 @@ ROUTINE_038797:
 #_0387AC: RTS
 
 ;===================================================================================================
-; TODO chest prize
+
 ROUTINE_0387AD:
 #_0387AD: TXY
-#_0387AE: JSR ROUTINE_038666
+#_0387AE: JSR CacheMyCoordinatesIn20
 
 #_0387B1: LDA.l $7FE816,X
 #_0387B5: AND.w #$000F
@@ -1564,117 +1611,126 @@ ROUTINE_0387AD:
 
 #_0387BF: LDX.w #$000E
 
-.no_overflow:
+.no_overflow
 #_0387C2: JMP (.vectors,X)
 
-.vectors:
-#_0387C5: dw ROUTINE_0387D7
-#_0387C7: dw ROUTINE_0391BA_005C
-#_0387C9: dw ROUTINE_0391BA_0062
-#_0387CB: dw ROUTINE_0391BA_0068
-#_0387CD: dw ROUTINE_0391BA_006E
-#_0387CF: dw ROUTINE_0391BA_0074
-#_0387D1: dw ROUTINE_0391BA_007A
-#_0387D3: dw ROUTINE_0391BA_0018
-#_0387D5: dw ROUTINE_0391BA_00C4
+.vectors
+#_0387C5: dw PresentPrize_RandomCoins
+#_0387C7: dw PresentPrize_Key
+#_0387C9: dw PresentPrize_10Coin
+#_0387CB: dw PresentPrize_30Coin
+#_0387CD: dw PresentPrize_Clothes
+#_0387CF: dw PresentPrize_Charm
+#_0387D1: dw PresentPrize_Ears
+#_0387D3: dw PresentPrize_Power
+#_0387D5: dw PresentPrize_FireBalls
 
 ;===================================================================================================
 
-ROUTINE_0387D7:
+PresentPrize_RandomCoins:
 #_0387D7: TYX
 
 #_0387D8: LDY.w #$0004
 
-CODE_0387DB:
+.next_coin
 #_0387DB: PHY
 #_0387DC: DEY
+
 #_0387DD: STY.b $2C
 #_0387DF: STZ.b $28
-#_0387E1: JSR ROUTINE_038E25
+
+#_0387E1: JSR Random
 #_0387E4: AND.w #$0003
 #_0387E7: TAY
 
-#_0387E8: LDA.w UNREACH_0387FD,Y
+#_0387E8: LDA.w .coins,Y
 #_0387EB: AND.w #$00FF
 #_0387EE: STA.b $26
 
 #_0387F0: LDA.w #$000E
 #_0387F3: STA.b $24
-#_0387F5: JSR ROUTINE_0391DB
+
+#_0387F5: JSR PrepEnemySpawn
+
 #_0387F8: PLY
 #_0387F9: DEY
-#_0387FA: BNE CODE_0387DB
+#_0387FA: BNE .next_coin
 
 #_0387FC: RTS
 
-UNREACH_0387FD:
-#_0387FD: db $66,$66,$6C,$6C
+.coins
+#_0387FD: db $66
+#_0387FE: db $66
+#_0387FF: db $6C
+#_038800: db $6C
 
 ;===================================================================================================
 
-ROUTINE_0391BA_00C4:
+PresentPrize_FireBalls:
 #_038801: TYX
 
 #_038802: LDA.w #$00C4
-#_038805: BRA ROUTINE_0391BA_bounce
+#_038805: BRA SetPresentPrize
 
 ;===================================================================================================
 
-ROUTINE_0391BA_005C:
+PresentPrize_Key:
 #_038807: TYX
 
 #_038808: LDA.w #$005C
-#_03880B: BRA ROUTINE_0391BA_bounce
+#_03880B: BRA SetPresentPrize
 
 ;===================================================================================================
 
-ROUTINE_0391BA_0062:
+PresentPrize_10Coin:
 #_03880D: TYX
 
 #_03880E: LDA.w #$0062
-#_038811: BRA ROUTINE_0391BA_bounce
+#_038811: BRA SetPresentPrize
 
 ;===================================================================================================
 
-ROUTINE_0391BA_0068:
+PresentPrize_30Coin:
 #_038813: TYX
 
 #_038814: LDA.w #$0068
-#_038817: BRA ROUTINE_0391BA_bounce
+#_038817: BRA SetPresentPrize
 
 ;===================================================================================================
 
-ROUTINE_0391BA_006E:
+PresentPrize_Clothes:
 #_038819: TYX
 
 #_03881A: LDA.w #$006E
-#_03881D: BRA ROUTINE_0391BA_bounce
+#_03881D: BRA SetPresentPrize
 
 ;===================================================================================================
 
-ROUTINE_0391BA_0074:
+PresentPrize_Charm:
 #_03881F: TYX
 
 #_038820: LDA.w #$0074
-#_038823: BRA ROUTINE_0391BA_bounce
+#_038823: BRA SetPresentPrize
 
 ;===================================================================================================
 
-ROUTINE_0391BA_007A:
+PresentPrize_Ears:
 #_038825: TYX
 
 #_038826: LDA.w #$007A
-#_038829: BRA ROUTINE_0391BA_bounce
+#_038829: BRA SetPresentPrize
 
 ;===================================================================================================
 
-ROUTINE_0391BA_0018:
+PresentPrize_Power:
 #_03882B: TYX
 
 #_03882C: LDA.w #$0018
 
-ROUTINE_0391BA_bounce:
-#_03882F: JMP ROUTINE_0391BA
+;===================================================================================================
+
+SetPresentPrize:
+#_03882F: JMP PrepEnemySpawnMyCoordinates
 
 ;===================================================================================================
 
@@ -2050,7 +2106,7 @@ ROUTINE_038A3E:
 #_038A3E: LDA.w #$000C
 #_038A41: STA.b $24
 
-#_038A43: JMP ROUTINE_0391DB
+#_038A43: JMP PrepEnemySpawn
 
 ;===================================================================================================
 
@@ -2079,7 +2135,7 @@ CODE_038A5B:
 #_038A5B: PHY
 #_038A5C: TYA
 #_038A5D: STA.b $28
-#_038A5F: JSR ROUTINE_038E25
+#_038A5F: JSR Random
 #_038A62: AND.w #$000F
 #_038A65: ADC.b $28
 #_038A67: INC A
@@ -2090,7 +2146,7 @@ CODE_038A5B:
 
 #_038A6F: LDA.w #$000E
 #_038A72: STA.b $24
-#_038A74: JSR ROUTINE_0391DB
+#_038A74: JSR PrepEnemySpawn
 #_038A77: PLY
 #_038A78: DEY
 #_038A79: BNE CODE_038A5B
@@ -2104,11 +2160,11 @@ ROUTINE_038A7D:
 #_038A7D: STZ.w $080A,X
 
 ROUTINE_038A80:
-#_038A80: JSR ROUTINE_038616
+#_038A80: JSR Set_0814_to_FFFF
 
 #_038A83: STZ.w $0816,X
 
-#_038A86: JSR ROUTINE_038CD2
+#_038A86: JSR Reset_0818_through_081F
 
 ;===================================================================================================
 
@@ -2569,11 +2625,12 @@ ROUTINE_038CBD:
 
 ;===================================================================================================
 
-ROUTINE_038CD2:
+Reset_0818_through_081F:
 #_038CD2: STZ.w $081C,X
 #_038CD5: STZ.w $081E,X
 #_038CD8: STZ.w $0818,X
 #_038CDB: STZ.w $081A,X
+
 #_038CDE: RTS
 
 ;===================================================================================================
@@ -2824,7 +2881,7 @@ CODE_038E0B:
 
 ;===================================================================================================
 
-ROUTINE_038E25:
+Random:
 #_038E25: LDA.w $1984
 #_038E28: ASL A
 #_038E29: ADC.w $1982
@@ -2832,8 +2889,10 @@ ROUTINE_038E25:
 #_038E2D: ADC.w $1984
 #_038E30: ADC.w #$3211
 #_038E33: STA.w $1984
+
 #_038E36: EOR.w $1982
 #_038E39: STA.w $1982
+
 #_038E3C: RTS
 
 ;===================================================================================================
@@ -2841,11 +2900,15 @@ ROUTINE_038E25:
 ROUTINE_038E3D:
 #_038E3D: STA.b $20
 #_038E3F: STY.b $22
+
 #_038E41: STZ.b $24
 #_038E43: STZ.b $26
+
 #_038E45: STZ.b $34
+
 #_038E47: STZ.b $2C
 #_038E49: STZ.b $2E
+
 #_038E4B: STX.b $30
 
 #_038E4D: LDX.w $056C
@@ -3153,7 +3216,7 @@ CODE_0390A7:
 #_0390C4: LDA.w #$000E
 #_0390C7: STA.b $24
 #_0390C9: PHY
-#_0390CA: JSR ROUTINE_0391DB
+#_0390CA: JSR PrepEnemySpawn
 #_0390CD: PLY
 #_0390CE: PLA
 #_0390CF: BCC CODE_0390D2
@@ -3239,7 +3302,7 @@ CODE_03910A:
 #_03912D: LDA.w #$000E
 #_039130: STA.b $24
 #_039132: PHY
-#_039133: JSR ROUTINE_0391DB
+#_039133: JSR PrepEnemySpawn
 #_039136: PLY
 #_039137: PLA
 #_039138: BCC CODE_03913B
@@ -3262,7 +3325,7 @@ ROUTINE_039140:
 
 #_039143: LDA.w #$00B4
 #_039146: STA.b $26
-#_039148: JSR ROUTINE_038E25
+#_039148: JSR Random
 #_03914B: AND.w #$01FF
 #_03914E: SBC.w #$0100
 #_039151: ADC.w $05E6
@@ -3277,7 +3340,7 @@ ROUTINE_039140:
 
 #_039163: LDA.w #$000C
 #_039166: STA.b $24
-#_039168: JSR ROUTINE_0391DB
+#_039168: JSR PrepEnemySpawn
 #_03916B: PLB
 #_03916C: RTL
 
@@ -3302,7 +3365,7 @@ ROUTINE_03916D:
 
 #_039184: LDA.w #$000C
 #_039187: STA.b $24
-#_039189: JSR ROUTINE_0391DB
+#_039189: JSR PrepEnemySpawn
 #_03918C: PLB
 #_03918D: RTL
 
@@ -3318,7 +3381,7 @@ ROUTINE_03918E:
 
 #_039196: LDA.w #$000C
 #_039199: STA.b $24
-#_03919B: JSR ROUTINE_0391DB
+#_03919B: JSR PrepEnemySpawn
 #_03919E: PLB
 #_03919F: RTL
 
@@ -3342,7 +3405,7 @@ ROUTINE_0391AD:
 
 ;===================================================================================================
 
-ROUTINE_0391BA:
+PrepEnemySpawnMyCoordinates:
 #_0391BA: STA.b $26
 
 #_0391BC: LDA.w $080C,X
@@ -3356,21 +3419,24 @@ ROUTINE_0391BA:
 
 #_0391CB: LDA.w #$000C
 #_0391CE: STA.b $24
-#_0391D0: JMP ROUTINE_0391DB
+
+#_0391D0: JMP PrepEnemySpawn
 
 ;===================================================================================================
 
-ROUTINE_0391DB_long:
+PrepEnemySpawn_long:
 #_0391D3: PHB
 #_0391D4: PHK
 #_0391D5: PLB
-#_0391D6: JSR ROUTINE_0391DB
+
+#_0391D6: JSR PrepEnemySpawn
+
 #_0391D9: PLB
 #_0391DA: RTL
 
 ;===================================================================================================
 
-ROUTINE_0391DB:
+PrepEnemySpawn:
 #_0391DB: PHX
 
 #_0391DC: LDA.b $0E
@@ -3895,7 +3961,7 @@ ROUTINE_0394C6:
 
 #_0394D0: LDA.w #$000E
 #_0394D3: STA.b $24
-#_0394D5: JMP ROUTINE_0391DB
+#_0394D5: JMP PrepEnemySpawn
 
 ;===================================================================================================
 
@@ -3978,7 +4044,7 @@ CODE_039535:
 
 #_039538: LDA.w #$000C
 #_03953B: STA.b $24
-#_03953D: JSR ROUTINE_0391DB
+#_03953D: JSR PrepEnemySpawn
 #_039540: PLY
 #_039541: RTS
 
@@ -4311,7 +4377,7 @@ ROUTINE_0396D3:
 
 #_0396D8: LDA.w #$000E
 #_0396DB: STA.b $24
-#_0396DD: JMP ROUTINE_0391DB
+#_0396DD: JMP PrepEnemySpawn
 
 ;===================================================================================================
 
@@ -4330,7 +4396,7 @@ ROUTINE_0396E3:
 #_0396E8: LDA.w #$000C
 #_0396EB: STA.b $24
 
-#_0396ED: JSR ROUTINE_0391DB
+#_0396ED: JSR PrepEnemySpawn
 
 #_0396F0: PLB
 #_0396F1: RTL
@@ -4469,7 +4535,7 @@ SpriteCollision_EnemyHug:
 #_039792: BEQ .exit
 
 #_039794: STA.w $0810,X
-#_039797: JSR ROUTINE_038CD2
+#_039797: JSR Reset_0818_through_081F
 #_03979A: STZ.w $080A,X
 #_03979D: STZ.w $0816,X
 
@@ -4774,7 +4840,7 @@ ROUTINE_03992B:
 
 #_039937: LDA.w #$000A
 #_03993A: STA.b $24
-#_03993C: JMP ROUTINE_0391DB
+#_03993C: JMP PrepEnemySpawn
 
 ;===================================================================================================
 
@@ -5357,7 +5423,7 @@ ROUTINE_039C2D:
 .exit
 #_039C5E: RTS
 
-.vectors:
+.vectors
 #_039C5F: dw ROUTINE_039D37
 #_039C61: dw ROUTINE_039D37
 #_039C63: dw ROUTINE_039D37
@@ -6246,7 +6312,7 @@ ROUTINE_03A23F:
 
 ;---------------------------------------------------------------------------------------------------
 
-.execute:
+.execute
 #_03A247: LDA.w $0280,X
 #_03A24A: STA.b $24
 
@@ -6874,7 +6940,7 @@ CODE_03A645:
 #_03A648: BNE .exit
 
 #_03A64A: INC.w $081C,X
-#_03A64D: JSR ROUTINE_038E25
+#_03A64D: JSR Random
 #_03A650: STA.b $20
 #_03A652: AND.w #$003F
 #_03A655: CLC
@@ -6903,12 +6969,12 @@ CODE_03A645:
 #_03A67D: STA.b $28
 #_03A67F: TYA
 #_03A680: STA.b $30
-#_03A682: JSR ROUTINE_0391DB
+#_03A682: JSR PrepEnemySpawn
 
 #_03A685: LDA.b $30
 #_03A687: STA.w $0816,Y
 #_03A68A: TYX
-#_03A68B: JSR ROUTINE_038CD2
+#_03A68B: JSR Reset_0818_through_081F
 #_03A68E: TXY
 
 .exit
@@ -6967,7 +7033,7 @@ ROUTINE_03A6E4:
 
 #_03A724: LDA.w $0816,X
 #_03A727: STA.b $30
-#_03A729: JSR ROUTINE_0391DB
+#_03A729: JSR PrepEnemySpawn
 
 #_03A72C: LDA.w #$020C
 #_03A72F: STA.w $0810,X
@@ -7095,7 +7161,7 @@ ROUTINE_03A7CC:
 #_03A7EE: LDA.w #$0D3E
 #_03A7F1: STA.w $0806,X
 #_03A7F4: STZ.w $081E,X
-#_03A7F7: JSR ROUTINE_038E25
+#_03A7F7: JSR Random
 #_03A7FA: AND.w #$000E
 #_03A7FD: TAY
 
@@ -7344,7 +7410,7 @@ CODE_03A99A:
 
 CODE_03A99D:
 #_03A99D: STA.w $0806,X
-#_03A9A0: JSR ROUTINE_038E25
+#_03A9A0: JSR Random
 #_03A9A3: AND.w #$001C
 #_03A9A6: TAY
 
@@ -7353,13 +7419,13 @@ CODE_03A99D:
 
 #_03A9AD: LDA.w UNREACH_03A84D,Y
 #_03A9B0: STA.w $081C,X
-#_03A9B3: JSR ROUTINE_038E25
+#_03A9B3: JSR Random
 #_03A9B6: AND.w #$000E
 #_03A9B9: TAY
 
 #_03A9BA: LDA.w UNREACH_03A86B,Y
 #_03A9BD: STA.w $0818,X
-#_03A9C0: JSR ROUTINE_038E25
+#_03A9C0: JSR Random
 #_03A9C3: AND.w #$001E
 #_03A9C6: STA.w $081E,X
 #_03A9C9: RTS
@@ -7431,7 +7497,7 @@ ROUTINE_03AA17:
 ;===================================================================================================
 
 ROUTINE_03AA1E:
-#_03AA1E: JSR ROUTINE_038CD2
+#_03AA1E: JSR Reset_0818_through_081F
 
 #_03AA21: LDA.w #$0D32
 #_03AA24: STA.w $0806,X
@@ -7574,7 +7640,7 @@ CODE_03AAF0:
 
 #_03AAF4: LDA.w #$0214
 #_03AAF7: STA.w $0810,X
-#_03AAFA: JSR ROUTINE_038E25
+#_03AAFA: JSR Random
 #_03AAFD: AND.w #$000F
 #_03AB00: CLC
 #_03AB01: ADC.w #$0018
@@ -7629,7 +7695,7 @@ CODE_03AB3E:
 #_03AB43: STA.l $7FE818,X
 #_03AB47: BNE CODE_03AB5C
 
-#_03AB49: JSR ROUTINE_038E25
+#_03AB49: JSR Random
 #_03AB4C: AND.w #$001F
 #_03AB4F: ADC.w #$0070
 #_03AB52: STA.l $7FE818,X
@@ -7823,7 +7889,7 @@ ROUTINE_03AC7F:
 
 #_03AC9B: LDA.w #$0D36
 #_03AC9E: STA.w $0806,X
-#_03ACA1: JSR ROUTINE_038E25
+#_03ACA1: JSR Random
 #_03ACA4: AND.w #$0007
 #_03ACA7: INC A
 #_03ACA8: STA.l $7FE81A,X
@@ -7887,7 +7953,7 @@ ROUTINE_03ACDE:
 #_03AD06: STA.b $30
 #_03AD08: STZ.b $2C
 #_03AD0A: PHY
-#_03AD0B: JSL ROUTINE_0391DB_long
+#_03AD0B: JSL PrepEnemySpawn_long
 #_03AD0F: PLY
 
 #_03AD10: LDA.w #$021A
@@ -8698,7 +8764,7 @@ ROUTINE_03B256:
 
 #_03B25C: LDA.l $7FE816,X
 #_03B260: AND.w #$00FF
-#_03B263: JSR ROUTINE_0391BA
+#_03B263: JSR PrepEnemySpawnMyCoordinates
 #_03B266: JMP ROUTINE_038C85
 
 CODE_03B269:
@@ -9662,7 +9728,7 @@ CODE_03B867:
 #_03B880: STA.w $081A,X
 
 CODE_03B883:
-#_03B883: JSR ROUTINE_038E25
+#_03B883: JSR Random
 #_03B886: AND.w #$0006
 #_03B889: TAY
 
@@ -10414,7 +10480,7 @@ ROUTINE_03BD2A:
 #_03BD2B: JSR ROUTINE_0385CA
 #_03BD2E: BNE CODE_03BD42
 
-#_03BD30: JSR ROUTINE_038666
+#_03BD30: JSR CacheMyCoordinatesIn20
 #_03BD33: STZ.b $30
 
 #_03BD35: LDA.w #$8248
@@ -10422,7 +10488,7 @@ ROUTINE_03BD2A:
 
 #_03BD3A: LDA.w #$000C
 #_03BD3D: STA.b $24
-#_03BD3F: JSR ROUTINE_0391DB
+#_03BD3F: JSR PrepEnemySpawn
 
 CODE_03BD42:
 #_03BD42: JSR ROUTINE_038B69
@@ -10565,7 +10631,7 @@ CODE_03BDD5:
 #_03BE09: BNE CODE_03BE15
 
 #_03BE0B: LDA.w #$01FE
-#_03BE0E: JSR ROUTINE_0385B1
+#_03BE0E: JSR Reset_0816_AndSetAIMode
 #_03BE11: JSR Set_18E2_to_FFFF
 #_03BE14: RTS
 
@@ -10994,7 +11060,7 @@ CODE_03C09D:
 ;===================================================================================================
 
 ROUTINE_03C0B9:
-#_03C0B9: JSR ROUTINE_03865B
+#_03C0B9: JSR CacheMyCoordinatesIn24
 #_03C0BC: JSR ROUTINE_03C0F9
 #_03C0BF: PHA
 
@@ -11028,7 +11094,7 @@ ROUTINE_03C0D3:
 ;===================================================================================================
 
 ROUTINE_03C0ED:
-#_03C0ED: JSR ROUTINE_03865B
+#_03C0ED: JSR CacheMyCoordinatesIn24
 #_03C0F0: JSR ROUTINE_03C0D3
 #_03C0F3: PHX
 #_03C0F4: JSR ROUTINE_02FB70_bounce
@@ -11181,7 +11247,7 @@ ROUTINE_03C185:
 
 #_03C1DE: LDA.w #$000E
 #_03C1E1: STA.b $24
-#_03C1E3: JSL ROUTINE_0391DB_long
+#_03C1E3: JSL PrepEnemySpawn_long
 
 .exit
 #_03C1E7: RTS
@@ -11339,23 +11405,23 @@ ROUTINE_03C2C3:
 #_03C2C7: BNE .exit
 
 #_03C2C9: STZ.w $0808,X
-#_03C2CC: JSR ROUTINE_038E25
+#_03C2CC: JSR Random
 #_03C2CF: AND.w #$000F
 #_03C2D2: SBC.w #$0008
 #_03C2D5: STA.w $0812,X
 #_03C2D8: STA.w $0814,X
-#_03C2DB: JSR ROUTINE_038E25
+#_03C2DB: JSR Random
 #_03C2DE: AND.w #$0007
 #_03C2E1: ADC.w #$0002
 #_03C2E4: STA.w $0816,X
-#_03C2E7: JSR ROUTINE_038E25
+#_03C2E7: JSR Random
 #_03C2EA: AND.w #$0001
 #_03C2ED: SEC
 #_03C2EE: ADC.w #$0100
 #_03C2F1: STA.l $7FE812,X
 #_03C2F5: JSR ROUTINE_0392C0
 #_03C2F8: STZ.w $080A,X
-#_03C2FB: JSR ROUTINE_038CD2
+#_03C2FB: JSR Reset_0818_through_081F
 #_03C2FE: JMP AdvanceAIModeUp
 
 .exit
@@ -11368,7 +11434,7 @@ ROUTINE_03C302:
 
 #_03C303: LDA.l $7FE812,X
 #_03C307: JSR ROUTINE_038D39
-#_03C30A: JSR ROUTINE_038E25
+#_03C30A: JSR Random
 #_03C30D: AND.w #$00FF
 #_03C310: ADC.w #$0200
 #_03C313: EOR.w #$FFFF
@@ -11628,7 +11694,7 @@ ROUTINE_03C4E0:
 
 #_03C4E1: LDA.w #$000B
 #_03C4E4: STA.w $04A2
-#_03C4E7: JSR ROUTINE_038CD2
+#_03C4E7: JSR Reset_0818_through_081F
 #_03C4EA: STZ.w $0808,X
 #_03C4ED: JSR ROUTINE_0392C0
 #_03C4F0: STZ.w $080A,X
@@ -11814,7 +11880,7 @@ CODE_03C60E:
 
 #_03C622: LDA.w #$000E
 #_03C625: STA.b $24
-#_03C627: JSL ROUTINE_0391DB_long
+#_03C627: JSL PrepEnemySpawn_long
 #_03C62B: CLC
 
 #_03C62C: LDA.w $080E,X
@@ -11841,7 +11907,7 @@ ROUTINE_03C63C:
 
 CODE_03C64A:
 #_03C64A: JSR ROUTINE_038088
-#_03C64D: JSR ROUTINE_0391BA
+#_03C64D: JSR PrepEnemySpawnMyCoordinates
 #_03C650: JMP ROUTINE_038C85
 
 .exit
@@ -11891,7 +11957,7 @@ ROUTINE_03C6BF:
 #_03C6C3: BNE .exit
 
 #_03C6C5: JSR ROUTINE_038088
-#_03C6C8: JSR ROUTINE_0391BA
+#_03C6C8: JSR PrepEnemySpawnMyCoordinates
 #_03C6CB: JMP ROUTINE_038C85
 
 .exit
@@ -11912,7 +11978,7 @@ ROUTINE_03C6D4:
 #_03C6D8: BNE .exit
 
 #_03C6DA: JSR ROUTINE_038088
-#_03C6DD: JSR ROUTINE_0391BA
+#_03C6DD: JSR PrepEnemySpawnMyCoordinates
 #_03C6E0: JMP ROUTINE_038C85
 
 .exit
@@ -13183,7 +13249,7 @@ ROUTINE_03CEDF:
 
 #_03CEEC: LDA.w #$0001
 #_03CEEF: STA.b $20
-#_03CEF1: JSR ROUTINE_038E25
+#_03CEF1: JSR Random
 #_03CEF4: AND.w #$00FF
 #_03CEF7: SBC.w #$0070
 #_03CEFA: ADC.w $081C,X
@@ -13775,7 +13841,7 @@ CODE_03D253:
 
 #_03D26A: LDA.w #$0006
 #_03D26D: STA.b $24
-#_03D26F: JSL ROUTINE_0391DB_long
+#_03D26F: JSL PrepEnemySpawn_long
 
 #_03D273: LDA.w #$0004
 #_03D276: STA.w $0810,X
@@ -13880,7 +13946,7 @@ ROUTINE_03D2FC:
 
 #_03D307: LDA.w #$0024
 #_03D30A: STA.w $0806,X
-#_03D30D: JSR ROUTINE_038616
+#_03D30D: JSR Set_0814_to_FFFF
 
 #_03D310: LDA.w #$2000
 #_03D313: STA.w $0808,X
@@ -14674,13 +14740,13 @@ UNREACH_03D78C:
 
 ROUTINE_03D79A:
 #_03D79A: TYX
-#_03D79B: JSR ROUTINE_038E25
+#_03D79B: JSR Random
 #_03D79E: AND.w #$0006
 #_03D7A1: TAY
 
 #_03D7A2: LDA.w UNREACH_03D7D5,Y
 #_03D7A5: STA.w $081C,X
-#_03D7A8: JSR ROUTINE_038E25
+#_03D7A8: JSR Random
 #_03D7AB: AND.w #$0006
 #_03D7AE: TAY
 
@@ -14999,7 +15065,7 @@ CODE_03D9AE:
 
 ROUTINE_03D9B1:
 #_03D9B1: TYX
-#_03D9B2: JSR ROUTINE_038CD2
+#_03D9B2: JSR Reset_0818_through_081F
 
 #_03D9B5: LDA.w #$0028
 #_03D9B8: STA.w $0810,X
@@ -15030,7 +15096,7 @@ ROUTINE_03D9CE:
 
 ROUTINE_03D9D2:
 #_03D9D2: TYX
-#_03D9D3: JSR ROUTINE_038CD2
+#_03D9D3: JSR Reset_0818_through_081F
 #_03D9D6: JMP AdvanceAIModeUp
 
 ;===================================================================================================
@@ -15052,7 +15118,7 @@ CODE_03D9E5:
 
 ROUTINE_03D9EB:
 #_03D9EB: TYX
-#_03D9EC: JSR ROUTINE_038CD2
+#_03D9EC: JSR Reset_0818_through_081F
 #_03D9EF: JMP AdvanceAIModeUp
 
 ;===================================================================================================
@@ -15743,7 +15809,7 @@ ROUTINE_03DD6B:
 
 #_03DDA4: LDA.w #$000C
 #_03DDA7: STA.b $24
-#_03DDA9: JSR ROUTINE_0391DB
+#_03DDA9: JSR PrepEnemySpawn
 
 #_03DDAC: LDA.w #$0100
 #_03DDAF: STA.w $0518
@@ -16056,7 +16122,7 @@ ROUTINE_03DF84:
 #_03DF88: AND.w #$0007
 #_03DF8B: BNE CODE_03DFAF
 
-#_03DF8D: JSR ROUTINE_038E25
+#_03DF8D: JSR Random
 #_03DF90: AND.w #$02F0
 #_03DF93: SBC.w #$0180
 #_03DF96: ADC.w $05E6
@@ -16071,7 +16137,7 @@ ROUTINE_03DF84:
 
 #_03DFA7: LDA.w #$000C
 #_03DFAA: STA.b $24
-#_03DFAC: JSR ROUTINE_0391DB
+#_03DFAC: JSR PrepEnemySpawn
 
 CODE_03DFAF:
 #_03DFAF: JSR ROUTINE_0392D5
@@ -16116,7 +16182,7 @@ UNREACH_03DFE3:
 
 ROUTINE_03DFF5:
 #_03DFF5: TYX
-#_03DFF6: JSR ROUTINE_038CD2
+#_03DFF6: JSR Reset_0818_through_081F
 
 #_03DFF9: LDA.w $080A,X
 #_03DFFC: STA.w $0816,X
@@ -16227,7 +16293,7 @@ ROUTINE_03E084:
 #_03E0B1: LDA.w $0562
 #_03E0B4: STA.w $081A,X
 #_03E0B7: JSR ROUTINE_03E0CD
-#_03E0BA: JSR ROUTINE_038666
+#_03E0BA: JSR CacheMyCoordinatesIn20
 
 #_03E0BD: LDA.w #$0130
 #_03E0C0: STA.b $26
@@ -16235,7 +16301,7 @@ ROUTINE_03E084:
 
 #_03E0C4: LDA.w #$000C
 #_03E0C7: STA.b $24
-#_03E0C9: JSR ROUTINE_0391DB
+#_03E0C9: JSR PrepEnemySpawn
 #_03E0CC: RTS
 
 ;===================================================================================================
@@ -16476,7 +16542,7 @@ ROUTINE_03E232:
 ROUTINE_03E236:
 #_03E236: TYX
 #_03E237: JSL ROUTINE_08D367
-#_03E23B: JSR ROUTINE_038CD2
+#_03E23B: JSR Reset_0818_through_081F
 
 #_03E23E: LDA.w $080A,X
 #_03E241: STA.w $0816,X
@@ -16582,7 +16648,7 @@ CODE_03E2D4:
 #_03E2D6: ASL A
 #_03E2D7: ASL A
 #_03E2D8: STA.b $20
-#_03E2DA: JSR ROUTINE_038E25
+#_03E2DA: JSR Random
 #_03E2DD: AND.w #$03FF
 #_03E2E0: SBC.w #$0200
 #_03E2E3: ADC.w $05E6
@@ -16596,7 +16662,7 @@ CODE_03E2D4:
 #_03E2F0: LDA.w $0562
 #_03E2F3: ADC.w #$0500
 #_03E2F6: STA.b $22
-#_03E2F8: JSR ROUTINE_038E25
+#_03E2F8: JSR Random
 #_03E2FB: AND.w #$0FFF
 #_03E2FE: SBC.w #$0800
 #_03E301: ADC.b $22
@@ -16606,7 +16672,7 @@ CODE_03E2D4:
 
 #_03E309: LDA.w #$000E
 #_03E30C: STA.b $24
-#_03E30E: JSL ROUTINE_0391DB_long
+#_03E30E: JSL PrepEnemySpawn_long
 
 CODE_03E312:
 #_03E312: LDA.w $05E0
@@ -16681,7 +16747,7 @@ ROUTINE_03E354:
 
 #_03E386: LDA.w #$000E
 #_03E389: STA.b $24
-#_03E38B: JSL ROUTINE_0391DB_long
+#_03E38B: JSL PrepEnemySpawn_long
 #_03E38F: RTS
 
 ;===================================================================================================
@@ -17134,12 +17200,12 @@ ROUTINE_03E604:
 #_03E615: LDA.w #$015E
 #_03E618: STA.w $0810,X
 #_03E61B: STA.w $04B6
-#_03E61E: JSR ROUTINE_038E25
+#_03E61E: JSR Random
 #_03E621: AND.w #$003F
 #_03E624: SBC.w #$0020
 #_03E627: ADC.w $080C,X
 #_03E62A: STA.b $24
-#_03E62C: JSR ROUTINE_038E25
+#_03E62C: JSR Random
 #_03E62F: AND.w #$003F
 #_03E632: SBC.w #$0020
 #_03E635: ADC.w $080E,X
@@ -17323,7 +17389,7 @@ CODE_03E713:
 
 #_03E720: LDA.w #$000C
 #_03E723: STA.b $24
-#_03E725: JSR ROUTINE_0391DB
+#_03E725: JSR PrepEnemySpawn
 #_03E728: PLY
 
 CODE_03E729:
@@ -17647,7 +17713,7 @@ CODE_03EC8D:
 #_03EC8F: AND.w #$003F
 #_03EC92: BNE .exit
 
-#_03EC94: JSR ROUTINE_038E25
+#_03EC94: JSR Random
 #_03EC97: AND.w #$000F
 #_03EC9A: TAY
 
@@ -17679,7 +17745,7 @@ CODE_03EC8D:
 #_03ECC8: LDX.w #$ED06
 #_03ECCB: JSR ROUTINE_038C0E
 #_03ECCE: PLX
-#_03ECCF: JSL ROUTINE_0391DB_long
+#_03ECCF: JSL PrepEnemySpawn_long
 
 .exit
 #_03ECD3: RTS
@@ -17783,7 +17849,7 @@ ROUTINE_03ED6B:
 
 #_03ED82: LDA.w #$0D20
 #_03ED85: STA.w $0806,X
-#_03ED88: JSR ROUTINE_038CD2
+#_03ED88: JSR Reset_0818_through_081F
 #_03ED8B: JSR AdvanceAIModeUp
 
 CODE_03ED8E:
@@ -17837,8 +17903,8 @@ CODE_03EDC5:
 
 #_03EDE6: LDA.w UNREACH_03EE19,Y
 #_03EDE9: STA.w $080A,X
-#_03EDEC: JSR ROUTINE_038CD2
-#_03EDEF: JSR ROUTINE_038E25
+#_03EDEC: JSR Reset_0818_through_081F
+#_03EDEF: JSR Random
 #_03EDF2: AND.w #$0007
 #_03EDF5: BEQ CODE_03EE0B
 
@@ -17889,8 +17955,8 @@ CODE_03EE31:
 #_03EE39: JSR ROUTINE_038CDF
 #_03EE3C: BNE CODE_03EE58
 
-#_03EE3E: JSR ROUTINE_038CD2
-#_03EE41: JSR ROUTINE_038E25
+#_03EE3E: JSR Reset_0818_through_081F
+#_03EE41: JSR Random
 #_03EE44: AND.w #$0003
 #_03EE47: BEQ CODE_03EE58
 
@@ -17944,7 +18010,7 @@ CODE_03EE90:
 #_03EE90: LDA.w #$0057
 #_03EE93: STA.w $04AA
 #_03EE96: JSR AdvanceAIModeUp
-#_03EE99: JSR ROUTINE_038CD2
+#_03EE99: JSR Reset_0818_through_081F
 
 #_03EE9C: LDA.w #$FFF0
 
@@ -17977,7 +18043,7 @@ ROUTINE_03EEAF:
 #_03EEC6: JSR ROUTINE_038CDF
 #_03EEC9: BNE CODE_03EED4
 
-#_03EECB: JSR ROUTINE_038CD2
+#_03EECB: JSR Reset_0818_through_081F
 
 #_03EECE: LDA.w #$0174
 #_03EED1: STA.w $0810,X
@@ -18062,7 +18128,7 @@ CODE_03EF3D:
 #_03EF46: BRA CODE_03EF4D
 
 CODE_03EF48:
-#_03EF48: JSR ROUTINE_038CD2
+#_03EF48: JSR Reset_0818_through_081F
 #_03EF4B: BRA CODE_03EF16
 
 CODE_03EF4D:
@@ -18266,7 +18332,7 @@ ROUTINE_03F065:
 
 #_03F078: LDA.w UNREACH_03F245,Y
 #_03F07B: STA.w $0806,X
-#_03F07E: JSR ROUTINE_038CD2
+#_03F07E: JSR Reset_0818_through_081F
 #_03F081: RTS
 
 ;===================================================================================================
@@ -18397,7 +18463,7 @@ ROUTINE_03F130:
 #_03F13A: LDA.w #$0080
 #_03F13D: STA.w $0816,X
 #_03F140: JSR ROUTINE_0386EC
-#_03F143: JSR ROUTINE_038CD2
+#_03F143: JSR Reset_0818_through_081F
 #_03F146: JMP AdvanceAIModeUp
 
 .exit
@@ -18485,7 +18551,7 @@ ROUTINE_03F1AC:
 #_03F1C0: LDA.b $2C
 #_03F1C2: STA.l $7FE812,X
 #_03F1C6: JSR ROUTINE_03F2E6
-#_03F1C9: JSR ROUTINE_038CD2
+#_03F1C9: JSR Reset_0818_through_081F
 #_03F1CC: JSR AdvanceAIModeUp
 
 CODE_03F1CF:
@@ -18633,7 +18699,7 @@ CODE_03F2AD:
 
 #_03F2C8: LDA.w #$0010
 #_03F2CB: STA.w $0816,X
-#_03F2CE: JSR ROUTINE_038CD2
+#_03F2CE: JSR Reset_0818_through_081F
 #_03F2D1: JSR AdvanceAIModeDown
 
 #_03F2D4: LDA.w #$0000
@@ -18928,7 +18994,7 @@ ROUTINE_03F4C4:
 
 #_03F4DC: LDA.w #$0020
 #_03F4DF: STA.w $0816,X
-#_03F4E2: JSR ROUTINE_038CD2
+#_03F4E2: JSR Reset_0818_through_081F
 #_03F4E5: JSR AdvanceAIModeUp
 
 #_03F4E8: LDA.w #$0000
@@ -20138,7 +20204,7 @@ ROUTINE_03FB36:
 
 CODE_03FB50:
 #_03FB50: JSR ROUTINE_038088
-#_03FB53: JSR ROUTINE_0391BA
+#_03FB53: JSR PrepEnemySpawnMyCoordinates
 #_03FB56: JMP ROUTINE_038C85
 
 .exit
@@ -20316,7 +20382,7 @@ ROUTINE_03FCF0:
 
 CODE_03FD0A:
 #_03FD0A: JSR ROUTINE_038088
-#_03FD0D: JSR ROUTINE_0391BA
+#_03FD0D: JSR PrepEnemySpawnMyCoordinates
 #_03FD10: JMP ROUTINE_038C85
 
 .exit
@@ -20387,7 +20453,7 @@ data03FD67:
 ROUTINE_03FD71:
 #_03FD71: TYX
 #_03FD72: STZ.w $080A,X
-#_03FD75: JSR ROUTINE_038616
+#_03FD75: JSR Set_0814_to_FFFF
 #_03FD78: STZ.w $0816,X
 #_03FD7B: JSR AdvanceAIModeUp
 #_03FD7E: JSR ROUTINE_03A295
@@ -20468,8 +20534,8 @@ ROUTINE_03FDCE:
 
 #_03FDEB: LDA.w #$000C
 #_03FDEE: STA.b $24
-#_03FDF0: JSL ROUTINE_0391DB_long
-#_03FDF4: JMP ROUTINE_0385B8
+#_03FDF0: JSL PrepEnemySpawn_long
+#_03FDF4: JMP Reset_0816_AndAdvanceAI_bank
 
 CODE_03FDF7:
 #_03FDF7: PHX
@@ -20483,7 +20549,7 @@ ROUTINE_03FDFF:
 #_03FDFF: TYX
 
 #_03FE00: LDA.w #$003C
-#_03FE03: JSR ROUTINE_038455
+#_03FE03: JSR Increment_0816_AndCompareTo
 #_03FE06: BCC CODE_03FE17
 
 #_03FE08: LDA.w #$004E

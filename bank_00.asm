@@ -62,14 +62,14 @@ ResetOBSELandOAM_long:
 
 ;===================================================================================================
 
-ROUTINE_088000_long:
-#_00802C: JSL ROUTINE_088000
+SetMessagePointer_long:
+#_00802C: JSL SetMessagePointer
 #_008030: RTL
 
 ;===================================================================================================
 
-ROUTINE_088014_long:
-#_008031: JSL ROUTINE_088014
+HandleDialog_long:
+#_008031: JSL HandleDialog
 #_008035: RTL
 
 ;===================================================================================================
@@ -5696,7 +5696,7 @@ ROUTINE_00A428:
 
 #_00A43F: LDA.w #$B057
 #_00A442: LDX.w #$0008
-#_00A445: JSL ROUTINE_088000
+#_00A445: JSL SetMessagePointer
 
 #_00A449: LDA.w #$0014
 #_00A44C: STA.w $0524
@@ -5749,7 +5749,7 @@ ROUTINE_00A54E:
 #_00A551: STA.w $0520
 
 #_00A554: JSR ROUTINE_00F957
-#_00A557: JSL ROUTINE_088014
+#_00A557: JSL HandleDialog
 
 #_00A55B: LDA.l $7E2550
 #_00A55F: BNE .exit
@@ -5765,7 +5765,7 @@ ROUTINE_00A54E:
 
 #_00A571: LDA.w #$B13F
 #_00A574: LDX.w #$0008
-#_00A577: JSL ROUTINE_088000
+#_00A577: JSL SetMessagePointer
 
 #_00A57B: LDX.w #$0004
 #_00A57E: JSR ROUTINE_00A990
@@ -5783,7 +5783,7 @@ ROUTINE_00A54E:
 ROUTINE_00A58B:
 #_00A58B: LDX.w #$0004
 #_00A58E: JSR ROUTINE_00A990
-#_00A591: JSL ROUTINE_088014
+#_00A591: JSL HandleDialog
 #_00A595: JSR ROUTINE_00F957
 
 #_00A598: LDX.w #$0002
@@ -5798,7 +5798,7 @@ ROUTINE_00A58B:
 
 #_00A5AE: LDA.w #$B1A7
 #_00A5B1: LDX.w #$0008
-#_00A5B4: JSL ROUTINE_088000
+#_00A5B4: JSL SetMessagePointer
 #_00A5B8: INC.w $0506
 
 .exit
@@ -5826,7 +5826,7 @@ ROUTINE_00A58B:
 ROUTINE_00A628:
 #_00A628: LDX.w #$0004
 #_00A62B: JSR ROUTINE_00A990
-#_00A62E: JSL ROUTINE_088014
+#_00A62E: JSL HandleDialog
 
 #_00A632: LDA.l $7E2550
 #_00A636: BNE .exit
@@ -5884,7 +5884,7 @@ ROUTINE_00A674:
 
 #_00A68A: LDA.w #$B1BC
 #_00A68D: LDX.w #$0008
-#_00A690: JSL ROUTINE_088000
+#_00A690: JSL SetMessagePointer
 
 #_00A694: LDA.w #data00A6B4
 #_00A697: STA.b $20
@@ -5914,7 +5914,7 @@ data00A6B4:
 ;===================================================================================================
 
 ROUTINE_00A6BD:
-#_00A6BD: JSL ROUTINE_088014
+#_00A6BD: JSL HandleDialog
 #_00A6C1: JSL ROUTINE_00ED0F_long
 
 #_00A6C5: LDA.l $7E2550
@@ -5957,7 +5957,7 @@ ROUTINE_00A6E5:
 
 #_00A701: LDA.w #$B23B
 #_00A704: LDX.w #$0008
-#_00A707: JSL ROUTINE_088000
+#_00A707: JSL SetMessagePointer
 #_00A70B: INC.w $0506
 
 CODE_00A70E:
@@ -5972,14 +5972,14 @@ CODE_00A70E:
 ;===================================================================================================
 
 ROUTINE_00A717:
-#_00A717: JSL ROUTINE_088014
+#_00A717: JSL HandleDialog
 
 #_00A71B: LDA.l $7E2550
 #_00A71F: BNE .exit
 
 #_00A721: LDA.w #$B323
 #_00A724: LDX.w #$0008
-#_00A727: JSL ROUTINE_088000
+#_00A727: JSL SetMessagePointer
 
 #_00A72B: LDA.w #$A751
 #_00A72E: STA.b $20
@@ -6017,7 +6017,7 @@ ROUTINE_00A783:
 ;===================================================================================================
 
 ROUTINE_00A78A:
-#_00A78A: JSL ROUTINE_088014
+#_00A78A: JSL HandleDialog
 #_00A78E: JSR ROUTINE_00F957
 
 #_00A791: LDX.w #$0004
@@ -6057,7 +6057,7 @@ data00A7C1:
 ROUTINE_00A7D1:
 #_00A7D1: JSR ROUTINE_00F957
 #_00A7D4: JSL ROUTINE_00ED0F_long
-#_00A7D8: JSL ROUTINE_088014
+#_00A7D8: JSL HandleDialog
 
 #_00A7DC: LDA.l $7E2550
 #_00A7E0: BNE .exit
@@ -6067,7 +6067,7 @@ ROUTINE_00A7D1:
 
 #_00A7E9: LDA.w #$B34E
 #_00A7EC: LDX.w #$0008
-#_00A7EF: JSL ROUTINE_088000
+#_00A7EF: JSL SetMessagePointer
 #_00A7F3: INC.w $0506
 
 .exit
@@ -6105,7 +6105,7 @@ CODE_00A80D:
 ROUTINE_00A822:
 #_00A822: JSR ROUTINE_00F957
 #_00A825: JSL ROUTINE_00ED0F_long
-#_00A829: JSL ROUTINE_088014
+#_00A829: JSL HandleDialog
 
 #_00A82D: LDA.l $7E2550
 #_00A831: BNE .exit
@@ -6140,7 +6140,7 @@ ROUTINE_00A853:
 
 #_00A85E: LDA.w #$B3FB
 #_00A861: LDX.w #$0008
-#_00A864: JSL ROUTINE_088000
+#_00A864: JSL SetMessagePointer
 #_00A868: INC.w $0506
 
 #_00A86B: LDA.w #$0032
@@ -6152,13 +6152,13 @@ ROUTINE_00A853:
 ;===================================================================================================
 
 ROUTINE_00A872:
-#_00A872: JSL ROUTINE_088014
+#_00A872: JSL HandleDialog
 #_00A876: DEC.w $0800
 #_00A879: BNE .exit
 
 #_00A87B: LDA.w #$B411
 #_00A87E: LDX.w #$0008
-#_00A881: JSL ROUTINE_088000
+#_00A881: JSL SetMessagePointer
 #_00A885: INC.w $0506
 
 .exit
@@ -6192,7 +6192,7 @@ ROUTINE_00A893:
 ;===================================================================================================
 
 ROUTINE_00A8AD:
-#_00A8AD: JSL ROUTINE_088014
+#_00A8AD: JSL HandleDialog
 
 #_00A8B1: LDA.l $7E2550
 #_00A8B5: BNE .exit
@@ -6807,7 +6807,7 @@ ROUTINE_00AC00:
 
 #_00AC2E: LDA.l UNREACH_08E4C1,X
 #_00AC32: LDX.w #$0008
-#_00AC35: JSL ROUTINE_088000
+#_00AC35: JSL SetMessagePointer
 
 #_00AC39: LDA.l $7E7B28
 #_00AC3D: CMP.w #$0044
@@ -6935,7 +6935,7 @@ CODE_00ACD8:
 ROUTINE_00ACDF:
 #_00ACDF: JSR ROUTINE_00C44D
 #_00ACE2: JSR ROUTINE_00AC5C
-#_00ACE5: JSL ROUTINE_088014
+#_00ACE5: JSL HandleDialog
 
 #_00ACE9: LDA.l $7E2550
 #_00ACED: BNE CODE_00ACF2
@@ -7461,7 +7461,7 @@ ROUTINE_00B038:
 
 ROUTINE_00B05A:
 #_00B05A: JSR ROUTINE_00C44D
-#_00B05D: JSL ROUTINE_088014
+#_00B05D: JSL HandleDialog
 
 #_00B061: LDA.l $7E2550
 #_00B065: BNE CODE_00B075
@@ -7659,7 +7659,7 @@ CODE_00B163:
 #_00B19C: LDA.w UNREACH_00B1E5,X
 
 #_00B19F: LDX.w #$0008
-#_00B1A2: JSL ROUTINE_088000
+#_00B1A2: JSL SetMessagePointer
 #_00B1A6: BRA CODE_00B1C3
 
 CODE_00B1A8:
@@ -7670,7 +7670,7 @@ CODE_00B1A8:
 #_00B1B0: LDA.w UNREACH_00B1F5,X
 
 #_00B1B3: LDX.w #$0008
-#_00B1B6: JSL ROUTINE_088000
+#_00B1B6: JSL SetMessagePointer
 #_00B1BA: BRA CODE_00B1C3
 
 CODE_00B1BC:
@@ -7698,13 +7698,24 @@ CODE_00B1E2:
 #_00B1E2: JMP CODE_00B8AA
 
 UNREACH_00B1E5:
-#_00B1E5: db $F8,$8D,$44,$8E,$B1,$8E,$1F,$8F
-#_00B1ED: db $72,$8F,$C5,$8F,$C5,$8F,$C5,$8F
+#_00B1E5: dw Message_088DF8
+#_00B1E7: dw Message_088E44
+#_00B1E9: dw Message_088EB1
+#_00B1EB: dw Message_088F1F
+#_00B1ED: dw Message_088F72
+#_00B1EF: dw Message_088FC5
+#_00B1F1: dw Message_088FC5
+#_00B1F3: dw Message_088FC5
 
 UNREACH_00B1F5:
-#_00B1F5: db $79,$B7,$79,$B7,$79,$B7,$79,$B7
-#_00B1FD: db $79,$B7,$3B,$B8,$48,$B9,$48,$B9
-#_00B205: db $27,$BA
+#_00B1F5: dw Message_08B779
+#_00B1F7: dw Message_08B779
+#_00B1F9: dw Message_08B779
+#_00B1FB: dw Message_08B779
+#_00B1FD: dw Message_08B779
+#_00B1FF: dw Message_08B83B
+#_00B201: dw Message_08B948
+#_00B203: dw Message_08B948
 
 ;===================================================================================================
 
@@ -7891,7 +7902,7 @@ CODE_00B313:
 
 ROUTINE_00B316:
 #_00B316: JSR ROUTINE_00C44D
-#_00B319: JSL ROUTINE_088014
+#_00B319: JSL HandleDialog
 #_00B31D: JMP ROUTINE_00AFF7
 
 ;===================================================================================================
@@ -8895,7 +8906,7 @@ CODE_00B910:
 #_00B91B: TAX
 
 #_00B91C: LDA.l $7E7B16
-#_00B920: JSL ROUTINE_088000
+#_00B920: JSL SetMessagePointer
 #_00B924: JSR ROUTINE_00D403
 
 .exit
@@ -8906,7 +8917,7 @@ CODE_00B910:
 ROUTINE_00B928:
 #_00B928: JSR ROUTINE_00C521
 #_00B92B: JSR ROUTINE_00ED0F
-#_00B92E: JSL ROUTINE_088014
+#_00B92E: JSL HandleDialog
 
 #_00B932: LDA.l $7E2550
 #_00B936: BNE .exit
@@ -8944,7 +8955,7 @@ CODE_00B95D:
 #_00B968: TAX
 
 #_00B969: LDA.l $7E7B16
-#_00B96D: JSL ROUTINE_088000
+#_00B96D: JSL SetMessagePointer
 #_00B971: STZ.w $18E2
 
 #_00B974: LDA.l $7E7B12
