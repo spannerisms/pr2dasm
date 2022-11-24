@@ -3446,18 +3446,24 @@ ROUTINE_07EA0F:
 #_07EA0F: PHB
 #_07EA10: PHK
 #_07EA11: PLB
+
 #_07EA12: JSR .run_vector
+
 #_07EA15: PLB
 #_07EA16: RTL
 
+;---------------------------------------------------------------------------------------------------
 
 .run_vector
 #_07EA17: LDX.w $04B8
-#_07EA1A: JSR (PTR16_07EA1E,X)
+#_07EA1A: JSR (.vectors,X)
+
 #_07EA1D: RTS
 
-PTR16_07EA1E:
-#_07EA1E: dw ROUTINE_07EE82
+;---------------------------------------------------------------------------------------------------
+
+.vectors
+#_07EA1E: dw EXIT_07EE82
 #_07EA20: dw ROUTINE_07EABB
 #_07EA22: dw ROUTINE_07EAC1
 #_07EA24: dw ROUTINE_07EAC7
@@ -3698,18 +3704,24 @@ ROUTINE_07EB3F:
 #_07EB3F: PHB
 #_07EB40: PHK
 #_07EB41: PLB
+
 #_07EB42: JSR .run_vector
+
 #_07EB45: PLB
 #_07EB46: RTL
 
+;---------------------------------------------------------------------------------------------------
 
 .run_vector
 #_07EB47: LDX.w $04B8
-#_07EB4A: JSR (PTR16_07EB4E,X)
+#_07EB4A: JSR (.vectors,X)
+
 #_07EB4D: RTS
 
-PTR16_07EB4E:
-#_07EB4E: dw ROUTINE_07EE82
+;---------------------------------------------------------------------------------------------------
+
+.vectors
+#_07EB4E: dw EXIT_07EE82
 #_07EB50: dw ROUTINE_07EBEB
 #_07EB52: dw ROUTINE_07EBF1
 #_07EB54: dw ROUTINE_07EBF7
@@ -3993,18 +4005,23 @@ ROUTINE_07EDA0:
 #_07EDA0: PHB
 #_07EDA1: PHK
 #_07EDA2: PLB
+
 #_07EDA3: JSR .run_vector
+
 #_07EDA6: PLB
 #_07EDA7: RTL
-
+;---------------------------------------------------------------------------------------------------
 
 .run_vector
 #_07EDA8: LDX.w $04B8
-#_07EDAB: JSR (PTR16_07EDAF,X)
+#_07EDAB: JSR (.vectors,X)
+
 #_07EDAE: RTS
 
-PTR16_07EDAF:
-#_07EDAF: dw ROUTINE_07EE82
+;---------------------------------------------------------------------------------------------------
+
+.vectors
+#_07EDAF: dw EXIT_07EE82
 #_07EDB1: dw ROUTINE_07EE50
 #_07EDB3: dw ROUTINE_07EE56
 #_07EDB5: dw ROUTINE_07EE5C
@@ -4190,15 +4207,17 @@ ROUTINE_07EE74:
 
 .run_vector
 #_07EE7C: LDX.w $04B8
-#_07EE7F: JSR (PTR16_07EE83,X)
+#_07EE7F: JSR (.vectors,X)
 
 ;===================================================================================================
 
-ROUTINE_07EE82:
+#EXIT_07EE82:
 #_07EE82: RTS
 
-PTR16_07EE83:
-#_07EE83: dw ROUTINE_07EE82
+;===================================================================================================
+
+.vectors
+#_07EE83: dw EXIT_07EE82
 #_07EE85: dw ROUTINE_07EF24
 #_07EE87: dw ROUTINE_07EF2A
 #_07EE89: dw ROUTINE_07EF30
@@ -4660,7 +4679,8 @@ ROUTINE_07F4C4:
 #_07F4C4: LDA.w $0506
 #_07F4C7: ASL A
 #_07F4C8: TAX
-#_07F4C9: JSR (PTR16_07F4D9,X)
+
+#_07F4C9: JSR (.vectors,X)
 
 #_07F4CC: LDA.w $0506
 #_07F4CF: CMP.w #$000F
@@ -4671,7 +4691,9 @@ ROUTINE_07F4C4:
 .exit
 #_07F4D8: RTL
 
-PTR16_07F4D9:
+;---------------------------------------------------------------------------------------------------
+
+.vectors
 #_07F4D9: dw ROUTINE_07F501
 #_07F4DB: dw ROUTINE_07F5D4
 #_07F4DD: dw ROUTINE_07F5E3
@@ -5304,8 +5326,8 @@ ROUTINE_07F92B:
 ; original size and regains
 ; consciousness.
 Message_07F92F:
-#_07F92F: dw $0001, $0003, $0012, $001C ; TODO
-#_07F937: dw $0003, $0000, $0000, $0000 ; TODO
+#_07F92F: dw $0001, $0003, $0012, $001C ; TODO, box x position, box y position, width
+#_07F937: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_07F93F: dw .data, $0000
 
 .data
@@ -5359,14 +5381,14 @@ Message_07F92F:
 ;        you at the
 ;        festival."
 Message_07F9DD:
-#_07F9DD: dw $0001, $0003, $0012, $001C ; TODO
-#_07F9E5: dw $0003, $0000, $0000, $0000 ; TODO
+#_07F9DD: dw $0001, $0003, $0012, $001C ; TODO, box x position, box y position, width
+#_07F9E5: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_07F9ED: dw .data, $0000
 
 .data
 #_07F9F1: db $05, $06 ; set delay
-#_07F9F3: db $03 ; TODO
-#_07F9F4: db $01, $00, $00 ; TODO
+#_07F9F3: db $03 ; clear text box
+#_07F9F4: db $01, $00, $00 ; set text position
 #_07F9F7: db $DB, $C9, $BE, $B1, $B7, $BF, $BE, $3A ; «Dynagon:»
 #_07F9FF: db $2B, $AB, $C2, $B9, $BE, $B3, $B5, $C3 ; «"Princes»
 #_07FA07: db $C3, $20, $A7, $C5, $BE, $B1, $2C      ; «s Luna,»
@@ -5479,14 +5501,14 @@ Message_07F9DD:
 ; Pocky:"Come on, you're
 ;        always eating."
 Message_07FB8A:
-#_07FB8A: dw $0001, $0003, $0012, $001C ; TODO
-#_07FB92: dw $0003, $0000, $0000, $0000 ; TODO
+#_07FB8A: dw $0001, $0003, $0012, $001C ; TODO, box x position, box y position, width
+#_07FB92: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_07FB9A: dw .data, $0000
 
 .data
 #_07FB9E: db $05, $06 ; set delay
-#_07FBA0: db $03 ; TODO
-#_07FBA1: db $01, $00, $00 ; TODO
+#_07FBA0: db $03 ; clear text box
+#_07FBA1: db $01, $00, $00 ; set text position
 #_07FBA4: db $3C, $BF, $C2, $B4, $BF, $BE, $3A, $2B ; «Gordon:"»
 #_07FBAC: db $D5, $BF, $C5, $20, $BD, $B1, $B4, $B5 ; «You made»
 #_07FBB4: db $20, $B9, $C4, $20, $B2, $B1, $B3, $BB ; « it back»
@@ -5562,8 +5584,8 @@ Message_07FB8A:
 ;===================================================================================================
 
 Message_07FCE5:
-#_07FCE5: dw $0001, $0003, $0012, $001C ; TODO
-#_07FCED: dw $0003, $0000, $0000, $0000 ; TODO
+#_07FCE5: dw $0001, $0003, $0012, $001C ; TODO, box x position, box y position, width
+#_07FCED: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_07FCF5: dw .data, $0000
 
 .data
@@ -5584,13 +5606,13 @@ Message_07FCE5:
 ; Pocky and her partners then
 ; go back to the village.
 Message_07FD00:
-#_07FD00: dw $0001, $0003, $0012, $001C ; TODO
-#_07FD08: dw $0003, $0000, $0000, $0000 ; TODO
+#_07FD00: dw $0001, $0003, $0012, $001C ; TODO, box x position, box y position, width
+#_07FD08: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_07FD10: dw .data, $0000
 
 .data
-#_07FD14: db $03 ; TODO
-#_07FD15: db $01, $00, $00 ; TODO
+#_07FD14: db $03 ; clear text box
+#_07FD15: db $01, $00, $00 ; set text position
 #_07FD18: db $05, $06 ; set delay
 #_07FD1A: db $AB, $BF, $B3, $BB, $C9, $20, $B1, $BE ; «Pocky an»
 #_07FD22: db $B4, $20, $B8, $B5, $C2, $20, $B6, $C2 ; «d her fr»
@@ -5658,13 +5680,13 @@ Message_07FD00:
 ; told by the villagers
 ; throughout the ages to come.
 Message_07FDF5:
-#_07FDF5: dw $0001, $0003, $0014, $001C ; TODO
-#_07FDFD: dw $0003, $0000, $0000, $0000 ; TODO
+#_07FDF5: dw $0001, $0003, $0014, $001C ; TODO, box x position, box y position, width
+#_07FDFD: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_07FE05: dw .data, $0000
 
 .data
-#_07FE09: db $03 ; TODO
-#_07FE0A: db $01, $00, $00 ; TODO
+#_07FE09: db $03 ; clear text box
+#_07FE0A: db $01, $00, $00 ; set text position
 #_07FE0D: db $05, $08 ; set delay
 #_07FE0F: db $3E, $C4, $20, $B8, $B1, $C3, $20, $B2 ; «It has b»
 #_07FE17: db $B5, $B3, $BF, $BD, $B5, $20, $B4, $B1 ; «ecome da»
@@ -5761,13 +5783,12 @@ Message_07FDF5:
 #_07FFD8: db $BF, $BD, $B5, $2E                     ; «ome.»
 #_07FFDC: db $05, $78 ; set delay
 #_07FFDE: db $05, $06 ; set delay
-#_07FFE0: db $03 ; TODO
+#_07FFE0: db $03 ; clear text box
 #_07FFE1: db $00 ; end message
 
 ;===================================================================================================
 
-#_07FFE2: db $00,$00,$00,$00,$00
-#_07FFE7: db $00,$00,$00,$00,$00,$00,$00,$00
-#_07FFEF: db $00,$00,$00,$00,$00,$00,$00,$00
-#_07FFF7: db $00,$00,$00,$00,$00,$00,$00,$00
-#_07FFFF: db $00
+#_07FFE2: db $00, $00, $00, $00, $00, $00, $00, $00
+#_07FFEA: db $00, $00, $00, $00, $00, $00, $00, $00
+#_07FFF2: db $00, $00, $00, $00, $00, $00, $00, $00
+#_07FFFA: db $00, $00, $00, $00, $00, $00

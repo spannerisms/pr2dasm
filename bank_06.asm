@@ -46,7 +46,7 @@ CODE_06A2D2:
 
 ;===================================================================================================
 
-ROUTINE_06A2DC:
+ExecuteHighSprite:
 #_06A2DC: PHB
 #_06A2DD: PHK
 #_06A2DE: PLB
@@ -65,97 +65,334 @@ ROUTINE_06A2DC:
 #_06A2EA: RTL
 
 .vectors
-#_06A2EB: dw ROUTINE_06FF27
-#_06A2ED: dw ROUTINE_06FF6B
-#_06A2EF: dw ROUTINE_06F83D
-#_06A2F1: dw ROUTINE_06F856
-#_06A2F3: dw ROUTINE_06F868
-#_06A2F5: dw ROUTINE_06F895
-#_06A2F7: db $BF,$F8,$FE,$F7,$0F,$F8,$25,$F9
-#_06A2FF: db $C5,$F9,$E7,$F9,$56,$FA,$E3,$FA
-#_06A307: db $D3,$FB,$5D,$FC,$C0,$FC,$39,$FE
-#_06A30F: db $53,$FE,$6D,$FE,$95,$FE,$D5,$FE
-#_06A317: db $1E,$FD,$7E,$FD,$BB,$FD,$4D,$F7
-#_06A31F: db $6D,$F7,$FB,$F7,$E7,$F6,$F3,$F6
-#_06A327: db $B4,$F6,$C4,$F6,$06,$F6,$22,$F6
-#_06A32F: db $86,$F6,$BA,$F5,$DC,$F5,$C5,$F5
-#_06A337: db $DC,$F5,$7B,$F5,$8B,$F5,$97,$F3
-#_06A33F: db $B5,$F3,$EB,$F3,$27,$F4,$46,$F4
-#_06A347: db $66,$F4,$80,$F4,$9A,$F4,$9E,$F4
-#_06A34F: db $E6,$F3,$27,$F4,$46,$F4,$66,$F4
-#_06A357: db $80,$F4,$9A,$F4,$A8,$F4,$E1,$F3
-#_06A35F: db $27,$F4,$46,$F4,$66,$F4,$80,$F4
-#_06A367: db $9A,$F4,$B2,$F4,$E8,$F4,$1B,$F5
-#_06A36F: db $36,$F5,$58,$F5,$9A,$F4,$01,$F5
-#_06A377: db $27,$F4,$C9,$F4,$91,$F2,$D5,$F1
-#_06A37F: db $0D,$F2,$71,$F2,$D8,$FD,$05,$FE
-
-;===================================================================================================
-
-#data06A387:
-#_06A387: db $00,$00,$00,$00,$00,$00,$00,$00
-#_06A38F: db $00,$00,$00,$00,$00,$00,$00,$00
-#_06A397: db $00,$00,$00,$00,$7B,$A5,$AE,$A5
-#_06A39F: db $DB,$A5,$FF,$A5,$1A,$A6,$27,$A6
-#_06A3A7: db $4B,$A6,$72,$A6,$B7,$A6,$C4,$A6
-#_06A3AF: db $F1,$CA,$15,$CB,$34,$CB,$22,$E0
-#_06A3B7: db $22,$E0,$00,$00,$65,$F1,$7F,$F1
-#_06A3BF: db $CD,$F1,$CD,$EF,$E3,$EF,$2F,$F0
-#_06A3C7: db $C7,$EF,$24,$F1,$68,$EF,$85,$EF
-#_06A3CF: db $68,$EF,$68,$EF,$00,$00,$00,$00
-#_06A3D7: db $00,$00,$00,$00,$22,$E0,$D4,$E0
-#_06A3DF: db $3D,$E2,$51,$E2,$60,$E2,$89,$E2
-#_06A3E7: db $98,$E2,$2E,$E4,$A4,$DE,$B6,$DE
-#_06A3EF: db $4C,$D3,$69,$D3,$0A,$D3,$24,$D3
-#_06A3F7: db $03,$D3,$EB,$D2,$F2,$D2,$39,$D2
-#_06A3FF: db $5A,$D2,$4A,$CF,$1C,$D2,$10,$CE
-#_06A407: db $55,$CE,$CE,$CC,$FC,$CC,$62,$CD
-#_06A40F: db $DD,$CD,$BB,$CB,$40,$CC,$80,$CC
-#_06A417: db $00,$00,$A9,$CB,$4F,$CB,$80,$CB
-#_06A41F: db $E7,$CA,$BB,$CA,$D4,$CA,$8F,$CA
-#_06A427: db $A7,$CA,$57,$CA,$7D,$CA,$98,$E2
-#_06A42F: db $2E,$E4,$DE,$E4,$A0,$E5,$F6,$E5
-#_06A437: db $3E,$E6,$82,$E7,$1F,$E8,$7C,$E8
-#_06A43F: db $97,$E8,$C9,$E8,$FD,$E8,$9D,$E9
-#_06A447: db $C3,$E9,$E6,$E9,$EF,$EB,$46,$EC
-#_06A44F: db $75,$EC,$A5,$EC,$F3,$ED,$6A,$EE
-#_06A457: db $82,$E7,$0A,$E7,$08,$EA,$A8,$EA
-#_06A45F: db $1B,$EB,$3A,$EB,$46,$EB,$56,$EB
-#_06A467: db $56,$EB,$A1,$EB,$87,$C5,$1F,$C6
-#_06A46F: db $6D,$C6,$80,$C6,$8F,$C6,$61,$C6
-#_06A477: db $AD,$C6,$29,$C9,$A1,$C9,$4D,$C5
-#_06A47F: db $51,$C5,$04,$C4,$47,$C4,$95,$C4
-#_06A487: db $CD,$C4,$37,$C5,$69,$C3,$BF,$C3
-#_06A48F: db $E3,$C3,$A3,$C3,$8A,$C2,$B5,$C2
-#_06A497: db $41,$C3,$00,$00,$06,$CA,$3C,$CA
-#_06A49F: db $CC,$C1,$31,$C2,$43,$C2,$56,$C2
-#_06A4A7: db $80,$C2,$58,$C1,$8C,$C1,$87,$BC
-#_06A4AF: db $B0,$BC,$F9,$BC,$0B,$BD,$C1,$BD
-#_06A4B7: db $F6,$BD,$3C,$BE,$4E,$BE,$84,$BE
-#_06A4BF: db $F8,$BE,$2E,$BF,$C0,$BF,$C0,$BF
-#_06A4C7: db $DE,$BF,$87,$C0,$9D,$C0,$01,$BA
-#_06A4CF: db $10,$BA,$47,$BA,$F8,$BA,$54,$BB
-#_06A4D7: db $7C,$BB,$AF,$BB,$DE,$BB,$09,$BC
-#_06A4DF: db $C3,$B9,$E7,$B9,$5B,$BC,$25,$B4
-#_06A4E7: db $5C,$B4,$AF,$B5,$CA,$B5,$D9,$B5
-#_06A4EF: db $56,$B5,$F2,$B5,$FE,$B5,$BE,$B6
-#_06A4F7: db $FA,$B6,$25,$B7,$A4,$B8,$B1,$B8
-#_06A4FF: db $DD,$B8,$2E,$B9,$BC,$B2,$F2,$B2
-#_06A507: db $C2,$B1,$D5,$B1,$0F,$B2,$47,$B2
-#_06A50F: db $7A,$B2,$73,$B1,$7C,$B1,$A2,$B1
-#_06A517: db $9A,$B0,$56,$AE,$6F,$AE,$A6,$AE
-#_06A51F: db $B9,$AE,$C8,$AE,$9A,$AE,$FC,$AE
-#_06A527: db $67,$AF,$E1,$AE,$E7,$AE,$EA,$AE
-#_06A52F: db $E1,$A6,$06,$A7,$12,$A7,$19,$A7
-#_06A537: db $00,$00,$00,$00,$AA,$AC,$E1,$AC
-#_06A53F: db $96,$AD,$38,$AE,$AA,$AC,$29,$AC
-#_06A547: db $54,$AC,$8C,$AC,$D9,$AB,$FD,$AB
-#_06A54F: db $DB,$AA,$4A,$AB,$25,$AB,$37,$A7
-#_06A557: db $00,$00,$00,$00,$A9,$AA,$AA,$AB
-#_06A55F: db $0D,$AB,$6D,$A7,$00,$00,$00,$00
-#_06A567: db $F7,$A7,$15,$A8,$90,$A7,$BE,$A7
-#_06A56F: db $D6,$A7,$E4,$A7,$A7,$E6,$F4,$E6
-#_06A577: db $76,$B0,$84,$B0
+#_06A2EB: dw ROUTINE_06FF27                     ; 8000
+#_06A2ED: dw ROUTINE_06FF6B                     ; 8002
+#_06A2EF: dw ROUTINE_06F83D                     ; 8004
+#_06A2F1: dw ROUTINE_06F856                     ; 8006
+#_06A2F3: dw ROUTINE_06F868                     ; 8008
+#_06A2F5: dw ROUTINE_06F895                     ; 800A
+#_06A2F7: dw ROUTINE_06F8BF                     ; 800C
+#_06A2F9: dw ROUTINE_06F7FE                     ; 800E
+#_06A2FB: dw ROUTINE_06F80F                     ; 8010
+#_06A2FD: dw ROUTINE_06F925                     ; 8012
+#_06A2FF: dw ROUTINE_06F9C5                     ; 8014
+#_06A301: dw ROUTINE_06F9E7                     ; 8016
+#_06A303: dw ROUTINE_06FA56                     ; 8018
+#_06A305: dw ROUTINE_06FAE3                     ; 801A
+#_06A307: dw ROUTINE_06FBD3                     ; 801C
+#_06A309: dw ROUTINE_06FC5D                     ; 801E
+#_06A30B: dw ROUTINE_06FCC0                     ; 8020
+#_06A30D: dw ROUTINE_06FE39                     ; 8022
+#_06A30F: dw ROUTINE_06FE53                     ; 8024
+#_06A311: dw ROUTINE_06FE6D                     ; 8026
+#_06A313: dw ROUTINE_06FE95                     ; 8028
+#_06A315: dw ROUTINE_06FED5                     ; 802A
+#_06A317: dw ROUTINE_06FD1E                     ; 802C
+#_06A319: dw ROUTINE_06FD7E                     ; 802E
+#_06A31B: dw ROUTINE_06FDBB                     ; 8030
+#_06A31D: dw ROUTINE_06F74D                     ; 8032
+#_06A31F: dw ROUTINE_06F76D                     ; 8034
+#_06A321: dw ROUTINE_06F7FB                     ; 8036
+#_06A323: dw ROUTINE_06F6E7                     ; 8038
+#_06A325: dw ROUTINE_06F6F3                     ; 803A
+#_06A327: dw ROUTINE_06F6B4                     ; 803C
+#_06A329: dw ROUTINE_06F6C4                     ; 803E
+#_06A32B: dw ROUTINE_06F606                     ; 8040
+#_06A32D: dw ROUTINE_06F622                     ; 8042
+#_06A32F: dw ROUTINE_06F686                     ; 8044
+#_06A331: dw ROUTINE_06F5BA                     ; 8046
+#_06A333: dw ROUTINE_06F5DC                     ; 8048
+#_06A335: dw ROUTINE_06F5C5                     ; 804A
+#_06A337: dw ROUTINE_06F5DC                     ; 804C
+#_06A339: dw ROUTINE_06F57B                     ; 804E
+#_06A33B: dw ROUTINE_06F58B                     ; 8050
+#_06A33D: dw ROUTINE_06F397                     ; 8052
+#_06A33F: dw ROUTINE_06F3B5                     ; 8054
+#_06A341: dw ROUTINE_06F3EB                     ; 8056
+#_06A343: dw ROUTINE_06F427                     ; 8058
+#_06A345: dw ROUTINE_06F446                     ; 805A
+#_06A347: dw ROUTINE_06F466                     ; 805C
+#_06A349: dw ROUTINE_06F480                     ; 805E
+#_06A34B: dw ROUTINE_06F49A                     ; 8060
+#_06A34D: dw ROUTINE_06F49E                     ; 8062
+#_06A34F: dw ROUTINE_06F3E6                     ; 8064
+#_06A351: dw ROUTINE_06F427                     ; 8066
+#_06A353: dw ROUTINE_06F446                     ; 8068
+#_06A355: dw ROUTINE_06F466                     ; 806A
+#_06A357: dw ROUTINE_06F480                     ; 806C
+#_06A359: dw ROUTINE_06F49A                     ; 806E
+#_06A35B: dw ROUTINE_06F4A8                     ; 8070
+#_06A35D: dw ROUTINE_06F3E1                     ; 8072
+#_06A35F: dw ROUTINE_06F427                     ; 8074
+#_06A361: dw ROUTINE_06F446                     ; 8076
+#_06A363: dw ROUTINE_06F466                     ; 8078
+#_06A365: dw ROUTINE_06F480                     ; 807A
+#_06A367: dw ROUTINE_06F49A                     ; 807C
+#_06A369: dw ROUTINE_06F4B2                     ; 807E
+#_06A36B: dw ROUTINE_06F4E8                     ; 8080
+#_06A36D: dw ROUTINE_06F51B                     ; 8082
+#_06A36F: dw ROUTINE_06F536                     ; 8084
+#_06A371: dw ROUTINE_06F558                     ; 8086
+#_06A373: dw ROUTINE_06F49A                     ; 8088
+#_06A375: dw ROUTINE_06F501                     ; 808A
+#_06A377: dw ROUTINE_06F427                     ; 808C
+#_06A379: dw ROUTINE_06F4C9                     ; 808E
+#_06A37B: dw ROUTINE_06F291                     ; 8090
+#_06A37D: dw ROUTINE_06F1D5                     ; 8092
+#_06A37F: dw ROUTINE_06F20D                     ; 8094
+#_06A381: dw ROUTINE_06F271                     ; 8096
+#_06A383: dw ROUTINE_06FDD8                     ; 8098
+#_06A385: dw ROUTINE_06FE05                     ; 809A
+#_06A387: dw $0000                              ; 809C
+#_06A389: dw $0000                              ; 809E
+#_06A38B: dw $0000                              ; 80A0
+#_06A38D: dw $0000                              ; 80A2
+#_06A38F: dw $0000                              ; 80A4
+#_06A391: dw $0000                              ; 80A6
+#_06A393: dw $0000                              ; 80A8
+#_06A395: dw $0000                              ; 80AA
+#_06A397: dw $0000                              ; 80AC
+#_06A399: dw $0000                              ; 80AE
+#_06A39B: dw ROUTINE_06A57B                     ; 80B0
+#_06A39D: dw ROUTINE_06A5AE                     ; 80B2
+#_06A39F: dw ROUTINE_06A5DB                     ; 80B4
+#_06A3A1: dw ROUTINE_06A5FF                     ; 80B6
+#_06A3A3: dw ROUTINE_06A61A                     ; 80B8
+#_06A3A5: dw ROUTINE_06A627                     ; 80BA
+#_06A3A7: dw ROUTINE_06A64B                     ; 80BC
+#_06A3A9: dw ROUTINE_06A672                     ; 80BE
+#_06A3AB: dw ROUTINE_06A6B7                     ; 80C0
+#_06A3AD: dw ROUTINE_06A6C4                     ; 80C2
+#_06A3AF: dw ROUTINE_06CAF1                     ; 80C4
+#_06A3B1: dw ROUTINE_06CB15                     ; 80C6
+#_06A3B3: dw ROUTINE_06CB34                     ; 80C8
+#_06A3B5: dw ROUTINE_06E022                     ; 80CA
+#_06A3B7: dw ROUTINE_06E022                     ; 80CC
+#_06A3B9: dw $0000                              ; 80CE
+#_06A3BB: dw ROUTINE_06F165                     ; 80D0
+#_06A3BD: dw ROUTINE_06F17F                     ; 80D2
+#_06A3BF: dw ROUTINE_06F1CD                     ; 80D4
+#_06A3C1: dw ROUTINE_06EFCD                     ; 80D6
+#_06A3C3: dw ROUTINE_06EFE3                     ; 80D8
+#_06A3C5: dw ROUTINE_06F02F                     ; 80DA
+#_06A3C7: dw ROUTINE_06EFC7                     ; 80DC
+#_06A3C9: dw ROUTINE_06F124                     ; 80DE
+#_06A3CB: dw ROUTINE_06EF68                     ; 80E0
+#_06A3CD: dw ROUTINE_06EF85                     ; 80E2
+#_06A3CF: dw ROUTINE_06EF68                     ; 80E4
+#_06A3D1: dw ROUTINE_06EF68                     ; 80E6
+#_06A3D3: dw $0000                              ; 80E8
+#_06A3D5: dw $0000                              ; 80EA
+#_06A3D7: dw $0000                              ; 80EC
+#_06A3D9: dw $0000                              ; 80EE
+#_06A3DB: dw ROUTINE_06E022                     ; 80F0
+#_06A3DD: dw ROUTINE_06E0D4                     ; 80F2
+#_06A3DF: dw ROUTINE_06E23D                     ; 80F4
+#_06A3E1: dw ROUTINE_06E251                     ; 80F6
+#_06A3E3: dw ROUTINE_06E260                     ; 80F8
+#_06A3E5: dw ROUTINE_06E289                     ; 80FA
+#_06A3E7: dw ROUTINE_06E298                     ; 80FC
+#_06A3E9: dw ROUTINE_06E42E                     ; 80FE
+#_06A3EB: dw ROUTINE_06DEA4                     ; 8100
+#_06A3ED: dw ROUTINE_06DEB6                     ; 8102
+#_06A3EF: dw ROUTINE_06D34C                     ; 8104
+#_06A3F1: dw ROUTINE_06D369                     ; 8106
+#_06A3F3: dw ROUTINE_06D30A                     ; 8108
+#_06A3F5: dw ROUTINE_06D324                     ; 810A
+#_06A3F7: dw ROUTINE_06D303                     ; 810C
+#_06A3F9: dw ROUTINE_06D2EB                     ; 810E
+#_06A3FB: dw ROUTINE_06D2F2                     ; 8110
+#_06A3FD: dw ROUTINE_06D239                     ; 8112
+#_06A3FF: dw ROUTINE_06D25A                     ; 8114
+#_06A401: dw ROUTINE_06CF4A                     ; 8116
+#_06A403: dw ROUTINE_06D21C                     ; 8118
+#_06A405: dw ROUTINE_06CE10                     ; 811A
+#_06A407: dw ROUTINE_06CE55                     ; 811C
+#_06A409: dw ROUTINE_06CCCE                     ; 811E
+#_06A40B: dw ROUTINE_06CCFC                     ; 8120
+#_06A40D: dw ROUTINE_06CD62                     ; 8122
+#_06A40F: dw ROUTINE_06CDDD                     ; 8124
+#_06A411: dw ROUTINE_06CBBB                     ; 8126
+#_06A413: dw ROUTINE_06CC40                     ; 8128
+#_06A415: dw ROUTINE_06CC80                     ; 812A
+#_06A417: dw $0000                              ; 812C
+#_06A419: dw ROUTINE_06CBA9                     ; 812E
+#_06A41B: dw ROUTINE_06CB4F                     ; 8130
+#_06A41D: dw ROUTINE_06CB80                     ; 8132
+#_06A41F: dw ROUTINE_06CAE7                     ; 8134
+#_06A421: dw ROUTINE_06CABB                     ; 8136
+#_06A423: dw ROUTINE_06CAD4                     ; 8138
+#_06A425: dw ROUTINE_06CA8F                     ; 813A
+#_06A427: dw ROUTINE_06CAA7                     ; 813C
+#_06A429: dw ROUTINE_06CA57                     ; 813E
+#_06A42B: dw ROUTINE_06CA7D                     ; 8140
+#_06A42D: dw ROUTINE_06E298                     ; 8142
+#_06A42F: dw ROUTINE_06E42E                     ; 8144
+#_06A431: dw ROUTINE_06E4DE                     ; 8146
+#_06A433: dw ROUTINE_06E5A0                     ; 8148
+#_06A435: dw ROUTINE_06E5F6                     ; 814A
+#_06A437: dw ROUTINE_06E63E                     ; 814C
+#_06A439: dw ROUTINE_06E782                     ; 814E
+#_06A43B: dw ROUTINE_06E81F                     ; 8150
+#_06A43D: dw ROUTINE_06E87C                     ; 8152
+#_06A43F: dw ROUTINE_06E897                     ; 8154
+#_06A441: dw ROUTINE_06E8C9                     ; 8156
+#_06A443: dw ROUTINE_06E8FD                     ; 8158
+#_06A445: dw ROUTINE_06E99D                     ; 815A
+#_06A447: dw ROUTINE_06E9C3                     ; 815C
+#_06A449: dw ROUTINE_06E9E6                     ; 815E
+#_06A44B: dw ROUTINE_06EBEF                     ; 8160
+#_06A44D: dw ROUTINE_06EC46                     ; 8162
+#_06A44F: dw ROUTINE_06EC75                     ; 8164
+#_06A451: dw ROUTINE_06ECA5                     ; 8166
+#_06A453: dw ROUTINE_06EDF3                     ; 8168
+#_06A455: dw ROUTINE_06EE6A                     ; 816A
+#_06A457: dw ROUTINE_06E782                     ; 816C
+#_06A459: dw ROUTINE_06E70A                     ; 816E
+#_06A45B: dw ROUTINE_06EA08                     ; 8170
+#_06A45D: dw ROUTINE_06EAA8                     ; 8172
+#_06A45F: dw ROUTINE_06EB1B                     ; 8174
+#_06A461: dw ROUTINE_06EB3A                     ; 8176
+#_06A463: dw ROUTINE_06EB46                     ; 8178
+#_06A465: dw ROUTINE_06EB56                     ; 817A
+#_06A467: dw ROUTINE_06EB56                     ; 817C
+#_06A469: dw ROUTINE_06EBA1                     ; 817E
+#_06A46B: dw ROUTINE_06C587                     ; 8180
+#_06A46D: dw ROUTINE_06C61F                     ; 8182
+#_06A46F: dw ROUTINE_06C66D                     ; 8184
+#_06A471: dw ROUTINE_06C680                     ; 8186
+#_06A473: dw ROUTINE_06C68F                     ; 8188
+#_06A475: dw ROUTINE_06C661                     ; 818A
+#_06A477: dw ROUTINE_06C6AD                     ; 818C
+#_06A479: dw ROUTINE_06C929                     ; 818E
+#_06A47B: dw ROUTINE_06C9A1                     ; 8190
+#_06A47D: dw ROUTINE_06C54D                     ; 8192
+#_06A47F: dw ROUTINE_06C551                     ; 8194
+#_06A481: dw ROUTINE_06C404                     ; 8196
+#_06A483: dw ROUTINE_06C447                     ; 8198
+#_06A485: dw ROUTINE_06C495                     ; 819A
+#_06A487: dw ROUTINE_06C4CD                     ; 819C
+#_06A489: dw ROUTINE_06C537                     ; 819E
+#_06A48B: dw ROUTINE_06C369                     ; 81A0
+#_06A48D: dw ROUTINE_06C3BF                     ; 81A2
+#_06A48F: dw ROUTINE_06C3E3                     ; 81A4
+#_06A491: dw ROUTINE_06C3A3                     ; 81A6
+#_06A493: dw ROUTINE_06C28A                     ; 81A8
+#_06A495: dw ROUTINE_06C2B5                     ; 81AA
+#_06A497: dw ROUTINE_06C341                     ; 81AC
+#_06A499: dw $0000                              ; 81AE
+#_06A49B: dw ROUTINE_06CA06                     ; 81B0
+#_06A49D: dw ROUTINE_06CA3C                     ; 81B2
+#_06A49F: dw ROUTINE_06C1CC                     ; 81B4
+#_06A4A1: dw ROUTINE_06C231                     ; 81B6
+#_06A4A3: dw ROUTINE_06C243                     ; 81B8
+#_06A4A5: dw ROUTINE_06C256                     ; 81BA
+#_06A4A7: dw ROUTINE_06C280                     ; 81BC
+#_06A4A9: dw ROUTINE_06C158                     ; 81BE
+#_06A4AB: dw ROUTINE_06C18C                     ; 81C0
+#_06A4AD: dw ROUTINE_06BC87                     ; 81C2
+#_06A4AF: dw ROUTINE_06BCB0                     ; 81C4
+#_06A4B1: dw ROUTINE_06BCF9                     ; 81C6
+#_06A4B3: dw ROUTINE_06BD0B                     ; 81C8
+#_06A4B5: dw ROUTINE_06BDC1                     ; 81CA
+#_06A4B7: dw ROUTINE_06BDF6                     ; 81CC
+#_06A4B9: dw ROUTINE_06BE3C                     ; 81CE
+#_06A4BB: dw ROUTINE_06BE4E                     ; 81D0
+#_06A4BD: dw ROUTINE_06BE84                     ; 81D2
+#_06A4BF: dw ROUTINE_06BEF8                     ; 81D4
+#_06A4C1: dw ROUTINE_06BF2E                     ; 81D6
+#_06A4C3: dw ROUTINE_06BFC0                     ; 81D8
+#_06A4C5: dw ROUTINE_06BFC0                     ; 81DA
+#_06A4C7: dw ROUTINE_06BFDE                     ; 81DC
+#_06A4C9: dw ROUTINE_06C087                     ; 81DE
+#_06A4CB: dw ROUTINE_06C09D                     ; 81E0
+#_06A4CD: dw ROUTINE_06BA01                     ; 81E2
+#_06A4CF: dw ROUTINE_06BA10                     ; 81E4
+#_06A4D1: dw ROUTINE_06BA47                     ; 81E6
+#_06A4D3: dw ROUTINE_06BAF8                     ; 81E8
+#_06A4D5: dw ROUTINE_06BB54                     ; 81EA
+#_06A4D7: dw ROUTINE_06BB7C                     ; 81EC
+#_06A4D9: dw ROUTINE_06BBAF                     ; 81EE
+#_06A4DB: dw ROUTINE_06BBDE                     ; 81F0
+#_06A4DD: dw ROUTINE_06BC09                     ; 81F2
+#_06A4DF: dw ROUTINE_06B9C3                     ; 81F4
+#_06A4E1: dw ROUTINE_06B9E7                     ; 81F6
+#_06A4E3: dw ROUTINE_06BC5B                     ; 81F8
+#_06A4E5: dw ROUTINE_06B425                     ; 81FA
+#_06A4E7: dw ROUTINE_06B45C                     ; 81FC
+#_06A4E9: dw ROUTINE_06B5AF                     ; 81FE
+#_06A4EB: dw ROUTINE_06B5CA                     ; 8200
+#_06A4ED: dw ROUTINE_06B5D9                     ; 8202
+#_06A4EF: dw ROUTINE_06B556                     ; 8204
+#_06A4F1: dw ROUTINE_06B5F2                     ; 8206
+#_06A4F3: dw ROUTINE_06B5FE                     ; 8208
+#_06A4F5: dw ROUTINE_06B6BE                     ; 820A
+#_06A4F7: dw ROUTINE_06B6FA                     ; 820C
+#_06A4F9: dw ROUTINE_06B725                     ; 820E
+#_06A4FB: dw ROUTINE_06B8A4                     ; 8210
+#_06A4FD: dw ROUTINE_06B8B1                     ; 8212
+#_06A4FF: dw ROUTINE_06B8DD                     ; 8214
+#_06A501: dw ROUTINE_06B92E                     ; 8216
+#_06A503: dw ROUTINE_06B2BC                     ; 8218
+#_06A505: dw ROUTINE_06B2F2                     ; 821A
+#_06A507: dw ROUTINE_06B1C2                     ; 821C
+#_06A509: dw ROUTINE_06B1D5                     ; 821E
+#_06A50B: dw ROUTINE_06B20F                     ; 8220
+#_06A50D: dw ROUTINE_06B247                     ; 8222
+#_06A50F: dw ROUTINE_06B27A                     ; 8224
+#_06A511: dw ROUTINE_06B173                     ; 8226
+#_06A513: dw ROUTINE_06B17C                     ; 8228
+#_06A515: dw ROUTINE_06B1A2                     ; 822A
+#_06A517: dw ROUTINE_06B09A                     ; 822C
+#_06A519: dw ROUTINE_06AE56                     ; 822E
+#_06A51B: dw ROUTINE_06AE6F                     ; 8230
+#_06A51D: dw ROUTINE_06AEA6                     ; 8232
+#_06A51F: dw ROUTINE_06AEB9                     ; 8234
+#_06A521: dw ROUTINE_06AEC8                     ; 8236
+#_06A523: dw ROUTINE_06AE9A                     ; 8238
+#_06A525: dw ROUTINE_06AEFC                     ; 823A
+#_06A527: dw ROUTINE_06AF67                     ; 823C
+#_06A529: dw ROUTINE_06AEE1                     ; 823E
+#_06A52B: dw ROUTINE_06AEE7                     ; 8240
+#_06A52D: dw ROUTINE_06AEEA                     ; 8242
+#_06A52F: dw ROUTINE_06A6E1                     ; 8244
+#_06A531: dw ROUTINE_06A706                     ; 8246
+#_06A533: dw ROUTINE_06A712                     ; 8248
+#_06A535: dw ROUTINE_06A719                     ; 824A
+#_06A537: dw $0000                              ; 824C
+#_06A539: dw $0000                              ; 824E
+#_06A53B: dw ROUTINE_06ACAA                     ; 8250
+#_06A53D: dw ROUTINE_06ACE1                     ; 8252
+#_06A53F: dw ROUTINE_06AD96                     ; 8254
+#_06A541: dw ROUTINE_06AE38                     ; 8256
+#_06A543: dw ROUTINE_06ACAA                     ; 8258
+#_06A545: dw ROUTINE_06AC29                     ; 825A
+#_06A547: dw ROUTINE_06AC54                     ; 825C
+#_06A549: dw ROUTINE_06AC8C                     ; 825E
+#_06A54B: dw ROUTINE_06ABD9                     ; 8260
+#_06A54D: dw ROUTINE_06ABFD                     ; 8262
+#_06A54F: dw ROUTINE_06AADB                     ; 8264
+#_06A551: dw ROUTINE_06AB4A                     ; 8266
+#_06A553: dw ROUTINE_06AB25                     ; 8268
+#_06A555: dw ROUTINE_06A737                     ; 826A
+#_06A557: dw $0000                              ; 826C
+#_06A559: dw $0000                              ; 826E
+#_06A55B: dw ROUTINE_06AAA9                     ; 8270
+#_06A55D: dw ROUTINE_06ABAA                     ; 8272
+#_06A55F: dw ROUTINE_06AB0D                     ; 8274
+#_06A561: dw ROUTINE_06A76D                     ; 8276
+#_06A563: dw $0000                              ; 8278
+#_06A565: dw $0000                              ; 827A
+#_06A567: dw ROUTINE_06A7F7                     ; 827C
+#_06A569: dw ROUTINE_06A815                     ; 827E
+#_06A56B: dw ROUTINE_06A790                     ; 8280
+#_06A56D: dw ROUTINE_06A7BE                     ; 8282
+#_06A56F: dw ROUTINE_06A7D6                     ; 8284
+#_06A571: dw ROUTINE_06A7E4                     ; 8286
+#_06A573: dw ROUTINE_06E6A7                     ; 8288
+#_06A575: dw ROUTINE_06E6F4                     ; 828A
+#_06A577: dw ROUTINE_06B076                     ; 828C
+#_06A579: dw ROUTINE_06B084                     ; 828E
 
 ;===================================================================================================
 
@@ -2734,7 +2971,7 @@ CODE_06B37E:
 
 CODE_06B386:
 #_06B386: LDA.w #$0006
-#_06B389: JSL ROUTINE_02FE15_long
+#_06B389: JSL ROUTINE_02FE0D
 #_06B38D: ASL A
 #_06B38E: ASL A
 #_06B38F: ASL A
@@ -5473,7 +5710,7 @@ ROUTINE_06C369:
 #_06C388: DEC A
 #_06C389: BEQ CODE_06C390
 
-#_06C38B: JSR ROUTINE_06C6C1
+#_06C38B: JSR AreWeOnLevel8
 #_06C38E: BNE CODE_06C39D
 
 CODE_06C390:
@@ -5701,7 +5938,7 @@ CODE_06C4EA:
 #_06C4F0: JSR ROUTINE_06C472
 
 #_06C4F3: LDA.w #$000C
-#_06C4F6: JSL ROUTINE_02FE15_long
+#_06C4F6: JSL ROUTINE_02FE0D
 #_06C4FA: JSR Increment_0816_AndCompareTo_bank06
 #_06C4FD: BCS CODE_06C507
 
@@ -5781,7 +6018,7 @@ ROUTINE_06C551:
 #_06C558: JSR ROUTINE_038D39_bank06
 
 CODE_06C55B:
-#_06C55B: JSR ROUTINE_06C6C1
+#_06C55B: JSR AreWeOnLevel8
 #_06C55E: BNE CODE_06C568
 
 #_06C560: LDA.w #$2000
@@ -5828,7 +6065,7 @@ ROUTINE_06C587:
 #_06C5A5: STZ.w $084C,X
 #_06C5A8: STZ.w $0840,X
 #_06C5AB: JSR ROUTINE_06BC9C
-#_06C5AE: JSR ROUTINE_06C610
+#_06C5AE: JSR SelectVoltaOrBoltaGreeting
 #_06C5B1: JSR ROUTINE_038589_bank06
 #_06C5B4: JSR ROUTINE_038719_bank06
 
@@ -5898,7 +6135,7 @@ CODE_06C608:
 
 ;===================================================================================================
 
-ROUTINE_06C610:
+SelectVoltaOrBoltaGreeting:
 #_06C610: LDA.w #Message_089334
 
 #_06C613: LDY.w $18E4
@@ -5971,7 +6208,7 @@ ROUTINE_06C66D:
 #_06C671: TAY
 #_06C672: BEQ CODE_06C67D
 
-#_06C674: JSR ROUTINE_06C610
+#_06C674: JSR SelectVoltaOrBoltaGreeting
 #_06C677: JSR ROUTINE_03857F_bank06
 #_06C67A: JSR AdvanceAIModeUp_bank06
 
@@ -6001,7 +6238,7 @@ ROUTINE_06C68F:
 #_06C696: TAY
 #_06C697: BEQ CODE_06C6AA
 
-#_06C699: JSR ROUTINE_038069_bank06
+#_06C699: JSR AreWeOnLevel9_bank06
 #_06C69C: BEQ CODE_06C69E
 
 CODE_06C69E:
@@ -6031,7 +6268,7 @@ CODE_06C6BB:
 
 ;===================================================================================================
 
-ROUTINE_06C6C1:
+AreWeOnLevel8:
 #_06C6C1: LDA.w $18E4
 #_06C6C4: CMP.w #$000E
 #_06C6C7: RTS
@@ -6052,7 +6289,7 @@ ROUTINE_06C6C8:
 #_06C6DD: BCS CODE_06C6EE
 
 #_06C6DF: LDA.w #$0024
-#_06C6E2: JSL ROUTINE_02FE15_long
+#_06C6E2: JSL ROUTINE_02FE0D
 #_06C6E6: SEP #$20
 #_06C6E8: XBA
 #_06C6E9: REP #$20
@@ -6083,7 +6320,7 @@ CODE_06C70A:
 #_06C70E: STA.w $080E,X
 
 CODE_06C711:
-#_06C711: JSR ROUTINE_06C6C1
+#_06C711: JSR AreWeOnLevel8
 #_06C714: BNE CODE_06C721
 
 #_06C716: LDA.w #$1100
@@ -6154,7 +6391,7 @@ ROUTINE_06C75A:
 #_06C776: LDA.w #$81BE
 #_06C779: JSR ROUTINE_0380B2_bank06
 #_06C77C: JSR ROUTINE_0380BB_bank06
-#_06C77F: JSR ROUTINE_06C6C1
+#_06C77F: JSR AreWeOnLevel8
 #_06C782: BNE CODE_06C789
 
 #_06C784: LDY.w #$0002
@@ -6271,7 +6508,7 @@ ROUTINE_06C818:
 #_06C828: JSR ROUTINE_0382D6_bank06
 
 CODE_06C82B:
-#_06C82B: JSR ROUTINE_06C6C1
+#_06C82B: JSR AreWeOnLevel8
 #_06C82E: BNE CODE_06C835
 
 #_06C830: LDA.w #$5000
@@ -6371,7 +6608,7 @@ ROUTINE_06C8AE:
 #_06C8BE: JSR ROUTINE_0382D6_bank06
 
 CODE_06C8C1:
-#_06C8C1: JSR ROUTINE_06C6C1
+#_06C8C1: JSR AreWeOnLevel8
 #_06C8C4: BNE CODE_06C8CB
 
 #_06C8C6: LDA.w #$2000
@@ -6474,7 +6711,7 @@ CODE_06C942:
 #_06C945: CMP.w #$0002
 #_06C948: BNE CODE_06C95B
 
-#_06C94A: JSR ROUTINE_06C6C1
+#_06C94A: JSR AreWeOnLevel8
 #_06C94D: BNE CODE_06C954
 
 #_06C94F: JSR ROUTINE_06C96E
@@ -6536,7 +6773,7 @@ ROUTINE_06C9A1:
 #_06C9A2: JSR ROUTINE_06C6C8
 
 #_06C9A5: LDA.w #$0015
-#_06C9A8: JSL ROUTINE_02FE15_long
+#_06C9A8: JSL ROUTINE_02FE0D
 #_06C9AC: JSR Increment_0816_AndCompareTo_bank06
 #_06C9AF: BCS CODE_06C9BF
 
@@ -6606,7 +6843,7 @@ ROUTINE_06CA06:
 #_06CA0A: CMP.w #$000C
 #_06CA0D: BCS CODE_06CA14
 
-#_06CA0F: JSR ROUTINE_06C6C1
+#_06CA0F: JSR AreWeOnLevel8
 #_06CA12: BNE CODE_06CA17
 
 CODE_06CA14:
@@ -6622,7 +6859,7 @@ CODE_06CA17:
 #_06CA22: JSR ROUTINE_06C9E7
 
 #_06CA25: LDY.w #$003C
-#_06CA28: JSR ROUTINE_06C6C1
+#_06CA28: JSR AreWeOnLevel8
 #_06CA2B: BNE CODE_06CA30
 
 #_06CA2D: LDY.w #$0078
@@ -8618,7 +8855,7 @@ ROUTINE_06D821:
 #_06D827: LSR A
 #_06D828: LSR A
 #_06D829: TAX
-#_06D82A: JSR (UNREACH_06D861,X)
+#_06D82A: JSR (.vectors,X)
 #_06D82D: JSR ROUTINE_06D882
 #_06D830: PLX
 
@@ -8641,15 +8878,22 @@ ROUTINE_06D821:
 #_06D85C: STA.b $36
 #_06D85E: JMP ROUTINE_06DA05
 
-UNREACH_06D861:
-#_06D861: db $70,$D8,$70,$D8,$70,$D8,$6D,$D8
-#_06D869: db $7C,$D8,$76,$D8
+.vectors:
+#_06D861: dw ROUTINE_06D870
+#_06D863: dw ROUTINE_06D870
+#_06D865: dw ROUTINE_06D870
+#_06D867: dw ROUTINE_06D86D
+#_06D869: dw ROUTINE_06D87C
+#_06D86B: dw ROUTINE_06D876
 
 ;===================================================================================================
 
 ROUTINE_06D86D:
 #_06D86D: STZ.w $05DC
 
+;===================================================================================================
+
+ROUTINE_06D870:
 #_06D870: LDA.w #$FEC3
 #_06D873: JMP ROUTINE_06D8BE
 
@@ -10000,7 +10244,7 @@ CODE_06E035:
 #_06E075: STZ.w $0840,X
 
 #_06E078: LDA.w #Message_08913B
-#_06E07B: JSR ROUTINE_038069_bank06
+#_06E07B: JSR AreWeOnLevel9_bank06
 #_06E07E: BNE CODE_06E083
 
 #_06E080: LDA.w #Message_08920F
@@ -10014,7 +10258,7 @@ CODE_06E083:
 #_06E08F: JSL ROUTINE_08BD65
 
 #_06E093: LDA.w #$0006
-#_06E096: JSR ROUTINE_038069_bank06
+#_06E096: JSR AreWeOnLevel9_bank06
 #_06E099: BEQ CODE_06E09E
 
 #_06E09B: LDA.w #$0000
@@ -10319,7 +10563,7 @@ ROUTINE_06E260:
 #_06E270: JSR ROUTINE_038BAD_bank06
 #_06E273: JSR ROUTINE_038077_bank06
 #_06E276: JSR Reset_0816_AndAdvanceAI_bank_bank06
-#_06E279: JSR ROUTINE_038069_bank06
+#_06E279: JSR AreWeOnLevel9_bank06
 #_06E27C: BNE CODE_06E283
 
 #_06E27E: JSR AskNicelyForSong_1D_bank06
@@ -10413,7 +10657,7 @@ ROUTINE_06E2FA:
 #_06E30B: BNE CODE_06E337
 
 #_06E30D: JSR ROUTINE_0381AB_bank06
-#_06E310: JSR ROUTINE_038069_bank06
+#_06E310: JSR AreWeOnLevel9_bank06
 #_06E313: BNE CODE_06E31A
 
 #_06E315: LDY.w #$0005
@@ -10811,7 +11055,7 @@ ROUTINE_06E53F:
 ;===================================================================================================
 
 ROUTINE_06E54E:
-#_06E54E: JSR ROUTINE_038069_bank06
+#_06E54E: JSR AreWeOnLevel9_bank06
 #_06E551: BNE CODE_06E561
 
 #_06E553: JSR ROUTINE_06E7CB
@@ -11381,7 +11625,7 @@ CODE_06E911:
 #_06E92E: STA.w $083E,X
 #_06E931: TYA
 #_06E932: STA.w $083C,X
-#_06E935: JSR ROUTINE_038069_bank06
+#_06E935: JSR AreWeOnLevel9_bank06
 #_06E938: BNE CODE_06E93F
 
 #_06E93A: JSR ROUTINE_06E96B
@@ -11554,7 +11798,7 @@ CODE_06EA34:
 #_06EA37: BCS CODE_06EA84
 
 #_06EA39: LDA.w #Message_0898C2
-#_06EA3C: JSR ROUTINE_038069_bank06
+#_06EA3C: JSR AreWeOnLevel9_bank06
 #_06EA3F: BNE CODE_06EA44
 
 #_06EA41: LDA.w #Message_089960
@@ -11563,7 +11807,7 @@ CODE_06EA44:
 #_06EA44: JSR ROUTINE_03859E_bank06
 
 #_06EA47: LDA.w #$0012
-#_06EA4A: JSR ROUTINE_038069_bank06
+#_06EA4A: JSR AreWeOnLevel9_bank06
 #_06EA4D: BNE CODE_06EA52
 
 #_06EA4F: LDA.w #$0006
@@ -11584,7 +11828,7 @@ CODE_06EA52:
 #_06EA6E: STA.l $7E7A4C
 
 #_06EA72: LDA.w #$000E
-#_06EA75: JSR ROUTINE_038069_bank06
+#_06EA75: JSR AreWeOnLevel9_bank06
 #_06EA78: BNE CODE_06EA7D
 
 #_06EA7A: LDA.w #$0018
@@ -11636,7 +11880,7 @@ ROUTINE_06EAA8:
 #_06EABD: BEQ CODE_06EAFF
 
 CODE_06EABF:
-#_06EABF: JSR ROUTINE_038069_bank06
+#_06EABF: JSR AreWeOnLevel9_bank06
 #_06EAC2: BNE CODE_06EAD7
 
 #_06EAC4: JSR ROUTINE_03867C_bank06
@@ -11695,7 +11939,7 @@ ROUTINE_06EB1B:
 #_06EB1C: LDA.l $7E7B08
 #_06EB20: BNE CODE_06EB37
 
-#_06EB22: JSR ROUTINE_038069_bank06
+#_06EB22: JSR AreWeOnLevel9_bank06
 #_06EB25: BNE CODE_06EB2E
 
 #_06EB27: LDA.w $0844,X
@@ -11812,7 +12056,7 @@ ROUTINE_06EBA1:
 #_06EBB6: LDA.w $0836,X
 #_06EBB9: BMI CODE_06EBD0
 
-#_06EBBB: JSR ROUTINE_038069_bank06
+#_06EBBB: JSR AreWeOnLevel9_bank06
 #_06EBBE: BNE CODE_06EBCD
 
 #_06EBC0: STZ.w $18E2
@@ -11852,7 +12096,7 @@ ROUTINE_06EBEF:
 #_06EBEF: TYX
 
 #_06EBF0: LDA.w #$0001
-#_06EBF3: JSR ROUTINE_038069_bank06
+#_06EBF3: JSR AreWeOnLevel9_bank06
 #_06EBF6: BNE CODE_06EBFB
 
 #_06EBF8: LDA.w #$0002
@@ -11981,7 +12225,7 @@ CODE_06ECB3:
 #_06ECB3: LDA.w $0816,Y
 #_06ECB6: ASL A
 #_06ECB7: TAX
-#_06ECB8: JSR (PTR16_06ECE5,X)
+#_06ECB8: JSR (.vectors,X)
 
 #_06ECBB: LDA.w $0800,X
 #_06ECBE: BNE CODE_06ECC1
@@ -12006,7 +12250,7 @@ CODE_06ECC1:
 #_06ECDF: JSR ROUTINE_038CAA_bank06
 #_06ECE2: JMP ROUTINE_038860_bank06
 
-PTR16_06ECE5:
+.vectors:
 #_06ECE5: dw ROUTINE_06ECEF
 #_06ECE7: dw ROUTINE_06ED3A
 #_06ECE9: dw ROUTINE_06ED80
@@ -12017,7 +12261,7 @@ PTR16_06ECE5:
 
 ROUTINE_06ECEF:
 #_06ECEF: TYX
-#_06ECF0: JSR ROUTINE_038069_bank06
+#_06ECF0: JSR AreWeOnLevel9_bank06
 #_06ECF3: BNE CODE_06ED35
 
 #_06ECF5: LDA.w #$0010
@@ -12208,12 +12452,12 @@ ROUTINE_06EDF3:
 #_06EE0D: STA.w $0806,X
 
 #_06EE10: LDA.w #$0009
-#_06EE13: JSL ROUTINE_02FE15_long
-#_06EE17: JSR ROUTINE_038069_bank06
+#_06EE13: JSL ROUTINE_02FE0D
+#_06EE17: JSR AreWeOnLevel9_bank06
 #_06EE1A: BNE CODE_06EE23
 
 #_06EE1C: LDA.w #$0018
-#_06EE1F: JSL ROUTINE_02FE15_long
+#_06EE1F: JSL ROUTINE_02FE0D
 
 CODE_06EE23:
 #_06EE23: STA.b $20
@@ -14627,7 +14871,7 @@ ROUTINE_06FD1E:
 #_06FD2B: STA.w $0806,X
 
 #_06FD2E: LDA.w #$0003
-#_06FD31: JSL ROUTINE_02FE15_long
+#_06FD31: JSL ROUTINE_02FE0D
 #_06FD35: LSR A
 
 #_06FD36: LDY.w $1792
@@ -15072,12 +15316,13 @@ ROUTINE_06FFBB:
 
 ;===================================================================================================
 
-#data06FFC2:
-#_06FFC2: db $00,$00,$00,$00,$00,$00,$00,$00
-#_06FFCA: db $00,$00,$00,$00,$00,$00,$00,$00
-#_06FFD2: db $00,$00,$00,$00,$00,$00,$00,$00
-#_06FFDA: db $00,$00,$00,$00,$00,$00,$00,$00
-#_06FFE2: db $00,$00,$00,$00,$00,$00,$00,$00
-#_06FFEA: db $00,$00,$00,$00,$00,$00,$00,$00
-#_06FFF2: db $00,$00,$00,$00,$00,$00,$00,$00
-#_06FFFA: db $00,$00,$00,$00,$00,$00
+#_06FFC2: db $00, $00, $00, $00, $00, $00, $00, $00
+#_06FFCA: db $00, $00, $00, $00, $00, $00, $00, $00
+#_06FFD2: db $00, $00, $00, $00, $00, $00, $00, $00
+#_06FFDA: db $00, $00, $00, $00, $00, $00, $00, $00
+#_06FFE2: db $00, $00, $00, $00, $00, $00, $00, $00
+#_06FFEA: db $00, $00, $00, $00, $00, $00, $00, $00
+#_06FFF2: db $00, $00, $00, $00, $00, $00, $00, $00
+#_06FFFA: db $00, $00, $00, $00, $00, $00
+
+;===================================================================================================

@@ -453,17 +453,17 @@ Dialog_ExecuteCommand:
 
 .vectors
 #_088290: dw Dialog_TerminateMessage          ; 00
-#_088292: dw ROUTINE_0882CA                   ; 01
+#_088292: dw Dialog_SetCursor                 ; 01
 #_088294: dw Dialog_NewLine                   ; 02
-#_088296: dw ROUTINE_088350                   ; 03
+#_088296: dw Dialog_ClearBox                  ; 03
 #_088298: dw Dialog_WaitForKey                ; 04
 #_08829A: dw Dialog_SetTextDelay              ; 05
 #_08829C: dw Dialog_WriteXSpaces              ; 06
 #_08829E: dw Dialog_OptionMarker              ; 07
 #_0882A0: dw Dialog_WriteNumber               ; 08
 #_0882A2: dw Dialog_WriteNumber               ; 09
-#_0882A4: dw ROUTINE_0883F8                   ; 0A
-#_0882A6: dw ROUTINE_088404                   ; 0B
+#_0882A4: dw Dialog_ToggleTextBlip            ; 0A
+#_0882A6: dw Dialog_ToggleTurboText           ; 0B
 #_0882A8: dw Dialog_WriteColoredButton        ; 0C
 #_0882AA: dw Dialog_RequestSong               ; 0D
 #_0882AC: dw Dialog_PlaySoundEffect           ; 0E
@@ -487,7 +487,7 @@ Dialog_TerminateMessage:
 
 ;===================================================================================================
 
-ROUTINE_0882CA:
+Dialog_SetCursor:
 #_0882CA: JSR GetNextTextByte
 #_0882CD: STA.b $20
 
@@ -568,7 +568,7 @@ Dialog_NewLine:
 
 ;===================================================================================================
 
-ROUTINE_088350:
+Dialog_ClearBox:
 #_088350: INC.w $7E2558
 
 #_088353: JMP ROUTINE_08859D
@@ -706,7 +706,7 @@ Dialog_Done8BitCommand:
 
 ;===================================================================================================
 
-ROUTINE_0883F8:
+Dialog_ToggleTextBlip:
 #_0883F8: JSR GetNextTextByte
 #_0883FB: AND.w #$00FF
 #_0883FE: STA.l $7E258C
@@ -715,7 +715,7 @@ ROUTINE_0883F8:
 
 ;===================================================================================================
 
-ROUTINE_088404:
+Dialog_ToggleTurboText:
 #_088404: JSR GetNextTextByte
 #_088407: AND.w #$00FF
 #_08840A: STA.l $7E258E
@@ -1417,12 +1417,12 @@ BeginDialog:
 ; Please pick
 ; whatever you need.
 Message_0887F2:
-#_0887F2: dw $0001, $0003, $0004, $0012 ; TODO
-#_0887FA: dw $0003, $0000, $0000, $0001 ; TODO
+#_0887F2: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_0887FA: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088802: dw .data, $0000 ; pointer
 
 .data
-#_088806: db $0B, $00 ; TODO
+#_088806: db $0B, $00 ; allow turbo
 #_088808: db $D3, $B5, $BC, $B3, $BF, $BD, $B5, $2C ; «Welcome,»
 #_088810: db $20, $C4, $B8, $B9, $C3, $20, $B1      ; « this a»
 #_088817: db $02 ; new line
@@ -1434,8 +1434,8 @@ Message_0887F2:
 #_088831: db $02 ; new line
 #_088832: db $C4, $C2, $BF, $C5, $B2, $BC, $B5, $2E ; «trouble.»
 #_08883A: db $04 ; wait for key
-#_08883B: db $03 ; TODO
-#_08883C: db $01, $00, $00 ; TODO
+#_08883B: db $03 ; clear text box
+#_08883C: db $01, $00, $00 ; set text position
 #_08883F: db $AB, $BC, $B5, $B1, $C3, $B5, $20, $C0 ; «Please p»
 #_088847: db $B9, $B3, $BB                          ; «ick»
 #_08884A: db $02 ; new line
@@ -1452,13 +1452,13 @@ Message_0887F2:
 ; is this OK?
 ;      Yes No 
 Message_08885F:
-#_08885F: dw $0001, $0003, $0004, $0012 ; TODO
-#_088867: dw $0003, $0000, $0000, $0001 ; TODO
+#_08885F: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088867: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08886F: dw .data, $0000 ; pointer
 
 .data
-#_088873: db $03 ; TODO
-#_088874: db $01, $00, $00 ; TODO
+#_088873: db $03 ; clear text box
+#_088874: db $01, $00, $00 ; set text position
 #_088877: db $AF, $B8, $B9, $C3, $20, $C7, $B9, $BC ; «This wil»
 #_08887F: db $BC, $20, $B3, $BF, $BD, $B5, $20, $C4 ; «l come t»
 #_088887: db $BF                                    ; «o»
@@ -1485,8 +1485,8 @@ Message_08885F:
 ; Do you need
 ; anything else?
 Message_0888B3:
-#_0888B3: dw $0001, $0003, $0004, $0012 ; TODO
-#_0888BB: dw $0003, $0000, $0000, $0001 ; TODO
+#_0888B3: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_0888BB: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0888C3: dw .data, $0000 ; pointer
 
 .data
@@ -1495,8 +1495,8 @@ Message_0888B3:
 #_0888D5: db $02 ; new line
 #_0888D6: db $BD, $C5, $B3, $B8, $2E                ; «much.»
 #_0888DB: db $04 ; wait for key
-#_0888DC: db $03 ; TODO
-#_0888DD: db $01, $00, $00 ; TODO
+#_0888DC: db $03 ; clear text box
+#_0888DD: db $01, $00, $00 ; set text position
 #_0888E0: db $DB, $BF, $20, $C9, $BF, $C5, $20, $BE ; «Do you n»
 #_0888E8: db $B5, $B5, $B4                          ; «eed»
 #_0888EB: db $02 ; new line
@@ -1511,8 +1511,8 @@ Message_0888B3:
 ; Do you need
 ; anything else?
 Message_0888FB:
-#_0888FB: dw $0001, $0003, $0004, $0012 ; TODO
-#_088903: dw $0003, $0000, $0000, $0001 ; TODO
+#_0888FB: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088903: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08890B: dw .data, $0000 ; pointer
 
 .data
@@ -1521,8 +1521,8 @@ Message_0888FB:
 #_08891D: db $02 ; new line
 #_08891E: db $B5, $BE, $BF, $C5, $B7, $B8, $2E      ; «enough.»
 #_088925: db $04 ; wait for key
-#_088926: db $03 ; TODO
-#_088927: db $01, $00, $00 ; TODO
+#_088926: db $03 ; clear text box
+#_088927: db $01, $00, $00 ; set text position
 #_08892A: db $DB, $BF, $20, $C9, $BF, $C5, $20, $BE ; «Do you n»
 #_088932: db $B5, $B5, $B4                          ; «eed»
 #_088935: db $02 ; new line
@@ -1537,8 +1537,8 @@ Message_0888FB:
 ; Do you need
 ; anything else?
 Message_088945:
-#_088945: dw $0001, $0003, $0004, $0012 ; TODO
-#_08894D: dw $0003, $0000, $0000, $0001 ; TODO
+#_088945: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08894D: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088955: dw .data, $0000 ; pointer
 
 .data
@@ -1548,8 +1548,8 @@ Message_088945:
 #_08896A: db $C4, $B8, $B9, $C3, $20, $B9, $C4, $B5 ; «this ite»
 #_088972: db $BD, $2E                               ; «m.»
 #_088974: db $04 ; wait for key
-#_088975: db $03 ; TODO
-#_088976: db $01, $00, $00 ; TODO
+#_088975: db $03 ; clear text box
+#_088976: db $01, $00, $00 ; set text position
 #_088979: db $DB, $BF, $20, $C9, $BF, $C5, $20, $BE ; «Do you n»
 #_088981: db $B5, $B5, $B4                          ; «eed»
 #_088984: db $02 ; new line
@@ -1563,13 +1563,13 @@ Message_088945:
 ; now?
 ;      Yes No 
 Message_088994:
-#_088994: dw $0001, $0003, $0004, $0012 ; TODO
-#_08899C: dw $0003, $0000, $0000, $0001 ; TODO
+#_088994: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08899C: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0889A4: dw .data, $0000 ; pointer
 
 .data
-#_0889A8: db $03 ; TODO
-#_0889A9: db $01, $00, $00 ; TODO
+#_0889A8: db $03 ; clear text box
+#_0889A9: db $01, $00, $00 ; set text position
 #_0889AC: db $D8, $C2, $B5, $20, $C9, $BF, $C5, $20 ; «Are you »
 #_0889B4: db $BC, $B5, $B1, $C6, $B9, $BE, $B7      ; «leaving»
 #_0889BB: db $02 ; new line
@@ -1590,15 +1590,15 @@ Message_088994:
 ; much.
 ; Come back again.
 Message_0889D6:
-#_0889D6: dw $0001, $0003, $0004, $0012 ; TODO
-#_0889DE: dw $0003, $0000, $0000, $0001 ; TODO
+#_0889D6: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_0889DE: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0889E6: dw .data, $0000 ; pointer
 
 .data
 #_0889EA: db $05, $60 ; set delay
 #_0889EC: db $05, $02 ; set delay
-#_0889EE: db $03 ; TODO
-#_0889EF: db $01, $00, $00 ; TODO
+#_0889EE: db $03 ; clear text box
+#_0889EF: db $01, $00, $00 ; set text position
 #_0889F2: db $AF, $B8, $B1, $BE, $BB, $20, $C9, $BF ; «Thank yo»
 #_0889FA: db $C5, $20, $C6, $B5, $C2, $C9           ; «u very»
 #_088A00: db $02 ; new line
@@ -1615,16 +1615,16 @@ Message_0889D6:
 ; That's too bad.
 ; Anything else?
 Message_088A1A:
-#_088A1A: dw $0001, $0003, $0004, $0012 ; TODO
-#_088A22: dw $0003, $0000, $0000, $0001 ; TODO
+#_088A1A: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088A22: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088A2A: dw .data, $0000 ; pointer
 
 .data
 #_088A2E: db $AF, $B8, $B1, $C4, $27, $C3, $20, $C4 ; «That's t»
 #_088A36: db $BF, $BF, $20, $B2, $B1, $B4, $2E      ; «oo bad.»
 #_088A3D: db $04 ; wait for key
-#_088A3E: db $03 ; TODO
-#_088A3F: db $01, $00, $00 ; TODO
+#_088A3E: db $03 ; clear text box
+#_088A3F: db $01, $00, $00 ; set text position
 #_088A42: db $D8, $BE, $C9, $C4, $B8, $B9, $BE, $B7 ; «Anything»
 #_088A4A: db $20, $B5, $BC, $C3, $B5, $3F           ; « else?»
 #_088A50: db $00 ; end message
@@ -1636,8 +1636,8 @@ Message_088A1A:
 ; to make more
 ; purchases?
 Message_088A51:
-#_088A51: dw $0001, $0003, $0004, $0012 ; TODO
-#_088A59: dw $0003, $0000, $0000, $0001 ; TODO
+#_088A51: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088A59: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088A61: dw .data, $0000 ; pointer
 
 .data
@@ -1662,8 +1662,8 @@ Message_088A51:
 ; magic cards by
 ; one level.
 Message_088A97:
-#_088A97: dw $0001, $0003, $0004, $0012 ; TODO
-#_088A9F: dw $0003, $0000, $0000, $0001 ; TODO
+#_088A97: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088A9F: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088AA7: dw .data, $0000 ; pointer
 
 .data
@@ -1688,8 +1688,8 @@ Message_088A97:
 ; protection by
 ; one level.
 Message_088AE1:
-#_088AE1: dw $0001, $0003, $0004, $0012 ; TODO
-#_088AE9: dw $0003, $0000, $0000, $0001 ; TODO
+#_088AE1: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088AE9: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088AF1: dw .data, $0000 ; pointer
 
 .data
@@ -1717,8 +1717,8 @@ Message_088AE1:
 ; protection by
 ; three levels.
 Message_088B37:
-#_088B37: dw $0001, $0003, $0004, $0012 ; TODO
-#_088B3F: dw $0003, $0000, $0000, $0001 ; TODO
+#_088B37: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088B3F: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088B47: dw .data, $0000 ; pointer
 
 .data
@@ -1747,8 +1747,8 @@ Message_088B37:
 ; receive one extra
 ; hit.
 Message_088B8D:
-#_088B8D: dw $0001, $0003, $0004, $0012 ; TODO
-#_088B95: dw $0003, $0000, $0000, $0001 ; TODO
+#_088B8D: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088B95: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088B9D: dw .data, $0000 ; pointer
 
 .data
@@ -1781,8 +1781,8 @@ Message_088B8D:
 ; treasure box with
 ; this.
 Message_088BFB:
-#_088BFB: dw $0001, $0003, $0004, $0012 ; TODO
-#_088C03: dw $0003, $0000, $0000, $0001 ; TODO
+#_088BFB: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088C03: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088C0B: dw .data, $0000 ; pointer
 
 .data
@@ -1807,8 +1807,8 @@ Message_088BFB:
 ; This is a one up
 ; item.
 Message_088C51:
-#_088C51: dw $0001, $0003, $0004, $0012 ; TODO
-#_088C59: dw $0003, $0000, $0000, $0001 ; TODO
+#_088C51: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088C59: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088C61: dw .data, $0000 ; pointer
 
 .data
@@ -1825,8 +1825,8 @@ Message_088C51:
 ; What's inside is
 ; a surprise.
 Message_088C7C:
-#_088C7C: dw $0001, $0003, $0004, $0012 ; TODO
-#_088C84: dw $0003, $0000, $0000, $0001 ; TODO
+#_088C7C: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088C84: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088C8C: dw .data, $0000 ; pointer
 
 .data
@@ -1855,8 +1855,8 @@ Message_088C7C:
 ; sold at your local
 ; bookstore.
 Message_088CC9:
-#_088CC9: dw $0001, $0003, $0004, $0012 ; TODO
-#_088CD1: dw $0003, $0000, $0000, $0001 ; TODO
+#_088CC9: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088CD1: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088CD9: dw .data, $0000 ; pointer
 
 .data
@@ -1895,8 +1895,8 @@ Message_088CC9:
 ; Do you need
 ; anytthing else?
 Message_088D5A:
-#_088D5A: dw $0001, $0003, $0004, $0012 ; TODO
-#_088D62: dw $0003, $0000, $0000, $0001 ; TODO
+#_088D5A: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088D62: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088D6A: dw .data, $0000 ; pointer
 
 .data
@@ -1905,8 +1905,8 @@ Message_088D5A:
 #_088D7C: db $02 ; new line
 #_088D7D: db $BD, $C5, $B3, $B8, $2E                ; «much.»
 #_088D82: db $04 ; wait for key
-#_088D83: db $03 ; TODO
-#_088D84: db $01, $00, $00 ; TODO
+#_088D83: db $03 ; clear text box
+#_088D84: db $01, $00, $00 ; set text position
 #_088D87: db $DB, $BF, $20, $C9, $BF, $C5, $20, $BE ; «Do you n»
 #_088D8F: db $B5, $B5, $B4                          ; «eed»
 #_088D92: db $02 ; new line
@@ -1918,8 +1918,8 @@ Message_088D5A:
 
 ; zb YThA �sTsxO
 Message_088DA3:
-#_088DA3: dw $0001, $0003, $0004, $0012 ; TODO
-#_088DAB: dw $0003, $0000, $0000, $0001 ; TODO
+#_088DA3: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088DAB: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088DB3: dw .data, $0000 ; pointer
 
 .data
@@ -1933,8 +1933,8 @@ Message_088DA3:
 ; Do you need
 ; anytthing else?
 Message_088DC7:
-#_088DC7: dw $0001, $0003, $0004, $0012 ; TODO
-#_088DCF: dw $0003, $0000, $0000, $0001 ; TODO
+#_088DC7: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088DCF: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088DD7: dw .data, $0000 ; pointer
 
 .data
@@ -1952,13 +1952,13 @@ Message_088DC7:
 ; ..... 2 one up's
 ; congratulations.
 Message_088DF8:
-#_088DF8: dw $0001, $0003, $0004, $0012 ; TODO
-#_088E00: dw $0003, $0000, $0000, $0001 ; TODO
+#_088DF8: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088E00: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088E08: dw .data, $0000 ; pointer
 
 .data
-#_088E0C: db $03 ; TODO
-#_088E0D: db $01, $00, $00 ; TODO
+#_088E0C: db $03 ; clear text box
+#_088E0D: db $01, $00, $00 ; set text position
 #_088E10: db $AF, $B8, $B5, $20, $B3, $BF, $BE, $C4 ; «The cont»
 #_088E18: db $B5, $BE, $C4, $C3, $20, $B1, $C2, $B5 ; «ents are»
 #_088E20: db $02 ; new line
@@ -1979,13 +1979,13 @@ Message_088DF8:
 ; unlucky day for
 ; you today.
 Message_088E44:
-#_088E44: dw $0001, $0003, $0004, $0012 ; TODO
-#_088E4C: dw $0003, $0000, $0000, $0001 ; TODO
+#_088E44: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088E4C: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088E54: dw .data, $0000 ; pointer
 
 .data
-#_088E58: db $03 ; TODO
-#_088E59: db $01, $00, $00 ; TODO
+#_088E58: db $03 ; clear text box
+#_088E59: db $01, $00, $00 ; set text position
 #_088E5C: db $AF, $BF, $BF, $20, $B2, $B1, $B4, $2C ; «Too bad,»
 #_088E64: db $20, $B1, $BC, $BC, $20, $C9, $BF, $C5 ; « all you»
 #_088E6C: db $02 ; new line
@@ -1994,8 +1994,8 @@ Message_088E44:
 #_088E7D: db $02 ; new line
 #_088E7E: db $C3, $C5, $B9, $C4, $2E                ; «suit.»
 #_088E83: db $04 ; wait for key
-#_088E84: db $03 ; TODO
-#_088E85: db $01, $00, $00 ; TODO
+#_088E84: db $03 ; clear text box
+#_088E85: db $01, $00, $00 ; set text position
 #_088E88: db $3E, $C4, $27, $C3, $20, $B2, $B5, $B5 ; «It's bee»
 #_088E90: db $BE, $20, $B1, $BE                     ; «n an»
 #_088E94: db $02 ; new line
@@ -2015,13 +2015,13 @@ Message_088E44:
 ; of rabbit ears.
 ; Congratulations.
 Message_088EB1:
-#_088EB1: dw $0001, $0003, $0004, $0012 ; TODO
-#_088EB9: dw $0003, $0000, $0000, $0001 ; TODO
+#_088EB1: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088EB9: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088EC1: dw .data, $0000 ; pointer
 
 .data
-#_088EC5: db $03 ; TODO
-#_088EC6: db $01, $00, $00 ; TODO
+#_088EC5: db $03 ; clear text box
+#_088EC6: db $01, $00, $00 ; set text position
 #_088EC9: db $AF, $B8, $B5, $20, $B3, $BF, $BE, $C4 ; «The cont»
 #_088ED1: db $B5, $BE, $C4, $C3, $20, $B1, $C2, $B5 ; «ents are»
 #_088ED9: db $02 ; new line
@@ -2047,13 +2047,13 @@ Message_088EB1:
 ; balls.
 ; Congratulations.
 Message_088F1F:
-#_088F1F: dw $0001, $0003, $0004, $0012 ; TODO
-#_088F27: dw $0003, $0000, $0000, $0001 ; TODO
+#_088F1F: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088F27: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088F2F: dw .data, $0000 ; pointer
 
 .data
-#_088F33: db $03 ; TODO
-#_088F34: db $01, $00, $00 ; TODO
+#_088F33: db $03 ; clear text box
+#_088F34: db $01, $00, $00 ; set text position
 #_088F37: db $AF, $B8, $B5, $20, $B3, $BF, $BE, $C4 ; «The cont»
 #_088F3F: db $B5, $BE, $C4, $C3, $20, $B1, $C2, $B5 ; «ents are»
 #_088F47: db $02 ; new line
@@ -2074,13 +2074,13 @@ Message_088F1F:
 ; You got ten keys.
 ; Congratulations.
 Message_088F72:
-#_088F72: dw $0001, $0003, $0004, $0012 ; TODO
-#_088F7A: dw $0003, $0000, $0000, $0001 ; TODO
+#_088F72: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088F7A: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088F82: dw .data, $0000 ; pointer
 
 .data
-#_088F86: db $03 ; TODO
-#_088F87: db $01, $00, $00 ; TODO
+#_088F86: db $03 ; clear text box
+#_088F87: db $01, $00, $00 ; set text position
 #_088F8A: db $A7, $B5, $C4, $27, $C3, $20, $BF, $C0 ; «Let's op»
 #_088F92: db $B5, $BE, $20, $C5, $C0, $20, $C4, $B8 ; «en up th»
 #_088F9A: db $B9, $C3, $B2, $BF, $C8, $2E           ; «isbox.»
@@ -2102,13 +2102,13 @@ Message_088F72:
 ; some new clothes.
 ; Congratulations.
 Message_088FC5:
-#_088FC5: dw $0001, $0003, $0004, $0012 ; TODO
-#_088FCD: dw $0003, $0000, $0000, $0001 ; TODO
+#_088FC5: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_088FCD: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_088FD5: dw .data, $0000 ; pointer
 
 .data
-#_088FD9: db $03 ; TODO
-#_088FDA: db $01, $00, $00 ; TODO
+#_088FD9: db $03 ; clear text box
+#_088FDA: db $01, $00, $00 ; set text position
 #_088FDD: db $A7, $B5, $C4, $27, $C3, $20, $BF, $C0 ; «Let's op»
 #_088FE5: db $B5, $BE, $20, $C5, $C0, $20, $C4, $B8 ; «en up th»
 #_088FED: db $B9, $C3, $B2, $BF, $C8, $2E, $2E, $2E ; «isbox...»
@@ -2136,8 +2136,8 @@ Message_088FC5:
 ; it without 
 ; stopping.
 Message_08902C:
-#_08902C: dw $0001, $0007, $0005, $0012 ; TODO
-#_089034: dw $0002, $0000, $0000, $0001 ; TODO
+#_08902C: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_089034: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08903C: dw .data, $0000 ; pointer
 
 .data
@@ -2177,8 +2177,8 @@ Message_08902C:
 ; The ingredients 
 ; will be you.
 Message_0890A7:
-#_0890A7: dw $0001, $0007, $000D, $0012 ; TODO
-#_0890AF: dw $0002, $0000, $0000, $0001 ; TODO
+#_0890A7: dw $0001, $0007, $000D, $0012 ; TODO, box x position, box y position, width
+#_0890AF: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0890B7: dw .data, $0000 ; pointer
 
 .data
@@ -2200,8 +2200,8 @@ Message_0890A7:
 #_0890E8: db $2E, $2E, $2E, $3E, $BE, $B7, $C2, $B5 ; «...Ingre»
 #_0890F0: db $B4, $B9, $B5, $BE, $C4, $C3, $3F      ; «dients?»
 #_0890F7: db $04 ; wait for key
-#_0890F8: db $03 ; TODO
-#_0890F9: db $01, $00, $00 ; TODO
+#_0890F8: db $03 ; clear text box
+#_0890F9: db $01, $00, $00 ; set text position
 #_0890FC: db $05, $02 ; set delay
 #_0890FE: db $3D, $B1, $21                          ; «Ha!»
 #_089101: db $05, $06 ; set delay
@@ -2241,8 +2241,8 @@ Message_0890A7:
 ; look away.
 ; let's fight.
 Message_08913B:
-#_08913B: dw $0001, $0007, $000D, $0012 ; TODO
-#_089143: dw $0002, $0000, $0000, $0001 ; TODO
+#_08913B: dw $0001, $0007, $000D, $0012 ; TODO, box x position, box y position, width
+#_089143: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08914B: dw .data, $0000 ; pointer
 
 .data
@@ -2309,8 +2309,8 @@ Message_08913B:
 ; to fight.
 ; Be prepared.
 Message_08920F:
-#_08920F: dw $0001, $0007, $000D, $0012 ; TODO
-#_089217: dw $0002, $0000, $0000, $0001 ; TODO
+#_08920F: dw $0001, $0007, $000D, $0012 ; TODO, box x position, box y position, width
+#_089217: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08921F: dw .data, $0000 ; pointer
 
 .data
@@ -2367,8 +2367,8 @@ Message_08920F:
 ; Well,defeat 
 ; me first.
 Message_0892D1:
-#_0892D1: dw $0001, $0007, $000D, $0012 ; TODO
-#_0892D9: dw $0002, $0000, $0000, $0001 ; TODO
+#_0892D1: dw $0001, $0007, $000D, $0012 ; TODO, box x position, box y position, width
+#_0892D9: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0892E1: dw .data, $0000 ; pointer
 
 .data
@@ -2399,8 +2399,8 @@ Message_0892D1:
 ; You can't get 
 ; through here.
 Message_089334:
-#_089334: dw $0001, $0007, $000D, $0012 ; TODO
-#_08933C: dw $0002, $0000, $0000, $0001 ; TODO
+#_089334: dw $0001, $0007, $000D, $0012 ; TODO, box x position, box y position, width
+#_08933C: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_089344: dw .data, $0000 ; pointer
 
 .data
@@ -2422,8 +2422,8 @@ Message_089334:
 ; it very hot on 
 ; the other side.
 Message_089366:
-#_089366: dw $0001, $0007, $000D, $0012 ; TODO
-#_08936E: dw $0002, $0000, $0000, $0001 ; TODO
+#_089366: dw $0001, $0007, $000D, $0012 ; TODO, box x position, box y position, width
+#_08936E: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_089376: dw .data, $0000 ; pointer
 
 .data
@@ -2460,8 +2460,8 @@ Message_089366:
 ; I will never let 
 ; you get away.
 Message_0893EE:
-#_0893EE: dw $0001, $0007, $000D, $0012 ; TODO
-#_0893F6: dw $0002, $0000, $0000, $0001 ; TODO
+#_0893EE: dw $0001, $0007, $000D, $0012 ; TODO, box x position, box y position, width
+#_0893F6: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0893FE: dw .data, $0000 ; pointer
 
 .data
@@ -2490,8 +2490,8 @@ Message_0893EE:
 ; I must avenge my 
 ; brother's demise.
 Message_08943E:
-#_08943E: dw $0001, $0007, $000D, $0012 ; TODO
-#_089446: dw $0002, $0000, $0000, $0001 ; TODO
+#_08943E: dw $0001, $0007, $000D, $0012 ; TODO, box x position, box y position, width
+#_089446: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08944E: dw .data, $0000 ; pointer
 
 .data
@@ -2531,8 +2531,8 @@ Message_08943E:
 ; I will eliminate 
 ; you.
 Message_0894B6:
-#_0894B6: dw $0001, $0007, $000D, $0012 ; TODO
-#_0894BE: dw $0002, $0000, $0000, $0001 ; TODO
+#_0894B6: dw $0001, $0007, $000D, $0012 ; TODO, box x position, box y position, width
+#_0894BE: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0894C6: dw .data, $0000 ; pointer
 
 .data
@@ -2599,12 +2599,12 @@ Message_0894B6:
 ; (Pocky is given
 ; 1000 coins.)
 Message_08956A:
-#_08956A: dw $0001, $0007, $0005, $0012 ; TODO
-#_089572: dw $0002, $0000, $0000, $0001 ; TODO
+#_08956A: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_089572: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08957A: dw .data, $0000 ; pointer
 
 .data
-#_08957E: db $0B, $00 ; TODO
+#_08957E: db $0B, $00 ; allow turbo
 #_089580: db $AE, $B5, $C2, $C6, $B1, $BE, $C4, $3A ; «Servant:»
 #_089588: db $02 ; new line
 #_089589: db $3E, $27, $BD, $20, $B1, $BD, $B1, $CA ; «I'm amaz»
@@ -2646,8 +2646,8 @@ Message_08956A:
 #_089628: db $B8, $B9, $BD, $C3, $B5, $BC, $B6, $20 ; «himself »
 #_089630: db $B1, $B7, $B1, $B9, $BE, $2E           ; «again.»
 #_089636: db $04 ; wait for key
-#_089637: db $03 ; TODO
-#_089638: db $01, $00, $00 ; TODO
+#_089637: db $03 ; clear text box
+#_089638: db $01, $00, $00 ; set text position
 #_08963B: db $A8, $BF, $BE, $C4, $C9, $3A           ; «Monty:»
 #_089641: db $02 ; new line
 #_089642: db $3E, $20, $B2, $B5, $B7, $20, $BF, $B6 ; «I beg of»
@@ -2664,10 +2664,10 @@ Message_08956A:
 #_089673: db $C9, $BF, $C5, $C2, $C3, $B5, $BC, $B6 ; «yourself»
 #_08967B: db $2E                                    ; «.»
 #_08967C: db $04 ; wait for key
-#_08967D: db $03 ; TODO
-#_08967E: db $01, $00, $00 ; TODO
-#_089681: db $0B, $01 ; TODO
-#_089683: db $0A, $01 ; TODO
+#_08967D: db $03 ; clear text box
+#_08967E: db $01, $00, $00 ; set text position
+#_089681: db $0B, $01 ; prohibit turbo
+#_089683: db $0A, $01 ; disable text blip
 #_089685: db $0D, $25, $00 ; play song 25
 #_089688: db $28, $AB, $BF, $B3, $BB, $C9, $20, $B9 ; «(Pocky i»
 #_089690: db $C3, $20, $B7, $B9, $C6, $B5, $BE      ; «s given»
@@ -2678,8 +2678,8 @@ Message_08956A:
 #_0896A6: db $05, $02 ; set delay
 #_0896A8: db $11 ; give 1000 coins
 #_0896A9: db $0D, $20, $00 ; play song 20
-#_0896AC: db $0A, $00 ; TODO
-#_0896AE: db $0B, $00 ; TODO
+#_0896AC: db $0A, $00 ; enable text blip
+#_0896AE: db $0B, $00 ; allow turbo
 #_0896B0: db $04 ; wait for key
 #_0896B1: db $00 ; end message
 
@@ -2701,12 +2701,12 @@ Message_08956A:
 ; different person.
 ; What a pity!
 Message_0896B2:
-#_0896B2: dw $0001, $0007, $0005, $0012 ; TODO
-#_0896BA: dw $0002, $0000, $0000, $0001 ; TODO
+#_0896B2: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_0896BA: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0896C2: dw .data, $0000 ; pointer
 
 .data
-#_0896C6: db $0B, $00 ; TODO
+#_0896C6: db $0B, $00 ; allow turbo
 #_0896C8: db $D9, $B1, $C2, $B2, $B9, $B5, $3A      ; «Barbie:»
 #_0896CF: db $02 ; new line
 #_0896D0: db $3D, $B5, $C9, $2C, $B4, $B9, $B4, $20 ; «Hey,did »
@@ -2786,12 +2786,12 @@ Message_0896B2:
 ; (Scarecrow joins
 ; Pocky.)
 Message_0897A1:
-#_0897A1: dw $0001, $0003, $0005, $0012 ; TODO
-#_0897A9: dw $0002, $0000, $0000, $0001 ; TODO
+#_0897A1: dw $0001, $0003, $0005, $0012 ; TODO, box x position, box y position, width
+#_0897A9: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0897B1: dw .data, $0000 ; pointer
 
 .data
-#_0897B5: db $0B, $00 ; TODO
+#_0897B5: db $0B, $00 ; allow turbo
 #_0897B7: db $AE, $B3, $B1, $C2, $B5, $B3, $C2, $BF ; «Scarecro»
 #_0897BF: db $C7, $3A                               ; «w:»
 #_0897C1: db $02 ; new line
@@ -2842,10 +2842,10 @@ Message_0897A1:
 #_089887: db $20, $C4, $BF, $B7, $B5, $C4, $B8, $B5 ; « togethe»
 #_08988F: db $C2, $2E                               ; «r.»
 #_089891: db $04 ; wait for key
-#_089892: db $03 ; TODO
-#_089893: db $01, $00, $00 ; TODO
-#_089896: db $0B, $01 ; TODO
-#_089898: db $0A, $01 ; TODO
+#_089892: db $03 ; clear text box
+#_089893: db $01, $00, $00 ; set text position
+#_089896: db $0B, $01 ; prohibit turbo
+#_089898: db $0A, $01 ; disable text blip
 #_08989A: db $0D, $25, $00 ; play song 25
 #_08989D: db $28, $AE, $B3, $B1, $C2, $B5, $B3, $C2 ; «(Scarecr»
 #_0898A5: db $BF, $C7, $20, $BA, $BF, $B9, $BE, $C3 ; «ow joins»
@@ -2854,8 +2854,8 @@ Message_0897A1:
 #_0898B5: db $05, $B4 ; set delay
 #_0898B7: db $05, $02 ; set delay
 #_0898B9: db $0D, $24, $00 ; play song 24
-#_0898BC: db $0A, $00 ; TODO
-#_0898BE: db $0B, $00 ; TODO
+#_0898BC: db $0A, $00 ; enable text blip
+#_0898BE: db $0B, $00 ; allow turbo
 #_0898C0: db $04 ; wait for key
 #_0898C1: db $00 ; end message
 
@@ -2871,12 +2871,12 @@ Message_0897A1:
 ; short cut,
 ; follow me.
 Message_0898C2:
-#_0898C2: dw $0001, $0007, $0005, $0012 ; TODO
-#_0898CA: dw $0002, $0000, $0000, $0001 ; TODO
+#_0898C2: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_0898CA: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_0898D2: dw .data, $0000 ; pointer
 
 .data
-#_0898D6: db $0B, $00 ; TODO
+#_0898D6: db $0B, $00 ; allow turbo
 #_0898D8: db $D5, $BF, $C5, $20, $B7, $BF, $C4, $20 ; «You got »
 #_0898E0: db $BD, $B5, $2E                          ; «me.»
 #_0898E3: db $04 ; wait for key
@@ -2928,12 +2928,12 @@ Message_0898C2:
 ; be much stronger,
 ; and I will win.
 Message_089960:
-#_089960: dw $0001, $0007, $0005, $0012 ; TODO
-#_089968: dw $0002, $0000, $0000, $0001 ; TODO
+#_089960: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_089968: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_089970: dw .data, $0000 ; pointer
 
 .data
-#_089974: db $0B, $00 ; TODO
+#_089974: db $0B, $00 ; allow turbo
 #_089976: db $3E, $20, $BC, $BF, $C3, $C4, $2E, $2E ; «I lost..»
 #_08997E: db $2E, $AB, $BF, $B3, $BB, $C9, $2C      ; «.Pocky,»
 #_089985: db $02 ; new line
@@ -3003,12 +3003,12 @@ Message_089960:
 ; forty years 
 ; younger.
 Message_089A4D:
-#_089A4D: dw $0001, $0007, $0005, $0012 ; TODO
-#_089A55: dw $0002, $0000, $0000, $0001 ; TODO
+#_089A4D: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_089A55: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_089A5D: dw .data, $0000 ; pointer
 
 .data
-#_089A61: db $0B, $00 ; TODO
+#_089A61: db $0B, $00 ; allow turbo
 #_089A63: db $3C, $C2, $B1, $BE, $C0, $B1, $3A      ; «Granpa:»
 #_089A6A: db $02 ; new line
 #_089A6B: db $D8, $B3, $B3, $BF, $C2, $B4, $B9, $BE ; «Accordin»
@@ -3030,8 +3030,8 @@ Message_089A4D:
 #_089AB1: db $B7, $B5, $C4, $20, $BD, $B1, $C2, $C2 ; «get marr»
 #_089AB9: db $B9, $B5, $B4, $2E                     ; «ied.»
 #_089ABD: db $04 ; wait for key
-#_089ABE: db $03 ; TODO
-#_089ABF: db $01, $00, $00 ; TODO
+#_089ABE: db $03 ; clear text box
+#_089ABF: db $01, $00, $00 ; set text position
 #_089AC2: db $AB, $C2, $C5, $BE, $B5, $3A           ; «Prune:»
 #_089AC8: db $02 ; new line
 #_089AC9: db $D3, $B8, $B1, $C4, $3F, $AF, $B8, $B5 ; «What?The»
@@ -3072,12 +3072,12 @@ Message_089A4D:
 ; (Pocky is given
 ; 1000 coins.)
 Message_089B21:
-#_089B21: dw $0001, $0007, $0005, $0012 ; TODO
-#_089B29: dw $0002, $0000, $0000, $0001 ; TODO
+#_089B21: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_089B29: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_089B31: dw .data, $0000 ; pointer
 
 .data
-#_089B35: db $0B, $00 ; TODO
+#_089B35: db $0B, $00 ; allow turbo
 #_089B37: db $D9, $C5, $BE, $BE, $C9, $20, $D9, $C5 ; «Bunny Bu»
 #_089B3F: db $B4, $B4, $B9, $B5, $C3, $3A           ; «ddies:»
 #_089B45: db $02 ; new line
@@ -3095,8 +3095,8 @@ Message_089B21:
 #_089B7A: db $B5, $20, $AB, $C2, $B9, $BE, $B3, $B5 ; «e Prince»
 #_089B82: db $C3, $C3, $2E                          ; «ss.»
 #_089B85: db $04 ; wait for key
-#_089B86: db $03 ; TODO
-#_089B87: db $01, $00, $00 ; TODO
+#_089B86: db $03 ; clear text box
+#_089B87: db $01, $00, $00 ; set text position
 #_089B8A: db $AF, $B8, $B9, $C3, $20, $B9, $C3, $20 ; «This is »
 #_089B92: db $BF, $C5, $C2, $20                     ; «our »
 #_089B96: db $02 ; new line
@@ -3117,10 +3117,10 @@ Message_089B21:
 #_089BDA: db $C9, $BF, $C5, $C2, $20, $C7, $B1, $C9 ; «your way»
 #_089BE2: db $2E                                    ; «.»
 #_089BE3: db $04 ; wait for key
-#_089BE4: db $03 ; TODO
-#_089BE5: db $01, $00, $00 ; TODO
-#_089BE8: db $0B, $01 ; TODO
-#_089BEA: db $0A, $01 ; TODO
+#_089BE4: db $03 ; clear text box
+#_089BE5: db $01, $00, $00 ; set text position
+#_089BE8: db $0B, $01 ; prohibit turbo
+#_089BEA: db $0A, $01 ; disable text blip
 #_089BEC: db $0D, $25, $00 ; play song 25
 #_089BEF: db $28, $AB, $BF, $B3, $BB, $C9, $20, $B9 ; «(Pocky i»
 #_089BF7: db $C3, $20, $B7, $B9, $C6, $B5, $BE      ; «s given»
@@ -3131,8 +3131,8 @@ Message_089B21:
 #_089C0D: db $05, $02 ; set delay
 #_089C0F: db $11 ; give 1000 coins
 #_089C10: db $0D, $20, $00 ; play song 20
-#_089C13: db $0A, $00 ; TODO
-#_089C15: db $0B, $00 ; TODO
+#_089C13: db $0A, $00 ; enable text blip
+#_089C15: db $0B, $00 ; allow turbo
 #_089C17: db $04 ; wait for key
 #_089C18: db $00 ; end message
 
@@ -3156,12 +3156,12 @@ Message_089B21:
 ; (Pocky is given
 ; two keys.)
 Message_089C19:
-#_089C19: dw $0001, $0007, $0005, $0012 ; TODO
-#_089C21: dw $0002, $0000, $0000, $0001 ; TODO
+#_089C19: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_089C21: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_089C29: dw .data, $0000 ; pointer
 
 .data
-#_089C2D: db $0B, $00 ; TODO
+#_089C2D: db $0B, $00 ; allow turbo
 #_089C2F: db $A1, $B5, $C3, $C4, $B5, $C2, $3A      ; «Jester:»
 #_089C36: db $02 ; new line
 #_089C37: db $3E, $20, $C7, $B9, $BC, $BC, $20, $B7 ; «I will g»
@@ -3183,8 +3183,8 @@ Message_089C19:
 #_089C7E: db $A8, $B5, $B9, $BB, $B1, $B9, $27, $C3 ; «Meikai's»
 #_089C86: db $20, $BB, $B5, $C9, $2E, $2E, $2E      ; « key...»
 #_089C8D: db $04 ; wait for key
-#_089C8E: db $03 ; TODO
-#_089C8F: db $01, $00, $00 ; TODO
+#_089C8E: db $03 ; clear text box
+#_089C8F: db $01, $00, $00 ; set text position
 #_089C92: db $A7, $B5, $C3, $C4, $B5, $C2, $3A      ; «Lester:»
 #_089C99: db $02 ; new line
 #_089C9A: db $3D, $B5, $C9, $20, $C9, $BF, $C5, $21 ; «Hey you!»
@@ -3205,8 +3205,8 @@ Message_089C19:
 #_089CD7: db $3E, $20, $C3, $B1, $C7, $20, $C9, $BF ; «I saw yo»
 #_089CDF: db $C5, $2E                               ; «u.»
 #_089CE1: db $04 ; wait for key
-#_089CE2: db $03 ; TODO
-#_089CE3: db $01, $00, $00 ; TODO
+#_089CE2: db $03 ; clear text box
+#_089CE3: db $01, $00, $00 ; set text position
 #_089CE6: db $A1, $B5, $C3, $C4, $B5, $C2, $3A      ; «Jester:»
 #_089CED: db $02 ; new line
 #_089CEE: db $3D, $B1, $21, $3D, $B1, $21, $3D, $B1 ; «Ha!Ha!Ha»
@@ -3217,10 +3217,10 @@ Message_089C19:
 #_089D01: db $BB, $BE, $BF, $C7, $20, $C9, $BF, $C5 ; «know you»
 #_089D09: db $20, $C3, $B1, $C7, $20, $BD, $B5, $21 ; « saw me!»
 #_089D11: db $04 ; wait for key
-#_089D12: db $03 ; TODO
-#_089D13: db $01, $00, $00 ; TODO
-#_089D16: db $0B, $01 ; TODO
-#_089D18: db $0A, $01 ; TODO
+#_089D12: db $03 ; clear text box
+#_089D13: db $01, $00, $00 ; set text position
+#_089D16: db $0B, $01 ; prohibit turbo
+#_089D18: db $0A, $01 ; disable text blip
 #_089D1A: db $0D, $25, $00 ; play song 25
 #_089D1D: db $28, $AB, $BF, $B3, $BB, $C9, $20, $B9 ; «(Pocky i»
 #_089D25: db $C3, $20, $B7, $B9, $C6, $B5, $BE      ; «s given»
@@ -3232,8 +3232,8 @@ Message_089C19:
 #_089D3B: db $10 ; give 1 key
 #_089D3C: db $10 ; give 1 key
 #_089D3D: db $0D, $20, $00 ; play song 20
-#_089D40: db $0A, $00 ; TODO
-#_089D42: db $0B, $00 ; TODO
+#_089D40: db $0A, $00 ; enable text blip
+#_089D42: db $0B, $00 ; allow turbo
 #_089D44: db $04 ; wait for key
 #_089D45: db $00 ; end message
 
@@ -3251,12 +3251,12 @@ Message_089C19:
 ; for an entire army
 ; out of him.
 Message_089D46:
-#_089D46: dw $0001, $0007, $0005, $0012 ; TODO
-#_089D4E: dw $0002, $0000, $0000, $0001 ; TODO
+#_089D46: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_089D4E: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_089D56: dw .data, $0000 ; pointer
 
 .data
-#_089D5A: db $0B, $00 ; TODO
+#_089D5A: db $0B, $00 ; allow turbo
 #_089D5C: db $A8, $B1, $C2, $C9, $3A                ; «Mary:»
 #_089D61: db $02 ; new line
 #_089D62: db $3E, $20, $B8, $B5, $B1, $C2, $B4, $20 ; «I heard »
@@ -3275,8 +3275,8 @@ Message_089D46:
 #_089D95: db $C2, $B5, $B1, $BC, $BC, $C9, $20, $B2 ; «really b»
 #_089D9D: db $B9, $B7, $2E                          ; «ig.»
 #_089DA0: db $04 ; wait for key
-#_089DA1: db $03 ; TODO
-#_089DA2: db $01, $00, $00 ; TODO
+#_089DA1: db $03 ; clear text box
+#_089DA2: db $01, $00, $00 ; set text position
 #_089DA5: db $AA, $BC, $B4, $20, $BC, $B1, $B4, $C9 ; «Old lady»
 #_089DAD: db $3A                                    ; «:»
 #_089DAE: db $02 ; new line
@@ -3317,12 +3317,12 @@ Message_089D46:
 ; (Digger joins 
 ; Pocky.)
 Message_089E02:
-#_089E02: dw $0001, $0003, $0005, $0012 ; TODO
-#_089E0A: dw $0002, $0000, $0000, $0001 ; TODO
+#_089E02: dw $0001, $0003, $0005, $0012 ; TODO, box x position, box y position, width
+#_089E0A: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_089E12: dw .data, $0000 ; pointer
 
 .data
-#_089E16: db $0B, $00 ; TODO
+#_089E16: db $0B, $00 ; allow turbo
 #_089E18: db $DB, $B9, $B7, $B7, $B5, $C2, $3A      ; «Digger:»
 #_089E1F: db $02 ; new line
 #_089E20: db $D8, $C2, $B5, $20, $C9, $BF, $C5, $20 ; «Are you »
@@ -3372,10 +3372,10 @@ Message_089E02:
 #_089EDC: db $C7, $B9, $C4, $B8, $20, $C9, $BF, $C5 ; «with you»
 #_089EE4: db $2E                                    ; «.»
 #_089EE5: db $04 ; wait for key
-#_089EE6: db $03 ; TODO
-#_089EE7: db $01, $00, $00 ; TODO
-#_089EEA: db $0B, $01 ; TODO
-#_089EEC: db $0A, $01 ; TODO
+#_089EE6: db $03 ; clear text box
+#_089EE7: db $01, $00, $00 ; set text position
+#_089EEA: db $0B, $01 ; prohibit turbo
+#_089EEC: db $0A, $01 ; disable text blip
 #_089EEE: db $0D, $25, $00 ; play song 25
 #_089EF1: db $28, $DB, $B9, $B7, $B7, $B5, $C2, $20 ; «(Digger »
 #_089EF9: db $BA, $BF, $B9, $BE, $C3, $20           ; «joins »
@@ -3384,8 +3384,8 @@ Message_089E02:
 #_089F07: db $05, $B4 ; set delay
 #_089F09: db $05, $02 ; set delay
 #_089F0B: db $0D, $24, $00 ; play song 24
-#_089F0E: db $0A, $00 ; TODO
-#_089F10: db $0B, $00 ; TODO
+#_089F0E: db $0A, $00 ; enable text blip
+#_089F10: db $0B, $00 ; allow turbo
 #_089F12: db $04 ; wait for key
 #_089F13: db $00 ; end message
 
@@ -3408,12 +3408,12 @@ Message_089E02:
 ; (Ottobot joins
 ; Pocky.)
 Message_089F14:
-#_089F14: dw $0001, $0003, $0005, $0012 ; TODO
-#_089F1C: dw $0002, $0000, $0000, $0001 ; TODO
+#_089F14: dw $0001, $0003, $0005, $0012 ; TODO, box x position, box y position, width
+#_089F1C: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_089F24: dw .data, $0000 ; pointer
 
 .data
-#_089F28: db $0B, $00 ; TODO
+#_089F28: db $0B, $00 ; allow turbo
 #_089F2A: db $DB, $C2, $2E, $A6, $B1, $B2, $C5, $BB ; «Dr.Kabuk»
 #_089F32: db $B9, $3A                               ; «i:»
 #_089F34: db $02 ; new line
@@ -3463,10 +3463,10 @@ Message_089F14:
 #_089FE0: db $3C, $BF, $BF, $B4, $20, $BC, $C5, $B3 ; «Good luc»
 #_089FE8: db $BB, $21                               ; «k!»
 #_089FEA: db $04 ; wait for key
-#_089FEB: db $03 ; TODO
-#_089FEC: db $01, $00, $00 ; TODO
-#_089FEF: db $0B, $01 ; TODO
-#_089FF1: db $0A, $01 ; TODO
+#_089FEB: db $03 ; clear text box
+#_089FEC: db $01, $00, $00 ; set text position
+#_089FEF: db $0B, $01 ; prohibit turbo
+#_089FF1: db $0A, $01 ; disable text blip
 #_089FF3: db $0D, $25, $00 ; play song 25
 #_089FF6: db $28, $AA, $C4, $C4, $BF, $B2, $BF, $C4 ; «(Ottobot»
 #_089FFE: db $20, $BA, $BF, $B9, $BE, $C3           ; « joins»
@@ -3475,8 +3475,8 @@ Message_089F14:
 #_08A00C: db $05, $B4 ; set delay
 #_08A00E: db $05, $02 ; set delay
 #_08A010: db $0D, $24, $00 ; play song 24
-#_08A013: db $0A, $00 ; TODO
-#_08A015: db $0B, $00 ; TODO
+#_08A013: db $0A, $00 ; enable text blip
+#_08A015: db $0B, $00 ; allow turbo
 #_08A017: db $04 ; wait for key
 #_08A018: db $00 ; end message
 
@@ -3492,12 +3492,12 @@ Message_089F14:
 ; forget about 
 ; Princess Luna.
 Message_08A019:
-#_08A019: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A021: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A019: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A021: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A029: dw .data, $0000 ; pointer
 
 .data
-#_08A02D: db $0B, $00 ; TODO
+#_08A02D: db $0B, $00 ; allow turbo
 #_08A02F: db $A8, $BF, $BE, $CA, $B1, $3A           ; «Monza:»
 #_08A035: db $02 ; new line
 #_08A036: db $D8, $C2, $B5, $20, $C9, $BF, $C5, $20 ; «Are you »
@@ -3545,12 +3545,12 @@ Message_08A019:
 ; (A player is 
 ; added.)
 Message_08A0A9:
-#_08A0A9: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A0B1: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A0A9: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A0B1: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A0B9: dw .data, $0000 ; pointer
 
 .data
-#_08A0BD: db $0B, $00 ; TODO
+#_08A0BD: db $0B, $00 ; allow turbo
 #_08A0BF: db $D9, $C5, $BE, $BE, $C9, $20, $D9, $C5 ; «Bunny Bu»
 #_08A0C7: db $B4, $B4, $B9, $B5, $C3, $3A           ; «ddies:»
 #_08A0CD: db $02 ; new line
@@ -3576,8 +3576,8 @@ Message_08A0A9:
 #_08A123: db $B2, $C9, $20, $C4, $B8, $B5, $20, $B5 ; «by the e»
 #_08A12B: db $BE, $B5, $BD, $C9, $2E                ; «nemy.»
 #_08A130: db $04 ; wait for key
-#_08A131: db $03 ; TODO
-#_08A132: db $01, $00, $00 ; TODO
+#_08A131: db $03 ; clear text box
+#_08A132: db $01, $00, $00 ; set text position
 #_08A135: db $D3, $B8, $B1, $C4, $20, $C7, $B5, $20 ; «What we »
 #_08A13D: db $B3, $B1, $BE, $20, $B4, $BF, $20      ; «can do »
 #_08A144: db $02 ; new line
@@ -3591,10 +3591,10 @@ Message_08A0A9:
 #_08A167: db $C9, $BF, $C5, $C2, $20, $B3, $BF, $C5 ; «your cou»
 #_08A16F: db $C2, $B1, $B7, $B5, $2E                ; «rage.»
 #_08A174: db $04 ; wait for key
-#_08A175: db $03 ; TODO
-#_08A176: db $01, $00, $00 ; TODO
-#_08A179: db $0B, $01 ; TODO
-#_08A17B: db $0A, $01 ; TODO
+#_08A175: db $03 ; clear text box
+#_08A176: db $01, $00, $00 ; set text position
+#_08A179: db $0B, $01 ; prohibit turbo
+#_08A17B: db $0A, $01 ; disable text blip
 #_08A17D: db $0D, $25, $00 ; play song 25
 #_08A180: db $28, $D8, $20, $C0, $BC, $B1, $C9, $B5 ; «(A playe»
 #_08A188: db $C2, $20, $B9, $C3, $20                ; «r is »
@@ -3604,8 +3604,8 @@ Message_08A0A9:
 #_08A197: db $05, $02 ; set delay
 #_08A199: db $12 ; give 1-up
 #_08A19A: db $0D, $20, $00 ; play song 20
-#_08A19D: db $0A, $00 ; TODO
-#_08A19F: db $0B, $00 ; TODO
+#_08A19D: db $0A, $00 ; enable text blip
+#_08A19F: db $0B, $00 ; allow turbo
 #_08A1A1: db $04 ; wait for key
 #_08A1A2: db $00 ; end message
 
@@ -3618,8 +3618,8 @@ Message_08A0A9:
 ; yourself and
 ; your friends.
 Message_08A1A3:
-#_08A1A3: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A1AB: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A1A3: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A1AB: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A1B3: dw .data, $0000 ; pointer
 
 .data
@@ -3649,8 +3649,8 @@ Message_08A1A3:
 
 ; Stop there.
 Message_08A210:
-#_08A210: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A218: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A210: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A218: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A220: dw .data, $0000 ; pointer
 
 .data
@@ -3667,8 +3667,8 @@ Message_08A210:
 ; been practicing 
 ; jogging.
 Message_08A232:
-#_08A232: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A23A: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A232: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A23A: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A242: dw .data, $0000 ; pointer
 
 .data
@@ -3693,8 +3693,8 @@ Message_08A232:
 ; Maybe itwas
 ; too easy.
 Message_08A282:
-#_08A282: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A28A: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A282: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A28A: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A292: dw .data, $0000 ; pointer
 
 .data
@@ -3718,8 +3718,8 @@ Message_08A282:
 ; You're clumsy,
 ; go ahead anyway.
 Message_08A2C6:
-#_08A2C6: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A2CE: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A2C6: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A2CE: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A2D6: dw .data, $0000 ; pointer
 
 .data
@@ -3735,8 +3735,8 @@ Message_08A2C6:
 
 ; That's all.
 Message_08A2FB:
-#_08A2FB: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A303: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A2FB: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A303: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A30B: dw .data, $0000 ; pointer
 
 .data
@@ -3753,8 +3753,8 @@ Message_08A2FB:
 ; I am very 
 ; disappointed.
 Message_08A31D:
-#_08A31D: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A325: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A31D: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A325: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A32D: dw .data, $0000 ; pointer
 
 .data
@@ -3779,8 +3779,8 @@ Message_08A31D:
 ; you won't have 
 ; any problems.
 Message_08A367:
-#_08A367: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A36F: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A367: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A36F: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A377: dw .data, $0000 ; pointer
 
 .data
@@ -3804,8 +3804,8 @@ Message_08A367:
 ; I believe you have
 ; nothing to fear.
 Message_08A3AD:
-#_08A3AD: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A3B5: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A3AD: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A3B5: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A3BD: dw .data, $0000 ; pointer
 
 .data
@@ -3828,8 +3828,8 @@ Message_08A3AD:
 
 ; You are done now.
 Message_08A403:
-#_08A403: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A40B: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A403: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A40B: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A413: dw .data, $0000 ; pointer
 
 .data
@@ -3846,8 +3846,8 @@ Message_08A403:
 ; discouraged,
 ; keep trying.
 Message_08A42B:
-#_08A42B: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A433: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A42B: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A433: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A43B: dw .data, $0000 ; pointer
 
 .data
@@ -3869,8 +3869,8 @@ Message_08A42B:
 ; forget what you 
 ; learned.
 Message_08A465:
-#_08A465: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A46D: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A465: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A46D: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A475: dw .data, $0000 ; pointer
 
 .data
@@ -3890,8 +3890,8 @@ Message_08A465:
 ; Great!,You did 
 ; a good job.
 Message_08A4A7:
-#_08A4A7: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A4AF: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A4A7: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A4AF: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A4B7: dw .data, $0000 ; pointer
 
 .data
@@ -3907,8 +3907,8 @@ Message_08A4A7:
 
 ; Stop.
 Message_08A4D8:
-#_08A4D8: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A4E0: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A4D8: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A4E0: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A4E8: dw .data, $0000 ; pointer
 
 .data
@@ -3922,8 +3922,8 @@ Message_08A4D8:
 ; That's terrible 
 ; team work.
 Message_08A4F4:
-#_08A4F4: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A4FC: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A4F4: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A4FC: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A504: dw .data, $0000 ; pointer
 
 .data
@@ -3940,8 +3940,8 @@ Message_08A4F4:
 ; Good team work.
 ; Keep it up.
 Message_08A525:
-#_08A525: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A52D: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A525: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A52D: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A535: dw .data, $0000 ; pointer
 
 .data
@@ -3960,8 +3960,8 @@ Message_08A525:
 ; and you will 
 ; do great.
 Message_08A556:
-#_08A556: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A55E: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A556: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A55E: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A566: dw .data, $0000 ; pointer
 
 .data
@@ -3983,8 +3983,8 @@ Message_08A556:
 
 ; Time is almost up.
 Message_08A59A:
-#_08A59A: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A5A2: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A59A: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A5A2: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A5AA: dw .data, $0000 ; pointer
 
 .data
@@ -4001,8 +4001,8 @@ Message_08A59A:
 ; I want you to 
 ; try harder.
 Message_08A5C2:
-#_08A5C2: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A5CA: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A5C2: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A5CA: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A5D2: dw .data, $0000 ; pointer
 
 .data
@@ -4027,8 +4027,8 @@ Message_08A5C2:
 ; The Guardian is 
 ; waiting for you.
 Message_08A60C:
-#_08A60C: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A614: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A60C: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A614: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A61C: dw .data, $0000 ; pointer
 
 .data
@@ -4049,8 +4049,8 @@ Message_08A60C:
 ; Well done,you did 
 ; an excellent job.
 Message_08A64F:
-#_08A64F: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A657: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A64F: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A657: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A65F: dw .data, $0000 ; pointer
 
 .data
@@ -4066,8 +4066,8 @@ Message_08A64F:
 
 ; The results are...
 Message_08A688:
-#_08A688: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A690: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A688: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A690: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A698: dw .data, $0000 ; pointer
 
 .data
@@ -4084,8 +4084,8 @@ Message_08A688:
 ; performance.
 ; You get a zero.
 Message_08A6B0:
-#_08A6B0: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A6B8: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A6B0: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A6B8: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A6C0: dw .data, $0000 ; pointer
 
 .data
@@ -4112,8 +4112,8 @@ Message_08A6B0:
 ; Be careful on 
 ; your journey.
 Message_08A702:
-#_08A702: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A70A: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A702: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A70A: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A712: dw .data, $0000 ; pointer
 
 .data
@@ -4139,8 +4139,8 @@ Message_08A702:
 ; will be different.
 ; Be careful.
 Message_08A755:
-#_08A755: dw $0001, $0007, $0005, $0012 ; TODO
-#_08A75D: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A755: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08A75D: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A765: dw .data, $0000 ; pointer
 
 .data
@@ -4171,12 +4171,12 @@ Message_08A755:
 ; sideways anyway 
 ; you like.
 Message_08A7AD:
-#_08A7AD: dw $0001, $0003, $0004, $0012 ; TODO
-#_08A7B5: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A7AD: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08A7B5: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A7BD: dw .data, $0000 ; pointer
 
 .data
-#_08A7C1: db $0A, $00 ; TODO
+#_08A7C1: db $0A, $00 ; enable text blip
 #_08A7C3: db $D1, $C3, $B5, $20, $C4, $B8, $B5, $20 ; «Use the »
 #_08A7CB: db $B3, $BF, $BE, $C4, $C2, $BF, $BC, $20 ; «control »
 #_08A7D3: db $02 ; new line
@@ -4209,8 +4209,8 @@ Message_08A7AD:
 ; I am to walk 
 ; around.
 Message_08A828:
-#_08A828: dw $0001, $000B, $0015, $0012 ; TODO
-#_08A830: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A828: dw $0001, $000B, $0015, $0012 ; TODO, box x position, box y position, width
+#_08A830: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A838: dw .data, $0000 ; pointer
 
 .data
@@ -4233,8 +4233,8 @@ Message_08A828:
 ; Keep focusing on 
 ; your target.
 Message_08A861:
-#_08A861: dw $0001, $0003, $0004, $0012 ; TODO
-#_08A869: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A861: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08A869: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A871: dw .data, $0000 ; pointer
 
 .data
@@ -4262,8 +4262,8 @@ Message_08A861:
 
 ; The & button?
 Message_08A8BF:
-#_08A8BF: dw $0001, $000B, $0015, $0012 ; TODO
-#_08A8C7: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A8BF: dw $0001, $000B, $0015, $0012 ; TODO, box x position, box y position, width
+#_08A8C7: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A8CF: dw .data, $0000 ; pointer
 
 .data
@@ -4282,8 +4282,8 @@ Message_08A8BF:
 ; Be careful not to
 ; get too close.
 Message_08A8E2:
-#_08A8E2: dw $0001, $0003, $0004, $0012 ; TODO
-#_08A8EA: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A8E2: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08A8EA: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A8F2: dw .data, $0000 ; pointer
 
 .data
@@ -4317,8 +4317,8 @@ Message_08A8E2:
 ; distance from the
 ; enemies right?
 Message_08A954:
-#_08A954: dw $0001, $000B, $0015, $0012 ; TODO
-#_08A95C: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A954: dw $0001, $000B, $0015, $0012 ; TODO, box x position, box y position, width
+#_08A95C: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A964: dw .data, $0000 ; pointer
 
 .data
@@ -4343,8 +4343,8 @@ Message_08A954:
 ; when you move with
 ; the control pad.
 Message_08A99D:
-#_08A99D: dw $0001, $0003, $0004, $0012 ; TODO
-#_08A9A5: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A99D: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08A9A5: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08A9AD: dw .data, $0000 ; pointer
 
 .data
@@ -4367,8 +4367,8 @@ Message_08A99D:
 ; So the partner 
 ; will follow me!
 Message_08A9F4:
-#_08A9F4: dw $0001, $000B, $0015, $0012 ; TODO
-#_08A9FC: dw $0002, $0000, $0000, $0001 ; TODO
+#_08A9F4: dw $0001, $000B, $0015, $0012 ; TODO, box x position, box y position, width
+#_08A9FC: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08AA04: dw .data, $0000 ; pointer
 
 .data
@@ -4390,8 +4390,8 @@ Message_08A9F4:
 ; direction you are
 ; heading.
 Message_08AA29:
-#_08AA29: dw $0001, $0003, $0004, $0012 ; TODO
-#_08AA31: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AA29: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08AA31: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08AA39: dw .data, $0000 ; pointer
 
 .data
@@ -4426,8 +4426,8 @@ Message_08AA29:
 
 ; I understand.
 Message_08AAAB:
-#_08AAAB: dw $0001, $000B, $0015, $0012 ; TODO
-#_08AAB3: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AAAB: dw $0001, $000B, $0015, $0012 ; TODO, box x position, box y position, width
+#_08AAB3: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08AABB: dw .data, $0000 ; pointer
 
 .data
@@ -4449,8 +4449,8 @@ Message_08AAAB:
 ; you will have to 
 ; start over.
 Message_08AACE:
-#_08AACE: dw $0001, $0003, $0004, $0012 ; TODO
-#_08AAD6: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AACE: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08AAD6: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08AADE: dw .data, $0000 ; pointer
 
 .data
@@ -4500,8 +4500,8 @@ Message_08AACE:
 ; being hit by the 
 ; enemy!
 Message_08AB7D:
-#_08AB7D: dw $0001, $000B, $0015, $0012 ; TODO
-#_08AB85: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AB7D: dw $0001, $000B, $0015, $0012 ; TODO, box x position, box y position, width
+#_08AB85: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08AB8D: dw .data, $0000 ; pointer
 
 .data
@@ -4526,13 +4526,13 @@ Message_08AB7D:
 ; lesson?
 ;      Yes No 
 Message_08ABCF:
-#_08ABCF: dw $0001, $0007, $0005, $0012 ; TODO
-#_08ABD7: dw $0002, $0000, $0000, $0001 ; TODO
+#_08ABCF: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08ABD7: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08ABDF: dw .data, $0000 ; pointer
 
 .data
-#_08ABE3: db $0A, $00 ; TODO
-#_08ABE5: db $0B, $00 ; TODO
+#_08ABE3: db $0A, $00 ; enable text blip
+#_08ABE5: db $0B, $00 ; allow turbo
 #_08ABE7: db $DB, $BF, $20, $C9, $BF, $C5, $20, $BE ; «Do you n»
 #_08ABEF: db $B5, $B5, $B4, $20, $B1, $20           ; «eed a »
 #_08ABF5: db $02 ; new line
@@ -4559,8 +4559,8 @@ Message_08ABCF:
 ; Pick up coins 
 ; quickly.
 Message_08AC14:
-#_08AC14: dw $0001, $0007, $0005, $0012 ; TODO
-#_08AC1C: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AC14: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08AC1C: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08AC24: dw .data, $0000 ; pointer
 
 .data
@@ -4601,8 +4601,8 @@ Message_08AC14:
 ; quickly.
 ; I am watching.
 Message_08AC9B:
-#_08AC9B: dw $0001, $0007, $0005, $0012 ; TODO
-#_08ACA3: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AC9B: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08ACA3: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08ACAB: dw .data, $0000 ; pointer
 
 .data
@@ -4644,8 +4644,8 @@ Message_08AC9B:
 ; guard,even when 
 ; you get confident.
 Message_08AD02:
-#_08AD02: dw $0001, $0007, $0005, $0012 ; TODO
-#_08AD0A: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AD02: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08AD0A: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08AD12: dw .data, $0000 ; pointer
 
 .data
@@ -4706,8 +4706,8 @@ Message_08AD02:
 ; He is Rocky the 
 ; Raccoon.
 Message_08ADD4:
-#_08ADD4: dw $0001, $0007, $0005, $0012 ; TODO
-#_08ADDC: dw $0002, $0000, $0000, $0001 ; TODO
+#_08ADD4: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08ADDC: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08ADE4: dw .data, $0000 ; pointer
 
 .data
@@ -4769,8 +4769,8 @@ Message_08ADD4:
 ; the enemies eight 
 ; times.
 Message_08AE98:
-#_08AE98: dw $0001, $0007, $0005, $0012 ; TODO
-#_08AEA0: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AE98: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08AEA0: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08AEA8: dw .data, $0000 ; pointer
 
 .data
@@ -4826,8 +4826,8 @@ Message_08AE98:
 ; avoiding the 
 ; enemies.
 Message_08AF3E:
-#_08AF3E: dw $0001, $0007, $0005, $0012 ; TODO
-#_08AF46: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AF3E: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08AF46: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08AF4E: dw .data, $0000 ; pointer
 
 .data
@@ -4880,8 +4880,8 @@ Message_08AF3E:
 ; Good choice,
 ; and good luck.
 Message_08AFFF:
-#_08AFFF: dw $0001, $0007, $0005, $0012 ; TODO
-#_08B007: dw $0002, $0000, $0000, $0001 ; TODO
+#_08AFFF: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08B007: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08B00F: dw .data, $0000 ; pointer
 
 .data
@@ -4900,8 +4900,8 @@ Message_08AFFF:
 
 ; OK,go ahead.
 Message_08B034:
-#_08B034: dw $0001, $0007, $0005, $0012 ; TODO
-#_08B03C: dw $0002, $0000, $0000, $0001 ; TODO
+#_08B034: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08B03C: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08B044: dw .data, $0000 ; pointer
 
 .data
@@ -4925,14 +4925,14 @@ Message_08B034:
 ; also gathered in 
 ; the festival square.
 Message_08B057:
-#_08B057: dw $0001, $0006, $0012, $0014 ; TODO
-#_08B05F: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B057: dw $0001, $0006, $0012, $0014 ; TODO, box x position, box y position, width
+#_08B05F: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_08B067: db $6B, $B0 ; pointer
 #_08B069: db $00 ; TODO
 #_08B06A: db $00 ; TODO
-#_08B06B: db $0A, $01 ; TODO
+#_08B06B: db $0A, $01 ; disable text blip
 #_08B06D: db $05, $04 ; set delay
-#_08B06F: db $0B, $01 ; TODO
+#_08B06F: db $0B, $01 ; prohibit turbo
 #_08B071: db $3E, $C4, $20, $B9, $C3, $20, $C4, $B8 ; «It is th»
 #_08B079: db $B5, $20, $B8, $B1, $C2, $C6, $B5, $C3 ; «e harves»
 #_08B081: db $C4, $20                               ; «t »
@@ -4990,14 +4990,14 @@ Message_08B057:
 ; with her rabbit 
 ; escorts.
 Message_08B13F:
-#_08B13F: dw $0001, $0006, $0012, $0014 ; TODO
-#_08B147: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B13F: dw $0001, $0006, $0012, $0014 ; TODO, box x position, box y position, width
+#_08B147: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_08B14F: dw .data, $0000 ; pointer
 
 .data
 #_08B153: db $05, $04 ; set delay
-#_08B155: db $03 ; TODO
-#_08B156: db $01, $00, $00 ; TODO
+#_08B155: db $03 ; clear text box
+#_08B156: db $01, $00, $00 ; set text position
 #_08B159: db $AB, $C2, $B9, $BE, $B3, $B5, $C3, $C3 ; «Princess»
 #_08B161: db $20, $A7, $C5, $BE, $B1, $20, $B9, $C3 ; « Luna is»
 #_08B169: db $20                                    ; « »
@@ -5024,12 +5024,12 @@ Message_08B1A7:
 #_08B1A7: dw .data, $0000 ; pointer
 
 .data
-#_08B1AB: db $03 ; TODO
-#_08B1AC: db $01, $00, $00 ; TODO
+#_08B1AB: db $03 ; clear text box
+#_08B1AC: db $01, $00, $00 ; set text position
 #_08B1AF: db $20, $20, $20, $20, $20, $20, $20      ; «       »
 #_08B1B6: db $05, $0A ; set delay
 #_08B1B8: db $05, $04 ; set delay
-#_08B1BA: db $03 ; TODO
+#_08B1BA: db $03 ; clear text box
 #_08B1BB: db $00 ; end message
 
 ;===================================================================================================
@@ -5039,8 +5039,8 @@ Message_08B1A7:
 ;       kidnapping 
 ;       Princess Luna."
 Message_08B1BC:
-#_08B1BC: dw $0001, $0003, $0012, $001B ; TODO
-#_08B1C4: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B1BC: dw $0001, $0003, $0012, $001B ; TODO, box x position, box y position, width
+#_08B1C4: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_08B1CC: dw .data, $0000 ; pointer
 
 .data
@@ -5083,8 +5083,8 @@ Message_08B1BC:
 ;       I am sure that we
 ;       will meet again."
 Message_08B23B:
-#_08B23B: dw $0001, $0003, $0012, $001B ; TODO
-#_08B243: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B23B: dw $0001, $0003, $0012, $001B ; TODO, box x position, box y position, width
+#_08B243: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_08B24B: dw .data, $0000 ; pointer
 
 .data
@@ -5139,15 +5139,15 @@ Message_08B23B:
 #_08B31C: db $2B                                    ; «"»
 #_08B31D: db $05, $5A ; set delay
 #_08B31F: db $05, $06 ; set delay
-#_08B321: db $03 ; TODO
+#_08B321: db $03 ; clear text box
 #_08B322: db $00 ; end message
 
 ;===================================================================================================
 
 ; Pocky:"...!!!???"
 Message_08B323:
-#_08B323: dw $0001, $0003, $0012, $001B ; TODO
-#_08B32B: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B323: dw $0001, $0003, $0012, $001B ; TODO, box x position, box y position, width
+#_08B32B: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_08B333: dw .data, $0000 ; pointer
 
 .data
@@ -5156,7 +5156,7 @@ Message_08B323:
 #_08B347: db $2B                                    ; «"»
 #_08B348: db $05, $50 ; set delay
 #_08B34A: db $05, $06 ; set delay
-#_08B34C: db $03 ; TODO
+#_08B34C: db $03 ; clear text box
 #_08B34D: db $00 ; end message
 
 ;===================================================================================================
@@ -5171,8 +5171,8 @@ Message_08B323:
 ; consult with the 
 ; seven wise people.
 Message_08B34E:
-#_08B34E: dw $0001, $0006, $0012, $0014 ; TODO
-#_08B356: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B34E: dw $0001, $0006, $0012, $0014 ; TODO, box x position, box y position, width
+#_08B356: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_08B35E: dw .data, $0000 ; pointer
 
 .data
@@ -5215,8 +5215,8 @@ Message_08B34E:
 ;===================================================================================================
 
 Message_08B3FB:
-#_08B3FB: dw $0001, $0004, $0012, $001B ; TODO
-#_08B403: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B3FB: dw $0001, $0004, $0012, $001B ; TODO, box x position, box y position, width
+#_08B403: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_08B40B: dw .data, $0000 ; pointer
 
 .data
@@ -5236,8 +5236,8 @@ Message_08B3FB:
 ;       We will rescue
 ;       the Princess."
 Message_08B411:
-#_08B411: dw $0001, $0003, $0012, $001C ; TODO
-#_08B419: dw $0003, $0000, $0000, $0000 ; TODO
+#_08B411: dw $0001, $0003, $0012, $001C ; TODO, box x position, box y position, width
+#_08B419: dw $0003, $0000, $0000, $0000 ; height, indent, text start x, text start y, theme
 #_08B421: dw .data, $0000 ; pointer
 
 .data
@@ -5301,9 +5301,9 @@ Message_08B411:
 #_08B50A: db $B3, $B5, $C3, $C3, $2E, $2B           ; «cess."»
 #_08B510: db $05, $5A ; set delay
 #_08B512: db $05, $06 ; set delay
-#_08B514: db $0B, $00 ; TODO
-#_08B516: db $03 ; TODO
-#_08B517: db $0A, $00 ; TODO
+#_08B514: db $0B, $00 ; allow turbo
+#_08B516: db $03 ; clear text box
+#_08B517: db $0A, $00 ; enable text blip
 #_08B519: db $00 ; end message
 
 ;===================================================================================================
@@ -5320,14 +5320,14 @@ Message_08B411:
 ; able to enjoy 
 ; the moonlight.
 Message_08B51A:
-#_08B51A: dw $0001, $0007, $0005, $0012 ; TODO
-#_08B522: dw $0002, $0000, $0000, $0001 ; TODO
+#_08B51A: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08B522: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08B52A: dw .data, $0000 ; pointer
 
 .data
-#_08B52E: db $0B, $00 ; TODO
+#_08B52E: db $0B, $00 ; allow turbo
 #_08B530: db $05, $02 ; set delay
-#_08B532: db $01, $00, $00 ; TODO
+#_08B532: db $01, $00, $00 ; set text position
 #_08B535: db $A8, $BF, $BF, $BE, $C9, $3A           ; «Moony:»
 #_08B53B: db $02 ; new line
 #_08B53C: db $D1, $BE, $BC, $B5, $C3, $C3, $20      ; «Unless »
@@ -5350,8 +5350,8 @@ Message_08B51A:
 #_08B57E: db $C7, $B9, $BC, $BC, $20, $B2, $B5, $20 ; «will be »
 #_08B586: db $B4, $B1, $C2, $BB, $2E                ; «dark.»
 #_08B58B: db $04 ; wait for key
-#_08B58C: db $03 ; TODO
-#_08B58D: db $01, $00, $00 ; TODO
+#_08B58C: db $03 ; clear text box
+#_08B58D: db $01, $00, $00 ; set text position
 #_08B590: db $A7, $BF, $BF, $BE, $C9, $3A           ; «Loony:»
 #_08B596: db $02 ; new line
 #_08B597: db $D8, $BE, $B4, $20, $3E, $20, $C7, $BF ; «And I wo»
@@ -5387,12 +5387,12 @@ Message_08B51A:
 ; (Tengy joins 
 ; Pocky.)
 Message_08B5C7:
-#_08B5C7: dw $0001, $0003, $0005, $0012 ; TODO
-#_08B5CF: dw $0002, $0000, $0000, $0001 ; TODO
+#_08B5C7: dw $0001, $0003, $0005, $0012 ; TODO, box x position, box y position, width
+#_08B5CF: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08B5D7: dw .data, $0000 ; pointer
 
 .data
-#_08B5DB: db $0B, $00 ; TODO
+#_08B5DB: db $0B, $00 ; allow turbo
 #_08B5DD: db $AF, $B5, $BE, $B7, $C9, $3A           ; «Tengy:»
 #_08B5E3: db $02 ; new line
 #_08B5E4: db $3E, $20, $BB, $BE, $B5, $C7, $20, $C4 ; «I knew t»
@@ -5448,10 +5448,10 @@ Message_08B5C7:
 #_08B6A6: db $02 ; new line
 #_08B6A7: db $C7, $B5, $20, $B6, $BC, $B5, $C7, $2E ; «we flew.»
 #_08B6AF: db $04 ; wait for key
-#_08B6B0: db $03 ; TODO
-#_08B6B1: db $01, $00, $00 ; TODO
-#_08B6B4: db $0B, $01 ; TODO
-#_08B6B6: db $0A, $01 ; TODO
+#_08B6B0: db $03 ; clear text box
+#_08B6B1: db $01, $00, $00 ; set text position
+#_08B6B4: db $0B, $01 ; prohibit turbo
+#_08B6B6: db $0A, $01 ; disable text blip
 #_08B6B8: db $0D, $25, $00 ; play song 25
 #_08B6BB: db $28, $AF, $B5, $BE, $B7, $C9, $20, $BA ; «(Tengy j»
 #_08B6C3: db $BF, $B9, $BE, $C3, $20                ; «oins »
@@ -5460,8 +5460,8 @@ Message_08B5C7:
 #_08B6D0: db $05, $B4 ; set delay
 #_08B6D2: db $05, $02 ; set delay
 #_08B6D4: db $0D, $24, $00 ; play song 24
-#_08B6D7: db $0A, $00 ; TODO
-#_08B6D9: db $0B, $00 ; TODO
+#_08B6D7: db $0A, $00 ; enable text blip
+#_08B6D9: db $0B, $00 ; allow turbo
 #_08B6DB: db $04 ; wait for key
 #_08B6DC: db $00 ; end message
 
@@ -5477,12 +5477,12 @@ Message_08B5C7:
 ; I recommend you 
 ; go right.
 Message_08B6DD:
-#_08B6DD: dw $0001, $0007, $0005, $0012 ; TODO
-#_08B6E5: dw $0002, $0000, $0000, $0001 ; TODO
+#_08B6DD: dw $0001, $0007, $0005, $0012 ; TODO, box x position, box y position, width
+#_08B6E5: dw $0002, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08B6ED: dw .data, $0000 ; pointer
 
 .data
-#_08B6F1: db $0B, $00 ; TODO
+#_08B6F1: db $0B, $00 ; allow turbo
 #_08B6F3: db $05, $02 ; set delay
 #_08B6F5: db $3E, $BE, $BE, $20, $BB, $B5, $B5, $C0 ; «Inn keep»
 #_08B6FD: db $B5, $C2, $3A                          ; «er:»
@@ -5532,13 +5532,13 @@ Message_08B6DD:
 ; This is the way
 ; to defeat him.
 Message_08B779:
-#_08B779: dw $0001, $0003, $0004, $0012 ; TODO
-#_08B781: dw $0003, $0000, $0000, $0001 ; TODO
+#_08B779: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08B781: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08B789: dw .data, $0000 ; pointer
 
 .data
-#_08B78D: db $03 ; TODO
-#_08B78E: db $01, $00, $00 ; TODO
+#_08B78D: db $03 ; clear text box
+#_08B78E: db $01, $00, $00 ; set text position
 #_08B791: db $DD, $BF, $C8, $C9, $27, $C3, $20, $B5 ; «Foxy's e»
 #_08B799: db $BE, $B4, $C5, $C2, $B1, $BE, $B3, $B5 ; «ndurance»
 #_08B7A1: db $02 ; new line
@@ -5596,13 +5596,13 @@ Message_08B779:
 ; middle to avoid
 ; the thorns.
 Message_08B83B:
-#_08B83B: dw $0001, $0003, $0004, $0012 ; TODO
-#_08B843: dw $0003, $0000, $0000, $0001 ; TODO
+#_08B83B: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08B843: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08B84B: dw .data, $0000 ; pointer
 
 .data
-#_08B84F: db $03 ; TODO
-#_08B850: db $01, $00, $00 ; TODO
+#_08B84F: db $03 ; clear text box
+#_08B850: db $01, $00, $00 ; set text position
 #_08B853: db $DB, $B5, $BD, $BF, $BE, $20, $3C, $B1 ; «Demon Ga»
 #_08B85B: db $C4, $B5, $20, $B9, $C3, $20, $C4, $B8 ; «te is th»
 #_08B863: db $B5                                    ; «e»
@@ -5677,13 +5677,13 @@ Message_08B83B:
 ; Be careful for
 ; the explosion.
 Message_08B948:
-#_08B948: dw $0001, $0003, $0004, $0012 ; TODO
-#_08B950: dw $0003, $0000, $0000, $0001 ; TODO
+#_08B948: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08B950: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08B958: dw .data, $0000 ; pointer
 
 .data
-#_08B95C: db $03 ; TODO
-#_08B95D: db $01, $00, $00 ; TODO
+#_08B95C: db $03 ; clear text box
+#_08B95D: db $01, $00, $00 ; set text position
 #_08B960: db $D3, $B8, $B5, $BE, $20, $C3, $C5, $C2 ; «When sur»
 #_08B968: db $C2, $BF, $C5, $BE, $B4, $B5, $B4      ; «rounded»
 #_08B96F: db $02 ; new line
@@ -5743,13 +5743,13 @@ Message_08B948:
 ; by using the
 ; Partner bomber.
 Message_08BA27:
-#_08BA27: dw $0001, $0003, $0004, $0012 ; TODO
-#_08BA2F: dw $0003, $0000, $0000, $0001 ; TODO
+#_08BA27: dw $0001, $0003, $0004, $0012 ; TODO, box x position, box y position, width
+#_08BA2F: dw $0003, $0000, $0000, $0001 ; height, indent, text start x, text start y, theme
 #_08BA37: dw .data, $0000 ; pointer
 
 .data
-#_08BA3B: db $03 ; TODO
-#_08BA3C: db $01, $00, $00 ; TODO
+#_08BA3B: db $03 ; clear text box
+#_08BA3C: db $01, $00, $00 ; set text position
 #_08BA3F: db $AF, $B8, $B5, $20, $B6, $B9, $BE, $B1 ; «The fina»
 #_08BA47: db $BC, $20, $B2, $B1, $C4, $C4, $BC, $B5 ; «l battle»
 #_08BA4F: db $02 ; new line
@@ -10391,7 +10391,7 @@ ROUTINE_08DEE5_long:
 #_08DEE4: RTL
 
 ;===================================================================================================
-
+; TODO related to shops
 ROUTINE_08DEE5:
 #_08DEE5: JSR ROUTINE_08DEA7
 #_08DEE8: PHY
@@ -10415,6 +10415,7 @@ ROUTINE_08DEE5:
 #_08DF09: LDA.w $0002,Y
 #_08DF0C: STA.b $20
 #_08DF0E: JSR .call_routine
+
 #_08DF11: TAY
 #_08DF12: RTS
 
@@ -10552,7 +10553,7 @@ UNREACH_08DFC1:
 
 ;===================================================================================================
 
-ROUTINE_08DFC9:
+ROUTINE_08DFCD:
 #_08DFCD: LDX.w $19F6
 #_08DFD0: CPX.w #$0002
 #_08DFD3: BCC CODE_08DFD9
@@ -10642,13 +10643,13 @@ ROUTINE_08E038:
 #_08E03C: BEQ CODE_08E044
 
 #_08E03E: LDX.w $04FC
-#_08E041: JSR (PTR16_08E048,X)
+#_08E041: JSR (.vectors,X)
 
 CODE_08E044:
 #_08E044: LDA.w #$0000
 #_08E047: RTS
 
-PTR16_08E048:
+.vectors
 #_08E048: dw ROUTINE_08E085
 #_08E04A: dw ROUTINE_08E058
 #_08E04C: dw ROUTINE_08E069
@@ -10855,9 +10856,15 @@ ROUTINE_08E352:
 #_08E374: RTL
 
 UNREACH_08E375:
-#_08E375: db $1F,$41,$1F,$45,$1F,$50,$1F,$3C
-#_08E37D: db $1F,$4C,$1F,$46,$1F,$52,$1F,$47
-#_08E385: db $1F,$51
+#_08E375: dw $411F
+#_08E377: dw $451F
+#_08E379: dw $501F
+#_08E37B: dw $3C1F
+#_08E37D: dw $4C1F
+#_08E37F: dw $461F
+#_08E381: dw $521F
+#_08E383: dw $471F
+#_08E385: dw $511F
 
 ;===================================================================================================
 
@@ -11073,7 +11080,7 @@ UNREACH_08E50D:
 
 ;===================================================================================================
 
-ROUTINE_08E529:
+SetLevelSong:
 #_08E529: PHB
 #_08E52A: PHK
 #_08E52B: PLB
@@ -11088,25 +11095,31 @@ ROUTINE_08E529:
 
 ; TODO 16-bit format
 .songs
-#_08E538: db $0F,$00,$03,$00,$01,$00,$17,$00
-#_08E540: db $13,$00,$02,$00,$04,$00,$14,$00
-#_08E548: db $15,$00
+#_08E538: dw $000F
+#_08E53A: dw $0003
+#_08E53C: dw $0001
+#_08E53E: dw $0017
+#_08E540: dw $0013
+#_08E542: dw $0002
+#_08E544: dw $0004
+#_08E546: dw $0014
+#_08E548: dw $0015
 
 ;===================================================================================================
 
-ROUTINE_08E552_long:
+EnterPasswordScreen:
 #_08E54A: PHB
 #_08E54B: PHK
 #_08E54C: PLB
 
-#_08E54D: JSR ROUTINE_08E552
+#_08E54D: JSR .execute
 
 #_08E550: PLB
 #_08E551: RTL
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_08E552:
+.execute
 #_08E552: LDA.w $19B0
 #_08E555: STA.w $19B4
 
@@ -11125,7 +11138,7 @@ CODE_08E56C:
 #_08E56F: AND.w #$1000
 #_08E572: BEQ CODE_08E577
 
-#_08E574: JMP CODE_08E6ED
+#_08E574: JMP ValidatePassword
 
 CODE_08E577:
 #_08E577: LDX.w #$0000
@@ -11245,7 +11258,7 @@ CODE_08E613:
 #_08E627: AND.w #$00FF
 #_08E62A: BNE CODE_08E62F
 
-#_08E62C: JMP CODE_08E6ED
+#_08E62C: JMP ValidatePassword
 
 CODE_08E62F:
 #_08E62F: JSR ROUTINE_08E7E1
@@ -11338,62 +11351,71 @@ UNREACH_08E6A5:
 #_08E6DD: db $74,$02,$77,$02,$A8,$02,$AB,$02
 #_08E6E5: db $AE,$02,$B1,$02,$B4,$02,$B7,$02
 
-;---------------------------------------------------------------------------------------------------
+;===================================================================================================
 
-CODE_08E6ED:
+ValidatePassword:
 #_08E6ED: LDX.w #$0000
 
-CODE_08E6F0:
+.check_next_password
 #_08E6F0: STX.b $22
 
-#_08E6F2: LDA.w UNREACH_08E915,X
+#_08E6F2: LDA.w LevelPasswords,X
 #_08E6F5: AND.w #$00FF
-#_08E6F8: BEQ CODE_08E736
+#_08E6F8: BEQ .end_of_passwords
 
 #_08E6FA: LDY.w #$0000
 
-CODE_08E6FD:
-#_08E6FD: LDA.w UNREACH_08E915,X
+.next_character
+#_08E6FD: LDA.w LevelPasswords,X
 #_08E700: AND.w #$00FF
 #_08E703: STA.b $20
 
 #_08E705: LDA.w $0800,Y
 #_08E708: AND.w #$00FF
 #_08E70B: CMP.b $20
-#_08E70D: BNE CODE_08E72D
+#_08E70D: BNE .no_match
 
 #_08E70F: INX
+
 #_08E710: INY
 #_08E711: INY
 #_08E712: CPY.w #$0008
-#_08E715: BNE CODE_08E6FD
+#_08E715: BNE .next_character
 
 #_08E717: LDA.w #$0065
 #_08E71A: STA.w $04A2
+
 #_08E71D: JSR ROUTINE_08E74E
 #_08E720: CMP.w #$006F
-#_08E723: BNE CODE_08E73F
+#_08E723: BNE .finished
 
 #_08E725: LDA.w #$0023
 #_08E728: STA.w $05A8
-#_08E72B: BRA CODE_08E73F
 
-CODE_08E72D:
+#_08E72B: BRA .finished
+
+.no_match
 #_08E72D: CLC
 
 #_08E72E: LDA.b $22
 #_08E730: ADC.w #$0006
 #_08E733: TAX
-#_08E734: BRA CODE_08E6F0
 
-CODE_08E736:
+#_08E734: BRA .check_next_password
+
+;---------------------------------------------------------------------------------------------------
+
+.end_of_passwords
 #_08E736: LDA.w #$0020
 #_08E739: STA.w $04A2
+
 #_08E73C: INC.w $0508
 
-CODE_08E73F:
+.finished
 #_08E73F: STZ.w $19BA
+
 #_08E742: JSR ROUTINE_08E648
+
 #_08E745: RTS
 
 ;===================================================================================================
@@ -11411,7 +11433,7 @@ ROUTINE_08E74E_long:
 ;===================================================================================================
 
 ROUTINE_08E74E:
-#_08E74E: LDA.w UNREACH_08E915,X
+#_08E74E: LDA.w LevelPasswords+0,X
 #_08E751: AND.w #$00FF
 #_08E754: STA.w $0552
 #_08E757: TAY
@@ -11429,7 +11451,7 @@ ROUTINE_08E74E:
 #_08E76C: LDA.w #$0004
 #_08E76F: STA.w $0508
 
-#_08E772: LDA.w UNREACH_08E916,X
+#_08E772: LDA.w LevelPasswords+1,X
 #_08E775: AND.w #$00FF
 #_08E778: STA.w $0500
 #_08E77B: RTS
@@ -11782,18 +11804,21 @@ ROUTINE_08E8CA:
 
 ;===================================================================================================
 
-UNREACH_08E915:
-#_08E915: db $4E
+; 4 byte passwords, followed by modules
+LevelPasswords:
+#_08E915: db $4E, $4B, $52, $F0 : db $00, $7A ; NKRP
+#_08E91B: db $48, $54, $D1, $4A : db $01, $7A ; HT1J
+#_08E921: db $56, $D3, $42, $58 : db $06, $7A ; V3BX
+#_08E927: db $46, $D8, $D7, $4E : db $02, $7A ; F87N
+#_08E92D: db $53, $D2, $59, $50 : db $04, $7A ; S2YP
+#_08E933: db $D6, $44, $5A, $D4 : db $08, $7A ; 6DZ4
+#_08E939: db $54, $52, $D5, $43 : db $0D, $7A ; TR5C
+#_08E93F: db $47, $5A, $4C, $52 : db $0B, $7A ; GZLR
+#_08E945: db $D5, $4B, $D0, $51 : db $0F, $7A ; 5K0Q
+#_08E94B: db $D0, $4D, $57, $D9 : db $00, $34 ; 0MW9
+#_08E951: db $00, $00
 
-UNREACH_08E916:
-#_08E916: db $4B,$52,$F0,$00,$7A,$48,$54,$D1
-#_08E91E: db $4A,$01,$7A,$56,$D3,$42,$58,$06
-#_08E926: db $7A,$46,$D8,$D7,$4E,$02,$7A,$53
-#_08E92E: db $D2,$59,$50,$04,$7A,$D6,$44,$5A
-#_08E936: db $D4,$08,$7A,$54,$52,$D5,$43,$0D
-#_08E93E: db $7A,$47,$5A,$4C,$52,$0B,$7A,$D5
-#_08E946: db $4B,$D0,$51,$0F,$7A,$D0,$4D,$57
-#_08E94E: db $D9,$00,$34,$00,$00
+;===================================================================================================
 
 UNREACH_08E953:
 #_08E953: db $3E,$3B,$3C,$71,$32,$32,$73,$77
@@ -11809,6 +11834,8 @@ UNREACH_08E953:
 #_08E9A3: db $2B,$2A,$19,$0C,$24,$25,$10,$04
 #_08E9AB: db $11,$0F,$07,$0A,$09,$0D,$03,$08
 #_08E9B3: db $05,$1B,$1C,$1D,$06,$0B,$02,$14
+
+;===================================================================================================
 
 UNREACH_08E9BB:
 #_08E9BB: db $00,$0D,$0E,$0F,$10,$03,$01,$17
@@ -11910,12 +11937,16 @@ ROUTINE_08EBDC:
 
 #_08EBFB: LDA.w #$FFFF
 #_08EBFE: STA.w $05BA
+
 #_08EC01: PLA
-#_08EC02: JSR (PTR16_08EC09,X)
+
+#_08EC02: JSR (.vectors,X)
+
 #_08EC05: INC.w $04D4
+
 #_08EC08: RTS
 
-PTR16_08EC09:
+.vectors
 #_08EC09: dw ROUTINE_08EC19
 #_08EC0B: dw ROUTINE_08EEFA
 #_08EC0D: dw ROUTINE_08EC4C
@@ -12154,6 +12185,7 @@ ROUTINE_08EDE6:
 #_08EDEC: LDA.w $1980
 #_08EDEF: ADC.w #$0020
 #_08EDF2: STA.w $1980
+
 #_08EDF5: RTS
 
 ;===================================================================================================

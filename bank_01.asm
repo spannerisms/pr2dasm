@@ -26,9 +26,10 @@ ROUTINE_01800D:
 
 ;===================================================================================================
 
-ROUTINE_01801C:
+TestForTutorialLevel:
 #_01801C: LDA.w $18E4
 #_01801F: CMP.w #$0000
+
 #_018022: RTS
 
 ;===================================================================================================
@@ -48,7 +49,7 @@ ROUTINE_018023:
 
 ROUTINE_018036:
 #_018036: TAY
-#_018037: JSR ROUTINE_01801C
+#_018037: JSR TestForTutorialLevel
 #_01803A: BNE CODE_018051
 
 #_01803C: LDA.w $1AD0
@@ -90,7 +91,7 @@ ROUTINE_018069:
 #_01806F: AND.w #$0080
 #_018072: BEQ CODE_0180A3
 
-#_018074: JSR ROUTINE_01801C
+#_018074: JSR TestForTutorialLevel
 #_018077: BNE CODE_01808A
 
 #_018079: LDA.w $1AD0
@@ -150,7 +151,7 @@ ROUTINE_0180B7:
 ROUTINE_0180CB:
 #_0180CB: STA.b $20
 
-#_0180CD: JSR ROUTINE_01801C
+#_0180CD: JSR TestForTutorialLevel
 #_0180D0: BNE CODE_0180E3
 
 #_0180D2: LDA.w $1AD0
@@ -327,7 +328,7 @@ CODE_018249:
 
 CODE_018251:
 #_018251: LDX.w $19CE
-#_018254: JSR (PTR16_018268,X)
+#_018254: JSR (.vectors,X)
 
 #_018257: LDA.w #$0018
 #_01825A: STA.w $1F2C
@@ -339,7 +340,7 @@ CODE_018251:
 #_018266: PLB
 #_018267: RTL
 
-PTR16_018268:
+.vectors
 #_018268: dw ROUTINE_019D71
 #_01826A: dw ROUTINE_019D71
 #_01826C: dw ROUTINE_019C93
@@ -863,7 +864,7 @@ CODE_0185AB:
 
 CODE_0185AF:
 #_0185AF: TAX
-#_0185B0: JMP (PTR16_018268,X)
+#_0185B0: JMP (.vectors,X)
 
 ;===================================================================================================
 
@@ -1231,7 +1232,7 @@ ROUTINE_018799:
 
 ROUTINE_0187A9:
 #_0187A9: STZ.w $1F70
-#_0187AC: JSR ROUTINE_01801C
+#_0187AC: JSR TestForTutorialLevel
 #_0187AF: BNE CODE_0187BE
 
 #_0187B1: LDA.l $7E7A52
@@ -2663,7 +2664,7 @@ CODE_0190AB:
 #_0190AB: LDA.w $19DE
 #_0190AE: ASL A
 #_0190AF: TAX
-#_0190B0: JMP (PTR16_018268,X)
+#_0190B0: JMP (.vectors,X)
 
 ;===================================================================================================
 
@@ -3148,7 +3149,7 @@ ROUTINE_019342:
 #_019350: LDA.w $05B4
 #_019353: BNE CODE_019359
 
-#_019355: JSL ROUTINE_02FE48
+#_019355: JSL SetLevelTimer
 
 CODE_019359:
 #_019359: JSR ROUTINE_01AA54
@@ -3764,7 +3765,7 @@ ROUTINE_0196DA:
 #_0196DA: JSR ROUTINE_0196CE
 #_0196DD: BNE CODE_0196F3
 
-#_0196DF: JSR ROUTINE_01801C
+#_0196DF: JSR TestForTutorialLevel
 #_0196E2: BNE CODE_0196EA
 
 #_0196E4: LDA.w #$0002
@@ -3885,7 +3886,7 @@ CODE_01979D:
 #_0197A0: AND.w #$4000
 #_0197A3: BEQ CODE_0197DE
 
-#_0197A5: JSR ROUTINE_01AA1B
+#_0197A5: JSR TestForLevel10
 #_0197A8: BEQ CODE_0197BA
 
 #_0197AA: LDA.w $19F9
@@ -3947,7 +3948,7 @@ CODE_0197F5:
 #_01980A: BRA CODE_019853
 
 CODE_01980C:
-#_01980C: JSR ROUTINE_01AA1B
+#_01980C: JSR TestForLevel10
 #_01980F: BEQ CODE_0197E6
 
 #_019811: LDA.w $19D0
@@ -3960,7 +3961,7 @@ CODE_01980C:
 #_019820: BRA CODE_0197F5
 
 CODE_019822:
-#_019822: JSR ROUTINE_01AA1B
+#_019822: JSR TestForLevel10
 #_019825: BEQ CODE_01982F
 
 #_019827: LDA.w $19F8
@@ -3998,12 +3999,12 @@ ROUTINE_019856:
 
 #_01985E: LDA.w $059C
 #_019861: CMP.w #$0003
-#_019864: BEQ EXIT_01986B
+#_019864: BEQ .exit_a
 
 #_019866: CMP.w #$0006
 #_019869: BNE CODE_01986C
 
-EXIT_01986B
+.exit_a
 #_01986B: RTS
 
 CODE_01986C:
@@ -4188,7 +4189,7 @@ CODE_019986:
 #_019989: AND.w #$4000
 #_01998C: BEQ CODE_0199C7
 
-#_01998E: JSR ROUTINE_01AA1B
+#_01998E: JSR TestForLevel10
 #_019991: BEQ CODE_0199A3
 
 #_019993: LDA.w $19F9
@@ -4250,7 +4251,7 @@ CODE_0199DE:
 #_0199F3: BRA CODE_019A3C
 
 CODE_0199F5:
-#_0199F5: JSR ROUTINE_01AA1B
+#_0199F5: JSR TestForLevel10
 #_0199F8: BEQ CODE_0199CF
 
 #_0199FA: LDA.w $19D0
@@ -4263,7 +4264,7 @@ CODE_0199F5:
 #_019A09: BRA CODE_0199DE
 
 CODE_019A0B:
-#_019A0B: JSR ROUTINE_01AA1B
+#_019A0B: JSR TestForLevel10
 #_019A0E: BEQ CODE_019A18
 
 #_019A10: LDA.w $19F8
@@ -4326,7 +4327,7 @@ CODE_019A6C:
 #_019A6F: AND.w #$4000
 #_019A72: BEQ CODE_019AAD
 
-#_019A74: JSR ROUTINE_01AA1B
+#_019A74: JSR TestForLevel10
 #_019A77: BEQ CODE_019A89
 
 #_019A79: LDA.w $19F9
@@ -4388,7 +4389,7 @@ CODE_019AC4:
 #_019AD9: BRA CODE_019B22
 
 CODE_019ADB:
-#_019ADB: JSR ROUTINE_01AA1B
+#_019ADB: JSR TestForLevel10
 #_019ADE: BEQ CODE_019AB5
 
 #_019AE0: LDA.w $19D0
@@ -4401,7 +4402,7 @@ CODE_019ADB:
 #_019AEF: BRA CODE_019AC4
 
 CODE_019AF1:
-#_019AF1: JSR ROUTINE_01AA1B
+#_019AF1: JSR TestForLevel10
 #_019AF4: BEQ CODE_019AFE
 
 #_019AF6: LDA.w $19F8
@@ -4464,7 +4465,7 @@ CODE_019B52:
 #_019B55: AND.w #$4000
 #_019B58: BEQ CODE_019B93
 
-#_019B5A: JSR ROUTINE_01AA1B
+#_019B5A: JSR TestForLevel10
 #_019B5D: BEQ CODE_019B6F
 
 #_019B5F: LDA.w $19F9
@@ -4526,7 +4527,7 @@ CODE_019BAA:
 #_019BBF: BRA CODE_019C08
 
 CODE_019BC1:
-#_019BC1: JSR ROUTINE_01AA1B
+#_019BC1: JSR TestForLevel10
 #_019BC4: BEQ CODE_019B9B
 
 #_019BC6: LDA.w $19D0
@@ -4539,7 +4540,7 @@ CODE_019BC1:
 #_019BD5: BRA CODE_019BAA
 
 CODE_019BD7:
-#_019BD7: JSR ROUTINE_01AA1B
+#_019BD7: JSR TestForLevel10
 #_019BDA: BEQ CODE_019BE4
 
 #_019BDC: LDA.w $19F8
@@ -4685,7 +4686,7 @@ CODE_019CBD:
 #_019CC0: AND.w #$4000
 #_019CC3: BEQ CODE_019CFE
 
-#_019CC5: JSR ROUTINE_01AA1B
+#_019CC5: JSR TestForLevel10
 #_019CC8: BEQ CODE_019CDA
 
 #_019CCA: LDA.w $19F9
@@ -4745,7 +4746,7 @@ CODE_019D11:
 #_019D26: BRA CODE_019D6B
 
 CODE_019D28:
-#_019D28: JSR ROUTINE_01AA1B
+#_019D28: JSR TestForLevel10
 #_019D2B: BEQ CODE_019D06
 
 #_019D2D: LDA.w $19D0
@@ -4756,7 +4757,7 @@ CODE_019D28:
 #_019D38: BRA CODE_019D11
 
 CODE_019D3A:
-#_019D3A: JSR ROUTINE_01AA1B
+#_019D3A: JSR TestForLevel10
 #_019D3D: BEQ CODE_019D47
 
 #_019D3F: LDA.w $19F8
@@ -4824,7 +4825,7 @@ CODE_019DA3:
 #_019DAB: JMP CODE_019E5B
 
 CODE_019DAE:
-#_019DAE: JSR ROUTINE_01801C
+#_019DAE: JSR TestForTutorialLevel
 #_019DB1: BNE CODE_019DC9
 
 #_019DB3: LDA.w $1AD0
@@ -4845,7 +4846,7 @@ CODE_019DC9:
 #_019DCC: AND.w #$4000
 #_019DCF: BEQ CODE_019E0A
 
-#_019DD1: JSR ROUTINE_01AA1B
+#_019DD1: JSR TestForLevel10
 #_019DD4: BEQ CODE_019DE6
 
 #_019DD6: LDA.w $19F9
@@ -4907,7 +4908,7 @@ CODE_019E21:
 #_019E36: BRA CODE_019E81
 
 CODE_019E38:
-#_019E38: JSR ROUTINE_01AA1B
+#_019E38: JSR TestForLevel10
 #_019E3B: BEQ CODE_019E12
 
 #_019E3D: LDA.w $19D0
@@ -4920,7 +4921,7 @@ CODE_019E38:
 #_019E4C: BRA CODE_019E21
 
 CODE_019E4E:
-#_019E4E: JSR ROUTINE_01AA1B
+#_019E4E: JSR TestForLevel10
 #_019E51: BEQ CODE_019E5B
 
 #_019E53: LDA.w $19F8
@@ -5053,13 +5054,13 @@ ROUTINE_019F12:
 #_019F18: AND.w #$0007
 #_019F1B: ASL A
 #_019F1C: TAX
-#_019F1D: JSR (PTR16_019F26,X)
+#_019F1D: JSR (.vectors,X)
 
 CODE_019F20:
 #_019F20: JSR ROUTINE_019EAB
 #_019F23: JMP ROUTINE_01A1F1
 
-PTR16_019F26:
+.vectors
 #_019F26: dw ROUTINE_019F4A
 #_019F28: dw ROUTINE_019F5E
 #_019F2A: dw ROUTINE_019F36
@@ -5515,7 +5516,7 @@ ROUTINE_01A1A1:
 #_01A1A1: PHY
 
 #_01A1A2: LDY.w $18E4
-#_01A1A5: LDA.w EXIT_01A1CD-1,Y
+#_01A1A5: LDA.w UNREACH_01A1CD-1,Y
 #_01A1A8: AND.w #$FF00
 #_01A1AB: STA.b $2C
 
@@ -6977,7 +6978,7 @@ CODE_01AA09:
 
 ;===================================================================================================
 
-ROUTINE_01AA1B:
+TestForLevel10:
 #_01AA1B: LDA.w $18E4
 #_01AA1E: CMP.w #$0012
 #_01AA21: RTS
@@ -8084,7 +8085,7 @@ CODE_01AF54:
 
 ;---------------------------------------------------------------------------------------------------
 
-#_01B0A5: dw Dragon_Normal                                            ; 0x0146
+#_01B0A5: dw Gordon_Normal                                            ; 0x0146
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -8696,7 +8697,7 @@ ROUTINE_01B3FF:
 
 ;===================================================================================================
 
-Dragon_Normal:
+Gordon_Normal:
 #_01B400: RTS
 
 ;===================================================================================================
@@ -9045,10 +9046,10 @@ ROUTINE_01B5FE:
 #_01B606: LDA.w $05E2
 #_01B609: ASL A
 #_01B60A: TAX
-#_01B60B: JSR (PTR16_01B611,X)
+#_01B60B: JSR (.vectors,X)
 #_01B60E: JMP CODE_01B674
 
-PTR16_01B611:
+.vectors
 #_01B611: dw ROUTINE_01B619
 #_01B613: dw ROUTINE_01B625
 #_01B615: dw ROUTINE_01B638
@@ -10252,7 +10253,7 @@ CODE_01BCDC:
 
 CODE_01BCE5:
 #_01BCE5: JSR ROUTINE_01DD53
-#_01BCE8: JSR ROUTINE_01801C
+#_01BCE8: JSR TestForTutorialLevel
 #_01BCEB: BEQ CODE_01BD0A
 
 #_01BCED: JSR ROUTINE_01A5A1
@@ -10270,7 +10271,7 @@ CODE_01BCE5:
 #_01BD07: JMP CODE_01BD8A
 
 CODE_01BD0A:
-#_01BD0A: JSR ROUTINE_01801C
+#_01BD0A: JSR TestForTutorialLevel
 #_01BD0D: BEQ CODE_01BD43
 
 #_01BD0F: JSR ROUTINE_01A5A1
@@ -10612,7 +10613,7 @@ CODE_01BF0D:
 CODE_01BF10:
 #_01BF10: STA.w $05CE
 
-#_01BF13: JSR ROUTINE_01801C
+#_01BF13: JSR TestForTutorialLevel
 #_01BF16: BNE CODE_01BF29
 
 #_01BF18: LDA.l $7E7A50
@@ -10895,7 +10896,7 @@ CODE_01C0A6:
 #_01C0AE: JMP ROUTINE_01A7F0
 
 CODE_01C0B1:
-#_01C0B1: JSR ROUTINE_01801C
+#_01C0B1: JSR TestForTutorialLevel
 #_01C0B4: BNE CODE_01C0C2
 
 #_01C0B6: LDA.l $7E7A72
@@ -11868,7 +11869,7 @@ CODE_01C63F:
 
 CODE_01C65A:
 #_01C65A: LDX.w $04FE
-#_01C65D: JSR (PTR16_01C67B,X)
+#_01C65D: JSR (.vectors,X)
 #_01C660: RTS
 
 CODE_01C661:
@@ -11887,7 +11888,7 @@ CODE_01C661:
 #_01C675: STZ.w $05DA
 #_01C678: JMP CODE_01C6D6
 
-PTR16_01C67B:
+.vectors
 #_01C67B: dw ROUTINE_01BE8F
 #_01C67D: dw ROUTINE_01DC59
 #_01C67F: dw ROUTINE_01D69B
@@ -13464,21 +13465,24 @@ ROUTINE_01CF9E:
 #_01CFA3: ADC.w $18E4
 #_01CFA6: TAY
 
-#_01CFA7: LDA.w UNREACH_01CFB7,Y
+#_01CFA7: LDA.w UNREACH_01CFB5+2,Y
 #_01CFAA: AND.w #$00FF
 #_01CFAD: STA.b $3E
 
-#_01CFAF: LDA.w UNREACH_01CFB5,Y
+#_01CFAF: LDA.w UNREACH_01CFB5+0,Y
 #_01CFB2: JMP CODE_01AEDB
 
+; TODO level data
 UNREACH_01CFB5:
-#_01CFB5: db $00,$D8
-
-UNREACH_01CFB7:
-#_01CFB7: db $1E,$00,$D8,$1E,$00,$D8,$1E,$00
-#_01CFBF: db $D8,$1E,$00,$D8,$1E,$00,$F8,$16
-#_01CFC7: db $00,$F8,$16,$00,$D8,$1E,$00,$F9
-#_01CFCF: db $16
+#_01CFB5: dl $1ED800
+#_01CFB8: dl $1ED800
+#_01CFBB: dl $1ED800
+#_01CFBE: dl $1ED800
+#_01CFC1: dl $1ED800
+#_01CFC4: dl $16F800
+#_01CFC7: dl $16F800
+#_01CFCA: dl $1ED800
+#_01CFCD: dl $16F900
 
 ;===================================================================================================
 
@@ -17690,7 +17694,7 @@ ROUTINE_01E852:
 #_01E8A1: TAX
 #_01E8A2: STA.b $2C
 
-#_01E8A4: JSR (PTR16_01E900,X)
+#_01E8A4: JSR (.vectors_a,X)
 
 CODE_01E8A7:
 #_01E8A7: LDA.w $056C
@@ -17747,20 +17751,20 @@ CODE_01E8DB:
 #_01E8F1: TAX
 #_01E8F2: STA.b $2E
 
-#_01E8F4: JSR (PTR16_01E93C,X)
+#_01E8F4: JSR (.vectors_b,X)
 
 CODE_01E8F7:
 #_01E8F7: LDX.b $30
 
 #_01E8F9: LDA.b $2C
-#_01E8FB: BNE EXIT_01E8FF
+#_01E8FB: BNE .exit
 
 #_01E8FD: LDA.b $2E
 
-EXIT_01E8FF
+.exit
 #_01E8FF: RTS
 
-PTR16_01E900:
+.vectors_a
 #_01E900: dw ROUTINE_01E990
 #_01E902: dw ROUTINE_01E97E
 #_01E904: dw ROUTINE_01E990
@@ -17792,7 +17796,7 @@ PTR16_01E900:
 #_01E938: dw ROUTINE_01E97E
 #_01E93A: dw ROUTINE_01E97E
 
-PTR16_01E93C:
+.vectors_b
 #_01E93C: dw ROUTINE_01E9A9
 #_01E93E: dw ROUTINE_01E997
 #_01E940: dw ROUTINE_01E9A9
@@ -17954,7 +17958,7 @@ ROUTINE_01E9AA:
 #_01E9F9: TAX
 #_01E9FA: STA.b $2C
 
-#_01E9FC: JSR (PTR16_01EA58,X)
+#_01E9FC: JSR (.vectors_a,X)
 
 CODE_01E9FF:
 #_01E9FF: LDA.w $056C
@@ -18011,20 +18015,20 @@ CODE_01EA33:
 #_01EA49: TAX
 #_01EA4A: STA.b $2E
 
-#_01EA4C: JSR (PTR16_01EA94,X)
+#_01EA4C: JSR (.vectors_b,X)
 
 CODE_01EA4F:
 #_01EA4F: LDX.b $30
 
 #_01EA51: LDA.b $2C
-#_01EA53: BNE EXIT_01EA57
+#_01EA53: BNE .exit
 
 #_01EA55: LDA.b $2E
 
-EXIT_01EA57
+.exit
 #_01EA57: RTS
 
-PTR16_01EA58:
+.vectors_a
 #_01EA58: dw ROUTINE_01EAEE
 #_01EA5A: dw ROUTINE_01EADC
 #_01EA5C: dw ROUTINE_01EAEE
@@ -18056,7 +18060,7 @@ PTR16_01EA58:
 #_01EA90: dw ROUTINE_01EAD6
 #_01EA92: dw ROUTINE_01EAD6
 
-PTR16_01EA94:
+.vectors_b
 #_01EA94: dw ROUTINE_01EB0D
 #_01EA96: dw ROUTINE_01EAFB
 #_01EA98: dw ROUTINE_01EB0D
@@ -18440,7 +18444,7 @@ CODE_01EC9A:
 #_01ECA7: STX.b $0C
 
 #_01ECA9: TYX
-#_01ECAA: JSR (PTR16_01ECD7,X)
+#_01ECAA: JSR (.vectors,X)
 
 #_01ECAD: LDX.b $0C
 #_01ECAF: LDA.w $0180,X
@@ -18482,7 +18486,7 @@ CODE_01ECD3:
 #_01ECD5: PLB
 #_01ECD6: RTL
 
-PTR16_01ECD7:
+.vectors
 #_01ECD7: dw ROUTINE_01FBB0
 #_01ECD9: dw ROUTINE_01FBB7
 #_01ECDB: dw ROUTINE_01FBB7
@@ -19124,11 +19128,11 @@ CODE_01F0A4:
 #_01F0A7: ASL A
 #_01F0A8: ASL A
 #_01F0A9: TAY
-#_01F0AA: BEQ EXIT_01F0B0
+#_01F0AA: BEQ .exit
 
 #_01F0AC: JSL ROUTINE_028208
 
-EXIT_01F0B0
+.exit
 #_01F0B0: RTS
 
 ;===================================================================================================
@@ -19468,13 +19472,13 @@ CODE_01F2A2:
 #_01F2A5: BEQ CODE_01F2AC
 
 #_01F2A7: LDA.w $0340,X
-#_01F2AA: BNE EXIT_01F2B1
+#_01F2AA: BNE .exit
 
 CODE_01F2AC:
 #_01F2AC: LDX.b $0C
 #_01F2AE: JMP ROUTINE_01FBB0
 
-EXIT_01F2B1
+.exit
 #_01F2B1: RTS
 
 ;===================================================================================================
@@ -20482,11 +20486,11 @@ ROUTINE_01F890:
 
 ROUTINE_01F8B0:
 #_01F8B0: JSR ROUTINE_01F987
-#_01F8B3: BCC CODE_01F8B6
+#_01F8B3: BCC .continue
 
 #_01F8B5: RTS
 
-CODE_01F8B6:
+.continue
 #_01F8B6: JSR ROUTINE_01F890
 
 #_01F8B9: LDY.w #$0000
@@ -20495,18 +20499,18 @@ CODE_01F8B6:
 
 #_01F8C2: LDA.w $0400,X
 #_01F8C5: CMP.w #$0003
-#_01F8C8: BCS CODE_01F8CF
+#_01F8C8: BCS .no_short_circuit
 
 #_01F8CA: LDA.w $0340,X
-#_01F8CD: BNE EXIT_01F8D6
+#_01F8CD: BNE .exit
 
-CODE_01F8CF:
+.no_short_circuit
 #_01F8CF: LDA.w #$009E
 #_01F8D2: STA.w $0180,X
 
 #_01F8D5: RTS
 
-EXIT_01F8D6
+.exit
 #_01F8D6: RTS
 
 ;===================================================================================================
@@ -20663,11 +20667,11 @@ CODE_01F99C:
 
 ROUTINE_01F99E:
 #_01F99E: JSR ROUTINE_01F987
-#_01F9A1: BCC CODE_01F9A4
+#_01F9A1: BCC .continue
 
 #_01F9A3: RTS
 
-CODE_01F9A4:
+.continue
 #_01F9A4: LDY.w $0440,X
 
 #_01F9A7: LDA.w $0800,Y
@@ -20704,7 +20708,7 @@ CODE_01F9A4:
 #_01F9DF: BCC CODE_01F9E9
 
 #_01F9E1: ROR A
-#_01F9E2: BCC EXIT_01F9F8
+#_01F9E2: BCC .exit
 
 #_01F9E4: BRA CODE_01F9E9
 
@@ -20720,7 +20724,7 @@ CODE_01F9E9:
 #_01F9F1: LDY.w $01C0,X
 #_01F9F4: JSL ROUTINE_028208
 
-EXIT_01F9F8
+.exit
 #_01F9F8: RTS
 
 ;===================================================================================================
@@ -21084,7 +21088,7 @@ ROUTINE_01FBB8:
 #_01FC01: TAX
 #_01FC02: STA.b $2C
 
-#_01FC04: JSR (PTR16_01FC5E,X)
+#_01FC04: JSR (.vectors_a,X)
 
 CODE_01FC07:
 #_01FC07: LDA.w $056C
@@ -21139,20 +21143,20 @@ CODE_01FC3B:
 #_01FC4F: TAX
 #_01FC50: STA.b $2E
 
-#_01FC52: JSR (PTR16_01FC9A,X)
+#_01FC52: JSR (.vectors_b,X)
 
 CODE_01FC55:
 #_01FC55: LDX.b $0C
 
 #_01FC57: LDA.b $2C
-#_01FC59: BNE EXIT_01FC5D
+#_01FC59: BNE .exit
 
 #_01FC5B: LDA.b $2E
 
-EXIT_01FC5D
+.exit
 #_01FC5D: RTS
 
-PTR16_01FC5E:
+.vectors_a
 #_01FC5E: dw ROUTINE_01FD02
 #_01FC60: dw ROUTINE_01FCFA
 #_01FC62: dw ROUTINE_01FCFA
@@ -21184,7 +21188,7 @@ PTR16_01FC5E:
 #_01FC96: dw ROUTINE_01FD02
 #_01FC98: dw ROUTINE_01FD02
 
-PTR16_01FC9A:
+.vectors_b
 #_01FC9A: dw ROUTINE_01FD02
 #_01FC9C: dw ROUTINE_01FCE4
 #_01FC9E: dw ROUTINE_01FCE4
@@ -21227,25 +21231,28 @@ ROUTINE_01FCD6:
 
 ROUTINE_01FCDA:
 #_01FCDA: LDA.w $0340,X
-#_01FCDD: BEQ EXIT_01FCE3
+#_01FCDD: BEQ .exit
 
 #_01FCDF: DEC A
 #_01FCE0: STA.w $0340,X
 
-EXIT_01FCE3
+.exit
 #_01FCE3: RTS
 
 ;===================================================================================================
 
 ROUTINE_01FCE4:
 #_01FCE4: INC.b $36
+
 #_01FCE6: RTS
 
 ;===================================================================================================
 
 ROUTINE_01FCE7:
 #_01FCE7: INC.b $36
+
 #_01FCE9: INC.b $34
+
 #_01FCEB: RTS
 
 ;===================================================================================================
@@ -21255,12 +21262,12 @@ ROUTINE_01FCEC:
 
 #_01FCEE: LDX.b $0C
 #_01FCF0: LDA.w $0340,X
-#_01FCF3: BEQ EXIT_01FCF9
+#_01FCF3: BEQ .exit
 
 #_01FCF5: DEC A
 #_01FCF6: STA.w $0340,X
 
-EXIT_01FCF9
+.exit
 #_01FCF9: RTS
 
 ;===================================================================================================
@@ -21273,13 +21280,17 @@ ROUTINE_01FCFA:
 
 ROUTINE_01FCFD:
 #_01FCFD: INC.b $36
+
 #_01FCFF: INC.b $34
+
 #_01FD01: RTS
 
 ;===================================================================================================
 
 ROUTINE_01FD02:
 #_01FD02: RTS
+
+;===================================================================================================
 
 UNREACH_01FD03:
 #_01FD03: db $00,$00,$02,$00,$04,$00,$06,$00
@@ -21446,50 +21457,52 @@ ROUTINE_01FE98:
 
 #_01FE9B: RTS
 
-;---------------------------------------------------------------------------------------------------
+;===================================================================================================
 
-#_01FE9C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEA4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEAC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEB4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEBC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEC4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FECC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FED4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEDC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEE4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEEC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEF4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FEFC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF04: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF0C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF14: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF1C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF24: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF2C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF34: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF3C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF44: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF4C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF54: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF5C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF64: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF6C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF74: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF7C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF84: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF8C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF94: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FF9C: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFA4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFAC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFB4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFBC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFC4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFCC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFD4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFDC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFE4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFEC: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFF4: db $00,$00,$00,$00,$00,$00,$00,$00
-#_01FFFC: db $00,$00,$00,$00
+#_01FE9C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEA4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEAC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEB4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEBC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEC4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FECC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FED4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEDC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEE4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEEC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEF4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FEFC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF04: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF0C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF14: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF1C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF24: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF2C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF34: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF3C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF44: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF4C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF54: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF5C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF64: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF6C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF74: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF7C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF84: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF8C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF94: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FF9C: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFA4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFAC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFB4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFBC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFC4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFCC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFD4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFDC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFE4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFEC: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFF4: db $00, $00, $00, $00, $00, $00, $00, $00
+#_01FFFC: db $00, $00, $00, $00
+
+;===================================================================================================
