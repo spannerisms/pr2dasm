@@ -1,16 +1,13 @@
-UNKNOWN_7E0000   = $7E0000
-UNKNOWN_7E0001   = $7E0001
-UNKNOWN_7E0002   = $7E0002
-UNKNOWN_7E0004   = $7E0004
+; Counts number of game frames, NMI triggers, and IRQ triggers
+FRMCT            = $7E0000
+NMICT            = $7E0002
+IRQCT            = $7E0004
 
 ; If nonzero, queued updates are run during NMI
-UNKNOWN_7E0006   = $7E0006
+DOQS             = $7E0006
 
-UNKNOWN_7E0007   = $7E0007
-UNKNOWN_7E0008   = $7E0008
-UNKNOWN_7E000A   = $7E000A
-UNKNOWN_7E000C   = $7E000C
-UNKNOWN_7E000E   = $7E000E
+; Pretty much all scratch?
+; [7E0008..7E00FF]
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -40,15 +37,15 @@ UNKNOWN_7E0493   = $7E0493
 UNKNOWN_7E0494   = $7E0494
 UNKNOWN_7E0495   = $7E0495
 
-; a bunch of music queues
-APUIO2Q0         = $7E04A0
-APUIO2Q1         = $7E04A2
-APUIO2Q2         = $7E04A4
-APUIO2Q3         = $7E04A6
-APUIO2Q4         = $7E04A8
-APUIO2Q5         = $7E04AA
-APUIO2Q6         = $7E04AC
-APUIO2Q7         = $7E04AE
+; a bunch of sfx queues
+SFXQ0            = $7E04A0
+SFXQ1            = $7E04A2
+SFXQ2            = $7E04A4
+SFXQ3            = $7E04A6
+SFXQ4            = $7E04A8
+SFXQ5            = $7E04AA
+SFXQ6            = $7E04AC
+SFXQ7            = $7E04AE
 
 UNKNOWN_7E04B0   = $7E04B0
 UNKNOWN_7E04B2   = $7E04B2
@@ -137,13 +134,13 @@ VTIMEQ           = $7E0534
 
 HDMAENQ          = $7E0536
 
-; Joypad input held and released
+; Joypad input held and new
 ; BYsSUDLR AXlr....
 P1JOY            = $7E0538
-P1REL            = $7E053A
+P1NEW            = $7E053A
 
 P2JOY            = $7E053C
-P2REL            = $7E053E
+P2NEW            = $7E053E
 
 ; Flags players having non-zero input on a standard controller
 P1INP            = $7E0540
@@ -151,7 +148,7 @@ P2INP            = $7E0542
 
 ; previous 3 variables, but both players together
 PTJOY            = $7E0544
-PTREL            = $7E0546
+PTNEW            = $7E0546
 PTINP            = $7E0548
 
 
@@ -198,7 +195,7 @@ UNKNOWN_7E059C   = $7E059C
 ; TODO partner pathing index?
 UNKNOWN_7E059E   = $7E059E
 
-UNKNOWN_7E05A0   = $7E05A0
+FRAME            = $7E05A0
 UNKNOWN_7E05A2   = $7E05A2
 UNKNOWN_7E05A4   = $7E05A4
 
@@ -508,8 +505,19 @@ UNKNOWN_7E1AFC   = $7E1AFC
 
 ;---------------------------------------------------------------------------------------------------
 
-; SOME GIANT THING!???! TODO
-UNKNOWN_7E1B00   = $7E1B00
+; Number of transfers
+B5DCT            = $7E1B00
+
+; data index
+B5DDX            = $7E1B02
+
+; vector index
+B5DVX            = $7E1B04
+
+; A bunch of transfers for DMA, up to 90 in bank05
+; 6 bytes each:
+;  dw <vram address>, <size>, <bank05 address>
+B5DMA            = $7E1B06
 
 ;---------------------------------------------------------------------------------------------------
 ; OAM buffer
@@ -563,7 +571,6 @@ VMBUFF           = $7E2004
 ;===================================================================================================
 ; Text stuff
 ;===================================================================================================
-
 MSGMODE          = $7E2550
 
 ; Message pointers
@@ -587,4 +594,9 @@ BGSCR            = $7E7B14
 
 ; holds text pointers at least once
 UNKNOWN_7E7B16   = $7E7B16
+
+;===================================================================================================
+
+; Partner movement?
+UNKNOWN_7FD000   = $7FD000
 

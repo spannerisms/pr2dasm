@@ -1,234 +1,971 @@
-
 org $048000
 
-#_048000: db $4B,$49,$4B,$49,$A4,$FF,$FF,$FF
+;===================================================================================================
+
+#_048000: db $4B, $49, $4B, $49 : dw $FFA4, $FFFF ; KIKI, end of assembly output
+
+;===================================================================================================
 
 UNREACH_048008:
-#_048008: db $38,$80,$38,$80,$D0,$80,$60,$81
-#_048010: db $F0,$81,$80,$82,$10,$83,$38,$80
-#_048018: db $38,$80,$38,$80,$38,$80,$38,$80
-#_048020: db $38,$80,$38,$80,$38,$80,$38,$80
-#_048028: db $9C,$83,$2A,$84,$BC,$84,$44,$85
-#_048030: db $D2,$85,$20,$86,$90,$86,$00,$87
-#_048038: db $10,$87,$10,$87,$18,$87,$20,$87
-#_048040: db $28,$87,$30,$87,$38,$87,$40,$87
-#_048048: db $48,$87,$50,$87,$6A,$87,$84,$87
-#_048050: db $9E,$87,$B8,$87,$D2,$87,$EC,$87
-#_048058: db $06,$88,$20,$88,$38,$88,$50,$88
-#_048060: db $68,$88,$80,$88,$98,$88,$B0,$88
-#_048068: db $C8,$88,$E0,$88,$FC,$88,$18,$89
-#_048070: db $34,$89,$50,$89,$70,$89,$8C,$89
-#_048078: db $A8,$89,$C4,$89,$CC,$89,$D4,$89
-#_048080: db $DC,$89,$E4,$89,$EC,$89,$F4,$89
-#_048088: db $FC,$89,$04,$8A,$0C,$8A,$14,$8A
-#_048090: db $1C,$8A,$24,$8A,$2C,$8A,$34,$8A
-#_048098: db $3C,$8A,$44,$8A,$58,$8A,$6C,$8A
-#_0480A0: db $80,$8A,$94,$8A,$A8,$8A,$BC,$8A
-#_0480A8: db $D0,$8A,$E4,$8A,$EC,$8A,$04,$8B
-#_0480B0: db $1C,$8B,$34,$8B,$4C,$8B,$64,$8B
-#_0480B8: db $7C,$8B,$94,$8B,$AC,$8B,$A0,$8C
-#_0480C0: db $C4,$8C,$CC,$8C,$D4,$8C,$DE,$8C
-#_0480C8: db $E6,$8C,$EE,$8C,$F6,$8C,$00,$8D
-#_0480D0: db $08,$8D,$08,$8D,$10,$8D,$18,$8D
-#_0480D8: db $20,$8D,$28,$8D,$30,$8D,$38,$8D
-#_0480E0: db $40,$8D,$48,$8D,$62,$8D,$7C,$8D
-#_0480E8: db $96,$8D,$B0,$8D,$CA,$8D,$E4,$8D
-#_0480F0: db $FE,$8D,$18,$8E,$30,$8E,$48,$8E
-#_0480F8: db $60,$8E,$78,$8E,$90,$8E,$A8,$8E
-#_048100: db $C0,$8E,$D8,$8E,$F4,$8E,$10,$8F
-#_048108: db $2C,$8F,$48,$8F,$64,$8F,$80,$8F
-#_048110: db $9C,$8F,$B8,$8F,$C0,$8F,$C8,$8F
-#_048118: db $D0,$8F,$D8,$8F,$E0,$8F,$E8,$8F
-#_048120: db $F0,$8F,$C8,$91,$D0,$91,$D8,$91
-#_048128: db $E0,$91,$E8,$91,$F0,$91,$F8,$91
-#_048130: db $00,$92,$F8,$8F,$0C,$90,$20,$90
-#_048138: db $34,$90,$48,$90,$5C,$90,$70,$90
-#_048140: db $84,$90,$F8,$8F,$98,$90,$B0,$90
-#_048148: db $C8,$90,$E0,$90,$F8,$90,$10,$91
-#_048150: db $28,$91,$40,$91,$58,$91,$58,$91
-#_048158: db $7C,$91,$C0,$91,$08,$92,$10,$92
-#_048160: db $18,$92,$18,$92,$20,$92,$28,$92
-#_048168: db $30,$92,$38,$92,$40,$92,$48,$92
-#_048170: db $50,$92,$58,$92,$72,$92,$8C,$92
-#_048178: db $A6,$92,$C0,$92,$DA,$92,$F4,$92
-#_048180: db $0E,$93,$28,$93,$40,$93,$58,$93
-#_048188: db $70,$93,$88,$93,$A0,$93,$B8,$93
-#_048190: db $D0,$93,$E8,$93,$04,$94,$20,$94
-#_048198: db $3C,$94,$58,$94,$74,$94,$90,$94
-#_0481A0: db $AC,$94,$C8,$94,$D0,$94,$D8,$94
-#_0481A8: db $E0,$94,$E8,$94,$F0,$94,$F8,$94
-#_0481B0: db $00,$95,$BC,$96,$C4,$96,$CC,$96
-#_0481B8: db $D4,$96,$DC,$96,$E4,$96,$EC,$96
-#_0481C0: db $F4,$96,$08,$95,$1C,$95,$30,$95
-#_0481C8: db $44,$95,$58,$95,$6C,$95,$80,$95
-#_0481D0: db $94,$95,$08,$95,$A8,$95,$C0,$95
-#_0481D8: db $D8,$95,$F0,$95,$08,$96,$20,$96
-#_0481E0: db $38,$96,$50,$96,$68,$96,$68,$96
-#_0481E8: db $8C,$96,$B4,$96,$FC,$96,$04,$97
-#_0481F0: db $0C,$97,$0C,$97,$14,$97,$1C,$97
-#_0481F8: db $24,$97,$2C,$97,$34,$97,$3C,$97
-#_048200: db $44,$97,$4C,$97,$66,$97,$80,$97
-#_048208: db $9A,$97,$B4,$97,$CE,$97,$E8,$97
-#_048210: db $02,$98,$1C,$98,$34,$98,$4C,$98
-#_048218: db $64,$98,$7C,$98,$94,$98,$AC,$98
-#_048220: db $C4,$98,$DC,$98,$F8,$98,$14,$99
-#_048228: db $30,$99,$4C,$99,$68,$99,$84,$99
-#_048230: db $A0,$99,$BC,$99,$C4,$99,$CC,$99
-#_048238: db $D4,$99,$DC,$99,$E4,$99,$EC,$99
-#_048240: db $F4,$99,$B0,$9B,$B8,$9B,$C0,$9B
-#_048248: db $C8,$9B,$D0,$9B,$D8,$9B,$E0,$9B
-#_048250: db $E8,$9B,$FC,$99,$10,$9A,$24,$9A
-#_048258: db $38,$9A,$4C,$9A,$60,$9A,$74,$9A
-#_048260: db $88,$9A,$FC,$99,$9C,$9A,$B4,$9A
-#_048268: db $CC,$9A,$E4,$9A,$FC,$9A,$14,$9B
-#_048270: db $2C,$9B,$44,$9B,$5C,$9B,$5C,$9B
-#_048278: db $80,$9B,$A8,$9B,$F0,$9B,$F8,$9B
-#_048280: db $00,$9C,$00,$9C,$08,$9C,$10,$9C
-#_048288: db $18,$9C,$20,$9C,$28,$9C,$30,$9C
-#_048290: db $38,$9C,$40,$9C,$5A,$9C,$74,$9C
-#_048298: db $8E,$9C,$A8,$9C,$C2,$9C,$DC,$9C
-#_0482A0: db $F6,$9C,$10,$9D,$28,$9D,$40,$9D
-#_0482A8: db $58,$9D,$70,$9D,$88,$9D,$A0,$9D
-#_0482B0: db $B8,$9D,$D0,$9D,$EC,$9D,$08,$9E
-#_0482B8: db $24,$9E,$40,$9E,$5C,$9E,$78,$9E
-#_0482C0: db $94,$9E,$B0,$9E,$B8,$9E,$C0,$9E
-#_0482C8: db $C8,$9E,$D0,$9E,$D8,$9E,$E0,$9E
-#_0482D0: db $E8,$9E,$A4,$A0,$AC,$A0,$B4,$A0
-#_0482D8: db $BC,$A0,$C4,$A0,$CC,$A0,$D4,$A0
-#_0482E0: db $DC,$A0,$F0,$9E,$04,$9F,$18,$9F
-#_0482E8: db $2C,$9F,$40,$9F,$54,$9F,$68,$9F
-#_0482F0: db $7C,$9F,$F0,$9E,$90,$9F,$A8,$9F
-#_0482F8: db $C0,$9F,$D8,$9F,$F0,$9F,$08,$A0
-#_048300: db $20,$A0,$38,$A0,$50,$A0,$50,$A0
-#_048308: db $74,$A0,$9C,$A0,$E4,$A0,$EC,$A0
-#_048310: db $86,$AD,$86,$AD,$8E,$AD,$96,$AD
-#_048318: db $9E,$AD,$A6,$AD,$AE,$AD,$B6,$AD
-#_048320: db $BE,$AD,$C6,$AD,$E0,$AD,$FA,$AD
-#_048328: db $14,$AE,$2E,$AE,$48,$AE,$62,$AE
-#_048330: db $7C,$AE,$96,$AE,$AE,$AE,$C6,$AE
-#_048338: db $DE,$AE,$F6,$AE,$0E,$AF,$26,$AF
-#_048340: db $3E,$AF,$56,$AF,$72,$AF,$8E,$AF
-#_048348: db $AA,$AF,$C6,$AF,$E2,$AF,$FE,$AF
-#_048350: db $1A,$B0,$36,$B0,$3E,$B0,$46,$B0
-#_048358: db $4E,$B0,$56,$B0,$5E,$B0,$66,$B0
-#_048360: db $6E,$B0,$76,$B0,$7E,$B0,$86,$B0
-#_048368: db $8E,$B0,$96,$B0,$9E,$B0,$A6,$B0
-#_048370: db $AE,$B0,$B6,$B0,$CA,$B0,$DE,$B0
-#_048378: db $F2,$B0,$06,$B1,$1A,$B1,$2E,$B1
-#_048380: db $42,$B1,$56,$B1,$5E,$B1,$76,$B1
-#_048388: db $8E,$B1,$A6,$B1,$BE,$B1,$D6,$B1
-#_048390: db $EE,$B1,$06,$B2,$1E,$B2,$12,$B3
-#_048398: db $36,$B3,$3E,$B3,$F4,$A0,$F4,$A0
-#_0483A0: db $FC,$A0,$04,$A1,$0C,$A1,$14,$A1
-#_0483A8: db $1C,$A1,$24,$A1,$2C,$A1,$34,$A1
-#_0483B0: db $4E,$A1,$68,$A1,$82,$A1,$9C,$A1
-#_0483B8: db $B6,$A1,$D0,$A1,$EA,$A1,$04,$A2
-#_0483C0: db $0C,$A2,$14,$A2,$1C,$A2,$24,$A2
-#_0483C8: db $2C,$A2,$34,$A2,$3C,$A2,$44,$A2
-#_0483D0: db $4C,$A2,$54,$A2,$5C,$A2,$64,$A2
-#_0483D8: db $6C,$A2,$74,$A2,$7C,$A2,$84,$A2
-#_0483E0: db $9C,$A2,$B4,$A2,$CC,$A2,$E4,$A2
-#_0483E8: db $FC,$A2,$14,$A3,$2C,$A3,$44,$A3
-#_0483F0: db $5C,$A3,$74,$A3,$8C,$A3,$A4,$A3
-#_0483F8: db $BC,$A3,$D4,$A3,$EC,$A3,$04,$A4
-#_048400: db $18,$A4,$2C,$A4,$40,$A4,$54,$A4
-#_048408: db $68,$A4,$7C,$A4,$90,$A4,$A4,$A4
-#_048410: db $B8,$A4,$CC,$A4,$E0,$A4,$F4,$A4
-#_048418: db $08,$A5,$1C,$A5,$30,$A5,$44,$A5
-#_048420: db $4E,$A5,$56,$A5,$60,$A5,$68,$A5
-#_048428: db $70,$A5,$78,$A5,$78,$A5,$7C,$A5
-#_048430: db $80,$A5,$84,$A5,$88,$A5,$8C,$A5
-#_048438: db $90,$A5,$94,$A5,$98,$A5,$AA,$A5
-#_048440: db $BC,$A5,$CE,$A5,$E0,$A5,$F2,$A5
-#_048448: db $04,$A6,$16,$A6,$28,$A6,$30,$A6
-#_048450: db $38,$A6,$40,$A6,$48,$A6,$50,$A6
-#_048458: db $58,$A6,$60,$A6,$68,$A6,$70,$A6
-#_048460: db $78,$A6,$80,$A6,$88,$A6,$90,$A6
-#_048468: db $98,$A6,$A0,$A6,$A8,$A6,$B8,$A6
-#_048470: db $C8,$A6,$D8,$A6,$E8,$A6,$F8,$A6
-#_048478: db $08,$A7,$18,$A7,$28,$A7,$3C,$A7
-#_048480: db $50,$A7,$64,$A7,$78,$A7,$8C,$A7
-#_048488: db $A0,$A7,$B4,$A7,$C8,$A7,$EC,$A7
-#_048490: db $F4,$A7,$FE,$A7,$06,$A8,$10,$A8
-#_048498: db $28,$A8,$40,$A8,$58,$A8,$70,$A8
-#_0484A0: db $88,$A8,$A0,$A8,$B8,$A8,$D0,$A8
-#_0484A8: db $E8,$A8,$00,$A9,$18,$A9,$30,$A9
-#_0484B0: db $48,$A9,$60,$A9,$78,$A9,$90,$A9
-#_0484B8: db $9A,$A9,$A2,$A9,$AA,$A9,$AA,$A9
-#_0484C0: db $B2,$A9,$BA,$A9,$C2,$A9,$CA,$A9
-#_0484C8: db $D2,$A9,$DA,$A9,$E2,$A9,$EA,$A9
-#_0484D0: db $F2,$A9,$04,$AA,$16,$AA,$28,$AA
-#_0484D8: db $3A,$AA,$4C,$AA,$5E,$AA,$70,$AA
-#_0484E0: db $82,$AA,$8A,$AA,$92,$AA,$9C,$AA
-#_0484E8: db $B0,$AA,$C4,$AA,$D8,$AA,$EC,$AA
-#_0484F0: db $FC,$AA,$0C,$AB,$1C,$AB,$2C,$AB
-#_0484F8: db $3C,$AB,$4C,$AB,$5C,$AB,$6C,$AB
-#_048500: db $74,$AB,$7C,$AB,$84,$AB,$8C,$AB
-#_048508: db $94,$AB,$9C,$AB,$A4,$AB,$AC,$AB
-#_048510: db $C0,$AB,$D4,$AB,$E8,$AB,$FC,$AB
-#_048518: db $10,$AC,$24,$AC,$38,$AC,$4C,$AC
-#_048520: db $4C,$AC,$64,$AC,$7C,$AC,$7C,$AC
-#_048528: db $7C,$AC,$94,$AC,$4C,$AC,$AC,$AC
-#_048530: db $B6,$AC,$BE,$AC,$C6,$AC,$DE,$AC
-#_048538: db $F6,$AC,$0E,$AD,$26,$AD,$3E,$AD
-#_048540: db $56,$AD,$6E,$AD,$46,$B3,$46,$B3
-#_048548: db $4E,$B3,$56,$B3,$5E,$B3,$66,$B3
-#_048550: db $6E,$B3,$76,$B3,$7E,$B3,$86,$B3
-#_048558: db $A0,$B3,$BA,$B3,$D4,$B3,$EE,$B3
-#_048560: db $08,$B4,$22,$B4,$3C,$B4,$56,$B4
-#_048568: db $6A,$B4,$7E,$B4,$92,$B4,$A6,$B4
-#_048570: db $BA,$B4,$CE,$B4,$E2,$B4,$F6,$B4
-#_048578: db $FE,$B4,$06,$B5,$0E,$B5,$16,$B5
-#_048580: db $1E,$B5,$26,$B5,$2E,$B5,$36,$B5
-#_048588: db $3E,$B5,$46,$B5,$4E,$B5,$56,$B5
-#_048590: db $5E,$B5,$66,$B5,$6E,$B5,$76,$B5
-#_048598: db $7E,$B5,$92,$B5,$A6,$B5,$BA,$B5
-#_0485A0: db $CE,$B5,$E2,$B5,$F6,$B5,$0A,$B6
-#_0485A8: db $1E,$B6,$26,$B6,$2E,$B6,$36,$B6
-#_0485B0: db $3E,$B6,$46,$B6,$4E,$B6,$56,$B6
-#_0485B8: db $5E,$B6,$6A,$B6,$76,$B6,$82,$B6
-#_0485C0: db $8E,$B6,$9A,$B6,$A6,$B6,$B2,$B6
-#_0485C8: db $BE,$B6,$C8,$B6,$D0,$B6,$DA,$B6
-#_0485D0: db $E2,$B6,$EA,$B6,$EA,$B6,$F4,$B6
-#_0485D8: db $FE,$B6,$08,$B7,$12,$B7,$1C,$B7
-#_0485E0: db $26,$B7,$30,$B7,$3A,$B7,$4E,$B7
-#_0485E8: db $62,$B7,$76,$B7,$8A,$B7,$9E,$B7
-#_0485F0: db $B2,$B7,$C6,$B7,$DA,$B7,$F2,$B7
-#_0485F8: db $0A,$B8,$22,$B8,$3A,$B8,$52,$B8
-#_048600: db $6A,$B8,$82,$B8,$9A,$B8,$A2,$B8
-#_048608: db $AA,$B8,$B4,$B8,$BE,$B8,$C8,$B8
-#_048610: db $D2,$B8,$DC,$B8,$E6,$B8,$F0,$B8
-#_048618: db $FA,$B8,$04,$B9,$0E,$B9,$16,$B9
-#_048620: db $1E,$B9,$1E,$B9,$26,$B9,$2E,$B9
-#_048628: db $36,$B9,$3E,$B9,$46,$B9,$4E,$B9
-#_048630: db $56,$B9,$5E,$B9,$66,$B9,$7A,$B9
-#_048638: db $8E,$B9,$A2,$B9,$B6,$B9,$CA,$B9
-#_048640: db $DE,$B9,$F2,$B9,$06,$BA,$0E,$BA
-#_048648: db $18,$BA,$34,$BA,$3E,$BA,$46,$BA
-#_048650: db $4E,$BA,$56,$BA,$5E,$BA,$66,$BA
-#_048658: db $6E,$BA,$76,$BA,$7E,$BA,$96,$BA
-#_048660: db $AE,$BA,$C6,$BA,$DE,$BA,$F6,$BA
-#_048668: db $0E,$BB,$26,$BB,$3E,$BB,$4E,$BB
-#_048670: db $5E,$BB,$6E,$BB,$7E,$BB,$8E,$BB
-#_048678: db $9E,$BB,$AE,$BB,$BE,$BB,$CE,$BB
-#_048680: db $DE,$BB,$EE,$BB,$FE,$BB,$0E,$BC
-#_048688: db $1E,$BC,$2E,$BC,$3E,$BC,$46,$BC
-#_048690: db $4E,$BC,$4E,$BC,$56,$BC,$5E,$BC
-#_048698: db $66,$BC,$6E,$BC,$76,$BC,$7E,$BC
-#_0486A0: db $86,$BC,$8E,$BC,$A8,$BC,$C2,$BC
-#_0486A8: db $DC,$BC,$F6,$BC,$10,$BD,$2A,$BD
-#_0486B0: db $44,$BD,$5E,$BD,$72,$BD,$86,$BD
-#_0486B8: db $9A,$BD,$AE,$BD,$C2,$BD,$D6,$BD
-#_0486C0: db $EA,$BD,$FE,$BD,$0E,$BE,$1E,$BE
-#_0486C8: db $2E,$BE,$3E,$BE,$4E,$BE,$5E,$BE
-#_0486D0: db $6E,$BE,$7E,$BE,$86,$BE,$9E,$BE
-#_0486D8: db $B6,$BE,$CE,$BE,$E6,$BE,$FE,$BE
-#_0486E0: db $16,$BF,$2E,$BF,$46,$BF,$4E,$BF
-#_0486E8: db $58,$BF,$70,$BF,$88,$BF,$A0,$BF
-#_0486F0: db $B8,$BF,$D0,$BF,$E8,$BF,$00,$C0
-#_0486F8: db $18,$C0,$22,$C0,$2C,$C0,$34,$C0
-#_048700: db $3C,$C0,$3C,$C0,$46,$C0,$4E,$C0
-#_048708: db $5E,$C0,$66,$C0,$7E,$C0,$84,$C0
+#_048008: dw pointers048038
+#_04800A: dw pointers048038
+#_04800C: dw pointers0480D0
+#_04800E: dw pointers048160
+#_048010: dw pointers0481F0
+#_048012: dw pointers048280
+#_048014: dw pointers048310
+#_048016: dw pointers048038
+#_048018: dw pointers048038
+#_04801A: dw pointers048038
+#_04801C: dw pointers048038
+#_04801E: dw pointers048038
+#_048020: dw pointers048038
+#_048022: dw pointers048038
+#_048024: dw pointers048038
+#_048026: dw pointers048038
+#_048028: dw pointers04839C
+#_04802A: dw pointers04842A
+#_04802C: dw pointers0484BC
+#_04802E: dw pointers048544
+#_048030: dw pointers0485D2
+#_048032: dw pointers048620
+#_048034: dw pointers048690
+#_048036: dw pointers048700
+
+;===================================================================================================
+
+pointers048038:
+#_048038: dw data048710
+#_04803A: dw data048710
+#_04803C: dw data048718
+#_04803E: dw data048720
+#_048040: dw data048728
+#_048042: dw data048730
+#_048044: dw data048738
+#_048046: dw data048740
+#_048048: dw data048748
+#_04804A: dw data048750
+#_04804C: dw data04876A
+#_04804E: dw data048784
+#_048050: dw data04879E
+#_048052: dw data0487B8
+#_048054: dw data0487D2
+#_048056: dw data0487EC
+#_048058: dw data048806
+#_04805A: dw data048820
+#_04805C: dw data048838
+#_04805E: dw data048850
+#_048060: dw data048868
+#_048062: dw data048880
+#_048064: dw data048898
+#_048066: dw data0488B0
+#_048068: dw data0488C8
+#_04806A: dw data0488E0
+#_04806C: dw data0488FC
+#_04806E: dw data048918
+#_048070: dw data048934
+#_048072: dw data048950
+#_048074: dw data048970
+#_048076: dw data04898C
+#_048078: dw data0489A8
+#_04807A: dw data0489C4
+#_04807C: dw data0489CC
+#_04807E: dw data0489D4
+#_048080: dw data0489DC
+#_048082: dw data0489E4
+#_048084: dw data0489EC
+#_048086: dw data0489F4
+#_048088: dw data0489FC
+#_04808A: dw data048A04
+#_04808C: dw data048A0C
+#_04808E: dw data048A14
+#_048090: dw data048A1C
+#_048092: dw data048A24
+#_048094: dw data048A2C
+#_048096: dw data048A34
+#_048098: dw data048A3C
+#_04809A: dw data048A44
+#_04809C: dw data048A58
+#_04809E: dw data048A6C
+#_0480A0: dw data048A80
+#_0480A2: dw data048A94
+#_0480A4: dw data048AA8
+#_0480A6: dw data048ABC
+#_0480A8: dw data048AD0
+#_0480AA: dw data048AE4
+#_0480AC: dw data048AEC
+#_0480AE: dw data048B04
+#_0480B0: dw data048B1C
+#_0480B2: dw data048B34
+#_0480B4: dw data048B4C
+#_0480B6: dw data048B64
+#_0480B8: dw data048B7C
+#_0480BA: dw data048B94
+#_0480BC: dw data048BAC
+#_0480BE: dw data048CA0
+#_0480C0: dw data048CC4
+#_0480C2: dw data048CCC
+#_0480C4: dw data048CD4
+#_0480C6: dw data048CDE
+#_0480C8: dw data048CE6
+#_0480CA: dw data048CEE
+#_0480CC: dw data048CF6
+#_0480CE: dw data048D00
+
+;===================================================================================================
+
+pointers0480D0:
+#_0480D0: dw data048D08
+#_0480D2: dw data048D08
+#_0480D4: dw data048D10
+#_0480D6: dw data048D18
+#_0480D8: dw data048D20
+#_0480DA: dw data048D28
+#_0480DC: dw data048D30
+#_0480DE: dw data048D38
+#_0480E0: dw data048D40
+#_0480E2: dw data048D48
+#_0480E4: dw data048D62
+#_0480E6: dw data048D7C
+#_0480E8: dw data048D96
+#_0480EA: dw data048DB0
+#_0480EC: dw data048DCA
+#_0480EE: dw data048DE4
+#_0480F0: dw data048DFE
+#_0480F2: dw data048E18
+#_0480F4: dw data048E30
+#_0480F6: dw data048E48
+#_0480F8: dw data048E60
+#_0480FA: dw data048E78
+#_0480FC: dw data048E90
+#_0480FE: dw data048EA8
+#_048100: dw data048EC0
+#_048102: dw data048ED8
+#_048104: dw data048EF4
+#_048106: dw data048F10
+#_048108: dw data048F2C
+#_04810A: dw data048F48
+#_04810C: dw data048F64
+#_04810E: dw data048F80
+#_048110: dw data048F9C
+#_048112: dw data048FB8
+#_048114: dw data048FC0
+#_048116: dw data048FC8
+#_048118: dw data048FD0
+#_04811A: dw data048FD8
+#_04811C: dw data048FE0
+#_04811E: dw data048FE8
+#_048120: dw data048FF0
+#_048122: dw data0491C8
+#_048124: dw data0491D0
+#_048126: dw data0491D8
+#_048128: dw data0491E0
+#_04812A: dw data0491E8
+#_04812C: dw data0491F0
+#_04812E: dw data0491F8
+#_048130: dw data049200
+#_048132: dw data048FF8
+#_048134: dw data04900C
+#_048136: dw data049020
+#_048138: dw data049034
+#_04813A: dw data049048
+#_04813C: dw data04905C
+#_04813E: dw data049070
+#_048140: dw data049084
+#_048142: dw data048FF8
+#_048144: dw data049098
+#_048146: dw data0490B0
+#_048148: dw data0490C8
+#_04814A: dw data0490E0
+#_04814C: dw data0490F8
+#_04814E: dw data049110
+#_048150: dw data049128
+#_048152: dw data049140
+#_048154: dw data049158
+#_048156: dw data049158
+#_048158: dw data04917C
+#_04815A: dw data0491C0
+#_04815C: dw data049208
+#_04815E: dw data049210
+
+;===================================================================================================
+
+pointers048160:
+#_048160: dw data049218
+#_048162: dw data049218
+#_048164: dw data049220
+#_048166: dw data049228
+#_048168: dw data049230
+#_04816A: dw data049238
+#_04816C: dw data049240
+#_04816E: dw data049248
+#_048170: dw data049250
+#_048172: dw data049258
+#_048174: dw data049272
+#_048176: dw data04928C
+#_048178: dw data0492A6
+#_04817A: dw data0492C0
+#_04817C: dw data0492DA
+#_04817E: dw data0492F4
+#_048180: dw data04930E
+#_048182: dw data049328
+#_048184: dw data049340
+#_048186: dw data049358
+#_048188: dw data049370
+#_04818A: dw data049388
+#_04818C: dw data0493A0
+#_04818E: dw data0493B8
+#_048190: dw data0493D0
+#_048192: dw data0493E8
+#_048194: dw data049404
+#_048196: dw data049420
+#_048198: dw data04943C
+#_04819A: dw data049458
+#_04819C: dw data049474
+#_04819E: dw data049490
+#_0481A0: dw data0494AC
+#_0481A2: dw data0494C8
+#_0481A4: dw data0494D0
+#_0481A6: dw data0494D8
+#_0481A8: dw data0494E0
+#_0481AA: dw data0494E8
+#_0481AC: dw data0494F0
+#_0481AE: dw data0494F8
+#_0481B0: dw data049500
+#_0481B2: dw data0496BC
+#_0481B4: dw data0496C4
+#_0481B6: dw data0496CC
+#_0481B8: dw data0496D4
+#_0481BA: dw data0496DC
+#_0481BC: dw data0496E4
+#_0481BE: dw data0496EC
+#_0481C0: dw data0496F4
+#_0481C2: dw data049508
+#_0481C4: dw data04951C
+#_0481C6: dw data049530
+#_0481C8: dw data049544
+#_0481CA: dw data049558
+#_0481CC: dw data04956C
+#_0481CE: dw data049580
+#_0481D0: dw data049594
+#_0481D2: dw data049508
+#_0481D4: dw data0495A8
+#_0481D6: dw data0495C0
+#_0481D8: dw data0495D8
+#_0481DA: dw data0495F0
+#_0481DC: dw data049608
+#_0481DE: dw data049620
+#_0481E0: dw data049638
+#_0481E2: dw data049650
+#_0481E4: dw data049668
+#_0481E6: dw data049668
+#_0481E8: dw data04968C
+#_0481EA: dw data0496B4
+#_0481EC: dw data0496FC
+#_0481EE: dw data049704
+
+;===================================================================================================
+
+pointers0481F0:
+#_0481F0: dw data04970C
+#_0481F2: dw data04970C
+#_0481F4: dw data049714
+#_0481F6: dw data04971C
+#_0481F8: dw data049724
+#_0481FA: dw data04972C
+#_0481FC: dw data049734
+#_0481FE: dw data04973C
+#_048200: dw data049744
+#_048202: dw data04974C
+#_048204: dw data049766
+#_048206: dw data049780
+#_048208: dw data04979A
+#_04820A: dw data0497B4
+#_04820C: dw data0497CE
+#_04820E: dw data0497E8
+#_048210: dw data049802
+#_048212: dw data04981C
+#_048214: dw data049834
+#_048216: dw data04984C
+#_048218: dw data049864
+#_04821A: dw data04987C
+#_04821C: dw data049894
+#_04821E: dw data0498AC
+#_048220: dw data0498C4
+#_048222: dw data0498DC
+#_048224: dw data0498F8
+#_048226: dw data049914
+#_048228: dw data049930
+#_04822A: dw data04994C
+#_04822C: dw data049968
+#_04822E: dw data049984
+#_048230: dw data0499A0
+#_048232: dw data0499BC
+#_048234: dw data0499C4
+#_048236: dw data0499CC
+#_048238: dw data0499D4
+#_04823A: dw data0499DC
+#_04823C: dw data0499E4
+#_04823E: dw data0499EC
+#_048240: dw data0499F4
+#_048242: dw data049BB0
+#_048244: dw data049BB8
+#_048246: dw data049BC0
+#_048248: dw data049BC8
+#_04824A: dw data049BD0
+#_04824C: dw data049BD8
+#_04824E: dw data049BE0
+#_048250: dw data049BE8
+#_048252: dw data0499FC
+#_048254: dw data049A10
+#_048256: dw data049A24
+#_048258: dw data049A38
+#_04825A: dw data049A4C
+#_04825C: dw data049A60
+#_04825E: dw data049A74
+#_048260: dw data049A88
+#_048262: dw data0499FC
+#_048264: dw data049A9C
+#_048266: dw data049AB4
+#_048268: dw data049ACC
+#_04826A: dw data049AE4
+#_04826C: dw data049AFC
+#_04826E: dw data049B14
+#_048270: dw data049B2C
+#_048272: dw data049B44
+#_048274: dw data049B5C
+#_048276: dw data049B5C
+#_048278: dw data049B80
+#_04827A: dw data049BA8
+#_04827C: dw data049BF0
+#_04827E: dw data049BF8
+
+;===================================================================================================
+
+pointers048280:
+#_048280: dw data049C00
+#_048282: dw data049C00
+#_048284: dw data049C08
+#_048286: dw data049C10
+#_048288: dw data049C18
+#_04828A: dw data049C20
+#_04828C: dw data049C28
+#_04828E: dw data049C30
+#_048290: dw data049C38
+#_048292: dw data049C40
+#_048294: dw data049C5A
+#_048296: dw data049C74
+#_048298: dw data049C8E
+#_04829A: dw data049CA8
+#_04829C: dw data049CC2
+#_04829E: dw data049CDC
+#_0482A0: dw data049CF6
+#_0482A2: dw data049D10
+#_0482A4: dw data049D28
+#_0482A6: dw data049D40
+#_0482A8: dw data049D58
+#_0482AA: dw data049D70
+#_0482AC: dw data049D88
+#_0482AE: dw data049DA0
+#_0482B0: dw data049DB8
+#_0482B2: dw data049DD0
+#_0482B4: dw data049DEC
+#_0482B6: dw data049E08
+#_0482B8: dw data049E24
+#_0482BA: dw data049E40
+#_0482BC: dw data049E5C
+#_0482BE: dw data049E78
+#_0482C0: dw data049E94
+#_0482C2: dw data049EB0
+#_0482C4: dw data049EB8
+#_0482C6: dw data049EC0
+#_0482C8: dw data049EC8
+#_0482CA: dw data049ED0
+#_0482CC: dw data049ED8
+#_0482CE: dw data049EE0
+#_0482D0: dw data049EE8
+#_0482D2: dw data04A0A4
+#_0482D4: dw data04A0AC
+#_0482D6: dw data04A0B4
+#_0482D8: dw data04A0BC
+#_0482DA: dw data04A0C4
+#_0482DC: dw data04A0CC
+#_0482DE: dw data04A0D4
+#_0482E0: dw data04A0DC
+#_0482E2: dw data049EF0
+#_0482E4: dw data049F04
+#_0482E6: dw data049F18
+#_0482E8: dw data049F2C
+#_0482EA: dw data049F40
+#_0482EC: dw data049F54
+#_0482EE: dw data049F68
+#_0482F0: dw data049F7C
+#_0482F2: dw data049EF0
+#_0482F4: dw data049F90
+#_0482F6: dw data049FA8
+#_0482F8: dw data049FC0
+#_0482FA: dw data049FD8
+#_0482FC: dw data049FF0
+#_0482FE: dw data04A008
+#_048300: dw data04A020
+#_048302: dw data04A038
+#_048304: dw data04A050
+#_048306: dw data04A050
+#_048308: dw data04A074
+#_04830A: dw data04A09C
+#_04830C: dw data04A0E4
+#_04830E: dw data04A0EC
+
+;===================================================================================================
+
+pointers048310:
+#_048310: dw data04AD86
+#_048312: dw data04AD86
+#_048314: dw data04AD8E
+#_048316: dw data04AD96
+#_048318: dw data04AD9E
+#_04831A: dw data04ADA6
+#_04831C: dw data04ADAE
+#_04831E: dw data04ADB6
+#_048320: dw data04ADBE
+#_048322: dw data04ADC6
+#_048324: dw data04ADE0
+#_048326: dw data04ADFA
+#_048328: dw data04AE14
+#_04832A: dw data04AE2E
+#_04832C: dw data04AE48
+#_04832E: dw data04AE62
+#_048330: dw data04AE7C
+#_048332: dw data04AE96
+#_048334: dw data04AEAE
+#_048336: dw data04AEC6
+#_048338: dw data04AEDE
+#_04833A: dw data04AEF6
+#_04833C: dw data04AF0E
+#_04833E: dw data04AF26
+#_048340: dw data04AF3E
+#_048342: dw data04AF56
+#_048344: dw data04AF72
+#_048346: dw data04AF8E
+#_048348: dw data04AFAA
+#_04834A: dw data04AFC6
+#_04834C: dw data04AFE2
+#_04834E: dw data04AFFE
+#_048350: dw data04B01A
+#_048352: dw data04B036
+#_048354: dw data04B03E
+#_048356: dw data04B046
+#_048358: dw data04B04E
+#_04835A: dw data04B056
+#_04835C: dw data04B05E
+#_04835E: dw data04B066
+#_048360: dw data04B06E
+#_048362: dw data04B076
+#_048364: dw data04B07E
+#_048366: dw data04B086
+#_048368: dw data04B08E
+#_04836A: dw data04B096
+#_04836C: dw data04B09E
+#_04836E: dw data04B0A6
+#_048370: dw data04B0AE
+#_048372: dw data04B0B6
+#_048374: dw data04B0CA
+#_048376: dw data04B0DE
+#_048378: dw data04B0F2
+#_04837A: dw data04B106
+#_04837C: dw data04B11A
+#_04837E: dw data04B12E
+#_048380: dw data04B142
+#_048382: dw data04B156
+#_048384: dw data04B15E
+#_048386: dw data04B176
+#_048388: dw data04B18E
+#_04838A: dw data04B1A6
+#_04838C: dw data04B1BE
+#_04838E: dw data04B1D6
+#_048390: dw data04B1EE
+#_048392: dw data04B206
+#_048394: dw data04B21E
+#_048396: dw data04B312
+#_048398: dw data04B336
+#_04839A: dw data04B33E
+
+;===================================================================================================
+
+pointers04839C:
+#_04839C: dw data04A0F4
+#_04839E: dw data04A0F4
+#_0483A0: dw data04A0FC
+#_0483A2: dw data04A104
+#_0483A4: dw data04A10C
+#_0483A6: dw data04A114
+#_0483A8: dw data04A11C
+#_0483AA: dw data04A124
+#_0483AC: dw data04A12C
+#_0483AE: dw data04A134
+#_0483B0: dw data04A14E
+#_0483B2: dw data04A168
+#_0483B4: dw data04A182
+#_0483B6: dw data04A19C
+#_0483B8: dw data04A1B6
+#_0483BA: dw data04A1D0
+#_0483BC: dw data04A1EA
+#_0483BE: dw data04A204
+#_0483C0: dw data04A20C
+#_0483C2: dw data04A214
+#_0483C4: dw data04A21C
+#_0483C6: dw data04A224
+#_0483C8: dw data04A22C
+#_0483CA: dw data04A234
+#_0483CC: dw data04A23C
+#_0483CE: dw data04A244
+#_0483D0: dw data04A24C
+#_0483D2: dw data04A254
+#_0483D4: dw data04A25C
+#_0483D6: dw data04A264
+#_0483D8: dw data04A26C
+#_0483DA: dw data04A274
+#_0483DC: dw data04A27C
+#_0483DE: dw data04A284
+#_0483E0: dw data04A29C
+#_0483E2: dw data04A2B4
+#_0483E4: dw data04A2CC
+#_0483E6: dw data04A2E4
+#_0483E8: dw data04A2FC
+#_0483EA: dw data04A314
+#_0483EC: dw data04A32C
+#_0483EE: dw data04A344
+#_0483F0: dw data04A35C
+#_0483F2: dw data04A374
+#_0483F4: dw data04A38C
+#_0483F6: dw data04A3A4
+#_0483F8: dw data04A3BC
+#_0483FA: dw data04A3D4
+#_0483FC: dw data04A3EC
+#_0483FE: dw data04A404
+#_048400: dw data04A418
+#_048402: dw data04A42C
+#_048404: dw data04A440
+#_048406: dw data04A454
+#_048408: dw data04A468
+#_04840A: dw data04A47C
+#_04840C: dw data04A490
+#_04840E: dw data04A4A4
+#_048410: dw data04A4B8
+#_048412: dw data04A4CC
+#_048414: dw data04A4E0
+#_048416: dw data04A4F4
+#_048418: dw data04A508
+#_04841A: dw data04A51C
+#_04841C: dw data04A530
+#_04841E: dw data04A544
+#_048420: dw data04A54E
+#_048422: dw data04A556
+#_048424: dw data04A560
+#_048426: dw data04A568
+#_048428: dw data04A570
+
+;===================================================================================================
+
+pointers04842A:
+#_04842A: dw data04A578
+#_04842C: dw data04A578
+#_04842E: dw data04A57C
+#_048430: dw data04A580
+#_048432: dw data04A584
+#_048434: dw data04A588
+#_048436: dw data04A58C
+#_048438: dw data04A590
+#_04843A: dw data04A594
+#_04843C: dw data04A598
+#_04843E: dw data04A5AA
+#_048440: dw data04A5BC
+#_048442: dw data04A5CE
+#_048444: dw data04A5E0
+#_048446: dw data04A5F2
+#_048448: dw data04A604
+#_04844A: dw data04A616
+#_04844C: dw data04A628
+#_04844E: dw data04A630
+#_048450: dw data04A638
+#_048452: dw data04A640
+#_048454: dw data04A648
+#_048456: dw data04A650
+#_048458: dw data04A658
+#_04845A: dw data04A660
+#_04845C: dw data04A668
+#_04845E: dw data04A670
+#_048460: dw data04A678
+#_048462: dw data04A680
+#_048464: dw data04A688
+#_048466: dw data04A690
+#_048468: dw data04A698
+#_04846A: dw data04A6A0
+#_04846C: dw data04A6A8
+#_04846E: dw data04A6B8
+#_048470: dw data04A6C8
+#_048472: dw data04A6D8
+#_048474: dw data04A6E8
+#_048476: dw data04A6F8
+#_048478: dw data04A708
+#_04847A: dw data04A718
+#_04847C: dw data04A728
+#_04847E: dw data04A73C
+#_048480: dw data04A750
+#_048482: dw data04A764
+#_048484: dw data04A778
+#_048486: dw data04A78C
+#_048488: dw data04A7A0
+#_04848A: dw data04A7B4
+#_04848C: dw data04A7C8
+#_04848E: dw data04A7EC
+#_048490: dw data04A7F4
+#_048492: dw data04A7FE
+#_048494: dw data04A806
+#_048496: dw data04A810
+#_048498: dw data04A828
+#_04849A: dw data04A840
+#_04849C: dw data04A858
+#_04849E: dw data04A870
+#_0484A0: dw data04A888
+#_0484A2: dw data04A8A0
+#_0484A4: dw data04A8B8
+#_0484A6: dw data04A8D0
+#_0484A8: dw data04A8E8
+#_0484AA: dw data04A900
+#_0484AC: dw data04A918
+#_0484AE: dw data04A930
+#_0484B0: dw data04A948
+#_0484B2: dw data04A960
+#_0484B4: dw data04A978
+#_0484B6: dw data04A990
+#_0484B8: dw data04A99A
+#_0484BA: dw data04A9A2
+
+;===================================================================================================
+
+pointers0484BC:
+#_0484BC: dw data04A9AA
+#_0484BE: dw data04A9AA
+#_0484C0: dw data04A9B2
+#_0484C2: dw data04A9BA
+#_0484C4: dw data04A9C2
+#_0484C6: dw data04A9CA
+#_0484C8: dw data04A9D2
+#_0484CA: dw data04A9DA
+#_0484CC: dw data04A9E2
+#_0484CE: dw data04A9EA
+#_0484D0: dw data04A9F2
+#_0484D2: dw data04AA04
+#_0484D4: dw data04AA16
+#_0484D6: dw data04AA28
+#_0484D8: dw data04AA3A
+#_0484DA: dw data04AA4C
+#_0484DC: dw data04AA5E
+#_0484DE: dw data04AA70
+#_0484E0: dw data04AA82
+#_0484E2: dw data04AA8A
+#_0484E4: dw data04AA92
+#_0484E6: dw data04AA9C
+#_0484E8: dw data04AAB0
+#_0484EA: dw data04AAC4
+#_0484EC: dw data04AAD8
+#_0484EE: dw data04AAEC
+#_0484F0: dw data04AAFC
+#_0484F2: dw data04AB0C
+#_0484F4: dw data04AB1C
+#_0484F6: dw data04AB2C
+#_0484F8: dw data04AB3C
+#_0484FA: dw data04AB4C
+#_0484FC: dw data04AB5C
+#_0484FE: dw data04AB6C
+#_048500: dw data04AB74
+#_048502: dw data04AB7C
+#_048504: dw data04AB84
+#_048506: dw data04AB8C
+#_048508: dw data04AB94
+#_04850A: dw data04AB9C
+#_04850C: dw data04ABA4
+#_04850E: dw data04ABAC
+#_048510: dw data04ABC0
+#_048512: dw data04ABD4
+#_048514: dw data04ABE8
+#_048516: dw data04ABFC
+#_048518: dw data04AC10
+#_04851A: dw data04AC24
+#_04851C: dw data04AC38
+#_04851E: dw data04AC4C
+#_048520: dw data04AC4C
+#_048522: dw data04AC64
+#_048524: dw data04AC7C
+#_048526: dw data04AC7C
+#_048528: dw data04AC7C
+#_04852A: dw data04AC94
+#_04852C: dw data04AC4C
+#_04852E: dw data04ACAC
+#_048530: dw data04ACB6
+#_048532: dw data04ACBE
+#_048534: dw data04ACC6
+#_048536: dw data04ACDE
+#_048538: dw data04ACF6
+#_04853A: dw data04AD0E
+#_04853C: dw data04AD26
+#_04853E: dw data04AD3E
+#_048540: dw data04AD56
+#_048542: dw data04AD6E
+
+;===================================================================================================
+
+pointers048544:
+#_048544: dw data04B346
+#_048546: dw data04B346
+#_048548: dw data04B34E
+#_04854A: dw data04B356
+#_04854C: dw data04B35E
+#_04854E: dw data04B366
+#_048550: dw data04B36E
+#_048552: dw data04B376
+#_048554: dw data04B37E
+#_048556: dw data04B386
+#_048558: dw data04B3A0
+#_04855A: dw data04B3BA
+#_04855C: dw data04B3D4
+#_04855E: dw data04B3EE
+#_048560: dw data04B408
+#_048562: dw data04B422
+#_048564: dw data04B43C
+#_048566: dw data04B456
+#_048568: dw data04B46A
+#_04856A: dw data04B47E
+#_04856C: dw data04B492
+#_04856E: dw data04B4A6
+#_048570: dw data04B4BA
+#_048572: dw data04B4CE
+#_048574: dw data04B4E2
+#_048576: dw data04B4F6
+#_048578: dw data04B4FE
+#_04857A: dw data04B506
+#_04857C: dw data04B50E
+#_04857E: dw data04B516
+#_048580: dw data04B51E
+#_048582: dw data04B526
+#_048584: dw data04B52E
+#_048586: dw data04B536
+#_048588: dw data04B53E
+#_04858A: dw data04B546
+#_04858C: dw data04B54E
+#_04858E: dw data04B556
+#_048590: dw data04B55E
+#_048592: dw data04B566
+#_048594: dw data04B56E
+#_048596: dw data04B576
+#_048598: dw data04B57E
+#_04859A: dw data04B592
+#_04859C: dw data04B5A6
+#_04859E: dw data04B5BA
+#_0485A0: dw data04B5CE
+#_0485A2: dw data04B5E2
+#_0485A4: dw data04B5F6
+#_0485A6: dw data04B60A
+#_0485A8: dw data04B61E
+#_0485AA: dw data04B626
+#_0485AC: dw data04B62E
+#_0485AE: dw data04B636
+#_0485B0: dw data04B63E
+#_0485B2: dw data04B646
+#_0485B4: dw data04B64E
+#_0485B6: dw data04B656
+#_0485B8: dw data04B65E
+#_0485BA: dw data04B66A
+#_0485BC: dw data04B676
+#_0485BE: dw data04B682
+#_0485C0: dw data04B68E
+#_0485C2: dw data04B69A
+#_0485C4: dw data04B6A6
+#_0485C6: dw data04B6B2
+#_0485C8: dw data04B6BE
+#_0485CA: dw data04B6C8
+#_0485CC: dw data04B6D0
+#_0485CE: dw data04B6DA
+#_0485D0: dw data04B6E2
+
+;===================================================================================================
+
+pointers0485D2:
+#_0485D2: dw data04B6EA
+#_0485D4: dw data04B6EA
+#_0485D6: dw data04B6F4
+#_0485D8: dw data04B6FE
+#_0485DA: dw data04B708
+#_0485DC: dw data04B712
+#_0485DE: dw data04B71C
+#_0485E0: dw data04B726
+#_0485E2: dw data04B730
+#_0485E4: dw data04B73A
+#_0485E6: dw data04B74E
+#_0485E8: dw data04B762
+#_0485EA: dw data04B776
+#_0485EC: dw data04B78A
+#_0485EE: dw data04B79E
+#_0485F0: dw data04B7B2
+#_0485F2: dw data04B7C6
+#_0485F4: dw data04B7DA
+#_0485F6: dw data04B7F2
+#_0485F8: dw data04B80A
+#_0485FA: dw data04B822
+#_0485FC: dw data04B83A
+#_0485FE: dw data04B852
+#_048600: dw data04B86A
+#_048602: dw data04B882
+#_048604: dw data04B89A
+#_048606: dw data04B8A2
+#_048608: dw data04B8AA
+#_04860A: dw data04B8B4
+#_04860C: dw data04B8BE
+#_04860E: dw data04B8C8
+#_048610: dw data04B8D2
+#_048612: dw data04B8DC
+#_048614: dw data04B8E6
+#_048616: dw data04B8F0
+#_048618: dw data04B8FA
+#_04861A: dw data04B904
+#_04861C: dw data04B90E
+#_04861E: dw data04B916
+
+;===================================================================================================
+
+pointers048620:
+#_048620: dw data04B91E
+#_048622: dw data04B91E
+#_048624: dw data04B926
+#_048626: dw data04B92E
+#_048628: dw data04B936
+#_04862A: dw data04B93E
+#_04862C: dw data04B946
+#_04862E: dw data04B94E
+#_048630: dw data04B956
+#_048632: dw data04B95E
+#_048634: dw data04B966
+#_048636: dw data04B97A
+#_048638: dw data04B98E
+#_04863A: dw data04B9A2
+#_04863C: dw data04B9B6
+#_04863E: dw data04B9CA
+#_048640: dw data04B9DE
+#_048642: dw data04B9F2
+#_048644: dw data04BA06
+#_048646: dw data04BA0E
+#_048648: dw data04BA18
+#_04864A: dw data04BA34
+#_04864C: dw data04BA3E
+#_04864E: dw data04BA46
+#_048650: dw data04BA4E
+#_048652: dw data04BA56
+#_048654: dw data04BA5E
+#_048656: dw data04BA66
+#_048658: dw data04BA6E
+#_04865A: dw data04BA76
+#_04865C: dw data04BA7E
+#_04865E: dw data04BA96
+#_048660: dw data04BAAE
+#_048662: dw data04BAC6
+#_048664: dw data04BADE
+#_048666: dw data04BAF6
+#_048668: dw data04BB0E
+#_04866A: dw data04BB26
+#_04866C: dw data04BB3E
+#_04866E: dw data04BB4E
+#_048670: dw data04BB5E
+#_048672: dw data04BB6E
+#_048674: dw data04BB7E
+#_048676: dw data04BB8E
+#_048678: dw data04BB9E
+#_04867A: dw data04BBAE
+#_04867C: dw data04BBBE
+#_04867E: dw data04BBCE
+#_048680: dw data04BBDE
+#_048682: dw data04BBEE
+#_048684: dw data04BBFE
+#_048686: dw data04BC0E
+#_048688: dw data04BC1E
+#_04868A: dw data04BC2E
+#_04868C: dw data04BC3E
+#_04868E: dw data04BC46
+
+;===================================================================================================
+
+pointers048690:
+#_048690: dw data04BC4E
+#_048692: dw data04BC4E
+#_048694: dw data04BC56
+#_048696: dw data04BC5E
+#_048698: dw data04BC66
+#_04869A: dw data04BC6E
+#_04869C: dw data04BC76
+#_04869E: dw data04BC7E
+#_0486A0: dw data04BC86
+#_0486A2: dw data04BC8E
+#_0486A4: dw data04BCA8
+#_0486A6: dw data04BCC2
+#_0486A8: dw data04BCDC
+#_0486AA: dw data04BCF6
+#_0486AC: dw data04BD10
+#_0486AE: dw data04BD2A
+#_0486B0: dw data04BD44
+#_0486B2: dw data04BD5E
+#_0486B4: dw data04BD72
+#_0486B6: dw data04BD86
+#_0486B8: dw data04BD9A
+#_0486BA: dw data04BDAE
+#_0486BC: dw data04BDC2
+#_0486BE: dw data04BDD6
+#_0486C0: dw data04BDEA
+#_0486C2: dw data04BDFE
+#_0486C4: dw data04BE0E
+#_0486C6: dw data04BE1E
+#_0486C8: dw data04BE2E
+#_0486CA: dw data04BE3E
+#_0486CC: dw data04BE4E
+#_0486CE: dw data04BE5E
+#_0486D0: dw data04BE6E
+#_0486D2: dw data04BE7E
+#_0486D4: dw data04BE86
+#_0486D6: dw data04BE9E
+#_0486D8: dw data04BEB6
+#_0486DA: dw data04BECE
+#_0486DC: dw data04BEE6
+#_0486DE: dw data04BEFE
+#_0486E0: dw data04BF16
+#_0486E2: dw data04BF2E
+#_0486E4: dw data04BF46
+#_0486E6: dw data04BF4E
+#_0486E8: dw data04BF58
+#_0486EA: dw data04BF70
+#_0486EC: dw data04BF88
+#_0486EE: dw data04BFA0
+#_0486F0: dw data04BFB8
+#_0486F2: dw data04BFD0
+#_0486F4: dw data04BFE8
+#_0486F6: dw data04C000
+#_0486F8: dw data04C018
+#_0486FA: dw data04C022
+#_0486FC: dw data04C02C
+#_0486FE: dw data04C034
+
+;===================================================================================================
+
+pointers048700:
+#_048700: dw data04C03C
+#_048702: dw data04C03C
+#_048704: dw data04C046
+#_048706: dw data04C04E
+#_048708: dw data04C05E
+#_04870A: dw data04C066
+#_04870C: dw data04C07E
+#_04870E: dw data04C084
+
+;===================================================================================================
+
 #_048710: db $FF,$7F,$D2,$02,$FF,$FF,$D2,$02
 #_048718: db $FF,$7F,$D7,$02,$FF,$FF,$D7,$02
 #_048720: db $FF,$7F,$D1,$02,$FF,$FF,$D1,$02
@@ -1743,22 +2480,14 @@ UNREACH_048008:
 #_04B648: db $18,$0B,$FF,$FF,$1A,$0B,$10,$00
 #_04B650: db $1E,$0B
 
+;===================================================================================================
+
 UNREACH_04B652:
 #_04B652: db $FF,$FF
-
-UNREACH_04B654:
 #_04B654: db $20,$0B
-
-UNREACH_04B656:
 #_04B656: db $10
-
-UNREACH_04B657:
 #_04B657: db $00,$24
-
-UNREACH_04B659:
 #_04B659: db $0B,$FF
-
-UNREACH_04B65B:
 #_04B65B: db $FF,$26,$0B,$10,$00,$24,$0B,$20
 #_04B663: db $00,$22,$0B,$FF,$FF,$26,$0B,$10
 #_04B66B: db $00,$24,$0B,$20,$00,$22,$0B,$FF
@@ -2087,10 +2816,10 @@ UNREACH_04B65B:
 #_04C083: db $FF,$40,$00,$CE,$0C,$FF,$FF,$CE
 #_04C08B: db $0C
 
+;===================================================================================================
+
 UNREACH_04C08C:
 #_04C08C: db $00,$E4
-
-UNREACH_04C08E:
 #_04C08E: db $21,$80,$E4,$21,$00,$E5,$21,$80
 #_04C096: db $E5,$21,$00,$E5,$21,$80,$E4,$21
 #_04C09E: db $00,$E9,$21,$40,$E9,$21,$80,$E9
@@ -2146,10 +2875,10 @@ UNREACH_04C08E:
 #_04C22E: db $D5,$25,$80,$D5,$25,$C0,$D5,$25
 #_04C236: db $80,$D5,$25,$40,$D5,$25
 
+;===================================================================================================
+
 UNREACH_04C23C:
 #_04C23C: db $00,$F4
-
-UNREACH_04C23E:
 #_04C23E: db $28,$80,$F4,$28,$00,$F5,$28,$80
 #_04C246: db $F5,$28,$00,$F5,$28,$80,$F4,$28
 #_04C24E: db $00,$FD,$28,$40,$FD,$28,$80,$FD
@@ -3954,7 +4683,7 @@ CODE_04F722:
 #_04F740: ADC.b $28
 #_04F742: TAY
 
-#_04F743: LDA.w UNREACH_04B652,Y
+#_04F743: LDA.w UNREACH_04B652+0,Y
 #_04F746: BMI .exit
 
 #_04F748: STZ.w $191A
@@ -3990,10 +4719,10 @@ CODE_04F76E:
 #_04F779: PLY
 
 CODE_04F77A:
-#_04F77A: LDA.w UNREACH_04B656,Y
+#_04F77A: LDA.w UNREACH_04B652+4,Y
 #_04F77D: STA.w $1918
 
-#_04F780: LDA.w UNREACH_04B654,Y
+#_04F780: LDA.w UNREACH_04B652+2,Y
 #_04F783: STA.w $191C
 #_04F786: CLC
 #_04F787: ADC.w #$0200
@@ -4005,7 +4734,7 @@ CODE_04F77A:
 #_04F793: LDA.w #$6300
 #_04F796: STA.w $1922
 
-#_04F799: LDA.w UNREACH_04B652,Y
+#_04F799: LDA.w UNREACH_04B652+0,Y
 #_04F79C: CMP.w #$4201
 #_04F79F: BEQ CODE_04F7B0
 
@@ -4035,10 +4764,10 @@ CODE_04F7B8:
 ROUTINE_04F7BC:
 #_04F7BC: STZ.w $1926
 
-#_04F7BF: LDA.w UNREACH_04B65B,Y
+#_04F7BF: LDA.w UNREACH_04B652+9,Y
 #_04F7C2: STA.w $1924
 
-#_04F7C5: LDA.w UNREACH_04B659,Y
+#_04F7C5: LDA.w UNREACH_04B652+7,Y
 #_04F7C8: STA.w $1928
 #_04F7CB: CLC
 #_04F7CC: ADC.w #$0200
@@ -4212,7 +4941,7 @@ CODE_04F8A6:
 #_04F8B1: ADC.b $28
 #_04F8B3: TAY
 
-#_04F8B4: LDA.w UNREACH_04B652,Y
+#_04F8B4: LDA.w UNREACH_04B652+0,Y
 #_04F8B7: BMI .exit
 
 #_04F8B9: STZ.w $1902
@@ -4227,10 +4956,10 @@ CODE_04F8A6:
 #_04F8CF: PLX
 
 CODE_04F8D0:
-#_04F8D0: LDA.w UNREACH_04B656,Y
+#_04F8D0: LDA.w UNREACH_04B652+4,Y
 #_04F8D3: STA.w $1900
 
-#_04F8D6: LDA.w UNREACH_04B654,Y
+#_04F8D6: LDA.w UNREACH_04B652+2,Y
 #_04F8D9: STA.w $1904
 #_04F8DC: CLC
 #_04F8DD: ADC.w #$0200
@@ -4245,16 +4974,16 @@ CODE_04F8D0:
 #_04F8EF: LDA.w #$0100
 #_04F8F2: STA.w $1902
 
-#_04F8F5: LDA.w UNREACH_04B657,Y
+#_04F8F5: LDA.w UNREACH_04B652+5,Y
 #_04F8F8: CMP.w #$FFFE
 #_04F8FB: BNE .exit
 
 #_04F8FD: STZ.w $190E
 
-#_04F900: LDA.w UNREACH_04B65B,Y
+#_04F900: LDA.w UNREACH_04B652+9,Y
 #_04F903: STA.w $190C
 
-#_04F906: LDA.w UNREACH_04B659,Y
+#_04F906: LDA.w UNREACH_04B652+7,Y
 #_04F909: STA.w $1910
 #_04F90C: CLC
 #_04F90D: ADC.w #$0200
@@ -4603,7 +5332,11 @@ UNREACH_04FF41:
 #_04FF89: db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 #_04FF91: db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 #_04FF99: db $FF,$FF,$1E,$1E,$1E,$1E,$1E,$1E
-#_04FFA1: db $1E,$1E,$1E,$00,$00,$00,$00,$00
+#_04FFA1: db $1E,$1E,$1E
+
+;===================================================================================================
+
+#_04FFA4: db $00,$00,$00,$00,$00
 #_04FFA9: db $00,$00,$00,$00,$00,$00,$00,$00
 #_04FFB1: db $00,$00,$00,$00,$00,$00,$00,$00
 #_04FFB9: db $00,$00,$00,$00,$00,$00,$00,$00

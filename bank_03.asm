@@ -1,5 +1,6 @@
-
 org $038000
+
+;===================================================================================================
 
 #_038000: REP #$10
 
@@ -6557,7 +6558,7 @@ SpriteAIPointers:
 #_03A369: dw ROUTINE_03D1AA                                          ; 0x0010
 #_03A36B: dw ROUTINE_03BD15                                          ; 0x0012
 #_03A36D: dw ROUTINE_03BD2A                                          ; 0x0014
-#_03A36F: dw $0000                                                   ; 0x0016
+#_03A36F: dw NullPtr                                                 ; 0x0016
 #_03A371: dw ROUTINE_03CBFB                                          ; 0x0018
 #_03A373: dw ROUTINE_03CC1E                                          ; 0x001A
 #_03A375: dw ROUTINE_03CC73                                          ; 0x001C
@@ -6632,7 +6633,7 @@ SpriteAIPointers:
 #_03A3FF: dw ROUTINE_03D056                                          ; 0x00A6
 #_03A401: dw ROUTINE_03D70E                                          ; 0x00A8
 #_03A403: dw ROUTINE_03D71B                                          ; 0x00AA
-#_03A405: dw $0000                                                   ; 0x00AC
+#_03A405: dw NullPtr                                                 ; 0x00AC
 #_03A407: dw ROUTINE_03CCCF                                          ; 0x00AE
 #_03A409: dw ROUTINE_03CCF2                                          ; 0x00B0
 #_03A40B: dw ROUTINE_03CE9C                                          ; 0x00B2
@@ -11621,7 +11622,7 @@ ROUTINE_03C40B:
 #_03C40B: LDA.w #$001E
 #_03C40E: STA.b $3E
 
-#_03C410: LDA.w UNREACH_03C4B6,Y
+#_03C410: LDA.w UNREACH_03C4B4+2,Y
 #_03C413: BPL ROUTINE_03C416
 
 #_03C415: RTS
@@ -11637,27 +11638,27 @@ ROUTINE_03C416:
 #_03C421: PHX
 #_03C422: PHY
 
-#_03C423: LDA.w UNREACH_03C454,Y
+#_03C423: LDA.w UNREACH_03C454+0,Y
 #_03C426: STA.b $38
 
-#_03C428: LDA.w UNREACH_03C456,Y
+#_03C428: LDA.w UNREACH_03C454+2,Y
 #_03C42B: STA.b $3A
 
-#_03C42D: LDA.w UNREACH_03C458,Y
+#_03C42D: LDA.w UNREACH_03C454+4,Y
 #_03C430: STA.b $3C
 #_03C432: JSL ROUTINE_00DB57_long
 #_03C436: PLY
 #_03C437: CLC
 
-#_03C438: LDA.w UNREACH_03C454,Y
+#_03C438: LDA.w UNREACH_03C454+0,Y
 #_03C43B: ADC.w #$0100
 #_03C43E: STA.b $38
 
-#_03C440: LDA.w UNREACH_03C456,Y
+#_03C440: LDA.w UNREACH_03C454+2,Y
 #_03C443: STA.b $3A
 #_03C445: CLC
 
-#_03C446: LDA.w UNREACH_03C458,Y
+#_03C446: LDA.w UNREACH_03C454+4,Y
 #_03C449: ADC.w #$0200
 #_03C44C: STA.b $3C
 #_03C44E: JSL ROUTINE_00DB57_long
@@ -11666,13 +11667,11 @@ ROUTINE_03C416:
 .exit
 #_03C453: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 UNREACH_03C454:
 #_03C454: db $00,$62
-
-UNREACH_03C456:
 #_03C456: db $80,$81
-
-UNREACH_03C458:
 #_03C458: db $00,$EC,$00,$62,$80,$81,$00,$F0
 #_03C460: db $00,$62,$C0,$81,$00,$F4,$00,$62
 #_03C468: db $C0,$81,$00,$F8,$00,$62,$C0,$81
@@ -11686,10 +11685,10 @@ UNREACH_03C458:
 #_03C4A8: db $80,$60,$80,$80,$80,$95,$80,$60
 #_03C4B0: db $80,$80,$00,$98
 
+;---------------------------------------------------------------------------------------------------
+
 UNREACH_03C4B4:
 #_03C4B4: db $01,$00
-
-UNREACH_03C4B6:
 #_03C4B6: db $00,$00,$03,$00,$06,$00,$05,$00
 #_03C4BE: db $00,$00,$07,$00,$06,$00,$09,$00
 #_03C4C6: db $00,$00,$0B,$00,$06,$00,$0D,$00

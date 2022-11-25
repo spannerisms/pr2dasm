@@ -1,12 +1,13 @@
-
 org $078000
 
-#_078000: db $4B,$49,$4B,$49,$11,$E5,$FF,$FF
+;===================================================================================================
+
+#_078000: db $4B, $49, $4B, $49 : dw $E511, $FFFF ; KIKI, end of assembly output
+
+;===================================================================================================
 
 UNREACH_078008:
 #_078008: db $02,$00
-
-UNREACH_07800A:
 #_07800A: db $00,$00,$08,$00,$00,$00,$20,$00
 #_078012: db $00,$00,$80,$00,$00,$00,$00,$02
 #_07801A: db $00,$00,$00,$08,$00,$00,$00,$20
@@ -3256,9 +3257,15 @@ UNREACH_079285:
 #_07E4F5: db $0C,$F8,$FF,$F8,$FF,$4E,$0C,$88
 #_07E4FD: db $E0,$FF,$F8,$FF,$4E,$0C,$EC,$FF
 #_07E505: db $F8,$FF,$4E,$0C,$88,$E0,$FF,$F8
-#_07E50D: db $FF,$4E,$0C,$88,$00,$00,$00,$00
+#_07E50D: db $FF,$4E,$0C,$88
+
+;===================================================================================================
+
+#_07E511: db $00,$00,$00,$00
 #_07E515: db $00,$00,$00,$00,$00,$00,$00,$00
 #_07E51D: db $00,$00
+
+;===================================================================================================
 
 UNREACH_07E51F:
 #_07E51F: db $00
@@ -4700,7 +4707,7 @@ ROUTINE_07F4C4:
 #_07F4DF: dw ROUTINE_07F602
 #_07F4E1: dw ROUTINE_07F60C
 #_07F4E3: dw ROUTINE_07F63A
-#_07F4E5: dw ROUTINE_07F654
+#_07F4E5: dw StallUpdateFlag
 #_07F4E7: dw ROUTINE_07F65D
 #_07F4E9: dw ROUTINE_07F677
 #_07F4EB: dw ROUTINE_07F67E
@@ -4708,7 +4715,7 @@ ROUTINE_07F4C4:
 #_07F4EF: dw ROUTINE_07F6E5
 #_07F4F1: dw ROUTINE_07F6F9
 #_07F4F3: dw ROUTINE_07F700
-#_07F4F5: dw ROUTINE_07F709
+#_07F4F5: dw StallUpdateFlagAndTMClear
 #_07F4F7: dw ROUTINE_07F718
 #_07F4F9: dw ROUTINE_07F8AE
 #_07F4FB: dw ROUTINE_07F8EC
@@ -4721,7 +4728,7 @@ ROUTINE_07F501:
 #_07F501: JSL ROUTINE_00D43C_long
 
 #_07F505: LDA.w #$0000
-#_07F508: LDX.w #data00804B
+#_07F508: LDX.w #compressed00804B
 #_07F50B: JSL ROUTINE_00DBF8_verylong
 
 #_07F50F: LDA.w #$0007
@@ -4857,6 +4864,7 @@ ROUTINE_07F60C:
 #_07F61C: STA.b $22
 #_07F61E: JSL ROUTINE_00ECEF_long
 #_07F622: JSL ROUTINE_00ED0F_long
+
 #_07F626: INC.w $0506
 
 .exit
@@ -4871,9 +4879,9 @@ ROUTINE_07F60C:
 ROUTINE_07F63A:
 #_07F63A: LDX.w #$07D0
 
-CODE_07F63D:
+.delay:
 #_07F63D: DEX
-#_07F63E: BNE CODE_07F63D
+#_07F63E: BNE .delay
 
 #_07F640: JSL ROUTINE_00ED0F_long
 
@@ -4882,6 +4890,7 @@ CODE_07F63D:
 
 #_07F64A: LDA.w #$0028
 #_07F64D: STA.w $0800
+
 #_07F650: INC.w $0506
 
 .exit
@@ -4889,7 +4898,7 @@ CODE_07F63D:
 
 ;===================================================================================================
 
-ROUTINE_07F654:
+StallUpdateFlag:
 #_07F654: DEC.w $0800
 #_07F657: BNE .exit
 
@@ -4939,6 +4948,7 @@ ROUTINE_07F67E:
 #_07F698: STA.b $22
 #_07F69A: JSL ROUTINE_00ECEF_long
 #_07F69E: JSL ROUTINE_00ED0F_long
+
 #_07F6A2: INC.w $0506
 
 .exit
@@ -4954,9 +4964,9 @@ ROUTINE_07F67E:
 ROUTINE_07F6BD:
 #_07F6BD: LDX.w #$07D0
 
-CODE_07F6C0:
+.delay:
 #_07F6C0: DEX
-#_07F6C1: BNE CODE_07F6C0
+#_07F6C1: BNE .delay
 
 #_07F6C3: JSL HandleDialog_long
 #_07F6C7: JSL ROUTINE_00ED0F_long
@@ -4981,6 +4991,7 @@ ROUTINE_07F6E5:
 #_07F6E5: JSL HandleDialog_long
 #_07F6E9: JSL ROUTINE_00F957_long
 #_07F6ED: JSR ROUTINE_07F5C1
+
 #_07F6F0: CMP.w #$0000
 #_07F6F3: BNE .exit
 
@@ -5008,13 +5019,14 @@ ROUTINE_07F700:
 
 ;===================================================================================================
 
-ROUTINE_07F709:
+StallUpdateFlagAndTMClear:
 #_07F709: DEC.w $0520
 
 #_07F70C: LDA.w $0520
 #_07F70F: BNE .exit
 
 #_07F711: STZ.w $0524
+
 #_07F714: INC.w $0506
 
 .exit
@@ -5107,6 +5119,7 @@ ROUTINE_07F7F9:
 
 #_07F7FC: LDA.w #$0001
 #_07F7FF: STA.w $0818
+
 #_07F802: RTS
 
 ;===================================================================================================
@@ -5303,6 +5316,7 @@ ROUTINE_07F902:
 
 ROUTINE_07F91F:
 #_07F91F: JSR ROUTINE_07F803
+
 #_07F922: DEC.w $0800
 #_07F925: BNE .exit
 
@@ -5313,7 +5327,7 @@ ROUTINE_07F91F:
 
 ;===================================================================================================
 
-ROUTINE_07F92B:
+ROUTINE_07F803_long:
 #_07F92B: JSR ROUTINE_07F803
 #_07F92E: RTL
 

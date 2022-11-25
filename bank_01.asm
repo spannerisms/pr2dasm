@@ -1,4 +1,3 @@
-
 org $018000
 
 ;===================================================================================================
@@ -1167,7 +1166,6 @@ ROUTINE_018712_long:
 
 ROUTINE_01875C:
 #_01875C: LDA.w #$0039
-
 #_01875F: LDY.w #$0001
 #_018762: BRA CODE_01878A
 
@@ -1175,7 +1173,6 @@ ROUTINE_01875C:
 
 ROUTINE_018764:
 #_018764: LDA.w #$0045
-
 #_018767: LDY.w #$0002
 #_01876A: BRA CODE_01878A
 
@@ -1183,7 +1180,6 @@ ROUTINE_018764:
 
 ROUTINE_01876C:
 #_01876C: LDA.w #$0045
-
 #_01876F: LDY.w #$0003
 #_018772: BRA CODE_01878A
 
@@ -1191,7 +1187,6 @@ ROUTINE_01876C:
 
 ROUTINE_018774:
 #_018774: LDA.w #$0045
-
 #_018777: LDY.w #$0004
 #_01877A: BRA CODE_01878A
 
@@ -1199,7 +1194,6 @@ ROUTINE_018774:
 
 ROUTINE_01877C:
 #_01877C: LDA.w #$0045
-
 #_01877F: LDY.w #$0005
 #_018782: BRA CODE_01878A
 
@@ -1207,8 +1201,9 @@ ROUTINE_01877C:
 
 ROUTINE_018784:
 #_018784: LDA.w #$0039
-
 #_018787: LDY.w #$0006
+
+;===================================================================================================
 
 CODE_01878A:
 #_01878A: JSR ROUTINE_019755
@@ -1950,7 +1945,6 @@ CODE_018C25:
 
 CODE_018C59:
 #_018C59: LDA.w #$0005
-
 #_018C5C: LDY.w #$0017
 #_018C5F: JSR ROUTINE_019755
 #_018C62: BNE CODE_018C6A
@@ -2037,7 +2031,6 @@ ROUTINE_018CC7:
 
 ROUTINE_018CD0:
 #_018CD0: LDA.w #$0009
-
 #_018CD3: LDY.w #$0003
 #_018CD6: JMP CODE_018CF1
 
@@ -2045,7 +2038,6 @@ ROUTINE_018CD0:
 
 ROUTINE_018CD9:
 #_018CD9: LDA.w #$0009
-
 #_018CDC: LDY.w #$0004
 #_018CDF: JMP CODE_018CF1
 
@@ -2053,7 +2045,6 @@ ROUTINE_018CD9:
 
 ROUTINE_018CE2:
 #_018CE2: LDA.w #$0009
-
 #_018CE5: LDY.w #$0005
 #_018CE8: JMP CODE_018CF1
 
@@ -2277,7 +2268,6 @@ CODE_018E4A:
 
 ROUTINE_018E55:
 #_018E55: LDA.w #$0009
-
 #_018E58: LDY.w #$0001
 #_018E5B: JMP CODE_018E8B
 
@@ -2285,7 +2275,6 @@ ROUTINE_018E55:
 
 ROUTINE_018E5E:
 #_018E5E: LDA.w #$0009
-
 #_018E61: LDY.w #$0002
 #_018E64: JMP CODE_018E8B
 
@@ -2293,7 +2282,6 @@ ROUTINE_018E5E:
 
 ROUTINE_018E67:
 #_018E67: LDA.w #$0009
-
 #_018E6A: LDY.w #$0003
 #_018E6D: JMP CODE_018E8B
 
@@ -2301,7 +2289,6 @@ ROUTINE_018E67:
 
 ROUTINE_018E70:
 #_018E70: LDA.w #$0009
-
 #_018E73: LDY.w #$0004
 #_018E76: JMP CODE_018E8B
 
@@ -2309,7 +2296,6 @@ ROUTINE_018E70:
 
 ROUTINE_018E79:
 #_018E79: LDA.w #$0009
-
 #_018E7C: LDY.w #$0005
 #_018E7F: JMP CODE_018E8B
 
@@ -2317,9 +2303,10 @@ ROUTINE_018E79:
 
 ROUTINE_018E82:
 #_018E82: LDA.w #$0009
-
 #_018E85: LDY.w #$0006
 #_018E88: JMP CODE_018E8B
+
+;===================================================================================================
 
 CODE_018E8B:
 #_018E8B: CLC
@@ -2388,7 +2375,7 @@ CODE_018EF9:
 
 #_018EFF: LDX.w #$F191
 #_018F02: LDA.w #$0007
-#_018F05: JSL ROUTINE_00DC8C_long
+#_018F05: JSL ROUTINE_00DC8C_bank00
 
 #_018F09: LDA.w #$004E
 #_018F0C: STA.w $0500
@@ -2456,7 +2443,6 @@ CODE_018F5B:
 
 ROUTINE_018F5F:
 #_018F5F: LDA.w #$0011
-
 #_018F62: LDY.w #$0001
 #_018F65: JMP CODE_018F92
 
@@ -2464,7 +2450,6 @@ ROUTINE_018F5F:
 
 ROUTINE_018F68:
 #_018F68: LDA.w #$0011
-
 #_018F6B: LDY.w #$0002
 #_018F6E: JMP CODE_018F92
 
@@ -2472,7 +2457,6 @@ ROUTINE_018F68:
 
 ROUTINE_018F71:
 #_018F71: LDA.w #$0011
-
 #_018F74: LDY.w #$0003
 #_018F77: JMP CODE_018F92
 
@@ -2480,7 +2464,6 @@ ROUTINE_018F71:
 
 ROUTINE_018F7A:
 #_018F7A: LDA.w #$0011
-
 #_018F7D: LDY.w #$0004
 #_018F80: JMP CODE_018F92
 
@@ -2488,7 +2471,6 @@ ROUTINE_018F7A:
 
 ROUTINE_018F83:
 #_018F83: LDA.w #$0011
-
 #_018F86: LDY.w #$0005
 #_018F89: JMP CODE_018F92
 
@@ -2496,8 +2478,9 @@ ROUTINE_018F83:
 
 ROUTINE_018F8C:
 #_018F8C: LDA.w #$0011
-
 #_018F8F: LDY.w #$0006
+
+;===================================================================================================
 
 CODE_018F92:
 #_018F92: JSL ROUTINE_04F843
@@ -7496,7 +7479,7 @@ ROUTINE_01ACCB:
 
 #_01ACD2: LDA.w #$0007
 #_01ACD5: LDX.w #$F130
-#_01ACD8: JSL ROUTINE_00DC8C_long
+#_01ACD8: JSL ROUTINE_00DC8C_bank00
 #_01ACDC: PLB
 #_01ACDD: RTL
 
@@ -7697,7 +7680,7 @@ ROUTINE_01AE3E:
 #_01AE41: LDY.w #$0040
 #_01AE44: JSR ROUTINE_01AF13_X01A0
 
-#_01AE47: LDA.w #$D000
+#_01AE47: LDA.w #data1ED000
 #_01AE4A: LDY.w #$001E
 #_01AE4D: STY.b $3E
 
@@ -7901,13 +7884,13 @@ CODE_01AF54:
 ;---------------------------------------------------------------------------------------------------
 
 .vectors
-#_01AF5F: dw LilNinja_Normal                                           ; 0x0000
-#_01AF61: dw LilNinja_Normal                                           ; 0x0002
-#_01AF63: dw LilNinja_MeleeAttack                                           ; 0x0004
-#_01AF65: dw LilNinja_Hurt                                           ; 0x0006
-#_01AF67: dw LilNinja_Stunned                                           ; 0x0008
-#_01AF69: dw LilNinja_Recovering                                           ; 0x000A
-#_01AF6B: dw LilNinja_Returning                                           ; 0x000C
+#_01AF5F: dw LilNinja_Normal                                          ; 0x0000
+#_01AF61: dw LilNinja_Normal                                          ; 0x0002
+#_01AF63: dw LilNinja_MeleeAttack                                     ; 0x0004
+#_01AF65: dw LilNinja_Hurt                                            ; 0x0006
+#_01AF67: dw LilNinja_Stunned                                         ; 0x0008
+#_01AF69: dw LilNinja_Recovering                                      ; 0x000A
+#_01AF6B: dw LilNinja_Returning                                       ; 0x000C
 #_01AF6D: dw ROUTINE_01DC78                                           ; 0x000E
 #_01AF6F: dw ROUTINE_01DCA2                                           ; 0x0010
 #_01AF71: dw ROUTINE_01DCB3                                           ; 0x0012
@@ -7920,7 +7903,7 @@ CODE_01AF54:
 
 ;---------------------------------------------------------------------------------------------------
 
-#_01AF7F: dw Digger_Normal                                           ; 0x0020
+#_01AF7F: dw Digger_Normal                                            ; 0x0020
 #_01AF81: dw ROUTINE_01D48C                                           ; 0x0022
 #_01AF83: dw ROUTINE_01D4BF                                           ; 0x0024
 #_01AF85: dw ROUTINE_01D9A0                                           ; 0x0026
@@ -7939,7 +7922,7 @@ CODE_01AF54:
 
 ;---------------------------------------------------------------------------------------------------
 
-#_01AF9F: dw BomberBob_Normal                                           ; 0x0040
+#_01AF9F: dw BomberBob_Normal                                         ; 0x0040
 #_01AFA1: dw ROUTINE_01D35B                                           ; 0x0042
 #_01AFA3: dw ROUTINE_01D463                                           ; 0x0044
 #_01AFA5: dw ROUTINE_01D308                                           ; 0x0046
@@ -7958,7 +7941,7 @@ CODE_01AF54:
 
 ;---------------------------------------------------------------------------------------------------
 
-#_01AFBF: dw Scarecrow_Normal                                           ; 0x0060
+#_01AFBF: dw Scarecrow_Normal                                         ; 0x0060
 #_01AFC1: dw ROUTINE_01CBD5                                           ; 0x0062
 #_01AFC3: dw ROUTINE_01CEE9                                           ; 0x0064
 #_01AFC5: dw ROUTINE_01CB8B                                           ; 0x0066
@@ -7996,7 +7979,7 @@ CODE_01AF54:
 
 ;---------------------------------------------------------------------------------------------------
 
-#_01AFFF: dw Robot_Normal                                           ; 0x00A0
+#_01AFFF: dw Robot_Normal                                             ; 0x00A0
 #_01B001: dw ROUTINE_01C55B                                           ; 0x00A2
 #_01B003: dw ROUTINE_01C5A4                                           ; 0x00A4
 #_01B005: dw ROUTINE_01C1E9                                           ; 0x00A6
@@ -8021,7 +8004,7 @@ CODE_01AF54:
 #_01B02B: dw ROUTINE_01B0F6                                           ; 0x00CC
 #_01B02D: dw ROUTINE_01B10A                                           ; 0x00CE
 #_01B02F: dw ROUTINE_01B234                                           ; 0x00D0
-#_01B031: dw $0000                                                    ; 0x00D2
+#_01B031: dw NullPtr                                                  ; 0x00D2
 #_01B033: dw ROUTINE_01D0BB                                           ; 0x00D4
 #_01B035: dw ROUTINE_01D00C                                           ; 0x00D6
 #_01B037: dw ROUTINE_01B11E                                           ; 0x00D8
@@ -8031,7 +8014,7 @@ CODE_01AF54:
 
 ;---------------------------------------------------------------------------------------------------
 
-#_01B03F: dw Rocky_Normal                                           ; 0x00E0
+#_01B03F: dw Rocky_Normal                                             ; 0x00E0
 #_01B041: dw ROUTINE_01BE95                                           ; 0x00E2
 #_01B043: dw ROUTINE_01BEEA                                           ; 0x00E4
 #_01B045: dw ROUTINE_01BED3                                           ; 0x00E6
@@ -18376,32 +18359,26 @@ CODE_01EBF6:
 ;===================================================================================================
 
 ROUTINE_01EBF8:
-#_01EBF8: LDA.w UNREACH_01EC15,Y
+#_01EBF8: LDA.w UNREACH_01EC15+0,Y
 #_01EBFB: ADC.w $0280,X
 #_01EBFE: STA.w $0140,X
 
-#_01EC01: ADC.w UNREACH_01EC19,Y
+#_01EC01: ADC.w UNREACH_01EC19+4,Y
 #_01EC04: STA.w $0100,X
 
-#_01EC07: LDA.w UNREACH_01EC17,Y
+#_01EC07: LDA.w UNREACH_01EC17+2,Y
 #_01EC0A: ADC.w $02C0,X
 #_01EC0D: STA.b $80,X
 
-#_01EC0F: ADC.w UNREACH_01EC1B,Y
+#_01EC0F: ADC.w UNREACH_01EC1B+6,Y
 #_01EC12: STA.b $C0,X
 
 #_01EC14: RTS
 
 UNREACH_01EC15:
 #_01EC15: db $00,$00
-
-UNREACH_01EC17:
 #_01EC17: db $00,$00
-
-UNREACH_01EC19:
 #_01EC19: db $00,$00
-
-UNREACH_01EC1B:
 #_01EC1B: db $00,$00,$F0,$FF,$F0,$FF,$20,$00
 #_01EC23: db $20,$00,$E0,$FF,$E0,$FF,$40,$00
 #_01EC2B: db $40,$00,$D0,$FF,$D0,$FF,$60,$00

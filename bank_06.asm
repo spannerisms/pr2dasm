@@ -1,7 +1,8 @@
-
 org $068000
 
-#_068000: db $4B,$49,$4B,$49,$C2,$FF,$FF,$FF
+;===================================================================================================
+
+#_068000: db $4B, $49, $4B, $49 : dw $FFC2, $FFFF ; KIKI, end of assembly output
 
 ;===================================================================================================
 ; $06:8008..$06:A2B5 is identical to the range $03:8000..$03:A2AD, code wise
@@ -143,16 +144,16 @@ ExecuteHighSprite:
 #_06A381: dw ROUTINE_06F271                     ; 8096
 #_06A383: dw ROUTINE_06FDD8                     ; 8098
 #_06A385: dw ROUTINE_06FE05                     ; 809A
-#_06A387: dw $0000                              ; 809C
-#_06A389: dw $0000                              ; 809E
-#_06A38B: dw $0000                              ; 80A0
-#_06A38D: dw $0000                              ; 80A2
-#_06A38F: dw $0000                              ; 80A4
-#_06A391: dw $0000                              ; 80A6
-#_06A393: dw $0000                              ; 80A8
-#_06A395: dw $0000                              ; 80AA
-#_06A397: dw $0000                              ; 80AC
-#_06A399: dw $0000                              ; 80AE
+#_06A387: dw NullPtr                            ; 809C
+#_06A389: dw NullPtr                            ; 809E
+#_06A38B: dw NullPtr                            ; 80A0
+#_06A38D: dw NullPtr                            ; 80A2
+#_06A38F: dw NullPtr                            ; 80A4
+#_06A391: dw NullPtr                            ; 80A6
+#_06A393: dw NullPtr                            ; 80A8
+#_06A395: dw NullPtr                            ; 80AA
+#_06A397: dw NullPtr                            ; 80AC
+#_06A399: dw NullPtr                            ; 80AE
 #_06A39B: dw ROUTINE_06A57B                     ; 80B0
 #_06A39D: dw ROUTINE_06A5AE                     ; 80B2
 #_06A39F: dw ROUTINE_06A5DB                     ; 80B4
@@ -168,7 +169,7 @@ ExecuteHighSprite:
 #_06A3B3: dw ROUTINE_06CB34                     ; 80C8
 #_06A3B5: dw ROUTINE_06E022                     ; 80CA
 #_06A3B7: dw ROUTINE_06E022                     ; 80CC
-#_06A3B9: dw $0000                              ; 80CE
+#_06A3B9: dw NullPtr                            ; 80CE
 #_06A3BB: dw ROUTINE_06F165                     ; 80D0
 #_06A3BD: dw ROUTINE_06F17F                     ; 80D2
 #_06A3BF: dw ROUTINE_06F1CD                     ; 80D4
@@ -181,10 +182,10 @@ ExecuteHighSprite:
 #_06A3CD: dw ROUTINE_06EF85                     ; 80E2
 #_06A3CF: dw ROUTINE_06EF68                     ; 80E4
 #_06A3D1: dw ROUTINE_06EF68                     ; 80E6
-#_06A3D3: dw $0000                              ; 80E8
-#_06A3D5: dw $0000                              ; 80EA
-#_06A3D7: dw $0000                              ; 80EC
-#_06A3D9: dw $0000                              ; 80EE
+#_06A3D3: dw NullPtr                            ; 80E8
+#_06A3D5: dw NullPtr                            ; 80EA
+#_06A3D7: dw NullPtr                            ; 80EC
+#_06A3D9: dw NullPtr                            ; 80EE
 #_06A3DB: dw ROUTINE_06E022                     ; 80F0
 #_06A3DD: dw ROUTINE_06E0D4                     ; 80F2
 #_06A3DF: dw ROUTINE_06E23D                     ; 80F4
@@ -215,7 +216,7 @@ ExecuteHighSprite:
 #_06A411: dw ROUTINE_06CBBB                     ; 8126
 #_06A413: dw ROUTINE_06CC40                     ; 8128
 #_06A415: dw ROUTINE_06CC80                     ; 812A
-#_06A417: dw $0000                              ; 812C
+#_06A417: dw NullPtr                            ; 812C
 #_06A419: dw ROUTINE_06CBA9                     ; 812E
 #_06A41B: dw ROUTINE_06CB4F                     ; 8130
 #_06A41D: dw ROUTINE_06CB80                     ; 8132
@@ -280,7 +281,7 @@ ExecuteHighSprite:
 #_06A493: dw ROUTINE_06C28A                     ; 81A8
 #_06A495: dw ROUTINE_06C2B5                     ; 81AA
 #_06A497: dw ROUTINE_06C341                     ; 81AC
-#_06A499: dw $0000                              ; 81AE
+#_06A499: dw NullPtr                            ; 81AE
 #_06A49B: dw ROUTINE_06CA06                     ; 81B0
 #_06A49D: dw ROUTINE_06CA3C                     ; 81B2
 #_06A49F: dw ROUTINE_06C1CC                     ; 81B4
@@ -359,8 +360,8 @@ ExecuteHighSprite:
 #_06A531: dw ROUTINE_06A706                     ; 8246
 #_06A533: dw ROUTINE_06A712                     ; 8248
 #_06A535: dw ROUTINE_06A719                     ; 824A
-#_06A537: dw $0000                              ; 824C
-#_06A539: dw $0000                              ; 824E
+#_06A537: dw NullPtr                            ; 824C
+#_06A539: dw NullPtr                            ; 824E
 #_06A53B: dw ROUTINE_06ACAA                     ; 8250
 #_06A53D: dw ROUTINE_06ACE1                     ; 8252
 #_06A53F: dw ROUTINE_06AD96                     ; 8254
@@ -375,14 +376,14 @@ ExecuteHighSprite:
 #_06A551: dw ROUTINE_06AB4A                     ; 8266
 #_06A553: dw ROUTINE_06AB25                     ; 8268
 #_06A555: dw ROUTINE_06A737                     ; 826A
-#_06A557: dw $0000                              ; 826C
-#_06A559: dw $0000                              ; 826E
+#_06A557: dw NullPtr                            ; 826C
+#_06A559: dw NullPtr                            ; 826E
 #_06A55B: dw ROUTINE_06AAA9                     ; 8270
 #_06A55D: dw ROUTINE_06ABAA                     ; 8272
 #_06A55F: dw ROUTINE_06AB0D                     ; 8274
 #_06A561: dw ROUTINE_06A76D                     ; 8276
-#_06A563: dw $0000                              ; 8278
-#_06A565: dw $0000                              ; 827A
+#_06A563: dw NullPtr                            ; 8278
+#_06A565: dw NullPtr                            ; 827A
 #_06A567: dw ROUTINE_06A7F7                     ; 827C
 #_06A569: dw ROUTINE_06A815                     ; 827E
 #_06A56B: dw ROUTINE_06A790                     ; 8280
@@ -2082,8 +2083,8 @@ ROUTINE_06AE6F:
 #_06AE7E: LDA.w #Message_089366
 #_06AE81: JSR ROUTINE_038589_bank06
 
-#_06AE84: LDA.w #$EC34
-#_06AE87: JSL ROUTINE_00EBF1_long
+#_06AE84: LDA.w #data00EC34
+#_06AE87: JSL ROUTINE_00EBF1_0003
 #_06AE8B: JSR ROUTINE_038719_bank06
 #_06AE8E: JSR Reset_0816_AndAdvanceAI_bank_bank06
 
@@ -3092,7 +3093,7 @@ ROUTINE_06B425:
 
 #_06B42A: JSR ROUTINE_038289_bank06
 
-#_06B42D: LDA.w #$FE59
+#_06B42D: LDA.w #data05FE59
 #_06B430: LDY.w #$0005
 #_06B433: JSL ROUTINE_08BD65
 #_06B437: JSR ROUTINE_06B4A8
@@ -3133,8 +3134,8 @@ CODE_06B463:
 #_06B46C: LDA.w #Message_0892D1
 #_06B46F: JSR ROUTINE_038589_bank06
 
-#_06B472: LDA.w #$EC26
-#_06B475: JSL ROUTINE_00EBF1_long
+#_06B472: LDA.w #data00EC26
+#_06B475: JSL ROUTINE_00EBF1_0003
 #_06B479: JSR ROUTINE_038719_bank06
 #_06B47C: JSR Set_04AA_to_0044
 #_06B47F: JSR ROUTINE_038550_bank06
@@ -4526,8 +4527,7 @@ ROUTINE_06BC09:
 #_06BC3D: BCS CODE_06BC52
 
 CODE_06BC3F:
-#_06BC3F: LDA.w #$FE87
-
+#_06BC3F: LDA.w #data05FE87
 #_06BC42: LDY.w #$0005
 #_06BC45: JSL ROUTINE_08BD65
 
@@ -5040,7 +5040,7 @@ CODE_06BF56:
 #_06BF60: LDA.l $7E2530
 #_06BF64: BNE CODE_06BF79
 
-#_06BF66: LDA.w #$FE70
+#_06BF66: LDA.w #data05FE70
 #_06BF69: LDY.w #$0005
 #_06BF6C: JSL ROUTINE_08BD65
 
@@ -6172,8 +6172,8 @@ CODE_06C62A:
 #_06C640: CMP.w #$1600
 #_06C643: BCC CODE_06C64F
 
-#_06C645: LDA.w #$EC18
-#_06C648: JSL ROUTINE_00EBF1_long
+#_06C645: LDA.w #data00EC18
+#_06C648: JSL ROUTINE_00EBF1_0003
 #_06C64C: JSR Reset_0816_AndAdvanceAI_bank_bank06
 
 CODE_06C64F:
@@ -10528,8 +10528,8 @@ ROUTINE_06E23D:
 #_06E241: TAY
 #_06E242: BEQ CODE_06E24E
 
-#_06E244: LDA.w #$EC50
-#_06E247: JSL ROUTINE_00EBF1_long
+#_06E244: LDA.w #data00EC50
+#_06E247: JSL ROUTINE_00EBF1_0003
 #_06E24B: JSR Reset_0816_AndAdvanceAI_bank_bank06
 
 CODE_06E24E:
@@ -13658,8 +13658,8 @@ ROUTINE_06F58B:
 #_06F593: CMP.w #$0100
 #_06F596: BCS CODE_06F5AB
 
-#_06F598: LDA.w #$EC42
-#_06F59B: JSL ROUTINE_00EBF1_long
+#_06F598: LDA.w #data00EC42
+#_06F59B: JSL ROUTINE_00EBF1_0003
 
 #_06F59F: LDA.w #$0DB4
 #_06F5A2: STA.w $1786
@@ -14169,7 +14169,7 @@ ROUTINE_06F895:
 #_06F89A: LDX.w #$0F00
 #_06F89D: JSL ROUTINE_08D53E_long
 
-#_06F8A1: LDA.w #$FE3B
+#_06F8A1: LDA.w #data05FE3B
 #_06F8A4: LDY.w #$0005
 #_06F8A7: JSL ROUTINE_08BD65
 #_06F8AB: PLX
@@ -14254,7 +14254,7 @@ CODE_06F938:
 
 #_06F944: PHX
 
-#_06F945: LDA.w #$FE0F
+#_06F945: LDA.w #data05FE0F
 #_06F948: LDY.w #$0005
 #_06F94B: JSL ROUTINE_08BD65
 #_06F94F: PLX

@@ -3,6 +3,9 @@ lorom
 incsrc "registers.asm"
 incsrc "registers_spc.asm"
 
+; Used a lot in tables
+NullPtr = $0000
+
 incsrc "bank_00.asm"
 incsrc "bank_01.asm"
 incsrc "bank_02.asm"

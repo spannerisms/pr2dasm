@@ -1,4 +1,3 @@
-
 org $088000
 
 ;===================================================================================================
@@ -8897,13 +8896,12 @@ ROUTINE_08D173:
 #_08D196: LDA.w #data08D24E
 #_08D199: JSR ROUTINE_08BD65_Y0008
 
-#_08D19C: LDA.w #$8373
+#_08D19C: LDA.w #data058373
 #_08D19F: LDY.w #$0005
 #_08D1A2: JMP CODE_08D1B8
 
 CODE_08D1A5:
 #_08D1A5: LDA.w #$0060
-
 #_08D1A8: LDX.w #$0F80
 #_08D1AB: BRA CODE_08D1B3
 
@@ -8919,6 +8917,8 @@ CODE_08D1B3:
 #_08D1B3: JSL ROUTINE_09C7CE
 #_08D1B7: RTS
 
+;===================================================================================================
+
 CODE_08D1B8:
 #_08D1B8: STA.b $20
 #_08D1BA: STY.b $22
@@ -8928,7 +8928,7 @@ CODE_08D1B8:
 
 #_08D1C1: LDA.w #$007F
 #_08D1C4: STA.b $26
-#_08D1C6: JSL ROUTINE_00D5DB_long
+#_08D1C6: JSL Decompress_long
 
 #_08D1CA: LDX.w #$0800
 
@@ -9023,7 +9023,7 @@ ROUTINE_08D2C0:
 #_08D2E3: LDA.w #data08D24E
 #_08D2E6: JSR ROUTINE_08BD65_Y0008
 
-#_08D2E9: LDA.w #$83D4
+#_08D2E9: LDA.w #data0583D4
 #_08D2EC: LDY.w #$0005
 #_08D2EF: JMP CODE_08D1B8
 
@@ -9918,32 +9918,32 @@ ROUTINE_08D8CC:
 #_08D90E: dw data08DB76
 #_08D910: dw data08DBB4
 #_08D912: dw data08DBF2
-#_08D914: dw $0000
-#_08D916: dw $0000
-#_08D918: dw $0000
-#_08D91A: dw $0000
-#_08D91C: dw $0000
-#_08D91E: dw $0000
-#_08D920: dw $0000
-#_08D922: dw $0000
-#_08D924: dw $0000
-#_08D926: dw $0000
-#_08D928: dw $0000
-#_08D92A: dw $0000
-#_08D92C: dw $0000
-#_08D92E: dw $0000
-#_08D930: dw $0000
-#_08D932: dw $0000
-#_08D934: dw $0000
-#_08D936: dw $0000
-#_08D938: dw $0000
-#_08D93A: dw $0000
-#_08D93C: dw $0000
-#_08D93E: dw $0000
-#_08D940: dw $0000
-#_08D942: dw $0000
-#_08D944: dw $0000
-#_08D946: dw $0000
+#_08D914: dw NullPtr
+#_08D916: dw NullPtr
+#_08D918: dw NullPtr
+#_08D91A: dw NullPtr
+#_08D91C: dw NullPtr
+#_08D91E: dw NullPtr
+#_08D920: dw NullPtr
+#_08D922: dw NullPtr
+#_08D924: dw NullPtr
+#_08D926: dw NullPtr
+#_08D928: dw NullPtr
+#_08D92A: dw NullPtr
+#_08D92C: dw NullPtr
+#_08D92E: dw NullPtr
+#_08D930: dw NullPtr
+#_08D932: dw NullPtr
+#_08D934: dw NullPtr
+#_08D936: dw NullPtr
+#_08D938: dw NullPtr
+#_08D93A: dw NullPtr
+#_08D93C: dw NullPtr
+#_08D93E: dw NullPtr
+#_08D940: dw NullPtr
+#_08D942: dw NullPtr
+#_08D944: dw NullPtr
+#_08D946: dw NullPtr
 
 ;---------------------------------------------------------------------------------------------------
 
