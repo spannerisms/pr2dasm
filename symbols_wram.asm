@@ -197,6 +197,7 @@ UNKNOWN_7E059C   = $7E059C
 UNKNOWN_7E059E   = $7E059E
 
 FRAME            = $7E05A0
+
 UNKNOWN_7E05A2   = $7E05A2
 UNKNOWN_7E05A4   = $7E05A4
 
@@ -262,7 +263,19 @@ UNKNOWN_7E0700   = $7E0700
 ;---------------------------------------------------------------------------------------------------
 ; Sprite properties
 ;---------------------------------------------------------------------------------------------------
+; TODO some bitfield
+; a... .... .... ....
+;   a - alive?
+; values that are checked/used:
+;   FE00 exactly, or >=
+;   0000
+;   8001
+;   8108
+;   810E
+;   FF01
 UNKNOWN_7E0800   = $7E0800
+
+
 UNKNOWN_7E0802   = $7E0802
 UNKNOWN_7E0804   = $7E0804
 
@@ -281,11 +294,16 @@ SPRID            = $7E0810
 SPRHP            = $7E0812
 
 UNKNOWN_7E0814   = $7E0814
+
+; in at least 1 enemy, is the index of a related sprite
 UNKNOWN_7E0816   = $7E0816
 UNKNOWN_7E0818   = $7E0818
 
 
 SPRTIMER         = $7E081A
+
+
+; in at least 1 enemy, is the index of a related sprite
 UNKNOWN_7E081C   = $7E081C
 UNKNOWN_7E081D   = $7E081D
 UNKNOWN_7E081E   = $7E081E
@@ -365,49 +383,6 @@ DMA0ADDR         = $7E1904
 DMA0VMA1         = $7E1906
 
 
-
-
-
-
-
-
-
-UNKNOWN_7E1900   = $7E1900
-UNKNOWN_7E1902   = $7E1902
-UNKNOWN_7E1904   = $7E1904
-UNKNOWN_7E1906   = $7E1906
-UNKNOWN_7E1908   = $7E1908
-UNKNOWN_7E190A   = $7E190A
-UNKNOWN_7E190C   = $7E190C
-UNKNOWN_7E190E   = $7E190E
-UNKNOWN_7E1910   = $7E1910
-UNKNOWN_7E1912   = $7E1912
-UNKNOWN_7E1914   = $7E1914
-UNKNOWN_7E1916   = $7E1916
-UNKNOWN_7E1918   = $7E1918
-UNKNOWN_7E191A   = $7E191A
-UNKNOWN_7E191C   = $7E191C
-UNKNOWN_7E191E   = $7E191E
-UNKNOWN_7E1920   = $7E1920
-UNKNOWN_7E1922   = $7E1922
-UNKNOWN_7E1924   = $7E1924
-UNKNOWN_7E1926   = $7E1926
-UNKNOWN_7E1928   = $7E1928
-UNKNOWN_7E192A   = $7E192A
-UNKNOWN_7E192C   = $7E192C
-UNKNOWN_7E192E   = $7E192E
-UNKNOWN_7E1930   = $7E1930
-UNKNOWN_7E1932   = $7E1932
-UNKNOWN_7E1934   = $7E1934
-UNKNOWN_7E1936   = $7E1936
-UNKNOWN_7E1938   = $7E1938
-UNKNOWN_7E193A   = $7E193A
-UNKNOWN_7E1940   = $7E1940
-UNKNOWN_7E1942   = $7E1942
-UNKNOWN_7E1944   = $7E1944
-UNKNOWN_7E1946   = $7E1946
-UNKNOWN_7E1948   = $7E1948
-UNKNOWN_7E194A   = $7E194A
 UNKNOWN_7E194C   = $7E194C
 UNKNOWN_7E194E   = $7E194E
 UNKNOWN_7E1954   = $7E1954
@@ -521,7 +496,7 @@ B5DVX            = $7E1B04
 B5DMA            = $7E1B06
 
 ;---------------------------------------------------------------------------------------------------
-; OAM buffer
+; OAM queue
 OAMQA            = $7E1D00
 OAMQB            = $7E1D20
 
@@ -595,6 +570,11 @@ BGSCR            = $7E7B14
 
 ; holds text pointers at least once
 UNKNOWN_7E7B16   = $7E7B16
+
+;===================================================================================================
+
+; OAM cache
+OAMCACHE         = $7E7B80
 
 ;===================================================================================================
 
