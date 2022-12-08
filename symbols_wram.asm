@@ -155,6 +155,7 @@ PTINP            = $7E0548
 
 UNKNOWN_7E054A   = $7E054A
 UNKNOWN_7E054C   = $7E054C
+UNKNOWN_7E054E   = $7E054E
 
 ; scratch used during NMI
 NMISCT           = $7E0550
@@ -557,7 +558,9 @@ MSGPTR           = $7E2558
 MSGSPD           = $7E256E
 MSGTMR           = $7E2570
 
-; CGRAM buffer
+; CGRAM buffer and caches
+CGRAM2           = $7E2A00
+CGRAM3           = $7E2C00
 CGRAMQ           = $7E2E00
 
 ;===================================================================================================
@@ -570,6 +573,9 @@ BGSCR            = $7E7B14
 
 ; holds text pointers at least once
 UNKNOWN_7E7B16   = $7E7B16
+
+; CGRAM cache
+CGRAM4           = $7E7E00
 
 ;===================================================================================================
 

@@ -2,7 +2,8 @@ org $078000
 
 ;===================================================================================================
 
-#_078000: db $4B, $49, $4B, $49 : dw $E511, $FFFF ; KIKI, end of assembly output
+#_078000: db $4B, $49, $4B, $49 : dw $E511 ; KIKI, end of assembly output
+#_078006: dw $FFFF
 
 ;===================================================================================================
 
@@ -8496,7 +8497,7 @@ data07F381:
 
 ;===================================================================================================
 
-ROUTINE_07F481:
+PrepareForTheEpilogue:
 #_07F481: LDA.w #$0000
 #_07F484: STA.w $0520
 #_07F487: STZ.w $0524
@@ -8519,14 +8520,17 @@ ROUTINE_07F481:
 #_07F4AF: LDA.w #$0001
 #_07F4B2: STA.l $7E258C
 #_07F4B6: STA.l $7E258E
+
 #_07F4BA: STZ.w $0506
 #_07F4BD: STZ.w $0508
+
 #_07F4C0: INC.w $0500
+
 #_07F4C3: RTL
 
 ;===================================================================================================
 
-ROUTINE_07F4C4:
+EpilogueMain:
 #_07F4C4: LDA.w $0506
 #_07F4C7: ASL A
 #_07F4C8: TAX
@@ -8572,12 +8576,12 @@ ROUTINE_07F501:
 #_07F501: JSL ROUTINE_00D43C_long
 
 #_07F505: LDA.w #$0000
-#_07F508: LDX.w #compressed00804B
-#_07F50B: JSL ROUTINE_00DBF8_verylong
+#_07F508: LDX.w #data00804B
+#_07F50B: JSL BulkDecompressionViaTable_verylong
 
 #_07F50F: LDA.w #$0007
 #_07F512: LDX.w #data07F554
-#_07F515: JSL ROUTINE_00DBF8_verylong
+#_07F515: JSL BulkDecompressionViaTable_verylong
 #_07F519: JSL ROUTINE_00D421_long
 
 #_07F51D: LDA.w #$001F
@@ -8592,7 +8596,7 @@ ROUTINE_07F501:
 #_07F52D: JSL ROUTINE_00FBCB_verylong
 #_07F531: JSL ROUTINE_00F957_long
 
-#_07F535: LDA.w #data07F92F
+#_07F535: LDA.w #Message_07F92F
 #_07F538: LDX.w #$0007
 #_07F53B: JSL SetMessagePointer_long
 #_07F53F: JSL ROUTINE_00A974_long
@@ -8604,17 +8608,49 @@ ROUTINE_07F501:
 #_07F550: INC.w $0506
 #_07F553: RTS
 
-#data07F554:
-#_07F554: db $0F,$01,$00,$80,$7F,$00,$17,$05
-#_07F55C: db $00,$80,$7F,$50,$1F,$71,$00,$80
-#_07F564: db $7F,$50,$1A,$00,$00,$80,$7F,$70
-#_07F56C: db $1F,$27,$00,$2A,$7E,$80,$1F,$74
-#_07F574: db $00,$2E,$7E,$80,$1F,$73,$00,$2E
-#_07F57C: db $7E,$80,$1F,$73,$00,$2A,$7E,$80
-#_07F584: db $1F,$2A,$00,$2F,$7E,$80,$1F,$2A
-#_07F58C: db $00,$2B,$7E,$80,$1F,$1E,$00,$80
-#_07F594: db $7F,$41,$1F,$39,$00,$80,$7F,$31
-#_07F59C: db $1F,$55,$00,$80,$7F,$28,$00,$00
+;---------------------------------------------------------------------------------------------------
+
+data07F554:
+#_07F554: db $0F, $01 ; read address $0F:800A for pointer
+#_07F556: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
+
+#_07F55A: db $17, $05 ; read address $17:801A for pointer
+#_07F55C: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
+
+#_07F560: db $1F, $71 ; read address $1F:81CA for pointer
+#_07F562: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
+
+#_07F566: db $1A, $00 ; read address $1A:8006 for pointer
+#_07F568: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
+
+#_07F56C: db $1F, $27 ; read address $1F:80A2 for pointer
+#_07F56E: dl $7E2A00 : db $80 ; target address
+
+#_07F572: db $1F, $74 ; read address $1F:81D6 for pointer
+#_07F574: dl $7E2E00 : db $80 ; target address
+
+#_07F578: db $1F, $73 ; read address $1F:81D2 for pointer
+#_07F57A: dl $7E2E00 : db $80 ; target address
+
+#_07F57E: db $1F, $73 ; read address $1F:81D2 for pointer
+#_07F580: dl $7E2A00 : db $80 ; target address
+
+#_07F584: db $1F, $2A ; read address $1F:80AE for pointer
+#_07F586: dl $7E2F00 : db $80 ; target address
+
+#_07F58A: db $1F, $2A ; read address $1F:80AE for pointer
+#_07F58C: dl $7E2B00 : db $80 ; target address
+
+#_07F590: db $1F, $1E ; read address $1F:807E for pointer
+#_07F592: dl $7F8000 : db $41 ; target address, copy to $8200 in VRAM
+
+#_07F596: db $1F, $39 ; read address $1F:80EA for pointer
+#_07F598: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
+
+#_07F59C: db $1F, $55 ; read address $1F:815A for pointer
+#_07F59E: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
+
+#_07F5A2: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -8628,7 +8664,9 @@ ROUTINE_07F5A4:
 #_07F5AE: JSL ROUTINE_00FBCB_verylong
 #_07F5B2: RTS
 
-CODE_07F5B3:
+;===================================================================================================
+
+ROUTINE_07F5B3:
 #_07F5B3: JSL HandleDialog_long
 
 #_07F5B7: LDA.l $7E2550
@@ -8691,7 +8729,7 @@ ROUTINE_07F5E3:
 ROUTINE_07F602:
 #_07F602: JSL ROUTINE_00F957_long
 #_07F606: JSR ROUTINE_07F5C1
-#_07F609: JMP CODE_07F5B3
+#_07F609: JMP ROUTINE_07F5B3
 
 ;===================================================================================================
 
@@ -8771,7 +8809,7 @@ ROUTINE_07F65D:
 
 ROUTINE_07F677:
 #_07F677: JSL ROUTINE_00F957_long
-#_07F67B: JMP CODE_07F5B3
+#_07F67B: JMP ROUTINE_07F5B3
 
 ;===================================================================================================
 
@@ -8848,7 +8886,7 @@ ROUTINE_07F6E5:
 
 ROUTINE_07F6F9:
 #_07F6F9: JSL ROUTINE_00F957_long
-#_07F6FD: JMP CODE_07F5B3
+#_07F6FD: JMP ROUTINE_07F5B3
 
 ;===================================================================================================
 
@@ -8894,7 +8932,8 @@ ROUTINE_07F718:
 
 #_07F734: LDA.w #$0007
 #_07F737: LDX.w #data07F797
-#_07F73A: JSL ROUTINE_00DBF8_verylong
+#_07F73A: JSL BulkDecompressionViaTable_verylong
+
 #_07F73E: PHB
 #_07F73F: PEA.w $7E7E
 #_07F742: PLB
@@ -8941,20 +8980,58 @@ CODE_07F747:
 #_07F793: INC.w $0506
 #_07F796: RTS
 
-#data07F797:
-#_07F797: db $1F,$4E,$00,$80,$7F,$28,$1F,$4E
-#_07F79F: db $00,$80,$7F,$2C,$1F,$4E,$00,$80
-#_07F7A7: db $7F,$30,$1F,$4E,$00,$80,$7F,$3C
-#_07F7AF: db $1F,$4E,$00,$80,$7F,$40,$18,$02
-#_07F7B7: db $00,$80,$7F,$00,$17,$05,$00,$80
-#_07F7BF: db $7F,$50,$1C,$02,$00,$80,$7F,$60
-#_07F7C7: db $1F,$53,$00,$80,$7F,$40,$1F,$53
-#_07F7CF: db $00,$80,$7F,$44,$1F,$04,$00,$80
-#_07F7D7: db $7F,$30,$1F,$04,$00,$80,$7F,$38
-#_07F7DF: db $1F,$5B,$00,$80,$7F,$34,$1F,$3B
-#_07F7E7: db $00,$2E,$7E,$80,$1F,$74,$00,$2E
-#_07F7EF: db $7E,$80,$1F,$48,$00,$2F,$7E,$80
-#_07F7F7: db $00,$00
+;---------------------------------------------------------------------------------------------------
+
+data07F797:
+#_07F797: db $1F, $4E ; read address $1F:813E for pointer
+#_07F799: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
+
+#_07F79D: db $1F, $4E ; read address $1F:813E for pointer
+#_07F79F: dl $7F8000 : db $2C ; target address, copy to $5800 in VRAM
+
+#_07F7A3: db $1F, $4E ; read address $1F:813E for pointer
+#_07F7A5: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
+
+#_07F7A9: db $1F, $4E ; read address $1F:813E for pointer
+#_07F7AB: dl $7F8000 : db $3C ; target address, copy to $7800 in VRAM
+
+#_07F7AF: db $1F, $4E ; read address $1F:813E for pointer
+#_07F7B1: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
+
+#_07F7B5: db $18, $02 ; read address $18:800E for pointer
+#_07F7B7: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
+
+#_07F7BB: db $17, $05 ; read address $17:801A for pointer
+#_07F7BD: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
+
+#_07F7C1: db $1C, $02 ; read address $1C:800E for pointer
+#_07F7C3: dl $7F8000 : db $60 ; target address, copy to $C000 in VRAM
+
+#_07F7C7: db $1F, $53 ; read address $1F:8152 for pointer
+#_07F7C9: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
+
+#_07F7CD: db $1F, $53 ; read address $1F:8152 for pointer
+#_07F7CF: dl $7F8000 : db $44 ; target address, copy to $8800 in VRAM
+
+#_07F7D3: db $1F, $04 ; read address $1F:8016 for pointer
+#_07F7D5: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
+
+#_07F7D9: db $1F, $04 ; read address $1F:8016 for pointer
+#_07F7DB: dl $7F8000 : db $38 ; target address, copy to $7000 in VRAM
+
+#_07F7DF: db $1F, $5B ; read address $1F:8172 for pointer
+#_07F7E1: dl $7F8000 : db $34 ; target address, copy to $6800 in VRAM
+
+#_07F7E5: db $1F, $3B ; read address $1F:80F2 for pointer
+#_07F7E7: dl $7E2E00 : db $80 ; target address
+
+#_07F7EB: db $1F, $74 ; read address $1F:81D6 for pointer
+#_07F7ED: dl $7E2E00 : db $80 ; target address
+
+#_07F7F1: db $1F, $48 ; read address $1F:8126 for pointer
+#_07F7F3: dl $7E2F00 : db $80 ; target address
+
+#_07F7F7: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -9650,3 +9727,6 @@ Message_07FDF5:
 #_07FFEA: db $00, $00, $00, $00, $00, $00, $00, $00
 #_07FFF2: db $00, $00, $00, $00, $00, $00, $00, $00
 #_07FFFA: db $00, $00, $00, $00, $00, $00
+
+;===================================================================================================
+
