@@ -3115,8 +3115,8 @@ data00928D:
 ;===================================================================================================
 
 LicensingScreens:
-#_0092AD: JSR ROUTINE_00C44D
-#_0092B0: JSR ROUTINE_00E230
+#_0092AD: JSR ResetModuleVariables
+#_0092B0: JSR Set_56E_54E_to_FFFF
 
 #_0092B3: LDX.w #$0800
 
@@ -3143,7 +3143,7 @@ LicensingScreens:
 ;===================================================================================================
 
 ROUTINE_0092D1:
-#_0092D1: JSR ROUTINE_00D46D
+#_0092D1: JSR ExecuteMosaicFadeIn_GrabFrame
 #_0092D4: BNE .exit
 
 #_0092D6: STZ.w $0800
@@ -3156,7 +3156,7 @@ ROUTINE_0092D1:
 ;===================================================================================================
 
 ROUTINE_0092DD:
-#_0092DD: JSR ROUTINE_00D462
+#_0092DD: JSR ExecuteMosaicFadeOut_GrabFrame
 #_0092E0: BNE .exit
 
 #_0092E2: STZ.w $0800
@@ -3245,10 +3245,11 @@ ConcludeEpilogue:
 #_00933B: JSL ROUTINE_07F803_long
 #_00933F: JSR ROUTINE_00CD0E
 
-#_009342: LDA.w #$001A
+#_009342: LDA.w #$001A ; SONG 1A
 #_009345: JSR RequestSong_bounce
 #_009348: JSL ROUTINE_08F144
 #_00934C: INC.w $0500
+
 #_00934F: RTS
 
 ;===================================================================================================
@@ -3293,7 +3294,7 @@ FadeToPlayerSelect:
 ;---------------------------------------------------------------------------------------------------
 
 .allow_partner
-#_009383: LDA.w #$001E
+#_009383: LDA.w #$001E ; SONG 1E
 #_009386: JSR RequestSong_bounce
 
 #_009389: LDA.w #$006C
@@ -3329,7 +3330,7 @@ LevelVictory:
 #_0093B1: JMP RecoverOAMFromCache
 
 .continue
-#_0093B4: LDA.w #$0021
+#_0093B4: LDA.w #$0021 ; SONG 21
 #_0093B7: JSR RequestSong_bounce
 
 #_0093BA: LDA.w #$00C0
@@ -3361,11 +3362,11 @@ LevelVictory:
 ;---------------------------------------------------------------------------------------------------
 
 #_0093E7: LDA.w #data009419
-#_0093EA: LDY.w #$0000
-#_0093ED: JSR ROUTINE_00E229
+#_0093EA: LDY.w #data009419>>16
+#_0093ED: JSR ROUTINE_00ECEF_ParamterizedYA
 
 #_0093F0: LDA.w #data00944C
-#_0093F3: LDY.w #$0000
+#_0093F3: LDY.w #data00944C>>16
 #_0093F6: JSL ROUTINE_00FBCB_ParameterizedBounce_long
 
 ;---------------------------------------------------------------------------------------------------
@@ -3382,7 +3383,7 @@ LevelVictory:
 #_00940D: LDA.w #$0021
 #_009410: TSB.w $0530
 
-#_009413: JSR ROUTINE_00D403
+#_009413: JSR AdvanceGameModule
 
 #_009416: JMP RecoverOAMFromCache
 
@@ -3413,7 +3414,7 @@ data00944C:
 LevelEndScreenDim:
 #_00946E: JSR ROUTINE_00F957
 #_009471: JSR ROUTINE_00B016
-#_009474: JSR ROUTINE_00E230
+#_009474: JSR Set_56E_54E_to_FFFF
 #_009477: JSR ROUTINE_00E29B
 #_00947A: BNE .done
 
@@ -3460,7 +3461,7 @@ CODE_0094C6:
 #_0094C8: CPX.w #$000A
 #_0094CB: BNE CODE_0094AA
 
-#_0094CD: JSR ROUTINE_00D403
+#_0094CD: JSR AdvanceGameModule
 
 #_0094D0: LDA.w #$0040
 #_0094D3: STA.l $7E7A62
@@ -3554,7 +3555,7 @@ CODE_00955D:
 
 #_009566: JSR ROUTINE_00B016
 #_009569: JSR ROUTINE_00C4E4
-#_00956C: JSR ROUTINE_00D403
+#_00956C: JSR AdvanceGameModule
 
 CODE_00956F:
 #_00956F: JSR ROUTINE_0096F2
@@ -3678,7 +3679,7 @@ ROUTINE_0095C1:
 ;===================================================================================================
 
 ScoreTallyDisperse:
-#_0095FF: JSR ROUTINE_00C44D
+#_0095FF: JSR ResetModuleVariables
 #_009602: JSR CountDown_1980
 #_009605: BNE .done
 
@@ -3701,7 +3702,7 @@ ScoreTallyDisperse:
 #_009622: CMP.w #$0300
 #_009625: BCC .done
 
-#_009627: JSR ROUTINE_00D403
+#_009627: JSR AdvanceGameModule
 
 .done
 #_00962A: JMP RecoverOAMFromCache
@@ -3716,8 +3717,8 @@ data00962D:
 ;===================================================================================================
 
 LevelEndFadeOut:
-#_009637: JSR ROUTINE_00C44D
-#_00963A: JSR ROUTINE_00D462
+#_009637: JSR ResetModuleVariables
+#_00963A: JSR ExecuteMosaicFadeOut_GrabFrame
 #_00963D: BNE .done
 
 #_00963F: LDA.w $18E4
@@ -3735,7 +3736,7 @@ LevelEndFadeOut:
 #_009655: TRB.w $0536
 #_009658: JSR ROUTINE_00DE17
 
-#_00965B: JMP ROUTINE_00E230
+#_00965B: JMP Set_56E_54E_to_FFFF
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -3890,7 +3891,7 @@ ROUTINE_009738:
 #_00973B: JSR ROUTINE_00E29B
 #_00973E: BNE .exit
 
-#_009740: JSR ROUTINE_00D403
+#_009740: JSR AdvanceGameModule
 
 .exit
 #_009743: RTS
@@ -3910,7 +3911,7 @@ GamePaused:
 
 #_009751: STZ.w $0600
 #_009754: JSR RecoverOAMFromCache
-#_009757: JSR ROUTINE_00E2C8
+#_009757: JSR TestNewInput_Start
 #_00975A: BEQ .done
 
 #_00975C: LDA.w #$00FE ; SFX FE
@@ -3951,8 +3952,8 @@ PrepareOptionsScreen:
 #_00978A: JSL BulkDecompressionViaTable_long
 
 #_00978E: LDA.w #data00F319
-#_009791: LDX.w #$0000
-#_009794: JSL ROUTINE_00F2A9
+#_009791: LDX.w #data00F319>>16
+#_009794: JSL ROUTINE_00F2AD_long2
 #_009798: JSR ROUTINE_0097FB
 
 #_00979B: STZ.w $0800
@@ -4080,26 +4081,26 @@ ROUTINE_0097FB:
 
 ;===================================================================================================
 
-ROUTINE_00987F:
+OptionsScreen_DarkenSelection:
 #_00987F: PHX
-#_009880: JSR ROUTINE_009E45
+#_009880: JSR OptionsScreen_GetVRAMOfSelection
 #_009883: PLX
 
-#_009884: JMP CODE_009DF9
+#_009884: JMP OptionsScreen_DarkenTiles
 
 ;===================================================================================================
 
-ROUTINE_009887:
+OptionsScreen_HighlightSelection:
 #_009887: PHX
-#_009888: JSR ROUTINE_009E45
+#_009888: JSR OptionsScreen_GetVRAMOfSelection
 #_00988B: PLX
 
-#_00988C: JMP CODE_009DF4
+#_00988C: JMP OptionsScreen_HighlightTiles
 
 ;===================================================================================================
 
 OptionsScreen:
-#_00988F: JSR ROUTINE_00C44D
+#_00988F: JSR ResetModuleVariables
 #_009892: JSR WaitForVBlankToEndOrFor65535
 
 #_009895: INC.w $080C
@@ -4114,7 +4115,7 @@ OptionsScreen:
 #_0098A2: LDA.l $7E8000,X
 #_0098A6: STA.l $7E2E04
 
-#_0098AA: JSR ROUTINE_00E230
+#_0098AA: JSR Set_56E_54E_to_FFFF
 
 #_0098AD: LDA.w $0508
 #_0098B0: ASL A
@@ -4123,28 +4124,28 @@ OptionsScreen:
 #_0098B2: JMP (.vectors,X)
 
 .vectors
-#_0098B5: dw ROUTINE_009ADD
-#_0098B7: dw ROUTINE_009B02
-#_0098B9: dw ROUTINE_009AC7
-#_0098BB: dw ROUTINE_00990E
-#_0098BD: dw ROUTINE_0098CF
-#_0098BF: dw ROUTINE_0098C1
+#_0098B5: dw OptionsScreen_Initialize
+#_0098B7: dw OptionsScreen_MainOptions
+#_0098B9: dw OptionsScreen_ScrollToConfig
+#_0098BB: dw OptionsScreen_ConfigureConfiguration
+#_0098BD: dw OptionsScreen_ScrollFromConfig
+#_0098BF: dw OptionsScreen_ExitToMain
 
 ;===================================================================================================
 
-ROUTINE_0098C1:
-#_0098C1: JSR ROUTINE_00D462
+OptionsScreen_ExitToMain:
+#_0098C1: JSR ExecuteMosaicFadeOut_GrabFrame
 #_0098C4: BNE .dont
 
 #_0098C6: LDA.w #$0023
 #_0098C9: STA.w $0500
 
 .dont
-#_0098CC: JMP ROUTINE_00AA91
+#_0098CC: JMP MatchMosaicToScreenBrightness
 
 ;===================================================================================================
 
-ROUTINE_0098CF:
+OptionsScreen_ScrollFromConfig:
 #_0098CF: SEC
 
 #_0098D0: LDA.w $0510
@@ -4161,16 +4162,17 @@ ROUTINE_0098CF:
 #_0098E4: RTS
 
 ;===================================================================================================
-
-ROUTINE_0098E5:
+; A = input mask
+;===================================================================================================
+OptionsScreen_PlayScrollOrSelectionSFX:
 #_0098E5: LDA.w #$5000
-#_0098E8: JSR ROUTINE_0098FE
+#_0098E8: JSR OptionsScreen_PlayScrollSFX
 
 #_0098EB: LDA.w #$0F30
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_0098EE:
+OptionsScreen_PlaySelectionSFX:
 #_0098EE: STA.b $20
 
 #_0098F0: LDA.w $053A
@@ -4183,9 +4185,9 @@ ROUTINE_0098EE:
 .exit
 #_0098FD: RTS
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_0098FE:
+OptionsScreen_PlayScrollSFX:
 #_0098FE: STA.b $20
 
 #_009900: LDA.w $053A
@@ -4200,52 +4202,53 @@ ROUTINE_0098FE:
 
 ;===================================================================================================
 
-ROUTINE_00990E:
-#_00990E: LDA.w #$1000
-#_009911: JSR ROUTINE_0098FE
+OptionsScreen_ConfigureConfiguration:
+#_00990E: LDA.w #$1000 ; S
+#_009911: JSR OptionsScreen_PlayScrollSFX
 
-#_009914: LDA.w #$0300
-#_009917: JSR ROUTINE_0098EE
+#_009914: LDA.w #$0300 ; lr
+#_009917: JSR OptionsScreen_PlaySelectionSFX
 
 #_00991A: LDA.w $05A0
 #_00991D: AND.w #$0010
-#_009920: BNE CODE_009936
+#_009920: BNE .flash_off
 
 #_009922: LDX.w #$0AD0
-#_009925: JSR ROUTINE_009A74
+#_009925: JSR EraseConfigTiles_Select
 
 #_009928: LDX.w #$0D96
 #_00992B: LDY.w #$000A
-
 #_00992E: LDA.w #$0004
-#_009931: JSR ROUTINE_009A7A
+#_009931: JSR EraseConfigTiles
+
 #_009934: BRA .continue
 
-CODE_009936:
+.flash_off
 #_009936: LDX.w #$0AD0
 #_009939: JSR ROUTINE_009A6B
 
 #_00993C: LDX.w #$0D96
 #_00993F: LDA.w #$2800
-#_009942: LDY.w #$EB7A
-#_009945: JSR ROUTINE_009A96
+#_009942: LDY.w #data08EB7A
+#_009945: JSR DrawConfigTiles
 
 ;---------------------------------------------------------------------------------------------------
 
 .continue
 #_009948: LDX.w #$08C8
-
 #_00994B: LDY.w #$000C
 #_00994E: LDA.w #$0008
-#_009951: JSR ROUTINE_009A7A
+#_009951: JSR EraseConfigTiles
 
 #_009954: LDX.w #$08E4
 #_009957: LDY.w #$000C
-
 #_00995A: LDA.w #$0008
-#_00995D: JSR ROUTINE_009A7A
-#_009960: JSR ROUTINE_009989
-#_009963: JSR ROUTINE_0099EA
+#_00995D: JSR EraseConfigTiles
+
+;---------------------------------------------------------------------------------------------------
+
+#_009960: JSR DrawPockyConfig
+#_009963: JSR DrawPartnerConfig
 
 #_009966: LDA.w #$3800
 #_009969: STA.b $3C
@@ -4259,11 +4262,12 @@ CODE_009936:
 #_009975: LDA.w #$8800
 #_009978: STA.b $3A
 
-#_00997A: JSR ROUTINE_00DB57
-#_00997D: JSR ROUTINE_00E2C8
+#_00997A: JSR QueueUpTilemapTransfers
+#_00997D: JSR TestNewInput_Start
 #_009980: BEQ .exit
 
 #_009982: JSR QueueSFX_1F
+
 #_009985: INC.w $0508
 
 .exit
@@ -4271,18 +4275,19 @@ CODE_009936:
 
 ;===================================================================================================
 
-ROUTINE_009989:
-#_009989: JSR ROUTINE_00E2CF
-#_00998C: BEQ CODE_009998
+DrawPockyConfig:
+#_009989: JSR TestNewInput_Left
+#_00998C: BEQ .didnt_press_left
 
 #_00998E: LDA.w $1F72
-#_009991: BEQ CODE_009998
+#_009991: BEQ .didnt_press_left
 
 #_009993: DEC.w $1F72
+
 #_009996: BRA .continue
 
-CODE_009998:
-#_009998: JSR ROUTINE_00E2D6
+.didnt_press_left
+#_009998: JSR TestNewInput_Right
 #_00999B: BEQ .continue
 
 #_00999D: LDA.w $1F72
@@ -4304,12 +4309,12 @@ CODE_009998:
 
 #_0099B2: LDX.w #$0896
 #_0099B5: LDA.w #$2800
-#_0099B8: JSR ROUTINE_009A96
+#_0099B8: JSR DrawConfigTiles
 
-#_0099BB: LDY.w #$EB99
+#_0099BB: LDY.w #data08EB99
 #_0099BE: LDX.w #$08C8
 #_0099C1: LDA.w #$2800
-#_0099C4: JSR ROUTINE_009A96
+#_0099C4: JSR DrawConfigTiles
 #_0099C7: PLY
 #_0099C8: PHY
 
@@ -4317,7 +4322,7 @@ CODE_009998:
 #_0099CC: LDX.w #$0480
 
 #_0099CF: LDY.w #$0980
-#_0099D2: JSR ROUTINE_0099DC
+#_0099D2: JSR DrawPlayerControls
 #_0099D5: PLY
 
 #_0099D6: LDX.w data009A53,Y
@@ -4325,7 +4330,7 @@ CODE_009998:
 
 ;===================================================================================================
 
-ROUTINE_0099DC:
+DrawPlayerControls:
 #_0099DC: STX.b $20
 #_0099DE: STY.b $22
 
@@ -4338,18 +4343,19 @@ ROUTINE_0099DC:
 
 ;===================================================================================================
 
-ROUTINE_0099EA:
+DrawPartnerConfig:
 #_0099EA: LDA.w $053E
 #_0099ED: AND.w #$0200
-#_0099F0: BEQ CODE_0099FC
+#_0099F0: BEQ .didnt_press_left
 
 #_0099F2: LDA.w $1F74
-#_0099F5: BEQ CODE_0099FC
+#_0099F5: BEQ .didnt_press_left
 
 #_0099F7: DEC.w $1F74
+
 #_0099FA: BRA .continue
 
-CODE_0099FC:
+.didnt_press_left
 #_0099FC: LDA.w $053E
 #_0099FF: AND.w #$0100
 #_009A02: BEQ .continue
@@ -4373,27 +4379,32 @@ CODE_0099FC:
 
 #_009A19: LDX.w #$08B2
 #_009A1C: LDA.w #$2800
-#_009A1F: JSR ROUTINE_009A96
+#_009A1F: JSR DrawConfigTiles
 
-#_009A22: LDY.w #$EBBA
+#_009A22: LDY.w #data08EBBA
 #_009A25: LDX.w #$08E4
 #_009A28: LDA.w #$2800
-#_009A2B: JSR ROUTINE_009A96
+#_009A2B: JSR DrawConfigTiles
 #_009A2E: PLY
 #_009A2F: PHY
 
 #_009A30: LDA.w data009A63,Y
 #_009A33: LDX.w #$0B80
 #_009A36: LDY.w #$0980
-#_009A39: JSR ROUTINE_0099DC
+#_009A39: JSR DrawPlayerControls
 
 #_009A3C: PLY
 
 #_009A3D: LDX.w data009A53,Y
 #_009A40: JMP ROUTINE_00F236
 
+;---------------------------------------------------------------------------------------------------
+
 data009A43:
-#_009A43: db $DE,$E9,$0E,$EA,$3E,$EA,$6E,$EA
+#_009A43: dw data08E9DE
+#_009A45: dw data08EA0E
+#_009A47: dw data08EA3E
+#_009A49: dw data08EA6E
 
 data009A4B:
 #_009A4B: db $5E,$02,$60,$02,$62,$02,$64,$02
@@ -4402,7 +4413,10 @@ data009A53:
 #_009A53: db $49,$F2,$61,$F2,$79,$F2,$91,$F2
 
 data009A5B:
-#_009A5B: db $9E,$EA,$CE,$EA,$FE,$EA,$2E,$EB
+#_009A5B: dw data08EA9E
+#_009A5D: dw data08EACE
+#_009A5F: dw data08EAFE
+#_009A61: dw data08EB2E
 
 data009A63:
 #_009A63: db $66,$02,$68,$02,$6A,$02,$6C,$02
@@ -4411,61 +4425,67 @@ data009A63:
 
 ROUTINE_009A6B:
 #_009A6B: LDA.w #$2800
-#_009A6E: LDY.w #$EB5E
-#_009A71: JMP ROUTINE_009A96
+#_009A6E: LDY.w #data08EB5E
+#_009A71: JMP DrawConfigTiles
 
 ;===================================================================================================
 
-ROUTINE_009A74:
+EraseConfigTiles_Select:
 #_009A74: LDY.w #$0012
 #_009A77: LDA.w #$0003
 
 ;===================================================================================================
 
-ROUTINE_009A7A:
+EraseConfigTiles:
 #_009A7A: STA.b $20
 
-CODE_009A7C:
+.next_row
 #_009A7C: LDA.w #$0000
 #_009A7F: PHX
 #_009A80: PHY
 
-CODE_009A81:
+.next_tile
 #_009A81: STA.l $7E3000,X
 
 #_009A85: INX
 #_009A86: INX
 #_009A87: DEY
-#_009A88: BNE CODE_009A81
+#_009A88: BNE .next_tile
 
 #_009A8A: PLY
+
 #_009A8B: PLA
 #_009A8C: CLC
 #_009A8D: ADC.w #$0040
 #_009A90: TAX
+
 #_009A91: DEC.b $20
-#_009A93: BNE CODE_009A7C
+#_009A93: BNE .next_row
 
 #_009A95: RTS
 
 ;===================================================================================================
-
-ROUTINE_009A96:
+; A - props
+; X - offset
+; Y - bank08 pointer
+;===================================================================================================
+DrawConfigTiles:
 #_009A96: STY.b $34
 
 #_009A98: LDY.w #$0008
 #_009A9B: STY.b $36
 
 #_009A9D: LDY.w #$0000
+
 #_009AA0: STA.b $20
 
-.next_chunk
+.next_advanced
 #_009AA2: PHX
 
 .next
 #_009AA3: LDA.b [$34],Y
 #_009AA5: AND.w #$00FF
-#_009AA8: BEQ .end_of_chunk
+#_009AA8: BEQ .advance
 
 #_009AAA: ORA.b $20
 #_009AAC: STA.l $7E3000,X
@@ -4479,7 +4499,7 @@ ROUTINE_009A96:
 
 ;---------------------------------------------------------------------------------------------------
 
-.end_of_chunk
+.advance
 #_009AB5: CLC
 #_009AB6: PLA
 #_009AB7: STA.b $22
@@ -4495,14 +4515,15 @@ ROUTINE_009A96:
 
 #_009AC2: INY
 #_009AC3: INY
-#_009AC4: BRA .next_chunk
+
+#_009AC4: BRA .next_advanced
 
 .exit
 #_009AC6: RTS
 
 ;===================================================================================================
 
-ROUTINE_009AC7:
+OptionsScreen_ScrollToConfig:
 #_009AC7: CLC
 
 #_009AC8: LDA.w $0510
@@ -4520,38 +4541,38 @@ ROUTINE_009AC7:
 
 ;===================================================================================================
 
-ROUTINE_009ADD:
+OptionsScreen_Initialize:
 #_009ADD: LDA.w $0804
 #_009AE0: ASL A
 #_009AE1: TAX
 
 #_009AE2: LDA.w .vectors,X
-#_009AE5: BEQ .done_submodule
+#_009AE5: BEQ .done_submodules
 
 #_009AE7: INC.w $0804
 #_009AEA: JMP (.vectors,X)
 
-.done_submodule
-#_009AED: JSR ROUTINE_00D46D
-#_009AF0: BNE CODE_009AF5
+.done_submodules
+#_009AED: JSR ExecuteMosaicFadeIn_GrabFrame
+#_009AF0: BNE .still_fading
 
 #_009AF2: INC.w $0508
 
-CODE_009AF5:
-#_009AF5: JMP ROUTINE_00AA91
+.still_fading
+#_009AF5: JMP MatchMosaicToScreenBrightness
 
 .vectors
-#_009AF8: dw ROUTINE_009B9A
-#_009AFA: dw ROUTINE_009D91
-#_009AFC: dw ROUTINE_009BF9
-#_009AFE: dw ROUTINE_009D21
+#_009AF8: dw OptionsScreen_DarkenDifficultySelection
+#_009AFA: dw OptionsScreen_DarkenOutputSelection
+#_009AFC: dw OptionsScreen_DarkenMusicSelection
+#_009AFE: dw OptionsScreen_DarkenSFXSelection
 #_009B00: dw $0000
 
 ;===================================================================================================
 
-ROUTINE_009B02:
+OptionsScreen_MainOptions:
 #_009B02: LDA.w #$0C00
-#_009B05: JSR ROUTINE_0098EE
+#_009B05: JSR OptionsScreen_PlaySelectionSFX
 
 #_009B08: LDA.w $0800
 #_009B0B: ASL A
@@ -4559,20 +4580,19 @@ ROUTINE_009B02:
 #_009B0D: JMP (.vectors,X)
 
 .vectors
-#_009B10: dw ROUTINE_009B49
-#_009B12: dw ROUTINE_009BA7
-#_009B14: dw ROUTINE_009CCD
-#_009B16: dw ROUTINE_009D34
-#_009B18: dw ROUTINE_009D9E
-#_009B1A: dw ROUTINE_009DC9
+#_009B10: dw OptionsScreen_Difficulty
+#_009B12: dw OptionsScreen_Music
+#_009B14: dw OptionsScreen_SoundEffect
+#_009B16: dw OptionsScreen_SoundOutput
+#_009B18: dw OptionsScreen_KeyConfiguration
+#_009B1A: dw OptionsScreen_Exit
 
 ;===================================================================================================
 
-CODE_009B1C:
+OptionsScreen_HandleSelectionChange:
 #_009B1C: LDA.w $0800
-
 #_009B1F: LDX.w #$0810
-#_009B22: JSR ROUTINE_00987F
+#_009B22: JSR OptionsScreen_DarkenSelection
 
 #_009B25: LDA.w $053A
 #_009B28: AND.w #$0800
@@ -4599,36 +4619,37 @@ CODE_009B1C:
 
 ;===================================================================================================
 
-ROUTINE_009B49:
+OptionsScreen_Difficulty:
 #_009B49: LDA.w $053A
 #_009B4C: AND.w #$0C00
-#_009B4F: BEQ CODE_009B60
+#_009B4F: BEQ .not_changing_option
 
 #_009B51: LDA.w #$0000
 #_009B54: LDX.w #$0810
-#_009B57: JSR ROUTINE_00987F
-#_009B5A: JSR ROUTINE_009B9A
-#_009B5D: JMP CODE_009B1C
+#_009B57: JSR OptionsScreen_DarkenSelection
+#_009B5A: JSR OptionsScreen_DarkenDifficultySelection
+#_009B5D: JMP OptionsScreen_HandleSelectionChange
 
-CODE_009B60:
+.not_changing_option
 #_009B60: LDA.w #$0000
 
 #_009B63: LDX.w #$0810
-#_009B66: JSR ROUTINE_009887
-#_009B69: JSR ROUTINE_00E2DD
+#_009B66: JSR OptionsScreen_HighlightSelection
+#_009B69: JSR TestNewInput_LeftOrRight
 #_009B6C: BEQ .done
 
-#_009B6E: JSR ROUTINE_00E2CF
-#_009B71: BEQ CODE_009B7D
+#_009B6E: JSR TestNewInput_Left
+#_009B71: BEQ .didnt_press_left
 
 #_009B73: LDA.w $0556
-#_009B76: BEQ CODE_009B7D
+#_009B76: BEQ .didnt_press_left
 
 #_009B78: DEC.w $0556
+
 #_009B7B: BRA .done
 
-CODE_009B7D:
-#_009B7D: JSR ROUTINE_00E2D6
+.didnt_press_left
+#_009B7D: JSR TestNewInput_Right
 #_009B80: BEQ .done
 
 #_009B82: LDA.w $0556
@@ -4644,75 +4665,75 @@ CODE_009B7D:
 #_009B91: ADC.w #$0006
 
 #_009B94: LDX.w #$0900
-#_009B97: JMP ROUTINE_009887
+#_009B97: JMP OptionsScreen_HighlightSelection
 
 ;===================================================================================================
 
-ROUTINE_009B9A:
+OptionsScreen_DarkenDifficultySelection:
 #_009B9A: CLC
 
 #_009B9B: LDA.w $0556
 #_009B9E: ADC.w #$0006
 
 #_009BA1: LDX.w #$0900
-#_009BA4: JMP ROUTINE_00987F
+#_009BA4: JMP OptionsScreen_DarkenSelection
 
 ;===================================================================================================
 
-ROUTINE_009BA7:
+OptionsScreen_Music:
 #_009BA7: LDA.w $053A
 #_009BAA: AND.w #$0C00
-#_009BAD: BEQ CODE_009BBE
+#_009BAD: BEQ .not_changing_option
 
-#_009BAF: JSR ROUTINE_009BF9
+#_009BAF: JSR OptionsScreen_DarkenMusicSelection
 
 #_009BB2: LDA.w #$0001
 #_009BB5: LDX.w #$0810
-#_009BB8: JSR ROUTINE_00987F
-#_009BBB: JMP CODE_009B1C
+#_009BB8: JSR OptionsScreen_DarkenSelection
+#_009BBB: JMP OptionsScreen_HandleSelectionChange
 
-CODE_009BBE:
+.not_changing_option
 #_009BBE: LDA.w #$0001
-
 #_009BC1: LDX.w #$0810
-#_009BC4: JSR ROUTINE_009887
+#_009BC4: JSR OptionsScreen_HighlightSelection
 
 #_009BC7: LDA.w #$0022
 #_009BCA: LDX.w #$0806
-#_009BCD: JSR ROUTINE_009C0C
+#_009BCD: JSR OptionsScreen_ChangeNumericOption
 
 #_009BD0: LDA.w $053A
 #_009BD3: AND.w #$5000
-#_009BD6: BEQ CODE_009BE5
+#_009BD6: BEQ .didnt_make_selection
 
 #_009BD8: LDX.w $0806
-#_009BDB: LDA.l data08E9BB,X
+
+#_009BDB: LDA.l OptionsScreenMusicTracks,X
 #_009BDF: AND.w #$00FF
 #_009BE2: JSR RequestSong_bounce
 
-CODE_009BE5:
+.didnt_make_selection
 #_009BE5: LDA.w $053A
 #_009BE8: AND.w #$8000
-#_009BEB: BEQ CODE_009BF3
+#_009BEB: BEQ .dont_stop_playing
 
-#_009BED: LDA.w #$0000
+#_009BED: LDA.w #$0000 ; SONG 00
 #_009BF0: JSR RequestSong_bounce
 
-CODE_009BF3:
-#_009BF3: JSR ROUTINE_009BFF
-#_009BF6: JMP CODE_009C83
+.dont_stop_playing
+#_009BF3: JSR OptionsScreen_LocateMusicSelection
+#_009BF6: JMP OptionsScreen_HighlightNumericValue
 
 ;===================================================================================================
 
-ROUTINE_009BF9:
-#_009BF9: JSR ROUTINE_009BFF
-#_009BFC: JMP CODE_009C89
+OptionsScreen_DarkenMusicSelection:
+#_009BF9: JSR OptionsScreen_LocateMusicSelection
+#_009BFC: JMP OptionsScreen_DarkenNumericValue
 
 ;===================================================================================================
 
-ROUTINE_009BFF:
+OptionsScreen_LocateMusicSelection:
 #_009BFF: LDA.w #$000B
-#_009C02: JSR ROUTINE_009E45
+#_009C02: JSR OptionsScreen_GetVRAMOfSelection
 
 #_009C05: LDX.w #$0900
 #_009C08: LDA.w $0806
@@ -4720,65 +4741,76 @@ ROUTINE_009BFF:
 #_009C0B: RTS
 
 ;===================================================================================================
-
-ROUTINE_009C0C:
+; A = max value
+; X = pointer to value
+;===================================================================================================
+OptionsScreen_ChangeNumericOption:
 #_009C0C: STA.b $20
 
 #_009C0E: LDA.w $053A
 #_009C11: AND.w #$0030
-#_009C14: BEQ CODE_009C1A
+#_009C14: BEQ .dont_reset_selection
 
 #_009C16: STZ.w $0000,X
+
 #_009C19: RTS
 
-CODE_009C1A:
-#_009C1A: JSR ROUTINE_00E2DD
-#_009C1D: BEQ CODE_009C24
+;---------------------------------------------------------------------------------------------------
+
+.dont_reset_selection
+#_009C1A: JSR TestNewInput_LeftOrRight
+#_009C1D: BEQ .no_track_change
 
 #_009C1F: LDA.w #$000F
-#_009C22: BRA CODE_009C44
+#_009C22: BRA .set_timer
 
-CODE_009C24:
+.no_track_change
 #_009C24: LDA.w $0538
 #_009C27: AND.w #$0300
-#_009C2A: BEQ CODE_009C7F
+#_009C2A: BEQ .not_changing_option
 
 #_009C2C: LDA.w $080A
-#_009C2F: BEQ CODE_009C41
+#_009C2F: BEQ .allowed_to_change
 
 #_009C31: CMP.w #$0010
-#_009C34: BCC CODE_009C3C
+#_009C34: BCC .on_cooldown
 
 #_009C36: LDA.w #$0010
 #_009C39: STA.w $080A
 
-CODE_009C3C:
+.on_cooldown
 #_009C3C: DEC.w $080A
+
 #_009C3F: BRA .exit
 
-CODE_009C41:
+;---------------------------------------------------------------------------------------------------
+
+.allowed_to_change
 #_009C41: LDA.w #$0006
 
-CODE_009C44:
+.set_timer
 #_009C44: STA.w $080A
 
 #_009C47: LDA.w $0538
 #_009C4A: AND.w #$0200
-#_009C4D: BEQ CODE_009C60
+#_009C4D: BEQ .not_holding_left
 
 #_009C4F: LDA.w $0000,X
-#_009C52: BNE CODE_009C5B
+#_009C52: BNE .not_holding_right
 
 #_009C54: LDA.b $20
 #_009C56: STA.w $0000,X
 
 #_009C59: BRA .exit
 
-CODE_009C5B:
+.not_holding_right
 #_009C5B: DEC.w $0000,X
+
 #_009C5E: BRA .exit
 
-CODE_009C60:
+;---------------------------------------------------------------------------------------------------
+
+.not_holding_left
 #_009C60: LDA.w $0538
 #_009C63: AND.w #$0100
 #_009C66: BEQ .exit
@@ -4788,14 +4820,14 @@ CODE_009C60:
 
 #_009C6C: LDA.w $0000,X
 #_009C6F: CMP.b $22
-#_009C71: BCC CODE_009C7B
+#_009C71: BCC .not_at_max_value
 
 #_009C73: LDA.w #$0000
 #_009C76: STA.w $0000,X
 
 #_009C79: BRA .exit
 
-CODE_009C7B:
+.not_at_max_value
 #_009C7B: INC.w $0000,X
 
 .exit
@@ -4803,56 +4835,73 @@ CODE_009C7B:
 
 ;---------------------------------------------------------------------------------------------------
 
-CODE_009C7F:
+.not_changing_option
 #_009C7F: INC.w $080A
+
 #_009C82: RTS
 
-CODE_009C83:
+;===================================================================================================
+
+OptionsScreen_HighlightNumericValue:
 #_009C83: PHY
 
 #_009C84: LDY.w #$2800
-#_009C87: BRA CODE_009C8D
+#_009C87: BRA OptionsScreen_ModifyNumericValue
 
-CODE_009C89:
+;---------------------------------------------------------------------------------------------------
+
+OptionsScreen_DarkenNumericValue:
 #_009C89: PHY
 
 #_009C8A: LDY.w #$3800
 
-CODE_009C8D:
+;---------------------------------------------------------------------------------------------------
+
+OptionsScreen_ModifyNumericValue:
 #_009C8D: STY.b $20
 
 #_009C8F: PHX
-#_009C90: JSR ROUTINE_009E2C
+
+#_009C90: JSR OptionsScreen_FillRowWithBlankSquares
 
 #_009C93: LDY.w #$0000
 
-CODE_009C96:
+.find_hundreds
 #_009C96: INY
+
 #_009C97: SEC
 #_009C98: SBC.w #$0064
-#_009C9B: BCS CODE_009C96
+#_009C9B: BCS .find_hundreds
 
 #_009C9D: ADC.w #$0064
-#_009CA0: JSR ROUTINE_009CBA
+#_009CA0: JSR .get_decimal_digit_tile
 
-CODE_009CA3:
+;---------------------------------------------------------------------------------------------------
+
+.find_tens
 #_009CA3: INY
 #_009CA4: SEC
 #_009CA5: SBC.w #$000A
-#_009CA8: BCS CODE_009CA3
+#_009CA8: BCS .find_tens
 
 #_009CAA: ADC.w #$000A
-#_009CAD: JSR ROUTINE_009CBA
+#_009CAD: JSR .get_decimal_digit_tile
+
+;---------------------------------------------------------------------------------------------------
+
 #_009CB0: TAY
 #_009CB1: INY
-#_009CB2: JSR ROUTINE_009CBA
+
+#_009CB2: JSR .get_decimal_digit_tile
+
 #_009CB5: PLX
 #_009CB6: PLY
-#_009CB7: JMP CODE_009E01
 
-;===================================================================================================
+#_009CB7: JMP OptionsScreen_FillTiles
 
-ROUTINE_009CBA:
+;---------------------------------------------------------------------------------------------------
+
+.get_decimal_digit_tile
 #_009CBA: DEY
 
 #_009CBB: PHA
@@ -4874,60 +4923,60 @@ ROUTINE_009CBA:
 
 ;===================================================================================================
 
-ROUTINE_009CCD:
+OptionsScreen_SoundEffect:
 #_009CCD: LDA.w $053A
 #_009CD0: AND.w #$0C00
-#_009CD3: BEQ CODE_009CE4
+#_009CD3: BEQ .not_changing_option
 
-#_009CD5: JSR ROUTINE_009D21
+#_009CD5: JSR OptionsScreen_DarkenSFXSelection
 
 #_009CD8: LDA.w #$0002
 #_009CDB: LDX.w #$0810
-#_009CDE: JSR ROUTINE_00987F
-#_009CE1: JMP CODE_009B1C
+#_009CDE: JSR OptionsScreen_DarkenSelection
+#_009CE1: JMP OptionsScreen_HandleSelectionChange
 
-CODE_009CE4:
+.not_changing_option
 #_009CE4: LDA.w #$0002
 
 #_009CE7: LDX.w #$0810
-#_009CEA: JSR ROUTINE_009887
+#_009CEA: JSR OptionsScreen_HighlightSelection
 
 #_009CED: LDA.w #$0067
 #_009CF0: LDX.w #$0808
-#_009CF3: JSR ROUTINE_009C0C
+#_009CF3: JSR OptionsScreen_ChangeNumericOption
 
 #_009CF6: LDA.w $053A
 #_009CF9: AND.w #$5000
-#_009CFC: BEQ CODE_009D0C
+#_009CFC: BEQ .didnt_make_selection
 
 #_009CFE: LDX.w $0808
-#_009D01: LDA.l data08E953,X
+#_009D01: LDA.l OptionsScreenSoundEffects,X
 #_009D05: AND.w #$00FF
 #_009D08: STA.l $0004A0
 
-CODE_009D0C:
+.didnt_make_selection
 #_009D0C: LDA.w $053A
 #_009D0F: AND.w #$8000
-#_009D12: BEQ CODE_009D1B
+#_009D12: BEQ .dont_stop_playing
 
-#_009D14: LDA.w #$0001
+#_009D14: LDA.w #$0001 ; SFX 01
 #_009D17: STA.l $0004A0
 
-CODE_009D1B:
-#_009D1B: JSR ROUTINE_009D27
-#_009D1E: JMP CODE_009C83
+.dont_stop_playing
+#_009D1B: JSR OptionsScreen_LocateSFXSelection
+#_009D1E: JMP OptionsScreen_HighlightNumericValue
 
 ;===================================================================================================
 
-ROUTINE_009D21:
-#_009D21: JSR ROUTINE_009D27
-#_009D24: JMP CODE_009C89
+OptionsScreen_DarkenSFXSelection:
+#_009D21: JSR OptionsScreen_LocateSFXSelection
+#_009D24: JMP OptionsScreen_DarkenNumericValue
 
 ;===================================================================================================
 
-ROUTINE_009D27:
+OptionsScreen_LocateSFXSelection:
 #_009D27: LDA.w #$000C
-#_009D2A: JSR ROUTINE_009E45
+#_009D2A: JSR OptionsScreen_GetVRAMOfSelection
 
 #_009D2D: LDX.w #$0900
 #_009D30: LDA.w $0808
@@ -4936,47 +4985,50 @@ ROUTINE_009D27:
 
 ;===================================================================================================
 
-ROUTINE_009D34:
+OptionsScreen_SoundOutput:
 #_009D34: LDA.w $053A
 #_009D37: AND.w #$0C00
-#_009D3A: BEQ CODE_009D4B
+#_009D3A: BEQ .not_changing_option
 
-#_009D3C: JSR ROUTINE_009D91
+#_009D3C: JSR OptionsScreen_DarkenOutputSelection
 
 #_009D3F: LDA.w #$0003
 #_009D42: LDX.w #$0810
-#_009D45: JSR ROUTINE_00987F
-#_009D48: JMP CODE_009B1C
+#_009D45: JSR OptionsScreen_DarkenSelection
+#_009D48: JMP OptionsScreen_HandleSelectionChange
 
 ;---------------------------------------------------------------------------------------------------
 
-CODE_009D4B:
+.not_changing_option
 #_009D4B: LDA.w #$0003
 
 #_009D4E: LDX.w #$0810
-#_009D51: JSR ROUTINE_009887
-#_009D54: JSR ROUTINE_00E2DD
-#_009D57: BEQ CODE_009D84
+#_009D51: JSR OptionsScreen_HighlightSelection
+#_009D54: JSR TestNewInput_LeftOrRight
+#_009D57: BEQ .no_selection_change
 
-#_009D59: JSR ROUTINE_00E2CF
-#_009D5C: BEQ CODE_009D6E
+#_009D59: JSR TestNewInput_Left
+#_009D5C: BEQ .cant_press_left
 
 #_009D5E: LDA.w $0554
-#_009D61: BEQ CODE_009D6E
+#_009D61: BEQ .cant_press_left
 
 #_009D63: LDA.w #$00FB ; SFX FB
 #_009D66: STA.w $04A0
 
 #_009D69: DEC.w $0554
-#_009D6C: BRA CODE_009D84
 
-CODE_009D6E:
-#_009D6E: JSR ROUTINE_00E2D6
-#_009D71: BEQ CODE_009D84
+#_009D6C: BRA .no_selection_change
+
+;---------------------------------------------------------------------------------------------------
+
+.cant_press_left
+#_009D6E: JSR TestNewInput_Right
+#_009D71: BEQ .no_selection_change
 
 #_009D73: LDA.w $0554
 #_009D76: CMP.w #$0001
-#_009D79: BEQ CODE_009D84
+#_009D79: BEQ .no_selection_change
 
 #_009D7B: LDA.w #$00FC ; SFX FC
 #_009D7E: STA.w $04A0
@@ -4985,93 +5037,96 @@ CODE_009D6E:
 
 ;---------------------------------------------------------------------------------------------------
 
-CODE_009D84:
+.no_selection_change
 #_009D84: CLC
 
 #_009D85: LDA.w $0554
 #_009D88: ADC.w #$0009
-
 #_009D8B: LDX.w #$0900
-#_009D8E: JMP ROUTINE_009887
+#_009D8E: JMP OptionsScreen_HighlightSelection
 
 ;===================================================================================================
 
-ROUTINE_009D91:
+OptionsScreen_DarkenOutputSelection:
 #_009D91: CLC
 
 #_009D92: LDA.w $0554
 #_009D95: ADC.w #$0009
-
 #_009D98: LDX.w #$0900
-#_009D9B: JMP ROUTINE_00987F
+#_009D9B: JMP OptionsScreen_DarkenSelection
 
 ;===================================================================================================
 
-ROUTINE_009D9E:
+OptionsScreen_KeyConfiguration:
 #_009D9E: LDA.w $053A
 #_009DA1: AND.w #$0C00
-#_009DA4: BEQ CODE_009DB2
+#_009DA4: BEQ .not_changing_option
 
 #_009DA6: LDA.w #$0004
 #_009DA9: LDX.w #$0810
-#_009DAC: JSR ROUTINE_00987F
-#_009DAF: JMP CODE_009B1C
+#_009DAC: JSR OptionsScreen_DarkenSelection
+#_009DAF: JMP OptionsScreen_HandleSelectionChange
 
-CODE_009DB2:
+.not_changing_option
 #_009DB2: LDA.w $053A
 #_009DB5: AND.w #$5000
-#_009DB8: BEQ CODE_009DC0
+#_009DB8: BEQ .dont_enter_config
 
 #_009DBA: JSR QueueSFX_1F
+
 #_009DBD: INC.w $0508
 
-CODE_009DC0:
+.dont_enter_config
 #_009DC0: LDA.w #$0004
 
 #_009DC3: LDX.w #$0810
-#_009DC6: JMP ROUTINE_009887
+#_009DC6: JMP OptionsScreen_HighlightSelection
 
 ;===================================================================================================
 
-ROUTINE_009DC9:
+OptionsScreen_Exit:
 #_009DC9: LDA.w $053A
 #_009DCC: AND.w #$0C00
-#_009DCF: BEQ CODE_009DDD
+#_009DCF: BEQ .not_changing_option
 
 #_009DD1: LDA.w #$0005
 #_009DD4: LDX.w #$0810
-#_009DD7: JSR ROUTINE_00987F
-#_009DDA: JMP CODE_009B1C
+#_009DD7: JSR OptionsScreen_DarkenSelection
+#_009DDA: JMP OptionsScreen_HandleSelectionChange
 
-CODE_009DDD:
-#_009DDD: JSR ROUTINE_00E2C8
-#_009DE0: BEQ CODE_009DEB
+.not_changing_option
+#_009DDD: JSR TestNewInput_Start
+#_009DE0: BEQ .dont_exit
 
 #_009DE2: JSR QueueSFX_FD
 
 #_009DE5: LDA.w #$0005
 #_009DE8: STA.w $0508
 
-CODE_009DEB:
+.dont_exit
 #_009DEB: LDA.w #$0005
 #_009DEE: LDX.w #$0810
-#_009DF1: JMP ROUTINE_009887
+#_009DF1: JMP OptionsScreen_HighlightSelection
 
-CODE_009DF4:
+;===================================================================================================
+
+OptionsScreen_HighlightTiles:
 #_009DF4: LDA.w #$2800
-#_009DF7: BRA CODE_009DFC
-
-CODE_009DF9:
-#_009DF9: LDA.w #$3800
-
-CODE_009DFC:
-#_009DFC: STA.b $20
-
-#_009DFE: JSR ROUTINE_009E2C
+#_009DF7: BRA .set_props
 
 ;---------------------------------------------------------------------------------------------------
 
-CODE_009E01:
+#OptionsScreen_DarkenTiles:
+#_009DF9: LDA.w #$3800
+
+.set_props
+#_009DFC: STA.b $20
+
+#_009DFE: JSR OptionsScreen_FillRowWithBlankSquares
+
+;---------------------------------------------------------------------------------------------------
+
+OptionsScreen_FillTiles:
 #_009E01: LDA.w $0000,Y
 #_009E04: STA.b $22
 
@@ -5089,6 +5144,7 @@ CODE_009E01:
 
 #_009E16: INX
 #_009E17: INX
+
 #_009E18: INY
 #_009E19: BRA .next
 
@@ -5097,7 +5153,6 @@ CODE_009E01:
 .done
 #_009E1B: PLX
 #_009E1C: STX.b $3C
-
 #_009E1E: STZ.b $3E
 
 #_009E20: LDA.b $22
@@ -5106,11 +5161,11 @@ CODE_009E01:
 #_009E24: LDA.w #$8014
 #_009E27: STA.b $3A
 
-#_009E29: JMP ROUTINE_00DB57
+#_009E29: JMP QueueUpTilemapTransfers
 
 ;===================================================================================================
 
-ROUTINE_009E2C:
+OptionsScreen_FillRowWithBlankSquares:
 #_009E2C: PHY
 #_009E2D: PHX
 #_009E2E: PHA
@@ -5137,7 +5192,7 @@ ROUTINE_009E2C:
 
 ;===================================================================================================
 
-ROUTINE_009E45:
+OptionsScreen_GetVRAMOfSelection:
 #_009E45: ASL A
 #_009E46: TAX
 
@@ -5146,99 +5201,159 @@ ROUTINE_009E45:
 #_009E4A: RTS
 
 .pointers
-#_009E4B: dw data009E65
-#_009E4D: dw data009E72
-#_009E4F: dw data009E7A
-#_009E51: dw data009E81
-#_009E53: dw data009E89
-#_009E55: dw data009E97
-#_009E57: dw data009EA5
-#_009E59: dw data009E9E
-#_009E5B: dw data009EAE
-#_009E5D: dw data009EB5
-#_009E5F: dw data009EBE
-#_009E61: dw data009EC6
-#_009E63: dw data009EC9
+#_009E4B: dw .difficulty_title ; 00
+#_009E4D: dw .music_title ; 01
+#_009E4F: dw .sound_effect_title ; 02
+#_009E51: dw .sound_output_title ; 03
+#_009E53: dw .key_config_title ; 04
+#_009E55: dw .exit_title ; 05
+#_009E57: dw data009EA5 ; 06
+#_009E59: dw data009E9E ; 07
+#_009E5B: dw data009EAE ; 08
+#_009E5D: dw data009EB5 ; 09
+#_009E5F: dw data009EBE ; 0A
+#_009E61: dw .music_param ; 0B
+#_009E63: dw .sound_effect_param ; 0C
+
+;---------------------------------------------------------------------------------------------------
+; TODO obviously slightly wrong with the very low values?
+.difficulty_title
+#_009E65: dw $30C7 ; $618E in VRAM
+#_009E67: dw $2722 ; $4E44 in VRAM
+#_009E69: dw $2424 ; $4848 in VRAM
+#_009E6B: dw $2127 ; $424E in VRAM
+#_009E6D: dw $2930 ; $5260 in VRAM
+#_009E6F: dw $322F ; $645E in VRAM
+#_009E71: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
-data009E65:
-#_009E65: db $C7, $30, $22, $27, $24, $24, $27, $21
-#_009E6D: db $30, $29, $2F, $32, $00
+.music_title
+#_009E72: dw $3127 ; $624E in VRAM
+#_009E74: dw $302A ; $6054 in VRAM
+#_009E76: dw $272E ; $4E5C in VRAM
+#_009E78: dw $0021 ; $0042 in VRAM
+#_009E7A: dw $3187 ; $630E in VRAM
+#_009E7C: dw $332E ; $665C in VRAM
+#_009E7E: dw $3323 ; $6646 in VRAM
+#_009E80: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
-data009E72:
-#_009E72: db $27, $31, $2A, $30, $2E, $27, $21, $00
+.sound_effect_title
+#_009E7A: dw $3187 ; $630E in VRAM
+#_009E7C: dw $332E ; $665C in VRAM
+#_009E7E: dw $3323 ; $6646 in VRAM
+#_009E80: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
-data009E7A:
-#_009E7A: db $87, $31, $2E, $33, $23, $33, $00
+.sound_output_title
+#_009E81: dw $31E7 ; $63CE in VRAM
+#_009E83: dw $2C2E ; $585C in VRAM
+#_009E85: dw $2B30 ; $5660 in VRAM
+#_009E87: dw $0022 ; $0044 in VRAM
+#_009E89: dw $3247 ; $648E in VRAM
+#_009E8B: dw $2328 ; $4650 in VRAM
+#_009E8D: dw $3B32 ; $7664 in VRAM
+#_009E8F: dw $2C21 ; $5842 in VRAM
+#_009E91: dw $242B ; $4856 in VRAM
+#_009E93: dw $2527 ; $4A4E in VRAM
+#_009E95: dw $0033 ; $0066 in VRAM
+#_009E97: dw $32E7 ; $65CE in VRAM
+#_009E99: dw $3123 ; $6246 in VRAM
+#_009E9B: dw $2F27 ; $5E4E in VRAM
+#_009E9D: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
-data009E81:
-#_009E81: db $E7, $31, $2E, $2C, $30, $2B, $22, $00
+.key_config_title
+#_009E89: dw $3247 ; $648E in VRAM
+#_009E8B: dw $2328 ; $4650 in VRAM
+#_009E8D: dw $3B32 ; $7664 in VRAM
+#_009E8F: dw $2C21 ; $5842 in VRAM
+#_009E91: dw $242B ; $4856 in VRAM
+#_009E93: dw $2527 ; $4A4E in VRAM
+#_009E95: dw $0033 ; $0066 in VRAM
+#_009E97: dw $32E7 ; $65CE in VRAM
+#_009E99: dw $3123 ; $6246 in VRAM
+#_009E9B: dw $2F27 ; $5E4E in VRAM
+#_009E9D: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
-data009E89:
-#_009E89: db $47, $32, $28, $23, $32, $3B, $21, $2C
-#_009E91: db $2B, $24, $27, $25, $33, $00
-
-;---------------------------------------------------------------------------------------------------
-
-data009E97:
-#_009E97: db $E7, $32, $23, $31, $27, $2F, $00
+.exit_title
+#_009E97: dw $32E7 ; $65CE in VRAM
+#_009E99: dw $3123 ; $6246 in VRAM
+#_009E9B: dw $2F27 ; $5E4E in VRAM
+#_009E9D: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data009E9E:
-#_009E9E: db $D2, $30, $23, $20, $2E, $32, $00
+#_009E9E: dw $30D2 ; $61A4 in VRAM
+#_009EA0: dw $2023 ; $4046 in VRAM
+#_009EA2: dw $322E ; $645C in VRAM
+#_009EA4: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data009EA5:
-#_009EA5: db $D2, $30, $2B, $2C, $2D, $2A, $20, $29
-#_009EAD: db $00
+#_009EA5: dw $30D2 ; $61A4 in VRAM
+#_009EA7: dw $2C2B ; $5856 in VRAM
+#_009EA9: dw $2A2D ; $545A in VRAM
+#_009EAB: dw $2920 ; $5240 in VRAM
+#_009EAD: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data009EAE:
-#_009EAE: db $D2, $30, $26, $20, $2D, $22, $00
+#_009EAE: dw $30D2 ; $61A4 in VRAM
+#_009EB0: dw $2026 ; $404C in VRAM
+#_009EB2: dw $222D ; $445A in VRAM
+#_009EB4: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data009EB5:
-#_009EB5: db $F2, $31, $2E, $2F, $23, $2D, $23, $2C
-#_009EBD: db $00
+#_009EB5: dw $31F2 ; $63E4 in VRAM
+#_009EB7: dw $2F2E ; $5E5C in VRAM
+#_009EB9: dw $2D23 ; $5A46 in VRAM
+#_009EBB: dw $2C23 ; $5846 in VRAM
+#_009EBD: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data009EBE:
-#_009EBE: db $F2, $31, $2A, $2C, $2B, $2C, $33, $00
+#_009EBE: dw $31F2 ; $63E4 in VRAM
+#_009EC0: dw $2C2A ; $5854 in VRAM
+#_009EC2: dw $2C2B ; $5856 in VRAM
+#_009EC4: dw $0033 ; $0066 in VRAM TODO ???
+#_009EC6: dw $3132 ; $6264 in VRAM
+#_009EC8: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
-data009EC6:
-#_009EC6: db $32, $31, $00
+.music_param
+#_009EC6: dw $3132 ; $6264 in VRAM
+#_009EC8: db $00 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
-data009EC9:
-#_009EC9: db $92, $31, $00
+.sound_effect_param
+#_009EC9: dw $3192 ; $6324 in VRAM
+#_009ECB: db $00 ; end
 
 ;===================================================================================================
 
 PreparePasswordScreen:
-#_009ECC: JSR ROUTINE_00C44D
+#_009ECC: JSR ResetModuleVariables
 
 #_009ECF: LDA.w #$00C8
 #_009ED2: TRB.w $0536
 #_009ED5: STZ.w $0508
 
-#_009ED8: LDX.w #data009F70
+#_009ED8: LDX.w #.password_init_table
 #_009EDB: JSR ArbitraryTableCopy
 
 #_009EDE: LDA.w #$0041
@@ -5247,18 +5362,22 @@ PreparePasswordScreen:
 #_009EE4: STZ.w $05DC
 #_009EE7: STZ.w $05DE
 
+;---------------------------------------------------------------------------------------------------
+
 #_009EEA: LDX.w #$0000
 #_009EED: LDA.w #$0100
 
-CODE_009EF0:
+.fill
 #_009EF0: STA.l $7EE000,X
 
 #_009EF4: INX
 #_009EF5: INX
 #_009EF6: CPX.w #$0400
-#_009EF9: BNE CODE_009EF0
+#_009EF9: BNE .fill
 
-CODE_009EFB:
+;---------------------------------------------------------------------------------------------------
+
+.next_tile
 #_009EFB: STA.l $7EE000,X
 
 #_009EFF: INX
@@ -5279,41 +5398,47 @@ CODE_009EFB:
 
 #_009F1B: LDY.w #$000B
 
-CODE_009F1E:
+.roll
 #_009F1E: PHA
 #_009F1F: ASL A
 #_009F20: PLA
 #_009F21: ROR A
+
 #_009F22: DEY
-#_009F23: BNE CODE_009F1E
+#_009F23: BNE .roll
 
 #_009F25: STA.b $20
 
 #_009F27: PLA
 #_009F28: SEC
 #_009F29: SBC.b $20
-#_009F2B: BCS CODE_009F30
+#_009F2B: BCS .dont_reset
 
 #_009F2D: LDA.w #$0000
 
-CODE_009F30:
+.dont_reset
 #_009F30: INX
 #_009F31: INX
 #_009F32: CPX.w #$0800
-#_009F35: BNE CODE_009EFB
+#_009F35: BNE .next_tile
 
-CODE_009F37:
+;---------------------------------------------------------------------------------------------------
+
+.clear_fill
 #_009F37: STA.l $7EE000,X
 
 #_009F3B: INX
 #_009F3C: INX
 #_009F3D: CPX.w #$0C00
-#_009F40: BNE CODE_009F37
+#_009F40: BNE .clear_fill
+
+;---------------------------------------------------------------------------------------------------
 
 #_009F42: LDA.w #$019C
 #_009F45: STA.w $05E0
 
 #_009F48: JSR ROUTINE_00A036
+
 #_009F4B: SEP #$20
 
 #_009F4D: LDA.b #$42
@@ -5336,9 +5461,9 @@ CODE_009F37:
 
 #_009F6D: JMP ROUTINE_00D3FA
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-#data009F70:
+.password_init_table
 #_009F70: dw $0001 : dl BG3SC ; size, address
 #_009F75: db $29
 
@@ -5357,7 +5482,7 @@ CODE_009F37:
 ;===================================================================================================
 
 PasswordScreen:
-#_009FA4: JSR ROUTINE_00C44D
+#_009FA4: JSR ResetModuleVariables
 
 #_009FA7: LDA.w $0508
 #_009FAA: ASL A
@@ -5409,7 +5534,7 @@ ROUTINE_009FD4:
 ;===================================================================================================
 
 ROUTINE_009FE9:
-#_009FE9: JSR ROUTINE_00D462
+#_009FE9: JSR ExecuteMosaicFadeOut_GrabFrame
 #_009FEC: BNE CODE_00A019
 
 ;===================================================================================================
@@ -5440,10 +5565,10 @@ ROUTINE_009FE9:
 #_00A010: STY.w $0500
 
 #_00A013: JSR ROUTINE_00DE17
-#_00A016: JMP ROUTINE_00E230
+#_00A016: JMP Set_56E_54E_to_FFFF
 
 CODE_00A019:
-#_00A019: JSR ROUTINE_00AA91
+#_00A019: JSR MatchMosaicToScreenBrightness
 #_00A01C: JMP ROUTINE_00A036
 
 ;===================================================================================================
@@ -5499,6 +5624,7 @@ PrepareGameOver:
 #_00A063: STA.l $7E7A42
 
 #_00A067: JSR ROUTINE_00B361
+
 #_00A06A: STZ.w $0510
 #_00A06D: STZ.w $0512
 #_00A070: STZ.w $0514
@@ -5506,17 +5632,17 @@ PrepareGameOver:
 #_00A076: STZ.w $0518
 #_00A079: STZ.w $051A
 
-#_00A07C: LDX.w #data00A08E
+#_00A07C: LDX.w #.gameover_init_table
 #_00A07F: JSR ArbitraryTableCopy
 
-#_00A082: LDA.w #$0007
+#_00A082: LDA.w #$0007 ; SONG 07
 #_00A085: JSR RequestSong_bounce
 #_00A088: JSR ROUTINE_00D3FA
 #_00A08B: JMP CODE_00A116
 
 ;---------------------------------------------------------------------------------------------------
 
-data00A08E:
+.gameover_init_table
 #_00A08E: dw $0003 : dl BG1SC ; size, address
 #_00A093: db $31, $40, $2A
 
@@ -5524,6 +5650,7 @@ data00A08E:
 
 ;===================================================================================================
 
+ROUTINE_00A098:
 #_00A098: JSR ROUTINE_00E23A
 #_00A09B: JSR ROUTINE_00ED0F
 
@@ -5556,13 +5683,13 @@ data00A08E:
 #_00A0CE: JSR Decompress
 
 #_00A0D1: LDA.w #data00A0F4
-#_00A0D4: LDY.w #$0000
+#_00A0D4: LDY.w #data00A0F4>>16
 #_00A0D7: JSL ROUTINE_00FBCB_ParameterizedBounce_long
 #_00A0DB: JSR GetLevelPassword
 
 #_00A0DE: LDA.w #$0063
 #_00A0E1: STA.w $052C
-#_00A0E4: JSR ROUTINE_00D403
+#_00A0E4: JSR AdvanceGameModule
 
 #_00A0E7: BRA CODE_00A0F1
 
@@ -5599,6 +5726,7 @@ CODE_00A116:
 
 #_00A126: LDA.w #$0232
 #_00A129: JSL ROUTINE_028220
+
 #_00A12D: RTS
 
 ;===================================================================================================
@@ -5640,7 +5768,7 @@ GetLevelPassword:
 #_00A161: LDA.w #$8008
 #_00A164: STA.b $3A
 
-#_00A166: JMP ROUTINE_00DB57
+#_00A166: JMP QueueUpTilemapTransfers
 
 ;===================================================================================================
 
@@ -5659,33 +5787,34 @@ GameOverAscendMore:
 #_00A182: CPY.w #$0018
 #_00A185: BEQ CODE_00A18C
 
-#_00A187: JSR ROUTINE_00A1AF
+#_00A187: JSR .queue_up_tilemap
 #_00A18A: BRA CODE_00A1A9
 
 CODE_00A18C:
-#_00A18C: LDA.w #data00A1EA
+#_00A18C: LDA.w #.init_table
 #_00A18F: LDY.w #$0000
 #_00A192: JSL ROUTINE_00FBCB_ParameterizedBounce_long
 
 #_00A196: LDA.w #data02FE69
-#_00A199: LDY.w #$0002
-#_00A19C: JSR ROUTINE_00E229
+#_00A199: LDY.w #data02FE69>>16
+#_00A19C: JSR ROUTINE_00ECEF_ParamterizedYA
 
 #_00A19F: LDA.w #$0340
 #_00A1A2: STA.l $7E7A42
 
-#_00A1A6: JSR ROUTINE_00D403
+#_00A1A6: JSR AdvanceGameModule
 
 CODE_00A1A9:
 #_00A1A9: JSR ROUTINE_00A2C3
 #_00A1AC: JMP CODE_00A116
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_00A1AF:
+.queue_up_tilemap
 #_00A1AF: CLC
 
 #_00A1B0: LDY.w $194C
+
 #_00A1B3: TYA
 #_00A1B4: ADC.w #$0004
 #_00A1B7: STA.w $194C
@@ -5702,19 +5831,20 @@ ROUTINE_00A1AF:
 #_00A1C9: LDA.w #$007F
 #_00A1CC: STA.b $3E
 
-#_00A1CE: JSR ROUTINE_00DB57
+#_00A1CE: JSR QueueUpTilemapTransfers
 #_00A1D1: RTS
 
 data00A1D2:
-#_00A1D2: db $00,$10
-#_00A1D4: db $00,$80,$00,$14,$00,$88,$00,$18
-#_00A1DC: db $00,$90,$00,$1C,$00,$98,$00,$20
-#_00A1E4: db $00,$A0,$00,$24,$00,$A8
+#_00A1D2: dw $1000, $8000
+#_00A1D6: dw $1400, $8800
+#_00A1DA: dw $1800, $9000
+#_00A1DE: dw $1C00, $9800
+#_00A1E2: dw $2000, $A000
+#_00A1E6: dw $2400, $A800
 
+;---------------------------------------------------------------------------------------------------
 
-;===================================================================================================
-
-data00A1EA:
+.init_table
 #_00A1EA: dw $0008, $0000 ; 4 sets of 8 words to offset $0000
 #_00A1EE: dl data08D4F6, data08D4C6, data08D4F6, data08D4D6
 
@@ -5726,7 +5856,7 @@ data00A1EA:
 ;===================================================================================================
 
 ContinueScreen:
-#_00A20C: JSR ROUTINE_00C44D
+#_00A20C: JSR ResetModuleVariables
 #_00A20F: JSR ROUTINE_00E29B
 #_00A212: BEQ CODE_00A217
 
@@ -5737,7 +5867,7 @@ CODE_00A217:
 #_00A21A: JSR ROUTINE_00E2FE
 #_00A21D: BCC CODE_00A27C
 
-#_00A21F: JSR ROUTINE_00E2CF
+#_00A21F: JSR TestNewInput_Left
 #_00A222: BEQ CODE_00A230
 
 #_00A224: STZ.w $0510
@@ -5748,7 +5878,7 @@ CODE_00A217:
 #_00A22E: BRA CODE_00A242
 
 CODE_00A230:
-#_00A230: JSR ROUTINE_00E2D6
+#_00A230: JSR TestNewInput_Right
 #_00A233: BEQ CODE_00A24C
 
 #_00A235: LDA.w #$0100
@@ -5764,7 +5894,7 @@ CODE_00A242:
 #_00A249: JSR QueueSFX_1E
 
 CODE_00A24C:
-#_00A24C: JSR ROUTINE_00E2C8
+#_00A24C: JSR TestNewInput_Start
 #_00A24F: BEQ CODE_00A279
 
 #_00A251: JSR QueueSFX_65
@@ -5781,9 +5911,9 @@ CODE_00A24C:
 CODE_00A265:
 #_00A265: JSR ROUTINE_00E2E4
 
-#_00A268: LDA.w #$A2A9
-#_00A26B: LDY.w #$0000
-#_00A26E: JSR ROUTINE_00E229
+#_00A268: LDA.w #data00A2A9
+#_00A26B: LDY.w #data00A2A9>>16
+#_00A26E: JSR ROUTINE_00ECEF_ParamterizedYA
 
 #_00A271: LDA.w #$0084
 #_00A274: STA.w $0500
@@ -5821,13 +5951,14 @@ CODE_00A282:
 
 ;---------------------------------------------------------------------------------------------------
 
+data00A2A9:
 #_00A2A9: db $1F,$4E,$00,$80,$7F,$00,$34,$00
 #_00A2B1: db $00
 
 ;===================================================================================================
 
 ReturnToTitleScreenFadeOut:
-#_00A2B2: JSR ROUTINE_00D462
+#_00A2B2: JSR ExecuteMosaicFadeOut_GrabFrame
 #_00A2B5: BNE CODE_00A2BD
 
 #_00A2B7: LDA.w #$0023
@@ -5842,15 +5973,16 @@ CODE_00A2BD:
 ROUTINE_00A2C3:
 #_00A2C3: INC.w $0514
 #_00A2C6: INC.w $0516
-#_00A2C9: JMP ROUTINE_00E230
+
+#_00A2C9: JMP Set_56E_54E_to_FFFF
 
 ;===================================================================================================
 
 ContinueAfterGameOver:
 #_00A2CC: JSR ROUTINE_00E29B
-#_00A2CF: BNE CODE_00A32F
+#_00A2CF: BNE .finished_here
 
-#_00A2D1: JSR ROUTINE_00E230
+#_00A2D1: JSR Set_56E_54E_to_FFFF
 #_00A2D4: CLC
 
 #_00A2D5: LDA.w $0510
@@ -5872,18 +6004,18 @@ ContinueAfterGameOver:
 #_00A2F2: LDA.w #$006E
 #_00A2F5: STA.w $0500
 
-#_00A2F8: BRA CODE_00A32F
-
-;---------------------------------------------------------------------------------------------------
+#_00A2F8: BRA .finished_here
 
 .allow_partner
-#_00A2FA: LDA.w #$001E
+#_00A2FA: LDA.w #$001E ; SONG 1E
 #_00A2FD: JSR RequestSong_bounce
 
 #_00A300: LDA.w #$008B
 #_00A303: STA.w $0500
 
-#_00A306: BRA CODE_00A32F
+#_00A306: BRA .finished_here
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_00A308:
 #_00A308: SEC
@@ -5893,12 +6025,12 @@ CODE_00A308:
 #_00A30F: STA.w $0510
 
 #_00A312: LDA.w $051A
-#_00A315: BPL CODE_00A31C
+#_00A315: BPL .decrease
 
 #_00A317: CMP.w #$FF80
-#_00A31A: BCC CODE_00A32F
+#_00A31A: BCC .finished_here
 
-CODE_00A31C:
+.decrease
 #_00A31C: SEC
 #_00A31D: SBC.w #$0008
 #_00A320: STA.w $051A
@@ -5909,15 +6041,15 @@ CODE_00A31C:
 #_00A328: SBC.w #$0080
 #_00A32B: STA.l $7E7A40
 
-CODE_00A32F:
+.finished_here
 #_00A32F: JSR ROUTINE_00A2C3
 #_00A332: JMP CODE_00A116
 
 ;===================================================================================================
 
-ROUTINE_00A335:
-#_00A335: JSR ROUTINE_00D462
-#_00A338: BNE CODE_00A344
+#ROUTINE_00A335:
+#_00A335: JSR ExecuteMosaicFadeOut_GrabFrame
+#_00A338: BNE .still_fading
 
 #_00A33A: JSR ROUTINE_009FE9_dont_unflag
 
@@ -5926,9 +6058,9 @@ ROUTINE_00A335:
 
 #_00A343: RTS
 
-CODE_00A344:
-#_00A344: JSR ROUTINE_00AA91
-#_00A347: BRA CODE_00A32F
+.still_fading
+#_00A344: JSR MatchMosaicToScreenBrightness
+#_00A347: BRA .finished_here
 
 ;===================================================================================================
 
@@ -5942,91 +6074,96 @@ PrepareStoryTime:
 #_00A356: STZ.w $0800
 #_00A359: STZ.w $0506
 #_00A35C: STZ.w $0508
-#_00A35F: JMP ROUTINE_00D403
+
+#_00A35F: JMP AdvanceGameModule
 
 ;===================================================================================================
 
 StoryTime:
 #_00A362: LDA.w $0508
-#_00A365: BEQ CODE_00A36A
+#_00A365: BEQ .needs_init
 
 #_00A367: LDA.w #$0001
 
-CODE_00A36A:
+.needs_init
 #_00A36A: ASL A
 #_00A36B: TAX
 #_00A36C: JMP (.vectors,X)
 
 .vectors
-#_00A36F: dw ROUTINE_00A373
-#_00A371: dw ROUTINE_00A3C7
+#_00A36F: dw ExecuteStoryTime_Skippable
+#_00A371: dw ExecuteStoryTime
 
 ;===================================================================================================
 
-ROUTINE_00A373:
+ExecuteStoryTime_Skippable:
 #_00A373: LDA.w $0546
 #_00A376: AND.w #$1000
-#_00A379: BEQ CODE_00A384
+#_00A379: BEQ .not_finished
 
 #_00A37B: INC.w $0508
 
 #_00A37E: LDA.w #$0015
 #_00A381: STA.w $0506
 
-CODE_00A384:
+.not_finished
 #_00A384: LDA.w $0506
 #_00A387: CMP.w #$0003
-#_00A38A: BCC CODE_00A38F
+#_00A38A: BCC .skip_this_stuff
 
 #_00A38C: JSR ROUTINE_00A947
 
-CODE_00A38F:
+.skip_this_stuff
 #_00A38F: LDA.w $0506
 #_00A392: ASL A
 #_00A393: TAX
-#_00A394: JMP (PTR16_00A397,X)
 
-PTR16_00A397:
-#_00A397: dw ROUTINE_00A3D3
-#_00A399: dw ROUTINE_00A424
-#_00A39B: dw ROUTINE_00A428
-#_00A39D: dw ROUTINE_00A54E
-#_00A39F: dw ROUTINE_00A58B
-#_00A3A1: dw ROUTINE_00A628
-#_00A3A3: dw ROUTINE_00A64C
-#_00A3A5: dw ROUTINE_00A674
-#_00A3A7: dw ROUTINE_00A6BD
-#_00A3A9: dw ROUTINE_00A6E5
-#_00A3AB: dw ROUTINE_00A717
-#_00A3AD: dw ROUTINE_00A783
-#_00A3AF: dw ROUTINE_00A78A
-#_00A3B1: dw ROUTINE_00A7D1
-#_00A3B3: dw ROUTINE_00A7F7
-#_00A3B5: dw ROUTINE_00A822
-#_00A3B7: dw ROUTINE_00A853
-#_00A3B9: dw ROUTINE_00A872
-#_00A3BB: dw ROUTINE_00A889
-#_00A3BD: dw ROUTINE_00A893
-#_00A3BF: dw ROUTINE_00A8AD
-#_00A3C1: dw ROUTINE_00A8CF
-#_00A3C3: dw ROUTINE_00A8F0
-#_00A3C5: dw ROUTINE_00A8F9
+#_00A394: JMP (StoryTimeSubmodules,X)
 
 ;===================================================================================================
 
-ROUTINE_00A3C7:
+StoryTimeSubmodules:
+#_00A397: dw ItsStoryTime_Initialize ; 00
+#_00A399: dw ROUTINE_00A424 ; 01
+#_00A39B: dw ItsStoryTime_FadeIn     ; 02
+#_00A39D: dw ROUTINE_00A54E ; 03
+#_00A39F: dw ROUTINE_00A58B ; 04
+#_00A3A1: dw ROUTINE_00A628 ; 05
+#_00A3A3: dw ItsStoryTime_ImpyMusic ; 06
+#_00A3A5: dw ItsStoryTime_ImpyInterrupts ; 07
+#_00A3A7: dw ROUTINE_00A6BD ; 08
+#_00A3A9: dw ROUTINE_00A6E5 ; 09
+#_00A3AB: dw ROUTINE_00A717 ; 0A
+#_00A3AD: dw ItsStoryTime_FadeSongBeforeFlash ; 0B
+#_00A3AF: dw ItsStoryTime_BrightFlash ; 0C
+#_00A3B1: dw ItsStoryTime_BrightSuspense ; 0D
+#_00A3B3: dw ROUTINE_00A7F7 ; 0E
+#_00A3B5: dw ROUTINE_00A822 ; 0F
+#_00A3B7: dw ROUTINE_00A853 ; 10
+#_00A3B9: dw ROUTINE_00A872 ; 11
+#_00A3BB: dw ROUTINE_00A889 ; 12
+#_00A3BD: dw ROUTINE_00A893 ; 13
+#_00A3BF: dw ROUTINE_00A8AD ; 14
+#_00A3C1: dw ItsStoryTime_PrepareToClose ; 15
+#_00A3C3: dw ItsStoryTime_DelayClose     ; 16
+#_00A3C5: dw ItsStoryTime_NoMore         ; 17
+
+;===================================================================================================
+
+ExecuteStoryTime:
 #_00A3C7: JSR ROUTINE_00A947
 
 #_00A3CA: LDA.w $0506
 #_00A3CD: ASL A
 #_00A3CE: TAX
-#_00A3CF: JMP (PTR16_00A397,X)
+
+#_00A3CF: JMP (StoryTimeSubmodules,X)
 
 #_00A3D2: RTS
 
 ;===================================================================================================
 
-ROUTINE_00A3D3:
+ItsStoryTime_Initialize:
 #_00A3D3: JSR ROUTINE_00D3BD
 #_00A3D6: JSR ROUTINE_00CD0E
 #_00A3D9: STZ.w $0524
@@ -6058,6 +6195,7 @@ ROUTINE_00A3D3:
 
 #_00A412: INC.w $054E
 #_00A415: INC.w $0506
+
 #_00A418: RTS
 
 ;---------------------------------------------------------------------------------------------------
@@ -6069,12 +6207,13 @@ ROUTINE_00A3D3:
 
 ROUTINE_00A424:
 #_00A424: INC.w $0506
+
 #_00A427: RTS
 
 ;===================================================================================================
 
-ROUTINE_00A428:
-#_00A428: LDA.w #$000B
+ItsStoryTime_FadeIn:
+#_00A428: LDA.w #$000B ; SONG 0B
 #_00A42B: JSL RequestSong
 
 #_00A42F: LDA.w #data00A4CA
@@ -6087,7 +6226,7 @@ ROUTINE_00A428:
 #_00A43C: JSR ROUTINE_00F957
 
 #_00A43F: LDA.w #Message_08B057
-#_00A442: LDX.w #$0008
+#_00A442: LDX.w #Message_08B057>>16
 #_00A445: JSL SetMessagePointer
 
 #_00A449: LDA.w #$0014
@@ -6243,8 +6382,8 @@ ROUTINE_00A54E:
 #_00A56B: JSR ROUTINE_00FBCB
 #_00A56E: JSR ROUTINE_00F957
 
-#_00A571: LDA.w #$B13F
-#_00A574: LDX.w #$0008
+#_00A571: LDA.w #Message_08B13F
+#_00A574: LDX.w #Message_08B13F>>16
 #_00A577: JSL SetMessagePointer
 
 #_00A57B: LDX.w #$0004
@@ -6277,7 +6416,7 @@ ROUTINE_00A58B:
 #_00A5AB: JSR QueueSFX_FD
 
 #_00A5AE: LDA.w #Message_08B1A7
-#_00A5B1: LDX.w #$0008
+#_00A5B1: LDX.w #Message_08B1A7>>16
 #_00A5B4: JSL SetMessagePointer
 #_00A5B8: INC.w $0506
 
@@ -6381,7 +6520,7 @@ ROUTINE_00A628:
 
 ;===================================================================================================
 
-ROUTINE_00A64C:
+ItsStoryTime_ImpyMusic:
 #_00A64C: JSR ROUTINE_00F957
 
 #_00A64F: LDX.w #$0004
@@ -6389,7 +6528,7 @@ ROUTINE_00A64C:
 #_00A656: CMP.l $7E2442,X
 #_00A65A: BNE .exit
 
-#_00A65C: LDA.w #$000C
+#_00A65C: LDA.w #$000C ; SONG 0C
 #_00A65F: JSL RequestSong
 
 #_00A663: LDA.w #data00A5CE
@@ -6406,7 +6545,7 @@ ROUTINE_00A64C:
 
 ;===================================================================================================
 
-ROUTINE_00A674:
+ItsStoryTime_ImpyInterrupts:
 #_00A674: LDA.w #$0016
 #_00A677: STA.w $0524
 
@@ -6418,7 +6557,7 @@ ROUTINE_00A674:
 #_00A688: BNE .exit
 
 #_00A68A: LDA.w #Message_08B1BC
-#_00A68D: LDX.w #$0008
+#_00A68D: LDX.w #Message_08B1BC>>16
 #_00A690: JSL SetMessagePointer
 
 #_00A694: LDA.w #data00A6B4
@@ -6490,8 +6629,8 @@ ROUTINE_00A6E5:
 #_00A6FC: CMP.w #$0001
 #_00A6FF: BNE CODE_00A70E
 
-#_00A701: LDA.w #$B23B
-#_00A704: LDX.w #$0008
+#_00A701: LDA.w #Message_08B23B
+#_00A704: LDX.w #Message_08B23B>>16
 #_00A707: JSL SetMessagePointer
 #_00A70B: INC.w $0506
 
@@ -6512,8 +6651,8 @@ ROUTINE_00A717:
 #_00A71B: LDA.l $7E2550
 #_00A71F: BNE .exit
 
-#_00A721: LDA.w #$B323
-#_00A724: LDX.w #$0008
+#_00A721: LDA.w #Message_08B323
+#_00A724: LDX.w #Message_08B323>>16
 #_00A727: JSL SetMessagePointer
 
 #_00A72B: LDA.w #$A751
@@ -6562,14 +6701,16 @@ data00A773:
 
 ;===================================================================================================
 
-ROUTINE_00A783:
+ItsStoryTime_FadeSongBeforeFlash:
 #_00A783: JSR QueueSFX_FD
+
 #_00A786: INC.w $0506
+
 #_00A789: RTS
 
 ;===================================================================================================
 
-ROUTINE_00A78A:
+ItsStoryTime_BrightFlash:
 #_00A78A: JSL HandleDialog
 #_00A78E: JSR ROUTINE_00F957
 
@@ -6607,7 +6748,7 @@ data00A7C1:
 
 ;===================================================================================================
 
-ROUTINE_00A7D1:
+ItsStoryTime_BrightSuspense:
 #_00A7D1: JSR ROUTINE_00F957
 #_00A7D4: JSL ROUTINE_00ED0F_long
 #_00A7D8: JSL HandleDialog
@@ -6615,11 +6756,11 @@ ROUTINE_00A7D1:
 #_00A7DC: LDA.l $7E2550
 #_00A7E0: BNE .exit
 
-#_00A7E2: LDA.w #$0016
+#_00A7E2: LDA.w #$0016 ; SONG 16
 #_00A7E5: JSL RequestSong
 
 #_00A7E9: LDA.w #Message_08B34E
-#_00A7EC: LDX.w #$0008
+#_00A7EC: LDX.w #Message_08B34E>>16
 #_00A7EF: JSL SetMessagePointer
 #_00A7F3: INC.w $0506
 
@@ -6691,8 +6832,8 @@ ROUTINE_00A853:
 #_00A859: CMP.w #$00D4
 #_00A85C: BCC .exit
 
-#_00A85E: LDA.w #$B3FB
-#_00A861: LDX.w #$0008
+#_00A85E: LDA.w #Message_08B3FB
+#_00A861: LDX.w #Message_08B3FB>>16
 #_00A864: JSL SetMessagePointer
 #_00A868: INC.w $0506
 
@@ -6709,8 +6850,8 @@ ROUTINE_00A872:
 #_00A876: DEC.w $0800
 #_00A879: BNE .exit
 
-#_00A87B: LDA.w #$B411
-#_00A87E: LDX.w #$0008
+#_00A87B: LDA.w #Message_08B411
+#_00A87E: LDX.w #Message_08B411>>16
 #_00A881: JSL SetMessagePointer
 #_00A885: INC.w $0506
 
@@ -6723,6 +6864,7 @@ ROUTINE_00A889:
 #_00A889: LDX.w #$0008
 #_00A88C: JSR ROUTINE_00A990
 #_00A88F: INC.w $0506
+
 #_00A892: RTS
 
 ;===================================================================================================
@@ -6767,7 +6909,7 @@ ROUTINE_00A8AD:
 
 ;===================================================================================================
 
-ROUTINE_00A8CF:
+ItsStoryTime_PrepareToClose:
 #_00A8CF: LDA.w #$0001
 #_00A8D2: TRB.w $0530
 #_00A8D5: JSR QueueSFX_FD
@@ -6781,11 +6923,12 @@ ROUTINE_00A8CF:
 
 #_00A8E9: INC.w $0506
 #_00A8EC: INC.w $0508
+
 #_00A8EF: RTS
 
 ;===================================================================================================
 
-ROUTINE_00A8F0:
+ItsStoryTime_DelayClose:
 #_00A8F0: DEC.w $0800
 #_00A8F3: BNE .exit
 
@@ -6796,7 +6939,7 @@ ROUTINE_00A8F0:
 
 ;===================================================================================================
 
-ROUTINE_00A8F9:
+ItsStoryTime_NoMore:
 #_00A8F9: LDA.w #$0001
 #_00A8FC: TSB.w $0530
 #_00A8FF: INC.w $0508
@@ -6864,6 +7007,7 @@ ROUTINE_00A947:
 
 #_00A968: LDA.w #$022A
 #_00A96B: JSL ROUTINE_028220
+
 #_00A96F: RTS
 
 ;===================================================================================================
@@ -6937,7 +7081,8 @@ CODE_00A9B8:
 
 ;===================================================================================================
 
-#_00A9BC: JSR ROUTINE_00C894
+MuchAdoAboutNothing:
+#_00A9BC: JSR ARoutineAboutNothing
 #_00A9BF: RTL
 
 ;===================================================================================================
@@ -6946,6 +7091,7 @@ FadeToStoryCutscene:
 #_00A9C0: LDX.w #data00A9CA
 #_00A9C3: JSR BulkDecompressionViaTable_currentDB
 #_00A9C6: INC.w $0500
+
 #_00A9C9: RTS
 
 ;---------------------------------------------------------------------------------------------------
@@ -6984,7 +7130,7 @@ PrepareLevelMap:
 CODE_00A9ED:
 #_00A9ED: STA.w $19A8
 
-#_00A9F0: LDA.w #$0011
+#_00A9F0: LDA.w #$0011 ; SONG 11
 #_00A9F3: JSR RequestSong_bounce
 #_00A9F6: JSR ROUTINE_00CD0E
 
@@ -7007,9 +7153,9 @@ CODE_00A9ED:
 ;===================================================================================================
 
 LevelMap:
-#_00AA24: JSR ROUTINE_00C44D
+#_00AA24: JSR ResetModuleVariables
 #_00AA27: JSR ROUTINE_00AA41
-#_00AA2A: JSR ROUTINE_00E230
+#_00AA2A: JSR Set_56E_54E_to_FFFF
 
 #_00AA2D: LDA.w $0506
 #_00AA30: ASL A
@@ -7022,12 +7168,12 @@ LevelMap:
 #_00AA39: dw ROUTINE_00AADB
 #_00AA3B: dw ROUTINE_00AB02
 #_00AA3D: dw ROUTINE_00AB17
-#_00AA3F: dw ROUTINE_00AB1D
+#_00AA3F: dw ROUTINE_00BA11_AndResetMosaic
 
 ;===================================================================================================
 
 ROUTINE_00AA41:
-#_00AA41: JSR ROUTINE_00E2C8
+#_00AA41: JSR TestNewInput_Start
 #_00AA44: BEQ .exit
 
 #_00AA46: LDA.w $0506
@@ -7049,7 +7195,7 @@ ROUTINE_00AA41:
 #_00AA66: LDA.w #$0100
 #_00AA69: STA.w $0518
 
-#_00AA6C: JSR ROUTINE_00CF32
+#_00AA6C: JSR FullBrightnessAndNoMosaic
 
 .exit
 #_00AA6F: RTS
@@ -7061,7 +7207,7 @@ CODE_00AA70:
 ;===================================================================================================
 
 ROUTINE_00AA75:
-#_00AA75: JSR ROUTINE_00D46D
+#_00AA75: JSR ExecuteMosaicFadeIn_GrabFrame
 
 CODE_00AA78:
 #_00AA78: BNE CODE_00AA83
@@ -7072,22 +7218,24 @@ CODE_00AA78:
 #_00AA80: INC.w $0506
 
 CODE_00AA83:
-#_00AA83: JSR ROUTINE_00AA91
+#_00AA83: JSR MatchMosaicToScreenBrightness
 #_00AA86: JMP CODE_00AA70
 
 ;===================================================================================================
 
-ROUTINE_00AA91_long:
+MatchMosaicToScreenBrightness_long:
 #_00AA89: PHB
 #_00AA8A: PHK
 #_00AA8B: PLB
-#_00AA8C: JSR ROUTINE_00AA91
+
+#_00AA8C: JSR MatchMosaicToScreenBrightness
+
 #_00AA8F: PLB
 #_00AA90: RTL
 
 ;===================================================================================================
 
-ROUTINE_00AA91:
+MatchMosaicToScreenBrightness:
 #_00AA91: SEP #$20
 
 #_00AA93: LDA.w $0520
@@ -7110,6 +7258,7 @@ ROUTINE_00AAA6:
 #_00AAA9: BEQ CODE_00AAB0
 
 #_00AAAB: DEC.w $0802
+
 #_00AAAE: BRA CODE_00AAD8
 
 CODE_00AAB0:
@@ -7128,6 +7277,7 @@ CODE_00AAC0:
 #_00AAC3: STA.w $0802
 
 #_00AAC6: INC.w $0506
+
 #_00AAC9: BRA CODE_00AAD8
 
 CODE_00AACB:
@@ -7148,6 +7298,7 @@ ROUTINE_00AADB:
 #_00AADE: BEQ CODE_00AAE5
 
 #_00AAE0: DEC.w $0802
+
 #_00AAE3: BRA CODE_00AAFF
 
 CODE_00AAE5:
@@ -7159,6 +7310,7 @@ CODE_00AAE5:
 #_00AAF0: STA.w $0802
 
 #_00AAF3: INC.w $0506
+
 #_00AAF6: BRA CODE_00AAFF
 
 CODE_00AAF8:
@@ -7172,13 +7324,14 @@ CODE_00AAFF:
 ;===================================================================================================
 
 ROUTINE_00AB02:
-#_00AB02: JSR ROUTINE_00E2C8
+#_00AB02: JSR TestNewInput_Start
 #_00AB05: BNE CODE_00AB11
 
 #_00AB07: LDA.w $0802
 #_00AB0A: BEQ CODE_00AB11
 
 #_00AB0C: DEC.w $0802
+
 #_00AB0F: BRA CODE_00AB14
 
 CODE_00AB11:
@@ -7190,21 +7343,22 @@ CODE_00AB14:
 ;===================================================================================================
 
 ROUTINE_00AB17:
-#_00AB17: JSR ROUTINE_00D462
+#_00AB17: JSR ExecuteMosaicFadeOut_GrabFrame
 #_00AB1A: JMP CODE_00AA78
 
 ;===================================================================================================
 
-ROUTINE_00AB1D:
+ROUTINE_00BA11_AndResetMosaic:
 #_00AB1D: SEP #$20
 #_00AB1F: STZ.w MOSAIC
 #_00AB22: REP #$20
+
 #_00AB24: JMP ROUTINE_00BA11
 
 ;===================================================================================================
 
 EnterBuilding:
-#_00AB27: JSR ROUTINE_00C44D
+#_00AB27: JSR ResetModuleVariables
 #_00AB2A: JSR ROUTINE_00AC79
 #_00AB2D: JSR QueueSFX_FD
 #_00AB30: JSR RecoverOAMFromCache
@@ -7251,26 +7405,26 @@ ROUTINE_00AB5D:
 #_00AB70: LDA.w #$007E
 #_00AB73: STA.b $3E
 
-#_00AB75: JSR ROUTINE_00DB57
+#_00AB75: JSR QueueUpTilemapTransfers
 #_00AB78: PLA
 #_00AB79: JMP ROUTINE_00F130
 
 ;===================================================================================================
 
 ZigZagWipeOut:
-#_00AB7C: JSR ROUTINE_00C44D
+#_00AB7C: JSR ResetModuleVariables
 
 #_00AB7F: LDA.w #$0010
 #_00AB82: STA.w $051A
 
 #_00AB85: LDA.w #$0004
 #_00AB88: TSB.w $0524
-#_00AB8B: JSR ROUTINE_00E230
+#_00AB8B: JSR Set_56E_54E_to_FFFF
 #_00AB8E: JSL ROUTINE_00F149
 #_00AB92: TAY
 #_00AB93: BNE .exit
 
-#_00AB95: JSR ROUTINE_00D403
+#_00AB95: JSR AdvanceGameModule
 
 .exit
 #_00AB98: RTS
@@ -7335,7 +7489,7 @@ ZigZagWipeIn:
 #_00ABF6: STA.w $0500
 
 #_00ABF9: STZ.w $051A
-#_00ABFC: JSR ROUTINE_00E230
+#_00ABFC: JSR Set_56E_54E_to_FFFF
 
 .exit
 #_00ABFF: RTS
@@ -7343,7 +7497,7 @@ ZigZagWipeIn:
 ;===================================================================================================
 
 PrepareBuildingNPC:
-#_00AC00: JSR ROUTINE_00C44D
+#_00AC00: JSR ResetModuleVariables
 #_00AC03: STZ.w $056E
 #_00AC06: JSR ROUTINE_00AD71
 #_00AC09: JSR ROUTINE_00B3F1
@@ -7379,7 +7533,7 @@ PrepareBuildingNPC:
 CODE_00AC48:
 #_00AC48: STA.l $7E7B38
 
-#_00AC4C: JSR ROUTINE_00D403
+#_00AC4C: JSR AdvanceGameModule
 
 #_00AC4F: LDA.w #$0980
 
@@ -7424,6 +7578,7 @@ ROUTINE_00AC79:
 
 #_00AC7F: STZ.w $04F8
 #_00AC82: STZ.w $04FA
+
 #_00AC85: RTS
 
 ;===================================================================================================
@@ -7449,7 +7604,7 @@ ROUTINE_00AC8C:
 ;===================================================================================================
 
 PrepareBuildingChat:
-#_00AC9A: JSR ROUTINE_00C44D
+#_00AC9A: JSR ResetModuleVariables
 #_00AC9D: JSR ROUTINE_00AE76
 #_00ACA0: JSR ROUTINE_00AC5C
 
@@ -7487,29 +7642,29 @@ CODE_00ACC9:
 CODE_00ACD8:
 #_00ACD8: STA.l $7E7B38
 
-#_00ACDC: JMP ROUTINE_00D403
+#_00ACDC: JMP AdvanceGameModule
 
 ;===================================================================================================
 
 BuildingChat:
-#_00ACDF: JSR ROUTINE_00C44D
+#_00ACDF: JSR ResetModuleVariables
 #_00ACE2: JSR ROUTINE_00AC5C
 #_00ACE5: JSL HandleDialog
 
 #_00ACE9: LDA.l $7E2550
 #_00ACED: BNE CODE_00ACF2
 
-#_00ACEF: JSR ROUTINE_00D403
+#_00ACEF: JSR AdvanceGameModule
 
 CODE_00ACF2:
 #_00ACF2: JSR ROUTINE_00AE76
-#_00ACF5: JSR ROUTINE_00C894
+#_00ACF5: JSR ARoutineAboutNothing
 #_00ACF8: JMP ROUTINE_00B434
 
 ;===================================================================================================
 
 EndBuildingChat:
-#_00ACFB: JSR ROUTINE_00C44D
+#_00ACFB: JSR ResetModuleVariables
 #_00ACFE: JSR ROUTINE_00AE76
 #_00AD01: JSR ROUTINE_00AC69
 #_00AD04: JSR ROUTINE_00B434
@@ -7542,7 +7697,7 @@ CODE_00AD16:
 
 CODE_00AD34:
 #_00AD34: JSR QueueSFX_FD
-#_00AD37: JSR ROUTINE_00D403
+#_00AD37: JSR AdvanceGameModule
 
 .exit
 #_00AD3A: RTS
@@ -7564,12 +7719,12 @@ DepartBuilding:
 #_00AD54: LDA.w #$0003
 #_00AD57: LDX.w #data00ABD8
 #_00AD5A: JSR ROUTINE_00AB5D
-#_00AD5D: JSR ROUTINE_00D403
+#_00AD5D: JSR AdvanceGameModule
 
 #_00AD60: LDA.w #$0010
 #_00AD63: STA.w $051A
 
-#_00AD66: JSR ROUTINE_00E230
+#_00AD66: JSR Set_56E_54E_to_FFFF
 
 #_00AD69: LDA.w #$0F00
 
@@ -7581,7 +7736,7 @@ CODE_00AD6C:
 ;===================================================================================================
 
 ROUTINE_00AD71:
-#_00AD71: JSR ROUTINE_00C44D
+#_00AD71: JSR ResetModuleVariables
 #_00AD74: JSR ROUTINE_00B47B
 #_00AD77: JSL ROUTINE_08D8CC_long
 #_00AD7B: RTS
@@ -7594,11 +7749,11 @@ ZigZagWipeBackOut:
 #_00AD82: JSR ROUTINE_00B016
 #_00AD85: JSL ROUTINE_00F149
 #_00AD89: TAY
-#_00AD8A: BEQ CODE_00AD8D
+#_00AD8A: BEQ .continue
 
 #_00AD8C: RTS
 
-CODE_00AD8D:
+.continue
 #_00AD8D: JSR ROUTINE_00D43C
 
 ;---------------------------------------------------------------------------------------------------
@@ -7666,14 +7821,14 @@ CODE_00ADA9:
 #_00ADF9: LDA.l $7E7B26
 #_00ADFD: STA.w $0516
 
-#_00AE00: JSR ROUTINE_00E230
+#_00AE00: JSR Set_56E_54E_to_FFFF
 
 #_00AE03: LDA.w #$0002
 #_00AE06: LDX.w #data00ABD8
 #_00AE09: JSR ROUTINE_00AB5D
 #_00AE0C: JSR ROUTINE_00D421
 #_00AE0F: JSR ROUTINE_00E129
-#_00AE12: JMP ROUTINE_00D403
+#_00AE12: JMP AdvanceGameModule
 
 ;===================================================================================================
 
@@ -7713,11 +7868,11 @@ ZigZagWipeBackIn:
 #_00AE42: BNE .exit
 
 #_00AE44: LDA.w #data00EC5E
-#_00AE47: LDY.w #$0000
-#_00AE4A: JSR ROUTINE_00E229
+#_00AE47: LDY.w #data00EC5E>>16
+#_00AE4A: JSR ROUTINE_00ECEF_ParamterizedYA
 
 #_00AE4D: LDA.w #data00E4FB
-#_00AE50: LDX.w #$0000
+#_00AE50: LDX.w #data00E4FB>>16
 #_00AE53: JSL ROUTINE_00F352_long
 
 #_00AE57: LDA.w #$006B
@@ -7735,7 +7890,7 @@ ReturnFromBuilding:
 
 #_00AE66: JSR ROUTINE_00B86E
 #_00AE69: STZ.w $051A
-#_00AE6C: JSR ROUTINE_00E230
+#_00AE6C: JSR Set_56E_54E_to_FFFF
 
 #_00AE6F: LDA.w #$0040
 #_00AE72: STA.w $0500
@@ -7785,29 +7940,31 @@ PrepareShop:
 #_00AEA5: ADC.w #$0004
 #_00AEA8: STA.w $194C
 
-#_00AEAB: LDA.w data00AEC2,Y
+#_00AEAB: LDA.w data00AEC2+0,Y
 #_00AEAE: STA.b $38
 
 #_00AEB0: LDA.w #$8800
 #_00AEB3: STA.b $3A
 
-#_00AEB5: LDA.w data00AEC4,Y
+#_00AEB5: LDA.w data00AEC2+2,Y
 #_00AEB8: STA.b $3C
 
 #_00AEBA: LDA.w #$007F
 #_00AEBD: STA.b $3E
 
-#_00AEBF: JMP ROUTINE_00DB57
+#_00AEBF: JMP QueueUpTilemapTransfers
 
 data00AEC2:
-#_00AEC2: db $00,$00
-
-data00AEC4:
-#_00AEC4: db $00,$80,$00,$04,$00,$88,$00,$08
-#_00AECC: db $00,$90,$00,$0C,$00,$98,$00,$70
-#_00AED4: db $00,$A0,$00,$74,$00,$A8,$00,$78
-#_00AEDC: db $00,$B0,$00,$7C,$00,$B8,$00,$30
-#_00AEE4: db $00,$C0,$00,$40,$00,$C8
+#_00AEC2: dw $0000, $8000
+#_00AEC6: dw $0400, $8800
+#_00AECA: dw $0800, $9000
+#_00AECE: dw $0C00, $9800
+#_00AED2: dw $7000, $A000
+#_00AED6: dw $7400, $A800
+#_00AEDA: dw $7800, $B000
+#_00AEDE: dw $7C00, $B800
+#_00AEE2: dw $3000, $C000
+#_00AEE6: dw $4000, $C800
 
 ;===================================================================================================
 
@@ -7843,10 +8000,10 @@ data00AF15:
 ;===================================================================================================
 
 LiftShopCurtainIn:
-#_00AF24: JSR ROUTINE_00C44D
+#_00AF24: JSR ResetModuleVariables
 #_00AF27: JSR ROUTINE_00B46E
 #_00AF2A: JSL ROUTINE_08D8CC_long
-#_00AF2E: JSR ROUTINE_00E031
+#_00AF2E: JSR ROUTINE_00E034_0000
 #_00AF31: CLC
 
 #_00AF32: LDA.w $19DE
@@ -7857,9 +8014,9 @@ LiftShopCurtainIn:
 #_00AF3D: JSR ROUTINE_00AF55
 #_00AF40: JSR ROUTINE_00B016
 
-#_00AF43: LDA.w #$0008
+#_00AF43: LDA.w #$0008 ; SONG 08
 #_00AF46: JSR RequestSong_bounce
-#_00AF49: JSR ROUTINE_00D403
+#_00AF49: JSR AdvanceGameModule
 
 #_00AF4C: LDA.w #$01FF
 
@@ -7893,10 +8050,10 @@ CODE_00AF58:
 ;===================================================================================================
 
 WalkIntoShop:
-#_00AF75: JSR ROUTINE_00C44D
+#_00AF75: JSR ResetModuleVariables
 #_00AF78: JSR ROUTINE_00B46E
 #_00AF7B: JSL ROUTINE_08D8CC_long
-#_00AF7F: JSR ROUTINE_00E031
+#_00AF7F: JSR ROUTINE_00E034_0000
 #_00AF82: JSR ROUTINE_00B3F1
 #_00AF85: SEC
 
@@ -7915,7 +8072,7 @@ WalkIntoShop:
 #_00AFA3: LDA.w #$FFFE
 #_00AFA6: STA.l $7E7B38
 
-#_00AFAA: JSR ROUTINE_00D403
+#_00AFAA: JSR AdvanceGameModule
 
 #_00AFAD: LDA.w #$0B80
 
@@ -7928,7 +8085,7 @@ CODE_00AFB0:
 ;===================================================================================================
 
 BeginShopDialog:
-#_00AFBA: JSR ROUTINE_00C44D
+#_00AFBA: JSR ResetModuleVariables
 #_00AFBD: JSR ROUTINE_00AFF7
 #_00AFC0: JSR ROUTINE_00AC5C
 
@@ -7954,7 +8111,7 @@ CODE_00AFE3:
 #_00AFEA: LDA.w #$FFFE
 #_00AFED: STA.l $7E7B38
 
-#_00AFF1: JSR ROUTINE_00D403
+#_00AFF1: JSR AdvanceGameModule
 #_00AFF4: JMP HandleShopBG3Scroll
 
 ;===================================================================================================
@@ -7962,7 +8119,7 @@ CODE_00AFE3:
 ROUTINE_00AFF7:
 #_00AFF7: JSR ROUTINE_00B46E
 #_00AFFA: JSL ROUTINE_08D8CC_long
-#_00AFFE: JSR ROUTINE_00E031
+#_00AFFE: JSR ROUTINE_00E034_0000
 
 #_00B001: LDA.w $04FA
 #_00B004: BNE CODE_00B013
@@ -7993,7 +8150,7 @@ ROUTINE_00B016:
 #_00B028: LDA.w #$8040
 #_00B02B: STA.b $3A
 
-#_00B02D: JSR ROUTINE_00DB57
+#_00B02D: JSR QueueUpTilemapTransfers
 
 #_00B030: LDA.w $05BA
 #_00B033: BMI ROUTINE_00B038
@@ -8028,7 +8185,7 @@ ROUTINE_00B038:
 ;===================================================================================================
 
 TalkToShopKeeper:
-#_00B05A: JSR ROUTINE_00C44D
+#_00B05A: JSR ResetModuleVariables
 #_00B05D: JSL HandleDialog
 
 #_00B061: LDA.l $7E2550
@@ -8038,7 +8195,7 @@ TalkToShopKeeper:
 #_00B06A: STA.l $7E7B32
 
 #_00B06E: JSL ROUTINE_08DEC4_long
-#_00B072: JSR ROUTINE_00D403
+#_00B072: JSR AdvanceGameModule
 
 CODE_00B075:
 #_00B075: JSR ROUTINE_00AFF7
@@ -8068,7 +8225,7 @@ PatronizeShop:
 
 #_00B0A2: LDX.w #$0002
 #_00B0A5: JSL ROUTINE_08D7BC
-#_00B0A9: JSR ROUTINE_00D403
+#_00B0A9: JSR AdvanceGameModule
 
 CODE_00B0AC:
 #_00B0AC: JMP HandleShopBG3Scroll
@@ -8112,7 +8269,7 @@ ROUTINE_00B0C5:
 ;===================================================================================================
 
 ROUTINE_00B0E7:
-#_00B0E7: JSR ROUTINE_00E2D6
+#_00B0E7: JSR TestNewInput_Right
 #_00B0EA: BEQ CODE_00B10C
 
 #_00B0EC: LDA.w #$0015 ; SFX 15
@@ -8131,10 +8288,11 @@ CODE_00B102:
 #_00B102: STA.l $7E7B32
 
 #_00B106: JSL ROUTINE_08DEC4_long
+
 #_00B10A: BRA CODE_00B12C
 
 CODE_00B10C:
-#_00B10C: JSR ROUTINE_00E2CF
+#_00B10C: JSR TestNewInput_Left
 #_00B10F: BEQ CODE_00B12C
 
 #_00B111: LDA.w #$0015 ; SFX 15
@@ -8157,9 +8315,6 @@ CODE_00B12C:
 #_00B12C: JSL ROUTINE_08DF1E_long
 #_00B130: RTS
 
-;===================================================================================================
-
-ROUTINE_00B131:
 #_00B131: RTS
 
 ;===================================================================================================
@@ -8249,7 +8404,7 @@ CODE_00B1C3:
 #_00B1C3: LDA.w #$FFFF
 #_00B1C6: STA.l $7E7B34
 
-#_00B1CA: JSR ROUTINE_00D403
+#_00B1CA: JSR AdvanceGameModule
 #_00B1CD: BRA CODE_00B1E2
 
 CODE_00B1CF:
@@ -8327,8 +8482,8 @@ CODE_00B21F:
 #_00B232: LDA.w #$0000
 #_00B235: STA.b $3E
 
-#_00B237: JSL ROUTINE_00DB57_long
-#_00B23B: JSR ROUTINE_00E2DD
+#_00B237: JSL QueueUpTilemapTransfers_long
+#_00B23B: JSR TestNewInput_LeftOrRight
 #_00B23E: BEQ CODE_00B28D
 
 #_00B240: PHA
@@ -8372,7 +8527,7 @@ CODE_00B26D:
 #_00B282: LDA.w #$0000
 #_00B285: STA.b $3E
 
-#_00B287: JSL ROUTINE_00DB57_long
+#_00B287: JSL QueueUpTilemapTransfers_long
 #_00B28B: BRA .exit
 
 CODE_00B28D:
@@ -8465,7 +8620,7 @@ AttemptToExitShop:
 CODE_00B309:
 #_00B309: LDX.w #$000C
 #_00B30C: JSL ROUTINE_08D7BC
-#_00B310: JSR ROUTINE_00D403
+#_00B310: JSR AdvanceGameModule
 
 CODE_00B313:
 #_00B313: JMP HandleShopBG3Scroll
@@ -8473,7 +8628,7 @@ CODE_00B313:
 ;===================================================================================================
 
 ROUTINE_00B316:
-#_00B316: JSR ROUTINE_00C44D
+#_00B316: JSR ResetModuleVariables
 #_00B319: JSL HandleDialog
 #_00B31D: JMP ROUTINE_00AFF7
 
@@ -8505,7 +8660,7 @@ CODE_00B348:
 #_00B34B: STA.w $04A2
 
 #_00B34E: JSR ROUTINE_00B361
-#_00B351: JSR ROUTINE_00D403
+#_00B351: JSR AdvanceGameModule
 
 CODE_00B354:
 #_00B354: JMP HandleShopBG3Scroll
@@ -8533,7 +8688,7 @@ ROUTINE_00B361:
 #_00B370: LDA.w #$8040
 #_00B373: STA.b $3A
 
-#_00B375: JMP ROUTINE_00DB57
+#_00B375: JMP QueueUpTilemapTransfers
 
 ;===================================================================================================
 
@@ -8554,7 +8709,7 @@ ROUTINE_00B37B:
 #_00B387: LDA.w #$0005
 #_00B38A: STA.b $3E
 
-#_00B38C: JMP ROUTINE_00DB57
+#_00B38C: JMP QueueUpTilemapTransfers
 
 ;===================================================================================================
 
@@ -8571,14 +8726,17 @@ ROUTINE_00B38F:
 
 #_00B39D: LDA.w data00B3A8+0,Y
 #_00B3A0: PLY
+
 #_00B3A1: JSL ROUTINE_04F828
 #_00B3A5: JMP ROUTINE_00B434
 
 data00B3A8:
-#_00B3A8: db $44,$00
-#_00B3AA: db $01,$00,$46,$00,$02,$00,$46,$00
-#_00B3B2: db $03,$00,$46,$00,$04,$00,$46,$00
-#_00B3BA: db $05,$00,$44,$00,$06,$00
+#_00B3A8: dw $0044, $0001
+#_00B3AC: dw $0046, $0002
+#_00B3B0: dw $0046, $0003
+#_00B3B4: dw $0046, $0004
+#_00B3B8: dw $0046, $0005
+#_00B3BC: dw $0044, $0006
 
 ;===================================================================================================
 
@@ -8595,14 +8753,17 @@ ROUTINE_00B3C0:
 
 #_00B3CE: LDA.w data00B3D9+0,Y
 #_00B3D1: PLY
+
 #_00B3D2: JSL ROUTINE_04F828
 #_00B3D6: JMP ROUTINE_00B434
 
 data00B3D9:
-#_00B3D9: db $01,$00
-#_00B3DB: db $01,$00,$01,$00,$02,$00,$01,$00
-#_00B3E3: db $03,$00,$01,$00,$04,$00,$01,$00
-#_00B3EB: db $05,$00,$01,$00,$06,$00
+#_00B3D9: dw $0001, $0001
+#_00B3DD: dw $0001, $0002
+#_00B3E1: dw $0001, $0003
+#_00B3E5: dw $0001, $0004
+#_00B3E9: dw $0001, $0005
+#_00B3ED: dw $0001, $0006
 
 ;===================================================================================================
 
@@ -8630,20 +8791,21 @@ ROUTINE_00B409:
 #_00B411: ASL A
 #_00B412: TAY
 
-#_00B413: LDA.w data00B41E,Y
+#_00B413: LDA.w data00B41C+2,Y
 #_00B416: PHA
 
-#_00B417: LDA.w data00B41C,Y
+#_00B417: LDA.w data00B41C+0,Y
 #_00B41A: PLY
+
 #_00B41B: RTS
 
 data00B41C:
-#_00B41C: db $09,$00
-
-data00B41E:
-#_00B41E: db $01,$00,$09,$00,$02,$00,$09,$00
-#_00B426: db $03,$00,$09,$00,$04,$00,$09,$00
-#_00B42E: db $05,$00,$09,$00,$06,$00
+#_00B41C: dw $0009, $0001
+#_00B420: dw $0009, $0002
+#_00B424: dw $0009, $0003
+#_00B428: dw $0009, $0004
+#_00B42C: dw $0009, $0005
+#_00B430: dw $0009, $0006
 
 ;===================================================================================================
 
@@ -8702,10 +8864,10 @@ ROUTINE_00B47B:
 #_00B47B: LDA.l $7E7B28
 #_00B47F: TAX
 
-#_00B480: LDA.w PTR16_00B4F6,X
+#_00B480: LDA.w pointers00B4F6,X
 #_00B483: BEQ CODE_00B488
 
-#_00B485: JSR (PTR16_00B4F6,X)
+#_00B485: JSR (pointers00B4F6,X)
 
 CODE_00B488:
 #_00B488: LDA.l $7E7B34
@@ -8717,10 +8879,10 @@ CODE_00B488:
 
 #_00B497: TAX
 
-#_00B498: LDA.w PTR16_00B620,X
+#_00B498: LDA.w pointers00B620,X
 #_00B49B: BEQ .exit
 
-#_00B49D: JSR (PTR16_00B620,X)
+#_00B49D: JSR (pointers00B620,X)
 
 .exit
 #_00B4A0: RTS
@@ -8730,12 +8892,12 @@ CODE_00B488:
 CODE_00B4A1:
 #_00B4A1: LDA.l $7E7B28
 #_00B4A5: TAX
-#_00B4A6: JSR (PTR16_00B4AA,X)
+#_00B4A6: JSR (pointers00B4AA,X)
 #_00B4A9: RTS
 
 ;---------------------------------------------------------------------------------------------------
 
-PTR16_00B4AA:
+pointers00B4AA:
 #_00B4AA: dw ROUTINE_00B6D6
 #_00B4AC: dw ROUTINE_00B6F7
 #_00B4AE: dw ROUTINE_00B6D6
@@ -8777,7 +8939,7 @@ PTR16_00B4AA:
 
 ;---------------------------------------------------------------------------------------------------
 
-PTR16_00B4F6:
+pointers00B4F6:
 #_00B4F6: dw ROUTINE_00B5CE
 #_00B4F8: dw ROUTINE_00B5FF
 #_00B4FA: dw ROUTINE_00B5CE
@@ -8978,7 +9140,7 @@ CODE_00B617:
 
 ;===================================================================================================
 
-PTR16_00B620:
+pointers00B620:
 #_00B620: dw ROUTINE_00B640
 #_00B622: dw ROUTINE_00B6F7
 #_00B624: dw ROUTINE_00B640
@@ -9168,10 +9330,10 @@ CODE_00B71A:
 ;===================================================================================================
 
 WalkOutOfShop:
-#_00B71F: JSR ROUTINE_00C44D
+#_00B71F: JSR ResetModuleVariables
 #_00B722: JSR ROUTINE_00B46E
 #_00B725: JSL ROUTINE_08D8CC_long
-#_00B729: JSR ROUTINE_00E031
+#_00B729: JSR ROUTINE_00E034_0000
 #_00B72C: CLC
 
 #_00B72D: LDA.l $7E7B2E
@@ -9192,7 +9354,7 @@ CODE_00B73C:
 #_00B74A: CMP.w #$011F
 #_00B74D: BCS CODE_00B75E
 
-#_00B74F: JSR ROUTINE_00D403
+#_00B74F: JSR AdvanceGameModule
 #_00B752: JSR QueueSFX_FD
 #_00B755: STZ.w $194C
 #_00B758: JSR ROUTINE_00B764
@@ -9243,16 +9405,16 @@ CODE_00B78A:
 
 #_00B796: LDA.l pointers08E0D6,X
 #_00B79A: LDY.w #$0008
-#_00B79D: JMP ROUTINE_00E229
+#_00B79D: JMP ROUTINE_00ECEF_ParamterizedYA
 
 ;===================================================================================================
 
 PrepareLevelFromShop:
 #_00B7A0: LDX.w #$0800
 
-CODE_00B7A3:
+.wait
 #_00B7A3: DEX
-#_00B7A4: BNE CODE_00B7A3
+#_00B7A4: BNE .wait
 
 #_00B7A6: LDY.w $194C
 #_00B7A9: CPY.w #$0020
@@ -9275,8 +9437,10 @@ CODE_00B7A3:
 #_00B7C5: LDA.w #$007E
 #_00B7C8: STA.b $3E
 
-#_00B7CA: JSR ROUTINE_00DB57
+#_00B7CA: JSR QueueUpTilemapTransfers
 #_00B7CD: BRA .exit
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_00B7CF:
 #_00B7CF: JSR ROUTINE_00E29B
@@ -9301,12 +9465,14 @@ CODE_00B7CF:
 #_00B7F6: RTS
 
 data00B7F7:
-#_00B7F7: db $00,$30
-#_00B7F9: db $00,$30
-#_00B7FB: db $00,$34,$00,$38,$00,$38,$00,$40
-#_00B803: db $00,$3C,$00,$48,$00,$40,$00,$50
-#_00B80B: db $00,$44,$00,$58,$00,$48,$00,$60
-#_00B813: db $00,$4C,$00,$68
+#_00B7F7: dw $3000, $3000
+#_00B7FB: dw $3400, $3800
+#_00B7FF: dw $3800, $4000
+#_00B803: dw $3C00, $4800
+#_00B807: dw $4000, $5000
+#_00B80B: dw $4400, $5800
+#_00B80F: dw $4800, $6000
+#_00B813: dw $4C00, $6800
 
 ;===================================================================================================
 
@@ -9320,7 +9486,7 @@ LiftShopCurtainOut:
 #_00B824: BCC CODE_00B82F
 
 #_00B826: JSR ROUTINE_00B016
-#_00B829: JSR ROUTINE_00D403
+#_00B829: JSR AdvanceGameModule
 
 #_00B82C: LDA.w #$01FF
 
@@ -9332,7 +9498,7 @@ CODE_00B82F:
 ;===================================================================================================
 
 RecoverOAMFromCache:
-#_00B835: JSR ROUTINE_00C44D
+#_00B835: JSR ResetModuleVariables
 
 #_00B838: LDX.w #$0000
 
@@ -9396,6 +9562,7 @@ ROUTINE_00B86E:
 #_00B893: LDX.w $04FE
 #_00B896: JSL ROUTINE_01ACA2_long
 #_00B89A: STZ.w $04F4
+
 #_00B89D: RTS
 
 data00B89E:
@@ -9481,7 +9648,7 @@ CODE_00B910:
 
 #_00B91C: LDA.l $7E7B16
 #_00B920: JSL SetMessagePointer
-#_00B924: JSR ROUTINE_00D403
+#_00B924: JSR AdvanceGameModule
 
 .exit
 #_00B927: RTS
@@ -9496,7 +9663,7 @@ ROUTINE_00B928:
 #_00B932: LDA.l $7E2550
 #_00B936: BNE .exit
 
-#_00B938: JSR ROUTINE_00D403
+#_00B938: JSR AdvanceGameModule
 
 .exit
 #_00B93B: RTS
@@ -9518,7 +9685,9 @@ ROUTINE_00B93C:
 
 #_00B953: LDA.l pointers04FCDD,X
 #_00B957: TAX
+
 #_00B958: JSL ROUTINE_05D57A_long
+
 #_00B95C: RTS
 
 CODE_00B95D:
@@ -9548,14 +9717,14 @@ data00B97C:
 ;===================================================================================================
 
 ROUTINE_00B990:
-#_00B990: LDX.w #data00B999
+#_00B990: LDX.w #.table
 #_00B993: JSR BulkDecompressionViaTable_currentDB
 
 #_00B996: JMP .continue
 
 ;---------------------------------------------------------------------------------------------------
 
-#data00B999:
+.table
 #_00B999: db $1F, $24 ; read address $1F:8096 for pointer
 #_00B99B: dl $7F8000 : db $80 ; target address
 
@@ -9576,7 +9745,7 @@ ROUTINE_00B990:
 #_00B9B0: LDA.w #$007F
 #_00B9B3: STA.b $3E
 
-#_00B9B5: JMP ROUTINE_00DB57
+#_00B9B5: JMP QueueUpTilemapTransfers
 
 ;===================================================================================================
 
@@ -9812,7 +9981,7 @@ ROUTINE_00BB36:
 #_00BB4E: LDY.w #$0026
 #_00BB51: JSR ROUTINE_00BA4B
 #_00BB54: JSR ROUTINE_00BA65
-#_00BB57: JSR ROUTINE_00E2F7
+#_00BB57: JSR Set_056C_to_2000
 #_00BB5A: STA.l $7E7A00
 
 #_00BB5E: JMP ROUTINE_00D421
@@ -9820,7 +9989,7 @@ ROUTINE_00BB36:
 ;===================================================================================================
 
 ROUTINE_00BB61:
-#_00BB61: JSR ROUTINE_00E2F7
+#_00BB61: JSR Set_056C_to_2000
 
 #_00BB64: LDY.w #$0006
 #_00BB67: JSR ROUTINE_00BACB
@@ -9844,7 +10013,7 @@ ROUTINE_00BB85:
 #_00BB85: LDA.w #$000A
 #_00BB88: STA.w $18E4
 
-#_00BB8B: JSR ROUTINE_00E2F7
+#_00BB8B: JSR Set_056C_to_2000
 
 #_00BB8E: LDA.w #$0002
 #_00BB91: STA.l $7E7B14
@@ -9883,7 +10052,7 @@ ROUTINE_00BBD2:
 #_00BBD2: LDA.w #$000A
 #_00BBD5: STA.w $18E4
 
-#_00BBD8: JSR ROUTINE_00E2F7
+#_00BBD8: JSR Set_056C_to_2000
 
 #_00BBDB: LDA.w #$0002
 #_00BBDE: STA.l $7E7B14
@@ -9919,7 +10088,7 @@ ROUTINE_00BBD2:
 ;===================================================================================================
 
 ROUTINE_00BC1F:
-#_00BC1F: JSR ROUTINE_00E2F7
+#_00BC1F: JSR Set_056C_to_2000
 
 #_00BC22: LDY.w #$000C
 #_00BC25: JSR ROUTINE_00BACB
@@ -9976,7 +10145,7 @@ ROUTINE_00BC43:
 #_00BC8C: LDA.w #$0B80
 #_00BC8F: JSR ROUTINE_00BA6B
 
-#_00BC92: LDA.w #$0014
+#_00BC92: LDA.w #$0014 ; SONG 14
 #_00BC95: JSR RequestSong_bounce
 
 #_00BC98: LDA.w #$0146
@@ -10003,7 +10172,7 @@ ROUTINE_00BCA1:
 #_00BCBC: JSR ROUTINE_00BA4B
 #_00BCBF: JSR ROUTINE_00BA65
 
-#_00BCC2: JSR ROUTINE_00E2F7
+#_00BCC2: JSR Set_056C_to_2000
 #_00BCC5: STA.l $7E7A00
 
 #_00BCC9: JMP ROUTINE_00D421
@@ -10011,7 +10180,7 @@ ROUTINE_00BCA1:
 ;===================================================================================================
 
 ROUTINE_00BCCC:
-#_00BCCC: JSR ROUTINE_00E2F7
+#_00BCCC: JSR Set_056C_to_2000
 
 #_00BCCF: LDY.w #$0018
 #_00BCD2: JSR ROUTINE_00BACB
@@ -10141,9 +10310,9 @@ CODE_00BD9C:
 #_00BD9C: JSR ROUTINE_00BA4B
 #_00BD9F: JSR ROUTINE_00BA65
 
-#_00BDA2: LDA.w #$0015
+#_00BDA2: LDA.w #$0015 ; SONG 15
 #_00BDA5: JSR RequestSong_bounce
-#_00BDA8: JSR ROUTINE_00E2F7
+#_00BDA8: JSR Set_056C_to_2000
 #_00BDAB: JMP ROUTINE_00D421
 
 ;===================================================================================================
@@ -10163,7 +10332,7 @@ ROUTINE_00BDAE:
 #_00BDC3: LDY.w #$0034
 #_00BDC6: JSR ROUTINE_00BA4B
 #_00BDC9: JSR ROUTINE_00BA65
-#_00BDCC: JSR ROUTINE_00E2F7
+#_00BDCC: JSR Set_056C_to_2000
 #_00BDCF: STA.l $7E7A00
 
 #_00BDD3: JMP ROUTINE_00D421
@@ -10250,7 +10419,7 @@ ROUTINE_00BE32:
 #_00BE71: JSR ROUTINE_00BA4B
 #_00BE74: JSR ROUTINE_00BA65
 
-#_00BE77: LDA.w #$0013
+#_00BE77: LDA.w #$0013 ; SONG 13
 #_00BE7A: JSR RequestSong_bounce
 
 #_00BE7D: LDA.w #$013C
@@ -10306,7 +10475,7 @@ CODE_00BED1:
 
 #_00BEE1: LDX.w #$0800
 #_00BEE4: JSL ROUTINE_08D53E_long
-#_00BEE8: JSR ROUTINE_00E2F7
+#_00BEE8: JSR Set_056C_to_2000
 #_00BEEB: STA.l $7E7A00
 
 #_00BEEF: JMP ROUTINE_00D421
@@ -10314,7 +10483,7 @@ CODE_00BED1:
 ;===================================================================================================
 
 ROUTINE_00BEF2:
-#_00BEF2: JSR ROUTINE_00E2F7
+#_00BEF2: JSR Set_056C_to_2000
 
 #_00BEF5: LDY.w #$003C
 #_00BEF8: JSR ROUTINE_00BACB
@@ -10361,7 +10530,7 @@ ROUTINE_00BF29:
 #_00BF41: LDY.w #$0004
 #_00BF44: JSR ROUTINE_00BA4B
 #_00BF47: JSR ROUTINE_00BA65
-#_00BF4A: JSR ROUTINE_00E2F7
+#_00BF4A: JSR Set_056C_to_2000
 #_00BF4D: STA.l $7E7A00
 
 #_00BF51: JMP ROUTINE_00D421
@@ -10369,7 +10538,7 @@ ROUTINE_00BF29:
 ;===================================================================================================
 
 ROUTINE_00BF54:
-#_00BF54: JSR ROUTINE_00E2F7
+#_00BF54: JSR Set_056C_to_2000
 
 #_00BF57: LDY.w #$0042
 #_00BF5A: JSR ROUTINE_00BACB
@@ -10448,7 +10617,7 @@ ROUTINE_00BFE4:
 
 #_00BFE7: LDY.w #$0048
 #_00BFEA: JSR ROUTINE_00BACB
-#_00BFED: JSR ROUTINE_00E2F7
+#_00BFED: JSR Set_056C_to_2000
 #_00BFF0: JSR ROUTINE_00BA8F_wrapper
 
 #_00BFF3: LDA.w #$4800
@@ -10613,7 +10782,7 @@ CODE_00C114:
 #_00C123: LDA.w #$007E
 #_00C126: STA.b $3E
 
-#_00C128: JSR ROUTINE_00DB57
+#_00C128: JSR QueueUpTilemapTransfers
 
 #_00C12B: LDX.w #$0000
 
@@ -10677,7 +10846,7 @@ CODE_00C182:
 #_00C189: BNE CODE_00C169
 
 #_00C18B: LDA.w #data00E4FB
-#_00C18E: LDX.w #$0000
+#_00C18E: LDX.w #data00E4FB>>16
 #_00C191: JSL ROUTINE_00F352_long
 #_00C195: SEP #$20
 
@@ -10786,7 +10955,7 @@ CODE_00C232:
 #_00C259: LDA.w #$0000
 #_00C25C: JSR ROUTINE_00F130
 #_00C25F: JSL ROUTINE_00DB0F
-#_00C263: JSR ROUTINE_00D403
+#_00C263: JSR AdvanceGameModule
 #_00C266: JSL ROUTINE_00D746_long
 #_00C26A: JSL ROUTINE_00D7A2
 #_00C26E: RTS
@@ -10807,7 +10976,7 @@ ROUTINE_00C28B:
 #_00C28E: LDX.w #$0000
 #_00C291: TXA
 
-CODE_00C292:
+.next_a
 #_00C292: STA.w $1840,X
 
 #_00C295: CLC
@@ -10815,33 +10984,37 @@ CODE_00C292:
 #_00C299: INX
 #_00C29A: INX
 #_00C29B: DEY
-#_00C29C: BNE CODE_00C292
+#_00C29C: BNE .next_a
+
+;---------------------------------------------------------------------------------------------------
 
 #_00C29E: STX.w $18EA
 
 #_00C2A1: LDX.w #$0000
 #_00C2A4: TXA
 
-CODE_00C2A5:
+.next_b
 #_00C2A5: STA.w $0700,X
 
 #_00C2A8: INX
 #_00C2A9: INX
 #_00C2AA: CPX.w #$0100
-#_00C2AD: BCC CODE_00C2A5
+#_00C2AD: BCC .next_b
+
+;---------------------------------------------------------------------------------------------------
 
 #_00C2AF: STZ.b $0E
 
 #_00C2B1: LDX.w #$0000
 #_00C2B4: TXA
 
-CODE_00C2B5:
+.next_c
 #_00C2B5: STA.w $0800,X
 
 #_00C2B8: INX
 #_00C2B9: INX
 #_00C2BA: CPX.w #$1000
-#_00C2BD: BCC CODE_00C2B5
+#_00C2BD: BCC .next_c
 
 #_00C2BF: RTS
 
@@ -10889,6 +11062,7 @@ CODE_00C2DE:
 
 #_00C2FD: STZ.w $194C
 #_00C300: STZ.w $194E
+
 #_00C303: RTS
 
 ;===================================================================================================
@@ -11013,6 +11187,7 @@ CODE_00C3B0:
 #_00C3DA: STA.w $05E4
 
 #_00C3DD: STZ.w $1F34
+
 #_00C3E0: RTS
 
 ;===================================================================================================
@@ -11025,16 +11200,16 @@ LevelWipe:
 
 #_00C3EA: LDA.w #$0004
 #_00C3ED: TSB.w $0524
-#_00C3F0: JSR ROUTINE_00E230
+#_00C3F0: JSR Set_56E_54E_to_FFFF
 #_00C3F3: JSR PlayLevel
 #_00C3F6: JSL ROUTINE_00F149
 #_00C3FA: TAY
 #_00C3FB: BNE .exit
 
 #_00C3FD: LDA.w #data00EC5E
-#_00C400: LDY.w #$0000
-#_00C403: JSR ROUTINE_00E229
-#_00C406: JSR ROUTINE_00D403
+#_00C400: LDY.w #data00EC5E>>16
+#_00C403: JSR ROUTINE_00ECEF_ParamterizedYA
+#_00C406: JSR AdvanceGameModule
 
 .exit
 #_00C409: RTS
@@ -11059,7 +11234,7 @@ PrepareLevel:
 #_00C425: LDA.w #$1100
 #_00C428: STA.w $194C
 
-#_00C42B: JSR ROUTINE_00D403
+#_00C42B: JSR AdvanceGameModule
 
 #_00C42E: LDA.w #$0000
 
@@ -11092,7 +11267,7 @@ ResetJoypadRead:
 
 ;===================================================================================================
 
-ResetModuleVariables_00C44D
+ResetModuleVariables:
 #_00C44D: STZ.w $0600
 
 #_00C450: PHB
@@ -11216,7 +11391,7 @@ ROUTINE_00C4E4:
 ;===================================================================================================
 
 PlayLevel:
-#_00C521: JSR ROUTINE_00C44D
+#_00C521: JSR ResetModuleVariables
 
 #_00C524: LDA.w $05BA
 #_00C527: BMI .skip_timer
@@ -11329,7 +11504,7 @@ CODE_00C5C5:
 #_00C5CE: LDA.w #$8040
 #_00C5D1: STA.b $3A
 
-#_00C5D3: JSR ROUTINE_00DB57
+#_00C5D3: JSR QueueUpTilemapTransfers
 
 #_00C5D6: LDA.w $05BA
 #_00C5D9: BMI CODE_00C5DE
@@ -11413,7 +11588,7 @@ CODE_00C671:
 CODE_00C675:
 #_00C675: STZ.w $04F4
 #_00C678: JSR ROUTINE_00DE52
-#_00C67B: JSR ROUTINE_00E2C8
+#_00C67B: JSR TestNewInput_Start
 #_00C67E: BEQ CODE_00C6AF
 
 #_00C680: LDA.w $19CE
@@ -11554,7 +11729,7 @@ CODE_00C764:
 #_00C76F: ASL A
 #_00C770: TAY
 
-#_00C771: LDA.w data00C823,Y
+#_00C771: LDA.w data00C823+0,Y
 #_00C774: STA.b $3C
 
 #_00C776: LDA.w data00C823+2,Y
@@ -11566,7 +11741,7 @@ CODE_00C764:
 #_00C780: LDA.w #$8040
 #_00C783: STA.b $3A
 
-#_00C785: JSR ROUTINE_00DB57
+#_00C785: JSR QueueUpTilemapTransfers
 #_00C788: CLC
 
 #_00C789: LDA.b $3C
@@ -11576,7 +11751,7 @@ CODE_00C764:
 #_00C790: LDA.w #$67C0
 #_00C793: STA.b $38
 
-#_00C795: JSR ROUTINE_00DB57
+#_00C795: JSR QueueUpTilemapTransfers
 
 CODE_00C798:
 #_00C798: LDA.w $04C4
@@ -11600,7 +11775,7 @@ CODE_00C798:
 #_00C7B7: LDA.w #$8040
 #_00C7BA: STA.b $3A
 
-#_00C7BC: JSR ROUTINE_00DB57
+#_00C7BC: JSR QueueUpTilemapTransfers
 #_00C7BF: CLC
 
 #_00C7C0: LDA.b $3C
@@ -11610,7 +11785,7 @@ CODE_00C798:
 #_00C7C7: LDA.w #$67E0
 #_00C7CA: STA.b $38
 
-#_00C7CC: JSR ROUTINE_00DB57
+#_00C7CC: JSR QueueUpTilemapTransfers
 
 CODE_00C7CF:
 #_00C7CF: LDA.w $04C2
@@ -11632,7 +11807,7 @@ CODE_00C7CF:
 #_00C7EA: LDA.w #$8040
 #_00C7ED: STA.b $3A
 
-#_00C7EF: JSR ROUTINE_00DB57
+#_00C7EF: JSR QueueUpTilemapTransfers
 #_00C7F2: CLC
 
 #_00C7F3: LDA.b $3C
@@ -11642,32 +11817,40 @@ CODE_00C7CF:
 #_00C7FA: LDA.w #$61E0
 #_00C7FD: STA.b $38
 
-#_00C7FF: JSR ROUTINE_00DB57
+#_00C7FF: JSR QueueUpTilemapTransfers
 
 .exit
 #_00C802: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data00C803:
-#_00C803: db $80,$D1
-#_00C805: db $1E,$00,$C0,$D1,$1E,$00,$80,$D5
-#_00C80D: db $1E,$00,$C0,$D5,$1E,$00,$00,$D9
-#_00C815: db $1E,$00,$40,$D9,$1E,$00,$80,$D9
-#_00C81D: db $1E,$00,$C0,$D9,$1E,$00
+#_00C803: dd data1ED180
+#_00C807: dd data1ED1C0
+#_00C80B: dd data1ED580
+#_00C80F: dd data1ED5C0
+#_00C813: dd data1ED900
+#_00C817: dd data1ED940
+#_00C81B: dd data1ED980
+#_00C81F: dd data1ED9C0
 
 ;---------------------------------------------------------------------------------------------------
 
 data00C823:
-#_00C823: db $80,$C5
-#_00C825: db $1E,$00,$C0,$C5,$1E,$00
+#_00C823: dd data1EC580
+#_00C827: dd data1EC5C0
 
 ;---------------------------------------------------------------------------------------------------
 
 data00C82B:
-#_00C82B: db $DF,$00
-#_00C82D: db $7F,$02,$3F,$5A,$DF,$00,$F8,$7C
-#_00C835: db $3F,$5A,$C0,$7D,$F5,$7C,$80,$73
-#_00C83D: db $C0,$7D,$A0,$03,$80,$73,$FF,$03
-#_00C845: db $A0,$03,$7F,$02,$FF,$03
+#_00C82B: dw $00DF, $027F
+#_00C82F: dw $5A3F, $00DF
+#_00C833: dw $7CF8, $5A3F
+#_00C837: dw $7DC0, $7CF5
+#_00C83B: dw $7380, $7DC0
+#_00C83F: dw $03A0, $7380
+#_00C843: dw $03FF, $03A0
+#_00C847: dw $027F, $03FF
 
 ;===================================================================================================
 
@@ -11695,13 +11878,13 @@ data00C85C:
 
 ;===================================================================================================
 
-ROUTINE_00C894:
+ARoutineAboutNothing:
 #_00C894: RTS
 
 ;===================================================================================================
 
 ROUTINE_00C895:
-#_00C895: JSR ROUTINE_00D462
+#_00C895: JSR ExecuteMosaicFadeOut_GrabFrame
 #_00C898: BNE CODE_00C89D
 
 #_00C89A: INC.w $0500
@@ -11726,7 +11909,7 @@ ROUTINE_00C8A0:
 
 ROUTINE_00C8B2:
 #_00C8B2: JSR WaitForVBlankToEndOrFor65535
-#_00C8B5: JSR ROUTINE_00D46D
+#_00C8B5: JSR ExecuteMosaicFadeIn_GrabFrame
 #_00C8B8: BNE CODE_00C8C0
 
 #_00C8BA: LDA.w #$003F
@@ -11814,12 +11997,13 @@ PrepareLevelArea:
 #_00C942: LDA.w #$8040
 #_00C945: STA.b $3A
 
-#_00C947: JSR ROUTINE_00DB57
+#_00C947: JSR QueueUpTilemapTransfers
 #_00C94A: JSR ResetSFXQueues
 #_00C94D: STZ.b $0A
 #_00C94F: STZ.b $0C
 #_00C951: JSR ROUTINE_00D421
 #_00C954: INC.w $0500
+
 #_00C957: RTS
 
 .vectors
@@ -11843,38 +12027,42 @@ ROUTINE_00C978:
 
 #_00C979: LDX.w #$0000
 
-CODE_00C97C:
+.next_clear_a
 #_00C97C: LDA.l $7E2B80,X
 #_00C980: STA.l $7FF800,X
 
 #_00C984: INX
 #_00C985: INX
 #_00C986: CPX.w #$0040
-#_00C989: BNE CODE_00C97C
+#_00C989: BNE .next_clear_a
+
+;---------------------------------------------------------------------------------------------------
 
 #_00C98B: PLX
 #_00C98C: JSR BulkDecompressionViaTable_currentDB
 
 #_00C98F: LDX.w #$027E
 
-CODE_00C992:
+.next_fill
 #_00C992: LDA.l $7F8000,X
 #_00C996: STA.l $7E2A00,X
 
 #_00C99A: DEX
 #_00C99B: DEX
-#_00C99C: BNE CODE_00C992
+#_00C99C: BNE .next_fill
+
+;---------------------------------------------------------------------------------------------------
 
 #_00C99E: LDX.w #$0000
 
-CODE_00C9A1:
+.next_clear_b
 #_00C9A1: LDA.l $7FF800,X
 #_00C9A5: STA.l $7E2B80,X
 
 #_00C9A9: INX
 #_00C9AA: INX
 #_00C9AB: CPX.w #$0040
-#_00C9AE: BNE CODE_00C9A1
+#_00C9AE: BNE .next_clear_b
 
 #_00C9B0: LDX.w #$0000
 #_00C9B3: JSR ROUTINE_00BAB8
@@ -11920,7 +12108,7 @@ CODE_00C9EF:
 #_00C9F2: STA.w $05E8
 
 #_00C9F5: STZ.b $0E
-#_00C9F7: JSR ROUTINE_00E2F7
+#_00C9F7: JSR Set_056C_to_2000
 #_00C9FA: RTS
 
 ;===================================================================================================
@@ -11981,7 +12169,7 @@ ROUTINE_00CA50:
 #_00CA58: LDA.w #$0074
 #_00CA5B: JSR ROUTINE_00BD82
 
-#_00CA5E: LDA.w #$0015
+#_00CA5E: LDA.w #$0015 ; SONG 15
 #_00CA61: JSR RequestSong_bounce
 
 #_00CA64: LDX.w #$8800
@@ -12030,7 +12218,7 @@ CODE_00CAAB:
 
 #_00CAAD: LDX.w #$0800
 #_00CAB0: JSL ROUTINE_08D53E_long
-#_00CAB4: JSR ROUTINE_00E2F7
+#_00CAB4: JSR Set_056C_to_2000
 #_00CAB7: STA.l $7E7A00
 
 #_00CABB: RTS
@@ -12055,7 +12243,7 @@ ROUTINE_00CABC:
 #_00CAD4: LDA.w #$8300
 #_00CAD7: STA.b $3A
 
-#_00CAD9: JSR ROUTINE_00DB57
+#_00CAD9: JSR QueueUpTilemapTransfers
 #_00CADC: JSR ROUTINE_00E28E
 
 #_00CADF: LDA.w #$9000
@@ -12144,6 +12332,7 @@ ROUTINE_00CB33:
 #_00CB78: STA.w $05AC
 
 #_00CB7B: STZ.b $0E
+
 #_00CB7D: RTS
 
 ;---------------------------------------------------------------------------------------------------
@@ -12195,7 +12384,7 @@ FadeInLevelArea:
 
 #_00CBBF: LDX.w $195E
 #_00CBC2: JSR (.vectors_b,X)
-#_00CBC5: JSR ROUTINE_00E2F7
+#_00CBC5: JSR Set_056C_to_2000
 
 #_00CBC8: LDA.w #$003F
 #_00CBCB: STA.w $0500
@@ -12203,31 +12392,35 @@ FadeInLevelArea:
 CODE_00CBCE:
 #_00CBCE: JSL ROUTINE_01EC8D
 #_00CBD2: JSL ROUTINE_03A300
+
 #_00CBD6: JSR ROUTINE_00DE52
 #_00CBD9: JSR ROUTINE_00DA88
+
 #_00CBDC: JMP ROUTINE_00E1ED
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors_a
 #_00CBDF: dw ROUTINE_00CC50
 #_00CBE1: dw ROUTINE_00CC68
-#_00CBE3: dw ROUTINE_00CC30
+#_00CBE3: dw ROUTINE_00CC20_9200
 #_00CBE5: dw ROUTINE_00CBFC
-#_00CBE7: dw ROUTINE_00CC1D
-#_00CBE9: dw ROUTINE_00CC26
-#_00CBEB: dw ROUTINE_00CC2B
+#_00CBE7: dw ROUTINE_00CC20_5000
+#_00CBE9: dw ROUTINE_00CC20_CA00
+#_00CBEB: dw ROUTINE_00CC20_DA00
 
 .vectors_b
 #_00CBED: dw ROUTINE_00CC35
-#_00CBEF: dw ROUTINE_00CC67
-#_00CBF1: dw ROUTINE_00CBFB
-#_00CBF3: dw ROUTINE_00CBFB
-#_00CBF5: dw ROUTINE_00CBFB
-#_00CBF7: dw ROUTINE_00CBFB
-#_00CBF9: dw ROUTINE_00CBFB
+#_00CBEF: dw EXIT_00CC67
+#_00CBF1: dw .exit
+#_00CBF3: dw .exit
+#_00CBF5: dw .exit
+#_00CBF7: dw .exit
+#_00CBF9: dw .exit
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_00CBFB:
+.exit
 #_00CBFB: RTS
 
 ;===================================================================================================
@@ -12263,30 +12456,32 @@ ROUTINE_00CC09:
 
 ;===================================================================================================
 
-ROUTINE_00CC1D:
+ROUTINE_00CC20_5000:
 #_00CC1D: LDA.w #$5000
 
-CODE_00CC20:
+;===================================================================================================
+
+ROUTINE_00CC20:
 #_00CC20: JSR ROUTINE_00CC09
 #_00CC23: JMP CODE_00CC02
 
 ;===================================================================================================
 
-ROUTINE_00CC26:
+ROUTINE_00CC20_CA00:
 #_00CC26: LDA.w #$CA00
-#_00CC29: BRA CODE_00CC20
+#_00CC29: BRA ROUTINE_00CC20
 
 ;===================================================================================================
 
-ROUTINE_00CC2B:
+ROUTINE_00CC20_DA00:
 #_00CC2B: LDA.w #$DA00
-#_00CC2E: BRA CODE_00CC20
+#_00CC2E: BRA ROUTINE_00CC20
 
 ;===================================================================================================
 
-ROUTINE_00CC30:
+ROUTINE_00CC20_9200:
 #_00CC30: LDA.w #$9200
-#_00CC33: BRA CODE_00CC20
+#_00CC33: BRA ROUTINE_00CC20
 
 ;===================================================================================================
 
@@ -12326,7 +12521,7 @@ ROUTINE_00CC50:
 
 ;===================================================================================================
 
-ROUTINE_00CC67:
+EXIT_00CC67:
 #_00CC67: RTS
 
 ;===================================================================================================
@@ -12437,6 +12632,7 @@ ROUTINE_00CCE5:
 #_00CCF5: STA.b $22
 
 #_00CCF7: STZ.b $30
+
 #_00CCF9: RTS
 
 ;===================================================================================================
@@ -12479,7 +12675,7 @@ PrepareTitle:
 #_00CD26: STZ.w HDMAEN
 #_00CD29: REP #$20
 
-#_00CD2B: LDA.w #$000D
+#_00CD2B: LDA.w #$000D ; SONG 0D
 #_00CD2E: JSR RequestSong_bounce
 #_00CD31: JSR ROUTINE_00E2C2
 
@@ -12701,7 +12897,7 @@ TitleScreen:
 #_00CEA0: JSR WaitForVBlankToEndOrFor65535
 #_00CEA3: JSR ROUTINE_00E23A
 #_00CEA6: JSR ROUTINE_00CECE
-#_00CEA9: JSR ROUTINE_00E230
+#_00CEA9: JSR Set_56E_54E_to_FFFF
 
 #_00CEAC: LDA.w $0506
 #_00CEAF: ASL A
@@ -12726,7 +12922,7 @@ TitleScreen:
 ;===================================================================================================
 
 ROUTINE_00CECE:
-#_00CECE: JSR ROUTINE_00E2C8
+#_00CECE: JSR TestNewInput_Start
 #_00CED1: BEQ .exit
 
 #_00CED3: LDA.w $0506
@@ -12753,12 +12949,12 @@ ROUTINE_00CECE:
 #_00CEFC: LDA.w #$0001
 #_00CEFF: STA.w $0802
 
-#_00CF02: JSR ROUTINE_00D0DC
+#_00CF02: JSR ROUTINE_00D0E2_AndEnableHDMA_6_7
 
 #_00CF05: LDA.w #$0600
 #_00CF08: STA.w $19EE
 
-#_00CF0B: JSR ROUTINE_00CF32
+#_00CF0B: JSR FullBrightnessAndNoMosaic
 
 .exit
 #_00CF0E: RTS
@@ -12780,13 +12976,14 @@ data00CF0F:
 
 ;===================================================================================================
 
-ROUTINE_00CF32:
+FullBrightnessAndNoMosaic:
 #_00CF32: LDA.w #$000F
 #_00CF35: STA.w $0520
 
 #_00CF38: SEP #$20
 #_00CF3A: STZ.w MOSAIC
 #_00CF3D: REP #$20
+
 #_00CF3F: RTS
 
 ;===================================================================================================
@@ -12808,12 +13005,12 @@ ROUTINE_00CF40:
 
 ROUTINE_00CF54:
 #_00CF54: JSR WaitForVBlankToEndOrFor65535
-#_00CF57: JSR ROUTINE_00D46D
-#_00CF5A: BNE CODE_00CF5F
+#_00CF57: JSR ExecuteMosaicFadeIn_GrabFrame
+#_00CF5A: BNE .dont_advance
 
 #_00CF5C: INC.w $0506
 
-CODE_00CF5F:
+.dont_advance
 #_00CF5F: JMP ROUTINE_00CF40
 
 ;===================================================================================================
@@ -12821,14 +13018,14 @@ CODE_00CF5F:
 ROUTINE_00CF62:
 #_00CF62: JSR WaitForVBlankToEndOrFor65535
 #_00CF65: DEC.w $0512
-#_00CF68: BNE CODE_00CF73
+#_00CF68: BNE .dont_advance
 
 #_00CF6A: LDA.w #$0040
 #_00CF6D: STA.w $0802
 
 #_00CF70: INC.w $0506
 
-CODE_00CF73:
+.dont_advance
 #_00CF73: JMP ROUTINE_00CF40
 
 ;===================================================================================================
@@ -12837,12 +13034,13 @@ ROUTINE_00CF76:
 #_00CF76: JSR WaitForVBlankToEndOrFor65535
 
 #_00CF79: LDA.w $0802
-#_00CF7C: BEQ CODE_00CF83
+#_00CF7C: BEQ .advance
 
 #_00CF7E: DEC.w $0802
-#_00CF81: BRA CODE_00CF92
 
-CODE_00CF83:
+#_00CF81: BRA .dont_advance
+
+.advance
 #_00CF83: LDA.w #$0020
 #_00CF86: STA.w $05E0
 
@@ -12851,7 +13049,7 @@ CODE_00CF83:
 
 #_00CF8F: INC.w $0506
 
-CODE_00CF92:
+.dont_advance
 #_00CF92: JMP ROUTINE_00CF40
 
 ;===================================================================================================
@@ -12878,7 +13076,7 @@ CODE_00CFA4:
 #_00CFB2: BNE CODE_00CFFA
 
 #_00CFB4: LDA.w #data00CFFD
-#_00CFB7: LDY.w #$0000
+#_00CFB7: LDY.w #data00CFFD>>16
 #_00CFBA: JSL ROUTINE_00FBCB_ParameterizedBounce_long
 #_00CFBE: BRA CODE_00CFFA
 
@@ -12912,6 +13110,7 @@ CODE_00CFC0:
 #_00CFF0: LDA.w #$0002
 #_00CFF3: TRB.w $0536
 #_00CFF6: INC.w $0506
+
 #_00CFF9: PLA
 
 CODE_00CFFA:
@@ -12941,6 +13140,7 @@ ROUTINE_00D011:
 #_00D01B: BEQ CODE_00D022
 
 #_00D01D: DEC.w $0802
+
 #_00D020: BRA CODE_00D040
 
 CODE_00D022:
@@ -12995,6 +13195,7 @@ ROUTINE_00D062:
 #_00D065: BEQ CODE_00D06C
 
 #_00D067: DEC.w $0802
+
 #_00D06A: BRA CODE_00D07E
 
 CODE_00D06C:
@@ -13041,28 +13242,34 @@ ROUTINE_00D09B:
 #_00D0A9: LDA.w #$0051
 #_00D0AC: STA.w $05E0
 
+;---------------------------------------------------------------------------------------------------
+
 #_00D0AF: LDX.w #$01FE
 #_00D0B2: LDA.w #$0100
 
-CODE_00D0B5:
+.next_fill_a
 #_00D0B5: AND.w #$01FF
 #_00D0B8: STA.l $7EE000,X
 
 #_00D0BC: INC A
 #_00D0BD: DEX
 #_00D0BE: DEX
-#_00D0BF: BPL CODE_00D0B5
+#_00D0BF: BPL .next_fill_a
+
+;---------------------------------------------------------------------------------------------------
 
 #_00D0C1: LDX.w #$0200
 #_00D0C4: LDA.w #$0100
 
-CODE_00D0C7:
+.next_fill_b
 #_00D0C7: STA.l $7EE000,X
 
 #_00D0CB: INX
 #_00D0CC: INX
 #_00D0CD: CPX.w #$0400
-#_00D0D0: BNE CODE_00D0C7
+#_00D0D0: BNE .next_fill_b
+
+;---------------------------------------------------------------------------------------------------
 
 #_00D0D2: JSL ROUTINE_08F0FA
 
@@ -13072,7 +13279,7 @@ CODE_00D0D6:
 
 ;===================================================================================================
 
-ROUTINE_00D0DC:
+ROUTINE_00D0E2_AndEnableHDMA_6_7:
 #_00D0DC: LDA.w #$00C0
 #_00D0DF: TRB.w $0536
 
@@ -13104,6 +13311,7 @@ ROUTINE_00D105:
 #_00D108: BEQ CODE_00D10F
 
 #_00D10A: DEC.w $0802
+
 #_00D10D: BRA CODE_00D115
 
 CODE_00D10F:
@@ -13130,6 +13338,7 @@ ROUTINE_00D11F:
 
 #_00D12F: STZ.w $05E0
 #_00D132: INC.w $0506
+
 #_00D135: BRA CODE_00D13B
 
 CODE_00D137:
@@ -13291,7 +13500,7 @@ ROUTINE_00D209:
 #_00D212: CMP.w $0506
 #_00D215: BEQ CODE_00D21E
 
-#_00D217: LDA.w #$000E
+#_00D217: LDA.w #$000E ; SONG 0E
 #_00D21A: JSL RequestSong
 
 CODE_00D21E:
@@ -13333,7 +13542,7 @@ CODE_00D24E:
 ;===================================================================================================
 
 ROUTINE_00D251:
-#_00D251: JSR ROUTINE_00E2C8
+#_00D251: JSR TestNewInput_Start
 #_00D254: BEQ CODE_00D267
 
 #_00D256: LDA.w $05E0
@@ -13351,7 +13560,7 @@ CODE_00D264:
 
 CODE_00D267:
 #_00D267: LDY.w #$D2CF
-#_00D26A: JSR ROUTINE_00E2CF
+#_00D26A: JSR TestNewInput_Left
 #_00D26D: BEQ CODE_00D282
 
 #_00D26F: JSR QueueSFX_1E
@@ -13362,10 +13571,11 @@ CODE_00D267:
 #_00D277: JSR ROUTINE_00D2B4
 #_00D27A: STZ.w $05E2
 #_00D27D: DEC.w $05E0
+
 #_00D280: BRA CODE_00D29B
 
 CODE_00D282:
-#_00D282: JSR ROUTINE_00E2D6
+#_00D282: JSR TestNewInput_Right
 #_00D285: BEQ CODE_00D29B
 
 #_00D287: JSR QueueSFX_1E
@@ -13411,7 +13621,7 @@ ROUTINE_00D2B4:
 #_00D2C5: LDA.w data00D2D1,Y
 #_00D2C8: STA.b $38
 
-#_00D2CA: JMP ROUTINE_00DB57
+#_00D2CA: JMP QueueUpTilemapTransfers
 
 #data00D2CD:
 #_00D2CD: db $3A,$28,$34,$28
@@ -13436,7 +13646,7 @@ CODE_00D2E4:
 #_00D2E7: BRA CODE_00D314
 
 CODE_00D2E9:
-#_00D2E9: JSR ROUTINE_00D462
+#_00D2E9: JSR ExecuteMosaicFadeOut_GrabFrame
 #_00D2EC: BNE CODE_00D317
 
 #_00D2EE: LDA.l $7E7A4E
@@ -13468,7 +13678,7 @@ CODE_00D317:
 ;===================================================================================================
 
 FadeToOptionsScreen:
-#_00D31A: JSR ROUTINE_00D462
+#_00D31A: JSR ExecuteMosaicFadeOut_GrabFrame
 #_00D31D: BNE CODE_00D325
 
 #_00D31F: LDA.w #$007B
@@ -13646,33 +13856,38 @@ ROUTINE_00D3FA:
 
 ;===================================================================================================
 
-ROUTINE_00D403:
+AdvanceGameModule:
 #_00D403: STZ.w $05A0
+
 #_00D406: INC.w $0500
+
 #_00D409: STZ.w $0502
 
-CODE_00D40C:
+.reset_504
 #_00D40C: STZ.w $0504
 
-CODE_00D40F:
+.reset_506
 #_00D40F: STZ.w $0506
+
 #_00D412: RTS
 
 ;===================================================================================================
 
-ROUTINE_00D413:
+#AdvanceGameModule_02:
 #_00D413: INC.w $0502
-#_00D416: BRA CODE_00D40C
+
+#_00D416: BRA .reset_504
 
 ;===================================================================================================
 
-ROUTINE_00D418:
+#AdvanceGameModule_04:
 #_00D418: INC.w $0504
-#_00D41B: BRA CODE_00D40F
+
+#_00D41B: BRA .reset_506
 
 ;===================================================================================================
 
-ROUTINE_00D41D:
+ROUTINE_00D421_long2:
 #_00D41D: JSR ROUTINE_00D421
 #_00D420: RTL
 
@@ -13724,76 +13939,75 @@ ROUTINE_00D43C:
 
 ;===================================================================================================
 
-ROUTINE_00D462:
+ExecuteMosaicFadeOut_GrabFrame:
 #_00D462: LDY.w $05A0
 
 ;===================================================================================================
 
-ROUTINE_00D465:
+ExecuteMosaicFadeOut:
 #_00D465: LDX.w #$0000
-
 #_00D468: LDA.w #$FFFF
-#_00D46B: BRA CODE_00D476
+#_00D46B: BRA ExecuteMosaicFade
 
 ;===================================================================================================
 
-ROUTINE_00D46D:
+ExecuteMosaicFadeIn_GrabFrame:
 #_00D46D: LDY.w $05A0
 
 ;===================================================================================================
 
-ROUTINE_00D470:
+ExecuteMosaicFadeIn:
 #_00D470: LDX.w #$000F
-
 #_00D473: LDA.w #$0001
 
-CODE_00D476:
-#_00D476: STA.b $20
+;===================================================================================================
 
+ExecuteMosaicFade:
+#_00D476: STA.b $20
 #_00D478: STX.b $22
 
 #_00D47A: TYA
 #_00D47B: AND.w #$0003
-#_00D47E: BNE CODE_00D497
+#_00D47E: BNE .dont_advance
 
 #_00D480: LDA.w $0520
 #_00D483: AND.w #$000F
 #_00D486: CMP.b $22
-#_00D488: BNE CODE_00D48E
+#_00D488: BNE .still_fading
 
 #_00D48A: LDA.w #$0000
 #_00D48D: RTS
 
-CODE_00D48E:
+.still_fading
 #_00D48E: CLC
 #_00D48F: ADC.b $20
 #_00D491: AND.w #$000F
 #_00D494: STA.w $0520
 
-CODE_00D497:
+.dont_advance
 #_00D497: LDA.w #$FFFF
 #_00D49A: RTS
 
 ;===================================================================================================
 
-ROUTINE_00D465_long:
+ExecuteMosaicFadeOut_long:
 #_00D49B: PHB
 #_00D49C: PHK
 #_00D49D: PLB
 
-#_00D49E: JSR ROUTINE_00D465
+#_00D49E: JSR ExecuteMosaicFadeOut
 
 #_00D4A1: PLB
 #_00D4A2: RTL
 
 ;===================================================================================================
 
-ROUTINE_00D470_long:
+ExecuteMosaicFadeIn_long:
 #_00D4A3: PHB
 #_00D4A4: PHK
 #_00D4A5: PLB
 
-#_00D4A6: JSR ROUTINE_00D470
+#_00D4A6: JSR ExecuteMosaicFadeIn
 
 #_00D4A9: PLB
 #_00D4AA: RTL
@@ -14947,6 +15161,7 @@ CODE_00DA65:
 
 #_00DA80: STZ.w $7ED005,X
 #_00DA83: STZ.w $7ED006,X
+
 #_00DA86: PLB
 #_00DA87: RTS
 
@@ -15033,6 +15248,8 @@ CODE_00DADD:
 
 #_00DAF5: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_00DAF6:
 #_00DAF6: TXA
 #_00DAF7: AND.w #$0FF0
@@ -15098,7 +15315,7 @@ CODE_00DB2A:
 
 ;===================================================================================================
 
-ROUTINE_00DB57_long:
+QueueUpTilemapTransfers_long:
 #_00DB37: PHB
 #_00DB38: PHK
 #_00DB39: PLB
@@ -15106,7 +15323,7 @@ ROUTINE_00DB57_long:
 #_00DB3A: PHX
 #_00DB3B: PHY
 
-#_00DB3C: JSR ROUTINE_00DB57
+#_00DB3C: JSR QueueUpTilemapTransfers
 
 #_00DB3F: PLY
 #_00DB40: PLX
@@ -15131,7 +15348,7 @@ ROUTINE_00DB43:
 
 ;===================================================================================================
 
-ROUTINE_00DB57:
+QueueUpTilemapTransfers:
 #_00DB57: PHB
 #_00DB58: SEP #$20
 
@@ -15544,18 +15761,22 @@ ArbitraryTableCopy:
 #_00DD1B: INX
 
 #_00DD1C: LDY.w #$0000
+
 #_00DD1F: SEP #$20
 
-CODE_00DD21:
+.next
 #_00DD21: LDA.w $0000,X
 #_00DD24: STA.b [$20],Y
 
 #_00DD26: INX
+
 #_00DD27: INY
+
 #_00DD28: DEC.b $24
-#_00DD2A: BNE CODE_00DD21
+#_00DD2A: BNE .next
 
 #_00DD2C: REP #$20
+
 #_00DD2E: BRA ArbitraryTableCopy
 
 .exit
@@ -15652,12 +15873,12 @@ ROUTINE_00DD7D:
 #_00DD83: LDA.w #$0000
 #_00DD86: LDX.w #$2000
 
-CODE_00DD89:
+.next
 #_00DD89: STA.l $7E3000,X
 
 #_00DD8D: DEX
 #_00DD8E: DEX
-#_00DD8F: BPL CODE_00DD89
+#_00DD8F: BPL .next
 
 #_00DD91: STA.l $7E3000,X
 
@@ -15665,7 +15886,6 @@ CODE_00DD89:
 
 ROUTINE_00DD95:
 #_00DD95: LDX.w #$2000
-
 #_00DD98: LDY.w #$3000
 #_00DD9B: LDA.w #$3000
 #_00DD9E: BRA CODE_00DDD8
@@ -15674,15 +15894,14 @@ ROUTINE_00DD95:
 
 ROUTINE_00DDA0:
 #_00DDA0: LDA.w #$0000
-
 #_00DDA3: LDX.w #$2000
 
-CODE_00DDA6:
+.next
 #_00DDA6: STA.l $7E5000,X
 
 #_00DDAA: DEX
 #_00DDAB: DEX
-#_00DDAC: BPL CODE_00DDA6
+#_00DDAC: BPL .next
 
 #_00DDAE: STA.l $7E5000,X
 
@@ -15690,7 +15909,6 @@ CODE_00DDA6:
 
 ROUTINE_00DDB2:
 #_00DDB2: LDX.w #$2000
-
 #_00DDB5: LDY.w #$5000
 #_00DDB8: LDA.w #$4000
 #_00DDBB: BRA CODE_00DDD8
@@ -15699,15 +15917,14 @@ ROUTINE_00DDB2:
 
 ROUTINE_00DDBD:
 #_00DDBD: LDA.w #$0000
-
 #_00DDC0: LDX.w #$1000
 
-CODE_00DDC3:
+.next
 #_00DDC3: STA.l $7E7000,X
 
 #_00DDC7: DEX
 #_00DDC8: DEX
-#_00DDC9: BPL CODE_00DDC3
+#_00DDC9: BPL .next
 
 #_00DDCB: STA.l $7E7000,X
 
@@ -15715,7 +15932,6 @@ CODE_00DDC3:
 
 ROUTINE_00DDCF:
 #_00DDCF: LDX.w #$1000
-
 #_00DDD2: LDY.w #$7000
 #_00DDD5: LDA.w #$2800
 
@@ -15748,7 +15964,7 @@ CODE_00DDD8:
 
 ;===================================================================================================
 
-ROUTINE_00DDFF:
+ROUTINE_00DE03_long:
 #_00DDFF: JSR ROUTINE_00DE03
 #_00DE02: RTL
 
@@ -15758,19 +15974,19 @@ ROUTINE_00DE03:
 #_00DE03: LDX.w #$0000
 #_00DE06: TXA
 
-CODE_00DE07:
+.next
 #_00DE07: STA.l $000510,X
 
 #_00DE0B: INX
 #_00DE0C: INX
 #_00DE0D: CPX.w #$0010
-#_00DE10: BNE CODE_00DE07
+#_00DE10: BNE .next
 
 #_00DE12: RTS
 
 ;===================================================================================================
 
-ROUTINE_00DE13:
+ROUTINE_00DE17_long:
 #_00DE13: JSR ROUTINE_00DE17
 #_00DE16: RTL
 
@@ -15806,11 +16022,11 @@ data00DE1E:
 
 ROUTINE_00DE52:
 #_00DE52: LDA.l $0019AC
-#_00DE56: BEQ CODE_00DE59
+#_00DE56: BEQ .continue
 
 #_00DE58: RTS
 
-CODE_00DE59:
+.continue
 #_00DE59: INC.w $059C
 
 #_00DE5C: LDA.w $059C
@@ -15840,7 +16056,9 @@ ROUTINE_00DE83_long:
 #_00DE7B: PHB
 #_00DE7C: PHK
 #_00DE7D: PLB
+
 #_00DE7E: JSR ROUTINE_00DE83
+
 #_00DE81: PLB
 #_00DE82: RTL
 
@@ -15884,7 +16102,7 @@ CODE_00DE9F:
 #_00DEB9: LDA.w #$8080
 #_00DEBC: STA.b $3A
 
-#_00DEBE: JSR ROUTINE_00DB57
+#_00DEBE: JSR QueueUpTilemapTransfers
 #_00DEC1: PLX
 #_00DEC2: CLC
 
@@ -15895,7 +16113,7 @@ CODE_00DE9F:
 #_00DECA: LDA.w #$6180
 #_00DECD: STA.b $38
 
-#_00DECF: JSR ROUTINE_00DB57
+#_00DECF: JSR QueueUpTilemapTransfers
 
 .exit
 #_00DED2: RTS
@@ -15906,7 +16124,9 @@ ROUTINE_00DEDB_long:
 #_00DED3: PHB
 #_00DED4: PHK
 #_00DED5: PLB
+
 #_00DED6: JSR ROUTINE_00DEDB
+
 #_00DED9: PLB
 #_00DEDA: RTL
 
@@ -15949,7 +16169,7 @@ CODE_00DEF7:
 #_00DF10: LDA.w #$8080
 #_00DF13: STA.b $3A
 
-#_00DF15: JSR ROUTINE_00DB57
+#_00DF15: JSR QueueUpTilemapTransfers
 
 #_00DF18: CLC
 #_00DF19: LDA.b $3C
@@ -15959,7 +16179,7 @@ CODE_00DEF7:
 #_00DF20: LDA.w #$6380
 #_00DF23: STA.b $38
 
-#_00DF25: JSR ROUTINE_00DB57
+#_00DF25: JSR QueueUpTilemapTransfers
 
 .exit
 #_00DF28: RTS
@@ -15999,10 +16219,10 @@ CODE_00DF53:
 #_00DF57: ADC.w $057A
 #_00DF5A: TAY
 
-#_00DF5B: LDA.w data00DF85,Y
+#_00DF5B: LDA.w data00DF83+2,Y
 #_00DF5E: STA.b $3E
 
-#_00DF60: LDA.w data00DF83,Y
+#_00DF60: LDA.w data00DF83+0,Y
 #_00DF63: STA.b $3C
 
 #_00DF65: LDA.w #$6CA0
@@ -16011,7 +16231,7 @@ CODE_00DF53:
 #_00DF6A: LDA.w #$8080
 #_00DF6D: STA.b $3A
 
-#_00DF6F: JSR ROUTINE_00DB57
+#_00DF6F: JSR QueueUpTilemapTransfers
 #_00DF72: CLC
 
 #_00DF73: LDA.b $3C
@@ -16021,17 +16241,18 @@ CODE_00DF53:
 #_00DF7A: LDA.w #$6DA0
 #_00DF7D: STA.b $38
 
-#_00DF7F: JSR ROUTINE_00DB57
+#_00DF7F: JSR QueueUpTilemapTransfers
 
 .exit
 #_00DF82: RTS
 
 data00DF83:
-#_00DF83: db $00,$AC
-
-data00DF85:
-#_00DF85: db $1E,$80,$AC,$1E,$00,$AD,$1E,$80
-#_00DF8D: db $AD,$1E,$00,$B0,$1E,$80,$B0,$1E
+#_00DF83: dl data1EAC00
+#_00DF86: dl data1EAC80
+#_00DF89: dl data1EAD00
+#_00DF8C: dl data1EAD80
+#_00DF8F: dl data1EB000
+#_00DF92: dl data1EB080
 
 ;===================================================================================================
 
@@ -16039,7 +16260,9 @@ ROUTINE_00DF9D_long:
 #_00DF95: PHB
 #_00DF96: PHK
 #_00DF97: PLB
+
 #_00DF98: JSR ROUTINE_00DF9D
+
 #_00DF9B: PLB
 #_00DF9C: RTL
 
@@ -16051,10 +16274,10 @@ ROUTINE_00DF9D:
 #_00DFA1: ADC.w $19A8
 #_00DFA4: TAY
 
-#_00DFA5: LDA.w data00DFCE,Y
+#_00DFA5: LDA.w data00DFCC+2,Y
 #_00DFA8: STA.b $3E
 
-#_00DFAA: LDA.w data00DFCC,Y
+#_00DFAA: LDA.w data00DFCC+0,Y
 #_00DFAD: STA.b $3C
 
 #_00DFAF: LDA.w #$64A0
@@ -16063,7 +16286,7 @@ ROUTINE_00DF9D:
 #_00DFB4: LDA.w #$8040
 #_00DFB7: STA.b $3A
 
-#_00DFB9: JSR ROUTINE_00DB57
+#_00DFB9: JSR QueueUpTilemapTransfers
 #_00DFBC: CLC
 
 #_00DFBD: LDA.b $3C
@@ -16073,15 +16296,16 @@ ROUTINE_00DF9D:
 #_00DFC4: LDA.w #$65A0
 #_00DFC7: STA.b $38
 
-#_00DFC9: JMP ROUTINE_00DB57
+#_00DFC9: JMP QueueUpTilemapTransfers
 
 data00DFCC:
-#_00DFCC: db $00,$CC
-
-data00DFCE:
-#_00DFCE: db $1E,$40,$CC,$1E,$80,$CC,$1E,$C0
-#_00DFD6: db $CC,$1E,$00,$CD,$1E,$40,$CD,$1E
-#_00DFDE: db $80,$CD,$1E
+#_00DFCC: dl data1ECC00
+#_00DFCF: dl data1ECC40
+#_00DFD2: dl data1ECC80
+#_00DFD5: dl data1ECCC0
+#_00DFD8: dl data1ECD00
+#_00DFDB: dl data1ECD40
+#_00DFDE: dl data1ECD80
 
 ;===================================================================================================
 
@@ -16102,11 +16326,11 @@ ROUTINE_00DFE1:
 
 #_00DFF7: LDY.w #$0000
 
-CODE_00DFFA:
+.next
 #_00DFFA: LDA.w $19A0,X
 #_00DFFD: AND.w #$00FF
 #_00E000: CMP.w #$00FF
-#_00E003: BNE CODE_00E016
+#_00E003: BNE .done
 
 #_00E005: INY
 #_00E006: CPY.w #$0008
@@ -16114,12 +16338,14 @@ CODE_00DFFA:
 
 #_00E00B: INX
 #_00E00C: CPX.w #$0007
-#_00E00F: BNE CODE_00DFFA
+#_00E00F: BNE .next
 
 #_00E011: LDX.w #$0000
-#_00E014: BRA CODE_00DFFA
+#_00E014: BRA .next
 
-CODE_00E016:
+;---------------------------------------------------------------------------------------------------
+
+.done
 #_00E016: STA.w $19A8
 
 #_00E019: TXA
@@ -16136,22 +16362,24 @@ CODE_00E016:
 
 ROUTINE_00E022:
 #_00E022: LDA.w $04C8
-#_00E025: BNE CODE_00E028
+#_00E025: BNE .continue
 
 #_00E027: RTS
 
-CODE_00E028:
+.continue
 #_00E028: LDA.w $057C
 #_00E02B: INC A
 #_00E02C: CMP.w #$000E
-#_00E02F: BCC CODE_00E034
+#_00E02F: BCC ROUTINE_00E034
 
 ;===================================================================================================
 
-ROUTINE_00E031:
+ROUTINE_00E034_0000:
 #_00E031: LDA.w #$0000
 
-CODE_00E034:
+;---------------------------------------------------------------------------------------------------
+
+ROUTINE_00E034:
 #_00E034: STA.w $057C
 
 #_00E037: BEQ CODE_00E03F
@@ -16167,10 +16395,10 @@ CODE_00E03F:
 #_00E042: ADC.b $20
 #_00E044: TAY
 
-#_00E045: LDA.w data00E06F,Y
+#_00E045: LDA.w data00E06D+2,Y
 #_00E048: STA.b $3E
 
-#_00E04A: LDA.w data00E06D,Y
+#_00E04A: LDA.w data00E06D+0,Y
 #_00E04D: STA.b $3C
 
 #_00E04F: LDA.w #$6E40
@@ -16179,7 +16407,7 @@ CODE_00E03F:
 #_00E054: LDA.w #$8180
 #_00E057: STA.b $3A
 
-#_00E059: JSR ROUTINE_00DB57
+#_00E059: JSR QueueUpTilemapTransfers
 #_00E05C: CLC
 
 #_00E05D: LDA.b $3C
@@ -16189,17 +16417,16 @@ CODE_00E03F:
 #_00E064: LDA.w #$6F40
 #_00E067: STA.b $38
 
-#_00E069: JSR ROUTINE_00DB57
+#_00E069: JSR QueueUpTilemapTransfers
 
 .exit
 #_00E06C: RTS
 
 data00E06D:
-#_00E06D: db $00,$B4
-
-data00E06F:
-#_00E06F: db $1E,$00,$B8,$1E,$00,$BC,$1E,$00
-#_00E077: db $C0,$1E
+#_00E06D: dl data1EB400
+#_00E070: dl data1EB800
+#_00E073: dl data1EBC00
+#_00E076: dl data1EC000
 
 ;===================================================================================================
 
@@ -16291,20 +16518,20 @@ ROUTINE_00E129:
 #_00E12C: JMP (.vectors,X)
 
 .vectors
-#_00E12F: dw ROUTINE_00E143
+#_00E12F: dw .exit
 #_00E131: dw ROUTINE_00E144
 #_00E133: dw ROUTINE_00E144
 #_00E135: dw ROUTINE_00E1A1
-#_00E137: dw ROUTINE_00E143
-#_00E139: dw ROUTINE_00E143
+#_00E137: dw .exit
+#_00E139: dw .exit
 #_00E13B: dw ROUTINE_00E144
-#_00E13D: dw ROUTINE_00E143
+#_00E13D: dw .exit
 #_00E13F: dw ROUTINE_00E1C7
-#_00E141: dw ROUTINE_00E143
+#_00E141: dw .exit
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_00E143:
+.exit
 #_00E143: RTS
 
 ;===================================================================================================
@@ -16316,10 +16543,10 @@ ROUTINE_00E144:
 #_00E14A: LDA.w #$0004
 #_00E14D: JSR ROUTINE_00E16A
 
-#_00E150: LDA.w data00E160,Y
+#_00E150: LDA.w data00E15E+2,Y
 #_00E153: STA.b $3E
 
-#_00E155: LDA.w data00E15E,Y
+#_00E155: LDA.w data00E15E+0,Y
 #_00E158: STA.b $3C
 
 #_00E15A: JSR ROUTINE_00E18D
@@ -16328,11 +16555,10 @@ ROUTINE_00E144:
 #_00E15D: RTS
 
 data00E15E:
-#_00E15E: db $00,$00
-
-data00E160:
-#_00E160: db $7F,$00,$04,$7F,$00,$08,$7F,$00
-#_00E168: db $0C,$7F
+#_00E15E: dl $7F0000
+#_00E161: dl $7F0400
+#_00E164: dl $7F0800
+#_00E167: dl $7F0C00
 
 ;===================================================================================================
 
@@ -16364,7 +16590,7 @@ CODE_00E178:
 ;===================================================================================================
 
 ROUTINE_00E18D:
-#_00E18D: JSR ROUTINE_00DB57
+#_00E18D: JSR QueueUpTilemapTransfers
 #_00E190: CLC
 
 #_00E191: LDA.b $3C
@@ -16374,7 +16600,8 @@ ROUTINE_00E18D:
 #_00E198: LDA.w #$0700
 #_00E19B: STA.b $38
 
-#_00E19D: JSR ROUTINE_00DB57
+#_00E19D: JSR QueueUpTilemapTransfers
+
 #_00E1A0: RTS
 
 ;===================================================================================================
@@ -16386,10 +16613,10 @@ ROUTINE_00E1A1:
 #_00E1A7: LDA.w #$0004
 #_00E1AA: JSR ROUTINE_00E16A
 
-#_00E1AD: LDA.w data00E1BD,Y
+#_00E1AD: LDA.w data00E1BB+2,Y
 #_00E1B0: STA.b $3E
 
-#_00E1B2: LDA.w data00E1BB,Y
+#_00E1B2: LDA.w data00E1BB+0,Y
 #_00E1B5: STA.b $3C
 
 #_00E1B7: JSR ROUTINE_00E18D
@@ -16398,11 +16625,10 @@ ROUTINE_00E1A1:
 #_00E1BA: RTS
 
 data00E1BB:
-#_00E1BB: db $00,$00
-
-data00E1BD:
-#_00E1BD: db $7F,$00,$04,$7F,$00,$08,$7F,$00
-#_00E1C5: db $04,$7F
+#_00E1BB: dl $7F0000
+#_00E1BE: dl $7F0400
+#_00E1C1: dl $7F0800
+#_00E1C4: dl $7F0400
 
 ;===================================================================================================
 
@@ -16413,10 +16639,10 @@ ROUTINE_00E1C7:
 #_00E1CD: LDA.w #$0004
 #_00E1D0: JSR ROUTINE_00E16A
 
-#_00E1D3: LDA.w data00E1E3,Y
+#_00E1D3: LDA.w data00E1E1+2,Y
 #_00E1D6: STA.b $3E
 
-#_00E1D8: LDA.w data00E1E1,Y
+#_00E1D8: LDA.w data00E1E1+0,Y
 #_00E1DB: STA.b $3C
 
 #_00E1DD: JSR ROUTINE_00E18D
@@ -16425,11 +16651,10 @@ ROUTINE_00E1C7:
 #_00E1E0: RTS
 
 data00E1E1:
-#_00E1E1: db $00,$00
-
-data00E1E3:
-#_00E1E3: db $7F,$00,$02,$7F,$00,$04,$7F,$00
-#_00E1EB: db $06,$7F
+#_00E1E1: dl $7F0000
+#_00E1E4: dl $7F0200
+#_00E1E7: dl $7F0400
+#_00E1EA: dl $7F0600
 
 ;===================================================================================================
 
@@ -16440,7 +16665,7 @@ ROUTINE_00E1ED:
 #_00E1F2: DEY
 #_00E1F3: DEY
 
-CODE_00E1F4:
+.next
 #_00E1F4: PHY
 
 #_00E1F5: LDX.w $0602,Y
@@ -16463,14 +16688,16 @@ CODE_00E1F4:
 #_00E218: PLY
 #_00E219: DEY
 #_00E21A: DEY
-#_00E21B: BPL CODE_00E1F4
+#_00E21B: BPL .next
 
 #_00E21D: STZ.w $0600
 
 .exit
 #_00E220: RTS
 
-CODE_00E221:
+;===================================================================================================
+
+ROUTINE_00E221:
 #_00E221: JSR ROUTINE_00ED0F
 
 #_00E224: LDA.l $7E2530
@@ -16478,7 +16705,7 @@ CODE_00E221:
 
 ;===================================================================================================
 
-ROUTINE_00E229:
+ROUTINE_00ECEF_ParamterizedYA:
 #_00E229: STA.b $20
 #_00E22B: STY.b $22
 
@@ -16486,7 +16713,7 @@ ROUTINE_00E229:
 
 ;===================================================================================================
 
-ROUTINE_00E230:
+Set_56E_54E_to_FFFF:
 #_00E230: LDA.w #$FFFF
 #_00E233: STA.w $056E
 #_00E236: STA.w $054E
@@ -16496,7 +16723,7 @@ ROUTINE_00E230:
 ;===================================================================================================
 
 ROUTINE_00E23A:
-#_00E23A: JSR ROUTINE_00C44D
+#_00E23A: JSR ResetModuleVariables
 #_00E23D: JMP ROUTINE_00F957
 
 ;===================================================================================================
@@ -16551,9 +16778,7 @@ ROUTINE_00E271:
 #_00E271: STY.w $1AE0
 
 #_00E274: STY.w $0562
-
 #_00E277: STY.w $0566
-
 #_00E27A: STY.w $056A
 
 #_00E27D: RTS
@@ -16562,13 +16787,10 @@ ROUTINE_00E271:
 
 ROUTINE_00E27E:
 #_00E27E: STX.w $1AB0
-
 #_00E281: STX.w $1AC0
 
 #_00E284: STX.w $0560
-
 #_00E287: STX.w $0564
-
 #_00E28A: STX.w $0568
 
 #_00E28D: RTS
@@ -16588,7 +16810,7 @@ ROUTINE_00E28E:
 
 ROUTINE_00E29B:
 #_00E29B: JSR WaitForVBlankToEndOrFor65535
-#_00E29E: JMP CODE_00E221
+#_00E29E: JMP ROUTINE_00E221
 
 ;===================================================================================================
 
@@ -16632,32 +16854,32 @@ RequestSong_bounce:
 
 ROUTINE_00E2C2:
 #_00E2C2: JSR ROUTINE_00F800
-#_00E2C5: JMP CODE_00F813
+#_00E2C5: JMP ROUTINE_00F813
 
 ;===================================================================================================
 
-ROUTINE_00E2C8:
+TestNewInput_Start:
 #_00E2C8: LDA.w $053A
 #_00E2CB: AND.w #$1000
 #_00E2CE: RTS
 
 ;===================================================================================================
 
-ROUTINE_00E2CF:
+TestNewInput_Left:
 #_00E2CF: LDA.w $053A
 #_00E2D2: AND.w #$0200
 #_00E2D5: RTS
 
 ;===================================================================================================
 
-ROUTINE_00E2D6:
+TestNewInput_Right:
 #_00E2D6: LDA.w $053A
 #_00E2D9: AND.w #$0100
 #_00E2DC: RTS
 
 ;===================================================================================================
 
-ROUTINE_00E2DD:
+TestNewInput_LeftOrRight:
 #_00E2DD: LDA.w $053A
 #_00E2E0: AND.w #$0300
 #_00E2E3: RTS
@@ -16678,7 +16900,7 @@ ROUTINE_00E2E4:
 
 ;===================================================================================================
 
-ROUTINE_00E2F7:
+Set_056C_to_2000:
 #_00E2F7: LDA.w #$2000
 #_00E2FA: STA.w $056C
 
@@ -16689,7 +16911,7 @@ ROUTINE_00E2F7:
 ROUTINE_00E2FE:
 #_00E2FE: LDX.w #$0000
 
-CODE_00E301:
+.next
 #_00E301: LDA.l $7E2442,X
 #_00E305: EOR.l $7E2462,X
 #_00E309: BNE CODE_00E314
@@ -16697,7 +16919,7 @@ CODE_00E301:
 #_00E30B: INX
 #_00E30C: INX
 #_00E30D: CPX.w #$0010
-#_00E310: BNE CODE_00E301
+#_00E310: BNE .next
 
 #_00E312: SEC
 #_00E313: RTS
@@ -16718,13 +16940,15 @@ ROUTINE_00E316:
 
 #_00E31E: LDA.w .pointers,Y
 #_00E321: TAX
-#_00E322: BPL CODE_00E32D
+#_00E322: BPL .indexed
 
 #_00E324: LDA.w #$0000
 #_00E327: JSL BulkDecompressionViaTable_long
 #_00E32B: BRA .exit
 
-CODE_00E32D:
+;---------------------------------------------------------------------------------------------------
+
+.indexed
 #_00E32D: JSR ROUTINE_00E37E
 
 .exit
@@ -16794,7 +17018,7 @@ ROUTINE_00E37E:
 #_00E39B: LDY.w data00E3C7+4,X
 #_00E39E: STY.w DMA0ADDRL
 
-#_00E3A1: LDA.w data00E3C+6,X
+#_00E3A1: LDA.w data00E3C7+6,X
 #_00E3A4: STA.w DMA0ADDRB
 
 #_00E3A7: LDA.b #$01
@@ -16815,6 +17039,7 @@ ROUTINE_00E37E:
 
 #_00E3BF: LDA.w #$0000
 #_00E3C2: JSL BulkDecompressionViaTable_long
+
 #_00E3C6: RTS
 
 data00E3C7:
@@ -17954,7 +18179,7 @@ ROUTINE_00EBF1_0002:
 
 .loop
 #_00EBF9: PHY
-#_00EBFA: JSL ROUTINE_00DB57_long
+#_00EBFA: JSL QueueUpTilemapTransfers_long
 #_00EBFE: CLC
 
 #_00EBFF: LDA.b $38
@@ -18166,7 +18391,7 @@ ROUTINE_00ED2F:
 #_00ED42: LDA.b [$28],Y
 #_00ED44: BNE CODE_00ED49
 
-#_00ED46: JMP CODE_00F127
+#_00ED46: JMP ROUTINE_00F127
 
 CODE_00ED49:
 #_00ED49: CMP.w #$FFFF
@@ -18371,7 +18596,7 @@ ROUTINE_00EE53:
 
 #_00EE58: LDX.b $20
 
-CODE_00EE5A:
+.next
 #_00EE5A: LSR.b $2E
 #_00EE5C: BCS CODE_00EE97
 
@@ -18408,7 +18633,7 @@ CODE_00EE6D:
 
 .in_visible_part_of_frame
 #_00EE91: DEY
-#_00EE92: BNE CODE_00EE5A
+#_00EE92: BNE .next
 
 #_00EE94: JMP CODE_00EF40
 
@@ -18532,7 +18757,7 @@ CODE_00EF38:
 #_00EF3A: DEY
 #_00EF3B: BEQ CODE_00EF40
 
-#_00EF3D: JMP CODE_00EE5A
+#_00EF3D: JMP .next
 
 CODE_00EF40:
 #_00EF40: STX.b $20
@@ -18574,7 +18799,7 @@ ROUTINE_00EF48:
 #_00EF82: LDA.l $7E2544
 #_00EF86: STA.b $38
 
-#_00EF88: JSR ROUTINE_00DB57
+#_00EF88: JSR QueueUpTilemapTransfers
 
 CODE_00EF8B:
 #_00EF8B: LDA.w #$0001
@@ -18632,7 +18857,7 @@ CODE_00EFBE:
 #_00EFE6: ADC.w #$0400
 #_00EFE9: STA.l $7E2544
 
-#_00EFED: JSR ROUTINE_00DB57
+#_00EFED: JSR QueueUpTilemapTransfers
 
 #_00EFF0: LDA.w #$0004
 #_00EFF3: STA.l $7E2530
@@ -18859,12 +19084,10 @@ ROUTINE_00F111:
 ROUTINE_00F123:
 #_00F123: JMP ROUTINE_00EF48
 
-;===================================================================================================
-
-ROUTINE_00F126:
 #_00F126: RTS
 
-CODE_00F127:
+;===================================================================================================
+ROUTINE_00F127:
 #_00F127: LDA.w #$0000
 #_00F12A: STA.l $7E2530
 
@@ -18932,7 +19155,7 @@ CODE_00F164:
 #_00F181: STA.b $3A
 
 #_00F183: PHX
-#_00F184: JSR ROUTINE_00DB57
+#_00F184: JSR QueueUpTilemapTransfers
 #_00F187: PLX
 #_00F188: BRA CODE_00F164
 
@@ -19027,7 +19250,6 @@ CODE_00F20D:
 
 ROUTINE_00F21A:
 #_00F21A: LDX.w #data00F249
-
 #_00F21D: JSR ROUTINE_00F236
 
 #_00F220: LDX.w #data00F249
@@ -19085,7 +19307,7 @@ data00F249:
 
 ;===================================================================================================
 
-ROUTINE_00F2A9:
+ROUTINE_00F2AD_long2:
 #_00F2A9: JSR ROUTINE_00F2AD
 #_00F2AC: RTL
 
@@ -19096,8 +19318,8 @@ ROUTINE_00F2AD:
 #_00F2AE: PEA.w $7E7E
 #_00F2B1: PLB
 #_00F2B2: PLB
-#_00F2B3: STA.b $38
 
+#_00F2B3: STA.b $38
 #_00F2B5: STX.b $3A
 
 #_00F2B7: LDA.b [$38]
@@ -19203,8 +19425,8 @@ ROUTINE_00F352:
 #_00F353: PEA.w $7E7E
 #_00F356: PLB
 #_00F357: PLB
-#_00F358: STA.b $38
 
+#_00F358: STA.b $38
 #_00F35A: STX.b $3A
 
 #_00F35C: LDX.w #$0000
@@ -19332,7 +19554,7 @@ PreparePlayerSelect:
 #_00F425: STZ.w $0520
 #_00F428: STZ.w $0536
 #_00F42B: STZ.w $0506
-#_00F42E: JMP ROUTINE_00D403
+#_00F42E: JMP AdvanceGameModule
 
 ;===================================================================================================
 
@@ -19421,6 +19643,7 @@ ROUTINE_00F455:
 #_00F4BF: INC.w $056E
 #_00F4C2: INC.w $054E
 #_00F4C5: INC.w $0506
+
 #_00F4C8: RTS
 
 ;---------------------------------------------------------------------------------------------------
@@ -19499,6 +19722,7 @@ ROUTINE_00F535:
 #_00F544: STZ.w $080C
 #_00F547: JSR ROUTINE_00F66B
 #_00F54A: INC.w $0506
+
 #_00F54D: RTS
 
 data00F54E:
@@ -19507,7 +19731,7 @@ data00F54E:
 ;===================================================================================================
 
 ROUTINE_00F552:
-#_00F552: JSR ROUTINE_00E2DD
+#_00F552: JSR TestNewInput_LeftOrRight
 #_00F555: BEQ CODE_00F563
 
 #_00F557: JSR QueueSFX_1E
@@ -19518,7 +19742,7 @@ ROUTINE_00F552:
 
 CODE_00F563:
 #_00F563: JSR ROUTINE_00F66B
-#_00F566: JSR ROUTINE_00E2C8
+#_00F566: JSR TestNewInput_Start
 #_00F569: BEQ CODE_00F571
 
 #_00F56B: JSR QueueSFX_1F
@@ -19592,22 +19816,24 @@ ROUTINE_00F5BE:
 #_00F5CA: BCC CODE_00F5CC
 
 CODE_00F5CC:
-#_00F5CC: JSR ROUTINE_00E2C8
+#_00F5CC: JSR TestNewInput_Start
 #_00F5CF: BEQ CODE_00F5D9
 
 #_00F5D1: JSR QueueSFX_1F
 #_00F5D4: INC.w $0506
+
 #_00F5D7: BRA CODE_00F5EB
 
 CODE_00F5D9:
-#_00F5D9: JSR ROUTINE_00E2CF
+#_00F5D9: JSR TestNewInput_Left
 #_00F5DC: BEQ CODE_00F5E3
 
 #_00F5DE: DEC.w $0800
+
 #_00F5E1: BRA CODE_00F5EB
 
 CODE_00F5E3:
-#_00F5E3: JSR ROUTINE_00E2D6
+#_00F5E3: JSR TestNewInput_Right
 #_00F5E6: BEQ CODE_00F5EB
 
 #_00F5E8: INC.w $0800
@@ -19758,7 +19984,7 @@ CODE_00F699:
 #_00F6AA: ORA.w #$8000
 #_00F6AD: STA.b $3A
 
-#_00F6AF: JSL ROUTINE_00DB57_long
+#_00F6AF: JSL QueueUpTilemapTransfers_long
 
 #_00F6B3: LDA.b $38
 #_00F6B5: CLC
@@ -19980,49 +20206,53 @@ ROUTINE_00F800:
 
 #_00F807: LDA.w #$0000
 
-CODE_00F80A:
+.next
 #_00F80A: STA.l $7E2800,X
 
 #_00F80E: DEX
 #_00F80F: DEX
-#_00F810: BNE CODE_00F80A
+#_00F810: BNE .next
 
 #_00F812: RTS
 
-CODE_00F813:
+;===================================================================================================
+
+ROUTINE_00F813:
 #_00F813: LDX.w #$001E
 
 #_00F816: LDA.w #$0000
 
-CODE_00F819:
+.next
 #_00F819: STA.l $7E2422,X
 
 #_00F81D: DEX
 #_00F81E: DEX
-#_00F81F: BPL CODE_00F819
+#_00F81F: BPL .next
 
 #_00F821: RTS
 
 ;===================================================================================================
 
-ROUTINE_00F82A_long:
+ROUTINE_00F822:
 #_00F822: PHB
 #_00F823: PHK
 #_00F824: PLB
-#_00F825: JSR ROUTINE_00F82A
+
+#_00F825: JSR .execute
+
 #_00F828: PLB
 #_00F829: RTL
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_00F82A:
+.execute
 #_00F82A: PHB
 #_00F82B: PHK
 #_00F82C: PLB
 
 #_00F82D: LDY.w #$0000
 
-CODE_00F830:
+.next_super
 #_00F830: LDA.b [$20],Y
 #_00F832: BEQ .exit
 
@@ -20067,7 +20297,7 @@ CODE_00F830:
 #_00F861: ASL A
 #_00F862: TAX
 
-CODE_00F863:
+.next
 #_00F863: STX.b $32
 
 #_00F865: JSR ROUTINE_00F878
@@ -20078,10 +20308,10 @@ CODE_00F863:
 #_00F86C: INY
 #_00F86D: INY
 #_00F86E: DEC.b $24
-#_00F870: BNE CODE_00F863
+#_00F870: BNE .next
 
 #_00F872: LDY.b $30
-#_00F874: BRA CODE_00F830
+#_00F874: BRA .next_super
 
 .exit
 #_00F876: PLB
@@ -20094,6 +20324,7 @@ ROUTINE_00F878:
 #_00F87A: AND.w #$000F
 #_00F87D: ASL A
 #_00F87E: TAX
+
 #_00F87F: JMP (.vectors,X)
 
 .vectors

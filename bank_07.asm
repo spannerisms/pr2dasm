@@ -8437,7 +8437,7 @@ data07F381:
 
 ;===================================================================================================
 
-data07F381:
+data07F3A1:
 #_07F3A1: dw $0080, $FF00
 #_07F3A5: dw $0080, $FF00
 #_07F3A9: dw $0100, $FF80
@@ -8597,15 +8597,16 @@ ROUTINE_07F501:
 #_07F531: JSL ROUTINE_00F957_long
 
 #_07F535: LDA.w #Message_07F92F
-#_07F538: LDX.w #$0007
+#_07F538: LDX.w #Message_07F92F>>16
 #_07F53B: JSL SetMessagePointer_long
 #_07F53F: JSL ROUTINE_00A974_long
 
-#_07F543: LDA.w #$0018
+#_07F543: LDA.w #$0018 ; SONG 18
 #_07F546: JSL RequestSong_verylong
 #_07F54A: INC.w $056E
 #_07F54D: INC.w $054E
 #_07F550: INC.w $0506
+
 #_07F553: RTS
 
 ;---------------------------------------------------------------------------------------------------
@@ -8716,7 +8717,7 @@ ROUTINE_07F5E3:
 #_07F5EF: BNE .exit
 
 #_07F5F1: LDA.w #Message_07F9DD
-#_07F5F4: LDX.w #$0007
+#_07F5F4: LDX.w #Message_07F9DD>>16
 #_07F5F7: JSL SetMessagePointer_long
 #_07F5FB: JSR ROUTINE_07F5A4
 #_07F5FE: INC.w $0506
@@ -8798,7 +8799,7 @@ ROUTINE_07F65D:
 #_07F667: BNE .exit
 
 #_07F669: LDA.w #Message_07FB8A
-#_07F66C: LDX.w #$0007
+#_07F66C: LDX.w #Message_07FB8A>>16
 #_07F66F: JSL SetMessagePointer_long
 #_07F673: INC.w $0506
 
@@ -8820,7 +8821,7 @@ ROUTINE_07F67E:
 #_07F683: JSR ROUTINE_07F5A4
 
 #_07F686: LDA.w #Message_07FCE5
-#_07F689: LDX.w #$0007
+#_07F689: LDX.w #Message_07FCE5>>16
 #_07F68C: JSL SetMessagePointer_long
 
 #_07F690: LDA.w #data07F6A6
@@ -8860,7 +8861,7 @@ ROUTINE_07F6BD:
 #_07F6D5: BNE .exit
 
 #_07F6D7: LDA.w #Message_07FD00
-#_07F6DA: LDX.w #$0007
+#_07F6DA: LDX.w #Message_07FD00>>16
 #_07F6DD: JSL SetMessagePointer_long
 #_07F6E1: INC.w $0506
 
@@ -8975,9 +8976,10 @@ CODE_07F747:
 #_07F786: STA.w $0818
 
 #_07F789: LDA.w #Message_07FDF5
-#_07F78C: LDX.w #$0007
+#_07F78C: LDX.w #Message_07FDF5>>16
 #_07F78F: JSL SetMessagePointer_long
 #_07F793: INC.w $0506
+
 #_07F796: RTS
 
 ;---------------------------------------------------------------------------------------------------

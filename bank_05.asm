@@ -3303,8 +3303,10 @@ CODE_05D452:
 
 #_05D467: LDA.w $1A50,Y
 #_05D46A: STA.w $1A50,X
+
 #_05D46D: PLA
 #_05D46E: STA.w $1A50,Y
+
 #_05D471: PLA
 #_05D472: STA.w $1A00,Y
 
@@ -3352,6 +3354,7 @@ CODE_05D4B1:
 #_05D4B6: BCC CODE_05D488
 
 #_05D4B8: STX.w $19B0
+
 #_05D4BB: BRA CODE_05D4FE
 
 CODE_05D4BD:
@@ -3442,6 +3445,7 @@ CODE_05D542:
 
 CODE_05D549:
 #_05D549: STZ.w $199E
+
 #_05D54C: PLB
 #_05D54D: RTL
 
@@ -3621,6 +3625,7 @@ CODE_05D631:
 #_05D640: LDA.w $0002,X
 #_05D643: ASL A
 #_05D644: STA.b $3A
+
 #_05D646: PLA
 #_05D647: ASL A
 #_05D648: ADC.b $24
@@ -3658,6 +3663,7 @@ CODE_05D631:
 
 #_05D674: LDA.b $30
 #_05D676: STA.b $38
+
 #_05D678: BRA CODE_05D690
 
 CODE_05D67A:
@@ -3742,19 +3748,21 @@ CODE_05D6EE:
 
 #_05D6F0: LDA.b $2C
 #_05D6F2: CMP.w #$2C00
-#_05D6F5: BCS CODE_05D704
+#_05D6F5: BCS .continue
 
 #_05D6F7: LDA.b $2E
 #_05D6F9: CMP.b $30
-#_05D6FB: BCC CODE_05D704
+#_05D6FB: BCC .continue
 
 #_05D6FD: LDA.b $32
 #_05D6FF: CMP.b $2C
-#_05D701: BCS CODE_05D704
+#_05D701: BCS .continue
 
 #_05D703: RTS
 
-CODE_05D704:
+;---------------------------------------------------------------------------------------------------
+
+.continue
 #_05D704: STZ.b $28
 
 #_05D706: LDA.b $30
@@ -3792,6 +3800,7 @@ CODE_05D71F:
 #_05D72E: LDA.w $0002,X
 #_05D731: ASL A
 #_05D732: STA.b $3A
+
 #_05D734: PLA
 #_05D735: ASL A
 #_05D736: ADC.b $24
@@ -3829,6 +3838,7 @@ CODE_05D71F:
 
 #_05D762: LDA.b $30
 #_05D764: STA.b $38
+
 #_05D766: BRA CODE_05D77E
 
 CODE_05D768:
@@ -7817,6 +7827,7 @@ CODE_05FDB0:
 CODE_05FDB6:
 #_05FDB6: PLX
 #_05FDB7: INC.w $054E
+
 #_05FDBA: RTS
 
 ;===================================================================================================
