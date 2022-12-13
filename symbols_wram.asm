@@ -418,7 +418,12 @@ UNKNOWN_7E19C6   = $7E19C6
 UNKNOWN_7E19C8   = $7E19C8
 UNKNOWN_7E19CA   = $7E19CA
 UNKNOWN_7E19CC   = $7E19CC
-UNKNOWN_7E19CE   = $7E19CE
+
+
+POCKYACT         = $7E19CE
+
+
+
 UNKNOWN_7E19D0   = $7E19D0
 UNKNOWN_7E19D4   = $7E19D4
 UNKNOWN_7E19D6   = $7E19D6
@@ -439,7 +444,6 @@ POCKX            = $7E19EE
 POCKY            = $7E19F0
 
 DOGHP            = $7E19F2
-
 
 LIVES            = $7E19F4
 
@@ -573,6 +577,11 @@ BGSCR            = $7E7B14
 
 ; holds text pointers at least once
 UNKNOWN_7E7B16   = $7E7B16
+
+; Shop ID?
+UNKNOWN_7E7B28   = $7E7B28
+
+;===================================================================================================
 
 ; CGRAM cache
 CGRAM4           = $7E7E00

@@ -7265,6 +7265,7 @@ ROUTINE_07EADC:
 
 #_07EB2E: LDA.w #$0082
 #_07EB31: JSL ROUTINE_028220
+
 #_07EB35: PLY
 
 CODE_07EB36:
@@ -7515,6 +7516,7 @@ ROUTINE_07EC0C:
 #_07EC4E: STA.l $7E7A10,X
 #_07EC52: PHY
 #_07EC53: JSR ROUTINE_07EFB3
+
 #_07EC56: PLY
 
 #_07EC57: LDA.w #$000B ; SFX 0B
@@ -8120,6 +8122,7 @@ ROUTINE_07EF45:
 #_07EF9A: STA.l $7E7A10,X
 #_07EF9E: PHY
 #_07EF9F: JSR ROUTINE_07EFB3
+
 #_07EFA2: PLY
 
 #_07EFA3: LDA.w #$000B ; SFX 0B
@@ -8344,7 +8347,7 @@ data07F191:
 
 ;===================================================================================================
 
-data07F1A1:
+PartnerPalettes:
 #_07F1A1: db $00, $38, $00, $00, $8A, $00, $12, $09
 #_07F1A9: db $78, $0D, $1D, $22, $86, $7F, $BD, $3E
 #_07F1B1: db $08, $21, $CE, $39, $B5, $56, $C2, $05
@@ -8392,7 +8395,7 @@ data07F1A1:
 
 ;===================================================================================================
 
-data07F2C1:
+BombingPalettes:
 #_07F2C1: db $60, $32, $00, $00, $AD, $00, $51, $01
 #_07F2C9: db $F8, $01, $0B, $00, $16, $00, $3F, $01
 #_07F2D1: db $FF, $01, $1F, $03, $FF, $03, $D6, $5A
@@ -8573,7 +8576,7 @@ EpilogueMain:
 ;===================================================================================================
 
 ROUTINE_07F501:
-#_07F501: JSL ROUTINE_00D43C_long
+#_07F501: JSL DisableInterruptsAndHDMAbutEnableFBlank_long
 
 #_07F505: LDA.w #$0000
 #_07F508: LDX.w #data00804B
@@ -8582,7 +8585,7 @@ ROUTINE_07F501:
 #_07F50F: LDA.w #$0007
 #_07F512: LDX.w #data07F554
 #_07F515: JSL BulkDecompressionViaTable_verylong
-#_07F519: JSL ROUTINE_00D421_long
+#_07F519: JSL EnableNMIandVIRQandFBlank_long
 
 #_07F51D: LDA.w #$001F
 #_07F520: STA.w $0524
@@ -8603,6 +8606,7 @@ ROUTINE_07F501:
 
 #_07F543: LDA.w #$0018 ; SONG 18
 #_07F546: JSL RequestSong_verylong
+
 #_07F54A: INC.w $056E
 #_07F54D: INC.w $054E
 #_07F550: INC.w $0506
@@ -8720,6 +8724,7 @@ ROUTINE_07F5E3:
 #_07F5F4: LDX.w #Message_07F9DD>>16
 #_07F5F7: JSL SetMessagePointer_long
 #_07F5FB: JSR ROUTINE_07F5A4
+
 #_07F5FE: INC.w $0506
 
 .exit
@@ -8801,6 +8806,7 @@ ROUTINE_07F65D:
 #_07F669: LDA.w #Message_07FB8A
 #_07F66C: LDX.w #Message_07FB8A>>16
 #_07F66F: JSL SetMessagePointer_long
+
 #_07F673: INC.w $0506
 
 .exit
@@ -8863,6 +8869,7 @@ ROUTINE_07F6BD:
 #_07F6D7: LDA.w #Message_07FD00
 #_07F6DA: LDX.w #Message_07FD00>>16
 #_07F6DD: JSL SetMessagePointer_long
+
 #_07F6E1: INC.w $0506
 
 .exit
@@ -8918,7 +8925,7 @@ StallUpdateFlagAndTMClear:
 ;===================================================================================================
 
 ROUTINE_07F718:
-#_07F718: JSL ROUTINE_00D43C_long
+#_07F718: JSL DisableInterruptsAndHDMAbutEnableFBlank_long
 #_07F71C: STZ.w $055E
 #_07F71F: STZ.w $052E
 
@@ -8942,15 +8949,19 @@ ROUTINE_07F718:
 
 #_07F744: LDX.w #$01FE
 
-CODE_07F747:
+.next:
 #_07F747: LDA.w $7E2E00,X
 #_07F74A: STA.w $7E2A00,X
+
 #_07F74D: DEX
 #_07F74E: DEX
-#_07F74F: BPL CODE_07F747
+#_07F74F: BPL .next
+
+;---------------------------------------------------------------------------------------------------
 
 #_07F751: PLB
-#_07F752: JSL ROUTINE_00D421_long
+
+#_07F752: JSL EnableNMIandVIRQandFBlank_long
 
 #_07F756: LDA.w #$001F
 #_07F759: STA.w $0524
@@ -8978,6 +8989,7 @@ CODE_07F747:
 #_07F789: LDA.w #Message_07FDF5
 #_07F78C: LDX.w #Message_07FDF5>>16
 #_07F78F: JSL SetMessagePointer_long
+
 #_07F793: INC.w $0506
 
 #_07F796: RTS

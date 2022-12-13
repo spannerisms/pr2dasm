@@ -3390,6 +3390,7 @@ CODE_05D4C0:
 #_05D4EF: LDA.w $0814,Y
 #_05D4F2: TAX
 #_05D4F3: JSR ROUTINE_05D57A
+
 #_05D4F6: PLX
 
 CODE_05D4F7:
@@ -3435,6 +3436,7 @@ CODE_05D506:
 #_05D53A: LDA.w $0814,Y
 #_05D53D: TAX
 #_05D53E: JSR ROUTINE_05D57A
+
 #_05D541: PLX
 
 CODE_05D542:
@@ -7788,27 +7790,29 @@ data05FD7C:
 
 ;===================================================================================================
 
-ROUTINE_05FD8C_long:
+ROUTINE_05FD84:
 #_05FD84: PHB
 #_05FD85: PHK
 #_05FD86: PLB
-#_05FD87: JSR ROUTINE_05FD8C
+
+#_05FD87: JSR .execute
+
 #_05FD8A: PLB
 #_05FD8B: RTL
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_05FD8C:
+.execute:
 #_05FD8C: PHX
 
 #_05FD8D: LDA.w $19CE
-#_05FD90: CMP.w #$0080
-#_05FD93: BCC CODE_05FD9A
+#_05FD90: CMP.w #$0080 ; STATE 80
+#_05FD93: BCC .not_gameover
 
-#_05FD95: CMP.w #$008C
-#_05FD98: BCC CODE_05FDB6
+#_05FD95: CMP.w #$008C ; STATE 8C
+#_05FD98: BCC .done
 
-CODE_05FD9A:
+.not_gameover
 #_05FD9A: LDA.w $0814,X
 #_05FD9D: CMP.w #$0002
 #_05FDA0: BCS CODE_05FDB0
@@ -7818,13 +7822,13 @@ CODE_05FD9A:
 
 #_05FDA8: LDY.w #$0020
 #_05FDAB: JSR ROUTINE_05FDBB
-#_05FDAE: BRA CODE_05FDB6
+#_05FDAE: BRA .done
 
 CODE_05FDB0:
 #_05FDB0: LDY.w #$0000
 #_05FDB3: JSR ROUTINE_05FDBB
 
-CODE_05FDB6:
+.done
 #_05FDB6: PLX
 #_05FDB7: INC.w $054E
 
@@ -7967,6 +7971,7 @@ ROUTINE_05FEF1:
 #_05FF18: LDA.l $7E7A52
 #_05FF1C: STA.b $22
 #_05FF1E: JSL ROUTINE_05D57A_long
+
 #_05FF22: PLX
 #_05FF23: CLC
 
