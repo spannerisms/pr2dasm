@@ -3978,8 +3978,10 @@ PrepareOptionsScreen:
 
 #_0097C2: LDA.w #$0020
 #_0097C5: TRB.w $0530
+
 #_0097C8: STZ.w $0506
 #_0097CB: STZ.w $0508
+
 #_0097CE: JMP ROUTINE_00D3FA
 
 ;===================================================================================================
@@ -4085,6 +4087,7 @@ ROUTINE_0097FB:
 
 OptionsScreen_DarkenSelection:
 #_00987F: PHX
+
 #_009880: JSR OptionsScreen_GetVRAMOfSelection
 
 #_009883: PLX
@@ -4095,6 +4098,7 @@ OptionsScreen_DarkenSelection:
 
 OptionsScreen_HighlightSelection:
 #_009887: PHX
+
 #_009888: JSR OptionsScreen_GetVRAMOfSelection
 
 #_00988B: PLX
@@ -5671,8 +5675,8 @@ ROUTINE_00A098:
 
 #_00A0AE: STZ.w $194C
 
-#_00A0B1: LDA.w #compressed218400
-#_00A0B4: LDY.w #compressed218400>>16
+#_00A0B1: LDA.w #data218400
+#_00A0B4: LDY.w #data218400>>16
 #_00A0B7: JSR DecompressTo_7F8000
 
 #_00A0BA: LDA.w #$8000
@@ -6131,30 +6135,30 @@ ExecuteStoryTime_Skippable:
 ;===================================================================================================
 
 StoryTimeSubmodules:
-#_00A397: dw ItsStoryTime_Initialize ; 00
-#_00A399: dw ROUTINE_00A424 ; 01
-#_00A39B: dw ItsStoryTime_FadeIn     ; 02
-#_00A39D: dw ROUTINE_00A54E ; 03
-#_00A39F: dw ROUTINE_00A58B ; 04
-#_00A3A1: dw ROUTINE_00A628 ; 05
-#_00A3A3: dw ItsStoryTime_ImpyMusic ; 06
-#_00A3A5: dw ItsStoryTime_ImpyInterrupts ; 07
-#_00A3A7: dw ROUTINE_00A6BD ; 08
-#_00A3A9: dw ROUTINE_00A6E5 ; 09
-#_00A3AB: dw ROUTINE_00A717 ; 0A
-#_00A3AD: dw ItsStoryTime_FadeSongBeforeFlash ; 0B
-#_00A3AF: dw ItsStoryTime_BrightFlash ; 0C
-#_00A3B1: dw ItsStoryTime_BrightSuspense ; 0D
-#_00A3B3: dw ROUTINE_00A7F7 ; 0E
-#_00A3B5: dw ROUTINE_00A822 ; 0F
-#_00A3B7: dw ROUTINE_00A853 ; 10
-#_00A3B9: dw ROUTINE_00A872 ; 11
-#_00A3BB: dw ROUTINE_00A889 ; 12
-#_00A3BD: dw ROUTINE_00A893 ; 13
-#_00A3BF: dw ROUTINE_00A8AD ; 14
-#_00A3C1: dw ItsStoryTime_PrepareToClose ; 15
-#_00A3C3: dw ItsStoryTime_DelayClose     ; 16
-#_00A3C5: dw ItsStoryTime_NoMore         ; 17
+#_00A397: dw ItsStoryTime_Initialize             ; 00
+#_00A399: dw ROUTINE_00A424                      ; 01
+#_00A39B: dw ItsStoryTime_FadeIn                 ; 02
+#_00A39D: dw ROUTINE_00A54E                      ; 03
+#_00A39F: dw ROUTINE_00A58B                      ; 04
+#_00A3A1: dw ROUTINE_00A628                      ; 05
+#_00A3A3: dw ItsStoryTime_ImpyMusic              ; 06
+#_00A3A5: dw ItsStoryTime_ImpyInterrupts         ; 07
+#_00A3A7: dw ROUTINE_00A6BD                      ; 08
+#_00A3A9: dw ROUTINE_00A6E5                      ; 09
+#_00A3AB: dw ROUTINE_00A717                      ; 0A
+#_00A3AD: dw ItsStoryTime_FadeSongBeforeFlash    ; 0B
+#_00A3AF: dw ItsStoryTime_BrightFlash            ; 0C
+#_00A3B1: dw ItsStoryTime_BrightSuspense         ; 0D
+#_00A3B3: dw ROUTINE_00A7F7                      ; 0E
+#_00A3B5: dw ROUTINE_00A822                      ; 0F
+#_00A3B7: dw ROUTINE_00A853                      ; 10
+#_00A3B9: dw ROUTINE_00A872                      ; 11
+#_00A3BB: dw ROUTINE_00A889                      ; 12
+#_00A3BD: dw ROUTINE_00A893                      ; 13
+#_00A3BF: dw ROUTINE_00A8AD                      ; 14
+#_00A3C1: dw ItsStoryTime_PrepareToClose         ; 15
+#_00A3C3: dw ItsStoryTime_DelayClose             ; 16
+#_00A3C5: dw ItsStoryTime_NoMore                 ; 17
 
 ;===================================================================================================
 
@@ -7033,7 +7037,7 @@ ROUTINE_00A947:
 
 ;===================================================================================================
 
-ROUTINE_00A970:
+ROUTINE_00A974_long2:
 #_00A970: JSR ROUTINE_00A974
 #_00A973: RTL
 
@@ -7055,7 +7059,7 @@ ROUTINE_00A974:
 
 ;===================================================================================================
 
-ROUTINE_00A98C:
+ROUTINE_00A990_long2:
 #_00A98C: JSR ROUTINE_00A990
 #_00A98F: RTL
 
@@ -7079,6 +7083,7 @@ CODE_00A9A0:
 
 ;===================================================================================================
 
+ROUTINE_00A9A8_long2:
 #_00A9A4: JSR ROUTINE_00A9A8
 #_00A9A7: RTL
 
@@ -7136,6 +7141,7 @@ PrepareStoryCutscene:
 
 StoryCutscene:
 #_00A9DA: JSL $7E8003
+
 #_00A9DE: RTS
 
 ;===================================================================================================
@@ -12788,13 +12794,13 @@ CODE_00CD85:
 #_00CD98: JSR ArbitraryTableCopy
 
 #_00CD9B: LDX.w #$0000
-#_00CD9E: LDA.w #compressed23E000
-#_00CDA1: LDY.w #compressed23E000>>16
+#_00CD9E: LDA.w #data23E000
+#_00CDA1: LDY.w #data23E000>>16
 #_00CDA4: JSR .decompress_vram_data
 
 #_00CDA7: LDX.w #$1000
-#_00CDAA: LDA.w #compressed2CE800
-#_00CDAD: LDY.w #compressed2CE800>>16
+#_00CDAA: LDA.w #data2CE800
+#_00CDAD: LDY.w #data2CE800>>16
 #_00CDB0: JSR .decompress_vram_data
 
 #_00CDB3: LDA.w #$000F
@@ -14412,8 +14418,8 @@ Decompress:
 #_00D63D: BCC .fewer_than_16_left
 
 #_00D63F: JSR Copy16BytesToWRAM
-#_00D642: SEC
 
+#_00D642: SEC
 #_00D643: LDA.b $2C
 #_00D645: SBC.w #$0010
 #_00D648: STA.b $2C
@@ -14499,6 +14505,7 @@ Decompress:
 
 #_00D69E: INC.b $28
 #_00D6A0: INC.b $24
+
 #_00D6A2: DEC.b $2C
 #_00D6A4: BEQ .finished
 
@@ -15508,13 +15515,13 @@ DecompressTo_7F8000:
 
 ;===================================================================================================
 
-ROUTINE_00DBDC_long:
-#_00DBD8: JSR ROUTINE_00DBDC
+DecompressToBank7FThing_long:
+#_00DBD8: JSR DecompressToBank7FThing
 #_00DBDB: RTL
 
 ;===================================================================================================
 
-ROUTINE_00DBDC:
+DecompressToBank7FThing:
 #_00DBDC: STA.b $20
 
 #_00DBDE: STY.b $22
@@ -19679,9 +19686,8 @@ ROUTINE_00F455:
 #_00F46C: LDX.w #data00F4C9
 #_00F46F: JSR BulkDecompressionViaTable_currentDB
 
-; TODO data?
-#_00F472: LDA.w #$8400
-#_00F475: LDY.w #$0021
+#_00F472: LDA.w #data218400
+#_00F475: LDY.w #data218400>>16
 #_00F478: JSR DecompressTo_7F8000
 #_00F47B: SEP #$20
 

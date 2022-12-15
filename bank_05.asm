@@ -26,190 +26,744 @@ data058006:
 ;===================================================================================================
 
 data058040:
-#_058040: db $01, $00, $01, $14, $35, $FF, $01, $00
-#_058048: db $08, $FF, $00, $30, $03, $03, $FF, $01
-#_058050: db $00, $03, $10, $30, $02, $00, $08, $1E
-#_058058: db $38, $FF, $04, $DB, $FD, $00, $08, $0F
-#_058060: db $40, $05, $00, $08, $1F, $40, $06, $00
-#_058068: db $08, $2F, $40, $0A, $68, $00, $00, $08
-#_058070: db $1F, $C0, $33, $90, $22, $F8, $00, $F8
-#_058078: db $8F, $A0
+#_058040: db $01, $0100 ; copy 256 bytes
+
+#_058043: dw $3514 ; block header
+#_058045: db $FF
+#_058046: db $01
+#_058047: dw $0800 ; copy 4 backtracking $001
+#_058049: db $FF
+#_05804A: dw $3000 ; copy 9 backtracking $001
+#_05804C: db $03
+#_05804D: db $03
+#_05804E: db $FF
+#_05804F: dw $0001 ; copy 3 backtracking $002
+#_058051: db $03
+#_058052: dw $3010 ; copy 9 backtracking $011
+#_058054: db $02
+#_058055: dw $0800 ; copy 4 backtracking $001
+#_058057: dw $381E ; copy 10 backtracking $01F
+#_058059: db $FF
+#_05805A: db $04
+
+#_05805B: dw $FDDB ; block header
+#_05805D: dw $0800 ; copy 4 backtracking $001
+#_05805F: dw $400F ; copy 11 backtracking $010
+#_058061: db $05
+#_058062: dw $0800 ; copy 4 backtracking $001
+#_058064: dw $401F ; copy 11 backtracking $020
+#_058066: db $06
+#_058067: dw $0800 ; copy 4 backtracking $001
+#_058069: dw $402F ; copy 11 backtracking $030
+#_05806B: dw $680A ; copy 16 backtracking $00B
+#_05806D: db $00
+#_05806E: dw $0800 ; copy 4 backtracking $001
+#_058070: dw $C01F ; copy 27 backtracking $020
+#_058072: dw $9033 ; copy 21 backtracking $034
+#_058074: dw $F822 ; copy 34 backtracking $023
+#_058076: dw $F800 ; copy 34 backtracking $001
+#_058078: dw $A08F ; copy 23 backtracking $090
 
 ;===================================================================================================
 
 data05807A:
-#_05807A: db $01, $00, $03, $08, $C0, $01, $80, $00
-#_058082: db $00, $18, $30, $00, $F8, $00, $B0, $80
-#_05808A: db $16, $50, $82, $20, $10, $20, $00, $F8
-#_058092: db $7F, $FF, $00, $F8, $00, $F8, $00, $F8
-#_05809A: db $00, $F8, $00, $F8, $07, $B8, $FF, $68
-#_0580A2: db $58, $FF, $F8, $00, $F8, $00, $F8, $00
-#_0580AA: db $F8, $00, $F8, $00, $F8, $00, $F8, $FF
-#_0580B2: db $60, $C0, $1F, $40, $13, $2E, $82, $00
-#_0580BA: db $06, $35, $F8, $00, $F8, $00, $F8, $00
-#_0580C2: db $F8, $00, $F8, $00, $F8, $00, $E8
+#_05807A: db $01, $0300 ; copy 768 bytes
+
+#_05807D: dw $C008 ; block header
+#_05807F: db $01
+#_058080: db $80
+#_058081: db $00
+#_058082: dw $1800 ; copy 6 backtracking $001
+#_058084: db $30
+#_058085: db $00
+#_058086: db $F8
+#_058087: db $00
+#_058088: db $B0
+#_058089: db $80
+#_05808A: db $16
+#_05808B: db $50
+#_05808C: db $82
+#_05808D: db $20
+#_05808E: dw $2010 ; copy 7 backtracking $011
+#_058090: dw $F800 ; copy 34 backtracking $001
+
+#_058092: dw $FF7F ; block header
+#_058094: dw $F800 ; copy 34 backtracking $001
+#_058096: dw $F800 ; copy 34 backtracking $001
+#_058098: dw $F800 ; copy 34 backtracking $001
+#_05809A: dw $F800 ; copy 34 backtracking $001
+#_05809C: dw $F800 ; copy 34 backtracking $001
+#_05809E: dw $B807 ; copy 26 backtracking $008
+#_0580A0: dw $68FF ; copy 16 backtracking $100
+#_0580A2: db $58
+#_0580A3: dw $F8FF ; copy 34 backtracking $100
+#_0580A5: dw $F800 ; copy 34 backtracking $001
+#_0580A7: dw $F800 ; copy 34 backtracking $001
+#_0580A9: dw $F800 ; copy 34 backtracking $001
+#_0580AB: dw $F800 ; copy 34 backtracking $001
+#_0580AD: dw $F800 ; copy 34 backtracking $001
+#_0580AF: dw $F800 ; copy 34 backtracking $001
+#_0580B1: dw $60FF ; copy 15 backtracking $100
+
+#_0580B3: dw $1FC0 ; block header
+#_0580B5: db $40
+#_0580B6: db $13
+#_0580B7: db $2E
+#_0580B8: db $82
+#_0580B9: db $00
+#_0580BA: db $06
+#_0580BB: dw $F835 ; copy 34 backtracking $036
+#_0580BD: dw $F800 ; copy 34 backtracking $001
+#_0580BF: dw $F800 ; copy 34 backtracking $001
+#_0580C1: dw $F800 ; copy 34 backtracking $001
+#_0580C3: dw $F800 ; copy 34 backtracking $001
+#_0580C5: dw $F800 ; copy 34 backtracking $001
+#_0580C7: dw $E800 ; copy 32 backtracking $001
 
 ;===================================================================================================
 
 data0580C9:
-#_0580C9: db $01, $00, $03, $08, $C0, $01, $80, $00
-#_0580D1: db $00, $18, $30, $00, $F8, $00, $D0, $80
-#_0580D9: db $16, $50, $82, $20, $10, $20, $00, $F8
-#_0580E1: db $7F, $FF, $00, $F8, $00, $F8, $00, $F8
-#_0580E9: db $00, $F8, $00, $F8, $07, $B8, $FF, $68
-#_0580F1: db $58, $FF, $F8, $00, $F8, $00, $F8, $00
-#_0580F9: db $F8, $00, $F8, $00, $F8, $00, $F8, $FF
-#_058101: db $60, $C0, $1F, $40, $13, $2E, $82, $00
-#_058109: db $06, $35, $F8, $00, $F8, $00, $F8, $00
-#_058111: db $F8, $00, $F8, $00, $F8, $00, $E8
+#_0580C9: db $01, $0300 ; copy 768 bytes
+
+#_0580CC: dw $C008 ; block header
+#_0580CE: db $01
+#_0580CF: db $80
+#_0580D0: db $00
+#_0580D1: dw $1800 ; copy 6 backtracking $001
+#_0580D3: db $30
+#_0580D4: db $00
+#_0580D5: db $F8
+#_0580D6: db $00
+#_0580D7: db $D0
+#_0580D8: db $80
+#_0580D9: db $16
+#_0580DA: db $50
+#_0580DB: db $82
+#_0580DC: db $20
+#_0580DD: dw $2010 ; copy 7 backtracking $011
+#_0580DF: dw $F800 ; copy 34 backtracking $001
+
+#_0580E1: dw $FF7F ; block header
+#_0580E3: dw $F800 ; copy 34 backtracking $001
+#_0580E5: dw $F800 ; copy 34 backtracking $001
+#_0580E7: dw $F800 ; copy 34 backtracking $001
+#_0580E9: dw $F800 ; copy 34 backtracking $001
+#_0580EB: dw $F800 ; copy 34 backtracking $001
+#_0580ED: dw $B807 ; copy 26 backtracking $008
+#_0580EF: dw $68FF ; copy 16 backtracking $100
+#_0580F1: db $58
+#_0580F2: dw $F8FF ; copy 34 backtracking $100
+#_0580F4: dw $F800 ; copy 34 backtracking $001
+#_0580F6: dw $F800 ; copy 34 backtracking $001
+#_0580F8: dw $F800 ; copy 34 backtracking $001
+#_0580FA: dw $F800 ; copy 34 backtracking $001
+#_0580FC: dw $F800 ; copy 34 backtracking $001
+#_0580FE: dw $F800 ; copy 34 backtracking $001
+#_058100: dw $60FF ; copy 15 backtracking $100
+
+#_058102: dw $1FC0 ; block header
+#_058104: db $40
+#_058105: db $13
+#_058106: db $2E
+#_058107: db $82
+#_058108: db $00
+#_058109: db $06
+#_05810A: dw $F835 ; copy 34 backtracking $036
+#_05810C: dw $F800 ; copy 34 backtracking $001
+#_05810E: dw $F800 ; copy 34 backtracking $001
+#_058110: dw $F800 ; copy 34 backtracking $001
+#_058112: dw $F800 ; copy 34 backtracking $001
+#_058114: dw $F800 ; copy 34 backtracking $001
+#_058116: dw $E800 ; copy 32 backtracking $001
 
 ;===================================================================================================
 
 data058118:
-#_058118: db $01, $00, $04, $08, $28, $02, $01, $00
-#_058120: db $00, $38, $80, $00, $80, $F0, $80, $00
-#_058128: db $02, $11, $40, $00, $1F, $50, $7B, $00
-#_058130: db $4C, $04, $8F, $06, $1E, $58, $1F, $58
-#_058138: db $A2, $80, $1F, $D8, $D2, $00, $8D, $3F
-#_058140: db $C8, $80, $3F, $80, $8F, $F4, $42, $87
-#_058148: db $01, $5F, $C0, $35, $80, $91, $EC, $1F
-#_058150: db $C8, $5E, $3F, $08, $D0, $48, $5F, $60
-#_058158: db $71, $00, $90, $E8, $1F, $C0, $10, $45
-#_058160: db $00, $86, $00, $90, $3F, $C8, $00, $95
-#_058168: db $80, $3F, $D8, $B8, $3F, $E0, $C8, $80
-#_058170: db $8D, $9F, $D0, $3A, $18, $42, $00, $8C
-#_058178: db $36, $90, $51, $1F, $61, $2D, $80, $8A
-#_058180: db $3A, $1F, $C0, $00, $B2, $00, $93, $3F
-#_058188: db $C8, $00, $08, $21, $C3, $00, $90, $1F
-#_058190: db $D0, $32, $80, $91, $D8, $3F, $C9, $64
-#_058198: db $00, $87, $DC, $5F, $C9, $6C, $80, $0C
-#_0581A0: db $85, $96, $D4, $7E, $59, $3F, $5A, $78
-#_0581A8: db $00, $90, $D0, $7F, $C9, $81, $1F, $D8
-#_0581B0: db $80, $7F, $00, $8C, $9F, $D0, $88, $94
-#_0581B8: db $9B, $00, $94, $BF, $D0, $9E, $80, $8B
-#_0581C0: db $DF, $C8, $00, $A1, $3F, $E0, $A4, $3F
-#_0581C8: db $E0, $A9, $00, $FF, $D0, $CC, $98, $80
-#_0581D0: db $AD, $3F, $D9, $BF, $09, $26, $00, $BF
-#_0581D8: db $F9, $9F, $B3, $D0, $80, $8A, $FF, $D1
-#_0581E0: db $BF, $03, $00, $02, $BF, $5B
+#_058118: db $01, $0400 ; copy 1024 bytes
+
+#_05811B: dw $2808 ; block header
+#_05811D: db $02
+#_05811E: db $01
+#_05811F: db $00
+#_058120: dw $3800 ; copy 10 backtracking $001
+#_058122: db $80
+#_058123: db $00
+#_058124: db $80
+#_058125: db $F0
+#_058126: db $80
+#_058127: db $00
+#_058128: db $02
+#_058129: dw $4011 ; copy 11 backtracking $012
+#_05812B: db $00
+#_05812C: dw $501F ; copy 13 backtracking $020
+#_05812E: db $7B
+#_05812F: db $00
+
+#_058130: dw $044C ; block header
+#_058132: db $8F
+#_058133: db $06
+#_058134: dw $581E ; copy 14 backtracking $01F
+#_058136: dw $581F ; copy 14 backtracking $020
+#_058138: db $A2
+#_058139: db $80
+#_05813A: dw $D81F ; copy 30 backtracking $020
+#_05813C: db $D2
+#_05813D: db $00
+#_05813E: db $8D
+#_05813F: dw $C83F ; copy 28 backtracking $040
+#_058141: db $80
+#_058142: db $3F
+#_058143: db $80
+#_058144: db $8F
+#_058145: db $F4
+
+#_058146: dw $8742 ; block header
+#_058148: db $01
+#_058149: dw $C05F ; copy 27 backtracking $060
+#_05814B: db $35
+#_05814C: db $80
+#_05814D: db $91
+#_05814E: db $EC
+#_05814F: dw $C81F ; copy 28 backtracking $020
+#_058151: db $5E
+#_058152: dw $083F ; copy 4 backtracking $040
+#_058154: dw $48D0 ; copy 12 backtracking $0D1
+#_058156: dw $605F ; copy 15 backtracking $060
+#_058158: db $71
+#_058159: db $00
+#_05815A: db $90
+#_05815B: db $E8
+#_05815C: dw $C01F ; copy 27 backtracking $020
+
+#_05815E: dw $4510 ; block header
+#_058160: db $00
+#_058161: db $86
+#_058162: db $00
+#_058163: db $90
+#_058164: dw $C83F ; copy 28 backtracking $040
+#_058166: db $00
+#_058167: db $95
+#_058168: db $80
+#_058169: dw $D83F ; copy 30 backtracking $040
+#_05816B: db $B8
+#_05816C: dw $E03F ; copy 31 backtracking $040
+#_05816E: db $C8
+#_05816F: db $80
+#_058170: db $8D
+#_058171: dw $D09F ; copy 29 backtracking $0A0
+#_058173: db $3A
+
+#_058174: dw $4218 ; block header
+#_058176: db $00
+#_058177: db $8C
+#_058178: db $36
+#_058179: dw $5190 ; copy 13 backtracking $191
+#_05817B: dw $611F ; copy 15 backtracking $120
+#_05817D: db $2D
+#_05817E: db $80
+#_05817F: db $8A
+#_058180: db $3A
+#_058181: dw $C01F ; copy 27 backtracking $020
+#_058183: db $00
+#_058184: db $B2
+#_058185: db $00
+#_058186: db $93
+#_058187: dw $C83F ; copy 28 backtracking $040
+#_058189: db $00
+
+#_05818A: dw $2108 ; block header
+#_05818C: db $C3
+#_05818D: db $00
+#_05818E: db $90
+#_05818F: dw $D01F ; copy 29 backtracking $020
+#_058191: db $32
+#_058192: db $80
+#_058193: db $91
+#_058194: db $D8
+#_058195: dw $C93F ; copy 28 backtracking $140
+#_058197: db $64
+#_058198: db $00
+#_058199: db $87
+#_05819A: db $DC
+#_05819B: dw $C95F ; copy 28 backtracking $160
+#_05819D: db $6C
+#_05819E: db $80
+
+#_05819F: dw $850C ; block header
+#_0581A1: db $96
+#_0581A2: db $D4
+#_0581A3: dw $597E ; copy 14 backtracking $17F
+#_0581A5: dw $5A3F ; copy 14 backtracking $240
+#_0581A7: db $78
+#_0581A8: db $00
+#_0581A9: db $90
+#_0581AA: db $D0
+#_0581AB: dw $C97F ; copy 28 backtracking $180
+#_0581AD: db $81
+#_0581AE: dw $D81F ; copy 30 backtracking $020
+#_0581B0: db $80
+#_0581B1: db $7F
+#_0581B2: db $00
+#_0581B3: db $8C
+#_0581B4: dw $D09F ; copy 29 backtracking $0A0
+
+#_0581B6: dw $9488 ; block header
+#_0581B8: db $9B
+#_0581B9: db $00
+#_0581BA: db $94
+#_0581BB: dw $D0BF ; copy 29 backtracking $0C0
+#_0581BD: db $9E
+#_0581BE: db $80
+#_0581BF: db $8B
+#_0581C0: dw $C8DF ; copy 28 backtracking $0E0
+#_0581C2: db $00
+#_0581C3: db $A1
+#_0581C4: dw $E03F ; copy 31 backtracking $040
+#_0581C6: db $A4
+#_0581C7: dw $E03F ; copy 31 backtracking $040
+#_0581C9: db $A9
+#_0581CA: db $00
+#_0581CB: dw $D0FF ; copy 29 backtracking $100
+
+#_0581CD: dw $98CC ; block header
+#_0581CF: db $80
+#_0581D0: db $AD
+#_0581D1: dw $D93F ; copy 30 backtracking $140
+#_0581D3: dw $09BF ; copy 4 backtracking $1C0
+#_0581D5: db $26
+#_0581D6: db $00
+#_0581D7: dw $F9BF ; copy 34 backtracking $1C0
+#_0581D9: dw $B39F ; copy 25 backtracking $3A0
+#_0581DB: db $D0
+#_0581DC: db $80
+#_0581DD: db $8A
+#_0581DE: dw $D1FF ; copy 29 backtracking $200
+#_0581E0: dw $03BF ; copy 3 backtracking $3C0
+#_0581E2: db $00
+#_0581E3: db $02
+#_0581E4: dw $5BBF ; copy 14 backtracking $3C0
 
 ;===================================================================================================
 
 data0581E6:
-#_0581E6: db $01, $00, $01, $04, $C0, $01, $00, $00
-#_0581EE: db $20, $30, $00, $F8, $00, $C8, $00, $15
-#_0581F6: db $FA, $81, $00, $02, $12, $28, $00, $F8
-#_0581FE: db $3F, $00, $00, $F8, $00, $F8, $00, $F8
-#_058206: db $00, $F8, $00, $F8, $00, $A8
+#_0581E6: db $01, $0100 ; copy 256 bytes
+
+#_0581E9: dw $C004 ; block header
+#_0581EB: db $01
+#_0581EC: db $00
+#_0581ED: dw $2000 ; copy 7 backtracking $001
+#_0581EF: db $30
+#_0581F0: db $00
+#_0581F1: db $F8
+#_0581F2: db $00
+#_0581F3: db $C8
+#_0581F4: db $00
+#_0581F5: db $15
+#_0581F6: db $FA
+#_0581F7: db $81
+#_0581F8: db $00
+#_0581F9: db $02
+#_0581FA: dw $2812 ; copy 8 backtracking $013
+#_0581FC: dw $F800 ; copy 34 backtracking $001
+
+#_0581FE: dw $003F ; block header
+#_058200: dw $F800 ; copy 34 backtracking $001
+#_058202: dw $F800 ; copy 34 backtracking $001
+#_058204: dw $F800 ; copy 34 backtracking $001
+#_058206: dw $F800 ; copy 34 backtracking $001
+#_058208: dw $F800 ; copy 34 backtracking $001
+#_05820A: dw $A800 ; copy 24 backtracking $001
 
 ;===================================================================================================
 
 data05820C:
-#_05820C: db $01, $00, $01, $08, $F8, $02, $01, $00
-#_058214: db $00, $38, $30, $00, $15, $34, $83, $00
-#_05821C: db $06, $11, $40, $00, $F8, $00, $F8, $00
-#_058224: db $F8, $00, $F8, $0D, $00, $08, $B0, $FF
-#_05822C: db $00, $F8, $04, $D0
+#_05820C: db $01, $0100 ; copy 256 bytes
+
+#_05820F: dw $F808 ; block header
+#_058211: db $02
+#_058212: db $01
+#_058213: db $00
+#_058214: dw $3800 ; copy 10 backtracking $001
+#_058216: db $30
+#_058217: db $00
+#_058218: db $15
+#_058219: db $34
+#_05821A: db $83
+#_05821B: db $00
+#_05821C: db $06
+#_05821D: dw $4011 ; copy 11 backtracking $012
+#_05821F: dw $F800 ; copy 34 backtracking $001
+#_058221: dw $F800 ; copy 34 backtracking $001
+#_058223: dw $F800 ; copy 34 backtracking $001
+#_058225: dw $F800 ; copy 34 backtracking $001
+
+#_058227: dw $000D ; block header
+#_058229: dw $B008 ; copy 25 backtracking $009
+#_05822B: db $FF
+#_05822C: dw $F800 ; copy 34 backtracking $001
+#_05822E: dw $D004 ; copy 29 backtracking $005
 
 ;===================================================================================================
 
 data058230:
-#_058230: db $01, $40, $00, $08, $28, $02, $01, $00
-#_058238: db $00, $38, $80, $00, $80, $F0, $80, $00
-#_058240: db $02, $11, $40, $00, $1F, $50, $7B, $00
-#_058248: db $04, $00, $8F, $06, $1E, $58, $00
+#_058230: db $01, $0040 ; copy 64 bytes
+
+#_058233: dw $2808 ; block header
+#_058235: db $02
+#_058236: db $01
+#_058237: db $00
+#_058238: dw $3800 ; copy 10 backtracking $001
+#_05823A: db $80
+#_05823B: db $00
+#_05823C: db $80
+#_05823D: db $F0
+#_05823E: db $80
+#_05823F: db $00
+#_058240: db $02
+#_058241: dw $4011 ; copy 11 backtracking $012
+#_058243: db $00
+#_058244: dw $501F ; copy 13 backtracking $020
+#_058246: db $7B
+#_058247: db $00
+
+#_058248: dw $0004 ; block header
+#_05824A: db $8F
+#_05824B: db $06
+#_05824C: dw $581E ; copy 14 backtracking $01F
+#_05824E: db $00
 
 ;===================================================================================================
 
 data05824F:
-#_05824F: db $01, $00, $01, $08, $F8, $02, $01, $00
-#_058257: db $00, $38, $90, $00, $93, $88, $83, $00
-#_05825F: db $05, $11, $40, $00, $F8, $00, $F8, $00
-#_058267: db $F8, $00, $F8, $07, $00, $00, $F8, $00
-#_05826F: db $F8, $00, $90
+#_05824F: db $01, $0100 ; copy 256 bytes
+
+#_058252: dw $F808 ; block header
+#_058254: db $02
+#_058255: db $01
+#_058256: db $00
+#_058257: dw $3800 ; copy 10 backtracking $001
+#_058259: db $90
+#_05825A: db $00
+#_05825B: db $93
+#_05825C: db $88
+#_05825D: db $83
+#_05825E: db $00
+#_05825F: db $05
+#_058260: dw $4011 ; copy 11 backtracking $012
+#_058262: dw $F800 ; copy 34 backtracking $001
+#_058264: dw $F800 ; copy 34 backtracking $001
+#_058266: dw $F800 ; copy 34 backtracking $001
+#_058268: dw $F800 ; copy 34 backtracking $001
+
+#_05826A: dw $0007 ; block header
+#_05826C: dw $F800 ; copy 34 backtracking $001
+#_05826E: dw $F800 ; copy 34 backtracking $001
+#_058270: dw $9000 ; copy 21 backtracking $001
 
 ;===================================================================================================
 
 data058272:
-#_058272: db $01, $01, $01, $50, $F4, $00, $10, $00
-#_05827A: db $20, $03, $00, $30, $01, $00, $50, $00
-#_058282: db $40, $0B, $50, $00, $0D, $60, $0F, $E8
-#_05828A: db $3B, $B8, $61, $58, $EF, $00, $01, $58
-#_058292: db $00, $48, $33, $B8, $A1, $30, $FF, $00
-#_05829A: db $F8, $00, $F8, $15, $48
+#_058272: db $01, $0101 ; copy 257 bytes
+
+#_058275: dw $F450 ; block header
+#_058277: db $00
+#_058278: db $10
+#_058279: db $00
+#_05827A: db $20
+#_05827B: dw $0003 ; copy 3 backtracking $004
+#_05827D: db $30
+#_05827E: dw $0001 ; copy 3 backtracking $002
+#_058280: db $50
+#_058281: db $00
+#_058282: db $40
+#_058283: dw $500B ; copy 13 backtracking $00C
+#_058285: db $00
+#_058286: dw $600D ; copy 15 backtracking $00E
+#_058288: dw $E80F ; copy 32 backtracking $010
+#_05828A: dw $B83B ; copy 26 backtracking $03C
+#_05828C: dw $5861 ; copy 14 backtracking $062
+
+#_05828E: dw $00EF ; block header
+#_058290: dw $5801 ; copy 14 backtracking $002
+#_058292: dw $4800 ; copy 12 backtracking $001
+#_058294: dw $B833 ; copy 26 backtracking $034
+#_058296: dw $30A1 ; copy 9 backtracking $0A2
+#_058298: db $FF
+#_058299: dw $F800 ; copy 34 backtracking $001
+#_05829B: dw $F800 ; copy 34 backtracking $001
+#_05829D: dw $4815 ; copy 12 backtracking $016
 
 ;===================================================================================================
 
 data05829F:
-#_05829F: db $01, $00, $02, $2E, $63, $00, $00, $F8
-#_0582A7: db $00, $F8, $0B, $98, $06, $00, $38, $02
-#_0582AF: db $02, $2E, $F8, $00, $F8, $00, $00, $08
-#_0582B7: db $00, $60, $31, $18, $04, $B7, $2E, $00
-#_0582BF: db $00, $04, $10, $07, $08, $02, $01, $A0
-#_0582C7: db $5C, $C0, $0A, $78, $00, $0C, $00, $20
-#_0582CF: db $09, $00, $86, $20, $16, $8E, $28, $0C
-#_0582D7: db $00, $D6, $7B, $16, $00, $00, $9C, $20
-#_0582DF: db $22, $A4, $08, $20, $00, $00, $AC, $F8
-#_0582E7: db $00, $F8, $1E, $00, $FF, $00, $F8, $00
-#_0582EF: db $F8, $00, $F8, $08, $B0
+#_05829F: db $01, $0200 ; copy 512 bytes
+
+#_0582A2: dw $632E ; block header
+#_0582A4: db $00
+#_0582A5: dw $F800 ; copy 34 backtracking $001
+#_0582A7: dw $F800 ; copy 34 backtracking $001
+#_0582A9: dw $980B ; copy 22 backtracking $00C
+#_0582AB: db $06
+#_0582AC: dw $3800 ; copy 10 backtracking $001
+#_0582AE: db $02
+#_0582AF: db $02
+#_0582B0: dw $F82E ; copy 34 backtracking $02F
+#_0582B2: dw $F800 ; copy 34 backtracking $001
+#_0582B4: db $00
+#_0582B5: db $00
+#_0582B6: db $08
+#_0582B7: dw $6000 ; copy 15 backtracking $001
+#_0582B9: dw $1831 ; copy 6 backtracking $032
+#_0582BB: db $04
+
+#_0582BC: dw $2EB7 ; block header
+#_0582BE: dw $0000 ; copy 3 backtracking $001
+#_0582C0: dw $1004 ; copy 5 backtracking $005
+#_0582C2: dw $0807 ; copy 4 backtracking $008
+#_0582C4: db $02
+#_0582C5: dw $A001 ; copy 23 backtracking $002
+#_0582C7: dw $C05C ; copy 27 backtracking $05D
+#_0582C9: db $0A
+#_0582CA: dw $0078 ; copy 3 backtracking $079
+#_0582CC: db $0C
+#_0582CD: dw $2000 ; copy 7 backtracking $001
+#_0582CF: dw $0009 ; copy 3 backtracking $00A
+#_0582D1: dw $2086 ; copy 7 backtracking $087
+#_0582D3: db $16
+#_0582D4: dw $288E ; copy 8 backtracking $08F
+#_0582D6: db $0C
+#_0582D7: db $00
+
+#_0582D8: dw $7BD6 ; block header
+#_0582DA: db $16
+#_0582DB: dw $0000 ; copy 3 backtracking $001
+#_0582DD: dw $209C ; copy 7 backtracking $09D
+#_0582DF: db $22
+#_0582E0: dw $08A4 ; copy 4 backtracking $0A5
+#_0582E2: db $20
+#_0582E3: dw $0000 ; copy 3 backtracking $001
+#_0582E5: dw $F8AC ; copy 34 backtracking $0AD
+#_0582E7: dw $F800 ; copy 34 backtracking $001
+#_0582E9: dw $001E ; copy 3 backtracking $01F
+#_0582EB: db $FF
+#_0582EC: dw $F800 ; copy 34 backtracking $001
+#_0582EE: dw $F800 ; copy 34 backtracking $001
+#_0582F0: dw $F800 ; copy 34 backtracking $001
+#_0582F2: dw $B008 ; copy 25 backtracking $009
 
 ;===================================================================================================
 
 data0582F4:
-#_0582F4: db $01, $00, $02, $E2, $9F, $00, $00, $90
-#_0582FC: db $0E, $0E, $0E, $18, $98, $00, $F8, $00
-#_058304: db $F8, $00, $F8, $00, $F8, $00, $F8, $00
-#_05830C: db $F8, $FA, $70, $10, $10, $23, $F8, $FD
-#_058314: db $00, $09, $A8, $FF, $00, $F8, $00, $F8
-#_05831C: db $00, $F8, $00, $F8, $00, $F8, $14, $50
+#_0582F4: db $01, $0200 ; copy 512 bytes
+
+#_0582F7: dw $9FE2 ; block header
+#_0582F9: db $00
+#_0582FA: dw $9000 ; copy 21 backtracking $001
+#_0582FC: db $0E
+#_0582FD: db $0E
+#_0582FE: db $0E
+#_0582FF: dw $9818 ; copy 22 backtracking $019
+#_058301: dw $F800 ; copy 34 backtracking $001
+#_058303: dw $F800 ; copy 34 backtracking $001
+#_058305: dw $F800 ; copy 34 backtracking $001
+#_058307: dw $F800 ; copy 34 backtracking $001
+#_058309: dw $F800 ; copy 34 backtracking $001
+#_05830B: dw $F800 ; copy 34 backtracking $001
+#_05830D: dw $70FA ; copy 17 backtracking $0FB
+#_05830F: db $10
+#_058310: db $10
+#_058311: dw $F823 ; copy 34 backtracking $024
+
+#_058313: dw $00FD ; block header
+#_058315: dw $A809 ; copy 24 backtracking $00A
+#_058317: db $FF
+#_058318: dw $F800 ; copy 34 backtracking $001
+#_05831A: dw $F800 ; copy 34 backtracking $001
+#_05831C: dw $F800 ; copy 34 backtracking $001
+#_05831E: dw $F800 ; copy 34 backtracking $001
+#_058320: dw $F800 ; copy 34 backtracking $001
+#_058322: dw $5014 ; copy 13 backtracking $015
 
 ;===================================================================================================
 
 data058324:
-#_058324: db $01, $00, $02, $36, $6D, $00, $00, $F8
-#_05832C: db $12, $60, $28, $00, $28, $2A, $08, $26
-#_058334: db $26, $30, $C8, $12, $00, $00, $50, $00
-#_05833C: db $14, $00, $00, $57, $D0, $18, $B3, $BC
-#_058344: db $00, $00, $78, $F8, $00, $1A, $00, $00
-#_05834C: db $25, $30, $24, $2F, $10, $1C, $1C, $05
-#_058354: db $30, $1D, $40, $15, $18, $50, $10, $1E
-#_05835C: db $00, $00, $FD, $03, $59, $C8, $FF, $00
-#_058364: db $F8, $00, $F8, $00, $F8, $00, $F8, $00
-#_05836C: db $F8, $00, $F8, $00, $F8, $10, $70
+#_058324: db $01, $0200 ; copy 512 bytes
+
+#_058327: dw $6D36 ; block header
+#_058329: db $00
+#_05832A: dw $F800 ; copy 34 backtracking $001
+#_05832C: dw $6012 ; copy 15 backtracking $013
+#_05832E: db $28
+#_05832F: dw $2800 ; copy 8 backtracking $001
+#_058331: dw $082A ; copy 4 backtracking $02B
+#_058333: db $26
+#_058334: db $26
+#_058335: dw $C830 ; copy 28 backtracking $031
+#_058337: db $12
+#_058338: dw $0000 ; copy 3 backtracking $001
+#_05833A: dw $0050 ; copy 3 backtracking $051
+#_05833C: db $14
+#_05833D: dw $0000 ; copy 3 backtracking $001
+#_05833F: dw $D057 ; copy 29 backtracking $058
+#_058341: db $18
+
+#_058342: dw $BCB3 ; block header
+#_058344: dw $0000 ; copy 3 backtracking $001
+#_058346: dw $F878 ; copy 34 backtracking $079
+#_058348: db $00
+#_058349: db $1A
+#_05834A: dw $0000 ; copy 3 backtracking $001
+#_05834C: dw $3025 ; copy 9 backtracking $026
+#_05834E: db $24
+#_05834F: dw $102F ; copy 5 backtracking $030
+#_058351: db $1C
+#_058352: db $1C
+#_058353: dw $3005 ; copy 9 backtracking $006
+#_058355: dw $401D ; copy 11 backtracking $01E
+#_058357: dw $1815 ; copy 6 backtracking $016
+#_058359: dw $1050 ; copy 5 backtracking $051
+#_05835B: db $1E
+#_05835C: dw $0000 ; copy 3 backtracking $001
+
+#_05835E: dw $03FD ; block header
+#_058360: dw $C859 ; copy 28 backtracking $05A
+#_058362: db $FF
+#_058363: dw $F800 ; copy 34 backtracking $001
+#_058365: dw $F800 ; copy 34 backtracking $001
+#_058367: dw $F800 ; copy 34 backtracking $001
+#_058369: dw $F800 ; copy 34 backtracking $001
+#_05836B: dw $F800 ; copy 34 backtracking $001
+#_05836D: dw $F800 ; copy 34 backtracking $001
+#_05836F: dw $F800 ; copy 34 backtracking $001
+#_058371: dw $7010 ; copy 17 backtracking $011
 
 ;===================================================================================================
 
 data058373:
-#_058373: db $01, $00, $04, $FE, $FF, $FF, $00, $F8
-#_05837B: db $00, $F8, $00, $F8, $00, $F8, $00, $F8
-#_058383: db $00, $F8, $00, $F8, $00, $F8, $00, $F8
-#_05838B: db $00, $F8, $00, $F8, $00, $F8, $00, $F8
-#_058393: db $00, $F8, $00, $F8, $FF, $14, $00, $F8
-#_05839B: db $00, $F8, $00, $F8, $00, $F8, $00, $F8
-#_0583A3: db $00, $F8, $00, $F8, $0E, $80, $01, $00
-#_0583AB: db $00, $20, $30, $08, $00, $CE, $00, $54
-#_0583B3: db $F8, $81, $0E, $80, $02, $11, $28, $19
-#_0583BB: db $10, $41, $F8, $00, $F8, $7F, $F8, $7F
-#_0583C3: db $20, $D0, $80, $54, $00, $80, $E0, $92
-#_0583CB: db $30, $07, $00, $00, $F8, $9F, $F8, $01
-#_0583D3: db $E8
+#_058373: db $01, $0400 ; copy 1024 bytes
+
+#_058376: dw $FFFE ; block header
+#_058378: db $FF
+#_058379: dw $F800 ; copy 34 backtracking $001
+#_05837B: dw $F800 ; copy 34 backtracking $001
+#_05837D: dw $F800 ; copy 34 backtracking $001
+#_05837F: dw $F800 ; copy 34 backtracking $001
+#_058381: dw $F800 ; copy 34 backtracking $001
+#_058383: dw $F800 ; copy 34 backtracking $001
+#_058385: dw $F800 ; copy 34 backtracking $001
+#_058387: dw $F800 ; copy 34 backtracking $001
+#_058389: dw $F800 ; copy 34 backtracking $001
+#_05838B: dw $F800 ; copy 34 backtracking $001
+#_05838D: dw $F800 ; copy 34 backtracking $001
+#_05838F: dw $F800 ; copy 34 backtracking $001
+#_058391: dw $F800 ; copy 34 backtracking $001
+#_058393: dw $F800 ; copy 34 backtracking $001
+#_058395: dw $F800 ; copy 34 backtracking $001
+
+#_058397: dw $14FF ; block header
+#_058399: dw $F800 ; copy 34 backtracking $001
+#_05839B: dw $F800 ; copy 34 backtracking $001
+#_05839D: dw $F800 ; copy 34 backtracking $001
+#_05839F: dw $F800 ; copy 34 backtracking $001
+#_0583A1: dw $F800 ; copy 34 backtracking $001
+#_0583A3: dw $F800 ; copy 34 backtracking $001
+#_0583A5: dw $F800 ; copy 34 backtracking $001
+#_0583A7: dw $800E ; copy 19 backtracking $00F
+#_0583A9: db $01
+#_0583AA: db $00
+#_0583AB: dw $2000 ; copy 7 backtracking $001
+#_0583AD: db $30
+#_0583AE: dw $0008 ; copy 3 backtracking $009
+#_0583B0: db $CE
+#_0583B1: db $00
+#_0583B2: db $54
+
+#_0583B3: dw $81F8 ; block header
+#_0583B5: db $0E
+#_0583B6: db $80
+#_0583B7: db $02
+#_0583B8: dw $2811 ; copy 8 backtracking $012
+#_0583BA: dw $1019 ; copy 5 backtracking $01A
+#_0583BC: dw $F841 ; copy 34 backtracking $042
+#_0583BE: dw $F800 ; copy 34 backtracking $001
+#_0583C0: dw $F87F ; copy 34 backtracking $080
+#_0583C2: dw $207F ; copy 7 backtracking $080
+#_0583C4: db $D0
+#_0583C5: db $80
+#_0583C6: db $54
+#_0583C7: db $00
+#_0583C8: db $80
+#_0583C9: db $E0
+#_0583CA: dw $3092 ; copy 9 backtracking $093
+
+#_0583CC: dw $0007 ; block header
+#_0583CE: dw $F800 ; copy 34 backtracking $001
+#_0583D0: dw $F89F ; copy 34 backtracking $0A0
+#_0583D2: dw $E801 ; copy 32 backtracking $002
 
 ;===================================================================================================
 
 data0583D4:
-#_0583D4: db $01, $00, $04, $FE, $FF, $FF, $00, $F8
-#_0583DC: db $00, $F8, $00, $F8, $00, $F8, $00, $F8
-#_0583E4: db $00, $F8, $00, $F8, $00, $F8, $00, $F8
-#_0583EC: db $00, $F8, $00, $F8, $00, $F8, $00, $F8
-#_0583F4: db $00, $F8, $00, $F8, $FF, $14, $00, $F8
-#_0583FC: db $00, $F8, $00, $F8, $00, $F8, $00, $F8
-#_058404: db $00, $F8, $00, $F8, $0E, $80, $01, $00
-#_05840C: db $00, $20, $30, $08, $00, $6E, $00, $14
-#_058414: db $F8, $81, $0E, $80, $02, $11, $28, $19
-#_05841C: db $10, $41, $F8, $00, $F8, $7F, $F8, $7F
-#_058424: db $20, $70, $80, $14, $00, $80, $E0, $92
-#_05842C: db $30, $07, $00, $00, $F8, $9F, $F8, $01
-#_058434: db $E8
+#_0583D4: db $01, $0400 ; copy 1024 bytes
+
+#_0583D7: dw $FFFE ; block header
+#_0583D9: db $FF
+#_0583DA: dw $F800 ; copy 34 backtracking $001
+#_0583DC: dw $F800 ; copy 34 backtracking $001
+#_0583DE: dw $F800 ; copy 34 backtracking $001
+#_0583E0: dw $F800 ; copy 34 backtracking $001
+#_0583E2: dw $F800 ; copy 34 backtracking $001
+#_0583E4: dw $F800 ; copy 34 backtracking $001
+#_0583E6: dw $F800 ; copy 34 backtracking $001
+#_0583E8: dw $F800 ; copy 34 backtracking $001
+#_0583EA: dw $F800 ; copy 34 backtracking $001
+#_0583EC: dw $F800 ; copy 34 backtracking $001
+#_0583EE: dw $F800 ; copy 34 backtracking $001
+#_0583F0: dw $F800 ; copy 34 backtracking $001
+#_0583F2: dw $F800 ; copy 34 backtracking $001
+#_0583F4: dw $F800 ; copy 34 backtracking $001
+#_0583F6: dw $F800 ; copy 34 backtracking $001
+
+#_0583F8: dw $14FF ; block header
+#_0583FA: dw $F800 ; copy 34 backtracking $001
+#_0583FC: dw $F800 ; copy 34 backtracking $001
+#_0583FE: dw $F800 ; copy 34 backtracking $001
+#_058400: dw $F800 ; copy 34 backtracking $001
+#_058402: dw $F800 ; copy 34 backtracking $001
+#_058404: dw $F800 ; copy 34 backtracking $001
+#_058406: dw $F800 ; copy 34 backtracking $001
+#_058408: dw $800E ; copy 19 backtracking $00F
+#_05840A: db $01
+#_05840B: db $00
+#_05840C: dw $2000 ; copy 7 backtracking $001
+#_05840E: db $30
+#_05840F: dw $0008 ; copy 3 backtracking $009
+#_058411: db $6E
+#_058412: db $00
+#_058413: db $14
+
+#_058414: dw $81F8 ; block header
+#_058416: db $0E
+#_058417: db $80
+#_058418: db $02
+#_058419: dw $2811 ; copy 8 backtracking $012
+#_05841B: dw $1019 ; copy 5 backtracking $01A
+#_05841D: dw $F841 ; copy 34 backtracking $042
+#_05841F: dw $F800 ; copy 34 backtracking $001
+#_058421: dw $F87F ; copy 34 backtracking $080
+#_058423: dw $207F ; copy 7 backtracking $080
+#_058425: db $70
+#_058426: db $80
+#_058427: db $14
+#_058428: db $00
+#_058429: db $80
+#_05842A: db $E0
+#_05842B: dw $3092 ; copy 9 backtracking $093
+
+#_05842D: dw $0007 ; block header
+#_05842F: dw $F800 ; copy 34 backtracking $001
+#_058431: dw $F89F ; copy 34 backtracking $0A0
+#_058433: dw $E801 ; copy 32 backtracking $002
 
 ;===================================================================================================
 
