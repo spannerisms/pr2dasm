@@ -42,6 +42,7 @@ InitializeAPU:
 
 RequestSong_redundant:
 #_0A8028: JSL RequestSong_local
+
 #_0A802C: RTL
 
 ;===================================================================================================
@@ -168,6 +169,7 @@ APUTransfer_Parameterized:
 
 APUTransfer_long:
 #_0A80B8: JSR APUTransfer
+
 #_0A80BB: RTL
 
 ;===================================================================================================
@@ -240,14 +242,17 @@ APUTransfer:
 #_0A80F7: REP #$20
 
 #_0A80F9: LDA.b [$20],Y
+
 #_0A80FB: INY
 #_0A80FC: INY
 
 #_0A80FD: TAX
 
 #_0A80FE: LDA.b [$20],Y
+
 #_0A8100: INY
 #_0A8101: INY
+
 #_0A8102: STA.w APUIO2
 
 #_0A8105: SEP #$20
@@ -257,10 +262,12 @@ APUTransfer:
 #_0A810A: LDA.b #$00
 #_0A810C: ROL A
 #_0A810D: STA.w APUIO1
+
 #_0A8110: ADC.b #$7F
 
 #_0A8112: PLA
 #_0A8113: STA.w APUIO0
+
 #_0A8116: CPX.w #$0001
 #_0A8119: BCC .done
 

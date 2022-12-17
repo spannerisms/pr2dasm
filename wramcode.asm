@@ -37,6 +37,7 @@ ROUTINE_7E8006:
 
 #_7E8021: LDA.w #$00FD ; SFX FD
 #_7E8024: STA.l $0004A0
+
 #_7E8028: JSL ResetOBSELandOAM_long
 
 #_7E802C: LDA.b $22
@@ -165,6 +166,7 @@ ROUTINE_7E80E0:
 
 #_7E80E6: LDA.w #$0009
 #_7E80E9: STA.w $0522
+
 #_7E80EC: JSL DisableInterruptsAndHDMAbutEnableFBlank_long
 
 #_7E80F0: LDA.w #data00804B>>16
@@ -912,6 +914,7 @@ ROUTINE_7E85A5:
 #_7E85B0: CLC
 #_7E85B1: ADC.w #$0001
 #_7E85B4: STA.w $0512
+
 #_7E85B7: CMP.w #$0020
 #_7E85BA: BNE .exit
 
@@ -1532,6 +1535,7 @@ data7E8956:
 
 ROUTINE_7E895C:
 #_7E895C: STZ.w $0810,X
+
 #_7E895F: RTS
 
 ;===================================================================================================
@@ -1646,6 +1650,7 @@ ROUTINE_7E89E8:
 #_7E89E8: STA.b $30
 #_7E89EA: STY.b $32
 #_7E89EC: STX.b $34
+
 #_7E89EE: JSR ROUTINE_7E87A5
 
 #_7E89F1: LDA.b $30
@@ -1922,6 +1927,7 @@ ROUTINE_7E8B2C:
 
 #_7E8B41: LDA.w #$7000
 #_7E8B44: STA.w $080A,X
+
 #_7E8B47: INC.w $0818,X
 
 .exit
@@ -3044,6 +3050,7 @@ ROUTINE_7E9054:
 
 ROUTINE_7E905F:
 #_7E905F: TYX
+
 #_7E9060: RTS
 
 ;===================================================================================================
@@ -3909,6 +3916,7 @@ ROUTINE_7E93EF:
 
 ROUTINE_7E9417:
 #_7E9417: TYX
+
 #_7E9418: JSR CutsceneHandleDialogBounce
 
 #_7E941B: LDA.l $7E2550
@@ -3916,6 +3924,7 @@ ROUTINE_7E9417:
 
 #_7E9421: LDA.w #$0003
 #_7E9424: STA.w $0508
+
 #_7E9427: INC.w $0818,X
 
 .exit

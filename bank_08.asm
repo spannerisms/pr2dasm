@@ -135,10 +135,12 @@ ROUTINE_08806F:
 
 #_0880AF: XBA
 #_0880B0: REP #$20
+
 #_0880B2: ASL A
 #_0880B3: ASL A
 #_0880B4: ORA.w #$2000
 #_0880B7: STA.l $7E2552
+
 #_0880BB: JSR ROUTINE_088705
 #_0880BE: JSR ROUTINE_088561
 
@@ -155,6 +157,7 @@ ROUTINE_08806F:
 #_0880DB: SEC
 #_0880DC: SBC.w #$0001
 #_0880DF: JSR .asl_7
+
 #_0880E2: CLC
 #_0880E3: ADC.w #$0080
 #_0880E6: STA.l $7E257E
@@ -271,6 +274,7 @@ Dialog_HandleNextByte:
 
 .not_a_letter
 #_088180: JSR Dialog_ExecuteCommand
+
 #_088183: BRA .done_command
 
 .exit
@@ -494,6 +498,7 @@ Dialog_SetCursor:
 #_0882D2: STA.l $7E255C
 
 #_0882D6: LDA.b $20
+
 #_0882D8: SEP #$20
 #_0882DA: XBA
 #_0882DB: REP #$20
@@ -519,6 +524,7 @@ Dialog_WaitForKey:
 #_0882FB: SBC.w #$0001
 #_0882FE: STA.b $22
 #_088300: STA.b $2C
+
 #_088302: JSR ROUTINE_08853F
 #_088305: STA.b $38
 
@@ -530,6 +536,7 @@ Dialog_WaitForKey:
 
 #_088310: LDA.b $2C
 #_088312: STA.b $22
+
 #_088314: JSR ROUTINE_08851B
 #_088317: STA.b $3C
 #_088319: TAX
@@ -540,6 +547,7 @@ Dialog_WaitForKey:
 
 #_088324: LDA.w #$007E
 #_088327: STA.b $3E
+
 #_088329: JSL QueueUpVRAMTransfers_long
 
 #_08832D: LDA.w #$0006
@@ -677,6 +685,7 @@ Dialog_WriteNumber:
 #_0883DE: STA.w $7E2580,X
 
 #_0883E1: PHX
+
 #_0883E2: JSR WriteCharacter
 
 #_0883E5: PLX
@@ -1042,6 +1051,7 @@ ROUTINE_08859D:
 #_0885B0: STA.b $22
 
 #_0885B2: JSR ROUTINE_08853F
+
 #_0885B5: SEC
 #_0885B6: SBC.w #$0020
 #_0885B9: STA.b $38
@@ -1121,6 +1131,7 @@ CODE_088620:
 
 #_088625: LDA.b $2E
 #_088627: STA.b $22
+
 #_088629: JSR ROUTINE_08853F
 #_08862C: STA.b $38
 
@@ -1133,13 +1144,16 @@ CODE_088620:
 
 #_08863A: LDA.b $2E
 #_08863C: STA.b $22
+
 #_08863E: JSR ROUTINE_08851B
+
 #_088641: SEC
 #_088642: SBC.b $30
 #_088644: STA.b $3C
 
 #_088646: LDA.w #$007E
 #_088649: STA.b $3E
+
 #_08864B: JSL QueueUpVRAMTransfers_long
 
 #_08864F: LDA.b $38
@@ -1161,6 +1175,7 @@ CODE_088667:
 
 #_088669: LDA.w #$007E
 #_08866C: STA.b $3E
+
 #_08866E: JSL QueueUpVRAMTransfers_long
 
 #_088672: INC.b $2E
@@ -1177,7 +1192,9 @@ CODE_088667:
 
 #_088684: LDA.w #$007E
 #_088687: STA.b $3E
+
 #_088689: JSL QueueUpVRAMTransfers_long
+
 #_08868D: RTS
 
 ;===================================================================================================
@@ -1197,6 +1214,7 @@ CODE_08869C:
 
 #_0886A1: LDA.b $2E
 #_0886A3: STA.b $22
+
 #_0886A5: JSR ROUTINE_08853F
 #_0886A8: STA.b $38
 
@@ -1209,11 +1227,13 @@ CODE_08869C:
 
 #_0886B6: LDA.b $2E
 #_0886B8: STA.b $22
+
 #_0886BA: JSR ROUTINE_08851B
 #_0886BD: STA.b $3C
 
 #_0886BF: LDA.w #$007E
 #_0886C2: STA.b $3E
+
 #_0886C4: JSL QueueUpVRAMTransfers_long
 
 #_0886C8: LDA.b $38
@@ -1225,6 +1245,7 @@ CODE_08869C:
 #_0886D2: SEC
 #_0886D3: SBC.b $30
 #_0886D5: STA.b $3C
+
 #_0886D7: JSL QueueUpVRAMTransfers_long
 
 #_0886DB: INC.b $2E
@@ -1236,6 +1257,7 @@ CODE_08869C:
 
 #_0886E5: LDA.w #$007E
 #_0886E8: STA.b $3E
+
 #_0886EA: JSL QueueUpVRAMTransfers_long
 
 #_0886EE: LDA.b $38
@@ -1248,6 +1270,7 @@ CODE_08869C:
 
 #_0886FB: LDA.w #$007E
 #_0886FE: STA.b $3E
+
 #_088700: JSL QueueUpVRAMTransfers_long
 
 #_088704: RTS
@@ -1283,6 +1306,7 @@ ROUTINE_088718:
 #_088729: SBC.w #$0001
 #_08872C: STA.b $22
 #_08872E: STA.b $2C
+
 #_088730: JSR ROUTINE_08853F
 #_088733: STA.b $38
 
@@ -1294,6 +1318,7 @@ ROUTINE_088718:
 
 #_08873E: LDA.b $2C
 #_088740: STA.b $22
+
 #_088742: JSR ROUTINE_08851B
 #_088745: STA.b $3C
 #_088747: TAX
@@ -1304,6 +1329,7 @@ ROUTINE_088718:
 
 #_088750: LDA.w #$0002
 #_088753: STA.l $7E2550
+
 #_088757: INC.w $7E2558
 
 #_08875A: BRA CODE_088763
@@ -1326,7 +1352,9 @@ CODE_08876B:
 
 #_088772: LDA.w #$007E
 #_088775: STA.b $3E
+
 #_088777: JSL QueueUpVRAMTransfers_long
+
 #_08877B: RTS
 
 ;===================================================================================================
@@ -1381,6 +1409,7 @@ BeginDialog:
 #_0887D5: SBC.w #$0001
 
 #_0887D8: JSR .asl_seven
+
 #_0887DB: CLC
 #_0887DC: ADC.w #$0080
 #_0887DF: STA.l $7E257E
@@ -5817,6 +5846,7 @@ ROUTINE_08BACE:
 #_08BAEF: STA.b [$20],Y
 
 #_08BAF1: INX
+
 #_08BAF2: INY
 
 #_08BAF3: DEC.b $24
@@ -5861,6 +5891,7 @@ ROUTINE_08BAFC:
 #_08BB1D: STA.b [$34],Y
 
 #_08BB1F: INX
+
 #_08BB20: INY
 
 #_08BB21: DEC.b $38
@@ -5912,6 +5943,7 @@ ROUTINE_08BB2A:
 #_08BB54: ADC.b $20
 
 #_08BB56: LDX.w $18E4
+
 #_08BB59: CLC
 #_08BB5A: ADC.w .data,X
 #_08BB5D: TAX
@@ -6586,6 +6618,7 @@ ROUTINE_08C06D:
 #_08C06D: STA.w $1AE0
 #_08C070: STA.w $1AD0
 #_08C073: STA.l $7E7B08
+
 #_08C077: TYA
 
 #_08C078: JSR ROUTINE_08BD65_bank08
@@ -6779,10 +6812,12 @@ CODE_08C19B:
 #_08C19E: BNE CODE_08C1A2
 
 #_08C1A0: SEC
+
 #_08C1A1: RTS
 
 CODE_08C1A2:
 #_08C1A2: CLC
+
 #_08C1A3: RTS
 
 ;===================================================================================================
@@ -7275,6 +7310,7 @@ data08C4A6:
 
 ROUTINE_08C4D2:
 #_08C4D2: TYX
+
 #_08C4D3: JSR ROUTINE_08BD7F
 
 #_08C4D6: JMP (.vectors,X)
@@ -7314,6 +7350,7 @@ ROUTINE_08C4EB:
 #_08C4FC: LDA.w #$9000
 #_08C4FF: STA.w $1AE0
 #_08C502: STA.l $7E7A00
+
 #_08C506: JSR ROUTINE_08D155
 
 #_08C509: LDA.w #data08C53A
@@ -7428,6 +7465,7 @@ ROUTINE_08C5CA_long:
 #_08C5DE: PLB
 
 #_08C5DF: PHX
+
 #_08C5E0: JSR ROUTINE_08C5CA
 
 #_08C5E3: PLX
@@ -7620,6 +7658,7 @@ ROUTINE_08C703:
 
 ROUTINE_08C705:
 #_08C705: TYX
+
 #_08C706: JSR ROUTINE_08BD7F
 
 #_08C709: JMP (.vectors,X)
@@ -7846,6 +7885,7 @@ ROUTINE_08C83D:
 
 #_08C862: LDA.w #$001E
 #_08C865: JSR ROUTINE_08BD98_Y0000
+
 #_08C868: RTS
 
 CODE_08C869:
@@ -7974,6 +8014,7 @@ ROUTINE_08C902:
 CODE_08C935:
 #_08C935: LDA.w #$0004
 #_08C938: JSR ROUTINE_08C5CA
+
 #_08C93B: STZ.w $18E2
 
 .exit
@@ -7983,6 +8024,7 @@ CODE_08C935:
 
 ROUTINE_08C93F:
 #_08C93F: TYX
+
 #_08C940: JSR ROUTINE_08BD7F
 
 #_08C943: JMP (.vectors,X)
@@ -8077,6 +8119,7 @@ CODE_08C9BC:
 
 #_08C9C3: LDY.w #$FFFF
 #_08C9C6: STY.w $18E2
+
 #_08C9C9: CMP.w #$9000
 #_08C9CC: BEQ CODE_08C9D6
 
@@ -8178,6 +8221,7 @@ CODE_08CA82:
 
 #_08CA89: LDY.w #$FFFF
 #_08CA8C: STY.w $18E2
+
 #_08CA8F: CMP.w #$7000
 #_08CA92: BEQ CODE_08CA9C
 
@@ -8207,6 +8251,7 @@ CODE_08CA9C:
 
 #_08CAAF: LDX.w #$0960
 #_08CAB2: JSR ROUTINE_08D53E
+
 #_08CAB5: RTS
 
 ;---------------------------------------------------------------------------------------------------
@@ -8274,6 +8319,7 @@ CODE_08CB42:
 
 #_08CB49: LDY.w #$FFFF
 #_08CB4C: STY.w $18E2
+
 #_08CB4F: CMP.w #$5000
 #_08CB52: BEQ CODE_08CB5C
 
@@ -8362,6 +8408,7 @@ ROUTINE_08CBD4:
 
 ROUTINE_08CBEA:
 #_08CBEA: TYX
+
 #_08CBEB: JSR ROUTINE_08BD7F
 
 #_08CBEE: JMP (.vectors,X)
@@ -8649,6 +8696,7 @@ CODE_08CDB5:
 ROUTINE_08BAFCandSpawn2:
 #_08CDD7: JSR ROUTINE_08BAFC
 #_08CDDA: JSL PrepEnemySpawn_long
+
 #_08CDDE: RTS
 
 ;===================================================================================================
@@ -8942,6 +8990,7 @@ CODE_08D05F:
 
 #_08D070: LDA.w #$3380
 #_08D073: STA.w $1AE0
+
 #_08D076: JSR Set_04F4_to_FFFF
 
 #_08D079: LDA.w #data08D0B6
@@ -8997,6 +9046,7 @@ CODE_08D0AA:
 ROUTINE_08BAFCandSpawn3:
 #_08D0DA: JSR ROUTINE_08BAFC
 #_08D0DD: JSL PrepEnemySpawn_long
+
 #_08D0E1: RTS
 
 ;---------------------------------------------------------------------------------------------------
@@ -9077,6 +9127,7 @@ ROUTINE_08D173:
 #_08D189: LDA.w #$5000
 #_08D18C: STA.w $1AE0
 #_08D18F: STA.l $7E7A00
+
 #_08D193: JSR ROUTINE_08D155
 
 #_08D196: LDA.w #data08D24E
@@ -9101,6 +9152,7 @@ CODE_08D1B0:
 
 CODE_08D1B3:
 #_08D1B3: JSL ROUTINE_09C7CE
+
 #_08D1B7: RTS
 
 ;===================================================================================================
@@ -9114,6 +9166,7 @@ CODE_08D1B8:
 
 #_08D1C1: LDA.w #$007F
 #_08D1C4: STA.b $26
+
 #_08D1C6: JSL Decompress_long
 
 #_08D1CA: LDX.w #$0800
@@ -9121,6 +9174,7 @@ CODE_08D1B8:
 CODE_08D1CD:
 #_08D1CD: LDA.l $7FE800,X
 #_08D1D1: STA.w $0800,X
+
 #_08D1D4: INX
 #_08D1D5: INX
 #_08D1D6: CPX.w #$1000
@@ -9129,6 +9183,7 @@ CODE_08D1CD:
 #_08D1DB: STZ.b $0E
 #_08D1DD: STZ.w $04B8
 #_08D1E0: STZ.w $05A4
+
 #_08D1E3: JSR ROUTINE_08C1B6
 
 #_08D1E6: LDA.w #$FFFF
@@ -9136,17 +9191,20 @@ CODE_08D1CD:
 
 #_08D1EC: LDX.w #$0F80
 #_08D1EF: JSR ROUTINE_08D53E
+
 #_08D1F2: CLC
 
 #_08D1F3: LDA.w $19EE
 #_08D1F6: ADC.w #$0080
 #_08D1F9: STA.b $20
+
 #_08D1FB: SEC
 
 #_08D1FC: LDA.w $19F0
 #_08D1FF: SBC.w #$0200
 #_08D202: STA.b $22
 #_08D204: STZ.b $30
+
 #_08D206: JSL PrepEnemySpawnType0C_0396E3_00E8
 
 #_08D20A: LDX.w #data08D21A
@@ -9211,6 +9269,7 @@ ROUTINE_08D2C0:
 #_08D2D6: LDA.w #$1000
 #_08D2D9: STA.w $1AE0
 #_08D2DC: STA.l $7E7A00
+
 #_08D2E0: JSR ROUTINE_08D155
 
 #_08D2E3: LDA.w #data08D24E
@@ -9227,6 +9286,7 @@ CODE_08D2F2:
 
 Read04BA:
 #_08D2F5: LDA.w $04BA
+
 #_08D2F8: RTS
 
 ;===================================================================================================
@@ -9729,6 +9789,7 @@ ROUTINE_08D5AC:
 #_08D5BA: CLC
 #_08D5BB: ADC.w #$0006
 #_08D5BE: TAY
+
 #_08D5BF: RTS
 
 data08D5C0:
@@ -10735,6 +10796,7 @@ ROUTINE_08DEA7:
 #_08DEAE: LDA.l $7E7B28
 #_08DEB2: ASL A
 #_08DEB3: TAX
+
 #_08DEB4: CLC
 
 #_08DEB5: LDA.w data08DC30+2,X
@@ -10808,9 +10870,11 @@ ROUTINE_08DEE5:
 
 #_08DF09: LDA.w $0002,Y
 #_08DF0C: STA.b $20
+
 #_08DF0E: JSR .call_routine
 
 #_08DF11: TAY
+
 #_08DF12: RTS
 
 ;===================================================================================================
@@ -10936,6 +11000,7 @@ ROUTINE_08DFAB:
 #_08DFB6: LDA.w data08DFC1,Y
 
 #_08DFB9: STA.l $7E7B30
+
 #_08DFBD: JSR ROUTINE_08E090
 
 .exit
@@ -10953,6 +11018,7 @@ ROUTINE_08DFCD:
 #_08DFD3: BCC CODE_08DFD9
 
 #_08DFD5: LDA.w #$FFFF
+
 #_08DFD8: RTS
 
 CODE_08DFD9:
@@ -10964,6 +11030,7 @@ CODE_08DFD9:
 
 CODE_08DFE3:
 #_08DFE3: LDA.w #$0000
+
 #_08DFE6: RTS
 
 ;===================================================================================================
@@ -10989,6 +11056,7 @@ ROUTINE_08DFEA:
 
 CODE_08E001:
 #_08E001: LDA.w #$FFFF
+
 #_08E004: RTS
 
 CODE_08E005:
@@ -11001,6 +11069,7 @@ CODE_08E005:
 
 CODE_08E00F:
 #_08E00F: LDA.w #$0000
+
 #_08E012: RTS
 
 ;===================================================================================================
@@ -11018,6 +11087,7 @@ ROUTINE_08E013:
 
 CODE_08E027:
 #_08E027: LDA.w #$FFFF
+
 #_08E02A: RTS
 
 CODE_08E02B:
@@ -11028,6 +11098,7 @@ CODE_08E02B:
 
 CODE_08E034:
 #_08E034: LDA.w #$0000
+
 #_08E037: RTS
 
 ;===================================================================================================
@@ -11041,6 +11112,7 @@ ROUTINE_08E038:
 
 CODE_08E044:
 #_08E044: LDA.w #$0000
+
 #_08E047: RTS
 
 .vectors
@@ -11061,6 +11133,7 @@ ROUTINE_08E058:
 
 #_08E05E: LDA.w #$003E
 #_08E061: STA.l $7E7B30
+
 #_08E065: JSR ROUTINE_08E090
 
 .exit
@@ -11071,6 +11144,7 @@ ROUTINE_08E058:
 ROUTINE_08E069:
 #_08E069: LDY.w #$0004
 #_08E06C: JSR ROUTINE_08DFAB
+
 #_08E06F: RTS
 
 ;===================================================================================================
@@ -11086,6 +11160,7 @@ ROUTINE_08E070:
 ROUTINE_08DFEA_0010:
 #_08E077: LDA.w #$0010
 #_08E07A: JSR ROUTINE_08DFEA
+
 #_08E07D: RTS
 
 ;===================================================================================================
@@ -11093,6 +11168,7 @@ ROUTINE_08DFEA_0010:
 ROUTINE_08E07E:
 #_08E07E: JSR ROUTINE_08DF4C
 #_08E081: JSR ROUTINE_08DFEA_0001
+
 #_08E084: RTS
 
 ;===================================================================================================
@@ -11100,12 +11176,14 @@ ROUTINE_08E07E:
 ROUTINE_08E085:
 #_08E085: JSR ROUTINE_08E013
 #_08E088: JSR ROUTINE_08E013
+
 #_08E08B: RTS
 
 ;===================================================================================================
 
 LoadAccumulatorWithZero:
 #_08E08C: LDA.w #$0000
+
 #_08E08F: RTS
 
 ;===================================================================================================
@@ -11117,7 +11195,9 @@ ROUTINE_08E090:
 #_08E099: STZ.w $19D6
 #_08E09C: STZ.w $19D0
 #_08E09F: STZ.w $19D2
+
 #_08E0A2: PHA
+
 #_08E0A3: SEC
 
 #_08E0A4: LDA.l $7E7B30
@@ -11126,6 +11206,7 @@ ROUTINE_08E090:
 
 #_08E0AC: LDA.w data08E0CA,Y
 #_08E0AF: STA.w $19CE
+
 #_08E0B2: JSL ROUTINE_04F926
 
 #_08E0B6: LDX.w #$0180
@@ -11133,12 +11214,14 @@ ROUTINE_08E090:
 CODE_08E0B9:
 #_08E0B9: LDA.l $7E2E00,X
 #_08E0BD: STA.l $7E7E00,X
+
 #_08E0C1: INX
 #_08E0C2: INX
 #_08E0C3: CPX.w #$01A0
 #_08E0C6: BNE CODE_08E0B9
 
 #_08E0C8: PLA
+
 #_08E0C9: RTS
 
 ; TODO states
@@ -11431,6 +11514,7 @@ ROUTINE_08E387:
 
 #_08E391: LDA.w data08E42D,X
 #_08E394: STA.w $0800
+
 #_08E397: TYA
 #_08E398: ASL A
 #_08E399: ASL A
@@ -11442,6 +11526,7 @@ ROUTINE_08E387:
 #_08E3A0: ASL A
 #_08E3A1: ASL A
 #_08E3A2: STA.b $20
+
 #_08E3A4: SEC
 
 #_08E3A5: LDA.w data08E409+0,X
@@ -11481,6 +11566,7 @@ ROUTINE_08E387:
 
 #_08E3DE: LDY.w #$6DE0
 #_08E3E1: JSR ROUTINE_08E3E6
+
 #_08E3E4: PLB
 #_08E3E5: RTL
 
@@ -11495,7 +11581,9 @@ ROUTINE_08E3E6:
 
 #_08E3EF: LDA.w #$8040
 #_08E3F2: STA.b $3A
+
 #_08E3F4: JSL QueueUpVRAMTransfers_long
+
 #_08E3F8: RTS
 
 data08E3F9:
@@ -11571,12 +11659,14 @@ CODE_08E478:
 #_08E494: LDA.w .pointers,Y
 #_08E497: TAX
 #_08E498: JSL ROUTINE_05D57A_long
+
 #_08E49C: BRA .exit
 
 CODE_08E49E:
 #_08E49E: LDA.w #$FFFE
 #_08E4A1: STA.l $7E7B38
 #_08E4A5: STZ.w $05E0
+
 #_08E4A8: INC.w $0506
 
 .exit
@@ -11754,6 +11844,7 @@ CODE_08E5AA:
 
 #_08E5AD: LDY.w #$E7A2
 #_08E5B0: JSR ROUTINE_08E64B
+
 #_08E5B3: STZ.w $19B8
 
 #_08E5B6: LDA.w $19B4
@@ -11859,9 +11950,11 @@ ROUTINE_08E648:
 
 ROUTINE_08E64B:
 #_08E64B: STY.b $3C
+
 #_08E64D: JSR ROUTINE_08E7A4
 #_08E650: ASL A
 #_08E651: TAY
+
 #_08E652: CLC
 
 #_08E653: LDA.w data08E6A5,Y
@@ -11873,6 +11966,7 @@ ROUTINE_08E64B:
 
 #_08E660: LDA.w #$8002
 #_08E663: STA.b $3A
+
 #_08E665: JSL QueueUpVRAMTransfers_long
 
 #_08E669: LDY.w #$0000
@@ -11880,6 +11974,7 @@ ROUTINE_08E64B:
 CODE_08E66C:
 #_08E66C: LDA.w $0800,Y
 #_08E66F: STA.w $0810,Y
+
 #_08E672: INY
 #_08E673: INY
 #_08E674: CPY.w #$0008
@@ -11909,7 +12004,9 @@ CODE_08E68F:
 
 #_08E69B: LDA.w #$8008
 #_08E69E: STA.b $3A
+
 #_08E6A0: JSL QueueUpVRAMTransfers_long
+
 #_08E6A4: RTS
 
 ;---------------------------------------------------------------------------------------------------
@@ -12050,6 +12147,7 @@ ROUTINE_08E7A4:
 .multiply_by_six
 #_08E7AA: CLC
 #_08E7AB: ADC.w $19B2
+
 #_08E7AE: DEY
 #_08E7AF: BNE .multiply_by_six
 
@@ -12059,7 +12157,10 @@ ROUTINE_08E7A4:
 
 #_08E7B6: LDA.w data08E7BD,Y
 #_08E7B9: AND.w #$00FF
+
 #_08E7BC: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data08E7BD:
 #_08E7BD: db $00,$01,$02,$03,$04,$05,$06,$07
@@ -12072,6 +12173,7 @@ data08E7BD:
 
 ROUTINE_08E7E1:
 #_08E7E1: STZ.w $19BA
+
 #_08E7E4: CMP.w #$000F
 #_08E7E7: BCC CODE_08E7F9
 
@@ -12128,9 +12230,11 @@ CODE_08E819:
 #_08E81E: TAX
 
 #_08E81F: LDA.w $0538
+
 #_08E822: SEP #$20
 #_08E824: XBA
 #_08E825: REP #$20
+
 #_08E827: AND.w #$000F
 #_08E82A: ASL A
 #_08E82B: JMP (.vectors,X)
@@ -12805,6 +12909,7 @@ ROUTINE_08EBDC:
 
 ROUTINE_08EC19:
 #_08EC19: TAX
+
 #_08EC1A: RTS
 
 ;===================================================================================================
@@ -12848,6 +12953,7 @@ ROUTINE_08EC4C:
 
 #_08EC5D: LDA.w #$FFFF
 #_08EC60: STA.w $18EC
+
 #_08EC63: JSL ROUTINE_00D746_long
 
 #_08EC67: PLX
@@ -12873,6 +12979,7 @@ ROUTINE_08EC4C:
 ROUTINE_08ECBB:
 #_08ECBB: TAX
 #_08ECBC: PHX
+
 #_08ECBD: JSL ROUTINE_01CFD0
 #_08ECC1: JSL ROUTINE_01B69E_0000
 
@@ -12915,6 +13022,7 @@ ROUTINE_08ED20:
 #_08ED30: LDX.w #$0000
 #_08ED33: LDA.w #$0100
 #_08ED36: STA.w $19B2
+
 #_08ED39: JSR ROUTINE_08EDF6
 
 #_08ED3C: LDA.w #$0000
@@ -12966,11 +13074,13 @@ CODE_08ED7A:
 
 #_08ED81: PLX
 #_08ED82: PLY
+
 #_08ED83: CLC
 
 #_08ED84: LDA.b $20
 #_08ED86: ADC.w $19B6
 #_08ED89: STA.l $7EE000,X
+
 #_08ED8D: INX
 #_08ED8E: INX
 #_08ED8F: DEY
@@ -12979,8 +13089,10 @@ CODE_08ED7A:
 #_08ED92: PLA
 #_08ED93: CLC
 #_08ED94: ADC.w #$0040
+
 #_08ED97: PLY
 #_08ED98: PHA
+
 #_08ED99: CPY.w #$0020
 
 #_08ED9C: LDA.w #$0001
@@ -13002,6 +13114,7 @@ CODE_08EDA4:
 #_08EDB0: LDA.w $19B2
 #_08EDB3: ADC.w $19B6
 #_08EDB6: STA.w $19B2
+
 #_08EDB9: JSR ROUTINE_08EDF6
 #_08EDBC: SEP #$20
 
@@ -13027,6 +13140,7 @@ CODE_08EDA4:
 #_08EDE1: TSB.w $0536
 
 #_08EDE4: PLX
+
 #_08EDE5: RTS
 
 ;===================================================================================================
@@ -13034,6 +13148,7 @@ CODE_08EDA4:
 ROUTINE_08EDE6:
 #_08EDE6: LDA.w $19B4
 #_08EDE9: STA.b $20
+
 #_08EDEB: CLC
 
 #_08EDEC: LDA.w $1980
@@ -13059,6 +13174,7 @@ ROUTINE_08EDF6:
 CODE_08EE04:
 #_08EE04: PHY
 #_08EE05: PHX
+
 #_08EE06: JSR ROUTINE_08EDE6
 #_08EE09: JSL ROUTINE_03A07D_long
 
@@ -13069,6 +13185,7 @@ CODE_08EE04:
 #_08EE10: LDA.b $20
 #_08EE12: ADC.w $19B2
 #_08EE15: STA.l $7EE000,X
+
 #_08EE19: INX
 #_08EE1A: INX
 #_08EE1B: DEY
@@ -13083,6 +13200,7 @@ CODE_08EE04:
 #_08EE28: PLA
 #_08EE29: CLC
 #_08EE2A: ADC.w #$0040
+
 #_08EE2D: PLY
 #_08EE2E: DEY
 #_08EE2F: BNE .next
@@ -13280,6 +13398,7 @@ ROUTINE_08EFE3:
 #_08F021: TSB.w $0536
 
 #_08F024: PLX
+
 #_08F025: RTS
 
 ;===================================================================================================
@@ -13317,6 +13436,7 @@ CODE_08F043:
 
 #_08F056: LDA.w #$0100
 #_08F059: STA.w $05E2
+
 #_08F05C: JSR ROUTINE_08F096
 #_08F05F: PHX
 
@@ -13334,6 +13454,7 @@ CODE_08F043:
 
 CODE_08F076:
 #_08F076: STA.l $7EE400,X
+
 #_08F07A: INX
 #_08F07B: INX
 #_08F07C: CPX.w #$0400
@@ -13348,6 +13469,7 @@ CODE_08F076:
 #_08F08A: LDA.w #$001C
 #_08F08D: JSL ROUTINE_06A2B6
 #_08F091: JSL ROUTINE_01B8F6_long
+
 #_08F095: RTS
 
 ;===================================================================================================
@@ -13361,7 +13483,9 @@ ROUTINE_08F096:
 CODE_08F09D:
 #_08F09D: AND.w #$01FF
 #_08F0A0: STA.l $7EE000,X
+
 #_08F0A4: INC A
+
 #_08F0A5: DEX
 #_08F0A6: DEX
 #_08F0A7: BPL CODE_08F09D
@@ -13371,12 +13495,14 @@ CODE_08F09D:
 
 CODE_08F0AF:
 #_08F0AF: STA.l $7EE000,X
+
 #_08F0B3: INX
 #_08F0B4: INX
 #_08F0B5: CPX.w #$0400
 #_08F0B8: BNE CODE_08F0AF
 
 #_08F0BA: PLX
+
 #_08F0BB: RTS
 
 ;===================================================================================================
@@ -13606,6 +13732,7 @@ ROUTINE_08F21A:
 
 #_08F24F: LDA.w #$8800
 #_08F252: STA.b $3A
+
 #_08F254: JSL QueueUpVRAMTransfers_long
 
 CODE_08F258:
@@ -13798,6 +13925,7 @@ ROUTINE_08F360:
 
 CODE_08F395:
 #_08F395: LDA.w .data_start+0,Y
+
 #_08F398: CMP.w #$FFFF
 #_08F39B: BNE .continue_c
 
@@ -13848,11 +13976,13 @@ CODE_08F3C4:
 CODE_08F3E2:
 #_08F3E2: LDA.w #$8001
 #_08F3E5: STA.w $0800,X
+
 #_08F3E8: PHY
 
 #_08F3E9: LDY.b $0E
 #_08F3EB: TXA
 #_08F3EC: STA.w $0700,Y
+
 #_08F3EF: INY
 #_08F3F0: INY
 #_08F3F1: STY.b $0E
@@ -13875,6 +14005,7 @@ CODE_08F3FB:
 
 CODE_08F407:
 #_08F407: LDA.w .data_start+6,Y
+
 #_08F40A: CMP.w #$FFFF
 #_08F40D: BEQ CODE_08F425
 

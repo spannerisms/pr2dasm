@@ -7517,7 +7517,9 @@ ROUTINE_07EC0C:
 #_07EC48: LDA.l $7E7A10,X
 #_07EC4C: ORA.b $28
 #_07EC4E: STA.l $7E7A10,X
+
 #_07EC52: PHY
+
 #_07EC53: JSR ROUTINE_07EFB3
 
 #_07EC56: PLY
@@ -8083,12 +8085,14 @@ ROUTINE_07EF45:
 
 #_07EF4A: SBC.w #$0200
 #_07EF4D: STA.b $20
+
 #_07EF4F: ADC.w #$0400
 #_07EF52: STA.b $24
 
 #_07EF54: LDA.w $0002,Y
 #_07EF57: SBC.w #$0200
 #_07EF5A: STA.b $22
+
 #_07EF5C: ADC.w #$0400
 #_07EF5F: STA.b $26
 
@@ -8123,7 +8127,9 @@ ROUTINE_07EF45:
 #_07EF94: LDA.l $7E7A10,X
 #_07EF98: ORA.b $28
 #_07EF9A: STA.l $7E7A10,X
+
 #_07EF9E: PHY
+
 #_07EF9F: JSR ROUTINE_07EFB3
 
 #_07EFA2: PLY
@@ -8163,7 +8169,9 @@ ROUTINE_07EFB3:
 
 #_07EFCE: LDA.w #$000E
 #_07EFD1: STA.b $24
+
 #_07EFD3: JSL PrepEnemySpawn_long
+
 #_07EFD7: RTS
 
 ;===================================================================================================
@@ -8513,6 +8521,7 @@ PrepareForTheEpilogue:
 
 #_07F48D: LDA.w #$0009
 #_07F490: STA.w $0522
+
 #_07F493: JSL ResetOBSELandOAM
 
 #_07F497: LDA.w #$0020
@@ -8693,6 +8702,7 @@ ROUTINE_07F5B3:
 ROUTINE_07F5C1:
 #_07F5C1: LDX.w #$0004
 #_07F5C4: JSL ROUTINE_00A990_long
+
 #_07F5C8: RTS
 
 ;===================================================================================================
@@ -8701,6 +8711,7 @@ ROUTINE_07F5C9:
 #_07F5C9: LDX.w #$0004
 #_07F5CC: JSL ROUTINE_00A9A8_long
 #_07F5D0: CMP.w #$00D4
+
 #_07F5D3: RTS
 
 ;===================================================================================================
@@ -8798,6 +8809,7 @@ ROUTINE_07F63A:
 ;===================================================================================================
 
 StallUpdateFlag:
+
 #_07F654: DEC.w $0800
 #_07F657: BNE .exit
 
@@ -8927,6 +8939,7 @@ ROUTINE_07F700:
 ;===================================================================================================
 
 StallUpdateFlagAndTMClear:
+
 #_07F709: DEC.w $0520
 
 #_07F70C: LDA.w $0520
@@ -8943,6 +8956,7 @@ StallUpdateFlagAndTMClear:
 
 ROUTINE_07F718:
 #_07F718: JSL DisableInterruptsAndHDMAbutEnableFBlank_long
+
 #_07F71C: STZ.w $055E
 #_07F71F: STZ.w $052E
 
@@ -9108,6 +9122,7 @@ CODE_07F828:
 #_07F835: CLC
 #_07F836: ADC.w $0512
 #_07F839: STA.w $0512
+
 #_07F83C: INC.w $0818
 
 CODE_07F83F:
@@ -9182,6 +9197,7 @@ CODE_07F8A6:
 
 CODE_07F8A9:
 #_07F8A9: JSL ROUTINE_028220
+
 #_07F8AD: RTS
 
 ;===================================================================================================
@@ -9259,6 +9275,7 @@ ROUTINE_07F902:
 
 #_07F915: LDA.w #$0078
 #_07F918: STA.w $0800
+
 #_07F91B: INC.w $0506
 
 .exit
