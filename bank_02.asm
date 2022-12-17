@@ -7929,6 +7929,7 @@ CODE_02EEA4:
 #_02EEA4: JSR ROUTINE_02EF18
 #_02EEA7: JSR ROUTINE_02F0BD
 #_02EEAA: JSR ROUTINE_02F4AE
+
 #_02EEAD: JMP ROUTINE_02F4EB
 
 #_02EEB0: RTS
@@ -7990,6 +7991,7 @@ CODE_02EF0B:
 #_02EF0B: JSR ROUTINE_02EF18
 #_02EF0E: JSR ROUTINE_02F0BD
 #_02EF11: JSR ROUTINE_02F4AE
+
 #_02EF14: JMP ROUTINE_02F4EB
 
 #_02EF17: RTS
@@ -8135,10 +8137,12 @@ CODE_02EFD9:
 #_02EFE2: BCC CODE_02EFEA
 
 #_02EFE4: JSR ROUTINE_02F437
+
 #_02EFE7: JMP ROUTINE_02F472
 
 CODE_02EFEA:
 #_02EFEA: JSR ROUTINE_02F4AE
+
 #_02EFED: JMP ROUTINE_02F4EB
 
 #_02EFF0: RTS
@@ -8278,6 +8282,7 @@ ROUTINE_02F0BD:
 #_02F0BD: JSR ROUTINE_02F45A
 #_02F0C0: JSR ROUTINE_02F496
 #_02F0C3: JSR ROUTINE_02F4D3
+
 #_02F0C6: JMP ROUTINE_02F510
 
 ;===================================================================================================
@@ -8952,6 +8957,7 @@ ROUTINE_02F472:
 #_02F48A: BPL CODE_02F492
 
 #_02F48C: JSR ROUTINE_02FAFF
+
 #_02F48F: JMP .exit
 
 CODE_02F492:
@@ -9001,6 +9007,7 @@ ROUTINE_02F4AE:
 #_02F4C7: BPL CODE_02F4CF
 
 #_02F4C9: JSR ROUTINE_02F997
+
 #_02F4CC: JMP .exit
 
 CODE_02F4CF:
@@ -9047,6 +9054,7 @@ ROUTINE_02F4EB:
 #_02F504: BPL CODE_02F50C
 
 #_02F506: JSR ROUTINE_02FA0E
+
 #_02F509: JMP .exit
 
 CODE_02F50C:
@@ -10403,24 +10411,26 @@ SetLevelTimer:
 
 ;===================================================================================================
 
+; TODO
 data02FE69:
-#_02FE69: db $1F,$01,$00,$80,$7F,$00
-#_02FE6F: db $30,$1F,$29,$00,$80,$7F,$00,$40
-#_02FE77: db $1F,$34,$00,$2A,$7E,$FF,$FF,$1F
-#_02FE7F: db $22,$00,$2B,$7E,$FF,$FF,$1F,$72
-#_02FE87: db $00,$2A,$7E,$FF,$FF,$00,$00
+#_02FE69: dw $011F : dl $7F8000 : dw $3000
+#_02FE70: dw $291F : dl $7F8000 : dw $4000
+#_02FE77: dw $341F : dl $7E2A00 : dw $FFFF
+#_02FE7E: dw $221F : dl $7E2B00 : dw $FFFF
+#_02FE85: dw $721F : dl $7E2A00 : dw $FFFF
+#_02FE8C: dw $0000 ; end
 
 ;===================================================================================================
 
 data02FE8E:
-#_02FE8E: db $1D
-#_02FE8F: db $1E,$00,$80,$7F,$00,$74,$00,$00
+#_02FE8E: dw $1E1D : dl $7F8000 : dw $7400
+#_02FE95: dw $0000 ; end
 
 ;===================================================================================================
 
 data02FE97:
-#_02FE97: db $1F,$83,$E0,$2F,$7E,$FF,$FF
-#_02FE98: db $83,$E0,$2F,$7E,$FF,$FF,$00,$00
+#_02FE97: dw $831F : dl $7E2FE0 : dw $FFFF
+#_02FE9E: dw $0000 ; end
 
 ;===================================================================================================
 ; Marked end of assembly
