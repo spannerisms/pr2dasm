@@ -1,0 +1,136 @@
+;===================================================================================================
+; SFX
+;===================================================================================================
+01 - 
+02 - Swish swash (card throw)
+03 - Ayy ayy! (wand)
+04 - Something bubbly TODO
+05 - Magic(u)!
+06 - Olé olé
+07 - Yaaa (taking damage)
+08 - Yaaa-aa-aaa-aa (dying)
+09 - Partner magic falling
+0A - Some drowning noise TODO
+0B - Partner respawn
+0C - Points scroll
+0D - Some blip TODO
+0E - Some brokenish blip? TODO
+0F - Collecting coin
+10 - Extra life jingle
+11 - Partner bombing fire noise? TODO
+12 - Wall breaking explosion? TODO
+13 - Entering shop percussion
+14 - Ayy ayy! (throwing card)
+15 - Some tweet TODO
+16 - Some collection thing TODO
+17 - Some blip blop TODO
+18 - Some blip TODO
+19 - Partner dizzy birds
+1A - Collecting partner swap
+1B - Some slash whoosh TODO
+1C - Partner rising for magic whoosh
+1D - Magic bonk
+1E - Some item collection TODO
+1F - Some item collection TODO
+20 - Error noise
+21 - Some squeak TODO
+22 - Present exploding
+23 - Some whoosh TODO
+24 - Little Ninja sword swing
+25 - Partner hitting something when flying
+26 - Some tiny swoosh TODO
+27 - Partner swap whoop
+28 - Partner swap spawning in
+29 - Some explosiony sound TODO
+2A - Little Ninja shuriken throw
+2B - 
+2C - 
+2D - 
+2E - 
+2F - 
+30 - 
+31 - 
+32 - 
+33 - 
+34 - 
+35 - 
+36 - 
+37 - 
+38 - 
+39 - 
+3A - 
+3B - 
+3C - 
+3D - 
+3E - 
+3F - 
+40 - 
+41 - 
+42 - 
+43 - Enemy boing
+44 - 
+45 - 
+46 - 
+47 - 
+48 - 
+49 - 
+4A - Tree fire breath
+4B - 
+4C - 
+4D - Tink (attacked invulnerable sprite)
+4E - 
+4F - 
+50 - 
+51 - 
+52 - 
+53 - Hitting enemy
+54 - Enemy sent flying away
+55 - 
+56 - 
+57 - 
+58 - Bald guy crying
+59 - 
+5A - Rocky beating chest
+5B - 
+5C - 
+5D - 
+5E - 
+5F - 
+60 - 
+61 - 
+62 - 
+63 - 
+64 - 
+65 - 
+66 - 
+67 - 
+68 - 
+69 - 
+6A - Boss dying TODO
+6B - 
+6C - 
+6D - 
+6E - 
+6F - 
+70 - 
+71 - 
+72 - 
+73 - 
+74 - 
+75 - 
+76 - 
+77 - 
+78 - 
+79 - 
+7A - 
+
+;---------------------------------------------------------------------------------------------------
+
+F8 - Nothing
+F9 - Nothing
+FA - Nothing
+FB - Some data switch TODO
+FC - Some data switch TODO
+FD - Fade out music
+FE - Max music volume
+FF - Half music volume

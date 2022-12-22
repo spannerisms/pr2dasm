@@ -2,8 +2,8 @@ org $008000
 
 ;===================================================================================================
 
-ROUTINE_00FBCB_verylong:
-#_008000: JSL ROUTINE_00FBCB_long
+QuadDataWriter_00FBCB_verylong:
+#_008000: JSL QuadDataWriter_00FBCB_long
 
 #_008004: RTL
 
@@ -122,64 +122,64 @@ ROUTINE_00A990_long:
 ;===================================================================================================
 
 data00804B:
-#_00804B: db $1F, $4E ; read address $1F:813E for pointer
+#_00804B: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00804D: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
 
-#_008051: db $1F, $4E ; read address $1F:813E for pointer
+#_008051: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_008053: dl $7F8000 : db $2C ; target address, copy to $5800 in VRAM
 
-#_008057: db $1F, $4E ; read address $1F:813E for pointer
+#_008057: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_008059: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_00805D: db $1F, $4E ; read address $1F:813E for pointer
+#_00805D: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00805F: dl $7F8000 : db $34 ; target address, copy to $6800 in VRAM
 
-#_008063: db $1F, $4E ; read address $1F:813E for pointer
+#_008063: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_008065: dl $7F8000 : db $38 ; target address, copy to $7000 in VRAM
 
-#_008069: db $1F, $4E ; read address $1F:813E for pointer
+#_008069: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00806B: dl $7F8000 : db $3C ; target address, copy to $7800 in VRAM
 
-#_00806F: db $1F, $4E ; read address $1F:813E for pointer
+#_00806F: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_008071: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_008075: db $1F, $4E ; read address $1F:813E for pointer
+#_008075: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_008077: dl $7F8000 : db $44 ; target address, copy to $8800 in VRAM
 
-#_00807B: db $1F, $4E ; read address $1F:813E for pointer
+#_00807B: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00807D: dl $7F8000 : db $48 ; target address, copy to $9000 in VRAM
 
-#_008081: db $1F, $4E ; read address $1F:813E for pointer
+#_008081: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_008083: dl $7F8000 : db $4C ; target address, copy to $9800 in VRAM
 
-#_008087: db $1A, $00 ; read address $1A:8006 for pointer
+#_008087: db $1A, $00 ; read $1A:8006 for pointer to data1A802C
 #_008089: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00808D: db $17, $05 ; read address $17:801A for pointer
+#_00808D: db $17, $05 ; read $17:801A for pointer to data17F4AC
 #_00808F: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
 
-#_008093: db $1F, $71 ; read address $1F:81CA for pointer
+#_008093: db $1F, $71 ; read $1F:81CA for pointer to data1FE126
 #_008095: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
 
-#_008099: db $1F, $55 ; read address $1F:815A for pointer
+#_008099: db $1F, $55 ; read $1F:815A for pointer to data1FD80B
 #_00809B: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
 
-#_00809F: db $1F, $9E ; read address $1F:827E for pointer
+#_00809F: db $1F, $9E ; read $1F:827E for pointer to CompressedData_Palette_1FE829
 #_0080A1: dl $7E2E00 : db $80 ; target address
 
-#_0080A5: db $1F, $73 ; read address $1F:81D2 for pointer
+#_0080A5: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_0080A7: dl $7E2E00 : db $80 ; target address
 
-#_0080AB: db $1F, $73 ; read address $1F:81D2 for pointer
+#_0080AB: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_0080AD: dl $7E2A00 : db $80 ; target address
 
-#_0080B1: db $1F, $22 ; read address $1F:808E for pointer
+#_0080B1: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_0080B3: dl $7E2B00 : db $80 ; target address
 
-#_0080B7: db $1F, $2A ; read address $1F:80AE for pointer
+#_0080B7: db $1F, $2A ; read $1F:80AE for pointer to CompressedData_Palette1FBCA9
 #_0080B9: dl $7E2F00 : db $80 ; target address
 
-#_0080BD: db $1F, $2A ; read address $1F:80AE for pointer
+#_0080BD: db $1F, $2A ; read $1F:80AE for pointer to CompressedData_Palette1FBCA9
 #_0080BF: dl $7E2B00 : db $80 ; target address
 
 #_0080C3: dw $0000 ; end
@@ -187,13 +187,13 @@ data00804B:
 ;===================================================================================================
 
 data0080C5:
-#_0080C5: db $1D, $15 ; read address $1D:805A for pointer
+#_0080C5: db $1D, $15 ; read $1D:805A for pointer to data1DD0D6
 #_0080C7: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_0080CB: db $1F, $44 ; read address $1F:8116 for pointer
+#_0080CB: db $1F, $44 ; read $1F:8116 for pointer to data1FCEE7
 #_0080CD: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
 
-#_0080D1: db $1F, $8E ; read address $1F:823E for pointer
+#_0080D1: db $1F, $8E ; read $1F:823E for pointer to CompressedData_Palette1FE632
 #_0080D3: dl $7E2A40 : db $80 ; target address
 
 #_0080D7: dw $0000 ; end
@@ -201,13 +201,13 @@ data0080C5:
 ;===================================================================================================
 
 data0080D9:
-#_0080D9: db $1D, $03 ; read address $1D:8012 for pointer
+#_0080D9: db $1D, $03 ; read $1D:8012 for pointer to data1D8ED2
 #_0080DB: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_0080DF: db $1C, $12 ; read address $1C:804E for pointer
+#_0080DF: db $1C, $12 ; read $1C:804E for pointer to data1CFEF0
 #_0080E1: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
 
-#_0080E5: db $1F, $8D ; read address $1F:823A for pointer
+#_0080E5: db $1F, $8D ; read $1F:823A for pointer to CompressedData_Palette1FE60B
 #_0080E7: dl $7E2A40 : db $80 ; target address
 
 #_0080EB: dw $0000 ; end
@@ -215,13 +215,13 @@ data0080D9:
 ;===================================================================================================
 
 data0080ED:
-#_0080ED: db $1D, $24 ; read address $1D:8096 for pointer
+#_0080ED: db $1D, $24 ; read $1D:8096 for pointer to data1DFC40
 #_0080EF: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_0080F3: db $1F, $2C ; read address $1F:80B6 for pointer
+#_0080F3: db $1F, $2C ; read $1F:80B6 for pointer to data1FBE41
 #_0080F5: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
 
-#_0080F9: db $1F, $5E ; read address $1F:817E for pointer
+#_0080F9: db $1F, $5E ; read $1F:817E for pointer to CompressedData_Palette1FDBBE
 #_0080FB: dl $7E2A40 : db $80 ; target address
 
 #_0080FF: dw $0000 ; end
@@ -229,25 +229,25 @@ data0080ED:
 ;===================================================================================================
 
 data008101:
-#_008101: db $17, $02 ; read address $17:800E for pointer
+#_008101: db $17, $02 ; read $17:800E for pointer to data17AFB5
 #_008103: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_008107: db $1F, $33 ; read address $1F:80D2 for pointer
+#_008107: db $1F, $33 ; read $1F:80D2 for pointer to data1FC3A5
 #_008109: dl $7F8000 : db $41 ; target address, copy to $8200 in VRAM
 
-#_00810D: db $1F, $54 ; read address $1F:8156 for pointer
+#_00810D: db $1F, $54 ; read $1F:8156 for pointer to data1FD791
 #_00810F: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
 
-#_008113: db $1F, $20 ; read address $1F:8086 for pointer
+#_008113: db $1F, $20 ; read $1F:8086 for pointer to CompressedData_Palette1FB399
 #_008115: dl $7E2A00 : db $80 ; target address
 
-#_008119: db $1F, $2A ; read address $1F:80AE for pointer
+#_008119: db $1F, $2A ; read $1F:80AE for pointer to CompressedData_Palette1FBCA9
 #_00811B: dl $7E2B00 : db $80 ; target address
 
-#_00811F: db $1F, $73 ; read address $1F:81D2 for pointer
+#_00811F: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_008121: dl $7E2E00 : db $80 ; target address
 
-#_008125: db $1F, $73 ; read address $1F:81D2 for pointer
+#_008125: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_008127: dl $7E2A00 : db $80 ; target address
 
 #_00812B: dw $0000 ; end
@@ -255,22 +255,22 @@ data008101:
 ;===================================================================================================
 
 data00812D:
-#_00812D: db $17, $02 ; read address $17:800E for pointer
+#_00812D: db $17, $02 ; read $17:800E for pointer to data17AFB5
 #_00812F: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_008133: db $1F, $25 ; read address $1F:809A for pointer
+#_008133: db $1F, $25 ; read $1F:809A for pointer to data1FB864
 #_008135: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
 
-#_008139: db $1F, $20 ; read address $1F:8086 for pointer
+#_008139: db $1F, $20 ; read $1F:8086 for pointer to CompressedData_Palette1FB399
 #_00813B: dl $7E2A00 : db $80 ; target address
 
-#_00813F: db $1F, $2A ; read address $1F:80AE for pointer
+#_00813F: db $1F, $2A ; read $1F:80AE for pointer to CompressedData_Palette1FBCA9
 #_008141: dl $7E2B00 : db $80 ; target address
 
-#_008145: db $1F, $73 ; read address $1F:81D2 for pointer
+#_008145: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_008147: dl $7E2E00 : db $80 ; target address
 
-#_00814B: db $1F, $73 ; read address $1F:81D2 for pointer
+#_00814B: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_00814D: dl $7E2A00 : db $80 ; target address
 
 #_008151: dw $0000 ; end
@@ -278,22 +278,22 @@ data00812D:
 ;===================================================================================================
 
 data008153:
-#_008153: db $17, $02 ; read address $17:800E for pointer
+#_008153: db $17, $02 ; read $17:800E for pointer to data17AFB5
 #_008155: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_008159: db $1F, $40 ; read address $1F:8106 for pointer
+#_008159: db $1F, $40 ; read $1F:8106 for pointer to data1FCC6E
 #_00815B: dl $7F8000 : db $41 ; target address, copy to $8200 in VRAM
 
-#_00815F: db $1F, $3E ; read address $1F:80FE for pointer
+#_00815F: db $1F, $3E ; read $1F:80FE for pointer to data1FCB2D
 #_008161: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
 
-#_008165: db $1F, $20 ; read address $1F:8086 for pointer
+#_008165: db $1F, $20 ; read $1F:8086 for pointer to CompressedData_Palette1FB399
 #_008167: dl $7E2A00 : db $80 ; target address
 
-#_00816B: db $1F, $73 ; read address $1F:81D2 for pointer
+#_00816B: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_00816D: dl $7E2E00 : db $80 ; target address
 
-#_008171: db $1F, $73 ; read address $1F:81D2 for pointer
+#_008171: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_008173: dl $7E2A00 : db $80 ; target address
 
 #_008177: dw $0000 ; end
@@ -301,62 +301,62 @@ data008153:
 ;===================================================================================================
 
 data008179:
-#_008179: db $17, $02 ; read address $17:800E for pointer
+#_008179: db $17, $02 ; read $17:800E for pointer to data17AFB5
 #_00817B: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00817F: db $1F, $59 ; read address $1F:816A for pointer
+#_00817F: db $1F, $59 ; read $1F:816A for pointer to data1FD9CE
 #_008181: dl $7F8000 : db $41 ; target address, copy to $8200 in VRAM
 
-#_008185: db $1F, $35 ; read address $1F:80DA for pointer
+#_008185: db $1F, $35 ; read $1F:80DA for pointer to data1FC520
 #_008187: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
 
-#_00818B: db $1F, $3D ; read address $1F:80FA for pointer
+#_00818B: db $1F, $3D ; read $1F:80FA for pointer to data1FCA87
 #_00818D: dl $7F8000 : db $39 ; target address, copy to $7200 in VRAM
 
-#_008191: db $1F, $20 ; read address $1F:8086 for pointer
+#_008191: db $1F, $20 ; read $1F:8086 for pointer to CompressedData_Palette1FB399
 #_008193: dl $7E2A00 : db $80 ; target address
 
-#_008197: db $1F, $2A ; read address $1F:80AE for pointer
+#_008197: db $1F, $2A ; read $1F:80AE for pointer to CompressedData_Palette1FBCA9
 #_008199: dl $7E2B00 : db $80 ; target address
 
-#_00819D: db $1F, $73 ; read address $1F:81D2 for pointer
+#_00819D: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_00819F: dl $7E2E00 : db $80 ; target address
 
-#_0081A3: db $1F, $73 ; read address $1F:81D2 for pointer
+#_0081A3: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_0081A5: dl $7E2A00 : db $80 ; target address
 
 #_0081A9: dw $0000 ; end
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
 data0081AB:
-#_0081AB: db $1D, $03 ; read address $1D:8012 for pointer
+#_0081AB: db $1D, $03 ; read $1D:8012 for pointer to data1D8ED2
 #_0081AD: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_0081B1: db $1F, $98 ; read address $1F:8266 for pointer
+#_0081B1: db $1F, $98 ; read $1F:8266 for pointer to CompressedData_Empty0100
 #_0081B3: dl $7F8000 : db $41 ; target address, copy to $8200 in VRAM
 
-#_0081B7: db $1F, $8D ; read address $1F:823A for pointer
+#_0081B7: db $1F, $8D ; read $1F:823A for pointer to CompressedData_Palette1FE60B
 #_0081B9: dl $7E2A40 : db $80 ; target address
 
 #_0081BD: dw $0000 ; end
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
 data0081BF:
-#_0081BF: db $1F, $39 ; read address $1F:80EA for pointer
+#_0081BF: db $1F, $39 ; read $1F:80EA for pointer to data1FC7E3
 #_0081C1: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
 
-#_0081C5: db $1F, $1E ; read address $1F:807E for pointer
+#_0081C5: db $1F, $1E ; read $1F:807E for pointer to data1FB17F
 #_0081C7: dl $7F8000 : db $41 ; target address, copy to $8200 in VRAM
 
-#_0081CB: db $1F, $27 ; read address $1F:80A2 for pointer
+#_0081CB: db $1F, $27 ; read $1F:80A2 for pointer to CompressedData_Palette1FBA2C
 #_0081CD: dl $7E2A00 : db $80 ; target address
 
-#_0081D1: db $1F, $73 ; read address $1F:81D2 for pointer
+#_0081D1: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_0081D3: dl $7E2E00 : db $80 ; target address
 
-#_0081D7: db $1F, $73 ; read address $1F:81D2 for pointer
+#_0081D7: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_0081D9: dl $7E2A00 : db $80 ; target address
 
 #_0081DD: dw $0000 ; end
@@ -489,8 +489,8 @@ RESET:
 #_0082A0: STZ.w $1F74
 
 #_0082A3: JSL ResetOBSELandOAM
-#_0082A7: JSR ROUTINE_00F21A
-#_0082AA: JSR ROUTINE_00837F
+#_0082A7: JSR SetBothControllerConfigsToDefault
+#_0082AA: JSR InitializeAvailablePartners
 
 #_0082AD: STZ.w $18CE
 
@@ -634,14 +634,14 @@ ResetSFXQueues:
 
 ;===================================================================================================
 
-ROUTINE_00837F:
+InitializeAvailablePartners:
 #_00837F: LDX.w #$0000
 #_008382: STX.w $19A8
 
 #_008385: SEP #$20
 
 .next
-#_008387: LDA.w data008396,X
+#_008387: LDA.w .partners,X
 #_00838A: STA.w $19A0,X
 
 #_00838D: INX
@@ -654,14 +654,13 @@ ROUTINE_00837F:
 
 ;---------------------------------------------------------------------------------------------------
 
-data008396:
+.partners
 #_008396: db $00, $01, $02, $FF, $FF, $FF, $FF
 
 ;===================================================================================================
 
 NMI:
 #_00839D: PHP
-
 #_00839E: REP #$30
 
 #_0083A0: PHA
@@ -1032,6 +1031,8 @@ DMAFromBank05:
 #_0085BF: STA.w DMAP0
 
 #_0085C2: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_0085C5: dw .transfer_01
@@ -2423,6 +2424,8 @@ IRQ:
 #_008DFD: LDX.w $052E
 #_008E00: JMP (.vectors,X)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_008E03: dw IRQ_DisableSelf
 #_008E05: dw IRQ_008E1B
@@ -2810,6 +2813,7 @@ CODE_009063:
 
 IRQ_DisableScreen:
 #_00907E: LDA.b #$FF
+
 #_009080: BIT.w HVBJOY
 #_009083: BVC IRQ_DisableScreen
 
@@ -2825,6 +2829,7 @@ IRQ_DisableScreen:
 
 IRQ_009093:
 #_009093: LDA.b #$FF
+
 #_009095: BIT.w HVBJOY
 #_009098: BVC IRQ_009093
 
@@ -2855,6 +2860,7 @@ IRQ_009093:
 
 IRQ_0090C7:
 #_0090C7: LDA.b #$FF
+
 #_0090C9: BIT.w HVBJOY
 #_0090CC: BVC IRQ_0090C7
 
@@ -2873,12 +2879,14 @@ IRQ_0090C7:
 #_0090E7: STZ.w $0535
 
 #_0090EA: LDA.w $0530
+
 #_0090ED: JMP IRQ_Exit
 
 ;===================================================================================================
 
 IRQ_0090F0:
 #_0090F0: LDA.b #$FF
+
 #_0090F2: BIT.w HVBJOY
 #_0090F5: BVC IRQ_0090F0
 
@@ -2923,8 +2931,6 @@ IRQ_0090F0:
 #_00912E: INX
 #_00912F: INX
 
-;---------------------------------------------------------------------------------------------------
-
 .continue_b
 #_009130: REP #$20
 
@@ -2946,6 +2952,8 @@ IRQ_0090F0:
 
 #_009147: JMP IRQ_Exit
 
+;---------------------------------------------------------------------------------------------------
+
 data00914A:
 #_00914A: db $18,$00,$34,$00,$58,$00,$74,$00
 #_009152: db $98,$00,$00,$00
@@ -2953,58 +2961,58 @@ data00914A:
 ;===================================================================================================
 
 GameModules:
-#_009156: dw NullPtr                                              ; 0x00
-#_009158: dw NullPtr                                              ; 0x01
-#_00915A: dw NullPtr                                              ; 0x02
-#_00915C: dw NullPtr                                              ; 0x03
-#_00915E: dw NullPtr                                              ; 0x04
-#_009160: dw NullPtr                                              ; 0x05
-#_009162: dw NullPtr                                              ; 0x06
-#_009164: dw NullPtr                                              ; 0x07
-#_009166: dw NullPtr                                              ; 0x08
-#_009168: dw NullPtr                                              ; 0x09
-#_00916A: dw NullPtr                                              ; 0x0A
-#_00916C: dw NullPtr                                              ; 0x0B
-#_00916E: dw NullPtr                                              ; 0x0C
-#_009170: dw NullPtr                                              ; 0x0D
-#_009172: dw NullPtr                                              ; 0x0E
-#_009174: dw NullPtr                                              ; 0x0F
-#_009176: dw NullPtr                                              ; 0x10
-#_009178: dw NullPtr                                              ; 0x11
-#_00917A: dw NullPtr                                              ; 0x12
-#_00917C: dw NullPtr                                              ; 0x13
-#_00917E: dw NullPtr                                              ; 0x14
-#_009180: dw NullPtr                                              ; 0x15
-#_009182: dw NullPtr                                              ; 0x16
-#_009184: dw NullPtr                                              ; 0x17
-#_009186: dw NullPtr                                              ; 0x18
-#_009188: dw NullPtr                                              ; 0x19
-#_00918A: dw NullPtr                                              ; 0x1A
-#_00918C: dw NullPtr                                              ; 0x1B
-#_00918E: dw NullPtr                                              ; 0x1C
-#_009190: dw NullPtr                                              ; 0x1D
-#_009192: dw NullPtr                                              ; 0x1E
-#_009194: dw NullPtr                                              ; 0x1F
-#_009196: dw NullPtr                                              ; 0x20
-#_009198: dw NullPtr                                              ; 0x21
-#_00919A: dw NullPtr                                              ; 0x22
+#_009156: dw $0000                                                ; 0x00
+#_009158: dw $0000                                                ; 0x01
+#_00915A: dw $0000                                                ; 0x02
+#_00915C: dw $0000                                                ; 0x03
+#_00915E: dw $0000                                                ; 0x04
+#_009160: dw $0000                                                ; 0x05
+#_009162: dw $0000                                                ; 0x06
+#_009164: dw $0000                                                ; 0x07
+#_009166: dw $0000                                                ; 0x08
+#_009168: dw $0000                                                ; 0x09
+#_00916A: dw $0000                                                ; 0x0A
+#_00916C: dw $0000                                                ; 0x0B
+#_00916E: dw $0000                                                ; 0x0C
+#_009170: dw $0000                                                ; 0x0D
+#_009172: dw $0000                                                ; 0x0E
+#_009174: dw $0000                                                ; 0x0F
+#_009176: dw $0000                                                ; 0x10
+#_009178: dw $0000                                                ; 0x11
+#_00917A: dw $0000                                                ; 0x12
+#_00917C: dw $0000                                                ; 0x13
+#_00917E: dw $0000                                                ; 0x14
+#_009180: dw $0000                                                ; 0x15
+#_009182: dw $0000                                                ; 0x16
+#_009184: dw $0000                                                ; 0x17
+#_009186: dw $0000                                                ; 0x18
+#_009188: dw $0000                                                ; 0x19
+#_00918A: dw $0000                                                ; 0x1A
+#_00918C: dw $0000                                                ; 0x1B
+#_00918E: dw $0000                                                ; 0x1C
+#_009190: dw $0000                                                ; 0x1D
+#_009192: dw $0000                                                ; 0x1E
+#_009194: dw $0000                                                ; 0x1F
+#_009196: dw $0000                                                ; 0x20
+#_009198: dw $0000                                                ; 0x21
+#_00919A: dw $0000                                                ; 0x22
 #_00919C: dw PrepareTitle                                         ; 0x23
 #_00919E: dw TitleScreen                                          ; 0x24
 #_0091A0: dw FadeToOptionsScreen                                  ; 0x25
 #_0091A2: dw ReturnToTitleScreenFadeOut                           ; 0x26
-#_0091A4: dw NullPtr                                              ; 0x27
-#_0091A6: dw NullPtr                                              ; 0x28
-#_0091A8: dw NullPtr                                              ; 0x29
-#_0091AA: dw NullPtr                                              ; 0x2A
-#_0091AC: dw NullPtr                                              ; 0x2B
-#_0091AE: dw NullPtr                                              ; 0x2C
-#_0091B0: dw NullPtr                                              ; 0x2D
-#_0091B2: dw NullPtr                                              ; 0x2E
-#_0091B4: dw NullPtr                                              ; 0x2F
-#_0091B6: dw NullPtr                                              ; 0x30
-#_0091B8: dw NullPtr                                              ; 0x31
-#_0091BA: dw NullPtr                                              ; 0x32
-#_0091BC: dw NullPtr                                              ; 0x33
+#_0091A4: dw $0000                                                ; 0x27
+#_0091A6: dw $0000                                                ; 0x28
+#_0091A8: dw $0000                                                ; 0x29
+#_0091AA: dw $0000                                                ; 0x2A
+#_0091AC: dw $0000                                                ; 0x2B
+#_0091AE: dw $0000                                                ; 0x2C
+#_0091B0: dw $0000                                                ; 0x2D
+#_0091B2: dw $0000                                                ; 0x2E
+#_0091B4: dw $0000                                                ; 0x2F
+#_0091B6: dw $0000                                                ; 0x30
+#_0091B8: dw $0000                                                ; 0x31
+#_0091BA: dw $0000                                                ; 0x32
+#_0091BC: dw $0000                                                ; 0x33
 #_0091BE: dw PrepareEpilogue                                      ; 0x34
 #_0091C0: dw Epilogue                                             ; 0x35
 #_0091C2: dw ConcludeEpilogue                                     ; 0x36
@@ -3012,7 +3020,7 @@ GameModules:
 #_0091C6: dw EpilogueOver                                         ; 0x38
 #_0091C8: dw PrepareLicenses                                      ; 0x39
 #_0091CA: dw LicensingScreens                                     ; 0x3A
-#_0091CC: dw NullPtr                                              ; 0x3B
+#_0091CC: dw $0000                                                ; 0x3B
 #_0091CE: dw PrepareLevelWipe                                     ; 0x3C
 #_0091D0: dw LevelWipe                                            ; 0x3D
 #_0091D2: dw PrepareLevel                                         ; 0x3E
@@ -3024,7 +3032,7 @@ GameModules:
 #_0091DE: dw GameMode_44                                          ; 0x44
 #_0091E0: dw GameMode_45                                          ; 0x45
 #_0091E2: dw FadeIntoLevel_46                                     ; 0x46
-#_0091E4: dw NullPtr                                              ; 0x47
+#_0091E4: dw $0000                                                ; 0x47
 #_0091E6: dw ConcludeEpilogue                                     ; 0x48
 #_0091E8: dw EpilogueFade                                         ; 0x49
 #_0091EA: dw EpilogueOver                                         ; 0x4A
@@ -3066,7 +3074,7 @@ GameModules:
 #_009232: dw GameMode_6E                                          ; 0x6E
 #_009234: dw PrepareStoryTime                                     ; 0x6F
 #_009236: dw StoryTime                                            ; 0x70
-#_009238: dw NullPtr                                              ; 0x71
+#_009238: dw $0000                                                ; 0x71
 #_00923A: dw FadeToStoryCutscene                                  ; 0x72
 #_00923C: dw PrepareStoryCutscene                                 ; 0x73
 #_00923E: dw StoryCutscene                                        ; 0x74
@@ -3101,7 +3109,7 @@ GameModules:
 PrepareLicenses:
 #_009272: JSR ROUTINE_00D3BD
 
-#_009275: LDX.w #data00928D
+#_009275: LDX.w #.table
 #_009278: JSR BulkDecompressionViaTable_currentDB
 
 #_00927B: LDA.w #$000F
@@ -3116,20 +3124,20 @@ PrepareLicenses:
 
 ;---------------------------------------------------------------------------------------------------
 
-data00928D:
-#_00928D: db $1B, $0B ; read address $1B:8032 for pointer
+.table
+#_00928D: db $1B, $0B ; read $1B:8032 for pointer to CompressedData_Empty0020_1B
 #_00928F: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_009293: db $19, $06 ; read address $19:801E for pointer
+#_009293: db $19, $06 ; read $19:801E for pointer to data19F442
 #_009295: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
 
-#_009299: db $1F, $1C ; read address $1F:8076 for pointer
+#_009299: db $1F, $1C ; read $1F:8076 for pointer to data1FAF52
 #_00929B: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
 
-#_00929F: db $1F, $74 ; read address $1F:81D6 for pointer
+#_00929F: db $1F, $74 ; read $1F:81D6 for pointer to CompressedData_Palette1FE1E0
 #_0092A1: dl $7E2E00 : db $80 ; target address
 
-#_0092A5: db $1F, $74 ; read address $1F:81D6 for pointer
+#_0092A5: db $1F, $74 ; read $1F:81D6 for pointer to CompressedData_Palette1FE1E0
 #_0092A7: dl $7E2A00 : db $80 ; target address
 
 #_0092AB: dw $0000 ; end
@@ -3219,7 +3227,7 @@ Licensing_LoadSeriousFun:
 ;---------------------------------------------------------------------------------------------------
 
 .table
-#_00930B: db $1F, $17 ; read address $1F:8062 for pointer
+#_00930B: db $1F, $17 ; read $1F:8062 for pointer to data1FA9A1
 #_00930D: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
 
 #_009311: dw $0000 ; end
@@ -3398,7 +3406,7 @@ LevelVictory:
 
 #_0093F0: LDA.w #.some_other_table
 #_0093F3: LDY.w #.some_other_table>>16
-#_0093F6: JSL ROUTINE_00FBCB_ParameterizedBounce_long
+#_0093F6: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -3420,15 +3428,28 @@ LevelVictory:
 
 ;---------------------------------------------------------------------------------------------------
 
-; TODO
 .table
-#_009419: dw $4E1F : dl $7F8000 : dw $2840
-#_009420: dw $4E1F : dl $7F8000 : dw $2C00
-#_009427: dw $0C05 : dl $7FF800 : dw $FFFF
-#_00942E: dw $040F : dl $7F8000 : dw $5100
-#_009435: dw $121F : dl $7F8000 : dw $2840
-#_00943C: dw $721F : dl $7E2E00 : dw $FFFF
-#_009443: dw $721F : dl $7E2A00 : dw $FFFF
+#_009419: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_00941B: dl $7F8000 : dw $2840 ; target address, copy to $5080 in VRAM
+
+#_009420: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_009422: dl $7F8000 : dw $2C00 ; target address, copy to $5800 in VRAM
+
+#_009427: db $05, $0C ; read $05:8036 for pointer to data058272
+#_009429: dl $7FF800 : dw $FFFF ; target address
+
+#_00942E: db $0F, $04 ; read $0F:8016 for pointer to CompressedData_MainGameFont
+#_009430: dl $7F8000 : dw $5100 ; target address, copy to $A200 in VRAM
+
+#_009435: db $1F, $12 ; read $1F:804E for pointer to data1FA311
+#_009437: dl $7F8000 : dw $2840 ; target address, copy to $5080 in VRAM
+
+#_00943C: db $1F, $72 ; read $1F:81CE for pointer to CompressedData_Palette1FE166
+#_00943E: dl $7E2E00 : dw $FFFF ; target address
+
+#_009443: db $1F, $72 ; read $1F:81CE for pointer to CompressedData_Palette1FE166
+#_009445: dl $7E2A00 : dw $FFFF ; target address
+
 #_00944A: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
@@ -3590,7 +3611,7 @@ CODE_009526:
 #_009563: STA.w $05BA
 
 #_009566: JSR ROUTINE_00B016
-#_009569: JSR ROUTINE_00C4E4
+#_009569: JSR UpdateScoreOnHUD
 #_00956C: JSR AdvanceGameModule
 
 ;---------------------------------------------------------------------------------------------------
@@ -3689,6 +3710,7 @@ FindNextExtraLifeMilestone:
 
 #_0095DA: INY
 #_0095DB: INY
+
 #_0095DC: BRA .next
 
 .this_one
@@ -3822,7 +3844,7 @@ ROUTINE_009681:
 #_009684: LSR A
 #_009685: INC A
 #_009686: AND.w #$00FF
-#_009689: JSR ROUTINE_00D330
+#_009689: JSR SplitBCDIntoDigits
 
 #_00968C: LDA.b $2C
 #_00968E: STA.l $7E7A58
@@ -3870,7 +3892,7 @@ ROUTINE_0096AD:
 ;===================================================================================================
 
 CODE_0096DD:
-#_0096DD: JSR ROUTINE_00D330
+#_0096DD: JSR SplitBCDIntoDigits
 
 #_0096E0: LDX.w #$0000
 
@@ -3897,13 +3919,13 @@ ROUTINE_0096F2:
 #_009702: JSR ROUTINE_009672
 
 #_009705: LDA.l $7E7A3E
-#_009709: JSR ROUTINE_00D330
+#_009709: JSR SplitBCDIntoDigits
 
 #_00970C: LDA.b $2E
 #_00970E: STA.l $7E7A58
 
 #_009712: LDA.l $7E7A3C
-#_009716: JSR ROUTINE_00D330
+#_009716: JSR SplitBCDIntoDigits
 
 #_009719: LDX.w #$0000
 
@@ -3963,7 +3985,7 @@ GamePaused:
 #_009757: JSR TestNewInput_Start
 #_00975A: BEQ .done
 
-#_00975C: LDA.w #$00FE ; SFX FE
+#_00975C: LDA.w #$00FE ; SFX FE - max volume music
 #_00975F: STA.w $04A0
 
 #_009762: JSR .wait_for_nmi
@@ -4078,6 +4100,7 @@ ROUTINE_0097FB:
 #_00982A: STA.w $191A
 
 #_00982D: PHY
+
 #_00982E: SEP #$20
 
 #_009830: LDA.b #$80
@@ -4177,6 +4200,8 @@ OptionsScreen:
 #_0098B1: TAX
 
 #_0098B2: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_0098B5: dw OptionsScreen_Initialize
@@ -4382,8 +4407,8 @@ DrawPockyConfig:
 
 #_0099D5: PLY
 
-#_0099D6: LDX.w data009A53,Y
-#_0099D9: JMP ROUTINE_00F223
+#_0099D6: LDX.w ControllerSchemeRemapPointers,Y
+#_0099D9: JMP BuildControllerRemapTable_Player1
 
 ;===================================================================================================
 
@@ -4453,8 +4478,8 @@ DrawPartnerConfig:
 
 #_009A3C: PLY
 
-#_009A3D: LDX.w data009A53,Y
-#_009A40: JMP ROUTINE_00F236
+#_009A3D: LDX.w ControllerSchemeRemapPointers,Y
+#_009A40: JMP BuildControllerRemapTable_Player2
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -4470,11 +4495,11 @@ data009A4B:
 #_009A4F: dw $0262
 #_009A51: dw $0264
 
-data009A53:
-#_009A53: dw dat00F249
-#_009A55: dw dat00F261
-#_009A57: dw dat00F279
-#_009A59: dw dat00F291
+ControllerSchemeRemapPointers:
+#_009A53: dw ControllerScheme_A
+#_009A55: dw ControllerScheme_B
+#_009A57: dw ControllerScheme_C
+#_009A59: dw ControllerScheme_D
 
 data009A5B:
 #_009A5B: dw data08EA9E
@@ -4618,7 +4643,10 @@ OptionsScreen_Initialize:
 #_009AE5: BEQ .done_submodules
 
 #_009AE7: INC.w $0804
+
 #_009AEA: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .done_submodules
 #_009AED: JSR ExecuteMosaicFadeIn_GrabFrame
@@ -4628,6 +4656,8 @@ OptionsScreen_Initialize:
 
 .still_fading
 #_009AF5: JMP MatchMosaicToScreenBrightness
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_009AF8: dw OptionsScreen_DarkenDifficultySelection
@@ -4645,7 +4675,10 @@ OptionsScreen_MainOptions:
 #_009B08: LDA.w $0800
 #_009B0B: ASL A
 #_009B0C: TAX
+
 #_009B0D: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_009B10: dw OptionsScreen_Difficulty
@@ -4701,9 +4734,9 @@ OptionsScreen_Difficulty:
 
 .not_changing_option
 #_009B60: LDA.w #$0000
-
 #_009B63: LDX.w #$0810
 #_009B66: JSR OptionsScreen_HighlightSelection
+
 #_009B69: JSR TestNewInput_LeftOrRight
 #_009B6C: BEQ .done
 
@@ -5080,7 +5113,6 @@ OptionsScreen_SoundOutput:
 
 .not_changing_option
 #_009D4B: LDA.w #$0003
-
 #_009D4E: LDX.w #$0810
 #_009D51: JSR OptionsScreen_HighlightSelection
 
@@ -5122,6 +5154,7 @@ OptionsScreen_SoundOutput:
 
 #_009D85: LDA.w $0554
 #_009D88: ADC.w #$0009
+
 #_009D8B: LDX.w #$0900
 #_009D8E: JMP OptionsScreen_HighlightSelection
 
@@ -5132,6 +5165,7 @@ OptionsScreen_DarkenOutputSelection:
 
 #_009D92: LDA.w $0554
 #_009D95: ADC.w #$0009
+
 #_009D98: LDX.w #$0900
 #_009D9B: JMP OptionsScreen_DarkenSelection
 
@@ -5286,6 +5320,8 @@ OptionsScreen_GetVRAMOfSelection:
 #_009E47: LDY.w .pointers,X
 
 #_009E4A: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 .pointers
 #_009E4B: dw .difficulty_title       ; 00
@@ -5470,6 +5506,7 @@ PreparePasswordScreen:
 
 #_009EFF: INX
 #_009F00: INX
+
 #_009F01: EOR.w #$FFFF
 #_009F04: INC A
 #_009F05: STA.l $7EE000,X
@@ -5477,6 +5514,7 @@ PreparePasswordScreen:
 #_009F09: EOR.w #$FFFF
 #_009F0C: INC A
 #_009F0D: PHA
+
 #_009F0E: INC.w $05DC
 
 #_009F11: LDA.w $05DC
@@ -5741,7 +5779,8 @@ PrepareGameOver:
 #_00A096: dw $0000 ; end
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00A098:
 #_00A098: JSR ROUTINE_00E23A
 #_00A09B: JSR ROUTINE_00ED0F
@@ -5760,15 +5799,13 @@ ROUTINE_00A098:
 #_00A0B4: LDY.w #data218400>>16
 #_00A0B7: JSR DecompressTo_7F8000
 
-#_00A0BA: LDA.w #$8000
+#_00A0BA: LDA.w #data238000
 #_00A0BD: STA.b $20
-
-#_00A0BF: LDA.w #$0023
+#_00A0BF: LDA.w #data238000>>16
 #_00A0C2: STA.b $22
 
 #_00A0C4: LDA.w #$A000
 #_00A0C7: STA.b $24
-
 #_00A0C9: LDA.w #$007F
 #_00A0CC: STA.b $26
 
@@ -5776,7 +5813,7 @@ ROUTINE_00A098:
 
 #_00A0D1: LDA.w #.table
 #_00A0D4: LDY.w #.table>>16
-#_00A0D7: JSL ROUTINE_00FBCB_ParameterizedBounce_long
+#_00A0D7: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
 
 #_00A0DB: JSR GetLevelPassword
 
@@ -5891,7 +5928,7 @@ GameOverAscendMore:
 CODE_00A18C:
 #_00A18C: LDA.w #.table
 #_00A18F: LDY.w #.table>>16
-#_00A192: JSL ROUTINE_00FBCB_ParameterizedBounce_long
+#_00A192: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
 
 #_00A196: LDA.w #data02FE69
 #_00A199: LDY.w #data02FE69>>16
@@ -6030,7 +6067,9 @@ CODE_00A27C:
 
 #_00A27F: JMP CODE_00A116
 
-CODE_00A282:
+;===================================================================================================
+
+ROUTINE_00A282:
 #_00A282: LDA.l $7E7A42
 #_00A286: STA.b $20
 
@@ -6055,9 +6094,10 @@ CODE_00A282:
 
 ;---------------------------------------------------------------------------------------------------
 
-; TODO
 .table
-#_00A2A9: dw $4E1F : dl $7F8000 : dw $3400
+#_00A2A9: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_00A2AB: dl $7F8000 : dw $3400 ; target address, copy to $6800 in VRAM
+
 #_00A2B0: dw $0000 ; end
 
 ;===================================================================================================
@@ -6334,7 +6374,7 @@ ItsStoryTime_FadeIn:
 #_00A434: LDA.w #data00A4CA>>16
 #_00A437: STA.b $22
 
-#_00A439: JSR ROUTINE_00FBCB
+#_00A439: JSR QuadDataWriter_00FBCB
 
 #_00A43C: JSR ROUTINE_00F957
 
@@ -6354,61 +6394,61 @@ ItsStoryTime_FadeIn:
 ;---------------------------------------------------------------------------------------------------
 
 data00A456:
-#_00A456: db $1A, $00 ; read address $1A:8006 for pointer
+#_00A456: db $1A, $00 ; read $1A:8006 for pointer to data1A802C
 #_00A458: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00A45C: db $1F, $4E ; read address $1F:813E for pointer
+#_00A45C: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00A45E: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
 
-#_00A462: db $1F, $4E ; read address $1F:813E for pointer
+#_00A462: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00A464: dl $7F8000 : db $2C ; target address, copy to $5800 in VRAM
 
-#_00A468: db $1F, $4E ; read address $1F:813E for pointer
+#_00A468: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00A46A: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_00A46E: db $1F, $4E ; read address $1F:813E for pointer
+#_00A46E: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00A470: dl $7F8000 : db $34 ; target address, copy to $6800 in VRAM
 
-#_00A474: db $1F, $4E ; read address $1F:813E for pointer
+#_00A474: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00A476: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00A47A: db $1F, $4E ; read address $1F:813E for pointer
+#_00A47A: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00A47C: dl $7F8000 : db $44 ; target address, copy to $8800 in VRAM
 
-#_00A480: db $10, $00 ; read address $10:8006 for pointer
+#_00A480: db $10, $00 ; read $10:8006 for pointer to data10801C
 #_00A482: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00A486: db $17, $05 ; read address $17:801A for pointer
+#_00A486: db $17, $05 ; read $17:801A for pointer to data17F4AC
 #_00A488: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
 
-#_00A48C: db $1F, $71 ; read address $1F:81CA for pointer
+#_00A48C: db $1F, $71 ; read $1F:81CA for pointer to data1FE126
 #_00A48E: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
 
-#_00A492: db $1F, $55 ; read address $1F:815A for pointer
+#_00A492: db $1F, $55 ; read $1F:815A for pointer to data1FD80B
 #_00A494: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
 
-#_00A498: db $1F, $0B ; read address $1F:8032 for pointer
+#_00A498: db $1F, $0B ; read $1F:8032 for pointer to data1F986E
 #_00A49A: dl $7F8000 : db $31 ; target address, copy to $6200 in VRAM
 
-#_00A49E: db $1F, $0F ; read address $1F:8042 for pointer
+#_00A49E: db $1F, $0F ; read $1F:8042 for pointer to data1F9ED7
 #_00A4A0: dl $7F8000 : db $41 ; target address, copy to $8200 in VRAM
 
-#_00A4A4: db $1F, $2F ; read address $1F:80C2 for pointer
+#_00A4A4: db $1F, $2F ; read $1F:80C2 for pointer to CompressedData_Palette1FC098
 #_00A4A6: dl $7E2A00 : db $80 ; target address
 
-#_00A4AA: db $1F, $9E ; read address $1F:827E for pointer
+#_00A4AA: db $1F, $9E ; read $1F:827E for pointer to CompressedData_Palette_1FE829
 #_00A4AC: dl $7E2E00 : db $80 ; target address
 
-#_00A4B0: db $1F, $73 ; read address $1F:81D2 for pointer
+#_00A4B0: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_00A4B2: dl $7E2E00 : db $80 ; target address
 
-#_00A4B6: db $1F, $73 ; read address $1F:81D2 for pointer
+#_00A4B6: db $1F, $73 ; read $1F:81D2 for pointer to CompressedData_Palette1FE1A5
 #_00A4B8: dl $7E2A00 : db $80 ; target address
 
-#_00A4BC: db $1F, $2A ; read address $1F:80AE for pointer
+#_00A4BC: db $1F, $2A ; read $1F:80AE for pointer to CompressedData_Palette1FBCA9
 #_00A4BE: dl $7E2F00 : db $80 ; target address
 
-#_00A4C2: db $1F, $2A ; read address $1F:80AE for pointer
+#_00A4C2: db $1F, $2A ; read $1F:80AE for pointer to CompressedData_Palette1FBCA9
 #_00A4C4: dl $7E2B00 : db $80 ; target address
 
 #_00A4C8: dw $0000 ; end
@@ -6493,7 +6533,7 @@ ItsStoryTime_03:
 #_00A566: LDA.w #data00A931>>16
 #_00A569: STA.b $22
 
-#_00A56B: JSR ROUTINE_00FBCB
+#_00A56B: JSR QuadDataWriter_00FBCB
 #_00A56E: JSR ROUTINE_00F957
 
 #_00A571: LDA.w #Message_08B13F
@@ -6626,7 +6666,7 @@ ItsStoryTime_05:
 #_00A63D: LDA.w #data00A73F>>16
 #_00A640: STA.b $22
 
-#_00A642: JSR ROUTINE_00FBCB
+#_00A642: JSR QuadDataWriter_00FBCB
 #_00A645: JSR ROUTINE_00F957
 
 #_00A648: INC.w $0506
@@ -6653,7 +6693,7 @@ ItsStoryTime_ImpyMusic:
 #_00A668: LDA.w #data00A5CE>>16
 #_00A66B: STA.b $22
 
-#_00A66D: JSR ROUTINE_00FBCB
+#_00A66D: JSR QuadDataWriter_00FBCB
 
 #_00A670: INC.w $0506
 
@@ -6697,9 +6737,10 @@ ItsStoryTime_ImpyInterrupts:
 
 ;---------------------------------------------------------------------------------------------------
 
-; TODO
 .table
-#_00A6B4: dw $2D1F : dl $7F8000 : dw $3100
+#_00A6B4: db $1F, $2D ; read $1F:80BA for pointer to data1FBF0B
+#_00A6B6: dl $7F8000 : dw $3100 ; target address, copy to $6200 in VRAM
+
 #_00A6BB: dw $0000 ; end
 
 ;===================================================================================================
@@ -6781,7 +6822,7 @@ ItsStoryTime_0A:
 #_00A730: LDA.w #data00A751>>16
 #_00A733: STA.b $22
 
-#_00A735: JSR ROUTINE_00FBCB
+#_00A735: JSR QuadDataWriter_00FBCB
 #_00A738: JSR ROUTINE_00F957
 
 #_00A73B: INC.w $0506
@@ -6854,7 +6895,7 @@ ItsStoryTime_BrightFlash:
 #_00A7B5: LDA.w #data00A4FE>>16
 #_00A7B8: STA.b $22
 
-#_00A7BA: JSR ROUTINE_00FBCB
+#_00A7BA: JSR QuadDataWriter_00FBCB
 
 #_00A7BD: INC.w $0506
 
@@ -6863,10 +6904,13 @@ ItsStoryTime_BrightFlash:
 
 ;---------------------------------------------------------------------------------------------------
 
-; TODO
 .table
-#_00A7C1: dw $231F : dl $7F8000 : dw $4100
-#_00A7C8: dw $4F1F : dl $7F8000 : dw $3100
+#_00A7C1: db $1F, $23 ; read $1F:8092 for pointer to data1FB687
+#_00A7C3: dl $7F8000 : dw $4100 ; target address, copy to $8200 in VRAM
+
+#_00A7C8: db $1F, $4F ; read $1F:8142 for pointer to data1FD502
+#_00A7CA: dl $7F8000 : dw $3100 ; target address, copy to $6200 in VRAM
+
 #_00A7CF: dw $0000 ; end
 
 ;===================================================================================================
@@ -6939,7 +6983,7 @@ ItsStoryTime_0F:
 #_00A83E: LDA.w #data00A931>>16
 #_00A841: STA.b $22
 
-#_00A843: JSR ROUTINE_00FBCB
+#_00A843: JSR QuadDataWriter_00FBCB
 #_00A846: JSR ROUTINE_00F957
 
 #_00A849: LDA.w #$001F
@@ -7112,7 +7156,7 @@ data00A931:
 
 ;===================================================================================================
 
-ROUTINE_00A947_long_2:
+ROUTINE_00A947_long2:
 #_00A943: JSR ROUTINE_00A947
 
 #_00A946: RTL
@@ -7235,7 +7279,7 @@ FadeToStoryCutscene:
 ;---------------------------------------------------------------------------------------------------
 
 .table
-#_00A9CA: db $12, $04 ; read address $12:8016 for pointer
+#_00A9CA: db $12, $04 ; read $12:8016 for pointer to CompressedCutsceneCode
 #_00A9CC: dl $7E8000 : db $80 ; target address
 
 #_00A9D0: dw $0000 ; end
@@ -7278,9 +7322,8 @@ CODE_00A9ED:
 #_00A9FC: LDX.w #data08E31A
 #_00A9FF: JSL BulkDecompressionViaTable_long
 
-#_00AA03: JSL ROUTINE_08E352
+#_00AA03: JSL BuildBulkDecompressionTableForLevel
 
-; TODO gross
 #_00AA07: LDA.w #$0000
 #_00AA0A: LDX.w #$19B0
 #_00AA0D: JSL BulkDecompressionViaTable_long
@@ -7627,10 +7670,10 @@ CODE_00ABBF:
 ;===================================================================================================
 
 data00ABD8:
-#_00ABD8: db $1F, $37 ; read address $1F:80E2 for pointer
+#_00ABD8: db $1F, $37 ; read $1F:80E2 for pointer to data1FC689
 #_00ABDA: dl $7E7000 : db $80 ; target address
 
-#_00ABDE: db $1C, $0C ; read address $1C:8036 for pointer
+#_00ABDE: db $1C, $0C ; read $1C:8036 for pointer to data1CDE71
 #_00ABE0: dl $7F8000 : db $80 ; target address
 
 #_00ABE4: dw $0000 ; end
@@ -7674,15 +7717,15 @@ PrepareBuildingNPC:
 #_00AC19: LDA.l $7E7B28
 #_00AC1D: TAX
 
-#_00AC1E: LDA.l data08E4C1,X
-#_00AC22: LDX.w #data08E4C1>>16
+#_00AC1E: LDA.l MessagePointers08E4C1,X
+#_00AC22: LDX.w #MessagePointers08E4C1>>16
 #_00AC25: JSL BeginDialog
 
 #_00AC29: LDA.l $7E7B28
 #_00AC2D: TAX
 
-#_00AC2E: LDA.l data08E4C1,X
-#_00AC32: LDX.w #data08E4C1>>16
+#_00AC2E: LDA.l MessagePointers08E4C1,X
+#_00AC32: LDX.w #MessagePointers08E4C1>>16
 #_00AC35: JSL SetMessagePointer
 
 #_00AC39: LDA.l $7E7B28
@@ -7974,7 +8017,7 @@ CODE_00ADA9:
 #_00ADC0: LDA.l pointers08E0D6,X
 #_00ADC4: TAX
 
-#_00ADC5: LDA.w #$0008
+#_00ADC5: LDA.w #pointers08E0D6>>16
 #_00ADC8: JSL ROUTINE_00DC8C_long
 
 #_00ADCC: LDY.w #$3000
@@ -8194,7 +8237,7 @@ LiftShopCurtainIn:
 #_00AF24: JSR ResetModuleVariables
 #_00AF27: JSR ROUTINE_00B46E
 #_00AF2A: JSL ROUTINE_08D8C4
-#_00AF2E: JSR ROUTINE_00E034_0000
+#_00AF2E: JSR AnimateCommonItems_Reset
 
 #_00AF31: CLC
 #_00AF32: LDA.w $19DE
@@ -8245,7 +8288,7 @@ WalkIntoShop:
 
 #_00AF78: JSR ROUTINE_00B46E
 #_00AF7B: JSL ROUTINE_08D8C4
-#_00AF7F: JSR ROUTINE_00E034_0000
+#_00AF7F: JSR AnimateCommonItems_Reset
 #_00AF82: JSR ROUTINE_00B3F1
 
 #_00AF85: SEC
@@ -8317,7 +8360,7 @@ BeginShopDialog:
 Shop_AFF7:
 #_00AFF7: JSR ROUTINE_00B46E
 #_00AFFA: JSL ROUTINE_08D8C4
-#_00AFFE: JSR ROUTINE_00E034_0000
+#_00AFFE: JSR AnimateCommonItems_Reset
 
 #_00B001: LDA.w $04FA
 #_00B004: BNE CODE_00B013
@@ -8336,9 +8379,9 @@ CODE_00B013:
 ;===================================================================================================
 
 ROUTINE_00B016:
-#_00B016: JSR ROUTINE_00C4C5
-#_00B019: JSR ROUTINE_00C4E4
-#_00B01C: JSR ROUTINE_00C488
+#_00B016: JSR UpdateTimerOnHUD
+#_00B019: JSR UpdateScoreOnHUD
+#_00B01C: JSR UpdateKeysAndCoinsOnHUD
 #_00B01F: STA.b $3C
 
 #_00B021: STY.b $3E
@@ -9177,10 +9220,10 @@ pointers00B4AA:
 #_00B4E8: dw ROUTINE_00B6B1_0E
 #_00B4EA: dw ROUTINE_00B6B1_0E
 #_00B4EC: dw ROUTINE_00B6B1_2E
-#_00B4EE: dw ROUTINE_00B54C
-#_00B4F0: dw ROUTINE_00B55E
-#_00B4F2: dw ROUTINE_00B56C
-#_00B4F4: dw ROUTINE_00B57A
+#_00B4EE: dw UnlockTengy
+#_00B4F0: dw UnlockDigger
+#_00B4F2: dw UnlockScarecrow
+#_00B4F4: dw UnlockOttobot
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -9201,24 +9244,24 @@ pointers00B4F6:
 #_00B510: dw ROUTINE_00B5CE
 #_00B512: dw ROUTINE_00B5CE
 #_00B514: dw ROUTINE_00B5CE
-#_00B516: dw NullPtr
-#_00B518: dw NullPtr
-#_00B51A: dw NullPtr
-#_00B51C: dw NullPtr
-#_00B51E: dw NullPtr
-#_00B520: dw NullPtr
-#_00B522: dw NullPtr
-#_00B524: dw NullPtr
-#_00B526: dw NullPtr
-#_00B528: dw NullPtr
-#_00B52A: dw NullPtr
-#_00B52C: dw NullPtr
-#_00B52E: dw NullPtr
-#_00B530: dw NullPtr
-#_00B532: dw NullPtr
-#_00B534: dw NullPtr
-#_00B536: dw NullPtr
-#_00B538: dw NullPtr
+#_00B516: dw $0000
+#_00B518: dw $0000
+#_00B51A: dw $0000
+#_00B51C: dw $0000
+#_00B51E: dw $0000
+#_00B520: dw $0000
+#_00B522: dw $0000
+#_00B524: dw $0000
+#_00B526: dw $0000
+#_00B528: dw $0000
+#_00B52A: dw $0000
+#_00B52C: dw $0000
+#_00B52E: dw $0000
+#_00B530: dw $0000
+#_00B532: dw $0000
+#_00B534: dw $0000
+#_00B536: dw $0000
+#_00B538: dw $0000
 #_00B53A: dw ROUTINE_00B59F_38
 #_00B53C: dw ROUTINE_00B59F_40
 #_00B53E: dw ROUTINE_00B59F_46
@@ -9226,7 +9269,7 @@ pointers00B4F6:
 
 ;===================================================================================================
 
-ROUTINE_00B542:
+UnlockPartner:
 #_00B542: SEP #$20
 
 #_00B544: TXA
@@ -9238,9 +9281,9 @@ ROUTINE_00B542:
 
 ;===================================================================================================
 
-ROUTINE_00B54C:
+UnlockTengy:
 #_00B54C: LDX.w #$0005
-#_00B54F: JSR ROUTINE_00B542
+#_00B54F: JSR UnlockPartner
 
 #_00B552: LDX.w #$0008
 #_00B555: LDA.w #$0010
@@ -9249,9 +9292,9 @@ ROUTINE_00B54C:
 
 ;===================================================================================================
 
-ROUTINE_00B55E:
+UnlockDigger:
 #_00B55E: LDX.w #$0003
-#_00B561: JSR ROUTINE_00B542
+#_00B561: JSR UnlockPartner
 
 #_00B564: LDY.w #$0044
 #_00B567: JSL ROUTINE_08D58B
@@ -9260,9 +9303,9 @@ ROUTINE_00B55E:
 
 ;===================================================================================================
 
-ROUTINE_00B56C:
+UnlockScarecrow:
 #_00B56C: LDX.w #$0004
-#_00B56F: JSR ROUTINE_00B542
+#_00B56F: JSR UnlockPartner
 
 #_00B572: LDY.w #$004A
 #_00B575: JSL ROUTINE_08D58B
@@ -9271,13 +9314,14 @@ ROUTINE_00B56C:
 
 ;===================================================================================================
 
-ROUTINE_00B57A:
+UnlockOttobot:
 #_00B57A: LDX.w #$0006
-#_00B57D: JSR ROUTINE_00B542
+#_00B57D: JSR UnlockPartner
 
 #_00B580: LDY.w #$0054
+
 #_00B583: LDA.w $0500
-#_00B586: CMP.w #$0066
+#_00B586: CMP.w #$0066 ; MODE 66
 #_00B589: BEQ CODE_00B593
 
 #_00B58B: LDY.w #$0050
@@ -9313,7 +9357,7 @@ ROUTINE_00B59F:
 CODE_00B5B3:
 #_00B5B3: STA.l $7E7B36
 
-#_00B5B7: JSL ROUTINE_08D56C_long
+#_00B5B7: JSL ROUTINE_08D564
 
 #_00B5BB: RTS
 
@@ -9588,7 +9632,7 @@ WalkOutOfShop:
 #_00B71F: JSR ResetModuleVariables
 #_00B722: JSR ROUTINE_00B46E
 #_00B725: JSL ROUTINE_08D8C4
-#_00B729: JSR ROUTINE_00E034_0000
+#_00B729: JSR AnimateCommonItems_Reset
 
 #_00B72C: CLC
 
@@ -9993,7 +10037,7 @@ ROUTINE_00B990:
 ;---------------------------------------------------------------------------------------------------
 
 .table
-#_00B999: db $1F, $24 ; read address $1F:8096 for pointer
+#_00B999: db $1F, $24 ; read $1F:8096 for pointer to data1FB776
 #_00B99B: dl $7F8000 : db $80 ; target address
 
 #_00B99F: dw $0000 ; end
@@ -10046,7 +10090,7 @@ CODE_00B9E2:
 #_00B9E8: CPX.w #$0600
 #_00B9EB: BCC CODE_00B9E2
 
-#_00B9ED: JSR ROUTINE_00C28B
+#_00B9ED: JSR ZeroOutLevelData_C28B
 
 #_00B9F0: LDA.w #$0000
 #_00B9F3: STA.l $7E7A72
@@ -10181,7 +10225,8 @@ ROUTINE_00BA8F:
 #_00BAB4: RTS
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00BAB8_0800:
 #_00BAB5: LDX.w #$0800
 
@@ -10889,7 +10934,8 @@ ROUTINE_00BF54:
 #_00BFB4: JMP EnableNMIandVIRQandFBlank
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00BFB7:
 #_00BFB7: LDA.w #$0002
 #_00BFBA: JSR ROUTINE_00C030
@@ -10906,13 +10952,13 @@ ROUTINE_00BFB7:
 ;---------------------------------------------------------------------------------------------------
 
 .table
-#_00BFD0: db $17, $03 ; read address $17:8012 for pointer
+#_00BFD0: db $17, $03 ; read $17:8012 for pointer to data17C72F
 #_00BFD2: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00BFD6: db $1F, $4B ; read address $1F:8132 for pointer
+#_00BFD6: db $1F, $4B ; read $1F:8132 for pointer to data1FD2E2
 #_00BFD8: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00BFDC: db $15, $26 ; read address $15:809E for pointer
+#_00BFDC: db $15, $26 ; read $15:809E for pointer to data15DD03
 #_00BFDE: dl $7F2000 : db $FF ; target address
 
 #_00BFE2: dw $0000 ; end
@@ -11324,7 +11370,7 @@ data00C276:
 
 ;===================================================================================================
 
-ROUTINE_00C28B:
+ZeroOutLevelData_C28B:
 #_00C28B: LDY.w #$0040
 
 #_00C28E: LDX.w #$0000
@@ -11505,7 +11551,7 @@ CODE_00C311:
 #_00C37B: TAX
 #_00C37C: STA.w $04FE
 
-#_00C37F: JSL ROUTINE_01ACA7_long
+#_00C37F: JSL SpawnInNewPartner_long
 
 .exit
 #_00C383: RTS
@@ -11525,7 +11571,8 @@ data00C38A:
 #_00C38E: dw $0006
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00C390:
 #_00C390: LDA.w #$0002 ; PARTNER 0002
 #_00C393: STA.w $05CE
@@ -11534,7 +11581,7 @@ ROUTINE_00C390:
 #_00C399: STA.w $05DC
 
 #_00C39C: LDX.w #$0002
-#_00C39F: JSL ROUTINE_01ACA7_long
+#_00C39F: JSL SpawnInNewPartner_long
 
 ;===================================================================================================
 
@@ -11695,12 +11742,12 @@ ResetModuleVariables:
 
 ;===================================================================================================
 
-ROUTINE_00C488:
+UpdateKeysAndCoinsOnHUD:
 #_00C488: LDA.w #$0001
 #_00C48B: TSB.w $05BA
 
 #_00C48E: LDA.w $05B2
-#_00C491: JSR ROUTINE_00D330
+#_00C491: JSR SplitBCDIntoDigits
 
 #_00C494: LDA.b $2C
 #_00C496: STA.l $7E706C
@@ -11709,7 +11756,7 @@ ROUTINE_00C488:
 #_00C49C: STA.l $7E706E
 
 #_00C4A0: LDA.w $05B0
-#_00C4A3: JSR ROUTINE_00D330
+#_00C4A3: JSR SplitBCDIntoDigits
 
 #_00C4A6: LDA.b $28
 #_00C4A8: STA.l $7E7074
@@ -11730,12 +11777,12 @@ ROUTINE_00C488:
 
 ;===================================================================================================
 
-ROUTINE_00C4C5:
+UpdateTimerOnHUD:
 #_00C4C5: LDA.w #$0001
 #_00C4C8: TSB.w $05BA
 
 #_00C4CB: LDA.w $05B4
-#_00C4CE: JSR ROUTINE_00D330
+#_00C4CE: JSR SplitBCDIntoDigits
 
 #_00C4D1: LDA.b $28
 #_00C4D3: STA.l $7E7060
@@ -11750,12 +11797,12 @@ ROUTINE_00C4C5:
 
 ;===================================================================================================
 
-ROUTINE_00C4E4:
+UpdateScoreOnHUD:
 #_00C4E4: LDA.w #$0001
 #_00C4E7: TSB.w $05BA
 
 #_00C4EA: LDA.w $05B8
-#_00C4ED: JSR ROUTINE_00D330
+#_00C4ED: JSR SplitBCDIntoDigits
 
 #_00C4F0: LDA.b $2A
 #_00C4F2: STA.l $7E704A
@@ -11767,7 +11814,7 @@ ROUTINE_00C4E4:
 #_00C4FE: STA.l $7E704E
 
 #_00C502: LDA.w $05B6
-#_00C505: JSR ROUTINE_00D330
+#_00C505: JSR SplitBCDIntoDigits
 
 #_00C508: LDA.b $28
 #_00C50A: STA.l $7E7050
@@ -11809,7 +11856,6 @@ PlayLevel:
 #_00C544: TAX
 
 #_00C545: LDA.l PockyStateTimerFlags,X
-
 #_00C549: AND.w #$00FF
 #_00C54C: BNE .dont_tick_timer
 
@@ -11859,25 +11905,25 @@ PlayLevel:
 #_00C598: JSL ROUTINE_018B41
 
 .dont_tick_timer
-#_00C59C: JSR ROUTINE_00C4C5
+#_00C59C: JSR UpdateTimerOnHUD
 
 ;---------------------------------------------------------------------------------------------------
 
 .skip_timer
 #_00C59F: LDA.w $05BA
-#_00C5A2: BNE CODE_00C5A7
+#_00C5A2: BNE .hud_is_flagged
 
 #_00C5A4: JMP .dont_clear
 
-CODE_00C5A7:
-#_00C5A7: BPL CODE_00C5BF
+.hud_is_flagged
+#_00C5A7: BPL .update_score_and_items
 
 #_00C5A9: CMP.w #$8000
-#_00C5AC: BNE CODE_00C5B1
+#_00C5AC: BNE .clear_allowed
 
 #_00C5AE: JMP .dont_clear
 
-CODE_00C5B1:
+.clear_allowed
 #_00C5B1: LDA.w #$8000
 #_00C5B4: STA.w $05BA
 
@@ -11886,9 +11932,9 @@ CODE_00C5B1:
 
 #_00C5BD: BRA CODE_00C5C5
 
-CODE_00C5BF:
-#_00C5BF: JSR ROUTINE_00C4E4
-#_00C5C2: JSR ROUTINE_00C488
+.update_score_and_items
+#_00C5BF: JSR UpdateScoreOnHUD
+#_00C5C2: JSR UpdateKeysAndCoinsOnHUD
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -11909,6 +11955,8 @@ CODE_00C5C5:
 #_00C5D9: BMI .dont_clear
 
 #_00C5DB: STZ.w $05BA
+
+;---------------------------------------------------------------------------------------------------
 
 .dont_clear
 #_00C5DE: LDA.w #$0E80
@@ -11953,8 +12001,11 @@ CODE_00C5FF:
 CODE_00C61C:
 #_00C61C: STZ.w $04EC
 #_00C61F: STZ.w $04EE
+
 #_00C622: STZ.w $04C0
+
 #_00C625: STZ.w $0600
+
 #_00C628: STZ.w $04C8
 #_00C62B: STZ.w $04CA
 #_00C62E: STZ.w $04C2
@@ -11966,13 +12017,18 @@ CODE_00C61C:
 #_00C63D: STA.w $050A
 
 #_00C640: JSR ROUTINE_00F957
-#_00C643: JSR ROUTINE_00F18F
-#_00C646: JSL ROUTINE_02EE59
-#_00C64A: JSL ROUTINE_08BB2A
-#_00C64E: JSL ROUTINE_09E870
-#_00C652: JSL ROUTINE_018220
 
-#_00C656: JSL PartnerAct
+#_00C643: JSR AdjustControllerInputsForConfig
+
+#_00C646: JSL ROUTINE_02EE59
+
+#_00C64A: JSL ROUTINE_08BB2A
+
+#_00C64E: JSL ROUTINE_09E870
+
+#_00C652: JSL Pocky_Act
+
+#_00C656: JSL Partner_Act
 
 #_00C65A: STZ.w $04F0
 
@@ -11998,18 +12054,19 @@ CODE_00C675:
 #_00C675: STZ.w $04F4
 
 #_00C678: JSR ROUTINE_00DE52
+
 #_00C67B: JSR TestNewInput_Start
-#_00C67E: BEQ .yes_game_overing
+#_00C67E: BEQ .dont_pause
 
 #_00C680: LDA.w $19CE
 #_00C683: CMP.w #$0080 ; STATE 80
 #_00C686: BCC .not_game_overing
 
 #_00C688: CMP.w #$008C ; STATE 8C
-#_00C68B: BCC .yes_game_overing
+#_00C68B: BCC .dont_pause
 
 .not_game_overing
-#_00C68D: LDA.w #$00FF ; SFX FF
+#_00C68D: LDA.w #$00FF ; SFX FF - half volume music
 #_00C690: STA.w $04A0
 
 #_00C693: STZ.w $1952
@@ -12028,7 +12085,7 @@ CODE_00C675:
 
 ;---------------------------------------------------------------------------------------------------
 
-.yes_game_overing
+.dont_pause
 #_00C6AF: LDA.l $7E7A28
 #_00C6B3: BNE CODE_00C6B9
 
@@ -12053,15 +12110,16 @@ CODE_00C6C2:
 
 #_00C6D7: JSR ROUTINE_00DA88
 #_00C6DA: JSR ROUTINE_00E1ED
-#_00C6DD: JSR ROUTINE_00C756
+
+#_00C6DD: JSR SomeTransfersIfNotInGameOverState
 
 #_00C6E0: LDA.l $7E7B1E
-#_00C6E4: BEQ CODE_00C705
+#_00C6E4: BEQ .dont_cache_oam
+
+;---------------------------------------------------------------------------------------------------
 
 #_00C6E6: LDA.w #$0000
 #_00C6E9: STA.l $7E7B1E
-
-;---------------------------------------------------------------------------------------------------
 
 #_00C6ED: LDX.w #$0000
 
@@ -12074,12 +12132,12 @@ CODE_00C6C2:
 #_00C6F9: CPX.w #$0220
 #_00C6FC: BNE .cache_oam
 
-;---------------------------------------------------------------------------------------------------
-
 #_00C6FE: LDA.w $054A
 #_00C701: STA.l $7E7B3C
 
-CODE_00C705:
+;---------------------------------------------------------------------------------------------------
+
+.dont_cache_oam
 #_00C705: LDA.w $18EC
 #_00C708: EOR.w $1970
 #_00C70B: EOR.w $18F0
@@ -12122,7 +12180,7 @@ CODE_00C72D:
 
 ;===================================================================================================
 
-ROUTINE_00C756:
+SomeTransfersIfNotInGameOverState:
 #_00C756: LDA.w $19CE
 #_00C759: CMP.w #$0082 ; STATE 82
 #_00C75C: BCC .not_gaming_over
@@ -12381,34 +12439,36 @@ FadeOutLevelArea:
 
 #_00C8DD: JMP ROUTINE_00E1ED
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
-#_00C8E0: dw ROUTINE_00C8FB
-#_00C8E2: dw ROUTINE_00C8EE
-#_00C8E4: dw ROUTINE_00C8EE
-#_00C8E6: dw ROUTINE_00C8EE
-#_00C8E8: dw ROUTINE_00C8EE
-#_00C8EA: dw ROUTINE_00C8EE
-#_00C8EC: dw ROUTINE_00C8EE
+#_00C8E0: dw .walk_down
+#_00C8E2: dw .walk_up
+#_00C8E4: dw .walk_up
+#_00C8E6: dw .walk_up
+#_00C8E8: dw .walk_up
+#_00C8EA: dw .walk_up
+#_00C8EC: dw .walk_up
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_00C8EE:
+.walk_up
 #_00C8EE: LDA.w #$00C0
 #_00C8F1: STA.w $056C
 
 #_00C8F4: LDA.w #$0800
-#_00C8F7: JSR ROUTINE_00CC7F
+#_00C8F7: JSR ForceJoypadInputsAndMovePlayers
 
 #_00C8FA: RTS
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_00C8FB:
+.walk_down
 #_00C8FB: LDA.w #$00C0
 #_00C8FE: STA.w $056C
 
 #_00C901: LDA.w #$0400
-#_00C904: JSR ROUTINE_00CC7F
+#_00C904: JSR ForceJoypadInputsAndMovePlayers
 
 #_00C907: RTS
 
@@ -12428,7 +12488,7 @@ PrepareLevelArea:
 #_00C920: JSR ROUTINE_00C3A3
 
 #_00C923: LDX.w $04FE
-#_00C926: JSL ROUTINE_01ACA7_long
+#_00C926: JSL SpawnInNewPartner_long
 
 #_00C92A: LDX.w $04FE
 #_00C92D: LDA.w .partners,X
@@ -12436,7 +12496,7 @@ PrepareLevelArea:
 
 #_00C933: STZ.w $05BA
 
-#_00C936: JSR ROUTINE_00C488
+#_00C936: JSR UpdateKeysAndCoinsOnHUD
 #_00C939: STA.b $3C
 #_00C93B: STY.b $3E
 
@@ -12757,16 +12817,16 @@ ROUTINE_00CABC:
 ;---------------------------------------------------------------------------------------------------
 
 .table
-#_00CB19: db $15, $25 ; read address $15:809A for pointer
+#_00CB19: db $15, $25 ; read $15:809A for pointer to data15DC31
 #_00CB1B: dl $7EC100 : db $80 ; target address
 
-#_00CB1F: db $14, $08 ; read address $14:8026 for pointer
+#_00CB1F: db $14, $08 ; read $14:8026 for pointer to data14DC3D
 #_00CB21: dl $7F8000 : db $18 ; target address, copy to $3000 in VRAM
 
-#_00CB25: db $15, $2F ; read address $15:80C2 for pointer
+#_00CB25: db $15, $2F ; read $15:80C2 for pointer to CompressedData_Palette15E424
 #_00CB27: dl $7E2A40 : db $80 ; target address
 
-#_00CB2B: db $1F, $76 ; read address $1F:81DE for pointer
+#_00CB2B: db $1F, $76 ; read $1F:81DE for pointer to CompressedData_Empty0300_A
 #_00CB2D: dl $7F8000 : db $80 ; target address
 
 #_00CB31: dw $0000 ; end
@@ -12813,16 +12873,16 @@ ROUTINE_00CB33:
 ;---------------------------------------------------------------------------------------------------
 
 .table
-#_00CB7E: db $15, $1E ; read address $15:807E for pointer
+#_00CB7E: db $15, $1E ; read $15:807E for pointer to data15D62F
 #_00CB80: dl $7EC100 : db $80 ; target address
 
-#_00CB84: db $14, $00 ; read address $14:8006 for pointer
+#_00CB84: db $14, $00 ; read $14:8006 for pointer to data148038
 #_00CB86: dl $7F8000 : db $18 ; target address, copy to $3000 in VRAM
 
-#_00CB8A: db $15, $2C ; read address $15:80B6 for pointer
+#_00CB8A: db $15, $2C ; read $15:80B6 for pointer to CompressedData_Palette15E1D1
 #_00CB8C: dl $7E2A40 : db $FF ; target address
 
-#_00CB90: db $15, $26 ; read address $15:809E for pointer
+#_00CB90: db $15, $26 ; read $15:809E for pointer to data15DD03
 #_00CB92: dl $7F2000 : db $FF ; target address
 
 #_00CB96: dw $0000 ; end
@@ -12908,11 +12968,11 @@ FadeInLevelArea:
 
 FadeInLevelArea_06:
 #_00CBFC: LDA.w #$7000
-#_00CBFF: JSR ROUTINE_00CC09
+#_00CBFF: JSR FadeInLevelArea_ForceMoveAndCheckY
 
 ;===================================================================================================
 
-ROUTINE_00CC02:
+FadeInLevelArea_YPositionCheck:
 #_00CC02: CMP.b $34
 #_00CC04: BCS .exit
 
@@ -12923,14 +12983,14 @@ ROUTINE_00CC02:
 
 ;===================================================================================================
 
-ROUTINE_00CC09:
+FadeInLevelArea_ForceMoveAndCheckY:
 #_00CC09: PHA
 
 #_00CC0A: LDA.w #$00C0
 #_00CC0D: STA.w $056C
 
 #_00CC10: LDA.w #$0800
-#_00CC13: JSR ROUTINE_00CC7F
+#_00CC13: JSR ForceJoypadInputsAndMovePlayers
 
 #_00CC16: PLA
 #_00CC17: STA.b $34
@@ -12946,28 +13006,28 @@ FadeInLevelArea_08:
 
 ;===================================================================================================
 
-ROUTINE_00CC20:
-#_00CC20: JSR ROUTINE_00CC09
+FadeInLevelArea_PerformWalkAndCheck:
+#_00CC20: JSR FadeInLevelArea_ForceMoveAndCheckY
 
-#_00CC23: JMP ROUTINE_00CC02
+#_00CC23: JMP FadeInLevelArea_YPositionCheck
 
 ;===================================================================================================
 
 FadeInLevelArea_0A:
 #_00CC26: LDA.w #$CA00
-#_00CC29: BRA ROUTINE_00CC20
+#_00CC29: BRA FadeInLevelArea_PerformWalkAndCheck
 
 ;===================================================================================================
 
 FadeInLevelArea_0E:
 #_00CC2B: LDA.w #$DA00
-#_00CC2E: BRA ROUTINE_00CC20
+#_00CC2E: BRA FadeInLevelArea_PerformWalkAndCheck
 
 ;===================================================================================================
 
 FadeInLevelArea_04:
 #_00CC30: LDA.w #$9200
-#_00CC33: BRA ROUTINE_00CC20
+#_00CC33: BRA FadeInLevelArea_PerformWalkAndCheck
 
 ;===================================================================================================
 
@@ -12981,7 +13041,7 @@ FadeInLevelArea_CC35:
 #_00CC42: JSL ROUTINE_0181D9
 #_00CC46: JSR ROUTINE_00CCFA
 
-#_00CC49: LDA.w #$00FA
+#_00CC49: LDA.w #$00FA ; SPRITE 00FA
 #_00CC4C: JSR ROUTINE_00CCBC
 
 .exit
@@ -12994,7 +13054,7 @@ FadeInLevelArea_00:
 #_00CC53: STA.w $056C
 
 #_00CC56: LDA.w #$0400
-#_00CC59: JSR ROUTINE_00CC7F
+#_00CC59: JSR ForceJoypadInputsAndMovePlayers
 
 #_00CC5C: LDA.w $19F0
 #_00CC5F: CMP.w #$A380
@@ -13017,7 +13077,7 @@ FadeInLevelArea_02:
 #_00CC6B: STA.w $056C
 
 #_00CC6E: LDA.w #$0800
-#_00CC71: JSR ROUTINE_00CC7F
+#_00CC71: JSR ForceJoypadInputsAndMovePlayers
 
 #_00CC74: LDA.w $19F0
 #_00CC77: CMP.w #$9200
@@ -13030,9 +13090,10 @@ FadeInLevelArea_02:
 
 ;===================================================================================================
 
-ROUTINE_00CC7F:
+ForceJoypadInputsAndMovePlayers:
 #_00CC7F: STA.w $1F24
 #_00CC82: STA.w $0538
+
 #_00CC85: STA.w $1F26
 #_00CC88: STA.w $053C
 
@@ -13042,8 +13103,8 @@ ROUTINE_00CC7F:
 #_00CC91: STZ.w $1F2A
 #_00CC94: STA.w $053E
 
-#_00CC97: JSL ROUTINE_018220
-#_00CC9B: JSL PartnerAct
+#_00CC97: JSL Pocky_Act
+#_00CC9B: JSL Partner_Act
 
 #_00CC9F: LDA.w #$FFFF
 #_00CCA2: STA.b $20
@@ -13104,6 +13165,7 @@ ROUTINE_00CCD5:
 
 .execute
 #_00CCDD: JSR ROUTINE_00CCE5
+
 #_00CCE0: JSL ROUTINE_0396F2
 
 #_00CCE4: RTS
@@ -13136,7 +13198,8 @@ ROUTINE_00CCFA:
 #_00CD01: RTS
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00CD02:
 #_00CD02: JSR ROUTINE_00CCE5
 #_00CD05: JSL PrepEnemySpawnType0C_0396E3_00E8
@@ -13602,7 +13665,7 @@ CODE_00CFA4:
 
 #_00CFB4: LDA.w #.table
 #_00CFB7: LDY.w #.table>>16
-#_00CFBA: JSL ROUTINE_00FBCB_ParameterizedBounce_long
+#_00CFBA: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
 
 #_00CFBE: BRA .finished
 
@@ -13816,7 +13879,7 @@ TitleScreen_06:
 
 ;---------------------------------------------------------------------------------------------------
 
-#_00D0D2: JSL ROUTINE_08F0FA
+#_00D0D2: JSL HDMAInitialize_08F0FA
 
 .finished
 #_00D0D6: JSR TitleScreen_CF40
@@ -14076,7 +14139,7 @@ TitleScreen_0B:
 #_00D221: JSR TitleScreen_0B_D251
 
 #_00D224: LDA.w $053A
-#_00D227: BNE CODE_00D247
+#_00D227: BNE .some_input
 
 #_00D229: LDA.l $7E7A4E
 #_00D22D: CMP.w #$0800
@@ -14097,7 +14160,7 @@ CODE_00D240:
 
 #_00D245: BRA .finished
 
-CODE_00D247:
+.some_input
 #_00D247: LDA.w #$0000
 #_00D24A: STA.l $7E7A4E
 
@@ -14266,19 +14329,19 @@ FadeToOptionsScreen:
 
 ;===================================================================================================
 
-ROUTINE_00D330_long:
+SplitBCDIntoDigits_long:
 #_00D328: PHB
 #_00D329: PHK
 #_00D32A: PLB
 
-#_00D32B: JSR ROUTINE_00D330
+#_00D32B: JSR SplitBCDIntoDigits
 
 #_00D32E: PLB
 #_00D32F: RTL
 
 ;===================================================================================================
 
-ROUTINE_00D330:
+SplitBCDIntoDigits:
 #_00D330: REP #$20
 
 #_00D332: STA.b $20
@@ -14287,12 +14350,12 @@ ROUTINE_00D330:
 #_00D335: PHX
 
 #_00D336: LDA.b $20
-#_00D338: JSR ROUTINE_00D34B
+#_00D338: JSR .get_two
 #_00D33B: STX.b $2E
 #_00D33D: STA.b $2C
 
 #_00D33F: LDA.b $21
-#_00D341: JSR ROUTINE_00D34B
+#_00D341: JSR .get_two
 #_00D344: STX.b $2A
 #_00D346: STA.b $28
 
@@ -14303,7 +14366,7 @@ ROUTINE_00D330:
 
 ;===================================================================================================
 
-ROUTINE_00D34B:
+.get_two
 #_00D34B: PHA
 
 #_00D34C: JSR .get_one
@@ -14321,7 +14384,7 @@ ROUTINE_00D34B:
 #_00D355: AND.w #$000F
 #_00D358: TAY
 
-#_00D359: LDA.w data00D363,Y
+#_00D359: LDA.w .tiles,Y
 #_00D35C: AND.w #$00FF
 #_00D35F: ORA.w #$3400
 
@@ -14329,26 +14392,29 @@ ROUTINE_00D34B:
 
 ;---------------------------------------------------------------------------------------------------
 
-data00D363:
-#_00D363: db $70
-#_00D364: db $71
-#_00D365: db $72
-#_00D366: db $73
-#_00D367: db $74
-#_00D368: db $75
-#_00D369: db $76
-#_00D36A: db $77
-#_00D36B: db $78
-#_00D36C: db $79
-#_00D36D: db $81
+.tiles
+#_00D363: db $70 ; 0
+#_00D364: db $71 ; 1
+#_00D365: db $72 ; 2
+#_00D366: db $73 ; 3
+#_00D367: db $74 ; 4
+#_00D368: db $75 ; 5
+#_00D369: db $76 ; 6
+#_00D36A: db $77 ; 7
+#_00D36B: db $78 ; 8
+#_00D36C: db $79 ; 9
+
+#_00D36D: db $81 ; (S)CORE
 #_00D36E: db $82
 #_00D36F: db $83
-#_00D370: db $84
+
+#_00D370: db $84 ; TIME
 #_00D371: db $85
 #_00D372: db $86
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00D373:
 #_00D373: REP #$20
 
@@ -14447,7 +14513,8 @@ ROUTINE_00D3BD:
 #_00D3E4: RTS
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00D3E5:
 #_00D3E5: JSR Transfer20kFrom7E3000to5000VRAM
 
@@ -14456,7 +14523,8 @@ ROUTINE_00D3E5:
 #_00D3EB: RTS
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00D3EC:
 #_00D3EC: LDX.w #$0000
 
@@ -15841,6 +15909,7 @@ ROUTINE_00DA88:
 
 CODE_00DA8B:
 #_00DA8B: PHY
+
 #_00DA8C: TYA
 #_00DA8D: ASL A
 #_00DA8E: TAX
@@ -15868,6 +15937,7 @@ CODE_00DAAD:
 #_00DAB1: BEQ CODE_00DAF6
 
 #_00DAB3: PHX
+
 #_00DAB4: TAY
 
 #_00DAB5: LDA.w $0002,Y
@@ -16019,6 +16089,7 @@ QueueUpVRAMTransfers_not_even_used:
 
 QueueUpVRAMTransfers:
 #_00DB57: PHB
+
 #_00DB58: SEP #$20
 
 #_00DB5A: LDA.b #$7E
@@ -16027,6 +16098,7 @@ QueueUpVRAMTransfers:
 #_00DB5D: PLB
 
 #_00DB5E: REP #$20
+
 #_00DB60: INC.w $7E2000
 
 #_00DB63: LDX.w $7E2002
@@ -16059,7 +16131,8 @@ QueueUpVRAMTransfers:
 #_00DB90: RTS
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00DB91:
 #_00DB91: INC.w $1B00
 
@@ -16125,7 +16198,6 @@ DecompressToBank7FThing_long:
 
 DecompressToBank7FThing:
 #_00DBDC: STA.b $20
-
 #_00DBDE: STY.b $22
 
 #_00DBE0: STX.b $24
@@ -16271,6 +16343,7 @@ BulkDecompressionViaTable:
 .skip_dma
 #_00DC79: INY
 #_00DC7A: INY
+
 #_00DC7B: BRA .next_byte
 
 .exit
@@ -16289,7 +16362,8 @@ ROUTINE_00DC8C_long:
 #_00DC85: RTL
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00DC8C_currentDB:
 #_00DC86: PHB
 #_00DC87: PHB
@@ -16298,10 +16372,10 @@ ROUTINE_00DC8C_currentDB:
 #_00DC89: AND.w #$00FF
 
 ;===================================================================================================
-
+; data tables are basically the same as bulk decompression table;
+;===================================================================================================
 ROUTINE_00DC8C:
 #_00DC8C: STA.b $36
-
 #_00DC8E: STX.b $34
 
 #_00DC90: LDY.w #$0000
@@ -16714,22 +16788,24 @@ ROUTINE_00DE52:
 
 #_00DE5C: LDA.w $059C
 #_00DE5F: CMP.w #$0006
-#_00DE62: BCC CODE_00DE6A
+#_00DE62: BCC .dont_reset
 
 #_00DE64: STZ.w $059C
 
 #_00DE67: LDA.w #$0000
 
-CODE_00DE6A:
+.dont_reset
 #_00DE6A: ASL A
 #_00DE6B: TAX
 
 #_00DE6C: JMP (.vectors,X)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_00DE6F: dw ROUTINE_00DE83
 #_00DE71: dw ROUTINE_00DEDB
-#_00DE73: dw ROUTINE_00E022
+#_00DE73: dw AnimateCommonItems_IfFlagged
 #_00DE75: dw ROUTINE_00E079
 #_00DE77: dw ROUTINE_00DF29
 #_00DE79: dw ROUTINE_00E129
@@ -16879,7 +16955,7 @@ ROUTINE_00DF29:
 #_00DF2F: LDA.w $04CC
 #_00DF32: BEQ CODE_00DF42
 
-#_00DF34: JSR ROUTINE_00DFE1
+#_00DF34: JSR RotatePartnerSwapIndex
 
 #_00DF37: LDA.w $057E
 #_00DF3A: AND.w #$000F
@@ -17001,7 +17077,7 @@ ROUTINE_00DF9D:
 
 ;===================================================================================================
 
-ROUTINE_00DFE1:
+RotatePartnerSwapIndex:
 #_00DFE1: INC.w $057E
 
 #_00DFE4: LDA.w $057E
@@ -17052,7 +17128,7 @@ ROUTINE_00DFE1:
 
 ;===================================================================================================
 
-ROUTINE_00E022:
+AnimateCommonItems_IfFlagged:
 #_00E022: LDA.w $04C8
 #_00E025: BNE .continue
 
@@ -17062,25 +17138,25 @@ ROUTINE_00E022:
 #_00E028: LDA.w $057C
 #_00E02B: INC A
 #_00E02C: CMP.w #$000E
-#_00E02F: BCC ROUTINE_00E034
+#_00E02F: BCC AnimateCommonItems
 
 ;===================================================================================================
 
-ROUTINE_00E034_0000:
+AnimateCommonItems_Reset:
 #_00E031: LDA.w #$0000
 
 ;---------------------------------------------------------------------------------------------------
 
-ROUTINE_00E034:
+AnimateCommonItems:
 #_00E034: STA.w $057C
 
-#_00E037: BEQ CODE_00E03F
+#_00E037: BEQ .was_zero
 
 #_00E039: SEC
 #_00E03A: SBC.w #$000A
 #_00E03D: BCC .exit
 
-CODE_00E03F:
+.was_zero:
 #_00E03F: STA.b $20
 
 #_00E041: ASL A
@@ -17538,7 +17614,7 @@ ROUTINE_00E28E:
 #_00E293: LDA.w #data08D450>>16
 #_00E296: STA.b $22
 
-#_00E298: JMP ROUTINE_00FBCB
+#_00E298: JMP QuadDataWriter_00FBCB
 
 ;===================================================================================================
 
@@ -17799,16 +17875,16 @@ ROUTINE_00E37E:
 ;===================================================================================================
 
 data00E3F3:
-#_00E3F3: db $18, $04 ; read address $18:8016 for pointer
+#_00E3F3: db $18, $04 ; read $18:8016 for pointer to data18D598
 #_00E3F5: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E3F9: db $1A, $03 ; read address $1A:8012 for pointer
+#_00E3F9: db $1A, $03 ; read $1A:8012 for pointer to data1AB3F8
 #_00E3FB: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E3FF: db $1F, $4E ; read address $1F:813E for pointer
+#_00E3FF: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00E401: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_00E405: db $1F, $5A ; read address $1F:816E for pointer
+#_00E405: db $1F, $5A ; read $1F:816E for pointer to CompressedData_Palette1FDA35
 #_00E407: dl $7E2E40 : db $80 ; target address
 
 #_00E40B: dw $0000 ; end
@@ -17816,16 +17892,16 @@ data00E3F3:
 ;===================================================================================================
 
 data00E40D:
-#_00E40D: db $1F, $0D ; read address $1F:803A for pointer
+#_00E40D: db $1F, $0D ; read $1F:803A for pointer to data1F9BC6
 #_00E40F: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00E413: db $1F, $92 ; read address $1F:824E for pointer
+#_00E413: db $1F, $92 ; read $1F:824E for pointer to CompressedData_Palette1FE6CE
 #_00E415: dl $7E2F20 : db $80 ; target address
 
-#_00E419: db $1F, $8B ; read address $1F:8232 for pointer
+#_00E419: db $1F, $8B ; read $1F:8232 for pointer to CompressedData_Palette1FE5BD
 #_00E41B: dl $7E2F40 : db $80 ; target address
 
-#_00E41F: db $1F, $7C ; read address $1F:81F6 for pointer
+#_00E41F: db $1F, $7C ; read $1F:81F6 for pointer to CompressedData_Palette1FE374
 #_00E421: dl $7E2FA0 : db $80 ; target address
 
 #_00E425: dw $0000 ; end
@@ -17833,13 +17909,13 @@ data00E40D:
 ;===================================================================================================
 
 data00E427:
-#_00E427: db $1F, $0D ; read address $1F:803A for pointer
+#_00E427: db $1F, $0D ; read $1F:803A for pointer to data1F9BC6
 #_00E429: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00E42D: db $1F, $7A ; read address $1F:81EE for pointer
+#_00E42D: db $1F, $7A ; read $1F:81EE for pointer to CompressedData_Palette_1FE326
 #_00E42F: dl $7E2F40 : db $80 ; target address
 
-#_00E433: db $1F, $91 ; read address $1F:824A for pointer
+#_00E433: db $1F, $91 ; read $1F:824A for pointer to CompressedData_Palette_1FE6A7
 #_00E435: dl $7E2FA0 : db $80 ; target address
 
 #_00E439: dw $0000 ; end
@@ -17847,13 +17923,13 @@ data00E427:
 ;===================================================================================================
 
 data00E43B:
-#_00E43B: db $1D, $25 ; read address $1D:809A for pointer
+#_00E43B: db $1D, $25 ; read $1D:809A for pointer to data1DFE82
 #_00E43D: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00E441: db $1F, $82 ; read address $1F:820E for pointer
+#_00E441: db $1F, $82 ; read $1F:820E for pointer to CompressedData_Palette1FE45E
 #_00E443: dl $7E2F40 : db $80 ; target address
 
-#_00E447: db $1F, $81 ; read address $1F:820A for pointer
+#_00E447: db $1F, $81 ; read $1F:820A for pointer to CompressedData_Palette1FE437
 #_00E449: dl $7E2FA0 : db $80 ; target address
 
 #_00E44D: dw $0000 ; end
@@ -17861,13 +17937,13 @@ data00E43B:
 ;===================================================================================================
 
 data00E44F:
-#_00E44F: db $1D, $25 ; read address $1D:809A for pointer
+#_00E44F: db $1D, $25 ; read $1D:809A for pointer to data1DFE82
 #_00E451: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00E455: db $1F, $7F ; read address $1F:8202 for pointer
+#_00E455: db $1F, $7F ; read $1F:8202 for pointer to CompressedData_Palette1FE3E9
 #_00E457: dl $7E2F40 : db $80 ; target address
 
-#_00E45B: db $1F, $88 ; read address $1F:8226 for pointer
+#_00E45B: db $1F, $88 ; read $1F:8226 for pointer to CompressedData_Palette1FE548
 #_00E45D: dl $7E2FA0 : db $80 ; target address
 
 #_00E461: dw $0000 ; end
@@ -17875,22 +17951,22 @@ data00E44F:
 ;===================================================================================================
 
 data00E463:
-#_00E463: db $1C, $07 ; read address $1C:8022 for pointer
+#_00E463: db $1C, $07 ; read $1C:8022 for pointer to data1CBDF0
 #_00E465: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E469: db $1A, $03 ; read address $1A:8012 for pointer
+#_00E469: db $1A, $03 ; read $1A:8012 for pointer to data1AB3F8
 #_00E46B: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E46F: db $1F, $4E ; read address $1F:813E for pointer
+#_00E46F: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00E471: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_00E475: db $1F, $11 ; read address $1F:804A for pointer
+#_00E475: db $1F, $11 ; read $1F:804A for pointer to data1FA1AE
 #_00E477: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00E47B: db $1F, $5A ; read address $1F:816E for pointer
+#_00E47B: db $1F, $5A ; read $1F:816E for pointer to CompressedData_Palette1FDA35
 #_00E47D: dl $7E2E40 : db $80 ; target address
 
-#_00E481: db $1F, $61 ; read address $1F:818A for pointer
+#_00E481: db $1F, $61 ; read $1F:818A for pointer to CompressedData_Palette1FDC9F
 #_00E483: dl $7E2F20 : db $80 ; target address
 
 #_00E487: dw $0000 ; end
@@ -17898,22 +17974,22 @@ data00E463:
 ;===================================================================================================
 
 data00E489:
-#_00E489: db $1C, $07 ; read address $1C:8022 for pointer
+#_00E489: db $1C, $07 ; read $1C:8022 for pointer to data1CBDF0
 #_00E48B: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E48F: db $1A, $03 ; read address $1A:8012 for pointer
+#_00E48F: db $1A, $03 ; read $1A:8012 for pointer to data1AB3F8
 #_00E491: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E495: db $1F, $4E ; read address $1F:813E for pointer
+#_00E495: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00E497: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_00E49B: db $1F, $0D ; read address $1F:803A for pointer
+#_00E49B: db $1F, $0D ; read $1F:803A for pointer to data1F9BC6
 #_00E49D: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00E4A1: db $1F, $5A ; read address $1F:816E for pointer
+#_00E4A1: db $1F, $5A ; read $1F:816E for pointer to CompressedData_Palette1FDA35
 #_00E4A3: dl $7E2E40 : db $80 ; target address
 
-#_00E4A7: db $1F, $61 ; read address $1F:818A for pointer
+#_00E4A7: db $1F, $61 ; read $1F:818A for pointer to CompressedData_Palette1FDC9F
 #_00E4A9: dl $7E2F20 : db $80 ; target address
 
 #_00E4AD: dw $0000 ; end
@@ -17921,22 +17997,22 @@ data00E489:
 ;===================================================================================================
 
 data00E4AF:
-#_00E4AF: db $1C, $07 ; read address $1C:8022 for pointer
+#_00E4AF: db $1C, $07 ; read $1C:8022 for pointer to data1CBDF0
 #_00E4B1: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E4B5: db $1A, $03 ; read address $1A:8012 for pointer
+#_00E4B5: db $1A, $03 ; read $1A:8012 for pointer to data1AB3F8
 #_00E4B7: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E4BB: db $1F, $4E ; read address $1F:813E for pointer
+#_00E4BB: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00E4BD: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_00E4C1: db $1D, $25 ; read address $1D:809A for pointer
+#_00E4C1: db $1D, $25 ; read $1D:809A for pointer to data1DFE82
 #_00E4C3: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00E4C7: db $1F, $5A ; read address $1F:816E for pointer
+#_00E4C7: db $1F, $5A ; read $1F:816E for pointer to CompressedData_Palette1FDA35
 #_00E4C9: dl $7E2E40 : db $80 ; target address
 
-#_00E4CD: db $1F, $61 ; read address $1F:818A for pointer
+#_00E4CD: db $1F, $61 ; read $1F:818A for pointer to CompressedData_Palette1FDC9F
 #_00E4CF: dl $7E2F20 : db $80 ; target address
 
 #_00E4D3: dw $0000 ; end
@@ -17944,22 +18020,22 @@ data00E4AF:
 ;===================================================================================================
 
 data00E4D5:
-#_00E4D5: db $1B, $04 ; read address $1B:8016 for pointer
+#_00E4D5: db $1B, $04 ; read $1B:8016 for pointer to data1BB7E6
 #_00E4D7: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E4DB: db $19, $01 ; read address $19:800A for pointer
+#_00E4DB: db $19, $01 ; read $19:800A for pointer to data199430
 #_00E4DD: dl $7FA000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E4E1: db $1F, $16 ; read address $1F:805E for pointer
+#_00E4E1: db $1F, $16 ; read $1F:805E for pointer to data1FA85C
 #_00E4E3: dl $7FC000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_00E4E7: db $1F, $00 ; read address $1F:8006 for pointer
+#_00E4E7: db $1F, $00 ; read $1F:8006 for pointer to data1F8284
 #_00E4E9: dl $7FC800 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00E4ED: db $1F, $93 ; read address $1F:8252 for pointer
+#_00E4ED: db $1F, $93 ; read $1F:8252 for pointer to CompressedData_Palette1FE6F5
 #_00E4EF: dl $7E2E40 : db $80 ; target address
 
-#_00E4F3: db $1F, $5F ; read address $1F:8182 for pointer
+#_00E4F3: db $1F, $5F ; read $1F:8182 for pointer to CompressedData_Palette1FDC09
 #_00E4F5: dl $7E2F20 : db $80 ; target address
 
 #_00E4F9: dw $0000 ; end
@@ -18022,871 +18098,872 @@ data00E55D:
 ;===================================================================================================
 
 data00E599:
-#_00E599: db $15, $46 ; read address $15:811E for pointer
+#_00E599: db $15, $46 ; read $15:811E for pointer to data15F449
 #_00E59B: dl $7EC100 : db $80 ; target address
 
-#_00E59F: db $15, $4A ; read address $15:812E for pointer
+#_00E59F: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E5A1: dl $7FE800 : db $80 ; target address
 
-#_00E5A5: db $15, $4D ; read address $15:813A for pointer
+#_00E5A5: db $15, $4D ; read $15:813A for pointer to data15F810
 #_00E5A7: dl $7FF000 : db $80 ; target address
 
-#_00E5AB: db $14, $07 ; read address $14:8022 for pointer
+#_00E5AB: db $14, $07 ; read $14:8022 for pointer to CompressedData_TutorialControllerImage
 #_00E5AD: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E5B1: db $12, $00 ; read address $12:8006 for pointer
+#_00E5B1: db $12, $00 ; read $12:8006 for pointer to data128024
 #_00E5B3: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00E5B7: db $12, $03 ; read address $12:8012 for pointer
+#_00E5B7: db $12, $03 ; read $12:8012 for pointer to data12C5BE
 #_00E5B9: dl $7F8000 : db $18 ; target address, copy to $3000 in VRAM
 
-#_00E5BD: db $15, $09 ; read address $15:802A for pointer
+#_00E5BD: db $15, $09 ; read $15:802A for pointer to data15BB41
 #_00E5BF: dl $7F2000 : db $80 ; target address
 
-#_00E5C3: db $15, $02 ; read address $15:800E for pointer
+#_00E5C3: db $15, $02 ; read $15:800E for pointer to data15914B
 #_00E5C5: dl $7E8000 : db $80 ; target address
 
-#_00E5C9: db $15, $56 ; read address $15:815E for pointer
+#_00E5C9: db $15, $56 ; read $15:815E for pointer to data15FB68
 #_00E5CB: dl $7FE600 : db $80 ; target address
 
-#_00E5CF: db $1D, $12 ; read address $1D:804E for pointer
+#_00E5CF: db $1D, $12 ; read $1D:804E for pointer to data1DC6B8
 #_00E5D1: dl $7F8000 : db $76 ; target address, copy to $EC00 in VRAM
 
-#_00E5D5: db $1C, $06 ; read address $1C:801E for pointer
+#_00E5D5: db $1C, $06 ; read $1C:801E for pointer to data1CB6A5
 #_00E5D7: dl $7F8000 : db $78 ; target address, copy to $F000 in VRAM
 
-#_00E5DB: db $15, $39 ; read address $15:80EA for pointer
+#_00E5DB: db $15, $39 ; read $15:80EA for pointer to data15EB87
 #_00E5DD: dl $7F8040 : db $80 ; target address
 
-#_00E5E1: db $1F, $22 ; read address $1F:808E for pointer
+#_00E5E1: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E5E3: dl $7F8100 : db $80 ; target address
 
-#_00E5E7: db $88 : dl data00EBCF ; change table location
+#_00E5E7: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E5EB:
-#_00E5EB: db $14, $09 ; read address $14:802A for pointer
+#_00E5EB: db $14, $09 ; read $14:802A for pointer to data14E68D
 #_00E5ED: dl $7F0000 : db $80 ; target address
 
-#_00E5F1: db $15, $25 ; read address $15:809A for pointer
+#_00E5F1: db $15, $25 ; read $15:809A for pointer to data15DC31
 #_00E5F3: dl $7EC100 : db $80 ; target address
 
-#_00E5F7: db $15, $4A ; read address $15:812E for pointer
+#_00E5F7: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E5F9: dl $7FE800 : db $80 ; target address
 
-#_00E5FD: db $15, $14 ; read address $15:8056 for pointer
+#_00E5FD: db $15, $14 ; read $15:8056 for pointer to data15CCC2
 #_00E5FF: dl $7FF000 : db $80 ; target address
 
-#_00E603: db $14, $05 ; read address $14:801A for pointer
+#_00E603: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00E605: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E609: db $12, $00 ; read address $12:8006 for pointer
+#_00E609: db $12, $00 ; read $12:8006 for pointer to data128024
 #_00E60B: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00E60F: db $14, $08 ; read address $14:8026 for pointer
+#_00E60F: db $14, $08 ; read $14:8026 for pointer to data14DC3D
 #_00E611: dl $7F8000 : db $18 ; target address, copy to $3000 in VRAM
 
-#_00E615: db $13, $04 ; read address $13:8016 for pointer
+#_00E615: db $13, $04 ; read $13:8016 for pointer to data13C13F
 #_00E617: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00E61B: db $13, $02 ; read address $13:800E for pointer
+#_00E61B: db $13, $02 ; read $13:800E for pointer to data13A2C0
 #_00E61D: dl $7F2000 : db $80 ; target address
 
-#_00E621: db $11, $02 ; read address $11:800E for pointer
+#_00E621: db $11, $02 ; read $11:800E for pointer to data11C09D
 #_00E623: dl $7E8000 : db $80 ; target address
 
-#_00E627: db $15, $4F ; read address $15:8142 for pointer
+#_00E627: db $15, $4F ; read $15:8142 for pointer to data15F8F7
 #_00E629: dl $7FE600 : db $80 ; target address
 
-#_00E62D: db $1B, $08 ; read address $1B:8026 for pointer
+#_00E62D: db $1B, $08 ; read $1B:8026 for pointer to data1BE7C1
 #_00E62F: dl $7F8000 : db $74 ; target address, copy to $E800 in VRAM
 
-#_00E633: db $1C, $0D ; read address $1C:803A for pointer
+#_00E633: db $1C, $0D ; read $1C:803A for pointer to data1CE435
 #_00E635: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E639: db $1F, $13 ; read address $1F:8052 for pointer
+#_00E639: db $1F, $13 ; read $1F:8052 for pointer to data1FA46F
 #_00E63B: dl $7F8000 : db $7E ; target address, copy to $FC00 in VRAM
 
-#_00E63F: db $15, $2F ; read address $15:80C2 for pointer
+#_00E63F: db $15, $2F ; read $15:80C2 for pointer to CompressedData_Palette15E424
 #_00E641: dl $7F8040 : db $80 ; target address
 
-#_00E645: db $1F, $22 ; read address $1F:808E for pointer
+#_00E645: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E647: dl $7F8100 : db $80 ; target address
 
-#_00E64B: db $88 : dl data00EBCF ; change table location
+#_00E64B: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E64F:
-#_00E64F: db $15, $04 ; read address $15:8016 for pointer
+#_00E64F: db $15, $04 ; read $15:8016 for pointer to data159FA3
 #_00E651: dl $7F0000 : db $80 ; target address
 
-#_00E655: db $15, $28 ; read address $15:80A6 for pointer
+#_00E655: db $15, $28 ; read $15:80A6 for pointer to data15DEA5
 #_00E657: dl $7EC100 : db $80 ; target address
 
-#_00E65B: db $15, $4A ; read address $15:812E for pointer
+#_00E65B: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E65D: dl $7FE800 : db $80 ; target address
 
-#_00E661: db $15, $1B ; read address $15:8072 for pointer
+#_00E661: db $15, $1B ; read $15:8072 for pointer to data15D389
 #_00E663: dl $7FF000 : db $80 ; target address
 
-#_00E667: db $14, $05 ; read address $14:801A for pointer
+#_00E667: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00E669: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E66D: db $13, $07 ; read address $13:8022 for pointer
+#_00E66D: db $13, $07 ; read $13:8022 for pointer to data13EC46
 #_00E66F: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00E673: db $11, $01 ; read address $11:800A for pointer
+#_00E673: db $11, $01 ; read $11:800A for pointer to data11A24F
 #_00E675: dl $7F8000 : db $10 ; target address, copy to $2000 in VRAM
 
-#_00E679: db $13, $03 ; read address $13:8012 for pointer
+#_00E679: db $13, $03 ; read $13:8012 for pointer to data13B236
 #_00E67B: dl $7F2000 : db $80 ; target address
 
-#_00E67F: db $13, $00 ; read address $13:8006 for pointer
+#_00E67F: db $13, $00 ; read $13:8006 for pointer to data138030
 #_00E681: dl $7E8000 : db $80 ; target address
 
-#_00E685: db $15, $4C ; read address $15:8136 for pointer
+#_00E685: db $15, $4C ; read $15:8136 for pointer to data15F797
 #_00E687: dl $7FE600 : db $80 ; target address
 
-#_00E68B: db $1B, $01 ; read address $1B:800A for pointer
+#_00E68B: db $1B, $01 ; read $1B:800A for pointer to data1B8F0A
 #_00E68D: dl $7F8000 : db $74 ; target address, copy to $E800 in VRAM
 
-#_00E691: db $1C, $0D ; read address $1C:803A for pointer
+#_00E691: db $1C, $0D ; read $1C:803A for pointer to data1CE435
 #_00E693: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E697: db $15, $3D ; read address $15:80FA for pointer
+#_00E697: db $15, $3D ; read $15:80FA for pointer to data15EE5C
 #_00E699: dl $7F8040 : db $80 ; target address
 
-#_00E69D: db $1F, $22 ; read address $1F:808E for pointer
+#_00E69D: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E69F: dl $7F8100 : db $80 ; target address
 
-#_00E6A3: db $17, $06 ; read address $17:801E for pointer
+#_00E6A3: db $17, $06 ; read $17:801E for pointer to data17FFBC
 #_00E6A5: dl $7F8120 : db $80 ; target address
 
-#_00E6A9: db $88 : dl data00EBCF ; change table location
+#_00E6A9: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E6AD:
-#_00E6AD: db $15, $4A ; read address $15:812E for pointer
+#_00E6AD: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E6AF: dl $7FE800 : db $80 ; target address
 
-#_00E6B3: db $15, $13 ; read address $15:8052 for pointer
+#_00E6B3: db $15, $13 ; read $15:8052 for pointer to data15CB96
 #_00E6B5: dl $7FF000 : db $80 ; target address
 
-#_00E6B9: db $13, $01 ; read address $13:800A for pointer
+#_00E6B9: db $13, $01 ; read $13:800A for pointer to data1392DC
 #_00E6BB: dl $7F8000 : db $10 ; target address, copy to $2000 in VRAM
 
-#_00E6BF: db $15, $0A ; read address $15:802E for pointer
+#_00E6BF: db $15, $0A ; read $15:802E for pointer to data15BD79
 #_00E6C1: dl $7F2000 : db $80 ; target address
 
-#_00E6C5: db $15, $08 ; read address $15:8026 for pointer
+#_00E6C5: db $15, $08 ; read $15:8026 for pointer to data15B6B3
 #_00E6C7: dl $7E8000 : db $80 ; target address
 
-#_00E6CB: db $13, $09 ; read address $13:802A for pointer
+#_00E6CB: db $13, $09 ; read $13:802A for pointer to data13FFA3
 #_00E6CD: dl $7FE600 : db $80 ; target address
 
-#_00E6D1: db $1A, $04 ; read address $1A:8016 for pointer
+#_00E6D1: db $1A, $04 ; read $1A:8016 for pointer to data1AC375
 #_00E6D3: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E6D7: db $15, $37 ; read address $15:80E2 for pointer
+#_00E6D7: db $15, $37 ; read $15:80E2 for pointer to data15EA17
 #_00E6D9: dl $7F8040 : db $80 ; target address
 
-#_00E6DD: db $1F, $22 ; read address $1F:808E for pointer
+#_00E6DD: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E6DF: dl $7F8100 : db $80 ; target address
 
-#_00E6E3: db $1F, $64 ; read address $1F:8196 for pointer
+#_00E6E3: db $1F, $64 ; read $1F:8196 for pointer to CompressedData_Palette1FDD80
 #_00E6E5: dl $7F8120 : db $80 ; target address
 
-#_00E6E9: db $88 : dl data00EBCF ; change table location
+#_00E6E9: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E6ED:
-#_00E6ED: db $15, $03 ; read address $15:8012 for pointer
+#_00E6ED: db $15, $03 ; read $15:8012 for pointer to data1598E9
 #_00E6EF: dl $7F0000 : db $80 ; target address
 
-#_00E6F3: db $15, $29 ; read address $15:80AA for pointer
+#_00E6F3: db $15, $29 ; read $15:80AA for pointer to data15DF74
 #_00E6F5: dl $7EC100 : db $80 ; target address
 
-#_00E6F9: db $15, $4A ; read address $15:812E for pointer
+#_00E6F9: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E6FB: dl $7FE800 : db $80 ; target address
 
-#_00E6FF: db $15, $0E ; read address $15:803E for pointer
+#_00E6FF: db $15, $0E ; read $15:803E for pointer to data15C524
 #_00E701: dl $7FF000 : db $80 ; target address
 
-#_00E705: db $14, $05 ; read address $14:801A for pointer
+#_00E705: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00E707: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E70B: db $10, $01 ; read address $10:800A for pointer
+#_00E70B: db $10, $01 ; read $10:800A for pointer to data10AF73
 #_00E70D: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00E711: db $14, $0B ; read address $14:8032 for pointer
+#_00E711: db $14, $0B ; read $14:8032 for pointer to data14F8E6
 #_00E713: dl $7F2000 : db $80 ; target address
 
-#_00E717: db $14, $02 ; read address $14:800E for pointer
+#_00E717: db $14, $02 ; read $14:800E for pointer to data149A57
 #_00E719: dl $7E8000 : db $80 ; target address
 
-#_00E71D: db $15, $52 ; read address $15:814E for pointer
+#_00E71D: db $15, $52 ; read $15:814E for pointer to data15FA30
 #_00E71F: dl $7FE600 : db $80 ; target address
 
-#_00E723: db $1A, $05 ; read address $1A:801A for pointer
+#_00E723: db $1A, $05 ; read $1A:801A for pointer to data1AD2E5
 #_00E725: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E729: db $15, $36 ; read address $15:80DE for pointer
+#_00E729: db $15, $36 ; read $15:80DE for pointer to data15E95E
 #_00E72B: dl $7F8040 : db $80 ; target address
 
-#_00E72F: db $1F, $22 ; read address $1F:808E for pointer
+#_00E72F: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E731: dl $7F8100 : db $80 ; target address
 
-#_00E735: db $1F, $80 ; read address $1F:8206 for pointer
+#_00E735: db $1F, $80 ; read $1F:8206 for pointer to data1FE410
 #_00E737: dl $7F81E0 : db $80 ; target address
 
-#_00E73B: db $1F, $63 ; read address $1F:8192 for pointer
+#_00E73B: db $1F, $63 ; read $1F:8192 for pointer to data1FDD35
 #_00E73D: dl $7F8120 : db $80 ; target address
 
-#_00E741: db $88 : dl data00EBCF ; change table location
+#_00E741: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E745:
-#_00E745: db $15, $22 ; read address $15:808E for pointer
+#_00E745: db $15, $22 ; read $15:808E for pointer to data15D9A8
 #_00E747: dl $7EC100 : db $80 ; target address
 
-#_00E74B: db $15, $4A ; read address $15:812E for pointer
+#_00E74B: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E74D: dl $7FE800 : db $80 ; target address
 
-#_00E751: db $15, $20 ; read address $15:8086 for pointer
+#_00E751: db $15, $20 ; read $15:8086 for pointer to data15D7EC
 #_00E753: dl $7FF000 : db $80 ; target address
 
-#_00E757: db $14, $05 ; read address $14:801A for pointer
+#_00E757: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00E759: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E75D: db $10, $02 ; read address $10:800E for pointer
+#_00E75D: db $10, $02 ; read $10:800E for pointer to data10DA39
 #_00E75F: dl $7F8000 : db $06 ; target address, copy to $0C00 in VRAM
 
-#_00E763: db $11, $04 ; read address $11:8016 for pointer
+#_00E763: db $11, $04 ; read $11:8016 for pointer to data11F405
 #_00E765: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00E769: db $15, $00 ; read address $15:8006 for pointer
+#_00E769: db $15, $00 ; read $15:8006 for pointer to data158168
 #_00E76B: dl $7F2000 : db $80 ; target address
 
-#_00E76F: db $12, $05 ; read address $12:801A for pointer
+#_00E76F: db $12, $05 ; read $12:801A for pointer to data12EDC0
 #_00E771: dl $7E8000 : db $80 ; target address
 
-#_00E775: db $15, $4E ; read address $15:813E for pointer
+#_00E775: db $15, $4E ; read $15:813E for pointer to data15F888
 #_00E777: dl $7FE600 : db $80 ; target address
 
-#_00E77B: db $1C, $0D ; read address $1C:803A for pointer
+#_00E77B: db $1C, $0D ; read $1C:803A for pointer to data1CE435
 #_00E77D: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E781: db $1B, $03 ; read address $1B:8012 for pointer
+#_00E781: db $1B, $03 ; read $1B:8012 for pointer to data1BAAEB
 #_00E783: dl $7F8000 : db $74 ; target address, copy to $E800 in VRAM
 
-#_00E787: db $15, $3F ; read address $15:8102 for pointer
+#_00E787: db $15, $3F ; read $15:8102 for pointer to data15EFC0
 #_00E789: dl $7F8040 : db $80 ; target address
 
-#_00E78D: db $1F, $22 ; read address $1F:808E for pointer
+#_00E78D: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E78F: dl $7F8100 : db $80 ; target address
 
-#_00E793: db $1F, $6E ; read address $1F:81BE for pointer
+#_00E793: db $1F, $6E ; read $1F:81BE for pointer to CompressedData_Palette1FE05B
 #_00E795: dl $7F8120 : db $80 ; target address
 
-#_00E799: db $88 : dl data00EBCF ; change table location
+#_00E799: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E79D:
-#_00E79D: db $15, $06 ; read address $15:801E for pointer
+#_00E79D: db $15, $06 ; read $15:801E for pointer to data15AC06
 #_00E79F: dl $7F0000 : db $80 ; target address
 
-#_00E7A3: db $15, $3E ; read address $15:80FE for pointer
+#_00E7A3: db $15, $3E ; read $15:80FE for pointer to data15EF0F
 #_00E7A5: dl $7EC100 : db $80 ; target address
 
-#_00E7A9: db $15, $4A ; read address $15:812E for pointer
+#_00E7A9: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E7AB: dl $7FE800 : db $80 ; target address
 
-#_00E7AF: db $15, $0D ; read address $15:803A for pointer
+#_00E7AF: db $15, $0D ; read $15:803A for pointer to data15C367
 #_00E7B1: dl $7FF000 : db $80 ; target address
 
-#_00E7B5: db $14, $05 ; read address $14:801A for pointer
+#_00E7B5: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00E7B7: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E7BB: db $11, $00 ; read address $11:8006 for pointer
+#_00E7BB: db $11, $00 ; read $11:8006 for pointer to data11801C
 #_00E7BD: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00E7C1: db $11, $04 ; read address $11:8016 for pointer
+#_00E7C1: db $11, $04 ; read $11:8016 for pointer to data11F405
 #_00E7C3: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00E7C7: db $13, $08 ; read address $13:8026 for pointer
+#_00E7C7: db $13, $08 ; read $13:8026 for pointer to data13F99B
 #_00E7C9: dl $7F2000 : db $80 ; target address
 
-#_00E7CD: db $13, $06 ; read address $13:801E for pointer
+#_00E7CD: db $13, $06 ; read $13:801E for pointer to data13DE75
 #_00E7CF: dl $7E8000 : db $80 ; target address
 
-#_00E7D3: db $15, $54 ; read address $15:8156 for pointer
+#_00E7D3: db $15, $54 ; read $15:8156 for pointer to data15FAEB
 #_00E7D5: dl $7FE600 : db $80 ; target address
 
-#_00E7D9: db $1C, $0D ; read address $1C:803A for pointer
+#_00E7D9: db $1C, $0D ; read $1C:803A for pointer to data1CE435
 #_00E7DB: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E7DF: db $1B, $05 ; read address $1B:801A for pointer
+#_00E7DF: db $1B, $05 ; read $1B:801A for pointer to data1BC4CE
 #_00E7E1: dl $7F8000 : db $74 ; target address, copy to $E800 in VRAM
 
-#_00E7E5: db $15, $3B ; read address $15:80F2 for pointer
+#_00E7E5: db $15, $3B ; read $15:80F2 for pointer to data15ECF4
 #_00E7E7: dl $7F8040 : db $80 ; target address
 
-#_00E7EB: db $1F, $22 ; read address $1F:808E for pointer
+#_00E7EB: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E7ED: dl $7F8100 : db $80 ; target address
 
-#_00E7F1: db $1F, $66 ; read address $1F:819E for pointer
+#_00E7F1: db $1F, $66 ; read $1F:819E for pointer to data1FDE16
 #_00E7F3: dl $7F8120 : db $80 ; target address
 
-#_00E7F7: db $88 : dl data00EBCF ; change table location
+#_00E7F7: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E7FB:
-#_00E7FB: db $15, $35 ; read address $15:80DA for pointer
+#_00E7FB: db $15, $35 ; read $15:80DA for pointer to data15E8A4
 #_00E7FD: dl $7EC100 : db $80 ; target address
 
-#_00E801: db $15, $4A ; read address $15:812E for pointer
+#_00E801: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E803: dl $7FE800 : db $80 ; target address
 
-#_00E807: db $15, $12 ; read address $15:804E for pointer
+#_00E807: db $15, $12 ; read $15:804E for pointer to data15CA63
 #_00E809: dl $7FF000 : db $80 ; target address
 
-#_00E80D: db $1A, $04 ; read address $1A:8016 for pointer
+#_00E80D: db $1A, $04 ; read $1A:8016 for pointer to data1AC375
 #_00E80F: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E813: db $1B, $06 ; read address $1B:801E for pointer
+#_00E813: db $1B, $06 ; read $1B:801E for pointer to data1BD0FB
 #_00E815: dl $7F8000 : db $74 ; target address, copy to $E800 in VRAM
 
-#_00E819: db $13, $05 ; read address $13:801A for pointer
+#_00E819: db $13, $05 ; read $13:801A for pointer to data13D034
 #_00E81B: dl $7F8000 : db $10 ; target address, copy to $2000 in VRAM
 
-#_00E81F: db $15, $0B ; read address $15:8032 for pointer
+#_00E81F: db $15, $0B ; read $15:8032 for pointer to data15BF92
 #_00E821: dl $7F2000 : db $80 ; target address
 
-#_00E825: db $15, $05 ; read address $15:801A for pointer
+#_00E825: db $15, $05 ; read $15:801A for pointer to data15A622
 #_00E827: dl $7E8000 : db $80 ; target address
 
-#_00E82B: db $15, $57 ; read address $15:8162 for pointer
+#_00E82B: db $15, $57 ; read $15:8162 for pointer to data15FB96
 #_00E82D: dl $7FE600 : db $80 ; target address
 
-#_00E831: db $15, $2E ; read address $15:80BE for pointer
+#_00E831: db $15, $2E ; read $15:80BE for pointer to data15E35F
 #_00E833: dl $7F8040 : db $80 ; target address
 
-#_00E837: db $1F, $22 ; read address $1F:808E for pointer
+#_00E837: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E839: dl $7F8100 : db $80 ; target address
 
-#_00E83D: db $1F, $65 ; read address $1F:819A for pointer
+#_00E83D: db $1F, $65 ; read $1F:819A for pointer to CompressedData_Palette1FDDCB
 #_00E83F: dl $7F8120 : db $80 ; target address
 
-#_00E843: db $88 : dl data00EBCF ; change table location
+#_00E843: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E847:
-#_00E847: db $15, $29 ; read address $15:80AA for pointer
+#_00E847: db $15, $29 ; read $15:80AA for pointer to data15DF74
 #_00E849: dl $7EC100 : db $80 ; target address
 
-#_00E84D: db $15, $4A ; read address $15:812E for pointer
+#_00E84D: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E84F: dl $7FE800 : db $80 ; target address
 
-#_00E853: db $05, $08 ; read address $05:8026 for pointer
+#_00E853: db $05, $08 ; read $05:8026 for pointer to data0581E6
 #_00E855: dl $7FF700 : db $80 ; target address
 
-#_00E859: db $14, $05 ; read address $14:801A for pointer
+#_00E859: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00E85B: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E85F: db $10, $01 ; read address $10:800A for pointer
+#_00E85F: db $10, $01 ; read $10:800A for pointer to data10AF73
 #_00E861: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00E865: db $14, $0B ; read address $14:8032 for pointer
+#_00E865: db $14, $0B ; read $14:8032 for pointer to data14F8E6
 #_00E867: dl $7F2000 : db $80 ; target address
 
-#_00E86B: db $14, $02 ; read address $14:800E for pointer
+#_00E86B: db $14, $02 ; read $14:800E for pointer to data149A57
 #_00E86D: dl $7E8000 : db $80 ; target address
 
-#_00E871: db $15, $52 ; read address $15:814E for pointer
+#_00E871: db $15, $52 ; read $15:814E for pointer to data15FA30
 #_00E873: dl $7FE600 : db $80 ; target address
 
-#_00E877: db $18, $05 ; read address $18:801A for pointer
+#_00E877: db $18, $05 ; read $18:801A for pointer to data18EA33
 #_00E879: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E87D: db $19, $00 ; read address $19:8006 for pointer
+#_00E87D: db $19, $00 ; read $19:8006 for pointer to data198024
 #_00E87F: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E883: db $15, $36 ; read address $15:80DE for pointer
+#_00E883: db $15, $36 ; read $15:80DE for pointer to data15E95E
 #_00E885: dl $7F8040 : db $80 ; target address
 
-#_00E889: db $1F, $85 ; read address $1F:821A for pointer
+#_00E889: db $1F, $85 ; read $1F:821A for pointer to CompressedData_Palette1FE4D3
 #_00E88B: dl $7F80E0 : db $80 ; target address
 
-#_00E88F: db $1F, $22 ; read address $1F:808E for pointer
+#_00E88F: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E891: dl $7F8100 : db $80 ; target address
 
-#_00E895: db $1F, $62 ; read address $1F:818E for pointer
+#_00E895: db $1F, $62 ; read $1F:818E for pointer to CompressedData_Palette1FDCEA
 #_00E897: dl $7F8120 : db $80 ; target address
 
-#_00E89B: db $88 : dl data00EBCF ; change table location
+#_00E89B: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E89F:
-#_00E89F: db $15, $22 ; read address $15:808E for pointer
+#_00E89F: db $15, $22 ; read $15:808E for pointer to data15D9A8
 #_00E8A1: dl $7EC100 : db $80 ; target address
 
-#_00E8A5: db $15, $4A ; read address $15:812E for pointer
+#_00E8A5: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E8A7: dl $7FE800 : db $80 ; target address
 
-#_00E8AB: db $05, $06 ; read address $05:801E for pointer
+#_00E8AB: db $05, $06 ; read $05:801E for pointer to data0580C9
 #_00E8AD: dl $7FF500 : db $80 ; target address
 
-#_00E8B1: db $88 : dl data00E8C7 ; change table location
+#_00E8B1: db $88 : dl data00E8C7 ; change table pointer
 
 ;===================================================================================================
 
 data00E8B5:
-#_00E8B5: db $15, $22 ; read address $15:808E for pointer
+#_00E8B5: db $15, $22 ; read $15:808E for pointer to data15D9A8
 #_00E8B7: dl $7EC100 : db $80 ; target address
 
-#_00E8BB: db $15, $4A ; read address $15:812E for pointer
+#_00E8BB: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E8BD: dl $7FE800 : db $80 ; target address
 
-#_00E8C1: db $05, $05 ; read address $05:801A for pointer
+#_00E8C1: db $05, $05 ; read $05:801A for pointer to data05807A
 #_00E8C3: dl $7FF500 : db $80 ; target address
 
-#_00E8C7: db $14, $05 ; read address $14:801A for pointer
+#_00E8C7: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00E8C9: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E8CD: db $10, $02 ; read address $10:800E for pointer
+#_00E8CD: db $10, $02 ; read $10:800E for pointer to data10DA39
 #_00E8CF: dl $7F8000 : db $06 ; target address, copy to $0C00 in VRAM
 
-#_00E8D3: db $11, $04 ; read address $11:8016 for pointer
+#_00E8D3: db $11, $04 ; read $11:8016 for pointer to data11F405
 #_00E8D5: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00E8D9: db $15, $00 ; read address $15:8006 for pointer
+#_00E8D9: db $15, $00 ; read $15:8006 for pointer to data158168
 #_00E8DB: dl $7F2000 : db $80 ; target address
 
-#_00E8DF: db $12, $05 ; read address $12:801A for pointer
+#_00E8DF: db $12, $05 ; read $12:801A for pointer to data12EDC0
 #_00E8E1: dl $7E8000 : db $80 ; target address
 
-#_00E8E5: db $15, $4E ; read address $15:813E for pointer
+#_00E8E5: db $15, $4E ; read $15:813E for pointer to data15F888
 #_00E8E7: dl $7FE600 : db $80 ; target address
 
-#_00E8EB: db $19, $03 ; read address $19:8012 for pointer
+#_00E8EB: db $19, $03 ; read $19:8012 for pointer to data19BB9C
 #_00E8ED: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E8F1: db $19, $02 ; read address $19:800E for pointer
+#_00E8F1: db $19, $02 ; read $19:800E for pointer to data19A7EF
 #_00E8F3: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E8F7: db $15, $3F ; read address $15:8102 for pointer
+#_00E8F7: db $15, $3F ; read $15:8102 for pointer to data15EFC0
 #_00E8F9: dl $7F8040 : db $80 ; target address
 
-#_00E8FD: db $1F, $22 ; read address $1F:808E for pointer
+#_00E8FD: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E8FF: dl $7F8100 : db $80 ; target address
 
-#_00E903: db $1F, $6A ; read address $1F:81AE for pointer
+#_00E903: db $1F, $6A ; read $1F:81AE for pointer to CompressedData_Palette1FDF3E
 #_00E905: dl $7F8120 : db $80 ; target address
 
-#_00E909: db $88 : dl data00EBCF ; change table location
+#_00E909: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E90D:
-#_00E90D: db $15, $3E ; read address $15:80FE for pointer
+#_00E90D: db $15, $3E ; read $15:80FE for pointer to data15EF0F
 #_00E90F: dl $7EC100 : db $80 ; target address
 
-#_00E913: db $15, $4A ; read address $15:812E for pointer
+#_00E913: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E915: dl $7FE800 : db $80 ; target address
 
-#_00E919: db $05, $09 ; read address $05:802A for pointer
+#_00E919: db $05, $09 ; read $05:802A for pointer to data05820C
 #_00E91B: dl $7FF700 : db $80 ; target address
 
-#_00E91F: db $14, $05 ; read address $14:801A for pointer
+#_00E91F: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00E921: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E925: db $11, $00 ; read address $11:8006 for pointer
+#_00E925: db $11, $00 ; read $11:8006 for pointer to data11801C
 #_00E927: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00E92B: db $13, $08 ; read address $13:8026 for pointer
+#_00E92B: db $13, $08 ; read $13:8026 for pointer to data13F99B
 #_00E92D: dl $7F2000 : db $80 ; target address
 
-#_00E931: db $13, $06 ; read address $13:801E for pointer
+#_00E931: db $13, $06 ; read $13:801E for pointer to data13DE75
 #_00E933: dl $7E8000 : db $80 ; target address
 
-#_00E937: db $15, $54 ; read address $15:8156 for pointer
+#_00E937: db $15, $54 ; read $15:8156 for pointer to data15FAEB
 #_00E939: dl $7FE600 : db $80 ; target address
 
-#_00E93D: db $18, $03 ; read address $18:8012 for pointer
+#_00E93D: db $18, $03 ; read $18:8012 for pointer to data18C0DE
 #_00E93F: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E943: db $15, $3B ; read address $15:80F2 for pointer
+#_00E943: db $15, $3B ; read $15:80F2 for pointer to data15ECF4
 #_00E945: dl $7F8040 : db $80 ; target address
 
-#_00E949: db $1F, $22 ; read address $1F:808E for pointer
+#_00E949: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E94B: dl $7F8100 : db $80 ; target address
 
-#_00E94F: db $1F, $75 ; read address $1F:81DA for pointer
+#_00E94F: db $1F, $75 ; read $1F:81DA for pointer to CompressedData_Palette1FE21A
 #_00E951: dl $7F8120 : db $80 ; target address
 
-#_00E955: db $88 : dl data00EBCF ; change table location
+#_00E955: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E959:
-#_00E959: db $15, $33 ; read address $15:80D2 for pointer
+#_00E959: db $15, $33 ; read $15:80D2 for pointer to data15E72A
 #_00E95B: dl $7EC100 : db $80 ; target address
 
-#_00E95F: db $15, $4A ; read address $15:812E for pointer
+#_00E95F: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E961: dl $7FE800 : db $80 ; target address
 
-#_00E965: db $05, $0B ; read address $05:8032 for pointer
+#_00E965: db $05, $0B ; read $05:8032 for pointer to data05824F
 #_00E967: dl $7FF700 : db $80 ; target address
 
-#_00E96B: db $14, $05 ; read address $14:801A for pointer
+#_00E96B: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00E96D: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E971: db $11, $03 ; read address $11:8012 for pointer
+#_00E971: db $11, $03 ; read $11:8012 for pointer to data11DAAB
 #_00E973: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00E977: db $14, $06 ; read address $14:801E for pointer
+#_00E977: db $14, $06 ; read $14:801E for pointer to data14C76F
 #_00E979: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00E97D: db $14, $0A ; read address $14:802E for pointer
+#_00E97D: db $14, $0A ; read $14:802E for pointer to data14F0C3
 #_00E97F: dl $7F2000 : db $80 ; target address
 
-#_00E983: db $14, $01 ; read address $14:800A for pointer
+#_00E983: db $14, $01 ; read $14:800A for pointer to data148D71
 #_00E985: dl $7E8000 : db $80 ; target address
 
-#_00E989: db $15, $50 ; read address $15:8146 for pointer
+#_00E989: db $15, $50 ; read $15:8146 for pointer to data15F966
 #_00E98B: dl $7FE600 : db $80 ; target address
 
-#_00E98F: db $1B, $02 ; read address $1B:800E for pointer
+#_00E98F: db $1B, $02 ; read $1B:800E for pointer to data1B9D02
 #_00E991: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E995: db $1A, $01 ; read address $1A:800A for pointer
+#_00E995: db $1A, $01 ; read $1A:800A for pointer to data1A921E
 #_00E997: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E99B: db $1C, $10 ; read address $1C:8046 for pointer
+#_00E99B: db $1C, $10 ; read $1C:8046 for pointer to data1CF4C2
 #_00E99D: dl $7F8000 : db $0C ; target address, copy to $1800 in VRAM
 
-#_00E9A1: db $1C, $10 ; read address $1C:8046 for pointer
+#_00E9A1: db $1C, $10 ; read $1C:8046 for pointer to data1CF4C2
 #_00E9A3: dl $7F8000 : db $7C ; target address, copy to $F800 in VRAM
 
-#_00E9A7: db $15, $24 ; read address $15:8096 for pointer
+#_00E9A7: db $15, $24 ; read $15:8096 for pointer to data15DB5C
 #_00E9A9: dl $7F8040 : db $80 ; target address
 
-#_00E9AD: db $1F, $22 ; read address $1F:808E for pointer
+#_00E9AD: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00E9AF: dl $7F8100 : db $80 ; target address
 
-#_00E9B3: db $1F, $60 ; read address $1F:8186 for pointer
+#_00E9B3: db $1F, $60 ; read $1F:8186 for pointer to CompressedData_Palette1FDC54
 #_00E9B5: dl $7F8120 : db $80 ; target address
 
-#_00E9B9: db $1F, $86 ; read address $1F:821E for pointer
+#_00E9B9: db $1F, $86 ; read $1F:821E for pointer to CompressedData_Palette1FE4FA
 #_00E9BB: dl $7F81E0 : db $80 ; target address
 
-#_00E9BF: db $88 : dl data00EBCF ; change table location
+#_00E9BF: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00E9C3:
-#_00E9C3: db $15, $49 ; read address $15:812A for pointer
+#_00E9C3: db $15, $49 ; read $15:812A for pointer to data15F603
 #_00E9C5: dl $7EC100 : db $80 ; target address
 
-#_00E9C9: db $15, $4A ; read address $15:812E for pointer
+#_00E9C9: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00E9CB: dl $7FE800 : db $80 ; target address
 
-#_00E9CF: db $05, $07 ; read address $05:8022 for pointer
+#_00E9CF: db $05, $07 ; read $05:8022 for pointer to data058118
 #_00E9D1: dl $7FF000 : db $80 ; target address
 
-#_00E9D5: db $14, $03 ; read address $14:8012 for pointer
+#_00E9D5: db $14, $03 ; read $14:8012 for pointer to data14A68C
 #_00E9D7: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00E9DB: db $13, $03 ; read address $13:8012 for pointer
+#_00E9DB: db $13, $03 ; read $13:8012 for pointer to data13B236
 #_00E9DD: dl $7F2000 : db $80 ; target address
 
-#_00E9E1: db $13, $00 ; read address $13:8006 for pointer
+#_00E9E1: db $13, $00 ; read $13:8006 for pointer to data138030
 #_00E9E3: dl $7E8000 : db $80 ; target address
 
-#_00E9E7: db $15, $4C ; read address $15:8136 for pointer
+#_00E9E7: db $15, $4C ; read $15:8136 for pointer to data15F797
 #_00E9E9: dl $7FE600 : db $80 ; target address
 
-#_00E9ED: db $1C, $09 ; read address $1C:802A for pointer
+#_00E9ED: db $1C, $09 ; read $1C:802A for pointer to data1CCB59
 #_00E9EF: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00E9F3: db $1C, $09 ; read address $1C:802A for pointer
+#_00E9F3: db $1C, $09 ; read $1C:802A for pointer to data1CCB59
 #_00E9F5: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00E9F9: db $1C, $09 ; read address $1C:802A for pointer
+#_00E9F9: db $1C, $09 ; read $1C:802A for pointer to data1CCB59
 #_00E9FB: dl $7F8000 : db $10 ; target address, copy to $2000 in VRAM
 
-#_00E9FF: db $1B, $07 ; read address $1B:8022 for pointer
+#_00E9FF: db $1B, $07 ; read $1B:8022 for pointer to data1BDCF0
 #_00EA01: dl $7F8000 : db $76 ; target address, copy to $EC00 in VRAM
 
-#_00EA05: db $1C, $04 ; read address $1C:8016 for pointer
+#_00EA05: db $1C, $04 ; read $1C:8016 for pointer to data1CA625
 #_00EA07: dl $7F8000 : db $06 ; target address, copy to $0C00 in VRAM
 
-#_00EA0B: db $1C, $05 ; read address $1C:801A for pointer
+#_00EA0B: db $1C, $05 ; read $1C:801A for pointer to data1CAE82
 #_00EA0D: dl $7F8000 : db $16 ; target address, copy to $2C00 in VRAM
 
-#_00EA11: db $15, $3C ; read address $15:80F6 for pointer
+#_00EA11: db $15, $3C ; read $15:80F6 for pointer to data15EDA8
 #_00EA13: dl $7F8040 : db $80 ; target address
 
-#_00EA17: db $1F, $22 ; read address $1F:808E for pointer
+#_00EA17: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00EA19: dl $7F8100 : db $80 ; target address
 
-#_00EA1D: db $1F, $6C ; read address $1F:81B6 for pointer
+#_00EA1D: db $1F, $6C ; read $1F:81B6 for pointer to data1FDFCD
 #_00EA1F: dl $7F8120 : db $80 ; target address
 
-#_00EA23: db $88 : dl data00EBCF ; change table location
+#_00EA23: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00EA27:
-#_00EA27: db $15, $16 ; read address $15:805E for pointer
+#_00EA27: db $15, $16 ; read $15:805E for pointer to data15CEE8
 #_00EA29: dl $7F0000 : db $80 ; target address
 
-#_00EA2D: db $15, $33 ; read address $15:80D2 for pointer
+#_00EA2D: db $15, $33 ; read $15:80D2 for pointer to data15E72A
 #_00EA2F: dl $7EC100 : db $80 ; target address
 
-#_00EA33: db $15, $4A ; read address $15:812E for pointer
+#_00EA33: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00EA35: dl $7FE800 : db $80 ; target address
 
-#_00EA39: db $15, $0F ; read address $15:8042 for pointer
+#_00EA39: db $15, $0F ; read $15:8042 for pointer to data15C6A1
 #_00EA3B: dl $7FF000 : db $80 ; target address
 
-#_00EA3F: db $14, $05 ; read address $14:801A for pointer
+#_00EA3F: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00EA41: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00EA45: db $11, $03 ; read address $11:8012 for pointer
+#_00EA45: db $11, $03 ; read $11:8012 for pointer to data11DAAB
 #_00EA47: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00EA4B: db $14, $06 ; read address $14:801E for pointer
+#_00EA4B: db $14, $06 ; read $14:801E for pointer to data14C76F
 #_00EA4D: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00EA51: db $14, $0A ; read address $14:802E for pointer
+#_00EA51: db $14, $0A ; read $14:802E for pointer to data14F0C3
 #_00EA53: dl $7F2000 : db $80 ; target address
 
-#_00EA57: db $14, $01 ; read address $14:800A for pointer
+#_00EA57: db $14, $01 ; read $14:800A for pointer to data148D71
 #_00EA59: dl $7E8000 : db $80 ; target address
 
-#_00EA5D: db $15, $50 ; read address $15:8146 for pointer
+#_00EA5D: db $15, $50 ; read $15:8146 for pointer to data15F966
 #_00EA5F: dl $7FE600 : db $80 ; target address
 
-#_00EA63: db $19, $04 ; read address $19:8016 for pointer
+#_00EA63: db $19, $04 ; read $19:8016 for pointer to data19CEB6
 #_00EA65: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
 ;---------------------------------------------------------------------------------------------------
 
 data00EA69:
-#_00EA69: db $1F, $22 ; read address $1F:808E for pointer
+#_00EA69: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00EA6B: dl $7F8100 : db $80 ; target address
 
-#_00EA6F: db $1F, $67 ; read address $1F:81A2 for pointer
+#_00EA6F: db $1F, $67 ; read $1F:81A2 for pointer to data1FDE61
 #_00EA71: dl $7F8120 : db $80 ; target address
 
 ;---------------------------------------------------------------------------------------------------
 
 data00EA75:
-#_00EA75: db $15, $24 ; read address $15:8096 for pointer
+#_00EA75: db $15, $24 ; read $15:8096 for pointer to data15DB5C
 #_00EA77: dl $7F8040 : db $80 ; target address
 
-#_00EA7B: db $88 : dl data00EBCF ; change table location
+#_00EA7B: db $88 : dl data00EBCF ; change table pointer
 
 ;===================================================================================================
 
 data00EA7F:
-#_00EA7F: db $15, $16 ; read address $15:805E for pointer
+#_00EA7F: db $15, $16 ; read $15:805E for pointer to data15CEE8
 #_00EA81: dl $7F0000 : db $80 ; target address
 
-#_00EA85: db $15, $33 ; read address $15:80D2 for pointer
+#_00EA85: db $15, $33 ; read $15:80D2 for pointer to data15E72A
 #_00EA87: dl $7EC100 : db $80 ; target address
 
-#_00EA8B: db $15, $4A ; read address $15:812E for pointer
+#_00EA8B: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00EA8D: dl $7FE800 : db $80 ; target address
 
-#_00EA91: db $15, $15 ; read address $15:805A for pointer
+#_00EA91: db $15, $15 ; read $15:805A for pointer to data15CDEB
 #_00EA93: dl $7FF000 : db $80 ; target address
 
-#_00EA97: db $14, $05 ; read address $14:801A for pointer
+#_00EA97: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00EA99: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00EA9D: db $11, $03 ; read address $11:8012 for pointer
+#_00EA9D: db $11, $03 ; read $11:8012 for pointer to data11DAAB
 #_00EA9F: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00EAA3: db $14, $06 ; read address $14:801E for pointer
+#_00EAA3: db $14, $06 ; read $14:801E for pointer to data14C76F
 #_00EAA5: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00EAA9: db $14, $0A ; read address $14:802E for pointer
+#_00EAA9: db $14, $0A ; read $14:802E for pointer to data14F0C3
 #_00EAAB: dl $7F2000 : db $80 ; target address
 
-#_00EAAF: db $14, $01 ; read address $14:800A for pointer
+#_00EAAF: db $14, $01 ; read $14:800A for pointer to data148D71
 #_00EAB1: dl $7E8000 : db $80 ; target address
 
-#_00EAB5: db $15, $50 ; read address $15:8146 for pointer
+#_00EAB5: db $15, $50 ; read $15:8146 for pointer to data15F966
 #_00EAB7: dl $7FE600 : db $80 ; target address
 
-#_00EABB: db $19, $05 ; read address $19:801A for pointer
+#_00EABB: db $19, $05 ; read $19:801A for pointer to data19E1CD
 #_00EABD: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00EAC1: db $88 : dl data00EA69 ; change table location
+#_00EAC1: db $88 : dl data00EA69 ; change table pointer
 
 ;===================================================================================================
 
 data00EAC5:
-#_00EAC5: db $15, $16 ; read address $15:805E for pointer
+#_00EAC5: db $15, $16 ; read $15:805E for pointer to data15CEE8
 #_00EAC7: dl $7F0000 : db $80 ; target address
 
-#_00EACB: db $15, $33 ; read address $15:80D2 for pointer
+#_00EACB: db $15, $33 ; read $15:80D2 for pointer to data15E72A
 #_00EACD: dl $7EC100 : db $80 ; target address
 
-#_00EAD1: db $15, $4A ; read address $15:812E for pointer
+#_00EAD1: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00EAD3: dl $7FE800 : db $80 ; target address
 
-#_00EAD7: db $15, $1F ; read address $15:8082 for pointer
+#_00EAD7: db $15, $1F ; read $15:8082 for pointer to data15D70E
 #_00EAD9: dl $7FF000 : db $80 ; target address
 
-#_00EADD: db $14, $05 ; read address $14:801A for pointer
+#_00EADD: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00EADF: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00EAE3: db $11, $03 ; read address $11:8012 for pointer
+#_00EAE3: db $11, $03 ; read $11:8012 for pointer to data11DAAB
 #_00EAE5: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00EAE9: db $14, $06 ; read address $14:801E for pointer
+#_00EAE9: db $14, $06 ; read $14:801E for pointer to data14C76F
 #_00EAEB: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00EAEF: db $14, $0A ; read address $14:802E for pointer
+#_00EAEF: db $14, $0A ; read $14:802E for pointer to data14F0C3
 #_00EAF1: dl $7F2000 : db $80 ; target address
 
-#_00EAF5: db $14, $01 ; read address $14:800A for pointer
+#_00EAF5: db $14, $01 ; read $14:800A for pointer to data148D71
 #_00EAF7: dl $7E8000 : db $80 ; target address
 
-#_00EAFB: db $15, $50 ; read address $15:8146 for pointer
+#_00EAFB: db $15, $50 ; read $15:8146 for pointer to data15F966
 #_00EAFD: dl $7FE600 : db $80 ; target address
 
-#_00EB01: db $19, $05 ; read address $19:801A for pointer
+#_00EB01: db $19, $05 ; read $19:801A for pointer to data19E1CD
 #_00EB03: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00EB07: db $88 : dl data00EA69 ; change table location
+#_00EB07: db $88 : dl data00EA69 ; change table pointer
 
 ;===================================================================================================
 
 data00EB0B:
-#_00EB0B: db $15, $16 ; read address $15:805E for pointer
+#_00EB0B: db $15, $16 ; read $15:805E for pointer to data15CEE8
 #_00EB0D: dl $7F0000 : db $80 ; target address
 
-#_00EB11: db $15, $33 ; read address $15:80D2 for pointer
+#_00EB11: db $15, $33 ; read $15:80D2 for pointer to data15E72A
 #_00EB13: dl $7EC100 : db $80 ; target address
 
-#_00EB17: db $15, $4A ; read address $15:812E for pointer
+#_00EB17: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00EB19: dl $7FE800 : db $80 ; target address
 
-#_00EB1D: db $15, $11 ; read address $15:804A for pointer
+#_00EB1D: db $15, $11 ; read $15:804A for pointer to data15C92F
 #_00EB1F: dl $7FF000 : db $80 ; target address
 
-#_00EB23: db $14, $05 ; read address $14:801A for pointer
+#_00EB23: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00EB25: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00EB29: db $11, $03 ; read address $11:8012 for pointer
+#_00EB29: db $11, $03 ; read $11:8012 for pointer to data11DAAB
 #_00EB2B: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00EB2F: db $14, $06 ; read address $14:801E for pointer
+#_00EB2F: db $14, $06 ; read $14:801E for pointer to data14C76F
 #_00EB31: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00EB35: db $14, $0A ; read address $14:802E for pointer
+#_00EB35: db $14, $0A ; read $14:802E for pointer to data14F0C3
 #_00EB37: dl $7F2000 : db $80 ; target address
 
-#_00EB3B: db $14, $01 ; read address $14:800A for pointer
+#_00EB3B: db $14, $01 ; read $14:800A for pointer to data148D71
 #_00EB3D: dl $7E8000 : db $80 ; target address
 
-#_00EB41: db $15, $50 ; read address $15:8146 for pointer
+#_00EB41: db $15, $50 ; read $15:8146 for pointer to data15F966
 #_00EB43: dl $7FE600 : db $80 ; target address
 
-#_00EB47: db $1B, $00 ; read address $1B:8006 for pointer
+#_00EB47: db $1B, $00 ; read $1B:8006 for pointer to data1B8038
 #_00EB49: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00EB4D: db $1F, $22 ; read address $1F:808E for pointer
+#_00EB4D: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00EB4F: dl $7F8100 : db $80 ; target address
 
-#_00EB53: db $1F, $6B ; read address $1F:81B2 for pointer
+#_00EB53: db $1F, $6B ; read $1F:81B2 for pointer to data1FDF86
 #_00EB55: dl $7F8120 : db $80 ; target address
 
-#_00EB59: db $88 : dl data00EA75 ; change table location
+#_00EB59: db $88 : dl data00EA75 ; change table pointer
 
 ;===================================================================================================
 
 data00EB5D:
-#_00EB5D: db $15, $33 ; read address $15:80D2 for pointer
+#_00EB5D: db $15, $33 ; read $15:80D2 for pointer to data15E72A
 #_00EB5F: dl $7EC100 : db $80 ; target address
 
-#_00EB63: db $15, $4A ; read address $15:812E for pointer
+#_00EB63: db $15, $4A ; read $15:812E for pointer to CompressedData_SpriteArrayEmptyState
 #_00EB65: dl $7FE800 : db $80 ; target address
 
-#_00EB69: db $05, $0A ; read address $05:802E for pointer
+#_00EB69: db $05, $0A ; read $05:802E for pointer to data058230
 #_00EB6B: dl $7FF000 : db $80 ; target address
 
-#_00EB6F: db $14, $05 ; read address $14:801A for pointer
+#_00EB6F: db $14, $05 ; read $14:801A for pointer to data14BCF3
 #_00EB71: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00EB75: db $11, $03 ; read address $11:8012 for pointer
+#_00EB75: db $11, $03 ; read $11:8012 for pointer to data11DAAB
 #_00EB77: dl $7F8000 : db $08 ; target address, copy to $1000 in VRAM
 
-#_00EB7B: db $14, $06 ; read address $14:801E for pointer
+#_00EB7B: db $14, $06 ; read $14:801E for pointer to data14C76F
 #_00EB7D: dl $7F8000 : db $20 ; target address, copy to $4000 in VRAM
 
-#_00EB81: db $14, $0A ; read address $14:802E for pointer
+#_00EB81: db $14, $0A ; read $14:802E for pointer to data14F0C3
 #_00EB83: dl $7F2000 : db $80 ; target address
 
-#_00EB87: db $14, $01 ; read address $14:800A for pointer
+#_00EB87: db $14, $01 ; read $14:800A for pointer to data148D71
 #_00EB89: dl $7E8000 : db $80 ; target address
 
-#_00EB8D: db $15, $50 ; read address $15:8146 for pointer
+#_00EB8D: db $15, $50 ; read $15:8146 for pointer to data15F966
 #_00EB8F: dl $7FE600 : db $80 ; target address
 
-#_00EB93: db $1C, $09 ; read address $1C:802A for pointer
+#_00EB93: db $1C, $09 ; read $1C:802A for pointer to data1CCB59
 #_00EB95: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00EB99: db $1C, $09 ; read address $1C:802A for pointer
+#_00EB99: db $1C, $09 ; read $1C:802A for pointer to data1CCB59
 #_00EB9B: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00EB9F: db $1C, $09 ; read address $1C:802A for pointer
+#_00EB9F: db $1C, $09 ; read $1C:802A for pointer to data1CCB59
 #_00EBA1: dl $7F8000 : db $10 ; target address, copy to $2000 in VRAM
 
-#_00EBA5: db $1B, $07 ; read address $1B:8022 for pointer
+#_00EBA5: db $1B, $07 ; read $1B:8022 for pointer to data1BDCF0
 #_00EBA7: dl $7F8000 : db $76 ; target address, copy to $EC00 in VRAM
 
-#_00EBAB: db $1C, $04 ; read address $1C:8016 for pointer
+#_00EBAB: db $1C, $04 ; read $1C:8016 for pointer to data1CA625
 #_00EBAD: dl $7F8000 : db $06 ; target address, copy to $0C00 in VRAM
 
-#_00EBB1: db $1C, $05 ; read address $1C:801A for pointer
+#_00EBB1: db $1C, $05 ; read $1C:801A for pointer to data1CAE82
 #_00EBB3: dl $7F8000 : db $16 ; target address, copy to $2C00 in VRAM
 
-#_00EBB7: db $0F, $00 ; read address $0F:8006 for pointer
+#_00EBB7: db $0F, $00 ; read $0F:8006 for pointer to data0F8020
 #_00EBB9: dl $7F0000 : db $80 ; target address
 
-#_00EBBD: db $15, $24 ; read address $15:8096 for pointer
+#_00EBBD: db $15, $24 ; read $15:8096 for pointer to data15DB5C
 #_00EBBF: dl $7F8040 : db $80 ; target address
 
-#_00EBC3: db $1F, $22 ; read address $1F:808E for pointer
+#_00EBC3: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00EBC5: dl $7F8100 : db $80 ; target address
 
-#_00EBC9: db $1F, $6C ; read address $1F:81B6 for pointer
+#_00EBC9: db $1F, $6C ; read $1F:81B6 for pointer to data1FDFCD
 #_00EBCB: dl $7F8120 : db $80 ; target address
 
 ;---------------------------------------------------------------------------------------------------
 
 data00EBCF:
-#_00EBCF: db $1F, $78 ; read address $1F:81E6 for pointer
+#_00EBCF: db $1F, $78 ; read $1F:81E6 for pointer to data1FE2BF
 #_00EBD1: dl $7F8000 : db $80 ; target address
 
 #_00EBD5: dw $0000 ; end
 
 ;===================================================================================================
-
+; TODO unused? all of these?
+;===================================================================================================
 ROUTINE_00EBF1_0002:
 #_00EBD7: PHB
 #_00EBD8: PHK
@@ -18913,6 +18990,7 @@ ROUTINE_00EBF1_0002:
 
 .start_2
 #_00EBE7: PHX
+
 #_00EBE8: TAX
 
 #_00EBE9: JSR ArbitraryTableCopy
@@ -19000,28 +19078,43 @@ data00EC50:
 
 ;===================================================================================================
 
-; TODO
 data00EC5E:
-#_00EC5E: dw $0205 : dl $7FE000 : dw $FFFF
-#_00EC65: dw $0305 : dl $7FE200 : dw $FFFF
-#_00EC6C: dw $0405 : dl $7FE400 : dw $FFFF
-#_00EC73: dw $0517 : dl $7F8000 : dw $5000
-#_00EC7A: dw $0A1F : dl $7F8000 : dw $5200
-#_00EC81: dw $4D1F : dl $7F8000 : dw $2820
-#_00EC88: dw $571F : dl $7F8000 : dw $5480
-#_00EC8F: dw $0D05 : dl $7FFC00 : dw $FFFF
+#_00EC5E: db $05, $02 ; read $05:800E for pointer to data05829F
+#_00EC60: dl $7FE000 : dw $FFFF ; target address
+
+#_00EC65: db $05, $03 ; read $05:8012 for pointer to data0582F4
+#_00EC67: dl $7FE200 : dw $FFFF ; target address
+
+#_00EC6C: db $05, $04 ; read $05:8016 for pointer to data058324
+#_00EC6E: dl $7FE400 : dw $FFFF ; target address
+
+#_00EC73: db $17, $05 ; read $17:801A for pointer to data17F4AC
+#_00EC75: dl $7F8000 : dw $5000 ; target address, copy to $A000 in VRAM
+
+#_00EC7A: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_00EC7C: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_00EC81: db $1F, $4D ; read $1F:813A for pointer to data1FD3F4
+#_00EC83: dl $7F8000 : dw $2820 ; target address, copy to $5040 in VRAM
+
+#_00EC88: db $1F, $57 ; read $1F:8162 for pointer to data1FD8FB
+#_00EC8A: dl $7F8000 : dw $5480 ; target address, copy to $A900 in VRAM
+
+#_00EC8F: db $05, $0D ; read $05:803A for pointer to data058040
+#_00EC91: dl $7FFC00 : dw $FFFF ; target address
+
 #_00EC96: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data00EC98:
-#_00EC98: db $1F, $2E ; read address $1F:80BE for pointer
+#_00EC98: db $1F, $2E ; read $1F:80BE for pointer to data1FBFD3
 #_00EC9A: dl $7E7000 : db $80 ; target address
 
-#_00EC9E: db $18, $00 ; read address $18:8006 for pointer
+#_00EC9E: db $18, $00 ; read $18:8006 for pointer to data188024
 #_00ECA0: dl $7F8000 : db $60 ; target address, copy to $C000 in VRAM
 
-#_00ECA4: db $1C, $0C ; read address $1C:8036 for pointer
+#_00ECA4: db $1C, $0C ; read $1C:8036 for pointer to data1CDE71
 #_00ECA6: dl $7F8000 : db $80 ; target address
 
 #_00ECAA: dw $0000 ; end
@@ -19029,37 +19122,38 @@ data00EC98:
 ;===================================================================================================
 
 data00ECAC:
-#_00ECAC: db $17, $00 ; read address $17:8006 for pointer
+#_00ECAC: db $17, $00 ; read $17:8006 for pointer to data178024
 #_00ECAE: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00ECB2: db $0F, $04 ; read address $0F:8016 for pointer
+#_00ECB2: db $0F, $04 ; read $0F:8016 for pointer to CompressedData_MainGameFont
 #_00ECB4: dl $7F8000 : db $51 ; target address, copy to $A200 in VRAM
 
-#_00ECB8: db $1F, $18 ; read address $1F:8066 for pointer
+#_00ECB8: db $1F, $18 ; read $1F:8066 for pointer to data1FAAD7
 #_00ECBA: dl $7F8000 : db $74 ; target address, copy to $E800 in VRAM
 
-#_00ECBE: db $1D, $0D ; read address $1D:803A for pointer
+#_00ECBE: db $1D, $0D ; read $1D:803A for pointer to data1DB575
 #_00ECC0: dl $7E5000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00ECC4: db $1F, $43 ; read address $1F:8112 for pointer
+#_00ECC4: db $1F, $43 ; read $1F:8112 for pointer to data1FCE4D
 #_00ECC6: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
 
-#_00ECCA: db $1F, $38 ; read address $1F:80E6 for pointer
+#_00ECCA: db $1F, $38 ; read $1F:80E6 for pointer to CompressedData_Palette1FC738
 #_00ECCC: dl $7E2E00 : db $80 ; target address
 
-#_00ECD0: db $1F, $72 ; read address $1F:81CE for pointer
+#_00ECD0: db $1F, $72 ; read $1F:81CE for pointer to CompressedData_Palette1FE166
 #_00ECD2: dl $7E2E00 : db $80 ; target address
 
-#_00ECD6: db $1A, $08 ; read address $1A:8026 for pointer
+#_00ECD6: db $1A, $08 ; read $1A:8026 for pointer to CompressedData_Palette1AFFB8
 #_00ECD8: dl $7E2F80 : db $80 ; target address
 
 #_00ECDC: dw $0000 ; end
 
 ;===================================================================================================
 
-; TODO
 data00ECDE:
-#_00ECDE: dw $1A1D : dl $7F8000 : dw $6200
+#_00ECDE: db $1D, $1A ; read $1D:806E for pointer to data1DE107
+#_00ECE0: dl $7F8000 : dw $6200 ; target address, copy to $C400 in VRAM
+
 #_00ECE5: dw $0000 ; end
 
 ;===================================================================================================
@@ -19317,7 +19411,7 @@ CODE_00EDC5:
 ;---------------------------------------------------------------------------------------------------
 
 .vectors
-#_00EE30: dw NullPtr
+#_00EE30: dw $0000
 #_00EE32: dw ROUTINE_00EE3A
 #_00EE34: dw ROUTINE_00EE53
 #_00EE36: dw ROUTINE_00F031
@@ -19332,12 +19426,15 @@ ROUTINE_00EE3A:
 #_00EE3E: PLB
 
 #_00EE3F: LDX.b $20
+
 #_00EE41: LDA.w $7E0000,X
 #_00EE44: STA.b $2E
 
-#_00EE46: BNE CODE_00EE48
+#_00EE46: BNE ROUTINE_00EE48
 
-CODE_00EE48:
+;===================================================================================================
+
+ROUTINE_00EE48:
 #_00EE48: INX
 #_00EE49: INX
 
@@ -19529,7 +19626,8 @@ CODE_00EF40:
 #_00EF40: STX.b $20
 
 #_00EF42: LDA.w $7E0000,X
-#_00EF45: JMP CODE_00EE48
+
+#_00EF45: JMP ROUTINE_00EE48
 
 ;===================================================================================================
 
@@ -19852,8 +19950,8 @@ ROUTINE_00F111:
 #_00F120: JMP ROUTINE_00EE53_in_visible_part_of_frame
 
 ;===================================================================================================
-
-ROUTINE_00F123:
+; TODO unused?
+;===================================================================================================
 #_00F123: JMP ROUTINE_00EF48
 
 #_00F126: RTS
@@ -19956,7 +20054,7 @@ ROUTINE_00F149:
 
 ;===================================================================================================
 
-ROUTINE_00F18F:
+AdjustControllerInputsForConfig:
 #_00F18F: STZ.w $1F24
 #_00F192: STZ.w $1F26
 #_00F195: STZ.w $1F28
@@ -20039,15 +20137,15 @@ ROUTINE_00F18F:
 
 ;===================================================================================================
 
-ROUTINE_00F21A:
-#_00F21A: LDX.w #data00F249
-#_00F21D: JSR ROUTINE_00F236
+SetBothControllerConfigsToDefault:
+#_00F21A: LDX.w #ControllerScheme_A
+#_00F21D: JSR BuildControllerRemapTable_Player2
 
-#_00F220: LDX.w #data00F249
+#_00F220: LDX.w #ControllerScheme_A
 
 ;===================================================================================================
 
-ROUTINE_00F223:
+BuildControllerRemapTable_Player1:
 #_00F223: LDY.w #$0000
 
 .next
@@ -20066,7 +20164,7 @@ ROUTINE_00F223:
 
 ;===================================================================================================
 
-ROUTINE_00F236:
+BuildControllerRemapTable_Player2:
 #_00F236: LDY.w #$0000
 
 .next
@@ -20085,28 +20183,28 @@ ROUTINE_00F236:
 
 ;===================================================================================================
 
-data00F249:
+ControllerScheme_A:
 #_00F249: dw $8000, $4000, $2000, $1000
 #_00F251: dw $0800, $0400, $0200, $0100
 #_00F259: dw $0080, $0040, $0020, $0010
 
 ;---------------------------------------------------------------------------------------------------
 
-data00F261:
+ControllerScheme_B:
 #_00F261: dw $8000, $4000, $2000, $1000
 #_00F269: dw $0800, $0400, $0200, $0100
 #_00F271: dw $0040, $0010, $0020, $0080
 
 ;---------------------------------------------------------------------------------------------------
 
-data00F279:
+ControllerScheme_C:
 #_00F279: dw $8000, $4000, $2000, $1000
 #_00F281: dw $0800, $0400, $0200, $0100
 #_00F289: dw $0040, $0080, $0020, $0010
 
 ;---------------------------------------------------------------------------------------------------
 
-data00F291:
+ControllerScheme_D:
 #_00F291: dw $8000, $4000, $2000, $1000
 #_00F299: dw $0800, $0400, $0200, $0100
 #_00F2A1: dw $0080, $0010, $0020, $0040
@@ -20460,7 +20558,7 @@ PlayerSelect_00:
 
 #_00F469: JSR DisableInterruptsAndHDMAbutEnableFBlank
 
-#_00F46C: LDX.w #data00F4C9
+#_00F46C: LDX.w #.table
 #_00F46F: JSR BulkDecompressionViaTable_currentDB
 
 #_00F472: LDA.w #data218400
@@ -20513,44 +20611,44 @@ PlayerSelect_00:
 
 ;---------------------------------------------------------------------------------------------------
 
-data00F4C9:
-#_00F4C9: db $0F, $03 ; read address $0F:8012 for pointer
+.table
+#_00F4C9: db $0F, $03 ; read $0F:8012 for pointer to CompressedData_PartnerSelectAndOptions
 #_00F4CB: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_00F4CF: db $1F, $08 ; read address $1F:8026 for pointer
+#_00F4CF: db $1F, $08 ; read $1F:8026 for pointer to data1F930E
 #_00F4D1: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
 
-#_00F4D5: db $1F, $06 ; read address $1F:801E for pointer
+#_00F4D5: db $1F, $06 ; read $1F:801E for pointer to data1F8F2F
 #_00F4D7: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_00F4DB: db $1F, $18 ; read address $1F:8066 for pointer
+#_00F4DB: db $1F, $18 ; read $1F:8066 for pointer to data1FAAD7
 #_00F4DD: dl $7F8000 : db $64 ; target address, copy to $C800 in VRAM
 
-#_00F4E1: db $1D, $20 ; read address $1D:8086 for pointer
+#_00F4E1: db $1D, $20 ; read $1D:8086 for pointer to data1DF264
 #_00F4E3: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_00F4E7: db $1F, $29 ; read address $1F:80AA for pointer
+#_00F4E7: db $1F, $29 ; read $1F:80AA for pointer to data1FBBD7
 #_00F4E9: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_00F4ED: db $1F, $4E ; read address $1F:813E for pointer
+#_00F4ED: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
 #_00F4EF: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
 
-#_00F4F3: db $1F, $34 ; read address $1F:80D6 for pointer
+#_00F4F3: db $1F, $34 ; read $1F:80D6 for pointer to CompressedData_Palette1FC463
 #_00F4F5: dl $7E2A00 : db $80 ; target address
 
-#_00F4F9: db $1F, $34 ; read address $1F:80D6 for pointer
+#_00F4F9: db $1F, $34 ; read $1F:80D6 for pointer to CompressedData_Palette1FC463
 #_00F4FB: dl $7E2E00 : db $80 ; target address
 
-#_00F4FF: db $1F, $72 ; read address $1F:81CE for pointer
+#_00F4FF: db $1F, $72 ; read $1F:81CE for pointer to CompressedData_Palette1FE166
 #_00F501: dl $7E2A00 : db $80 ; target address
 
-#_00F505: db $1F, $72 ; read address $1F:81CE for pointer
+#_00F505: db $1F, $72 ; read $1F:81CE for pointer to CompressedData_Palette1FE166
 #_00F507: dl $7E2E00 : db $80 ; target address
 
-#_00F50B: db $1F, $22 ; read address $1F:808E for pointer
+#_00F50B: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00F50D: dl $7E2B00 : db $80 ; target address
 
-#_00F511: db $1F, $22 ; read address $1F:808E for pointer
+#_00F511: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_00F513: dl $7E2F00 : db $80 ; target address
 
 #_00F517: dw $0000 ; end
@@ -20925,7 +21023,8 @@ ROUTINE_00F6E7:
 #_00F6F4: RTS
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00F6F9_long:
 #_00F6F5: JSR ROUTINE_00F6F9
 
@@ -20954,7 +21053,8 @@ ROUTINE_00F6F9:
 #_00F711: RTS
 
 ;===================================================================================================
-
+; TODO unused?
+;===================================================================================================
 ROUTINE_00F712:
 #_00F712: JSR .execute
 
@@ -21390,6 +21490,7 @@ ROUTINE_00F957_long2:
 
 ROUTINE_00F957:
 #_00F957: PHB
+
 #_00F958: PEA.w $7E7E
 #_00F95B: PLB
 #_00F95C: PLB
@@ -21397,9 +21498,9 @@ ROUTINE_00F957:
 #_00F95D: LDX.w #$01FE
 #_00F960: TXY
 
-CODE_00F961:
+.next
 #_00F961: CPX.w $050E
-#_00F964: BEQ CODE_00F9A5
+#_00F964: BEQ .finished
 
 #_00F966: INC.w $054E
 
@@ -21415,7 +21516,7 @@ CODE_00F961:
 #_00F977: TAX
 
 #_00F978: LDA.l $7E2800,X
-#_00F97C: BEQ CODE_00F991
+#_00F97C: BEQ .skip
 
 #_00F97E: STA.b $22
 
@@ -21432,7 +21533,7 @@ CODE_00F961:
 #_00F98D: TAX
 #_00F98E: JSR (.vectors,X)
 
-CODE_00F991:
+.skip
 #_00F991: LDX.b $36
 
 #_00F993: LDY.b $38
@@ -21448,9 +21549,11 @@ CODE_00F991:
 CODE_00F9A1:
 #_00F9A1: DEX
 #_00F9A2: DEX
-#_00F9A3: BNE CODE_00F961
+#_00F9A3: BNE .next
 
-CODE_00F9A5:
+;---------------------------------------------------------------------------------------------------
+
+.finished
 #_00F9A5: TYA
 #_00F9A6: STA.l $00050E
 
@@ -21815,7 +21918,7 @@ CODE_00FB92:
 
 ;---------------------------------------------------------------------------------------------------
 
-.finished:
+.finished
 #_00FBA2: LDA.l $7E2800,X
 #_00FBA6: AND.w #$1F00
 
@@ -21840,14 +21943,14 @@ CODE_00FB92:
 
 ;===================================================================================================
 
-ROUTINE_00FBCB_long:
-#_00FBC7: JSR ROUTINE_00FBCB
+QuadDataWriter_00FBCB_long:
+#_00FBC7: JSR QuadDataWriter_00FBCB
 
 #_00FBCA: RTL
 
 ;===================================================================================================
 
-ROUTINE_00FBCB:
+QuadDataWriter_00FBCB:
 #_00FBCB: PHB
 #_00FBCC: PEA.w $7E7E
 #_00FBCF: PLB

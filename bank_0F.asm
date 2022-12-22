@@ -9,10 +9,10 @@ org $0F8000
 
 #_0F8006: dw data0F8020, $0421
 #_0F800A: dw data0FA6CF, $0121
-#_0F800E: dw data0FC372, $0121
-#_0F8012: dw data0FDC61, $0121
-#_0F8016: dw data0FF487, $0251
-#_0F801A: dw data0FFFDA, $0521
+#_0F800E: dw CompressedData_WorldMapGraphics, $0121
+#_0F8012: dw CompressedData_PartnerSelectAndOptions, $0121
+#_0F8016: dw CompressedData_MainGameFont, $0251
+#_0F801A: dw CompressedData_Palette_0FFFDA, $0521
 #_0F801E: dw $FFFF
 
 ;===================================================================================================
@@ -12385,7 +12385,7 @@ data0FA6CF:
 
 ;===================================================================================================
 
-data0FC372:
+CompressedData_WorldMapGraphics:
 #_0FC372: db $01, $2000 ; copy 8192 bytes
 
 #_0FC375: dw $8002 ; block header
@@ -17095,7 +17095,7 @@ data0FC372:
 
 ;===================================================================================================
 
-data0FDC61:
+CompressedData_PartnerSelectAndOptions:
 #_0FDC61: db $01, $2000 ; copy 8192 bytes
 
 #_0FDC64: dw $71FE ; block header
@@ -21593,7 +21593,7 @@ data0FDC61:
 
 ;===================================================================================================
 
-data0FF487:
+CompressedData_MainGameFont:
 #_0FF487: db $01, $1A00 ; copy 6656 bytes
 
 #_0FF48A: dw $C17E ; block header
@@ -23709,7 +23709,7 @@ data0FF487:
 
 ;===================================================================================================
 
-data0FFFDA:
+CompressedData_Palette_0FFFDA:
 #_0FFFDA: db $01, $0020 ; copy 32 bytes
 
 #_0FFFDD: dw $0002 ; block header

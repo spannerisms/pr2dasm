@@ -41,14 +41,16 @@ HandleDialog:
 
 #_088024: JMP (.vectors,X)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_088027: dw Dialog_Nothing
 #_088029: dw Dialog_InitializeMessage
 #_08802B: dw Dialog_HandleNextByte
 #_08802D: dw Dialog_WaitForYPress
-#_08802F: dw ROUTINE_0884ED
-#_088031: dw ROUTINE_08850B
-#_088033: dw ROUTINE_088718
+#_08802F: dw Dialog_04
+#_088031: dw Dialog_05
+#_088033: dw Dialog_06
 
 ;===================================================================================================
 
@@ -86,6 +88,8 @@ Dialog_InitializeMessage:
 #_08805D: TAX
 
 #_08805E: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_088061: dw ROUTINE_088067
@@ -280,6 +284,8 @@ Dialog_HandleNextByte:
 .exit
 #_088185: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_088186:
 #_088186: LDA.w #$0012
 #_088189: STA.l $7E2574
@@ -453,6 +459,8 @@ Dialog_ExecuteCommand:
 #_08828C: TAX
 
 #_08828D: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_088290: dw Dialog_TerminateMessage          ; 00
@@ -778,6 +786,7 @@ Dialog_GiftKey:
 
 #_088440: SED
 #_088441: CLC
+
 #_088442: ADC.w $05B2
 
 #_088445: CLD
@@ -796,9 +805,12 @@ Dialog_GiftKey:
 
 Dialog_GiftMoney:
 #_088453: LDA.w #$1000
+
 #_088456: SED
 #_088457: CLC
+
 #_088458: ADC.w $05B0
+
 #_08845B: CLD
 
 #_08845C: BCC .no_overflow
@@ -907,7 +919,7 @@ Dialog_WaitForYPress:
 
 ;===================================================================================================
 
-ROUTINE_0884ED:
+Dialog_04:
 #_0884ED: LDA.w $0538
 #_0884F0: AND.w #$4000
 #_0884F3: BNE .not_pressing_y
@@ -929,7 +941,7 @@ ROUTINE_0884ED:
 
 ;===================================================================================================
 
-ROUTINE_08850B:
+Dialog_05:
 #_08850B: DEC.w $7E256C
 #_08850E: BNE .exit
 
@@ -942,7 +954,7 @@ ROUTINE_08850B:
 #_08851A: RTS
 
 ;===================================================================================================
-
+; TODO might be get cursor character or something
 ROUTINE_08851B:
 #_08851B: LDA.b $22
 #_08851D: ASL A
@@ -1030,6 +1042,8 @@ ROUTINE_088561:
 
 #_08858F: DEY
 #_088590: BNE .next
+
+;---------------------------------------------------------------------------------------------------
 
 #_088592: LDA.w #$0002
 #_088595: STA.l $7E256E
@@ -1122,10 +1136,11 @@ ROUTINE_088605:
 #_088616: STA.b $30
 
 #_088618: LDY.w $7E2562
+
 #_08861B: LDA.w #$0000
 #_08861E: STA.b $2E
 
-CODE_088620:
+.next
 #_088620: LDA.w #$0000
 #_088623: STA.b $20
 
@@ -1179,8 +1194,11 @@ CODE_088667:
 #_08866E: JSL QueueUpVRAMTransfers_long
 
 #_088672: INC.b $2E
+
 #_088674: DEY
-#_088675: BNE CODE_088620
+#_088675: BNE .next
+
+;---------------------------------------------------------------------------------------------------
 
 #_088677: LDA.b $38
 #_088679: CLC
@@ -1205,10 +1223,11 @@ ROUTINE_08868E:
 #_088692: STA.b $30
 
 #_088694: LDY.w $7E2562
+
 #_088697: LDA.w #$0000
 #_08869A: STA.b $2E
 
-CODE_08869C:
+.next
 #_08869C: LDA.w #$0000
 #_08869F: STA.b $20
 
@@ -1250,7 +1269,9 @@ CODE_08869C:
 
 #_0886DB: INC.b $2E
 #_0886DD: DEY
-#_0886DE: BNE CODE_08869C
+#_0886DE: BNE .next
+
+;---------------------------------------------------------------------------------------------------
 
 #_0886E0: LDA.w #$77BE
 #_0886E3: STA.b $3C
@@ -1294,7 +1315,7 @@ ROUTINE_088705:
 
 ;===================================================================================================
 
-ROUTINE_088718:
+Dialog_06:
 #_088718: LDA.l $7E2560
 #_08871C: SEC
 #_08871D: SBC.w #$0001
@@ -5816,7 +5837,7 @@ Message_08BA27:
 
 ;===================================================================================================
 
-ROUTINE_08BACE:
+CopyArbitraryTable_08BACE:
 #_08BACE: LDA.w $0000,X
 #_08BAD1: BEQ .exit
 
@@ -5854,7 +5875,7 @@ ROUTINE_08BACE:
 
 #_08BAF7: REP #$20
 
-#_08BAF9: BRA ROUTINE_08BACE
+#_08BAF9: BRA CopyArbitraryTable_08BACE
 
 .exit
 #_08BAFB: RTS
@@ -6073,22 +6094,22 @@ data08BCFA:
 
 ;===================================================================================================
 
-ROUTINE_08BD3A:
+IsPockyBusy:
 #_08BD3A: LDA.l $7E2530
-#_08BD3E: BNE CODE_08BD51
+#_08BD3E: BNE .busy
 
 #_08BD40: LDA.w $19CE
 #_08BD43: CMP.w #$0028 ; STATE 28
-#_08BD46: BCS CODE_08BD51
+#_08BD46: BCS .busy
 
 #_08BD48: CMP.w #$001A ; STATE 1A
-#_08BD4B: BEQ CODE_08BD51
+#_08BD4B: BEQ .busy
 
 #_08BD4D: LDA.w #$0000
 
 #_08BD50: RTS
 
-CODE_08BD51:
+.busy
 #_08BD51: LDA.w #$FFFF
 
 #_08BD54: RTS
@@ -6172,7 +6193,7 @@ ROUTINE_08BD98:
 
 ;===================================================================================================
 
-ROUTINE_08BDA3:
+ROUTINE_08BDA3_Set04B8:
 #_08BDA3: STA.w $04B8
 
 #_08BDA6: RTS
@@ -6246,6 +6267,8 @@ ROUTINE_08BDF4:
 
 #_08BDF8: JMP (.vectors,X)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_08BDFB: dw .exit
 #_08BDFD: dw ROUTINE_08BE08
@@ -6276,7 +6299,7 @@ ROUTINE_08BE08:
 #_08BE1D: JSR ROUTINE_08BD98_Y0000
 
 #_08BE20: LDA.w #$0010
-#_08BE23: JSR ROUTINE_08BDA3
+#_08BE23: JSR ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08BE26: RTS
@@ -6291,7 +6314,7 @@ ROUTINE_08BE27:
 #_08BE2F: CMP.b $20
 #_08BE31: BNE .exit
 
-#_08BE33: JSR ROUTINE_08BD3A
+#_08BE33: JSR IsPockyBusy
 #_08BE36: BNE .exit
 
 #_08BE38: LDA.w #$8000
@@ -6304,7 +6327,7 @@ ROUTINE_08BE27:
 #_08BE47: JSR ROUTINE_08BD98_Y0101
 
 #_08BE4A: LDA.w #$0012
-#_08BE4D: JSR ROUTINE_08BDA3
+#_08BE4D: JSR ROUTINE_08BDA3_Set04B8
 
 #_08BE50: LDA.w #data08BE5D
 #_08BE53: JSR ROUTINE_08BD65_bank08
@@ -6318,11 +6341,21 @@ ROUTINE_08BE27:
 ;---------------------------------------------------------------------------------------------------
 
 data08BE5D:
-#_08BE5D: dw $0117 : dl $7F8000 : dw $7000
-#_08BE64: dw $6D1F : dl $7E2F20 : dw $FFFF
-#_08BE6B: dw $6D1F : dl $7E2B20 : dw $FFFF
-#_08BE72: dw $2715 : dl $7FF000 : dw $FFFF
-#_08BE79: dw $2715 : dl $001000 : dw $FFFF
+#_08BE5D: db $17, $01 ; read $17:800A for pointer to data179836
+#_08BE5F: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08BE64: db $1F, $6D ; read $1F:81BA for pointer to CompressedData_Palette1FE014
+#_08BE66: dl $7E2F20 : dw $FFFF ; target address
+
+#_08BE6B: db $1F, $6D ; read $1F:81BA for pointer to CompressedData_Palette1FE014
+#_08BE6D: dl $7E2B20 : dw $FFFF ; target address
+
+#_08BE72: db $15, $27 ; read $15:80A2 for pointer to data15DDD5
+#_08BE74: dl $7FF000 : dw $FFFF ; target address
+
+#_08BE79: db $15, $27 ; read $15:80A2 for pointer to data15DDD5
+#_08BE7B: dl $001000 : dw $FFFF ; target address
+
 #_08BE80: dw $0000 ; end
 
 ;===================================================================================================
@@ -6335,7 +6368,7 @@ ROUTINE_08BE82:
 #_08BE8A: CMP.b $22
 #_08BE8C: BNE .exit
 
-#_08BE8E: JSR ROUTINE_08BD3A
+#_08BE8E: JSR IsPockyBusy
 #_08BE91: BNE .exit
 
 #_08BE93: LDA.w #$4800
@@ -6346,7 +6379,7 @@ ROUTINE_08BE82:
 #_08BE9F: JSR ROUTINE_08BD98_Y0000
 
 #_08BEA2: LDA.w #$0014
-#_08BEA5: JSR ROUTINE_08BDA3
+#_08BEA5: JSR ROUTINE_08BDA3_Set04B8
 
 #_08BEA8: LDA.w #data08BEAF
 #_08BEAB: JSR ROUTINE_08BD65_bank08
@@ -6357,9 +6390,15 @@ ROUTINE_08BE82:
 ;---------------------------------------------------------------------------------------------------
 
 data08BEAF:
-#_08BEAF: dw $0D1C : dl $7F8000 : dw $7000
-#_08BEB6: dw $2D15 : dl $7FF400 : dw $FFFF
-#_08BEBD: dw $2D15 : dl $001400 : dw $FFFF
+#_08BEAF: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08BEB1: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08BEB6: db $15, $2D ; read $15:80BA for pointer to data15E298
+#_08BEB8: dl $7FF400 : dw $FFFF ; target address
+
+#_08BEBD: db $15, $2D ; read $15:80BA for pointer to data15E298
+#_08BEBF: dl $001400 : dw $FFFF ; target address
+
 #_08BEC4: dw $0000 ; end
 
 ;===================================================================================================
@@ -6372,7 +6411,7 @@ ROUTINE_08BEC6:
 #_08BECE: CMP.b $20
 #_08BED0: BNE .exit
 
-#_08BED2: JSR ROUTINE_08BD3A
+#_08BED2: JSR IsPockyBusy
 #_08BED5: BNE .exit
 
 #_08BED7: LDA.w #$C000
@@ -6385,7 +6424,7 @@ ROUTINE_08BEC6:
 #_08BEE6: JSR ROUTINE_08BD98_Y0101
 
 #_08BEE9: LDA.w #$0016
-#_08BEEC: JSR ROUTINE_08BDA3
+#_08BEEC: JSR ROUTINE_08BDA3_Set04B8
 
 #_08BEEF: LDA.w #data08BEF6
 #_08BEF2: JSR ROUTINE_08BD65_bank08
@@ -6396,10 +6435,18 @@ ROUTINE_08BEC6:
 ;---------------------------------------------------------------------------------------------------
 
 data08BEF6:
-#_08BEF6: dw $4715 : dl $7FF000 : dw $FFFF
-#_08BEFD: dw $4715 : dl $001000 : dw $FFFF
-#_08BF04: dw $851F : dl $7E2EE0 : dw $FFFF
-#_08BF0B: dw $851F : dl $7E2AE0 : dw $FFFF
+#_08BEF6: db $15, $47 ; read $15:8122 for pointer to data15F4E2
+#_08BEF8: dl $7FF000 : dw $FFFF ; target address
+
+#_08BEFD: db $15, $47 ; read $15:8122 for pointer to data15F4E2
+#_08BEFF: dl $001000 : dw $FFFF ; target address
+
+#_08BF04: db $1F, $85 ; read $1F:821A for pointer to CompressedData_Palette1FE4D3
+#_08BF06: dl $7E2EE0 : dw $FFFF ; target address
+
+#_08BF0B: db $1F, $85 ; read $1F:821A for pointer to CompressedData_Palette1FE4D3
+#_08BF0D: dl $7E2AE0 : dw $FFFF ; target address
+
 #_08BF12: dw $0000 ; end
 
 ;===================================================================================================
@@ -6488,12 +6535,24 @@ CODE_08BF95:
 ;===================================================================================================
 
 data08BF9B:
-#_08BF9B: dw $0518 : dl $7F8000 : dw $7000
-#_08BFA2: dw $0019 : dl $7F8000 : dw $0000
-#_08BFA9: dw $0805 : dl $7FF700 : dw $FFFF
-#_08BFB0: dw $0805 : dl $001700 : dw $FFFF
-#_08BFB7: dw $621F : dl $7E2F20 : dw $FFFF
-#_08BFBE: dw $621F : dl $7E2B20 : dw $FFFF
+#_08BF9B: db $18, $05 ; read $18:801A for pointer to data18EA33
+#_08BF9D: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08BFA2: db $19, $00 ; read $19:8006 for pointer to data198024
+#_08BFA4: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08BFA9: db $05, $08 ; read $05:8026 for pointer to data0581E6
+#_08BFAB: dl $7FF700 : dw $FFFF ; target address
+
+#_08BFB0: db $05, $08 ; read $05:8026 for pointer to data0581E6
+#_08BFB2: dl $001700 : dw $FFFF ; target address
+
+#_08BFB7: db $1F, $62 ; read $1F:818E for pointer to CompressedData_Palette1FDCEA
+#_08BFB9: dl $7E2F20 : dw $FFFF ; target address
+
+#_08BFBE: db $1F, $62 ; read $1F:818E for pointer to CompressedData_Palette1FDCEA
+#_08BFC0: dl $7E2B20 : dw $FFFF ; target address
+
 #_08BFC5: dw $0000 ; end
 
 ;===================================================================================================
@@ -6630,14 +6689,25 @@ ROUTINE_08C06D:
 
 ;===================================================================================================
 
-; TODO
 data08C083:
-#_08C083: dw $0505 : dl $7FF500 : dw $FFFF
-#_08C08A: dw $0505 : dl $001500 : dw $FFFF
-#_08C091: dw $0319 : dl $7F8000 : dw $7000
-#_08C098: dw $0219 : dl $7F8000 : dw $0000
-#_08C09F: dw $6A1F : dl $7E2F20 : dw $FFFF
-#_08C0A6: dw $6A1F : dl $7E2B20 : dw $FFFF
+#_08C083: db $05, $05 ; read $05:801A for pointer to data05807A
+#_08C085: dl $7FF500 : dw $FFFF ; target address
+
+#_08C08A: db $05, $05 ; read $05:801A for pointer to data05807A
+#_08C08C: dl $001500 : dw $FFFF ; target address
+
+#_08C091: db $19, $03 ; read $19:8012 for pointer to data19BB9C
+#_08C093: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08C098: db $19, $02 ; read $19:800E for pointer to data19A7EF
+#_08C09A: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08C09F: db $1F, $6A ; read $1F:81AE for pointer to CompressedData_Palette1FDF3E
+#_08C0A1: dl $7E2F20 : dw $FFFF ; target address
+
+#_08C0A6: db $1F, $6A ; read $1F:81AE for pointer to CompressedData_Palette1FDF3E
+#_08C0A8: dl $7E2B20 : dw $FFFF ; target address
+
 #_08C0AD: dw $0000 ; end
 
 ;===================================================================================================
@@ -6657,6 +6727,8 @@ ROUTINE_08C0B0:
 #_08C0BB: TAX
 
 #_08C0BC: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08C0BF: dw ROUTINE_08C146
@@ -6699,7 +6771,7 @@ ROUTINE_08C0E8:
 #_08C0EE: JSR ROUTINE_08C1A4
 #_08C0F1: BNE EXIT_08C117
 
-#_08C0F3: JSR RequestSong0002
+#_08C0F3: JSR RequestSong02
 
 #_08C0F6: LDA.w #$2800
 #_08C0F9: STA.w $1AB0
@@ -6831,7 +6903,7 @@ ROUTINE_08C1A4:
 
 ;===================================================================================================
 
-RequestSong0002:
+RequestSong02:
 #_08C1AE: LDA.w #$0002 ; SONG 02
 #_08C1B1: JSL RequestSong
 
@@ -6860,6 +6932,8 @@ ROUTINE_08C1C4:
 #_08C1CF: TAX
 
 #_08C1D0: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08C1D3: dw ROUTINE_08C25A
@@ -6903,7 +6977,7 @@ ROUTINE_08C1FC:
 #_08C202: JSR ROUTINE_08C1A4
 #_08C205: BNE EXIT_08C22B
 
-#_08C207: JSR RequestSong0002
+#_08C207: JSR RequestSong02
 
 #_08C20A: LDA.w #$6800
 #_08C20D: STA.w $1AB0
@@ -6984,18 +7058,32 @@ ROUTINE_08C25A:
 ;---------------------------------------------------------------------------------------------------
 
 data08C27D:
-#_08C27D: dw $091B : dl $7F8000 : dw $7000
-#_08C284: dw $7B1F : dl $7E2B20 : dw $FFFF
-#_08C28B: dw $7B1F : dl $7E2F20 : dw $FFFF
+#_08C27D: db $1B, $09 ; read $1B:802A for pointer to data1BF289
+#_08C27F: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08C284: db $1F, $7B ; read $1F:81F2 for pointer to CompressedData_Palette1FE34D
+#_08C286: dl $7E2B20 : dw $FFFF ; target address
+
+#_08C28B: db $1F, $7B ; read $1F:81F2 for pointer to CompressedData_Palette1FE34D
+#_08C28D: dl $7E2F20 : dw $FFFF ; target address
+
 #_08C292: dw $0000 ; end
 
 ;===================================================================================================
 
 data08C294:
-#_08C294: dw $0D1C : dl $7F8000 : dw $7000
-#_08C29B: dw $031B : dl $7F8000 : dw $7400
-#_08C2A2: dw $6E1F : dl $7E2B20 : dw $FFFF
-#_08C2A9: dw $6E1F : dl $7E2F20 : dw $FFFF
+#_08C294: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08C296: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08C29B: db $1B, $03 ; read $1B:8012 for pointer to data1BAAEB
+#_08C29D: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_08C2A2: db $1F, $6E ; read $1F:81BE for pointer to CompressedData_Palette1FE05B
+#_08C2A4: dl $7E2B20 : dw $FFFF ; target address
+
+#_08C2A9: db $1F, $6E ; read $1F:81BE for pointer to CompressedData_Palette1FE05B
+#_08C2AB: dl $7E2F20 : dw $FFFF ; target address
+
 #_08C2B0: dw $0000 ; end
 
 ;===================================================================================================
@@ -7030,7 +7118,7 @@ ROUTINE_08C2D1:
 #_08C2D9: CMP.b $20
 #_08C2DB: BNE .exit
 
-#_08C2DD: JSR ROUTINE_08BD3A
+#_08C2DD: JSR IsPockyBusy
 #_08C2E0: BNE .exit
 
 #_08C2E2: LDA.w #$2800
@@ -7061,7 +7149,7 @@ ROUTINE_08C2D1:
 #_08C319: JSR ROUTINE_08BD98_Y0101
 
 #_08C31C: LDA.w #$002C
-#_08C31F: JSR ROUTINE_08BDA3
+#_08C31F: JSR ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08C322: RTS
@@ -7069,9 +7157,15 @@ ROUTINE_08C2D1:
 ;---------------------------------------------------------------------------------------------------
 
 data08C323:
-#_08C323: dw $1C15 : dl $7FF400 : dw $FFFF
-#_08C32A: dw $1C15 : dl $7FF400 : dw $FFFF
-#_08C331: dw $1C15 : dl $001400 : dw $FFFF
+#_08C323: db $15, $1C ; read $15:8076 for pointer to data15D46C
+#_08C325: dl $7FF400 : dw $FFFF ; target address
+
+#_08C32A: db $15, $1C ; read $15:8076 for pointer to data15D46C
+#_08C32C: dl $7FF400 : dw $FFFF ; target address
+
+#_08C331: db $15, $1C ; read $15:8076 for pointer to data15D46C
+#_08C333: dl $001400 : dw $FFFF ; target address
+
 #_08C338: dw $0000 ; end
 
 ;===================================================================================================
@@ -7084,7 +7178,7 @@ ROUTINE_08C33A:
 #_08C342: CMP.b $22
 #_08C344: BNE .exit_a
 
-#_08C346: JSR ROUTINE_08BD3A
+#_08C346: JSR IsPockyBusy
 #_08C349: BNE .exit_a
 
 #_08C34B: LDA.w #$6800
@@ -7095,6 +7189,8 @@ ROUTINE_08C33A:
 
 .exit_a
 #_08C357: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_08C358:
 #_08C358: LDA.w #$6800
@@ -7113,7 +7209,7 @@ CODE_08C358:
 #_08C371: JSR ROUTINE_08BD98_Y0000
 
 #_08C374: LDA.w #$002E
-#_08C377: JSR ROUTINE_08BDA3
+#_08C377: JSR ROUTINE_08BDA3_Set04B8
 
 .exit_b
 #_08C37A: RTS
@@ -7121,8 +7217,12 @@ CODE_08C358:
 ;---------------------------------------------------------------------------------------------------
 
 data08C37B:
-#_08C37B: dw $1815 : dl $7FF000 : dw $FFFF
-#_08C382: dw $1815 : dl $001000 : dw $FFFF
+#_08C37B: db $15, $18 ; read $15:8066 for pointer to data15D0D3
+#_08C37D: dl $7FF000 : dw $FFFF ; target address
+
+#_08C382: db $15, $18 ; read $15:8066 for pointer to data15D0D3
+#_08C384: dl $001000 : dw $FFFF ; target address
+
 #_08C389: dw $0000 ; end
 
 ;===================================================================================================
@@ -7135,7 +7235,7 @@ ROUTINE_08C38B:
 #_08C393: CMP.b $20
 #_08C395: BNE .exit
 
-#_08C397: JSR ROUTINE_08BD3A
+#_08C397: JSR IsPockyBusy
 #_08C39A: BNE .exit
 
 #_08C39C: LDA.w #$A800
@@ -7151,7 +7251,7 @@ ROUTINE_08C38B:
 #_08C3B1: JSR ROUTINE_08BD98_Y0101
 
 #_08C3B4: LDA.w #$0030
-#_08C3B7: JSR ROUTINE_08BDA3
+#_08C3B7: JSR ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08C3BA: RTS
@@ -7159,8 +7259,12 @@ ROUTINE_08C38B:
 ;---------------------------------------------------------------------------------------------------
 
 data08C3BB:
-#_08C3BB: dw $3A15 : dl $7FF400 : dw $FFFF
-#_08C3C2: dw $3A15 : dl $001400 : dw $FFFF
+#_08C3BB: db $15, $3A ; read $15:80EE for pointer to data15EC3E
+#_08C3BD: dl $7FF400 : dw $FFFF ; target address
+
+#_08C3C2: db $15, $3A ; read $15:80EE for pointer to data15EC3E
+#_08C3C4: dl $001400 : dw $FFFF ; target address
+
 #_08C3C9: dw $0000 ; end
 
 ;===================================================================================================
@@ -7173,7 +7277,7 @@ ROUTINE_08C3CB:
 #_08C3D3: CMP.b $20
 #_08C3D5: BNE .exit
 
-#_08C3D7: JSR ROUTINE_08BD3A
+#_08C3D7: JSR IsPockyBusy
 #_08C3DA: BNE .exit
 
 #_08C3DC: LDA.w #$6800
@@ -7189,7 +7293,7 @@ ROUTINE_08C3CB:
 #_08C3F1: JSR ROUTINE_08BD98_Y0101
 
 #_08C3F4: LDA.w #$0026
-#_08C3F7: JSR ROUTINE_08BDA3
+#_08C3F7: JSR ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08C3FA: RTS
@@ -7197,8 +7301,12 @@ ROUTINE_08C3CB:
 ;---------------------------------------------------------------------------------------------------
 
 data08C3FB:
-#_08C3FB: dw $1A15 : dl $7FF400 : dw $FFFF
-#_08C402: dw $1A15 : dl $001400 : dw $FFFF
+#_08C3FB: db $15, $1A ; read $15:806E for pointer to data15D2A3
+#_08C3FD: dl $7FF400 : dw $FFFF ; target address
+
+#_08C402: db $15, $1A ; read $15:806E for pointer to data15D2A3
+#_08C404: dl $001400 : dw $FFFF ; target address
+
 #_08C409: dw $0000 ; end
 
 ;===================================================================================================
@@ -7211,7 +7319,7 @@ ROUTINE_08C40B:
 #_08C413: CMP.b $22
 #_08C415: BNE .exit
 
-#_08C417: JSR ROUTINE_08BD3A
+#_08C417: JSR IsPockyBusy
 #_08C41A: BNE .exit
 
 #_08C41C: LDA.w #$4800
@@ -7225,7 +7333,7 @@ ROUTINE_08C40B:
 #_08C42E: JSR ROUTINE_08BD98_Y0000
 
 #_08C431: LDA.w #$0028
-#_08C434: JSR ROUTINE_08BDA3
+#_08C434: JSR ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08C437: RTS
@@ -7233,8 +7341,12 @@ ROUTINE_08C40B:
 ;---------------------------------------------------------------------------------------------------
 
 data08C438:
-#_08C438: dw $2315 : dl $7FF000 : dw $FFFF
-#_08C43F: dw $2315 : dl $001000 : dw $FFFF
+#_08C438: db $15, $23 ; read $15:8092 for pointer to data15DA84
+#_08C43A: dl $7FF000 : dw $FFFF ; target address
+
+#_08C43F: db $15, $23 ; read $15:8092 for pointer to data15DA84
+#_08C441: dl $001000 : dw $FFFF ; target address
+
 #_08C446: dw $0000 ; end
 
 ;===================================================================================================
@@ -7247,7 +7359,7 @@ ROUTINE_08C448:
 #_08C450: CMP.b $20
 #_08C452: BNE .exit
 
-#_08C454: JSR ROUTINE_08BD3A
+#_08C454: JSR IsPockyBusy
 #_08C457: BNE .exit
 
 #_08C459: LDA.w #$C800
@@ -7263,7 +7375,7 @@ ROUTINE_08C448:
 #_08C46E: JSR ROUTINE_08BD98_Y0101
 
 #_08C471: LDA.w #$002A
-#_08C474: JSR ROUTINE_08BDA3
+#_08C474: JSR ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08C477: RTS
@@ -7271,8 +7383,12 @@ ROUTINE_08C448:
 ;---------------------------------------------------------------------------------------------------
 
 data08C478:
-#_08C478: dw $4315 : dl $7FF400 : dw $FFFF
-#_08C47F: dw $4315 : dl $001400 : dw $FFFF
+#_08C478: db $15, $43 ; read $15:8112 for pointer to data15F268
+#_08C47A: dl $7FF400 : dw $FFFF ; target address
+
+#_08C47F: db $15, $43 ; read $15:8112 for pointer to data15F268
+#_08C481: dl $001400 : dw $FFFF ; target address
+
 #_08C486: dw $0000 ; end
 
 ;===================================================================================================
@@ -7298,12 +7414,24 @@ CODE_08C4A0:
 ;===================================================================================================
 
 data08C4A6:
-#_08C4A6: dw $0605 : dl $7FF500 : dw $FFFF
-#_08C4AD: dw $0605 : dl $001500 : dw $FFFF
-#_08C4B4: dw $0319 : dl $7F8000 : dw $7000
-#_08C4BB: dw $0219 : dl $7F8000 : dw $0000
-#_08C4C2: dw $6A1F : dl $7E2F20 : dw $FFFF
-#_08C4C9: dw $6A1F : dl $7E2B20 : dw $FFFF
+#_08C4A6: db $05, $06 ; read $05:801E for pointer to data0580C9
+#_08C4A8: dl $7FF500 : dw $FFFF ; target address
+
+#_08C4AD: db $05, $06 ; read $05:801E for pointer to data0580C9
+#_08C4AF: dl $001500 : dw $FFFF ; target address
+
+#_08C4B4: db $19, $03 ; read $19:8012 for pointer to data19BB9C
+#_08C4B6: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08C4BB: db $19, $02 ; read $19:800E for pointer to data19A7EF
+#_08C4BD: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08C4C2: db $1F, $6A ; read $1F:81AE for pointer to CompressedData_Palette1FDF3E
+#_08C4C4: dl $7E2F20 : dw $FFFF ; target address
+
+#_08C4C9: db $1F, $6A ; read $1F:81AE for pointer to CompressedData_Palette1FDF3E
+#_08C4CB: dl $7E2B20 : dw $FFFF ; target address
+
 #_08C4D0: dw $0000 ; end
 
 ;===================================================================================================
@@ -7314,6 +7442,8 @@ ROUTINE_08C4D2:
 #_08C4D3: JSR ROUTINE_08BD7F
 
 #_08C4D6: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08C4D9: dw .exit
@@ -7384,16 +7514,36 @@ CODE_08C534:
 ;---------------------------------------------------------------------------------------------------
 
 data08C53A:
-#_08C53A: dw $0B05 : dl $7FF700 : dw $FFFF
-#_08C541: dw $0B05 : dl $001700 : dw $FFFF
-#_08C548: dw $021B : dl $7F8000 : dw $7000
-#_08C54F: dw $011A : dl $7F8000 : dw $0000
-#_08C556: dw $101C : dl $7F8000 : dw $0C00
-#_08C55D: dw $101C : dl $7F8000 : dw $7C00
-#_08C564: dw $601F : dl $7E2F20 : dw $FFFF
-#_08C56B: dw $861F : dl $7E2FE0 : dw $FFFF
-#_08C572: dw $601F : dl $7E2B20 : dw $FFFF
-#_08C579: dw $861F : dl $7E2BE0 : dw $FFFF
+#_08C53A: db $05, $0B ; read $05:8032 for pointer to data05824F
+#_08C53C: dl $7FF700 : dw $FFFF ; target address
+
+#_08C541: db $05, $0B ; read $05:8032 for pointer to data05824F
+#_08C543: dl $001700 : dw $FFFF ; target address
+
+#_08C548: db $1B, $02 ; read $1B:800E for pointer to data1B9D02
+#_08C54A: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08C54F: db $1A, $01 ; read $1A:800A for pointer to data1A921E
+#_08C551: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08C556: db $1C, $10 ; read $1C:8046 for pointer to data1CF4C2
+#_08C558: dl $7F8000 : dw $0C00 ; target address, copy to $1800 in VRAM
+
+#_08C55D: db $1C, $10 ; read $1C:8046 for pointer to data1CF4C2
+#_08C55F: dl $7F8000 : dw $7C00 ; target address, copy to $F800 in VRAM
+
+#_08C564: db $1F, $60 ; read $1F:8186 for pointer to CompressedData_Palette1FDC54
+#_08C566: dl $7E2F20 : dw $FFFF ; target address
+
+#_08C56B: db $1F, $86 ; read $1F:821E for pointer to CompressedData_Palette1FE4FA
+#_08C56D: dl $7E2FE0 : dw $FFFF ; target address
+
+#_08C572: db $1F, $60 ; read $1F:8186 for pointer to CompressedData_Palette1FDC54
+#_08C574: dl $7E2B20 : dw $FFFF ; target address
+
+#_08C579: db $1F, $86 ; read $1F:821E for pointer to CompressedData_Palette1FE4FA
+#_08C57B: dl $7E2BE0 : dw $FFFF ; target address
+
 #_08C580: dw $0000 ; end
 
 ;===================================================================================================
@@ -7440,7 +7590,7 @@ ROUTINE_08C59B:
 #_08C5C0: JSR ROUTINE_08C5CA
 
 #_08C5C3: LDA.w #$0034
-#_08C5C6: JSR ROUTINE_08BDA3
+#_08C5C6: JSR ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08C5C9: RTS
@@ -7455,7 +7605,7 @@ ROUTINE_08C5CA:
 
 #_08C5D3: LDA.w #data08D43E
 #_08C5D6: LDY.w #data08D43E>>16
-#_08C5D9: JMP ROUTINE_00FBCB_ParameterizedBounce
+#_08C5D9: JMP QuadDataWriter_00FBCB_ParameterizedBounce
 
 ;===================================================================================================
 
@@ -7498,7 +7648,7 @@ ROUTINE_08C5E6:
 #_08C60B: JSR ROUTINE_08C5CA
 
 #_08C60E: LDA.w #$0036
-#_08C611: JSR ROUTINE_08BDA3
+#_08C611: JSR ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08C614: RTS
@@ -7528,7 +7678,7 @@ ROUTINE_08C615:
 #_08C63A: JSR ROUTINE_08C5CA
 
 #_08C63D: LDA.w #$0038
-#_08C640: JSR ROUTINE_08BDA3
+#_08C640: JSR ROUTINE_08BDA3_Set04B8
 #_08C643: JSR ROUTINE_08C1B6
 
 .exit
@@ -7551,9 +7701,11 @@ ROUTINE_08C64E:
 
 #_08C652: JMP (.vectors,X)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_08C655: dw .exit
-#_08C657: dw ROUTINE_08C65A
+#_08C657: dw .execute
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -7562,7 +7714,7 @@ ROUTINE_08C64E:
 
 ;===================================================================================================
 
-ROUTINE_08C65A:
+.execute
 #_08C65A: LDA.w #$1000
 #_08C65D: CMP.w $1AE0
 #_08C660: BEQ CODE_08C6BD
@@ -7588,7 +7740,7 @@ ROUTINE_08C65A:
 #_08C688: BRA CODE_08C6BB
 
 CODE_08C68A:
-#_08C68A: JSR ROUTINE_08BD3A
+#_08C68A: JSR IsPockyBusy
 #_08C68D: BNE CODE_08C6BB
 
 #_08C68F: LDA.w #$0000
@@ -7640,11 +7792,21 @@ CODE_08C6D8:
 ;---------------------------------------------------------------------------------------------------
 
 data08C6DE:
-#_08C6DE: dw $0905 : dl $7FF700 : dw $FFFF
-#_08C6E5: dw $0905 : dl $001700 : dw $FFFF
-#_08C6EC: dw $0318 : dl $7F8000 : dw $7000
-#_08C6F3: dw $751F : dl $7E2F20 : dw $FFFF
-#_08C6FA: dw $751F : dl $7E2B20 : dw $FFFF
+#_08C6DE: db $05, $09 ; read $05:802A for pointer to data05820C
+#_08C6E0: dl $7FF700 : dw $FFFF ; target address
+
+#_08C6E5: db $05, $09 ; read $05:802A for pointer to data05820C
+#_08C6E7: dl $001700 : dw $FFFF ; target address
+
+#_08C6EC: db $18, $03 ; read $18:8012 for pointer to data18C0DE
+#_08C6EE: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08C6F3: db $1F, $75 ; read $1F:81DA for pointer to CompressedData_Palette1FE21A
+#_08C6F5: dl $7E2F20 : dw $FFFF ; target address
+
+#_08C6FA: db $1F, $75 ; read $1F:81DA for pointer to CompressedData_Palette1FE21A
+#_08C6FC: dl $7E2B20 : dw $FFFF ; target address
+
 #_08C701: dw $0000 ; end
 
 ;===================================================================================================
@@ -7662,6 +7824,8 @@ ROUTINE_08C705:
 #_08C706: JSR ROUTINE_08BD7F
 
 #_08C709: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08C70C: dw EXIT_08C741
@@ -7736,7 +7900,7 @@ ROUTINE_08C761:
 #_08C769: CMP.b $20
 #_08C76B: BNE .exit
 
-#_08C76D: JSR ROUTINE_08BD3A
+#_08C76D: JSR IsPockyBusy
 #_08C770: BNE .exit
 
 #_08C772: LDA.w #$2800
@@ -7750,7 +7914,7 @@ ROUTINE_08C761:
 #_08C784: JSR ROUTINE_08BD98_Y0101
 
 #_08C787: LDA.w #$001E
-#_08C78A: JSR ROUTINE_08BDA3
+#_08C78A: JSR ROUTINE_08BDA3_Set04B8
 
 #_08C78D: LDA.w #data08C794
 #_08C790: JSR ROUTINE_08BD65_bank08
@@ -7761,8 +7925,12 @@ ROUTINE_08C761:
 ;---------------------------------------------------------------------------------------------------
 
 data08C794:
-#_08C794: dw $1D15 : dl $7FF400 : dw $FFFF
-#_08C79B: dw $1D15 : dl $001400 : dw $FFFF
+#_08C794: db $15, $1D ; read $15:807A for pointer to data15D54E
+#_08C796: dl $7FF400 : dw $FFFF ; target address
+
+#_08C79B: db $15, $1D ; read $15:807A for pointer to data15D54E
+#_08C79D: dl $001400 : dw $FFFF ; target address
+
 #_08C7A2: dw $0000 ; end
 
 ;===================================================================================================
@@ -7775,7 +7943,7 @@ ROUTINE_08C7A4:
 #_08C7AC: CMP.b $22
 #_08C7AE: BNE .exit
 
-#_08C7B0: JSR ROUTINE_08BD3A
+#_08C7B0: JSR IsPockyBusy
 #_08C7B3: BNE .exit
 
 #_08C7B5: LDA.w #$6800
@@ -7786,7 +7954,7 @@ ROUTINE_08C7A4:
 #_08C7C1: JSR ROUTINE_08BD98_Y0000
 
 #_08C7C4: LDA.w #$0020
-#_08C7C7: JSR ROUTINE_08BDA3
+#_08C7C7: JSR ROUTINE_08BDA3_Set04B8
 
 #_08C7CA: LDA.w #data08C7D1
 #_08C7CD: JSR ROUTINE_08BD65_bank08
@@ -7797,8 +7965,12 @@ ROUTINE_08C7A4:
 ;---------------------------------------------------------------------------------------------------
 
 data08C7D1:
-#_08C7D1: dw $4415 : dl $7FF000 : dw $FFFF
-#_08C7D8: dw $4415 : dl $001000 : dw $FFFF
+#_08C7D1: db $15, $44 ; read $15:8116 for pointer to data15F30D
+#_08C7D3: dl $7FF000 : dw $FFFF ; target address
+
+#_08C7D8: db $15, $44 ; read $15:8116 for pointer to data15F30D
+#_08C7DA: dl $001000 : dw $FFFF ; target address
+
 #_08C7DF: dw $0000 ; end
 
 ;===================================================================================================
@@ -7811,7 +7983,7 @@ ROUTINE_08C7E1:
 #_08C7E9: CMP.b $20
 #_08C7EB: BNE .exit
 
-#_08C7ED: JSR ROUTINE_08BD3A
+#_08C7ED: JSR IsPockyBusy
 #_08C7F0: BNE .exit
 
 #_08C7F2: LDA.w #$4800
@@ -7832,8 +8004,12 @@ ROUTINE_08C7E1:
 ;---------------------------------------------------------------------------------------------------
 
 data08C80B:
-#_08C80B: dw $1715 : dl $7FF400 : dw $FFFF
-#_08C812: dw $1715 : dl $001400 : dw $FFFF
+#_08C80B: db $15, $17 ; read $15:8062 for pointer to data15CFE4
+#_08C80D: dl $7FF400 : dw $FFFF ; target address
+
+#_08C812: db $15, $17 ; read $15:8062 for pointer to data15CFE4
+#_08C814: dl $001400 : dw $FFFF ; target address
+
 #_08C819: dw $0000 ; end
 
 ;===================================================================================================
@@ -7855,7 +8031,7 @@ ROUTINE_08C81B:
 #_08C833: JSR ROUTINE_08BD98_Y0000
 
 #_08C836: LDA.w #$0022
-#_08C839: JSR ROUTINE_08BDA3
+#_08C839: JSR ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08C83C: RTS
@@ -7888,6 +8064,8 @@ ROUTINE_08C83D:
 
 #_08C868: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_08C869:
 #_08C869: LDA.w #$8800
 #_08C86C: CMP.w $1AB0
@@ -7917,7 +8095,7 @@ ROUTINE_08C885:
 #_08C88D: CMP.b $20
 #_08C88F: BNE .exit
 
-#_08C891: JSR ROUTINE_08BD3A
+#_08C891: JSR IsPockyBusy
 #_08C894: BNE .exit
 
 #_08C896: LDA.w #$C800
@@ -7930,7 +8108,7 @@ ROUTINE_08C885:
 #_08C8A5: JSR ROUTINE_08BD98_Y0101
 
 #_08C8A8: LDA.w #$001A
-#_08C8AB: JSR ROUTINE_08BDA3
+#_08C8AB: JSR ROUTINE_08BDA3_Set04B8
 
 #_08C8AE: LDA.w #data08C8B5
 #_08C8B1: JSR ROUTINE_08BD65_bank08
@@ -7941,8 +8119,12 @@ ROUTINE_08C885:
 ;---------------------------------------------------------------------------------------------------
 
 data08C8B5:
-#_08C8B5: dw $2A15 : dl $7FF400 : dw $FFFF
-#_08C8BC: dw $2A15 : dl $001400 : dw $FFFF
+#_08C8B5: db $15, $2A ; read $15:80AE for pointer to data15E041
+#_08C8B7: dl $7FF400 : dw $FFFF ; target address
+
+#_08C8BC: db $15, $2A ; read $15:80AE for pointer to data15E041
+#_08C8BE: dl $001400 : dw $FFFF ; target address
+
 #_08C8C3: dw $0000 ; end
 
 ;===================================================================================================
@@ -7955,7 +8137,7 @@ ROUTINE_08C8C5:
 #_08C8CD: CMP.b $22
 #_08C8CF: BNE .exit
 
-#_08C8D1: JSR ROUTINE_08BD3A
+#_08C8D1: JSR IsPockyBusy
 #_08C8D4: BNE .exit
 
 #_08C8D6: LDA.w #$8800
@@ -7966,7 +8148,7 @@ ROUTINE_08C8C5:
 #_08C8E2: JSR ROUTINE_08BD98_Y0000
 
 #_08C8E5: LDA.w #$001C
-#_08C8E8: JSR ROUTINE_08BDA3
+#_08C8E8: JSR ROUTINE_08BDA3_Set04B8
 
 #_08C8EB: LDA.w #data08C8F2
 #_08C8EE: JSR ROUTINE_08BD65_bank08
@@ -7977,8 +8159,12 @@ ROUTINE_08C8C5:
 ;---------------------------------------------------------------------------------------------------
 
 data08C8F2:
-#_08C8F2: dw $2B15 : dl $7FF000 : dw $FFFF
-#_08C8F9: dw $2B15 : dl $001000 : dw $FFFF
+#_08C8F2: db $15, $2B ; read $15:80B2 for pointer to data15E109
+#_08C8F4: dl $7FF000 : dw $FFFF ; target address
+
+#_08C8F9: db $15, $2B ; read $15:80B2 for pointer to data15E109
+#_08C8FB: dl $001000 : dw $FFFF ; target address
+
 #_08C900: dw $0000 ; end
 
 ;===================================================================================================
@@ -8028,6 +8214,8 @@ ROUTINE_08C93F:
 #_08C940: JSR ROUTINE_08BD7F
 
 #_08C943: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08C946: dw .exit
@@ -8157,13 +8345,27 @@ CODE_08C9D6:
 ;---------------------------------------------------------------------------------------------------
 
 data08C9F3:
-#_08C9F3: dw $0F1D : dl $7F8000 : dw $7E00
-#_08C9FA: dw $171D : dl $7F8000 : dw $7400
-#_08CA01: dw $121D : dl $7F8000 : dw $7600
-#_08CA08: dw $061C : dl $7F8000 : dw $7800
-#_08CA0F: dw $7E1F : dl $7E2F20 : dw $FFFF
-#_08CA16: dw $8A1F : dl $7E2EA0 : dw $FFFF
-#_08CA1D: dw $9C1F : dl $7E2FE0 : dw $FFFF
+#_08C9F3: db $1D, $0F ; read $1D:8042 for pointer to data1DBC69
+#_08C9F5: dl $7F8000 : dw $7E00 ; target address, copy to $FC00 in VRAM
+
+#_08C9FA: db $1D, $17 ; read $1D:8062 for pointer to data1DD775
+#_08C9FC: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_08CA01: db $1D, $12 ; read $1D:804E for pointer to data1DC6B8
+#_08CA03: dl $7F8000 : dw $7600 ; target address, copy to $EC00 in VRAM
+
+#_08CA08: db $1C, $06 ; read $1C:801E for pointer to data1CB6A5
+#_08CA0A: dl $7F8000 : dw $7800 ; target address, copy to $F000 in VRAM
+
+#_08CA0F: db $1F, $7E ; read $1F:81FE for pointer to CompressedData_Palette1FE3C2
+#_08CA11: dl $7E2F20 : dw $FFFF ; target address
+
+#_08CA16: db $1F, $8A ; read $1F:822E for pointer to CompressedData_Palette1FE596
+#_08CA18: dl $7E2EA0 : dw $FFFF ; target address
+
+#_08CA1D: db $1F, $9C ; read $1F:8276 for pointer to CompressedData_Palette1FE801
+#_08CA1F: dl $7E2FE0 : dw $FFFF ; target address
+
 #_08CA24: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
@@ -8188,11 +8390,21 @@ CODE_08CA26:
 ;---------------------------------------------------------------------------------------------------
 
 data08CA43:
-#_08CA43: dw $1B1D : dl $7F8000 : dw $7E00
-#_08CA4A: dw $0A1B : dl $7F8000 : dw $7400
-#_08CA51: dw $121D : dl $7F8000 : dw $7600
-#_08CA58: dw $7E1F : dl $7E2F20 : dw $FFFF
-#_08CA5F: dw $991F : dl $7E2FE0 : dw $FFFF
+#_08CA43: db $1D, $1B ; read $1D:8072 for pointer to data1DE3FB
+#_08CA45: dl $7F8000 : dw $7E00 ; target address, copy to $FC00 in VRAM
+
+#_08CA4A: db $1B, $0A ; read $1B:802E for pointer to data1BFD30
+#_08CA4C: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_08CA51: db $1D, $12 ; read $1D:804E for pointer to data1DC6B8
+#_08CA53: dl $7F8000 : dw $7600 ; target address, copy to $EC00 in VRAM
+
+#_08CA58: db $1F, $7E ; read $1F:81FE for pointer to CompressedData_Palette1FE3C2
+#_08CA5A: dl $7E2F20 : dw $FFFF ; target address
+
+#_08CA5F: db $1F, $99 ; read $1F:826A for pointer to CompressedData_Palette1FE7C2
+#_08CA61: dl $7E2FE0 : dw $FFFF ; target address
+
 #_08CA66: dw $0000 ; end
 
 ;===================================================================================================
@@ -8257,12 +8469,24 @@ CODE_08CA9C:
 ;---------------------------------------------------------------------------------------------------
 
 data08CAB6:
-#_08CAB6: dw $061D : dl $7F8000 : dw $7E00
-#_08CABD: dw $0D1C : dl $7F8000 : dw $7000
-#_08CAC4: dw $081D : dl $7F8000 : dw $7400
-#_08CACB: dw $121D : dl $7F8000 : dw $7600
-#_08CAD2: dw $841F : dl $7E2F20 : dw $FFFF
-#_08CAD9: dw $9B1F : dl $7E2FE0 : dw $FFFF
+#_08CAB6: db $1D, $06 ; read $1D:801E for pointer to data1D9B15
+#_08CAB8: dl $7F8000 : dw $7E00 ; target address, copy to $FC00 in VRAM
+
+#_08CABD: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08CABF: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08CAC4: db $1D, $08 ; read $1D:8026 for pointer to data1DA2FA
+#_08CAC6: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_08CACB: db $1D, $12 ; read $1D:804E for pointer to data1DC6B8
+#_08CACD: dl $7F8000 : dw $7600 ; target address, copy to $EC00 in VRAM
+
+#_08CAD2: db $1F, $84 ; read $1F:8216 for pointer to CompressedData_Palette1FE4AC
+#_08CAD4: dl $7E2F20 : dw $FFFF ; target address
+
+#_08CAD9: db $1F, $9B ; read $1F:8272 for pointer to CompressedData_Palette1FE7EC
+#_08CADB: dl $7E2FE0 : dw $FFFF ; target address
+
 #_08CAE0: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
@@ -8285,12 +8509,24 @@ CODE_08CAE2:
 ;---------------------------------------------------------------------------------------------------
 
 data08CAFC:
-#_08CAFC: dw $211D : dl $7F8000 : dw $7E00
-#_08CB03: dw $0D1C : dl $7F8000 : dw $7000
-#_08CB0A: dw $091D : dl $7F8000 : dw $7400
-#_08CB11: dw $121D : dl $7F8000 : dw $7600
-#_08CB18: dw $891F : dl $7E2F20 : dw $FFFF
-#_08CB1F: dw $9C1F : dl $7E2FE0 : dw $FFFF
+#_08CAFC: db $1D, $21 ; read $1D:808A for pointer to data1DF4F9
+#_08CAFE: dl $7F8000 : dw $7E00 ; target address, copy to $FC00 in VRAM
+
+#_08CB03: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08CB05: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08CB0A: db $1D, $09 ; read $1D:802A for pointer to data1DA6E8
+#_08CB0C: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_08CB11: db $1D, $12 ; read $1D:804E for pointer to data1DC6B8
+#_08CB13: dl $7F8000 : dw $7600 ; target address, copy to $EC00 in VRAM
+
+#_08CB18: db $1F, $89 ; read $1F:822A for pointer to CompressedData_Palette1FE56F
+#_08CB1A: dl $7E2F20 : dw $FFFF ; target address
+
+#_08CB1F: db $1F, $9C ; read $1F:8276 for pointer to CompressedData_Palette1FE801
+#_08CB21: dl $7E2FE0 : dw $FFFF ; target address
+
 #_08CB26: dw $0000 ; end
 
 ;===================================================================================================
@@ -8355,11 +8591,21 @@ CODE_08CB5C:
 ;---------------------------------------------------------------------------------------------------
 
 data08CB76:
-#_08CB76: dw $0E1D : dl $7F8000 : dw $7E00
-#_08CB7D: dw $141D : dl $7F8000 : dw $7400
-#_08CB84: dw $121D : dl $7F8000 : dw $7600
-#_08CB8B: dw $8C1F : dl $7E2F20 : dw $FFFF
-#_08CB92: dw $991F : dl $7E2FE0 : dw $FFFF
+#_08CB76: db $1D, $0E ; read $1D:803E for pointer to data1DB8F0
+#_08CB78: dl $7F8000 : dw $7E00 ; target address, copy to $FC00 in VRAM
+
+#_08CB7D: db $1D, $14 ; read $1D:8056 for pointer to data1DCD82
+#_08CB7F: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_08CB84: db $1D, $12 ; read $1D:804E for pointer to data1DC6B8
+#_08CB86: dl $7F8000 : dw $7600 ; target address, copy to $EC00 in VRAM
+
+#_08CB8B: db $1F, $8C ; read $1F:8236 for pointer to CompressedData_Palette1FE5E4
+#_08CB8D: dl $7E2F20 : dw $FFFF ; target address
+
+#_08CB92: db $1F, $99 ; read $1F:826A for pointer to CompressedData_Palette1FE7C2
+#_08CB94: dl $7E2FE0 : dw $FFFF ; target address
+
 #_08CB99: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
@@ -8379,11 +8625,21 @@ CODE_08CB9B:
 ;---------------------------------------------------------------------------------------------------
 
 data08CBAF:
-#_08CBAF: dw $161D : dl $7F8000 : dw $7E00
-#_08CBB6: dw $0C1D : dl $7F8000 : dw $7400
-#_08CBBD: dw $121D : dl $7F8000 : dw $7600
-#_08CBC4: dw $871F : dl $7E2F20 : dw $FFFF
-#_08CBCB: dw $9A1F : dl $7E2FE0 : dw $FFFF
+#_08CBAF: db $1D, $16 ; read $1D:805E for pointer to data1DD426
+#_08CBB1: dl $7F8000 : dw $7E00 ; target address, copy to $FC00 in VRAM
+
+#_08CBB6: db $1D, $0C ; read $1D:8036 for pointer to data1DB1F6
+#_08CBB8: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_08CBBD: db $1D, $12 ; read $1D:804E for pointer to data1DC6B8
+#_08CBBF: dl $7F8000 : dw $7600 ; target address, copy to $EC00 in VRAM
+
+#_08CBC4: db $1F, $87 ; read $1F:8222 for pointer to CompressedData_Palette1FE521
+#_08CBC6: dl $7E2F20 : dw $FFFF ; target address
+
+#_08CBCB: db $1F, $9A ; read $1F:826E for pointer to CompressedData_Palette1FE7D7
+#_08CBCD: dl $7E2FE0 : dw $FFFF ; target address
+
 #_08CBD2: dw $0000 ; end
 
 ;===================================================================================================
@@ -8412,6 +8668,8 @@ ROUTINE_08CBEA:
 #_08CBEB: JSR ROUTINE_08BD7F
 
 #_08CBEE: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08CBF1: dw .exit
@@ -8491,17 +8749,32 @@ CODE_08CC56:
 
 ;---------------------------------------------------------------------------------------------------
 
-#data08CC62:
-#_08CC62: db $10,$00,$E0,$0E,$01,$00,$00,$00
-#_08CC6A: db $00,$00,$00,$00,$00,$00,$00,$00
-#_08CC72: db $00,$D0,$00,$72,$56,$01,$00,$01
-#_08CC7A: db $00,$00,$00,$00,$00,$00,$00,$00
-#_08CC82: db $00,$00,$00,$00
+data08CC62:
+#_08CC62: dw $0010 ; copy 16
+#_08CC64: dw $0EE0
+#_08CC66: dw $0001
+#_08CC68: dw $0000
+#_08CC6A: dw $0000
+#_08CC6C: dw $0000
+#_08CC6E: dw $0000
+#_08CC70: dw $0000
+#_08CC72: dw $D000
+#_08CC74: dw $7200
+#_08CC76: dw $0156
+#_08CC78: dw $0100
+#_08CC7A: dw $0000
+#_08CC7C: dw $0000
+#_08CC7E: dw $0000
+#_08CC80: dw $0000
+#_08CC82: dw $0000
+
+#_08CC84: dw $0000
 
 ;===================================================================================================
 
 ROUTINE_08BAFCandSpawn1:
 #_08CC86: JSR ROUTINE_08BAFC
+
 #_08CC89: JSL PrepEnemySpawn_long
 
 #_08CC8D: RTS
@@ -8509,37 +8782,47 @@ ROUTINE_08BAFCandSpawn1:
 ;===================================================================================================
 
 data08CC8E:
-#_08CC8E: db $10, $00, $20, $00, $00, $00, $CF, $F0
-#_08CC96: db $70, $10, $00, $50, $01, $C6, $0E, $30
-#_08CC9E: db $00, $00, $00, $E0, $0E, $00, $00
+#_08CC8E: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CC93: db $00, $CF, $F0, $70, $10, $00, $50, $01
+#_08CC9B: db $C6, $0E, $30, $00, $00, $00, $E0, $0E
+
+#_08CCA3: dw $0000 ; end
 
 ;===================================================================================================
 
 data08CCA5:
-#_08CCA5: db $10, $00, $20, $00, $00, $00, $CF, $F0
-#_08CCAD: db $72, $10, $00, $50, $01, $CA, $0E, $10
-#_08CCB5: db $00, $08, $00, $E0, $0E, $00, $00
+#_08CCA5: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CCAA: db $00, $CF, $F0, $72, $10, $00, $50, $01
+#_08CCB2: db $CA, $0E, $10, $00, $08, $00, $E0, $0E
+
+#_08CCBA: dw $0000 ; end
 
 ;===================================================================================================
 
 data08CCBC:
-#_08CCBC: db $10, $00, $20, $00, $00, $00, $D1, $F0
-#_08CCC4: db $70, $10, $00, $50, $01, $C8, $0E, $20
-#_08CCCC: db $00, $04, $00, $E0, $0E, $00, $00
+#_08CCBC: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CCC1: db $00, $D1, $F0, $70, $10, $00, $50, $01
+#_08CCC9: db $C8, $0E, $20, $00, $04, $00, $E0, $0E
+
+#_08CCD1: dw $0000 ; end
 
 ;===================================================================================================
 
 data08CCD3:
-#_08CCD3: db $10, $00, $20, $00, $00, $00, $D1, $F0
-#_08CCDB: db $72, $10, $00, $50, $01, $CC, $0E, $01
-#_08CCE3: db $00, $0C, $00, $E0, $0E, $00, $00
+#_08CCD3: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CCD8: db $00, $D1, $F0, $72, $10, $00, $50, $01
+#_08CCE0: db $CC, $0E, $01, $00, $0C, $00, $E0, $0E
+
+#_08CCE8: dw $0000 ; end
 
 ;===================================================================================================
 
 data08CCEA:
-#_08CCEA: db $10, $00, $20, $00, $00, $00, $D0, $00
-#_08CCF2: db $72, $10, $00, $5C, $01, $00, $00, $20
-#_08CCFA: db $00, $00, $00, $E0, $0E, $00, $00
+#_08CCEA: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CCEF: db $00, $D0, $00, $72, $10, $00, $5C, $01
+#_08CCF7: db $00, $00, $20, $00, $00, $00, $E0, $0E
+
+#_08CCFF: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -8559,6 +8842,7 @@ ROUTINE_08CD01:
 
 #_08CD11: LDA.b [$22],Y
 #_08CD13: TAX
+
 #_08CD14: INY
 #_08CD15: INY
 
@@ -8598,7 +8882,7 @@ ROUTINE_08CD28:
 #_08CD45: STA.w $05BC
 
 #_08CD48: LDA.w #$0004
-#_08CD4B: JMP ROUTINE_08BDA3
+#_08CD4B: JMP ROUTINE_08BDA3_Set04B8
 
 CODE_08CD4E:
 #_08CD4E: CMP.w $1AD0
@@ -8675,7 +8959,7 @@ CODE_08CDB5:
 #_08CDB8: CMP.b $22
 #_08CDBA: BNE .exit_b
 
-#_08CDBC: JSR ROUTINE_08BD3A
+#_08CDBC: JSR IsPockyBusy
 #_08CDBF: BNE .exit_b
 
 #_08CDC1: LDA.w #$8800
@@ -8702,37 +8986,47 @@ ROUTINE_08BAFCandSpawn2:
 ;===================================================================================================
 
 data08CDDF:
-#_08CDDF: db $10, $00, $20, $00, $00, $00, $4F, $F0
-#_08CDE7: db $98, $10, $00, $50, $01, $C6, $0E, $30
-#_08CDEF: db $00, $00, $00, $E0, $0E, $00, $00
+#_08CDDF: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CDE4: db $00, $4F, $F0, $98, $10, $00, $50, $01
+#_08CDEC: db $C6, $0E, $30, $00, $00, $00, $E0, $0E
+
+#_08CDF4: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08CDF6:
-#_08CDF6: db $10, $00, $20, $00, $00, $00, $4F, $F0
-#_08CDFE: db $9A, $10, $00, $50, $01, $CA, $0E, $10
-#_08CE06: db $00, $08, $00, $E0, $0E, $00, $00
+#_08CDF6: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CDFB: db $00, $4F, $F0, $9A, $10, $00, $50, $01
+#_08CE03: db $CA, $0E, $10, $00, $08, $00, $E0, $0E
+
+#_08CE0B: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08CE0D:
-#_08CE0D: db $10, $00, $20, $00, $00, $00, $51, $F0
-#_08CE15: db $98, $10, $00, $50, $01, $C8, $0E, $20
-#_08CE1D: db $00, $04, $00, $E0, $0E, $00, $00
+#_08CE0D: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CE12: db $00, $51, $F0, $98, $10, $00, $50, $01
+#_08CE1A: db $C8, $0E, $20, $00, $04, $00, $E0, $0E
+
+#_08CE22: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08CE24:
-#_08CE24: db $10, $00, $20, $00, $00, $00, $51, $F0
-#_08CE2C: db $9A, $10, $00, $50, $01, $CC, $0E, $01
-#_08CE34: db $00, $0C, $00, $E0, $0E, $00, $00
+#_08CE24: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CE29: db $00, $51, $F0, $9A, $10, $00, $50, $01
+#_08CE31: db $CC, $0E, $01, $00, $0C, $00, $E0, $0E
+
+#_08CE39: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08CE3B:
-#_08CE3B: db $10, $00, $20, $00, $00, $00, $50, $F0
-#_08CE43: db $99, $10, $00, $5C, $01, $00, $00, $20
-#_08CE4B: db $00, $00, $00, $E0, $0E, $00, $00
+#_08CE3B: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08CE40: db $00, $50, $F0, $99, $10, $00, $5C, $01
+#_08CE48: db $00, $00, $20, $00, $00, $00, $E0, $0E
+
+#_08CE50: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -8745,31 +9039,62 @@ Set_04F4_to_FFFF:
 ;===================================================================================================
 
 data08CE59:
-#_08CE59: dw $081B : dl $7F8000 : dw $7400
+#_08CE59: db $1B, $08 ; read $1B:8026 for pointer to data1BE7C1
+#_08CE5B: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
 
 ;---------------------------------------------------------------------------------------------------
 
 data08CE60:
-#_08CE60: dw $901F : dl $7E2FE0 : dw $FFFF
-#_08CE67: dw $901F : dl $7E2BE0 : dw $FFFF
-#_08CE6E: dw $011D : dl $7F8000 : dw $7000
-#_08CE75: dw $221D : dl $7F8000 : dw $7E00
+#_08CE60: db $1F, $90 ; read $1F:8246 for pointer to CompressedData_Palette1FE680
+#_08CE62: dl $7E2FE0 : dw $FFFF ; target address
+
+#_08CE67: db $1F, $90 ; read $1F:8246 for pointer to CompressedData_Palette1FE680
+#_08CE69: dl $7E2BE0 : dw $FFFF ; target address
+
+#_08CE6E: db $1D, $01 ; read $1D:800A for pointer to data1D856A
+#_08CE70: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08CE75: db $1D, $22 ; read $1D:808E for pointer to data1DF781
+#_08CE77: dl $7F8000 : dw $7E00 ; target address, copy to $FC00 in VRAM
+
 #_08CE7C: dw $0000 ; end
 
 ;===================================================================================================
 
 data08CE7E:
-#_08CE7E: dw $1915 : dl $7FF000 : dw $FFFF
-#_08CE85: dw $1915 : dl $001000 : dw $FFFF
-#_08CE8C: dw $1E15 : dl $7EC100 : dw $FFFF
-#_08CE93: dw $0014 : dl $7F8000 : dw $1800
-#_08CE9A: dw $061A : dl $7F8000 : dw $7400
-#_08CEA1: dw $0D1C : dl $7F8000 : dw $7000
-#_08CEA8: dw $831F : dl $7E2FE0 : dw $FFFF
-#_08CEAF: dw $831F : dl $7E2BE0 : dw $FFFF
-#_08CEB6: dw $2C15 : dl $7E2E40 : dw $FFFF
-#_08CEBD: dw $2C15 : dl $7E2A40 : dw $FFFF
-#_08CEC4: dw $2615 : dl $7F2000 : dw $FFFF
+#_08CE7E: db $15, $19 ; read $15:806A for pointer to data15D1BC
+#_08CE80: dl $7FF000 : dw $FFFF ; target address
+
+#_08CE85: db $15, $19 ; read $15:806A for pointer to data15D1BC
+#_08CE87: dl $001000 : dw $FFFF ; target address
+
+#_08CE8C: db $15, $1E ; read $15:807E for pointer to data15D62F
+#_08CE8E: dl $7EC100 : dw $FFFF ; target address
+
+#_08CE93: db $14, $00 ; read $14:8006 for pointer to data148038
+#_08CE95: dl $7F8000 : dw $1800 ; target address, copy to $3000 in VRAM
+
+#_08CE9A: db $1A, $06 ; read $1A:801E for pointer to data1AE1F1
+#_08CE9C: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_08CEA1: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08CEA3: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08CEA8: db $1F, $83 ; read $1F:8212 for pointer to CompressedData_Palette1FE485
+#_08CEAA: dl $7E2FE0 : dw $FFFF ; target address
+
+#_08CEAF: db $1F, $83 ; read $1F:8212 for pointer to CompressedData_Palette1FE485
+#_08CEB1: dl $7E2BE0 : dw $FFFF ; target address
+
+#_08CEB6: db $15, $2C ; read $15:80B6 for pointer to CompressedData_Palette15E1D1
+#_08CEB8: dl $7E2E40 : dw $FFFF ; target address
+
+#_08CEBD: db $15, $2C ; read $15:80B6 for pointer to CompressedData_Palette15E1D1
+#_08CEBF: dl $7E2A40 : dw $FFFF ; target address
+
+#_08CEC4: db $15, $26 ; read $15:809E for pointer to data15DD03
+#_08CEC6: dl $7F2000 : dw $FFFF ; target address
+
 #_08CECB: dw $0000 ; end
 
 ;===================================================================================================
@@ -8782,7 +9107,7 @@ ROUTINE_08CECD:
 #_08CED5: CMP.b $20
 #_08CED7: BNE .exit_a
 
-#_08CED9: JSR ROUTINE_08BD3A
+#_08CED9: JSR IsPockyBusy
 #_08CEDC: BNE .exit_a
 
 #_08CEDE: LDA.w #$C800
@@ -8796,10 +9121,12 @@ ROUTINE_08CECD:
 #_08CEF0: JSR ROUTINE_08BD98
 
 #_08CEF3: LDA.w #$0006
-#_08CEF6: JMP ROUTINE_08BDA3
+#_08CEF6: JMP ROUTINE_08BDA3_Set04B8
 
 .exit_a
 #_08CEF9: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_08CEFA:
 #_08CEFA: LDA.w #$6B80
@@ -8818,23 +9145,47 @@ CODE_08CEFA:
 ;---------------------------------------------------------------------------------------------------
 
 data08CF0F:
-#_08CF0F: dw $3415 : dl $7FF400 : dw $FFFF
-#_08CF16: dw $3415 : dl $001400 : dw $FFFF
-#_08CF1D: dw $2515 : dl $7EC100 : dw $FFFF
-#_08CF24: dw $0814 : dl $7F8000 : dw $1800
-#_08CF2B: dw $2F15 : dl $7E2E40 : dw $FFFF
-#_08CF32: dw $2F15 : dl $7E2A40 : dw $FFFF
+#_08CF0F: db $15, $34 ; read $15:80D6 for pointer to data15E7EA
+#_08CF11: dl $7FF400 : dw $FFFF ; target address
+
+#_08CF16: db $15, $34 ; read $15:80D6 for pointer to data15E7EA
+#_08CF18: dl $001400 : dw $FFFF ; target address
+
+#_08CF1D: db $15, $25 ; read $15:809A for pointer to data15DC31
+#_08CF1F: dl $7EC100 : dw $FFFF ; target address
+
+#_08CF24: db $14, $08 ; read $14:8026 for pointer to data14DC3D
+#_08CF26: dl $7F8000 : dw $1800 ; target address, copy to $3000 in VRAM
+
+#_08CF2B: db $15, $2F ; read $15:80C2 for pointer to CompressedData_Palette15E424
+#_08CF2D: dl $7E2E40 : dw $FFFF ; target address
+
+#_08CF32: db $15, $2F ; read $15:80C2 for pointer to CompressedData_Palette15E424
+#_08CF34: dl $7E2A40 : dw $FFFF ; target address
+
 #_08CF39: dw $0000 ; end
 
 ;===================================================================================================
 
 data08CF3B:
-#_08CF3B: dw $3415 : dl $7FF000 : dw $FFFF
-#_08CF42: dw $3415 : dl $001000 : dw $FFFF
-#_08CF49: dw $2515 : dl $7EC100 : dw $FFFF
-#_08CF50: dw $0814 : dl $7F8000 : dw $1800
-#_08CF57: dw $2F15 : dl $7E2E40 : dw $FFFF
-#_08CF5E: dw $2F15 : dl $7E2A40 : dw $FFFF
+#_08CF3B: db $15, $34 ; read $15:80D6 for pointer to data15E7EA
+#_08CF3D: dl $7FF000 : dw $FFFF ; target address
+
+#_08CF42: db $15, $34 ; read $15:80D6 for pointer to data15E7EA
+#_08CF44: dl $001000 : dw $FFFF ; target address
+
+#_08CF49: db $15, $25 ; read $15:809A for pointer to data15DC31
+#_08CF4B: dl $7EC100 : dw $FFFF ; target address
+
+#_08CF50: db $14, $08 ; read $14:8026 for pointer to data14DC3D
+#_08CF52: dl $7F8000 : dw $1800 ; target address, copy to $3000 in VRAM
+
+#_08CF57: db $15, $2F ; read $15:80C2 for pointer to CompressedData_Palette15E424
+#_08CF59: dl $7E2E40 : dw $FFFF ; target address
+
+#_08CF5E: db $15, $2F ; read $15:80C2 for pointer to CompressedData_Palette15E424
+#_08CF60: dl $7E2A40 : dw $FFFF ; target address
+
 #_08CF65: dw $0000 ; end
 
 ;===================================================================================================
@@ -8847,7 +9198,7 @@ ROUTINE_08CF67:
 #_08CF6F: CMP.b $20
 #_08CF71: BNE .exit
 
-#_08CF73: JSR ROUTINE_08BD3A
+#_08CF73: JSR IsPockyBusy
 #_08CF76: BNE .exit
 
 #_08CF78: LDA.w #$2800
@@ -8864,7 +9215,7 @@ ROUTINE_08CF67:
 #_08CF90: JSR ROUTINE_08BD65_bank08
 
 #_08CF93: LDA.w #$0008
-#_08CF96: JMP ROUTINE_08BDA3
+#_08CF96: JMP ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08CF99: RTS
@@ -8872,8 +9223,12 @@ ROUTINE_08CF67:
 ;---------------------------------------------------------------------------------------------------
 
 data08CF9A:
-#_08CF9A: dw $3015 : dl $7FF400 : dw $FFFF
-#_08CFA1: dw $3015 : dl $001400 : dw $FFFF
+#_08CF9A: db $15, $30 ; read $15:80C6 for pointer to data15E4E9
+#_08CF9C: dl $7FF400 : dw $FFFF ; target address
+
+#_08CFA1: db $15, $30 ; read $15:80C6 for pointer to data15E4E9
+#_08CFA3: dl $001400 : dw $FFFF ; target address
+
 #_08CFA8: dw $0000 ; end
 
 ;===================================================================================================
@@ -8886,7 +9241,7 @@ ROUTINE_08CFAA:
 #_08CFB2: CMP.b $22
 #_08CFB4: BNE .exit
 
-#_08CFB6: JSR ROUTINE_08BD3A
+#_08CFB6: JSR IsPockyBusy
 #_08CFB9: BNE .exit
 
 #_08CFBB: LDA.w #$4800
@@ -8900,7 +9255,7 @@ ROUTINE_08CFAA:
 #_08CFCD: JSR ROUTINE_08BD65_bank08
 
 #_08CFD0: LDA.w #$000A
-#_08CFD3: JMP ROUTINE_08BDA3
+#_08CFD3: JMP ROUTINE_08BDA3_Set04B8
 
 .exit
 #_08CFD6: RTS
@@ -8908,8 +9263,12 @@ ROUTINE_08CFAA:
 ;---------------------------------------------------------------------------------------------------
 
 data08CFD7:
-#_08CFD7: dw $3115 : dl $7FF000 : dw $FFFF
-#_08CFDE: dw $3115 : dl $001000 : dw $FFFF
+#_08CFD7: db $15, $31 ; read $15:80CA for pointer to data15E5AA
+#_08CFD9: dl $7FF000 : dw $FFFF ; target address
+
+#_08CFDE: db $15, $31 ; read $15:80CA for pointer to data15E5AA
+#_08CFE0: dl $001000 : dw $FFFF ; target address
+
 #_08CFE5: dw $0000 ; end
 
 ;===================================================================================================
@@ -8938,18 +9297,29 @@ ROUTINE_08CFE7:
 #_08D00F: JSR ROUTINE_08BD65_bank08
 
 #_08D012: LDA.w #$000C
-#_08D015: JMP ROUTINE_08BDA3
+#_08D015: JMP ROUTINE_08BDA3_Set04B8
 
 ;---------------------------------------------------------------------------------------------------
 
-; TODO
 data08D018:
-#_08D018: dw $4B15 : dl $7FF400 : dw $FFFF
-#_08D01F: dw $4B15 : dl $001400 : dw $FFFF
-#_08D026: dw $2515 : dl $7EC100 : dw $FFFF
-#_08D02D: dw $0814 : dl $7F8000 : dw $1800
-#_08D034: dw $2F15 : dl $7E2E40 : dw $FFFF
-#_08D03B: dw $2F15 : dl $7E2A40 : dw $FFFF
+#_08D018: db $15, $4B ; read $15:8132 for pointer to data15F715
+#_08D01A: dl $7FF400 : dw $FFFF ; target address
+
+#_08D01F: db $15, $4B ; read $15:8132 for pointer to data15F715
+#_08D021: dl $001400 : dw $FFFF ; target address
+
+#_08D026: db $15, $25 ; read $15:809A for pointer to data15DC31
+#_08D028: dl $7EC100 : dw $FFFF ; target address
+
+#_08D02D: db $14, $08 ; read $14:8026 for pointer to data14DC3D
+#_08D02F: dl $7F8000 : dw $1800 ; target address, copy to $3000 in VRAM
+
+#_08D034: db $15, $2F ; read $15:80C2 for pointer to CompressedData_Palette15E424
+#_08D036: dl $7E2E40 : dw $FFFF ; target address
+
+#_08D03B: db $15, $2F ; read $15:80C2 for pointer to CompressedData_Palette15E424
+#_08D03D: dl $7E2A40 : dw $FFFF ; target address
+
 #_08D042: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
@@ -8985,7 +9355,7 @@ CODE_08D05F:
 #_08D067: CMP.b $22
 #_08D069: BNE .exit_c
 
-#_08D06B: JSR ROUTINE_08BD3A
+#_08D06B: JSR IsPockyBusy
 #_08D06E: BNE .exit_c
 
 #_08D070: LDA.w #$3380
@@ -9034,12 +9404,26 @@ CODE_08D0AA:
 
 ;---------------------------------------------------------------------------------------------------
 
-#data08D0B6:
-#_08D0B6: db $10,$00,$E0,$0E,$01,$00,$00,$00
-#_08D0BE: db $00,$00,$00,$00,$00,$00,$00,$00
-#_08D0C6: db $00,$70,$00,$3A,$56,$01,$00,$01
-#_08D0CE: db $00,$00,$00,$00,$00,$00,$00,$00
-#_08D0D6: db $00,$00,$00,$00
+data08D0B6:
+#_08D0B6: dw $0010 ; copy 16
+#_08D0B8: dw $0EE0
+#_08D0BA: dw $0001
+#_08D0BC: dw $0000
+#_08D0BE: dw $0000
+#_08D0C0: dw $0000
+#_08D0C2: dw $0000
+#_08D0C4: dw $0000
+#_08D0C6: dw $7000
+#_08D0C8: dw $3A00
+#_08D0CA: dw $0156
+#_08D0CC: dw $0100
+#_08D0CE: dw $0000
+#_08D0D0: dw $0000
+#_08D0D2: dw $0000
+#_08D0D4: dw $0000
+#_08D0D6: dw $0000
+
+#_08D0D8: dw $0000
 
 ;===================================================================================================
 
@@ -9052,37 +9436,47 @@ ROUTINE_08BAFCandSpawn3:
 ;---------------------------------------------------------------------------------------------------
 
 data08D0E2:
-#_08D0E2: db $10, $00, $20, $00, $00, $00, $6F, $F0
-#_08D0EA: db $38, $10, $00, $50, $01, $C6, $0E, $30
-#_08D0F2: db $00, $00, $00, $E0, $0E, $00, $00
+#_08D0E2: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08D0E7: db $00, $6F, $F0, $38, $10, $00, $50, $01
+#_08D0EF: db $C6, $0E, $30, $00, $00, $00, $E0, $0E
+
+#_08D0F7: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08D0F9:
-#_08D0F9: db $10, $00, $20, $00, $00, $00, $6F, $F0
-#_08D101: db $3A, $10, $00, $50, $01, $CA, $0E, $10
-#_08D109: db $00, $08, $00, $E0, $0E, $00, $00
+#_08D0F9: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08D0FE: db $00, $6F, $F0, $3A, $10, $00, $50, $01
+#_08D106: db $CA, $0E, $10, $00, $08, $00, $E0, $0E
+
+#_08D10E: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08D110:
-#_08D110: db $10, $00, $20, $00, $00, $00, $71, $F0
-#_08D118: db $38, $10, $00, $50, $01, $C8, $0E, $20
-#_08D120: db $00, $04, $00, $E0, $0E, $00, $00
+#_08D110: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08D115: db $00, $71, $F0, $38, $10, $00, $50, $01
+#_08D11D: db $C8, $0E, $20, $00, $04, $00, $E0, $0E
+
+#_08D125: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08D127:
-#_08D127: db $10, $00, $20, $00, $00, $00, $71, $F0
-#_08D12F: db $3A, $10, $00, $50, $01, $CC, $0E, $01
-#_08D137: db $00, $0C, $00, $E0, $0E, $00, $00
+#_08D127: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08D12C: db $00, $71, $F0, $3A, $10, $00, $50, $01
+#_08D134: db $CC, $0E, $01, $00, $0C, $00, $E0, $0E
+
+#_08D13C: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08D13E:
-#_08D13E: db $10, $00, $20, $00, $00, $00, $70, $F0
-#_08D146: db $39, $10, $00, $5C, $01, $00, $00, $20
-#_08D14E: db $00, $00, $00, $E0, $0E, $00, $00
+#_08D13E: dw $0010 : dl $000020 ; write 16 bytes to target
+#_08D143: db $00, $70, $F0, $39, $10, $00, $5C, $01
+#_08D14B: db $00, $00, $20, $00, $00, $00, $E0, $0E
+
+#_08D153: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -9121,7 +9515,7 @@ ROUTINE_08D173:
 #_08D17F: JSR ROUTINE_08BD55
 #_08D182: BEQ CODE_08D1A5
 
-#_08D184: JSR ROUTINE_08BD3A
+#_08D184: JSR IsPockyBusy
 #_08D187: BNE CODE_08D1A5
 
 #_08D189: LDA.w #$5000
@@ -9208,46 +9602,89 @@ CODE_08D1CD:
 #_08D206: JSL PrepEnemySpawnType0C_0396E3_00E8
 
 #_08D20A: LDX.w #data08D21A
-#_08D20D: JSR ROUTINE_08BACE
+#_08D20D: JSR CopyArbitraryTable_08BACE
 
 ; TODO WTF??
 #_08D210: LDA.w #data08D462
 #_08D213: LDY.w #data08D462>>16
-#_08D216: JSR ROUTINE_00FBCB_ParameterizedBounce
+#_08D216: JSR QuadDataWriter_00FBCB_ParameterizedBounce
 
 #_08D219: RTS
 
 ;---------------------------------------------------------------------------------------------------
 
 data08D21A:
-#_08D21A: db $08,$00,$24,$05,$00,$15,$00,$00
-#_08D222: db $00,$00,$00,$00,$00,$02,$00,$30
-#_08D22A: db $21,$00,$00,$00,$04,$00,$14,$05
-#_08D232: db $00,$00,$00,$00,$00,$02,$00,$07
-#_08D23A: db $21,$00,$43,$33,$02,$00,$14,$7B
-#_08D242: db $7E,$00,$00,$02,$00,$C8,$19,$00
-#_08D24A: db $00,$30,$00,$00
+#_08D21A: dw $0008 : dl $000524 ; write 8 bytes to target
+#_08D21F: db $15, $00, $00, $00, $00, $00, $00, $00
+
+#_08D227: dw $0002 : dl CGWSEL ; write 2 bytes to target
+#_08D22C: db $00, $00
+
+#_08D22E: dw $0004 : dl $000514 ; write 4 bytes to target
+#_08D233: db $00, $00, $00, $00
+
+#_08D237: dw $0002 : dl BG1SC ; write 2 bytes to target
+#_08D23C: db $43, $33
+
+#_08D23E: dw $0002 : dl $7E7B14 ; write 2 bytes to target
+#_08D243: db $00, $00
+
+#_08D245: dw $0002 : dl $0019C8 ; write 2 bytes to target
+#_08D24A: db $00, $30
+
+#_08D24C: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
-; TODO
 data08D24E:
-#_08D24E: dw $4E1F : dl $7F8000 : dw $3000
-#_08D255: dw $4E1F : dl $7F8000 : dw $3400
-#_08D25C: dw $4E1F : dl $7F8000 : dw $3800
-#_08D263: dw $4E1F : dl $7F8000 : dw $3C00
-#_08D26A: dw $7D1F : dl $7E2F20 : dw $FFFF
-#_08D271: dw $7D1F : dl $7E2B20 : dw $FFFF
-#_08D278: dw $941F : dl $7E2F40 : dw $FFFF
-#_08D27F: dw $941F : dl $7E2B40 : dw $FFFF
-#_08D286: dw $9E1F : dl $7E2E40 : dw $FFFF
-#_08D28D: dw $7D1F : dl $7E2A40 : dw $FFFF
-#_08D294: dw $9E1F : dl $7E2E80 : dw $FFFF
-#_08D29B: dw $941F : dl $7E2A80 : dw $FFFF
-#_08D2A2: dw $0317 : dl $7F8000 : dw $7000
-#_08D2A9: dw $001C : dl $7F8000 : dw $0400
-#_08D2B0: dw $5C1F : dl $7F8000 : dw $30C0
-#_08D2B7: dw $0C1F : dl $7F8000 : dw $0000
+#_08D24E: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_08D250: dl $7F8000 : dw $3000 ; target address, copy to $6000 in VRAM
+
+#_08D255: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_08D257: dl $7F8000 : dw $3400 ; target address, copy to $6800 in VRAM
+
+#_08D25C: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_08D25E: dl $7F8000 : dw $3800 ; target address, copy to $7000 in VRAM
+
+#_08D263: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_08D265: dl $7F8000 : dw $3C00 ; target address, copy to $7800 in VRAM
+
+#_08D26A: db $1F, $7D ; read $1F:81FA for pointer to CompressedData_Palette1FE39B
+#_08D26C: dl $7E2F20 : dw $FFFF ; target address
+
+#_08D271: db $1F, $7D ; read $1F:81FA for pointer to CompressedData_Palette1FE39B
+#_08D273: dl $7E2B20 : dw $FFFF ; target address
+
+#_08D278: db $1F, $94 ; read $1F:8256 for pointer to CompressedData_Palette1FE71C
+#_08D27A: dl $7E2F40 : dw $FFFF ; target address
+
+#_08D27F: db $1F, $94 ; read $1F:8256 for pointer to CompressedData_Palette1FE71C
+#_08D281: dl $7E2B40 : dw $FFFF ; target address
+
+#_08D286: db $1F, $9E ; read $1F:827E for pointer to CompressedData_Palette_1FE829
+#_08D288: dl $7E2E40 : dw $FFFF ; target address
+
+#_08D28D: db $1F, $7D ; read $1F:81FA for pointer to CompressedData_Palette1FE39B
+#_08D28F: dl $7E2A40 : dw $FFFF ; target address
+
+#_08D294: db $1F, $9E ; read $1F:827E for pointer to CompressedData_Palette_1FE829
+#_08D296: dl $7E2E80 : dw $FFFF ; target address
+
+#_08D29B: db $1F, $94 ; read $1F:8256 for pointer to CompressedData_Palette1FE71C
+#_08D29D: dl $7E2A80 : dw $FFFF ; target address
+
+#_08D2A2: db $17, $03 ; read $17:8012 for pointer to data17C72F
+#_08D2A4: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08D2A9: db $1C, $00 ; read $1C:8006 for pointer to data1C8054
+#_08D2AB: dl $7F8000 : dw $0400 ; target address, copy to $0800 in VRAM
+
+#_08D2B0: db $1F, $5C ; read $1F:8176 for pointer to data1FDAFF
+#_08D2B2: dl $7F8000 : dw $30C0 ; target address, copy to $6180 in VRAM
+
+#_08D2B7: db $1F, $0C ; read $1F:8036 for pointer to data1F9A20
+#_08D2B9: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
 #_08D2BE: dw $0000 ; end
 
 ;===================================================================================================
@@ -9263,7 +9700,7 @@ ROUTINE_08D2C0:
 #_08D2CC: JSR ROUTINE_08BD55
 #_08D2CF: BEQ CODE_08D2F2
 
-#_08D2D1: JSR ROUTINE_08BD3A
+#_08D2D1: JSR IsPockyBusy
 #_08D2D4: BNE CODE_08D2F2
 
 #_08D2D6: LDA.w #$1000
@@ -9305,7 +9742,7 @@ ROUTINE_08D2F9:
 
 #_08D30E: LDA.w #data08D43E
 #_08D311: LDY.w #data08D43E>>16
-#_08D314: JSR ROUTINE_00FBCB_ParameterizedBounce
+#_08D314: JSR QuadDataWriter_00FBCB_ParameterizedBounce
 
 #_08D317: LDA.w #$0002
 #_08D31A: STA.w $195E
@@ -9341,7 +9778,7 @@ ROUTINE_08D324:
 
 #_08D349: LDA.w #data08D43E
 #_08D34C: LDY.w #data08D43E>>16
-#_08D34F: JSR ROUTINE_00FBCB_ParameterizedBounce
+#_08D34F: JSR QuadDataWriter_00FBCB_ParameterizedBounce
 
 #_08D352: LDA.w #$0000
 #_08D355: STA.w $195E
@@ -9357,7 +9794,7 @@ ROUTINE_08D324:
 ROUTINE_08D35F:
 #_08D35F: LDA.w #data08D42C
 #_08D362: LDY.w #data08D42C>>16
-#_08D365: BRA ROUTINE_00FBCB_ParameterizedBounce_long
+#_08D365: BRA QuadDataWriter_00FBCB_ParameterizedBounce_long
 
 ;===================================================================================================
 
@@ -9370,7 +9807,7 @@ ROUTINE_08D367:
 
 #_08D371: LDA.w #data08D3B6
 #_08D374: LDY.w #data08D3B6>>16
-#_08D377: BRA ROUTINE_00FBCB_ParameterizedBounce_long
+#_08D377: BRA QuadDataWriter_00FBCB_ParameterizedBounce_long
 
 .pointers
 #_08D379: db data08D3B6
@@ -9380,14 +9817,14 @@ ROUTINE_08D367:
 
 ;===================================================================================================
 
-ROUTINE_00FBCB_ParameterizedBounce_long:
+QuadDataWriter_00FBCB_ParameterizedBounce_long:
 #_08D381: PHB
 #_08D382: PHK
 #_08D383: PLB
 
 #_08D384: PHX
 
-#_08D385: JSR ROUTINE_00FBCB_ParameterizedBounce
+#_08D385: JSR QuadDataWriter_00FBCB_ParameterizedBounce
 
 #_08D388: PLX
 
@@ -9396,11 +9833,11 @@ ROUTINE_00FBCB_ParameterizedBounce_long:
 
 ;===================================================================================================
 
-ROUTINE_00FBCB_ParameterizedBounce:
+QuadDataWriter_00FBCB_ParameterizedBounce:
 #_08D38B: STA.b $20
 #_08D38D: STY.b $22
 
-#_08D38F: JSL ROUTINE_00FBCB_long
+#_08D38F: JSL QuadDataWriter_00FBCB_long
 
 #_08D393: RTS
 
@@ -9704,19 +10141,19 @@ CODE_08D553:
 
 ;===================================================================================================
 
-ROUTINE_08D56C_long:
+ROUTINE_08D564:
 #_08D564: PHB
 #_08D565: PHK
 #_08D566: PLB
 
-#_08D567: JSR ROUTINE_08D56C
+#_08D567: JSR .execute
 
 #_08D56A: PLB
 #_08D56B: RTL
 
 ;===================================================================================================
 
-ROUTINE_08D56C:
+.execute
 #_08D56C: LDA.w data08D5C0,Y
 #_08D56F: TAY
 
@@ -9791,6 +10228,8 @@ ROUTINE_08D5AC:
 #_08D5BE: TAY
 
 #_08D5BF: RTS
+
+;===================================================================================================
 
 data08D5C0:
 #_08D5C0: dw data08D730
@@ -10138,6 +10577,8 @@ GetShopActionMessage:
 .exit
 #_08D7D9: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 .pointers
 #_08D7DA: dw .welcome
 #_08D7DC: dw .that_costs_this
@@ -10359,32 +10800,32 @@ ROUTINE_08D8C4:
 #_08D90E: dw data08DB76
 #_08D910: dw data08DBB4
 #_08D912: dw data08DBF2
-#_08D914: dw NullPtr
-#_08D916: dw NullPtr
-#_08D918: dw NullPtr
-#_08D91A: dw NullPtr
-#_08D91C: dw NullPtr
-#_08D91E: dw NullPtr
-#_08D920: dw NullPtr
-#_08D922: dw NullPtr
-#_08D924: dw NullPtr
-#_08D926: dw NullPtr
-#_08D928: dw NullPtr
-#_08D92A: dw NullPtr
-#_08D92C: dw NullPtr
-#_08D92E: dw NullPtr
-#_08D930: dw NullPtr
-#_08D932: dw NullPtr
-#_08D934: dw NullPtr
-#_08D936: dw NullPtr
-#_08D938: dw NullPtr
-#_08D93A: dw NullPtr
-#_08D93C: dw NullPtr
-#_08D93E: dw NullPtr
-#_08D940: dw NullPtr
-#_08D942: dw NullPtr
-#_08D944: dw NullPtr
-#_08D946: dw NullPtr
+#_08D914: dw $0000
+#_08D916: dw $0000
+#_08D918: dw $0000
+#_08D91A: dw $0000
+#_08D91C: dw $0000
+#_08D91E: dw $0000
+#_08D920: dw $0000
+#_08D922: dw $0000
+#_08D924: dw $0000
+#_08D926: dw $0000
+#_08D928: dw $0000
+#_08D92A: dw $0000
+#_08D92C: dw $0000
+#_08D92E: dw $0000
+#_08D930: dw $0000
+#_08D932: dw $0000
+#_08D934: dw $0000
+#_08D936: dw $0000
+#_08D938: dw $0000
+#_08D93A: dw $0000
+#_08D93C: dw $0000
+#_08D93E: dw $0000
+#_08D940: dw $0000
+#_08D942: dw $0000
+#_08D944: dw $0000
+#_08D946: dw $0000
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -10852,7 +11293,7 @@ ROUTINE_08DEE5:
 #_08DEE8: PHY
 
 #_08DEE9: LDA.w $0000,Y
-#_08DEEC: JSL ROUTINE_00D330_long
+#_08DEEC: JSL SplitBCDIntoDigits_long
 
 #_08DEF0: LDA.b $28
 #_08DEF2: STA.l $7E2580
@@ -10948,6 +11389,8 @@ ROUTINE_08DF4C:
 .exit
 #_08DF6A: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data08DF6B:
 #_08DF6B: db $40,$00,$3C,$00,$FF,$FF,$46,$00
 #_08DF73: db $FF,$FF,$44,$00
@@ -10974,6 +11417,8 @@ ROUTINE_08DF77:
 
 .exit
 #_08DF95: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data08DF96:
 #_08DF96: db $40,$00,$40,$00,$FF,$FF,$44,$00
@@ -11005,6 +11450,8 @@ ROUTINE_08DFAB:
 
 .exit
 #_08DFC0: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data08DFC1:
 #_08DFC1: db $46,$00,$42,$00,$44,$00,$FF,$FF
@@ -11105,15 +11552,17 @@ CODE_08E034:
 
 ROUTINE_08E038:
 #_08E038: LDA.l $7E7B3A
-#_08E03C: BEQ CODE_08E044
+#_08E03C: BEQ .skip
 
 #_08E03E: LDX.w $04FC
 #_08E041: JSR (.vectors,X)
 
-CODE_08E044:
+.skip
 #_08E044: LDA.w #$0000
 
 #_08E047: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08E048: dw ROUTINE_08E085
@@ -11224,10 +11673,15 @@ CODE_08E0B9:
 
 #_08E0C9: RTS
 
-; TODO states
+;---------------------------------------------------------------------------------------------------
+
 data08E0CA:
-#_08E0CA: db $4A,$00,$4C,$00,$4E,$00,$50,$00
-#_08E0D2: db $52,$00,$54,$00
+#_08E0CA: dw $004A ; STATE 4A
+#_08E0CC: dw $004C ; STATE 4C
+#_08E0CE: dw $004E ; STATE 4E
+#_08E0D0: dw $0050 ; STATE 50
+#_08E0D2: dw $0052 ; STATE 52
+#_08E0D4: dw $0054 ; STATE 54
 
 ;===================================================================================================
 
@@ -11271,163 +11725,277 @@ pointers08E0D6:
 #_08E11E: dw data08E1AF
 #_08E120: dw data08E21E
 
-; TODO
-
 ;---------------------------------------------------------------------------------------------------
 
 data08E122:
-#_08E122: dw $0A1F : dl $7F8000 : dw $5200
-#_08E129: dw $0514 : dl $7F8000 : dw $0000
-#_08E130: dw $0012 : dl $7F8000 : dw $0800
-#_08E137: dw $061A : dl $7F8000 : dw $7400
-#_08E13E: dw $0D1C : dl $7F8000 : dw $7000
+#_08E122: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E124: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E129: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E12B: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E130: db $12, $00 ; read $12:8006 for pointer to data128024
+#_08E132: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E137: db $1A, $06 ; read $1A:801E for pointer to data1AE1F1
+#_08E139: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_08E13E: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08E140: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
 #_08E145: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08E147:
-#_08E147: dw $0A1F : dl $7F8000 : dw $5200
-#_08E14E: dw $0514 : dl $7F8000 : dw $0000
-#_08E155: dw $0210 : dl $7F8000 : dw $0600
-#_08E15C: dw $0D1C : dl $7F8000 : dw $7000
-#_08E163: dw $031B : dl $7F8000 : dw $7400
+#_08E147: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E149: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E14E: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E150: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E155: db $10, $02 ; read $10:800E for pointer to data10DA39
+#_08E157: dl $7F8000 : dw $0600 ; target address, copy to $0C00 in VRAM
+
+#_08E15C: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08E15E: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08E163: db $1B, $03 ; read $1B:8012 for pointer to data1BAAEB
+#_08E165: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
 #_08E16A: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08E16C:
-#_08E16C: dw $0A1F : dl $7F8000 : dw $5200
-#_08E173: dw $0514 : dl $7F8000 : dw $0000
-#_08E17A: dw $0713 : dl $7F8000 : dw $0800
-#_08E181: dw $0111 : dl $7F8000 : dw $1000
-#_08E188: dw $0D1C : dl $7F8000 : dw $7000
-#_08E18F: dw $011B : dl $7F8000 : dw $7400
+#_08E16C: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E16E: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E173: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E175: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E17A: db $13, $07 ; read $13:8022 for pointer to data13EC46
+#_08E17C: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E181: db $11, $01 ; read $11:800A for pointer to data11A24F
+#_08E183: dl $7F8000 : dw $1000 ; target address, copy to $2000 in VRAM
+
+#_08E188: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08E18A: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08E18F: db $1B, $01 ; read $1B:800A for pointer to data1B8F0A
+#_08E191: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
 #_08E196: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08E198:
-#_08E198: dw $0A1F : dl $7F8000 : dw $5200
-#_08E19F: dw $0113 : dl $7F8000 : dw $1000
-#_08E1A6: dw $041A : dl $7F8000 : dw $7000
+#_08E198: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E19A: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E19F: db $13, $01 ; read $13:800A for pointer to data1392DC
+#_08E1A1: dl $7F8000 : dw $1000 ; target address, copy to $2000 in VRAM
+
+#_08E1A6: db $1A, $04 ; read $1A:8016 for pointer to data1AC375
+#_08E1A8: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
 #_08E1AD: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08E1AF:
-#_08E1AF: dw $0A1F : dl $7F8000 : dw $5200
-#_08E1B6: dw $0514 : dl $7F8000 : dw $0000
-#_08E1BD: dw $0110 : dl $7F8000 : dw $0800
-#_08E1C4: dw $0117 : dl $7F8000 : dw $7000
-#_08E1CB: dw $0D1C : dl $7F8000 : dw $7000
+#_08E1AF: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E1B1: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E1B6: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E1B8: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E1BD: db $10, $01 ; read $10:800A for pointer to data10AF73
+#_08E1BF: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E1C4: db $17, $01 ; read $17:800A for pointer to data179836
+#_08E1C6: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08E1CB: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08E1CD: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
 #_08E1D2: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08E1D4:
-#_08E1D4: dw $0A1F : dl $7F8000 : dw $5200
-#_08E1DB: dw $0514 : dl $7F8000 : dw $0000
-#_08E1E2: dw $0110 : dl $7F8000 : dw $0800
-#_08E1E9: dw $051A : dl $7F8000 : dw $7000
+#_08E1D4: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E1D6: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E1DB: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E1DD: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E1E2: db $10, $01 ; read $10:800A for pointer to data10AF73
+#_08E1E4: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E1E9: db $1A, $05 ; read $1A:801A for pointer to data1AD2E5
+#_08E1EB: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
 #_08E1F0: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08E1F2:
-#_08E1F2: dw $0A1F : dl $7F8000 : dw $5200
-#_08E1F9: dw $0514 : dl $7F8000 : dw $0000
-#_08E200: dw $0011 : dl $7F8000 : dw $0800
-#_08E207: dw $0411 : dl $7F8000 : dw $2000
-#_08E20E: dw $0D1C : dl $7F8000 : dw $7000
-#_08E215: dw $051B : dl $7F8000 : dw $7400
+#_08E1F2: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E1F4: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E1F9: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E1FB: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E200: db $11, $00 ; read $11:8006 for pointer to data11801C
+#_08E202: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E207: db $11, $04 ; read $11:8016 for pointer to data11F405
+#_08E209: dl $7F8000 : dw $2000 ; target address, copy to $4000 in VRAM
+
+#_08E20E: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08E210: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08E215: db $1B, $05 ; read $1B:801A for pointer to data1BC4CE
+#_08E217: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
 #_08E21C: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08E21E:
-#_08E21E: dw $0A1F : dl $7F8000 : dw $5200
-#_08E225: dw $0514 : dl $7F8000 : dw $0000
-#_08E22C: dw $0011 : dl $7F8000 : dw $0800
-#_08E233: dw $0D1C : dl $7F8000 : dw $7000
-#_08E23A: dw $051B : dl $7F8000 : dw $7400
+#_08E21E: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E220: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E225: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E227: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E22C: db $11, $00 ; read $11:8006 for pointer to data11801C
+#_08E22E: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E233: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_08E235: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_08E23A: db $1B, $05 ; read $1B:801A for pointer to data1BC4CE
+#_08E23C: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
 #_08E241: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08E243:
-#_08E243: dw $0A1F : dl $7F8000 : dw $5200
-#_08E24A: dw $0514 : dl $7F8000 : dw $0000
-#_08E251: dw $0311 : dl $7F8000 : dw $0800
-#_08E258: dw $0614 : dl $7F8000 : dw $2000
-#_08E25F: dw $0419 : dl $7F8000 : dw $7000
+#_08E243: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E245: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E24A: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E24C: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E251: db $11, $03 ; read $11:8012 for pointer to data11DAAB
+#_08E253: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E258: db $14, $06 ; read $14:801E for pointer to data14C76F
+#_08E25A: dl $7F8000 : dw $2000 ; target address, copy to $4000 in VRAM
+
+#_08E25F: db $19, $04 ; read $19:8016 for pointer to data19CEB6
+#_08E261: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
 #_08E266: dw $0000 ; end
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
 data08E268:
-#_08E268: dw $0A1F : dl $7F8000 : dw $5200
-#_08E26F: dw $0514 : dl $7F8000 : dw $0000
-#_08E276: dw $0311 : dl $7F8000 : dw $0800
-#_08E27D: dw $0614 : dl $7F8000 : dw $2000
-#_08E284: dw $0519 : dl $7F8000 : dw $7000
+#_08E268: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E26A: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E26F: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E271: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E276: db $11, $03 ; read $11:8012 for pointer to data11DAAB
+#_08E278: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E27D: db $14, $06 ; read $14:801E for pointer to data14C76F
+#_08E27F: dl $7F8000 : dw $2000 ; target address, copy to $4000 in VRAM
+
+#_08E284: db $19, $05 ; read $19:801A for pointer to data19E1CD
+#_08E286: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
 #_08E28B: dw $0000 ; end
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
 data08E28D:
-#_08E28D: dw $0A1F : dl $7F8000 : dw $5200
-#_08E294: dw $0514 : dl $7F8000 : dw $0000
-#_08E29B: dw $0311 : dl $7F8000 : dw $0800
-#_08E2A2: dw $0614 : dl $7F8000 : dw $2000
-#_08E2A9: dw $001B : dl $7F8000 : dw $7000
+#_08E28D: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E28F: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E294: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E296: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E29B: db $11, $03 ; read $11:8012 for pointer to data11DAAB
+#_08E29D: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E2A2: db $14, $06 ; read $14:801E for pointer to data14C76F
+#_08E2A4: dl $7F8000 : dw $2000 ; target address, copy to $4000 in VRAM
+
+#_08E2A9: db $1B, $00 ; read $1B:8006 for pointer to data1B8038
+#_08E2AB: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
 #_08E2B0: dw $0000 ; end
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
 data08E2B2:
-#_08E2B2: dw $0A1F : dl $7F8000 : dw $5200
-#_08E2B9: dw $0514 : dl $7F8000 : dw $0000
-#_08E2C0: dw $0713 : dl $7F8000 : dw $0800
-#_08E2C7: dw $0111 : dl $7F8000 : dw $1000
+#_08E2B2: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_08E2B4: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
+#_08E2B9: db $14, $05 ; read $14:801A for pointer to data14BCF3
+#_08E2BB: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08E2C0: db $13, $07 ; read $13:8022 for pointer to data13EC46
+#_08E2C2: dl $7F8000 : dw $0800 ; target address, copy to $1000 in VRAM
+
+#_08E2C7: db $11, $01 ; read $11:800A for pointer to data11A24F
+#_08E2C9: dl $7F8000 : dw $1000 ; target address, copy to $2000 in VRAM
+
 #_08E2CE: dw $0000 ; end
 
 ;===================================================================================================
 
 data08E2D0:
-#_08E2D0: db $18, $01 ; read address $18:800A for pointer
+#_08E2D0: db $18, $01 ; read $18:800A for pointer to data189659
 #_08E2D2: dl $7F8000 : db $60 ; target address, copy to $C000 in VRAM
 
-#_08E2D6: db $1F, $18 ; read address $1F:8066 for pointer
+#_08E2D6: db $1F, $18 ; read $1F:8066 for pointer to data1FAAD7
 #_08E2D8: dl $7F8000 : db $74 ; target address, copy to $E800 in VRAM
 
-#_08E2DC: db $0F, $04 ; read address $0F:8016 for pointer
+#_08E2DC: db $0F, $04 ; read $0F:8016 for pointer to CompressedData_MainGameFont
 #_08E2DE: dl $7F8000 : db $51 ; target address, copy to $A200 in VRAM
 
-#_08E2E2: db $1D, $19 ; read address $1D:806A for pointer
+#_08E2E2: db $1D, $19 ; read $1D:806A for pointer to data1DDDE3
 #_08E2E4: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
 
-#_08E2E8: db $1D, $23 ; read address $1D:8092 for pointer
+#_08E2E8: db $1D, $23 ; read $1D:8092 for pointer to data1DF9EC
 #_08E2EA: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_08E2EE: db $1F, $10 ; read address $1F:8046 for pointer
+#_08E2EE: db $1F, $10 ; read $1F:8046 for pointer to data1FA044
 #_08E2F0: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_08E2F4: db $1D, $1F ; read address $1D:8082 for pointer
+#_08E2F4: db $1D, $1F ; read $1D:8082 for pointer to data1DEF8F
 #_08E2F6: dl $7F8000 : db $3C ; target address, copy to $7800 in VRAM
 
-#_08E2FA: db $1F, $26 ; read address $1F:809E for pointer
+#_08E2FA: db $1F, $26 ; read $1F:809E for pointer to data1FB951
 #_08E2FC: dl $7F8000 : db $28 ; target address, copy to $5000 in VRAM
 
-#_08E300: db $1F, $0E ; read address $1F:803E for pointer
+#_08E300: db $1F, $0E ; read $1F:803E for pointer to data1F9D69
 #_08E302: dl $7F8000 : db $2C ; target address, copy to $5800 in VRAM
 
-#_08E306: db $1F, $2B ; read address $1F:80B2 for pointer
+#_08E306: db $1F, $2B ; read $1F:80B2 for pointer to CompressedData_Palette1FBD75
 #_08E308: dl $7E2E00 : db $80 ; target address
 
-#_08E30C: db $1F, $79 ; read address $1F:81EA for pointer
+#_08E30C: db $1F, $79 ; read $1F:81EA for pointer to CompressedData_Palette_1FE2F4
 #_08E30E: dl $7E2E00 : db $80 ; target address
 
-#_08E312: db $1F, $5D ; read address $1F:817A for pointer
+#_08E312: db $1F, $5D ; read $1F:817A for pointer to CompressedData_Palette1FDB61
 #_08E314: dl $7E2F00 : db $80 ; target address
 
 #_08E318: dw $0000 ; end
@@ -11435,44 +12003,44 @@ data08E2D0:
 ;===================================================================================================
 
 data08E31A:
-#_08E31A: db $0F, $02 ; read address $0F:800E for pointer
+#_08E31A: db $0F, $02 ; read $0F:800E for pointer to CompressedData_WorldMapGraphics
 #_08E31C: dl $7F8000 : db $00 ; target address, copy to $0000 in VRAM
 
-#_08E320: db $1C, $03 ; read address $1C:8012 for pointer
+#_08E320: db $1C, $03 ; read $1C:8012 for pointer to data1C9DA3
 #_08E322: dl $7F8000 : db $50 ; target address, copy to $A000 in VRAM
 
-#_08E326: db $18, $00 ; read address $18:8006 for pointer
+#_08E326: db $18, $00 ; read $18:8006 for pointer to data188024
 #_08E328: dl $7F8000 : db $60 ; target address, copy to $C000 in VRAM
 
-#_08E32C: db $1A, $00 ; read address $1A:8006 for pointer
+#_08E32C: db $1A, $00 ; read $1A:8006 for pointer to data1A802C
 #_08E32E: dl $7F8000 : db $70 ; target address, copy to $E000 in VRAM
 
-#_08E332: db $1D, $0B ; read address $1D:8032 for pointer
+#_08E332: db $1D, $0B ; read $1D:8032 for pointer to data1DAE70
 #_08E334: dl $7F8000 : db $30 ; target address, copy to $6000 in VRAM
 
-#_08E338: db $1F, $15 ; read address $1F:805A for pointer
+#_08E338: db $1F, $15 ; read $1F:805A for pointer to data1FA713
 #_08E33A: dl $7F8000 : db $40 ; target address, copy to $8000 in VRAM
 
-#_08E33E: db $1F, $3F ; read address $1F:8102 for pointer
+#_08E33E: db $1F, $3F ; read $1F:8102 for pointer to CompressedData_Palette1FCBCE
 #_08E340: dl $7E2E00 : db $80 ; target address
 
-#_08E344: db $1F, $97 ; read address $1F:8262 for pointer
+#_08E344: db $1F, $97 ; read $1F:8262 for pointer to CompressedData_Palette1FE78D
 #_08E346: dl $7E2E00 : db $80 ; target address
 
-#_08E34A: db $1F, $22 ; read address $1F:808E for pointer
+#_08E34A: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
 #_08E34C: dl $7E2F00 : db $80 ; target address
 
 #_08E350: dw $0000 ; end
 
 ;===================================================================================================
 
-ROUTINE_08E352:
+BuildBulkDecompressionTableForLevel:
 #_08E352: PHB
 #_08E353: PHK
 #_08E354: PLB
 
 #_08E355: LDY.w $18E4
-#_08E358: LDA.w data08E375,Y
+#_08E358: LDA.w .pointers,Y
 #_08E35B: STA.w $19B0
 
 #_08E35E: LDA.w #$8000
@@ -11488,16 +12056,18 @@ ROUTINE_08E352:
 #_08E373: PLB
 #_08E374: RTL
 
-data08E375:
-#_08E375: dw $411F
-#_08E377: dw $451F
-#_08E379: dw $501F
-#_08E37B: dw $3C1F
-#_08E37D: dw $4C1F
-#_08E37F: dw $461F
-#_08E381: dw $521F
-#_08E383: dw $471F
-#_08E385: dw $511F
+;---------------------------------------------------------------------------------------------------
+
+.pointers
+#_08E375: db $1F, $41 ; read $1F:810A for pointer to data 1FCD0E
+#_08E377: db $1F, $45 ; read $1F:811A for pointer to data 1FCF7F
+#_08E379: db $1F, $50 ; read $1F:8146 for pointer to data 1FD588
+#_08E37B: db $1F, $3C ; read $1F:80F6 for pointer to data 1FC9E0
+#_08E37D: db $1F, $4C ; read $1F:8136 for pointer to data 1FD36B
+#_08E37F: db $1F, $46 ; read $1F:811E for pointer to data 1FD017
+#_08E381: db $1F, $52 ; read $1F:814E for pointer to data 1FD692
+#_08E383: db $1F, $47 ; read $1F:8122 for pointer to data 1FD0AB
+#_08E385: db $1F, $51 ; read $1F:814A for pointer to data 1FD60D
 
 ;===================================================================================================
 
@@ -11586,6 +12156,8 @@ ROUTINE_08E3E6:
 
 #_08E3F8: RTS
 
+;===================================================================================================
+
 data08E3F9:
 #_08E3F9: db $C0,$C4,$00,$C5,$C0,$C4,$40,$C5
 
@@ -11673,6 +12245,8 @@ CODE_08E49E:
 #_08E4AB: PLB
 #_08E4AC: RTL
 
+;---------------------------------------------------------------------------------------------------
+
 .pointers
 #_08E4AD: dw data05E60E
 #_08E4AF: dw data05E62A
@@ -11687,7 +12261,7 @@ CODE_08E49E:
 
 ;===================================================================================================
 
-data08E4C1:
+MessagePointers08E4C1:
 #_08E4C1: dw Message_0887F2
 #_08E4C3: dw Message_0887F2
 #_08E4C5: dw Message_0887F2
@@ -11752,13 +12326,15 @@ SetLevelSong:
 
 #_08E52C: LDY.w $18E4
 
-#_08E52F: LDA.w .songs,Y
+#_08E52F: LDA.w .song,Y
 #_08E532: JSL RequestSong
 
 #_08E536: PLB
 #_08E537: RTL
 
-.songs
+;---------------------------------------------------------------------------------------------------
+
+.song
 #_08E538: dw $000F ; SONG 0F
 #_08E53A: dw $0003 ; SONG 03
 #_08E53C: dw $0001 ; SONG 01
@@ -11840,9 +12416,9 @@ CODE_08E59E:
 
 CODE_08E5AA:
 #_08E5AA: TXA
-#_08E5AB: BEQ CODE_08E5C2
+#_08E5AB: BEQ ROUTINE_08E5C2
 
-#_08E5AD: LDY.w #$E7A2
+#_08E5AD: LDY.w #data08E7A2
 #_08E5B0: JSR ROUTINE_08E64B
 
 #_08E5B3: STZ.w $19B8
@@ -11853,7 +12429,7 @@ CODE_08E5AA:
 #_08E5BC: LDA.w $19B6
 #_08E5BF: STA.w $19B2
 
-CODE_08E5C2:
+ROUTINE_08E5C2:
 #_08E5C2: LDA.w $19B2
 #_08E5C5: BPL CODE_08E5CC
 
@@ -11929,7 +12505,7 @@ CODE_08E62F:
 #_08E62F: JSR ROUTINE_08E7E1
 
 CODE_08E632:
-#_08E632: LDY.w #$E7A0
+#_08E632: LDY.w #data08E7A0
 
 #_08E635: LDA.w $0538
 #_08E638: AND.w #$1000
@@ -11944,7 +12520,7 @@ CODE_08E632:
 ;===================================================================================================
 
 ROUTINE_08E648:
-#_08E648: LDY.w #$E7A2
+#_08E648: LDY.w #data08E7A2
 
 ;===================================================================================================
 
@@ -11969,16 +12545,20 @@ ROUTINE_08E64B:
 
 #_08E665: JSL QueueUpVRAMTransfers_long
 
+;---------------------------------------------------------------------------------------------------
+
 #_08E669: LDY.w #$0000
 
-CODE_08E66C:
+.next
 #_08E66C: LDA.w $0800,Y
 #_08E66F: STA.w $0810,Y
 
 #_08E672: INY
 #_08E673: INY
 #_08E674: CPY.w #$0008
-#_08E677: BNE CODE_08E66C
+#_08E677: BNE .next
+
+;---------------------------------------------------------------------------------------------------
 
 #_08E679: INC.w $19BA
 
@@ -12012,15 +12592,42 @@ CODE_08E68F:
 ;---------------------------------------------------------------------------------------------------
 
 data08E6A5:
-#_08E6A5: db $68,$01,$6B,$01,$6E,$01,$71,$01
-#_08E6AD: db $74,$01,$77,$01,$A8,$01,$AB,$01
-#_08E6B5: db $AE,$01,$B1,$01,$B4,$01,$B7,$01
-#_08E6BD: db $E8,$01,$EB,$01,$EE,$01,$F1,$01
-#_08E6C5: db $F4,$01,$F7,$01,$28,$02,$2B,$02
-#_08E6CD: db $2E,$02,$31,$02,$34,$02,$37,$02
-#_08E6D5: db $68,$02,$6B,$02,$6E,$02,$71,$02
-#_08E6DD: db $74,$02,$77,$02,$A8,$02,$AB,$02
-#_08E6E5: db $AE,$02,$B1,$02,$B4,$02,$B7,$02
+#_08E6A5: dw $0168
+#_08E6A7: dw $016B
+#_08E6A9: dw $016E
+#_08E6AB: dw $0171
+#_08E6AD: dw $0174
+#_08E6AF: dw $0177
+#_08E6B1: dw $01A8
+#_08E6B3: dw $01AB
+#_08E6B5: dw $01AE
+#_08E6B7: dw $01B1
+#_08E6B9: dw $01B4
+#_08E6BB: dw $01B7
+#_08E6BD: dw $01E8
+#_08E6BF: dw $01EB
+#_08E6C1: dw $01EE
+#_08E6C3: dw $01F1
+#_08E6C5: dw $01F4
+#_08E6C7: dw $01F7
+#_08E6C9: dw $0228
+#_08E6CB: dw $022B
+#_08E6CD: dw $022E
+#_08E6CF: dw $0231
+#_08E6D1: dw $0234
+#_08E6D3: dw $0237
+#_08E6D5: dw $0268
+#_08E6D7: dw $026B
+#_08E6D9: dw $026E
+#_08E6DB: dw $0271
+#_08E6DD: dw $0274
+#_08E6DF: dw $0277
+#_08E6E1: dw $02A8
+#_08E6E3: dw $02AB
+#_08E6E5: dw $02AE
+#_08E6E7: dw $02B1
+#_08E6E9: dw $02B4
+#_08E6EB: dw $02B7
 
 ;===================================================================================================
 
@@ -12132,11 +12739,54 @@ ROUTINE_08E74E:
 ;===================================================================================================
 
 data08E77C:
-#_08E77C: db $42,$43,$44,$46,$47,$48,$4A,$4B
-#_08E784: db $4C,$4D,$4E,$50,$51,$52,$53,$54
-#_08E78C: db $56,$57,$58,$59,$5A,$D0,$D1,$D2
-#_08E794: db $D3,$D4,$D5,$D6,$D7,$D8,$D9,$F0
-#_08E79C: db $F1,$02,$01,$00,$3B,$28,$34,$28
+#_08E77C: db $42
+#_08E77D: db $43
+#_08E77E: db $44
+#_08E77F: db $46
+#_08E780: db $47
+#_08E781: db $48
+#_08E782: db $4A
+#_08E783: db $4B
+#_08E784: db $4C
+#_08E785: db $4D
+#_08E786: db $4E
+#_08E787: db $50
+#_08E788: db $51
+#_08E789: db $52
+#_08E78A: db $53
+#_08E78B: db $54
+#_08E78C: db $56
+#_08E78D: db $57
+#_08E78E: db $58
+#_08E78F: db $59
+#_08E790: db $5A
+#_08E791: db $D0
+#_08E792: db $D1
+#_08E793: db $D2
+#_08E794: db $D3
+#_08E795: db $D4
+#_08E796: db $D5
+#_08E797: db $D6
+#_08E798: db $D7
+#_08E799: db $D8
+#_08E79A: db $D9
+#_08E79B: db $F0
+#_08E79C: db $F1
+
+; TODO ???
+#_08E79D: db $02
+#_08E79E: db $01
+#_08E79F: db $00
+
+;===================================================================================================
+
+data08E7A0:
+#_08E7A0: dw $283B
+
+;===================================================================================================
+
+data08E7A2:
+#_08E7A2: dw $2834
 
 ;===================================================================================================
 
@@ -12163,11 +12813,42 @@ ROUTINE_08E7A4:
 ;---------------------------------------------------------------------------------------------------
 
 data08E7BD:
-#_08E7BD: db $00,$01,$02,$03,$04,$05,$06,$07
-#_08E7C5: db $08,$09,$0A,$0B,$0C,$0D,$0E,$0F
-#_08E7CD: db $10,$11,$12,$13,$14,$15,$16,$17
-#_08E7D5: db $18,$19,$1A,$1B,$1C,$1D,$1E,$1F
-#_08E7DD: db $20,$21,$22,$23
+#_08E7BD: db $00
+#_08E7BE: db $01
+#_08E7BF: db $02
+#_08E7C0: db $03
+#_08E7C1: db $04
+#_08E7C2: db $05
+#_08E7C3: db $06
+#_08E7C4: db $07
+#_08E7C5: db $08
+#_08E7C6: db $09
+#_08E7C7: db $0A
+#_08E7C8: db $0B
+#_08E7C9: db $0C
+#_08E7CA: db $0D
+#_08E7CB: db $0E
+#_08E7CC: db $0F
+#_08E7CD: db $10
+#_08E7CE: db $11
+#_08E7CF: db $12
+#_08E7D0: db $13
+#_08E7D1: db $14
+#_08E7D2: db $15
+#_08E7D3: db $16
+#_08E7D4: db $17
+#_08E7D5: db $18
+#_08E7D6: db $19
+#_08E7D7: db $1A
+#_08E7D8: db $1B
+#_08E7D9: db $1C
+#_08E7DA: db $1D
+#_08E7DB: db $1E
+#_08E7DC: db $1F
+#_08E7DD: db $20
+#_08E7DE: db $21
+#_08E7DF: db $22
+#_08E7E0: db $23
 
 ;===================================================================================================
 
@@ -12191,7 +12872,10 @@ ROUTINE_08E7E1:
 CODE_08E7F9:
 #_08E7F9: ASL A
 #_08E7FA: TAX
+
 #_08E7FB: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08E7FE: dw ROUTINE_08E804
@@ -12237,7 +12921,10 @@ CODE_08E819:
 
 #_08E827: AND.w #$000F
 #_08E82A: ASL A
+
 #_08E82B: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08E82E: dw ROUTINE_08E8CA
@@ -12248,9 +12935,12 @@ CODE_08E819:
 
 ROUTINE_08E834:
 #_08E834: TAX
+
 #_08E835: JSR (.vectors,X)
 
-#_08E838: JMP CODE_08E5C2
+#_08E838: JMP ROUTINE_08E5C2
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08E83B: dw .inc_19B0_a
@@ -12337,9 +13027,12 @@ ROUTINE_08E834:
 
 ROUTINE_08E87F:
 #_08E87F: TAX
+
 #_08E880: JSR (.vectors,X)
 
-#_08E883: JMP CODE_08E5C2
+#_08E883: JMP ROUTINE_08E5C2
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08E886: dw .dec_19B0_a
@@ -12426,9 +13119,12 @@ ROUTINE_08E87F:
 
 ROUTINE_08E8CA:
 #_08E8CA: TAX
+
 #_08E8CB: JSR (.vectors,X)
 
-#_08E8CE: JMP CODE_08E5C2
+#_08E8CE: JMP ROUTINE_08E5C2
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08E8D1: dw .inc_19B0_a
@@ -12530,7 +13226,6 @@ LevelPasswords:
 ;===================================================================================================
 
 OptionsScreenSoundEffects:
-
 #_08E953: db $3E ; 000 - SFX 3E
 #_08E954: db $3B ; 001 - SFX 3B
 #_08E955: db $3C ; 002 - SFX 3C
@@ -12873,6 +13568,7 @@ ROUTINE_08EBDC:
 
 .execute
 #_08EBE4: PHX
+
 #_08EBE5: TYX
 
 #_08EBE6: LDA.l $7E7B14
@@ -12894,6 +13590,8 @@ ROUTINE_08EBDC:
 #_08EC05: INC.w $04D4
 
 #_08EC08: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_08EC09: dw ROUTINE_08EC19
@@ -12919,10 +13617,10 @@ ROUTINE_08EC1B:
 #_08EC1C: PHX
 
 #_08EC1D: LDX.w #data08EC39
-#_08EC20: JSR ROUTINE_08F127
+#_08EC20: JSR CopyArbitraryTable_08BACE_ThenCopy
 
 #_08EC23: LDX.w #data08EF7E
-#_08EC26: JSR ROUTINE_08BACE
+#_08EC26: JSR CopyArbitraryTable_08BACE
 
 #_08EC29: PLX
 #_08EC2A: INC.w $054E
@@ -12931,12 +13629,18 @@ ROUTINE_08EC1B:
 #_08EC30: TRB.w $0536
 
 #_08EC33: LDA.w #$0132 ; PARTNER 0132
-#_08EC36: JMP ROUTINE_08EF7A
+#_08EC36: JMP SetPartner_08EF7A
 
-#data08EC39:
-#_08EC39: db $06,$00,$3A,$2E,$7E,$1F,$00,$1F
-#_08EC41: db $01,$1F,$02,$01,$00,$09,$21,$00
-#_08EC49: db $29,$00,$00
+;---------------------------------------------------------------------------------------------------
+; TODO palette
+data08EC39:
+#_08EC39: dw $0006 : dl $7E2E3A ; write 6 bytes to target
+#_08EC3E: dw $001F, $011F, $021F
+
+#_08EC44: dw $0001 : dl BG3SC ; write 1 byte to target
+#_08EC49: db $29
+
+#_08EC4A: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -12945,11 +13649,12 @@ ROUTINE_08EC4C:
 #_08EC4D: PHX
 
 #_08EC4E: LDX.w #data08EC71
-#_08EC51: JSR ROUTINE_08F127
+#_08EC51: JSR CopyArbitraryTable_08BACE_ThenCopy
 
 #_08EC54: LDX.w #data08EF9A
-#_08EC57: JSR ROUTINE_08BACE
-#_08EC5A: JSR ROUTINE_08EFE3
+#_08EC57: JSR CopyArbitraryTable_08BACE
+
+#_08EC5A: JSR HDMAInitialize_08EFE3
 
 #_08EC5D: LDA.w #$FFFF
 #_08EC60: STA.w $18EC
@@ -12957,22 +13662,40 @@ ROUTINE_08EC4C:
 #_08EC63: JSL ROUTINE_00D746_long
 
 #_08EC67: PLX
+
 #_08EC68: INC.w $054E
 
 #_08EC6B: LDA.w #$0128 ; PARTNER 0128
-#_08EC6E: JMP ROUTINE_08EF7A
+#_08EC6E: JMP SetPartner_08EF7A
 
-#data08EC71:
-#_08EC71: db $06,$00,$3A,$2E,$7E,$15,$40,$0E
-#_08EC79: db $20,$FF,$7F,$04,$00,$24,$05,$00
-#_08EC81: db $17,$00,$0B,$00,$02,$00,$30,$21
-#_08EC89: db $00,$02,$E4,$01,$00,$09,$21,$00
-#_08EC91: db $29,$04,$00,$28,$05,$00,$17,$00
-#_08EC99: db $00,$00,$03,$00,$23,$21,$00,$22
-#_08ECA1: db $02,$00,$08,$00,$1C,$19,$00,$00
-#_08ECA9: db $FC,$00,$FE,$00,$62,$00,$63,$04
-#_08ECB1: db $00,$18,$19,$00,$27,$00,$00,$02
-#_08ECB9: db $00,$00
+;---------------------------------------------------------------------------------------------------
+; TODO palette
+data08EC71:
+#_08EC71: dw $0006 : dl $7E2E3A ; write 6 bytes to target
+#_08EC76: db $15, $40, $0E, $20, $FF, $7F
+
+#_08EC7C: dw $0004 : dl $000524 ; write 4 bytes to target
+#_08EC81: db $17, $00, $0B, $00
+
+#_08EC85: dw $0002 : dl CGWSEL ; write 2 bytes to target
+#_08EC8A: db $02, $E4
+
+#_08EC8C: dw $0001 : dl BG3SC ; write 1 byte to target
+#_08EC91: db $29
+
+#_08EC92: dw $0004 : dl $000528 ; write 4 bytes to target
+#_08EC97: db $17, $00, $00, $00
+
+#_08EC9B: dw $0003 : dl W12SEL ; write 3 bytes to target
+#_08ECA0: db $22, $02, $00
+
+#_08ECA3: dw $0008 : dl $00191C ; write 8 bytes to target
+#_08ECA8: db $00, $FC, $00, $FE, $00, $62, $00, $63
+
+#_08ECB0: dw $0004 : dl $001918 ; write 4 bytes to target
+#_08ECB5: db $27, $00, $00, $02
+
+#_08ECB9: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -12984,10 +13707,10 @@ ROUTINE_08ECBB:
 #_08ECC1: JSL ROUTINE_01B69E_0000
 
 #_08ECC5: LDX.w #data08ECDE
-#_08ECC8: JSR ROUTINE_08F127
+#_08ECC8: JSR CopyArbitraryTable_08BACE_ThenCopy
 
 #_08ECCB: LDX.w #data08EF7E
-#_08ECCE: JSR ROUTINE_08BACE
+#_08ECCE: JSR CopyArbitraryTable_08BACE
 
 #_08ECD1: INC.w $054E
 
@@ -12995,18 +13718,28 @@ ROUTINE_08ECBB:
 #_08ECD5: JSR ROUTINE_08ED20
 
 #_08ECD8: LDA.w #$011E ; PARTNER 011E
-#_08ECDB: JMP ROUTINE_08EF7A
+#_08ECDB: JMP SetPartner_08EF7A
 
-#data08ECDE:
-#_08ECDE: db $06,$00,$3A,$2E,$7E,$00,$7E,$F0
-#_08ECE6: db $7F,$FF,$7F,$08,$00,$1C,$19,$00
-#_08ECEE: db $80,$98,$80,$9A,$00,$64,$00,$65
-#_08ECF6: db $04,$00,$18,$19,$00,$16,$00,$40
-#_08ECFE: db $01,$1A,$00,$00,$FC,$7E,$A0,$00
-#_08ED06: db $E0,$A0,$00,$E0,$A0,$00,$E0,$A0
-#_08ED0E: db $00,$E0,$A0,$00,$E0,$A0,$00,$E0
-#_08ED16: db $A0,$00,$E0,$A0,$00,$E0,$00,$00
-#_08ED1E: db $00,$00
+;---------------------------------------------------------------------------------------------------
+
+data08ECDE:
+; TODO palette
+#_08ECDE: dw $0006 : dl $7E2E3A ; write 6 bytes to target
+#_08ECE3: db $00, $7E, $F0, $7F, $FF, $7F
+
+#_08ECE9: dw $0008 : dl $00191C ; write 8 bytes to target
+#_08ECEE: db $80, $98, $80, $9A, $00, $64, $00, $65
+
+#_08ECF6: dw $0004 : dl $001918 ; write 4 bytes to target
+#_08ECFB: db $16, $00, $40, $01
+
+#_08ECFF: dw $001A : dl $7EFC00 ; write 26 bytes to target
+#_08ED04: db $A0, $00, $E0, $A0, $00, $E0, $A0, $00
+#_08ED0C: db $E0, $A0, $00, $E0, $A0, $00, $E0, $A0
+#_08ED14: db $00, $E0, $A0, $00, $E0, $A0, $00, $E0
+#_08ED1C: db $00, $00
+
+#_08ED1E: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -13031,6 +13764,7 @@ ROUTINE_08ED20:
 CODE_08ED42:
 #_08ED42: PHY
 #_08ED43: PHA
+
 #_08ED44: STA.w $1980
 
 #_08ED47: LDY.w #$0020
@@ -13038,6 +13772,7 @@ CODE_08ED42:
 CODE_08ED4A:
 #_08ED4A: PHY
 #_08ED4B: PHX
+
 #_08ED4C: INC.w $19B8
 
 #_08ED4F: LDA.w $19B8
@@ -13161,12 +13896,12 @@ ROUTINE_08EDE6:
 
 ROUTINE_08EDF6:
 #_08EDF6: LDA.w #$0000
-
 #_08EDF9: LDY.w #$0010
 
 .next
 #_08EDFC: PHY
 #_08EDFD: PHA
+
 #_08EDFE: STA.w $1980
 
 #_08EE01: LDY.w #$0020
@@ -13188,6 +13923,7 @@ CODE_08EE04:
 
 #_08EE19: INX
 #_08EE1A: INX
+
 #_08EE1B: DEY
 #_08EE1C: BNE CODE_08EE04
 
@@ -13214,30 +13950,49 @@ ROUTINE_08EE32:
 #_08EE33: PHX
 
 #_08EE34: LDX.w #data08EE4D
-#_08EE37: JSR ROUTINE_08F127
+#_08EE37: JSR CopyArbitraryTable_08BACE_ThenCopy
 
 #_08EE3A: LDX.w #data08EF9A
-#_08EE3D: JSR ROUTINE_08BACE
+#_08EE3D: JSR CopyArbitraryTable_08BACE
 
 #_08EE40: INC.w $054E
 
 #_08EE43: PLX
-#_08EE44: JSR ROUTINE_08EFE3
+
+#_08EE44: JSR HDMAInitialize_08EFE3
 
 #_08EE47: LDA.w #$0114 ; PARTNER 0114
-#_08EE4A: JMP ROUTINE_08EF7A
+#_08EE4A: JMP SetPartner_08EF7A
 
-#data08EE4D:
-#_08EE4D: db $06,$00,$3A,$2E,$7E,$03,$00,$08
-#_08EE55: db $00,$10,$00,$01,$00,$09,$21,$00
-#_08EE5D: db $2A,$04,$00,$24,$05,$00,$17,$00
-#_08EE65: db $10,$00,$02,$00,$30,$21,$00,$02
-#_08EE6D: db $04,$08,$00,$1C,$19,$00,$00,$F8
-#_08EE75: db $00,$FA,$00,$62,$00,$63,$04,$00
-#_08EE7D: db $18,$19,$00,$27,$00,$00,$01,$08
-#_08EE85: db $00,$28,$19,$00,$00,$F9,$00,$FB
-#_08EE8D: db $00,$64,$00,$65,$04,$00,$24,$19
-#_08EE95: db $00,$27,$00,$00,$01,$00,$00
+;---------------------------------------------------------------------------------------------------
+
+data08EE4D:
+; TODO palette
+#_08EE4D: dw $0006 : dl $7E2E3A ; write 6 bytes to target
+#_08EE52: db $03, $00, $08, $00, $10, $00
+
+#_08EE58: dw $0001 : dl BG3SC ; write 1 byte to target
+#_08EE5D: db $2A
+
+#_08EE5E: dw $0004 : dl $000524 ; write 4 bytes to target
+#_08EE63: db $17, $00, $10, $00
+
+#_08EE67: dw $0002 : dl CGWSEL ; write 2 bytes to target
+#_08EE6C: db $02, $04
+
+#_08EE6E: dw $0008 : dl $00191C ; write 8 bytes to target
+#_08EE73: db $00, $F8, $00, $FA, $00, $62, $00, $63
+
+#_08EE7B: dw $0004 : dl $001918 ; write 4 bytes to target
+#_08EE80: db $27, $00, $00, $01
+
+#_08EE84: dw $0008 : dl $001928 ; write 8 bytes to target
+#_08EE89: db $00, $F9, $00, $FB, $00, $64, $00, $65
+
+#_08EE91: dw $0004 : dl $001924 ; write 4 bytes to target
+#_08EE96: db $27, $00, $00, $01
+
+#_08EE9A: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -13256,23 +14011,36 @@ ROUTINE_08EE9C:
 #_08EEAC: LDA.w #$0024
 #_08EEAF: ORA.w #$DA00
 #_08EEB2: JSL ROUTINE_06A2CD
+
 #_08EEB6: PHX
 
 #_08EEB7: LDX.w #data08EEC1
-#_08EEBA: JSR ROUTINE_08F127
+#_08EEBA: JSR CopyArbitraryTable_08BACE_ThenCopy
 
 #_08EEBD: PLX
+
 #_08EEBE: JMP CODE_08EF63
 
-#data08EEC1:
-#_08EEC1: db $06,$00,$3A,$2E,$7E,$C6,$68,$CE
-#_08EEC9: db $69,$18,$6B,$08,$00,$1C,$19,$00
-#_08EED1: db $00,$F0,$00,$F2,$00,$62,$00,$63
-#_08EED9: db $04,$00,$18,$19,$00,$27,$00,$80
-#_08EEE1: db $01,$08,$00,$28,$19,$00,$00,$ED
-#_08EEE9: db $00,$EF,$00,$64,$00,$65,$04,$00
-#_08EEF1: db $24,$19,$00,$27,$00,$00,$01,$00
-#_08EEF9: db $00
+;---------------------------------------------------------------------------------------------------
+
+data08EEC1:
+; TODO palette
+#_08EEC1: dw $0006 : dl $7E2E3A ; write 6 bytes to target
+#_08EEC6: db $C6, $68, $CE, $69, $18, $6B
+
+#_08EECC: dw $0008 : dl $00191C ; write 8 bytes to target
+#_08EED1: db $00, $F0, $00, $F2, $00, $62, $00, $63
+
+#_08EED9: dw $0004 : dl $001918 ; write 4 bytes to target
+#_08EEDE: db $27, $00, $80, $01
+
+#_08EEE2: dw $0008 : dl $001928 ; write 8 bytes to target
+#_08EEE7: db $00, $ED, $00, $EF, $00, $64, $00, $65
+
+#_08EEEF: dw $0004 : dl $001924 ; write 4 bytes to target
+#_08EEF4: db $27, $00, $00, $01
+
+#_08EEF8: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -13291,44 +14059,62 @@ ROUTINE_08EEFA:
 #_08EF0A: LDA.w #$0020
 #_08EF0D: ORA.w #$DC00
 #_08EF10: JSL ROUTINE_06A2CD
+
 #_08EF14: PHX
 
 #_08EF15: LDX.w #data08EF1F
-#_08EF18: JSR ROUTINE_08F127
+#_08EF18: JSR CopyArbitraryTable_08BACE_ThenCopy
 
 #_08EF1B: PLX
+
 #_08EF1C: JMP CODE_08EF63
 
+;---------------------------------------------------------------------------------------------------
+
 #data08EF1F:
-#_08EF1F: db $06,$00,$02,$2E,$7E,$7A,$02,$5A
-#_08EF27: db $3B,$5A,$6B,$06,$00,$3A,$2E,$7E
-#_08EF2F: db $16,$00,$3A,$01,$7A,$02,$08,$00
-#_08EF37: db $1C,$19,$00,$00,$F4,$00,$F6,$00
-#_08EF3F: db $62,$00,$63,$04,$00,$18,$19,$00
-#_08EF47: db $27,$00,$80,$01,$08,$00,$28,$19
-#_08EF4F: db $00,$00,$EC,$00,$EE,$00,$64,$00
-#_08EF57: db $65,$04,$00,$24,$19,$00,$27,$00
-#_08EF5F: db $00,$01,$00,$00
+; TODO palettes
+#_08EF1F: dw $0006 : dl $7E2E02 ; write 6 bytes to target
+#_08EF24: db $7A, $02, $5A, $3B, $5A, $6B
+
+#_08EF2A: dw $0006 : dl $7E2E3A ; write 6 bytes to target
+#_08EF2F: db $16, $00, $3A, $01, $7A, $02
+
+#_08EF35: dw $0008 : dl $00191C ; write 8 bytes to target
+#_08EF3A: db $00, $F4, $00, $F6, $00, $62, $00, $63
+
+#_08EF42: dw $0004 : dl $001918 ; write 4 bytes to target
+#_08EF47: db $27, $00, $80, $01
+
+#_08EF4B: dw $0008 : dl $001928 ; write 8 bytes to target
+#_08EF50: db $00, $EC, $00, $EE, $00, $64, $00, $65
+
+#_08EF58: dw $0004 : dl $001924 ; write 4 bytes to target
+#_08EF5D: db $27, $00, $00, $01
+
+#_08EF61: dw $0000 ; end
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_08EF63:
 #_08EF63: PHX
 
 #_08EF64: LDX.w #data08EF7E
-#_08EF67: JSR ROUTINE_08BACE
+#_08EF67: JSR CopyArbitraryTable_08BACE
 
 #_08EF6A: LDX.w #data08EF9A
-#_08EF6D: JSR ROUTINE_08BACE
+#_08EF6D: JSR CopyArbitraryTable_08BACE
 
 #_08EF70: INC.w $054E
 
 #_08EF73: PLX
-#_08EF74: JSR ROUTINE_08EFE3
+
+#_08EF74: JSR HDMAInitialize_08EFE3
 
 #_08EF77: LDA.w #$010A ; PARTNER 010A
 
 ;---------------------------------------------------------------------------------------------------
 
-ROUTINE_08EF7A:
+SetPartner_08EF7A:
 #_08EF7A: STA.w $05CE
 
 #_08EF7D: RTS
@@ -13336,29 +14122,45 @@ ROUTINE_08EF7A:
 ;===================================================================================================
 
 data08EF7E:
-#_08EF7E: db $08,$00,$24,$05,$00,$13,$00,$04
-#_08EF86: db $00,$00,$00,$00,$00,$02,$00,$30
-#_08EF8E: db $21,$00,$02,$23,$01,$00,$09,$21
-#_08EF96: db $00,$29,$00,$00
+#_08EF7E: dw $0008 : dl $000524 ; write 8 bytes to target
+#_08EF83: db $13, $00, $04, $00, $00, $00, $00, $00
 
+#_08EF8B: dw $0002 : dl CGWSEL ; write 2 bytes to target
+#_08EF90: db $02, $23
+
+#_08EF92: dw $0001 : dl BG3SC ; write 1 byte to target
+#_08EF97: db $29
+
+#_08EF98: dw $0000 ; end
 
 ;===================================================================================================
 
 data08EF9A:
-#_08EF9A: db $0A,$00,$02,$FC
-#_08EF9E: db $7E,$00,$00,$E4,$00,$02,$E4,$00
-#_08EFA6: db $04,$E4,$00,$0A,$00,$80,$04,$00
-#_08EFAE: db $00,$00,$E4,$00,$02,$E4,$00,$04
-#_08EFB6: db $E4,$00,$07,$00,$12,$FC,$7E,$7F
-#_08EFBE: db $00,$E0,$7F,$00,$E0,$00,$06,$00
-#_08EFC6: db $00,$E4,$7E,$00,$00,$00,$00,$00
-#_08EFCE: db $00,$06,$00,$90,$04,$00,$00,$00
-#_08EFD6: db $00,$00,$00,$00,$02,$00,$00,$E0
-#_08EFDE: db $7E,$00,$00,$00,$00
+#_08EF9A: dw $000A : dl $7EFC02 ; write 10 bytes to target
+#_08EF9F: db $00, $00, $E4, $00, $02, $E4, $00, $04
+#_08EFA7: db $E4, $00
+
+#_08EFA9: dw $000A : dl $000480 ; write 10 bytes to target
+#_08EFAE: db $00, $00, $E4, $00, $02, $E4, $00, $04
+#_08EFB6: db $E4, $00
+
+#_08EFB8: dw $0007 : dl $7EFC12 ; write 7 bytes to target
+#_08EFBD: db $7F, $00, $E0, $7F, $00, $E0, $00
+
+#_08EFC4: dw $0006 : dl $7EE400 ; write 6 bytes to target
+#_08EFC9: db $00, $00, $00, $00, $00, $00
+
+#_08EFCF: dw $0006 : dl $000490 ; write 6 bytes to target
+#_08EFD4: db $00, $00, $00, $00, $00, $00
+
+#_08EFDA: dw $0002 : dl $7EE000 ; write 2 bytes to target
+#_08EFDF: db $00, $00
+
+#_08EFE1: dw $0000 ; end
 
 ;===================================================================================================
 
-ROUTINE_08EFE3:
+HDMAInitialize_08EFE3:
 #_08EFE3: PHX
 
 #_08EFE4: SEP #$20
@@ -13369,7 +14171,7 @@ ROUTINE_08EFE3:
 #_08EFEB: LDA.b #BG3HOFS
 #_08EFED: STA.w BBAD6
 
-#_08EFF0: LDX.w #$FC02
+#_08EFF0: LDX.w #$7EFC02
 #_08EFF3: STX.w DMA6ADDRL
 
 #_08EFF6: LDA.b #$7E
@@ -13407,7 +14209,7 @@ ROUTINE_08F026:
 #_08F026: TAX
 
 #_08F027: LDA.w #$0100 ; PARTNER 0100
-#_08F02A: JSR ROUTINE_08EF7A
+#_08F02A: JSR SetPartner_08EF7A
 
 #_08F02D: LDA.w $05E8
 #_08F030: AND.w #$FF80
@@ -13416,11 +14218,11 @@ ROUTINE_08F026:
 #_08F037: CLC
 #_08F038: ADC.w #$0400
 #_08F03B: AND.w #$FF80
-#_08F03E: BPL CODE_08F043
+#_08F03E: BPL .positive
 
 #_08F040: LDA.w #$0010
 
-CODE_08F043:
+.positive
 #_08F043: LSR A
 #_08F044: LSR A
 #_08F045: LSR A
@@ -13430,6 +14232,8 @@ CODE_08F043:
 #_08F049: DEC A
 #_08F04A: STA.w $05E0
 
+;---------------------------------------------------------------------------------------------------
+
 #_08F04D: LDA.w #$0080
 #_08F050: STA.w $05DC
 #_08F053: STA.w $05DE
@@ -13438,30 +14242,34 @@ CODE_08F043:
 #_08F059: STA.w $05E2
 
 #_08F05C: JSR ROUTINE_08F096
+
 #_08F05F: PHX
 
 #_08F060: LDX.w #data08F0DC
-#_08F063: JSR ROUTINE_08F127
+#_08F063: JSR CopyArbitraryTable_08BACE_ThenCopy
 
 #_08F066: LDX.w #data08EF9A
-#_08F069: JSR ROUTINE_08BACE
+#_08F069: JSR CopyArbitraryTable_08BACE
 
 #_08F06C: LDX.w #data08F0BC
-#_08F06F: JSR ROUTINE_08BACE
+#_08F06F: JSR CopyArbitraryTable_08BACE
 
 #_08F072: LDX.w #$0000
 #_08F075: TXA
 
-CODE_08F076:
+.next
 #_08F076: STA.l $7EE400,X
 
 #_08F07A: INX
 #_08F07B: INX
 #_08F07C: CPX.w #$0400
-#_08F07F: BNE CODE_08F076
+#_08F07F: BNE .next
+
+;---------------------------------------------------------------------------------------------------
 
 #_08F081: PLX
-#_08F082: JSR ROUTINE_08EFE3
+
+#_08F082: JSR HDMAInitialize_08EFE3
 
 #_08F085: LDA.w #$0106
 #_08F088: STA.b $26
@@ -13480,7 +14288,7 @@ ROUTINE_08F096:
 #_08F097: LDX.w #$01FE
 #_08F09A: LDA.w #$0100
 
-CODE_08F09D:
+.next_arithmetic
 #_08F09D: AND.w #$01FF
 #_08F0A0: STA.l $7EE000,X
 
@@ -13488,18 +14296,20 @@ CODE_08F09D:
 
 #_08F0A5: DEX
 #_08F0A6: DEX
-#_08F0A7: BPL CODE_08F09D
+#_08F0A7: BPL .next_arithmetic
+
+;---------------------------------------------------------------------------------------------------
 
 #_08F0A9: LDX.w #$0200
 #_08F0AC: LDA.w #$0100
 
-CODE_08F0AF:
+.next_constant
 #_08F0AF: STA.l $7EE000,X
 
 #_08F0B3: INX
 #_08F0B4: INX
 #_08F0B5: CPX.w #$0400
-#_08F0B8: BNE CODE_08F0AF
+#_08F0B8: BNE .next_constant
 
 #_08F0BA: PLX
 
@@ -13508,28 +14318,40 @@ CODE_08F0AF:
 ;===================================================================================================
 
 data08F0BC:
-#_08F0BC: db $0A,$00,$02,$FC,$7E,$FF,$00,$E4
-#_08F0C4: db $FF,$00,$E5,$FF,$00,$E6,$00,$0A
-#_08F0CC: db $00,$80,$04,$00,$FF,$00,$E4,$FF
-#_08F0D4: db $00,$E5,$FF,$00,$E6,$00,$00,$00
+#_08F0BC: dw $000A : dl $7EFC02 ; write 10 bytes to target
+#_08F0C1: db $FF, $00, $E4, $FF, $00, $E5, $FF, $00
+#_08F0C9: db $E6, $00
+
+#_08F0CB: dw $000A : dl $000480 ; write 10 bytes to target
+#_08F0D0: db $FF, $00, $E4, $FF, $00, $E5, $FF, $00
+#_08F0D8: db $E6, $00
+
+#_08F0DA: dw $0000 ; end
 
 ;===================================================================================================
 
 data08F0DC:
-#_08F0DC: db $06,$00,$02,$2E,$7E,$67,$00,$11
-#_08F0E4: db $01,$B6,$01,$06,$00,$3A,$2E,$7E
-#_08F0EC: db $67,$00,$B6,$01,$7F,$4F,$01,$00
-#_08F0F4: db $09,$21,$00,$29,$00,$00
+; TODO palettes
+#_08F0DC: dw $0006 : dl $7E2E02 ; write 6 bytes to target
+#_08F0E1: db $67, $00, $11, $01, $B6, $01
+
+#_08F0E7: dw $0006 : dl $7E2E3A ; write 6 bytes to target
+#_08F0EC: db $67, $00, $B6, $01, $7F, $4F
+
+#_08F0F2: dw $0001 : dl BG3SC ; write 1 byte to target
+#_08F0F7: db $29
+
+#_08F0F8: dw $0000 ; end
 
 ;===================================================================================================
 
-ROUTINE_08F0FA:
+HDMAInitialize_08F0FA:
 #_08F0FA: PHB
 #_08F0FB: PHK
 #_08F0FC: PLB
 
 #_08F0FD: LDX.w #data08EF9A
-#_08F100: JSR ROUTINE_08BACE
+#_08F100: JSR CopyArbitraryTable_08BACE
 
 #_08F103: SEP #$20
 
@@ -13556,8 +14378,8 @@ ROUTINE_08F0FA:
 
 ;===================================================================================================
 
-ROUTINE_08F127:
-#_08F127: JSR ROUTINE_08BACE
+CopyArbitraryTable_08BACE_ThenCopy:
+#_08F127: JSR CopyArbitraryTable_08BACE
 
 #_08F12A: LDX.w #$0002
 #_08F12D: JSR .fill
@@ -13597,7 +14419,7 @@ ROUTINE_08F144:
 
 #_08F155: LDA.w #data08F1AC
 #_08F158: LDY.w #data08F1AC>>16
-#_08F15B: JSL ROUTINE_00FBCB_ParameterizedBounce_long
+#_08F15B: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
 
 #_08F15F: STZ.w $19C0
 
@@ -13616,16 +14438,31 @@ ROUTINE_08F144:
 
 ;---------------------------------------------------------------------------------------------------
 
-; TODO
 data08F172:
-#_08F172: dw $4E1F : dl $7F8000 : dw $2800
-#_08F179: dw $4E1F : dl $7F8000 : dw $2C00
-#_08F180: dw $0619 : dl $7F8000 : dw $5000
-#_08F187: dw $741F : dl $7E2E00 : dw $FFFF
-#_08F18E: dw $741F : dl $7E2A00 : dw $FFFF
-#_08F195: dw $111D : dl $7F2000 : dw $FFFF
-#_08F19C: dw $021D : dl $7F4000 : dw $FFFF
-#_08F1A3: dw $031F : dl $7F6000 : dw $FFFF
+#_08F172: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_08F174: dl $7F8000 : dw $2800 ; target address, copy to $5000 in VRAM
+
+#_08F179: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_08F17B: dl $7F8000 : dw $2C00 ; target address, copy to $5800 in VRAM
+
+#_08F180: db $19, $06 ; read $19:801E for pointer to data19F442
+#_08F182: dl $7F8000 : dw $5000 ; target address, copy to $A000 in VRAM
+
+#_08F187: db $1F, $74 ; read $1F:81D6 for pointer to CompressedData_Palette1FE1E0
+#_08F189: dl $7E2E00 : dw $FFFF ; target address
+
+#_08F18E: db $1F, $74 ; read $1F:81D6 for pointer to CompressedData_Palette1FE1E0
+#_08F190: dl $7E2A00 : dw $FFFF ; target address
+
+#_08F195: db $1D, $11 ; read $1D:804A for pointer to data1DC34C
+#_08F197: dl $7F2000 : dw $FFFF ; target address
+
+#_08F19C: db $1D, $02 ; read $1D:800E for pointer to data1D8A29
+#_08F19E: dl $7F4000 : dw $FFFF ; target address
+
+#_08F1A3: db $1F, $03 ; read $1F:8012 for pointer to data1F8901
+#_08F1A5: dl $7F6000 : dw $FFFF ; target address
+
 #_08F1AA: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
@@ -13710,12 +14547,12 @@ ROUTINE_08F21A:
 #_08F22B: BCS .exit
 
 #_08F22D: AND.w #$00FF
-#_08F230: BNE CODE_08F258
+#_08F230: BNE .no_transfer
 
 #_08F232: LDA.w $19C1
 #_08F235: AND.w #$00FF
 #_08F238: CMP.w #$000A
-#_08F23B: BCS CODE_08F258
+#_08F23B: BCS .no_transfer
 
 #_08F23D: ASL A
 #_08F23E: ASL A
@@ -13735,7 +14572,9 @@ ROUTINE_08F21A:
 
 #_08F254: JSL QueueUpVRAMTransfers_long
 
-CODE_08F258:
+;---------------------------------------------------------------------------------------------------
+
+.no_transfer
 #_08F258: INC.w $19C0
 
 #_08F25B: LDA.w $19C0
@@ -13801,63 +14640,80 @@ ROUTINE_08F29A:
 #_08F2BA: dw data08F2F0
 #_08F2BC: dw data08F2C4
 #_08F2BE: dw data08F2E5
-#_08F2C0: dw NullPtr
+#_08F2C0: dw $0000
 #_08F2C2: dw data08F2F9
-
-; TODO
 
 ;---------------------------------------------------------------------------------------------------
 
 data08F2C4:
-#_08F2C4: dl $00FFFF
-#_08F2C7: dw $2388 : dl $7F8000 : dw $5B80
+#_08F2C4: dw $FFFF : dl CompressedData_TengyFlair
+#_08F2C9: dl $7F8000 : dw $5B80 ; target address, copy to $B700 in VRAM
 #_08F2CE: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08F2D0:
-#_08F2D0: dw $0F1C : dl $7F8000 : dw $5B80
+#_08F2D0: db $1C, $0F ; read $1C:8042 for pointer to data1CEF6A
+#_08F2D2: dl $7F8000 : dw $5B80 ; target address, copy to $B700 in VRAM
+
 #_08F2D7: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08F2D9:
-#_08F2D9: dl $00FFFF
-#_08F2DC: dw $238C : dl $7F8000 : dw $5B80
+#_08F2D9: dw $FFFF : dl CompressedData_DiggerFlair
+#_08F2DC: dl $7F8000 : dw $5B80 ; target address, copy to $B700 in VRAM
 #_08F2E3: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08F2E5:
-#_08F2E5: dw $001D : dl $7F8000 : dw $5B80
+#_08F2E5: db $1D, $00 ; read $1D:8006 for pointer to data1D80A0
+#_08F2E7: dl $7F8000 : dw $5B80 ; target address, copy to $B700 in VRAM
+
 #_08F2EC: dw $0000 ; end
+
 #_08F2EE: dw $0000
 
 ;---------------------------------------------------------------------------------------------------
 
 data08F2F0:
-#_08F2F0: dw $101D : dl $7F8000 : dw $5B80
+#_08F2F0: db $1D, $10 ; read $1D:8046 for pointer to data1DBFDC
+#_08F2F2: dl $7F8000 : dw $5B80 ; target address, copy to $B700 in VRAM
+
 #_08F2F7: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08F2F9:
-#_08F2F9: dw $0A1C : dl $7F8000 : dw $5B80
+#_08F2F9: db $1C, $0A ; read $1C:802E for pointer to data1CD1EB
+#_08F2FB: dl $7F8000 : dw $5B80 ; target address, copy to $B700 in VRAM
+
 #_08F300: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08F302:
-#_08F302: dw $051D : dl $7F8000 : dw $5B80
+#_08F302: db $1D, $05 ; read $1D:801A for pointer to data1D9719
+#_08F304: dl $7F8000 : dw $5B80 ; target address, copy to $B700 in VRAM
+
 #_08F309: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data08F30B:
-#_08F30B: dw $0B1B : dl $7F8000 : dw $0000
-#_08F312: dw $040F : dl $7F8000 : dw $5100
-#_08F319: dw $121F : dl $7F8000 : dw $2800
-#_08F320: dw $721F : dl $7E2E00 : dw $FFFF
+#_08F30B: db $1B, $0B ; read $1B:8032 for pointer to CompressedData_Empty0020_1B
+#_08F30D: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_08F312: db $0F, $04 ; read $0F:8016 for pointer to CompressedData_MainGameFont
+#_08F314: dl $7F8000 : dw $5100 ; target address, copy to $A200 in VRAM
+
+#_08F319: db $1F, $12 ; read $1F:804E for pointer to data1FA311
+#_08F31B: dl $7F8000 : dw $2800 ; target address, copy to $5000 in VRAM
+
+#_08F320: db $1F, $72 ; read $1F:81CE for pointer to CompressedData_Palette1FE166
+#_08F322: dl $7E2E00 : dw $FFFF ; target address
+
 #_08F327: dw $0000 ; end
 
 ;===================================================================================================
@@ -13913,7 +14769,7 @@ ROUTINE_08F360:
 #_08F385: TAY
 
 #_08F386: LDA.w $04E4
-#_08F389: BEQ CODE_08F395
+#_08F389: BEQ .loop
 
 #_08F38B: LDA.l $7E2530
 #_08F38F: BEQ .continue_b
@@ -13923,7 +14779,9 @@ ROUTINE_08F360:
 .continue_b
 #_08F392: STZ.w $04E4
 
-CODE_08F395:
+;---------------------------------------------------------------------------------------------------
+
+.loop
 #_08F395: LDA.w .data_start+0,Y
 
 #_08F398: CMP.w #$FFFF
@@ -13954,7 +14812,7 @@ CODE_08F3BD:
 #_08F3BD: CLC
 #_08F3BE: TYA
 #_08F3BF: ADC.w #$0006
-#_08F3C2: BRA CODE_08F42A
+#_08F3C2: BRA .to_next
 
 CODE_08F3C4:
 #_08F3C4: LDX.b $20
@@ -14001,7 +14859,7 @@ CODE_08F3FB:
 #_08F400: CLC
 #_08F401: TYA
 #_08F402: ADC.w #$0006
-#_08F405: BRA CODE_08F42A
+#_08F405: BRA .to_next
 
 CODE_08F407:
 #_08F407: LDA.w .data_start+6,Y
@@ -14026,9 +14884,10 @@ CODE_08F425:
 #_08F426: TYA
 #_08F427: ADC.w #$000A
 
-CODE_08F42A:
+.to_next
 #_08F42A: TAY
-#_08F42B: JMP CODE_08F395
+
+#_08F42B: JMP .loop
 
 .data_start
 

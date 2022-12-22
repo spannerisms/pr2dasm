@@ -69,338 +69,338 @@ ExecuteHighSprite:
 ;---------------------------------------------------------------------------------------------------
 
 .vectors
-#_06A2EB: dw ROUTINE_06FF27                     ; 8000
-#_06A2ED: dw ROUTINE_06FF6B                     ; 8002
-#_06A2EF: dw ROUTINE_06F83D                     ; 8004
-#_06A2F1: dw ROUTINE_06F856                     ; 8006
-#_06A2F3: dw ROUTINE_06F868                     ; 8008
-#_06A2F5: dw ROUTINE_06F895                     ; 800A
-#_06A2F7: dw ROUTINE_06F8BF                     ; 800C
-#_06A2F9: dw ROUTINE_06F7FE                     ; 800E
-#_06A2FB: dw ROUTINE_06F80F                     ; 8010
-#_06A2FD: dw ROUTINE_06F925                     ; 8012
-#_06A2FF: dw ROUTINE_06F9C5                     ; 8014
-#_06A301: dw ROUTINE_06F9E7                     ; 8016
-#_06A303: dw ROUTINE_06FA56                     ; 8018
-#_06A305: dw ROUTINE_06FAE3                     ; 801A
-#_06A307: dw ROUTINE_06FBD3                     ; 801C
-#_06A309: dw ROUTINE_06FC5D                     ; 801E
-#_06A30B: dw ROUTINE_06FCC0                     ; 8020
-#_06A30D: dw ROUTINE_06FE39                     ; 8022
-#_06A30F: dw ROUTINE_06FE53                     ; 8024
-#_06A311: dw ROUTINE_06FE6D                     ; 8026
-#_06A313: dw ROUTINE_06FE95                     ; 8028
-#_06A315: dw ROUTINE_06FED5                     ; 802A
-#_06A317: dw ROUTINE_06FD1E                     ; 802C
-#_06A319: dw ROUTINE_06FD7E                     ; 802E
-#_06A31B: dw ROUTINE_06FDBB                     ; 8030
-#_06A31D: dw ROUTINE_06F74D                     ; 8032
-#_06A31F: dw ROUTINE_06F76D                     ; 8034
-#_06A321: dw ROUTINE_06F7FB                     ; 8036
-#_06A323: dw ROUTINE_06F6E7                     ; 8038
-#_06A325: dw ROUTINE_06F6F3                     ; 803A
-#_06A327: dw ROUTINE_06F6B4                     ; 803C
-#_06A329: dw ROUTINE_06F6C4                     ; 803E
-#_06A32B: dw ROUTINE_06F606                     ; 8040
-#_06A32D: dw ROUTINE_06F622                     ; 8042
-#_06A32F: dw ROUTINE_06F686                     ; 8044
-#_06A331: dw ROUTINE_06F5BA                     ; 8046
-#_06A333: dw ROUTINE_06F5DC                     ; 8048
-#_06A335: dw ROUTINE_06F5C5                     ; 804A
-#_06A337: dw ROUTINE_06F5DC                     ; 804C
-#_06A339: dw ROUTINE_06F57B                     ; 804E
-#_06A33B: dw ROUTINE_06F58B                     ; 8050
-#_06A33D: dw ROUTINE_06F397                     ; 8052
-#_06A33F: dw ROUTINE_06F3B5                     ; 8054
-#_06A341: dw ROUTINE_06F3EE_805E                     ; 8056
-#_06A343: dw ROUTINE_06F427                     ; 8058
-#_06A345: dw ROUTINE_06F446                     ; 805A
-#_06A347: dw ROUTINE_06F466                     ; 805C
-#_06A349: dw ROUTINE_06F480                     ; 805E
-#_06A34B: dw ROUTINE_06F3B5_dupe                     ; 8060
-#_06A34D: dw ROUTINE_06F49E                     ; 8062
-#_06A34F: dw ROUTINE_06F3EE_806C                     ; 8064
-#_06A351: dw ROUTINE_06F427                     ; 8066
-#_06A353: dw ROUTINE_06F446                     ; 8068
-#_06A355: dw ROUTINE_06F466                     ; 806A
-#_06A357: dw ROUTINE_06F480                     ; 806C
-#_06A359: dw ROUTINE_06F3B5_dupe                     ; 806E
-#_06A35B: dw ROUTINE_06F4A8                     ; 8070
-#_06A35D: dw ROUTINE_06F3EE_807A                     ; 8072
-#_06A35F: dw ROUTINE_06F427                     ; 8074
-#_06A361: dw ROUTINE_06F446                     ; 8076
-#_06A363: dw ROUTINE_06F466                     ; 8078
-#_06A365: dw ROUTINE_06F480                     ; 807A
-#_06A367: dw ROUTINE_06F3B5_dupe                     ; 807C
-#_06A369: dw ROUTINE_06F4B2                     ; 807E
-#_06A36B: dw ROUTINE_06F4E8                     ; 8080
-#_06A36D: dw ROUTINE_06F51B                     ; 8082
-#_06A36F: dw ROUTINE_06F536                     ; 8084
-#_06A371: dw ROUTINE_06F558                     ; 8086
-#_06A373: dw ROUTINE_06F3B5_dupe                     ; 8088
-#_06A375: dw ROUTINE_06F501                     ; 808A
-#_06A377: dw ROUTINE_06F427                     ; 808C
-#_06A379: dw ROUTINE_06F4C9                     ; 808E
-#_06A37B: dw ROUTINE_06F291                     ; 8090
-#_06A37D: dw ROUTINE_06F1D5                     ; 8092
-#_06A37F: dw ROUTINE_06F20D                     ; 8094
-#_06A381: dw ROUTINE_06F271                     ; 8096
-#_06A383: dw ROUTINE_06FDD8                     ; 8098
-#_06A385: dw ROUTINE_06FE05                     ; 809A
-#_06A387: dw NullPtr                            ; 809C
-#_06A389: dw NullPtr                            ; 809E
-#_06A38B: dw NullPtr                            ; 80A0
-#_06A38D: dw NullPtr                            ; 80A2
-#_06A38F: dw NullPtr                            ; 80A4
-#_06A391: dw NullPtr                            ; 80A6
-#_06A393: dw NullPtr                            ; 80A8
-#_06A395: dw NullPtr                            ; 80AA
-#_06A397: dw NullPtr                            ; 80AC
-#_06A399: dw NullPtr                            ; 80AE
-#_06A39B: dw ROUTINE_06A57B                     ; 80B0
-#_06A39D: dw ROUTINE_06A5AE                     ; 80B2
-#_06A39F: dw ROUTINE_06A5DB                     ; 80B4
-#_06A3A1: dw ROUTINE_06A5FF                     ; 80B6
-#_06A3A3: dw ROUTINE_06A61A                     ; 80B8
-#_06A3A5: dw ROUTINE_06A627                     ; 80BA
-#_06A3A7: dw ROUTINE_06A64B                     ; 80BC
-#_06A3A9: dw ROUTINE_06A672                     ; 80BE
-#_06A3AB: dw ROUTINE_06A6B7                     ; 80C0
-#_06A3AD: dw ROUTINE_06A6C4                     ; 80C2
-#_06A3AF: dw ROUTINE_06CAF1                     ; 80C4
-#_06A3B1: dw ROUTINE_06CB15                     ; 80C6
-#_06A3B3: dw ROUTINE_06CB34                     ; 80C8
-#_06A3B5: dw ROUTINE_06E022                     ; 80CA
-#_06A3B7: dw ROUTINE_06E022                     ; 80CC
-#_06A3B9: dw NullPtr                            ; 80CE
-#_06A3BB: dw ROUTINE_06F165                     ; 80D0
-#_06A3BD: dw ROUTINE_06F17F                     ; 80D2
-#_06A3BF: dw ROUTINE_06F1CD                     ; 80D4
-#_06A3C1: dw ROUTINE_06EFCD                     ; 80D6
-#_06A3C3: dw ROUTINE_06EFE3                     ; 80D8
-#_06A3C5: dw ROUTINE_06F02F                     ; 80DA
-#_06A3C7: dw ROUTINE_06EFC7                     ; 80DC
-#_06A3C9: dw ROUTINE_06F124                     ; 80DE
-#_06A3CB: dw ROUTINE_06EF68                     ; 80E0
-#_06A3CD: dw ROUTINE_06EF85                     ; 80E2
-#_06A3CF: dw ROUTINE_06EF68                     ; 80E4
-#_06A3D1: dw ROUTINE_06EF68                     ; 80E6
-#_06A3D3: dw NullPtr                            ; 80E8
-#_06A3D5: dw NullPtr                            ; 80EA
-#_06A3D7: dw NullPtr                            ; 80EC
-#_06A3D9: dw NullPtr                            ; 80EE
-#_06A3DB: dw ROUTINE_06E022                     ; 80F0
-#_06A3DD: dw ROUTINE_06E0D4                     ; 80F2
-#_06A3DF: dw ROUTINE_06E23D                     ; 80F4
-#_06A3E1: dw ROUTINE_06E251                     ; 80F6
-#_06A3E3: dw ROUTINE_06E260                     ; 80F8
-#_06A3E5: dw ROUTINE_06E289                     ; 80FA
-#_06A3E7: dw ROUTINE_06E298                     ; 80FC
-#_06A3E9: dw ROUTINE_06E42E                     ; 80FE
-#_06A3EB: dw ROUTINE_06DEA4                     ; 8100
-#_06A3ED: dw ROUTINE_06DEB6                     ; 8102
-#_06A3EF: dw ROUTINE_06D34C                     ; 8104
-#_06A3F1: dw ROUTINE_06D369                     ; 8106
-#_06A3F3: dw ROUTINE_06D30A                     ; 8108
-#_06A3F5: dw ROUTINE_06D324                     ; 810A
-#_06A3F7: dw ROUTINE_06D303                     ; 810C
-#_06A3F9: dw ROUTINE_06D2EB                     ; 810E
-#_06A3FB: dw ROUTINE_06D2F2                     ; 8110
-#_06A3FD: dw ROUTINE_06D239                     ; 8112
-#_06A3FF: dw ROUTINE_06D25A                     ; 8114
-#_06A401: dw ROUTINE_06CF4A                     ; 8116
-#_06A403: dw ROUTINE_06D21C                     ; 8118
-#_06A405: dw ROUTINE_06CE10                     ; 811A
-#_06A407: dw ROUTINE_06CE55                     ; 811C
-#_06A409: dw ROUTINE_06CCCE                     ; 811E
-#_06A40B: dw ROUTINE_06CCFC                     ; 8120
-#_06A40D: dw ROUTINE_06CD62                     ; 8122
-#_06A40F: dw ROUTINE_06CDDD                     ; 8124
-#_06A411: dw ROUTINE_06CBBB                     ; 8126
-#_06A413: dw ROUTINE_06CC40                     ; 8128
-#_06A415: dw ROUTINE_06CC80                     ; 812A
-#_06A417: dw NullPtr                            ; 812C
-#_06A419: dw ROUTINE_06CBA9                     ; 812E
-#_06A41B: dw ROUTINE_06CB4F                     ; 8130
-#_06A41D: dw ROUTINE_06CB80                     ; 8132
-#_06A41F: dw ROUTINE_06CAE7                     ; 8134
-#_06A421: dw ROUTINE_06CABB                     ; 8136
-#_06A423: dw ROUTINE_06CAD4                     ; 8138
-#_06A425: dw ROUTINE_06CA8F                     ; 813A
-#_06A427: dw ROUTINE_06CAA7                     ; 813C
-#_06A429: dw ROUTINE_06CA57                     ; 813E
-#_06A42B: dw ROUTINE_06CA7D                     ; 8140
-#_06A42D: dw ROUTINE_06E298                     ; 8142
-#_06A42F: dw ROUTINE_06E42E                     ; 8144
-#_06A431: dw ROUTINE_06E4DE                     ; 8146
-#_06A433: dw ROUTINE_06E5A0                     ; 8148
-#_06A435: dw ROUTINE_06E5F6                     ; 814A
-#_06A437: dw ROUTINE_06E63E                     ; 814C
-#_06A439: dw ROUTINE_06E782                     ; 814E
-#_06A43B: dw ROUTINE_06E81F                     ; 8150
-#_06A43D: dw ROUTINE_06E87C                     ; 8152
-#_06A43F: dw ROUTINE_06E897                     ; 8154
-#_06A441: dw ROUTINE_06E8C9                     ; 8156
-#_06A443: dw ROUTINE_06E8FD                     ; 8158
-#_06A445: dw ROUTINE_06E99D                     ; 815A
-#_06A447: dw ROUTINE_06E9C3                     ; 815C
-#_06A449: dw ROUTINE_06E9E6                     ; 815E
-#_06A44B: dw ROUTINE_06EBEF                     ; 8160
-#_06A44D: dw ROUTINE_06EC46                     ; 8162
-#_06A44F: dw ROUTINE_06EC75                     ; 8164
-#_06A451: dw ROUTINE_06ECA5                     ; 8166
-#_06A453: dw ROUTINE_06EDF3                     ; 8168
-#_06A455: dw ROUTINE_06EE6A                     ; 816A
-#_06A457: dw ROUTINE_06E782                     ; 816C
-#_06A459: dw ROUTINE_06E70A                     ; 816E
-#_06A45B: dw ROUTINE_06EA08                     ; 8170
-#_06A45D: dw ROUTINE_06EAA8                     ; 8172
-#_06A45F: dw ROUTINE_06EB1B                     ; 8174
-#_06A461: dw ROUTINE_06EB3A                     ; 8176
-#_06A463: dw ROUTINE_06EB46                     ; 8178
-#_06A465: dw ROUTINE_06EB56                     ; 817A
-#_06A467: dw ROUTINE_06EB56                     ; 817C
-#_06A469: dw ROUTINE_06EBA1                     ; 817E
-#_06A46B: dw ROUTINE_06C587                     ; 8180
-#_06A46D: dw ROUTINE_06C61F                     ; 8182
-#_06A46F: dw ROUTINE_06C66D                     ; 8184
-#_06A471: dw ROUTINE_06C680                     ; 8186
-#_06A473: dw ROUTINE_06C68F                     ; 8188
-#_06A475: dw ROUTINE_06C661                     ; 818A
-#_06A477: dw ROUTINE_06C6AD                     ; 818C
-#_06A479: dw ROUTINE_06C929                     ; 818E
-#_06A47B: dw ROUTINE_06C9A1                     ; 8190
-#_06A47D: dw ROUTINE_06C54D                     ; 8192
-#_06A47F: dw ROUTINE_06C551                     ; 8194
-#_06A481: dw ROUTINE_06C404                     ; 8196
-#_06A483: dw ROUTINE_06C447                     ; 8198
-#_06A485: dw ROUTINE_06C495                     ; 819A
-#_06A487: dw ROUTINE_06C4CD                     ; 819C
-#_06A489: dw ROUTINE_06C537                     ; 819E
-#_06A48B: dw ROUTINE_06C369                     ; 81A0
-#_06A48D: dw ROUTINE_06C3BF                     ; 81A2
-#_06A48F: dw ROUTINE_06C3E3                     ; 81A4
-#_06A491: dw ROUTINE_06C3A3                     ; 81A6
-#_06A493: dw ROUTINE_06C28A                     ; 81A8
-#_06A495: dw ROUTINE_06C2B5                     ; 81AA
-#_06A497: dw ROUTINE_06C341                     ; 81AC
-#_06A499: dw NullPtr                            ; 81AE
-#_06A49B: dw ROUTINE_06CA06                     ; 81B0
-#_06A49D: dw ROUTINE_06CA3C                     ; 81B2
-#_06A49F: dw ROUTINE_06C1CC                     ; 81B4
-#_06A4A1: dw ROUTINE_06C231                     ; 81B6
-#_06A4A3: dw ROUTINE_06C243                     ; 81B8
-#_06A4A5: dw ROUTINE_06C256                     ; 81BA
-#_06A4A7: dw ROUTINE_06C280                     ; 81BC
-#_06A4A9: dw ROUTINE_06C158                     ; 81BE
-#_06A4AB: dw ROUTINE_06C18C                     ; 81C0
-#_06A4AD: dw ROUTINE_06BC87                     ; 81C2
-#_06A4AF: dw ROUTINE_06BCB0                     ; 81C4
-#_06A4B1: dw ROUTINE_06BCF9                     ; 81C6
-#_06A4B3: dw ROUTINE_06BD0B                     ; 81C8
-#_06A4B5: dw ROUTINE_06BDC1                     ; 81CA
-#_06A4B7: dw ROUTINE_06BDF6                     ; 81CC
-#_06A4B9: dw ROUTINE_06BE3C                     ; 81CE
-#_06A4BB: dw ROUTINE_06BE4E                     ; 81D0
-#_06A4BD: dw ROUTINE_06BE84                     ; 81D2
-#_06A4BF: dw ROUTINE_06BEF8                     ; 81D4
-#_06A4C1: dw ROUTINE_06BF2E                     ; 81D6
-#_06A4C3: dw ROUTINE_06BFC0                     ; 81D8
-#_06A4C5: dw ROUTINE_06BFC0                     ; 81DA
-#_06A4C7: dw ROUTINE_06BFDE                     ; 81DC
-#_06A4C9: dw ROUTINE_06C087                     ; 81DE
-#_06A4CB: dw ROUTINE_06C09D                     ; 81E0
-#_06A4CD: dw ROUTINE_06BA01                     ; 81E2
-#_06A4CF: dw ROUTINE_06BA10                     ; 81E4
-#_06A4D1: dw ROUTINE_06BA47                     ; 81E6
-#_06A4D3: dw ROUTINE_06BAF8                     ; 81E8
-#_06A4D5: dw ROUTINE_06BB54                     ; 81EA
-#_06A4D7: dw ROUTINE_06BB7C                     ; 81EC
-#_06A4D9: dw ROUTINE_06BBAF                     ; 81EE
-#_06A4DB: dw ROUTINE_06BBDE                     ; 81F0
-#_06A4DD: dw ROUTINE_06BC09                     ; 81F2
-#_06A4DF: dw ROUTINE_06B9C3                     ; 81F4
-#_06A4E1: dw ROUTINE_06B9E7                     ; 81F6
-#_06A4E3: dw ROUTINE_06BC5B                     ; 81F8
-#_06A4E5: dw ROUTINE_06B425                     ; 81FA
-#_06A4E7: dw ROUTINE_06B45C                     ; 81FC
-#_06A4E9: dw ROUTINE_06B5AF                     ; 81FE
-#_06A4EB: dw ROUTINE_06B5CA                     ; 8200
-#_06A4ED: dw ROUTINE_06B5D9                     ; 8202
-#_06A4EF: dw ROUTINE_06B556                     ; 8204
-#_06A4F1: dw ROUTINE_06B5F2                     ; 8206
-#_06A4F3: dw ROUTINE_06B5FE                     ; 8208
-#_06A4F5: dw ROUTINE_06B6BE                     ; 820A
-#_06A4F7: dw ROUTINE_06B6FA                     ; 820C
-#_06A4F9: dw ROUTINE_06B725                     ; 820E
-#_06A4FB: dw ROUTINE_06B8A4                     ; 8210
-#_06A4FD: dw ROUTINE_06B8B1                     ; 8212
-#_06A4FF: dw ROUTINE_06B8DD                     ; 8214
-#_06A501: dw ROUTINE_06B92E                     ; 8216
-#_06A503: dw ROUTINE_06B2BC                     ; 8218
-#_06A505: dw ROUTINE_06B2F2                     ; 821A
-#_06A507: dw ROUTINE_06B1C2                     ; 821C
-#_06A509: dw ROUTINE_06B1D5                     ; 821E
-#_06A50B: dw ROUTINE_06B20F                     ; 8220
-#_06A50D: dw ROUTINE_06B247                     ; 8222
-#_06A50F: dw ROUTINE_06B27A                     ; 8224
-#_06A511: dw ROUTINE_06B173                     ; 8226
-#_06A513: dw ROUTINE_06B17C                     ; 8228
-#_06A515: dw ROUTINE_06B1A2                     ; 822A
-#_06A517: dw ROUTINE_06B09A                     ; 822C
-#_06A519: dw ROUTINE_06AE56                     ; 822E
-#_06A51B: dw ROUTINE_06AE6F                     ; 8230
-#_06A51D: dw ROUTINE_06AEA6                     ; 8232
-#_06A51F: dw ROUTINE_06AEB9                     ; 8234
-#_06A521: dw ROUTINE_06AEC8                     ; 8236
-#_06A523: dw ROUTINE_06AE9A                     ; 8238
-#_06A525: dw ROUTINE_06AEFC                     ; 823A
-#_06A527: dw ROUTINE_06AF67                     ; 823C
-#_06A529: dw ROUTINE_06AEE1                     ; 823E
-#_06A52B: dw ROUTINE_06AEE7                     ; 8240
-#_06A52D: dw ROUTINE_06AEEA                     ; 8242
-#_06A52F: dw ROUTINE_06A6E1                     ; 8244
-#_06A531: dw ROUTINE_06A706                     ; 8246
-#_06A533: dw ROUTINE_06A712                     ; 8248
-#_06A535: dw ROUTINE_06A719                     ; 824A
-#_06A537: dw NullPtr                            ; 824C
-#_06A539: dw NullPtr                            ; 824E
-#_06A53B: dw ROUTINE_06ACAA                     ; 8250
-#_06A53D: dw ROUTINE_06ACE1                     ; 8252
-#_06A53F: dw ROUTINE_06AD96                     ; 8254
-#_06A541: dw ROUTINE_06AE38                     ; 8256
-#_06A543: dw ROUTINE_06ACAA                     ; 8258
-#_06A545: dw ROUTINE_06AC29                     ; 825A
-#_06A547: dw ROUTINE_06AC54                     ; 825C
-#_06A549: dw ROUTINE_06AC8C                     ; 825E
-#_06A54B: dw ROUTINE_06ABD9                     ; 8260
-#_06A54D: dw ROUTINE_06ABFD                     ; 8262
-#_06A54F: dw ROUTINE_06AADB                     ; 8264
-#_06A551: dw ROUTINE_06AB4A                     ; 8266
-#_06A553: dw ROUTINE_06AB25                     ; 8268
-#_06A555: dw ROUTINE_06A737                     ; 826A
-#_06A557: dw NullPtr                            ; 826C
-#_06A559: dw NullPtr                            ; 826E
-#_06A55B: dw ROUTINE_06AAA9                     ; 8270
-#_06A55D: dw ROUTINE_06ABAA                     ; 8272
-#_06A55F: dw ROUTINE_06AB0D                     ; 8274
-#_06A561: dw ROUTINE_06A76D                     ; 8276
-#_06A563: dw NullPtr                            ; 8278
-#_06A565: dw NullPtr                            ; 827A
-#_06A567: dw ROUTINE_06A7F7                     ; 827C
-#_06A569: dw ROUTINE_06A815                     ; 827E
-#_06A56B: dw ROUTINE_06A790                     ; 8280
-#_06A56D: dw ROUTINE_06A7BE                     ; 8282
-#_06A56F: dw ROUTINE_06A7D6                     ; 8284
-#_06A571: dw ROUTINE_06A7E4                     ; 8286
-#_06A573: dw ROUTINE_06E6A7                     ; 8288
-#_06A575: dw ROUTINE_06E6F4                     ; 828A
-#_06A577: dw ROUTINE_06B076                     ; 828C
-#_06A579: dw ROUTINE_06B084                     ; 828E
+#_06A2EB: dw SpriteAI_8000                                  ; 8000
+#_06A2ED: dw SpriteAI_8002                                  ; 8002
+#_06A2EF: dw SpriteAI_8004                                  ; 8004
+#_06A2F1: dw SpriteAI_8006                                  ; 8006
+#_06A2F3: dw SpriteAI_8008                                  ; 8008
+#_06A2F5: dw SpriteAI_800A                                  ; 800A
+#_06A2F7: dw SpriteAI_800C                                  ; 800C
+#_06A2F9: dw SpriteAI_800E                                  ; 800E
+#_06A2FB: dw SpriteAI_8010                                  ; 8010
+#_06A2FD: dw SpriteAI_8012                                  ; 8012
+#_06A2FF: dw SpriteAI_8014                                  ; 8014
+#_06A301: dw SpriteAI_8016                                  ; 8016
+#_06A303: dw SpriteAI_8018                                  ; 8018
+#_06A305: dw SpriteAI_801A                                  ; 801A
+#_06A307: dw SpriteAI_801C                                  ; 801C
+#_06A309: dw SpriteAI_801E                                  ; 801E
+#_06A30B: dw SpriteAI_8020                                  ; 8020
+#_06A30D: dw SpriteAI_8022                                  ; 8022
+#_06A30F: dw SpriteAI_8024                                  ; 8024
+#_06A311: dw SpriteAI_8026                                  ; 8026
+#_06A313: dw SpriteAI_8028                                  ; 8028
+#_06A315: dw SpriteAI_802A                                  ; 802A
+#_06A317: dw SpriteAI_802C                                  ; 802C
+#_06A319: dw SpriteAI_802E                                  ; 802E
+#_06A31B: dw SpriteAI_8030                                  ; 8030
+#_06A31D: dw SpriteAI_8032                                  ; 8032
+#_06A31F: dw SpriteAI_8034                                  ; 8034
+#_06A321: dw SpriteAI_8036                                  ; 8036
+#_06A323: dw SpriteAI_8038                                  ; 8038
+#_06A325: dw SpriteAI_803A                                  ; 803A
+#_06A327: dw SpriteAI_803C                                  ; 803C
+#_06A329: dw SpriteAI_803E                                  ; 803E
+#_06A32B: dw SpriteAI_8040                                  ; 8040
+#_06A32D: dw SpriteAI_8042                                  ; 8042
+#_06A32F: dw SpriteAI_8044                                  ; 8044
+#_06A331: dw SpriteAI_8046                                  ; 8046
+#_06A333: dw SpriteAI_8048                                  ; 8048
+#_06A335: dw SpriteAI_804A                                  ; 804A
+#_06A337: dw SpriteAI_8048                                  ; 804C
+#_06A339: dw SpriteAI_804E                                  ; 804E
+#_06A33B: dw SpriteAI_8050                                  ; 8050
+#_06A33D: dw SpriteAI_8052                                  ; 8052
+#_06A33F: dw SpriteAI_8054                                  ; 8054
+#_06A341: dw SpriteAI_8056                                  ; 8056
+#_06A343: dw SpriteAI_8058                                  ; 8058
+#_06A345: dw SpriteAI_805A                                  ; 805A
+#_06A347: dw SpriteAI_805C                                  ; 805C
+#_06A349: dw SpriteAI_805E                                  ; 805E
+#_06A34B: dw SpriteAI_8060                                  ; 8060
+#_06A34D: dw SpriteAI_8062                                  ; 8062
+#_06A34F: dw SpriteAI_8064                                  ; 8064
+#_06A351: dw SpriteAI_8058                                  ; 8066
+#_06A353: dw SpriteAI_805A                                  ; 8068
+#_06A355: dw SpriteAI_805C                                  ; 806A
+#_06A357: dw SpriteAI_805E                                  ; 806C
+#_06A359: dw SpriteAI_8060                                  ; 806E
+#_06A35B: dw SpriteAI_8070                                  ; 8070
+#_06A35D: dw SpriteAI_8072                                  ; 8072
+#_06A35F: dw SpriteAI_8058                                  ; 8074
+#_06A361: dw SpriteAI_805A                                  ; 8076
+#_06A363: dw SpriteAI_805C                                  ; 8078
+#_06A365: dw SpriteAI_805E                                  ; 807A
+#_06A367: dw SpriteAI_8060                                  ; 807C
+#_06A369: dw SpriteAI_807E                                  ; 807E
+#_06A36B: dw SpriteAI_8080                                  ; 8080
+#_06A36D: dw SpriteAI_8082                                  ; 8082
+#_06A36F: dw SpriteAI_8084                                  ; 8084
+#_06A371: dw SpriteAI_8086                                  ; 8086
+#_06A373: dw SpriteAI_8060                                  ; 8088
+#_06A375: dw SpriteAI_808A                                  ; 808A
+#_06A377: dw SpriteAI_8058                                  ; 808C
+#_06A379: dw SpriteAI_808E                                  ; 808E
+#_06A37B: dw SpriteAI_8090                                  ; 8090
+#_06A37D: dw SpriteAI_8092                                  ; 8092
+#_06A37F: dw SpriteAI_8094                                  ; 8094
+#_06A381: dw SpriteAI_8096                                  ; 8096
+#_06A383: dw SpriteAI_8098                                  ; 8098
+#_06A385: dw SpriteAI_809A                                  ; 809A
+#_06A387: dw $0000                                          ; 809C
+#_06A389: dw $0000                                          ; 809E
+#_06A38B: dw $0000                                          ; 80A0
+#_06A38D: dw $0000                                          ; 80A2
+#_06A38F: dw $0000                                          ; 80A4
+#_06A391: dw $0000                                          ; 80A6
+#_06A393: dw $0000                                          ; 80A8
+#_06A395: dw $0000                                          ; 80AA
+#_06A397: dw $0000                                          ; 80AC
+#_06A399: dw $0000                                          ; 80AE
+#_06A39B: dw SpriteAI_80B0                                  ; 80B0
+#_06A39D: dw SpriteAI_80B2                                  ; 80B2
+#_06A39F: dw SpriteAI_80B4                                  ; 80B4
+#_06A3A1: dw SpriteAI_80B6                                  ; 80B6
+#_06A3A3: dw SpriteAI_80B8                                  ; 80B8
+#_06A3A5: dw SpriteAI_80BA                                  ; 80BA
+#_06A3A7: dw SpriteAI_80BC                                  ; 80BC
+#_06A3A9: dw SpriteAI_80BE                                  ; 80BE
+#_06A3AB: dw SpriteAI_80C0                                  ; 80C0
+#_06A3AD: dw SpriteAI_80C2                                  ; 80C2
+#_06A3AF: dw SpriteAI_80C4                                  ; 80C4
+#_06A3B1: dw SpriteAI_80C6                                  ; 80C6
+#_06A3B3: dw SpriteAI_80C8                                  ; 80C8
+#_06A3B5: dw SpriteAI_80CA                                  ; 80CA
+#_06A3B7: dw SpriteAI_80CA                                  ; 80CC
+#_06A3B9: dw $0000                                          ; 80CE
+#_06A3BB: dw SpriteAI_80D0                                  ; 80D0
+#_06A3BD: dw SpriteAI_80D2                                  ; 80D2
+#_06A3BF: dw SpriteAI_80D4                                  ; 80D4
+#_06A3C1: dw SpriteAI_80D6                                  ; 80D6
+#_06A3C3: dw SpriteAI_80D8                                  ; 80D8
+#_06A3C5: dw SpriteAI_80DA                                  ; 80DA
+#_06A3C7: dw SpriteAI_80DC                                  ; 80DC
+#_06A3C9: dw SpriteAI_80DE                                  ; 80DE
+#_06A3CB: dw SpriteAI_80E0                                  ; 80E0
+#_06A3CD: dw SpriteAI_80E2                                  ; 80E2
+#_06A3CF: dw SpriteAI_80E0                                  ; 80E4
+#_06A3D1: dw SpriteAI_80E0                                  ; 80E6
+#_06A3D3: dw $0000                                          ; 80E8
+#_06A3D5: dw $0000                                          ; 80EA
+#_06A3D7: dw $0000                                          ; 80EC
+#_06A3D9: dw $0000                                          ; 80EE
+#_06A3DB: dw SpriteAI_80CA                                  ; 80F0
+#_06A3DD: dw SpriteAI_80F2                                  ; 80F2
+#_06A3DF: dw SpriteAI_80F4                                  ; 80F4
+#_06A3E1: dw SpriteAI_80F6                                  ; 80F6
+#_06A3E3: dw SpriteAI_80F8                                  ; 80F8
+#_06A3E5: dw SpriteAI_80FA                                  ; 80FA
+#_06A3E7: dw SpriteAI_80FC                                  ; 80FC
+#_06A3E9: dw SpriteAI_80FE                                  ; 80FE
+#_06A3EB: dw SpriteAI_8100                                  ; 8100
+#_06A3ED: dw SpriteAI_8102                                  ; 8102
+#_06A3EF: dw SpriteAI_8104                                  ; 8104
+#_06A3F1: dw SpriteAI_8106                                  ; 8106
+#_06A3F3: dw SpriteAI_8108                                  ; 8108
+#_06A3F5: dw SpriteAI_810A                                  ; 810A
+#_06A3F7: dw SpriteAI_810C                                  ; 810C
+#_06A3F9: dw SpriteAI_810E                                  ; 810E
+#_06A3FB: dw SpriteAI_8110                                  ; 8110
+#_06A3FD: dw SpriteAI_8112                                  ; 8112
+#_06A3FF: dw SpriteAI_8114                                  ; 8114
+#_06A401: dw SpriteAI_8116                                  ; 8116
+#_06A403: dw SpriteAI_8118                                  ; 8118
+#_06A405: dw SpriteAI_811A                                  ; 811A
+#_06A407: dw SpriteAI_811C                                  ; 811C
+#_06A409: dw SpriteAI_811E                                  ; 811E
+#_06A40B: dw SpriteAI_8120                                  ; 8120
+#_06A40D: dw SpriteAI_8122                                  ; 8122
+#_06A40F: dw SpriteAI_8124                                  ; 8124
+#_06A411: dw SpriteAI_8126                                  ; 8126
+#_06A413: dw SpriteAI_8128                                  ; 8128
+#_06A415: dw SpriteAI_812A                                  ; 812A
+#_06A417: dw $0000                                          ; 812C
+#_06A419: dw SpriteAI_812E                                  ; 812E
+#_06A41B: dw SpriteAI_8130                                  ; 8130
+#_06A41D: dw SpriteAI_8132                                  ; 8132
+#_06A41F: dw SpriteAI_8134                                  ; 8134
+#_06A421: dw SpriteAI_8136                                  ; 8136
+#_06A423: dw SpriteAI_8138                                  ; 8138
+#_06A425: dw SpriteAI_813A                                  ; 813A
+#_06A427: dw SpriteAI_813C                                  ; 813C
+#_06A429: dw SpriteAI_813E                                  ; 813E
+#_06A42B: dw SpriteAI_8140                                  ; 8140
+#_06A42D: dw SpriteAI_80FC                                  ; 8142
+#_06A42F: dw SpriteAI_80FE                                  ; 8144
+#_06A431: dw SpriteAI_8146                                  ; 8146
+#_06A433: dw SpriteAI_8148                                  ; 8148
+#_06A435: dw SpriteAI_814A                                  ; 814A
+#_06A437: dw SpriteAI_814C                                  ; 814C
+#_06A439: dw SpriteAI_814E                                  ; 814E
+#_06A43B: dw SpriteAI_8150                                  ; 8150
+#_06A43D: dw SpriteAI_8152                                  ; 8152
+#_06A43F: dw SpriteAI_8154                                  ; 8154
+#_06A441: dw SpriteAI_8156                                  ; 8156
+#_06A443: dw SpriteAI_8158                                  ; 8158
+#_06A445: dw SpriteAI_815A                                  ; 815A
+#_06A447: dw SpriteAI_815C                                  ; 815C
+#_06A449: dw SpriteAI_815E                                  ; 815E
+#_06A44B: dw SpriteAI_8160                                  ; 8160
+#_06A44D: dw SpriteAI_8162                                  ; 8162
+#_06A44F: dw SpriteAI_8164                                  ; 8164
+#_06A451: dw SpriteAI_8166                                  ; 8166
+#_06A453: dw SpriteAI_8168                                  ; 8168
+#_06A455: dw SpriteAI_816A                                  ; 816A
+#_06A457: dw SpriteAI_814E                                  ; 816C
+#_06A459: dw SpriteAI_816E                                  ; 816E
+#_06A45B: dw SpriteAI_8170                                  ; 8170
+#_06A45D: dw SpriteAI_8172                                  ; 8172
+#_06A45F: dw SpriteAI_8174                                  ; 8174
+#_06A461: dw SpriteAI_8176                                  ; 8176
+#_06A463: dw SpriteAI_8178                                  ; 8178
+#_06A465: dw SpriteAI_817A                                  ; 817A
+#_06A467: dw SpriteAI_817A                                  ; 817C
+#_06A469: dw SpriteAI_817E                                  ; 817E
+#_06A46B: dw SpriteAI_8180                                  ; 8180
+#_06A46D: dw SpriteAI_8182                                  ; 8182
+#_06A46F: dw SpriteAI_8184                                  ; 8184
+#_06A471: dw SpriteAI_8186                                  ; 8186
+#_06A473: dw SpriteAI_8188                                  ; 8188
+#_06A475: dw SpriteAI_818A                                  ; 818A
+#_06A477: dw SpriteAI_818C                                  ; 818C
+#_06A479: dw SpriteAI_818E                                  ; 818E
+#_06A47B: dw SpriteAI_8190                                  ; 8190
+#_06A47D: dw SpriteAI_8192                                  ; 8192
+#_06A47F: dw SpriteAI_8194                                  ; 8194
+#_06A481: dw SpriteAI_8196                                  ; 8196
+#_06A483: dw SpriteAI_8198                                  ; 8198
+#_06A485: dw SpriteAI_819A                                  ; 819A
+#_06A487: dw SpriteAI_819C                                  ; 819C
+#_06A489: dw SpriteAI_819E                                  ; 819E
+#_06A48B: dw SpriteAI_81A0                                  ; 81A0
+#_06A48D: dw SpriteAI_81A2                                  ; 81A2
+#_06A48F: dw SpriteAI_81A4                                  ; 81A4
+#_06A491: dw SpriteAI_81A6                                  ; 81A6
+#_06A493: dw SpriteAI_81A8                                  ; 81A8
+#_06A495: dw SpriteAI_81AA                                  ; 81AA
+#_06A497: dw SpriteAI_81AC                                  ; 81AC
+#_06A499: dw $0000                                          ; 81AE
+#_06A49B: dw SpriteAI_81B0                                  ; 81B0
+#_06A49D: dw SpriteAI_81B2                                  ; 81B2
+#_06A49F: dw SpriteAI_81B4                                  ; 81B4
+#_06A4A1: dw SpriteAI_81B6                                  ; 81B6
+#_06A4A3: dw SpriteAI_81B8                                  ; 81B8
+#_06A4A5: dw SpriteAI_81BA                                  ; 81BA
+#_06A4A7: dw SpriteAI_81BC                                  ; 81BC
+#_06A4A9: dw SpriteAI_81BE                                  ; 81BE
+#_06A4AB: dw SpriteAI_81C0                                  ; 81C0
+#_06A4AD: dw SpriteAI_81C2                                  ; 81C2
+#_06A4AF: dw SpriteAI_81C4                                  ; 81C4
+#_06A4B1: dw SpriteAI_81C6                                  ; 81C6
+#_06A4B3: dw SpriteAI_81C8                                  ; 81C8
+#_06A4B5: dw SpriteAI_81CA                                  ; 81CA
+#_06A4B7: dw SpriteAI_81CC                                  ; 81CC
+#_06A4B9: dw SpriteAI_81CE                                  ; 81CE
+#_06A4BB: dw SpriteAI_81D0                                  ; 81D0
+#_06A4BD: dw SpriteAI_81D2                                  ; 81D2
+#_06A4BF: dw SpriteAI_81D4                                  ; 81D4
+#_06A4C1: dw SpriteAI_81D6                                  ; 81D6
+#_06A4C3: dw SpriteAI_81D8                                  ; 81D8
+#_06A4C5: dw SpriteAI_81D8                                  ; 81DA
+#_06A4C7: dw SpriteAI_81DC                                  ; 81DC
+#_06A4C9: dw SpriteAI_81DE                                  ; 81DE
+#_06A4CB: dw SpriteAI_81E0                                  ; 81E0
+#_06A4CD: dw SpriteAI_81E2                                  ; 81E2
+#_06A4CF: dw SpriteAI_81E4                                  ; 81E4
+#_06A4D1: dw SpriteAI_81E6                                  ; 81E6
+#_06A4D3: dw SpriteAI_81E8                                  ; 81E8
+#_06A4D5: dw SpriteAI_81EA                                  ; 81EA
+#_06A4D7: dw SpriteAI_81EC                                  ; 81EC
+#_06A4D9: dw SpriteAI_81EE                                  ; 81EE
+#_06A4DB: dw SpriteAI_81F0                                  ; 81F0
+#_06A4DD: dw SpriteAI_81F2                                  ; 81F2
+#_06A4DF: dw SpriteAI_81F4                                  ; 81F4
+#_06A4E1: dw SpriteAI_81F6                                  ; 81F6
+#_06A4E3: dw SpriteAI_81F8                                  ; 81F8
+#_06A4E5: dw SpriteAI_81FA                                  ; 81FA
+#_06A4E7: dw SpriteAI_81FC                                  ; 81FC
+#_06A4E9: dw SpriteAI_81FE                                  ; 81FE
+#_06A4EB: dw SpriteAI_8200                                  ; 8200
+#_06A4ED: dw SpriteAI_8202                                  ; 8202
+#_06A4EF: dw SpriteAI_8204                                  ; 8204
+#_06A4F1: dw SpriteAI_8206                                  ; 8206
+#_06A4F3: dw SpriteAI_8208                                  ; 8208
+#_06A4F5: dw SpriteAI_820A                                  ; 820A
+#_06A4F7: dw SpriteAI_820C                                  ; 820C
+#_06A4F9: dw SpriteAI_820E                                  ; 820E
+#_06A4FB: dw SpriteAI_8210                                  ; 8210
+#_06A4FD: dw SpriteAI_8212                                  ; 8212
+#_06A4FF: dw SpriteAI_8214                                  ; 8214
+#_06A501: dw SpriteAI_8216                                  ; 8216
+#_06A503: dw SpriteAI_8218                                  ; 8218
+#_06A505: dw SpriteAI_821A                                  ; 821A
+#_06A507: dw SpriteAI_821C                                  ; 821C
+#_06A509: dw SpriteAI_821E                                  ; 821E
+#_06A50B: dw SpriteAI_8220                                  ; 8220
+#_06A50D: dw SpriteAI_8222                                  ; 8222
+#_06A50F: dw SpriteAI_8224                                  ; 8224
+#_06A511: dw SpriteAI_8226                                  ; 8226
+#_06A513: dw SpriteAI_8228                                  ; 8228
+#_06A515: dw SpriteAI_822A                                  ; 822A
+#_06A517: dw SpriteAI_822C                                  ; 822C
+#_06A519: dw SpriteAI_822E                                  ; 822E
+#_06A51B: dw SpriteAI_8230                                  ; 8230
+#_06A51D: dw SpriteAI_8232                                  ; 8232
+#_06A51F: dw SpriteAI_8234                                  ; 8234
+#_06A521: dw SpriteAI_8236                                  ; 8236
+#_06A523: dw SpriteAI_8238                                  ; 8238
+#_06A525: dw SpriteAI_823A                                  ; 823A
+#_06A527: dw SpriteAI_823C                                  ; 823C
+#_06A529: dw SpriteAI_823E                                  ; 823E
+#_06A52B: dw SpriteAI_8240                                  ; 8240
+#_06A52D: dw SpriteAI_8242                                  ; 8242
+#_06A52F: dw SpriteAI_8244                                  ; 8244
+#_06A531: dw SpriteAI_8246                                  ; 8246
+#_06A533: dw SpriteAI_8248                                  ; 8248
+#_06A535: dw SpriteAI_824A                                  ; 824A
+#_06A537: dw $0000                                          ; 824C
+#_06A539: dw $0000                                          ; 824E
+#_06A53B: dw SpriteAI_8250                                  ; 8250
+#_06A53D: dw SpriteAI_8252                                  ; 8252
+#_06A53F: dw SpriteAI_8254                                  ; 8254
+#_06A541: dw SpriteAI_8256                                  ; 8256
+#_06A543: dw SpriteAI_8250                                  ; 8258
+#_06A545: dw SpriteAI_825A                                  ; 825A
+#_06A547: dw SpriteAI_825C                                  ; 825C
+#_06A549: dw SpriteAI_825E                                  ; 825E
+#_06A54B: dw SpriteAI_8260                                  ; 8260
+#_06A54D: dw SpriteAI_8262                                  ; 8262
+#_06A54F: dw SpriteAI_8264                                  ; 8264
+#_06A551: dw SpriteAI_8266                                  ; 8266
+#_06A553: dw SpriteAI_8268                                  ; 8268
+#_06A555: dw SpriteAI_826A                                  ; 826A
+#_06A557: dw $0000                                          ; 826C
+#_06A559: dw $0000                                          ; 826E
+#_06A55B: dw SpriteAI_8270                                  ; 8270
+#_06A55D: dw SpriteAI_8272                                  ; 8272
+#_06A55F: dw SpriteAI_8274                                  ; 8274
+#_06A561: dw SpriteAI_8276                                  ; 8276
+#_06A563: dw $0000                                          ; 8278
+#_06A565: dw $0000                                          ; 827A
+#_06A567: dw SpriteAI_827C                                  ; 827C
+#_06A569: dw SpriteAI_827E                                  ; 827E
+#_06A56B: dw SpriteAI_8280                                  ; 8280
+#_06A56D: dw SpriteAI_8282                                  ; 8282
+#_06A56F: dw SpriteAI_8284                                  ; 8284
+#_06A571: dw SpriteAI_8286                                  ; 8286
+#_06A573: dw SpriteAI_8288                                  ; 8288
+#_06A575: dw SpriteAI_828A                                  ; 828A
+#_06A577: dw SpriteAI_828C                                  ; 828C
+#_06A579: dw SpriteAI_828E                                  ; 828E
 
 ;===================================================================================================
 
-ROUTINE_06A57B:
+SpriteAI_80B0:
 #_06A57B: TYX
 
 ;===================================================================================================
@@ -440,7 +440,7 @@ ROUTINE_06A5A2:
 
 ;===================================================================================================
 
-ROUTINE_06A5AE:
+SpriteAI_80B2:
 #_06A5AE: TYX
 
 #_06A5AF: JSR ROUTINE_0392C0_bank06
@@ -484,7 +484,7 @@ CODE_06A5D9:
 
 ;===================================================================================================
 
-ROUTINE_06A5DB:
+SpriteAI_80B4:
 #_06A5DB: JSR ROUTINE_06A5CA
 #_06A5DE: BCC .continue
 
@@ -511,7 +511,7 @@ CODE_06A5F6:
 
 ;===================================================================================================
 
-ROUTINE_06A5FF:
+SpriteAI_80B6:
 #_06A5FF: JSR ROUTINE_06A5CA
 #_06A602: BCC .continue
 
@@ -536,7 +536,7 @@ CODE_06A616:
 
 ;===================================================================================================
 
-ROUTINE_06A61A:
+SpriteAI_80B8:
 #_06A61A: TYX
 
 #_06A61B: LDA.w $19CE
@@ -550,7 +550,7 @@ ROUTINE_06A61A:
 
 ;===================================================================================================
 
-ROUTINE_06A627:
+SpriteAI_80BA:
 #_06A627: JSR ROUTINE_06A5CA
 #_06A62A: BCC .continue
 
@@ -582,7 +582,7 @@ CODE_06A645:
 
 ;===================================================================================================
 
-ROUTINE_06A64B:
+SpriteAI_80BC:
 #_06A64B: JSR ROUTINE_06A5CA
 #_06A64E: BCC .continue
 
@@ -599,7 +599,7 @@ ROUTINE_06A64B:
 #_06A65E: CMP.w #$00BA ; STATE BA
 #_06A661: BNE CODE_06A669
 
-#_06A663: JSR ROUTINE_03883A_bank06
+#_06A663: JSR DecrementTutorialCounter_bank06
 #_06A666: JSR AdvanceAIModeUp_bank06
 
 CODE_06A669:
@@ -610,7 +610,7 @@ CODE_06A669:
 
 ;===================================================================================================
 
-ROUTINE_06A672:
+SpriteAI_80BE:
 #_06A672: JSR ROUTINE_06A5CA
 #_06A675: BCC .continue
 
@@ -667,7 +667,7 @@ ROUTINE_06A6AB:
 
 ;===================================================================================================
 
-ROUTINE_06A6B7:
+SpriteAI_80C0:
 #_06A6B7: TYX
 
 #_06A6B8: LDA.w $080A,X
@@ -679,7 +679,7 @@ ROUTINE_06A6B7:
 
 ;===================================================================================================
 
-ROUTINE_06A6C4:
+SpriteAI_80C2:
 #_06A6C4: TYX
 
 #_06A6C5: LDA.w $05CE
@@ -708,7 +708,7 @@ ROUTINE_06A6DB:
 
 ;===================================================================================================
 
-ROUTINE_06A6E1:
+SpriteAI_8244:
 #_06A6E1: TYX
 
 #_06A6E2: JSR ROUTINE_038038_bank06
@@ -734,7 +734,7 @@ CODE_06A6F6:
 
 ;===================================================================================================
 
-ROUTINE_06A706:
+SpriteAI_8246:
 #_06A706: TYX
 
 #_06A707: JSR Increment_0816_AndCompareTo_0078_bank06
@@ -747,16 +747,16 @@ CODE_06A70F:
 
 ;===================================================================================================
 
-ROUTINE_06A712:
+SpriteAI_8248:
 #_06A712: TYX
 
-#_06A713: JSR ROUTINE_038179_bank06
+#_06A713: JSR SetHPtoFFFF_bank06
 
 #_06A716: JMP ROUTINE_038A7D_bank06
 
 ;===================================================================================================
 
-ROUTINE_06A719:
+SpriteAI_824A:
 #_06A719: TYX
 
 #_06A71A: JSR Set_0814_to_FFFF_bank06
@@ -780,7 +780,7 @@ CODE_06A734:
 
 ;===================================================================================================
 
-ROUTINE_06A737:
+SpriteAI_826A:
 #_06A737: TYX
 
 #_06A738: LDA.w #$1707
@@ -823,7 +823,7 @@ CODE_06A762:
 
 ;===================================================================================================
 
-ROUTINE_06A76D:
+SpriteAI_8276:
 #_06A76D: TYX
 
 #_06A76E: LDA.w #$1708
@@ -850,7 +850,7 @@ CODE_06A78A:
 
 ;===================================================================================================
 
-ROUTINE_06A790:
+SpriteAI_8280:
 #_06A790: TYX
 
 #_06A791: LDA.l $7FF718
@@ -883,7 +883,7 @@ QueueSFX_44:
 
 ;===================================================================================================
 
-ROUTINE_06A7BE:
+SpriteAI_8282:
 #_06A7BE: TYX
 
 #_06A7BF: JSR ROUTINE_06B3D3
@@ -901,7 +901,7 @@ CODE_06A7CD:
 
 ;===================================================================================================
 
-ROUTINE_06A7D6:
+SpriteAI_8284:
 #_06A7D6: TYX
 
 #_06A7D7: LDA.w #$0010
@@ -915,7 +915,7 @@ CODE_06A7E2:
 
 ;===================================================================================================
 
-ROUTINE_06A7E4:
+SpriteAI_8286:
 #_06A7E4: TYX
 
 #_06A7E5: STZ.b $20
@@ -935,7 +935,7 @@ CODE_06A7F5:
 
 ;===================================================================================================
 
-ROUTINE_06A7F7:
+SpriteAI_827C:
 #_06A7F7: TYX
 
 #_06A7F8: LDA.w #$8001
@@ -954,7 +954,7 @@ ROUTINE_06A7F7:
 
 ;===================================================================================================
 
-ROUTINE_06A815:
+SpriteAI_827E:
 #_06A815: TYX
 
 #_06A816: LDA.w #$0FFF
@@ -1473,7 +1473,7 @@ ROUTINE_06AA9C:
 
 ;===================================================================================================
 
-ROUTINE_06AAA9:
+SpriteAI_8270:
 #_06AAA9: TYX
 
 CODE_06AAAA:
@@ -1514,7 +1514,7 @@ ROUTINE_06AAC7:
 
 ;===================================================================================================
 
-ROUTINE_06AADB:
+SpriteAI_8264:
 #_06AADB: TYX
 
 CODE_06AADC:
@@ -1555,7 +1555,7 @@ ROUTINE_06AAF9:
 
 ;===================================================================================================
 
-ROUTINE_06AB0D:
+SpriteAI_8274:
 #_06AB0D: TYX
 
 #_06AB0E: LDA.w #$170C
@@ -1572,7 +1572,7 @@ CODE_06AB22:
 
 ;===================================================================================================
 
-ROUTINE_06AB25:
+SpriteAI_8268:
 #_06AB25: TYX
 
 #_06AB26: LDA.w #$170B
@@ -1598,7 +1598,7 @@ CODE_06AB3D:
 
 ;===================================================================================================
 
-ROUTINE_06AB4A:
+SpriteAI_8266:
 #_06AB4A: TYX
 
 #_06AB4B: LDA.w #$1709
@@ -1701,7 +1701,7 @@ CODE_06ABD6:
 
 ;===================================================================================================
 
-ROUTINE_06ABD9:
+SpriteAI_8260:
 #_06ABD9: TYX
 
 #_06ABDA: LDA.w $0806,X
@@ -1722,7 +1722,7 @@ ROUTINE_06ABD9:
 
 ;===================================================================================================
 
-ROUTINE_06ABFD:
+SpriteAI_8262:
 #_06ABFD: TYX
 
 #_06ABFE: LDY.w #$0010
@@ -1748,7 +1748,7 @@ ROUTINE_06ABFD:
 
 ;===================================================================================================
 
-ROUTINE_06AC29:
+SpriteAI_825A:
 #_06AC29: TYX
 
 #_06AC2A: JSR ROUTINE_06ACCD
@@ -1780,7 +1780,7 @@ CODE_06AC40:
 
 ;===================================================================================================
 
-ROUTINE_06AC54:
+SpriteAI_825C:
 #_06AC54: TYX
 
 #_06AC55: JSR ROUTINE_06AD41
@@ -1819,7 +1819,7 @@ CODE_06AC89:
 
 ;===================================================================================================
 
-ROUTINE_06AC8C:
+SpriteAI_825E:
 #_06AC8C: TYX
 
 #_06AC8D: JSR Set_0814_to_FFFF_bank06
@@ -1841,7 +1841,7 @@ CODE_06ACA7:
 
 ;===================================================================================================
 
-ROUTINE_06ACAA:
+SpriteAI_8250:
 #_06ACAA: JSR ROUTINE_038566_bank06
 #_06ACAD: BNE .exit
 
@@ -1882,7 +1882,7 @@ CODE_06ACDF:
 
 ;===================================================================================================
 
-ROUTINE_06ACE1:
+SpriteAI_8252:
 #_06ACE1: TYX
 
 #_06ACE2: JSR ROUTINE_06ACCD
@@ -1930,6 +1930,7 @@ CODE_06AD03:
 
 ROUTINE_06AD17:
 #_06AD17: PHA
+
 #_06AD18: ADC.w $080C,X
 #_06AD1B: STA.b $20
 
@@ -2043,7 +2044,7 @@ ROUTINE_06AD8E:
 
 ;===================================================================================================
 
-ROUTINE_06AD96:
+SpriteAI_8254:
 #_06AD96: TYX
 
 #_06AD97: JSR ROUTINE_06AD46
@@ -2176,7 +2177,7 @@ ROUTINE_06AE2F:
 
 ;===================================================================================================
 
-ROUTINE_06AE38:
+SpriteAI_8256:
 #_06AE38: TYX
 
 #_06AE39: JSR Set_0814_to_FFFF_bank06
@@ -2198,7 +2199,7 @@ CODE_06AE53:
 
 ;===================================================================================================
 
-ROUTINE_06AE56:
+SpriteAI_822E:
 #_06AE56: JSR ROUTINE_038566_bank06
 #_06AE59: BNE .exit
 
@@ -2217,7 +2218,7 @@ ROUTINE_06AE56:
 
 ;===================================================================================================
 
-ROUTINE_06AE6F:
+SpriteAI_8230:
 #_06AE6F: TYX
 
 #_06AE70: LDA.w $1AE0
@@ -2228,11 +2229,11 @@ ROUTINE_06AE6F:
 #_06AE7B: STA.w $18E2
 
 #_06AE7E: LDA.w #Message_089366
-#_06AE81: JSR ROUTINE_038589_bank06
+#_06AE81: JSR Sprite_BeginBank08Dialog_8589_bank06
 
 #_06AE84: LDA.w #data00EC34
 #_06AE87: JSL ROUTINE_00EBF1_0003
-#_06AE8B: JSR ROUTINE_038719_bank06
+#_06AE8B: JSR Set_7E7B38_to_002E_bank06
 #_06AE8E: JSR Reset_0816_AndAdvanceAI_bank06
 
 CODE_06AE91:
@@ -2243,7 +2244,7 @@ CODE_06AE91:
 
 ;===================================================================================================
 
-ROUTINE_06AE9A:
+SpriteAI_8238:
 #_06AE9A: TYX
 
 #_06AE9B: JSR Increment_0816_AndCompareTo_0078_bank06
@@ -2256,7 +2257,7 @@ CODE_06AEA3:
 
 ;===================================================================================================
 
-ROUTINE_06AEA6:
+SpriteAI_8232:
 #_06AEA6: TYX
 
 #_06AEA7: JSR ROUTINE_038741_0044_bank06
@@ -2264,7 +2265,7 @@ ROUTINE_06AEA6:
 #_06AEAB: BEQ CODE_06AEB6
 
 #_06AEAD: LDA.w #Message_089366
-#_06AEB0: JSR ROUTINE_03857F_bank06
+#_06AEB0: JSR Sprite_SetBank08Message_bank06
 #_06AEB3: JSR Reset_0816_AndAdvanceAI_bank06
 
 CODE_06AEB6:
@@ -2272,13 +2273,13 @@ CODE_06AEB6:
 
 ;===================================================================================================
 
-ROUTINE_06AEB9:
+SpriteAI_8234:
 #_06AEB9: TYX
 
-#_06AEBA: JSR ROUTINE_038574_bank06
+#_06AEBA: JSR Sprite_HandleExistingDialog_bank06
 #_06AEBD: BNE CODE_06AEC5
 
-#_06AEBF: JSR ROUTINE_038721_bank06
+#_06AEBF: JSR Set_7E7B38_to_0016_bank06
 #_06AEC2: JSR Reset_0816_AndAdvanceAI_bank06
 
 CODE_06AEC5:
@@ -2286,7 +2287,7 @@ CODE_06AEC5:
 
 ;===================================================================================================
 
-ROUTINE_06AEC8:
+SpriteAI_8236:
 #_06AEC8: TYX
 
 #_06AEC9: LDA.w #$0022
@@ -2304,7 +2305,7 @@ CODE_06AEDE:
 
 ;===================================================================================================
 
-ROUTINE_06AEE1:
+SpriteAI_823E:
 #_06AEE1: TYX
 
 #_06AEE2: JSR ROUTINE_06AF7F
@@ -2313,13 +2314,13 @@ ROUTINE_06AEE1:
 
 ;===================================================================================================
 
-ROUTINE_06AEE7:
-#_06AEE7: JMP ROUTINE_06AF67
+SpriteAI_8240:
+#_06AEE7: JMP SpriteAI_823C
 
 ;===================================================================================================
 
-ROUTINE_06AEEA:
-#_06AEEA: JSR ROUTINE_06AF67
+SpriteAI_8242:
+#_06AEEA: JSR SpriteAI_823C
 
 #_06AEED: LDA.w $0810,X
 #_06AEF0: CMP.w #$8242 ; SPRITE 8242
@@ -2333,7 +2334,7 @@ ROUTINE_06AEEA:
 
 ;===================================================================================================
 
-ROUTINE_06AEFC:
+SpriteAI_823A:
 #_06AEFC: TYX
 
 #_06AEFD: LDA.w $1510
@@ -2404,7 +2405,7 @@ ROUTINE_06AF5E:
 
 ;===================================================================================================
 
-ROUTINE_06AF67:
+SpriteAI_823C:
 #_06AF67: TYX
 
 #_06AF68: LDA.l $7E7A20
@@ -2601,19 +2602,19 @@ CODE_06B06F:
 
 ;===================================================================================================
 
-ROUTINE_06B076:
+SpriteAI_828C:
 #_06B076: TYX
 
 #_06B077: LDA.w $081C,X
 #_06B07A: STA.l $7FE81A,X
 
-#_06B07E: JSR ROUTINE_038180_bank06
+#_06B07E: JSR SetHPto0001_bank06
 
 #_06B081: JMP ROUTINE_038A7D_bank06
 
 ;===================================================================================================
 
-ROUTINE_06B084:
+SpriteAI_828E:
 #_06B084: TYX
 
 #_06B085: LDA.w #$0200
@@ -2628,7 +2629,7 @@ ROUTINE_06B084:
 
 ;===================================================================================================
 
-ROUTINE_06B09A:
+SpriteAI_822C:
 #_06B09A: TYX
 
 #_06B09B: JSR Set_0814_to_FFFF_bank06
@@ -2789,7 +2790,7 @@ CODE_06B171:
 
 ;===================================================================================================
 
-ROUTINE_06B173:
+SpriteAI_8226:
 #_06B173: TYX
 
 #_06B174: LDY.w #$0096
@@ -2798,7 +2799,7 @@ ROUTINE_06B173:
 
 ;===================================================================================================
 
-ROUTINE_06B17C:
+SpriteAI_8228:
 #_06B17C: TYX
 
 #_06B17D: LDY.w #$0078
@@ -2829,7 +2830,7 @@ CODE_06B192:
 
 ;===================================================================================================
 
-ROUTINE_06B1A2:
+SpriteAI_822A:
 #_06B1A2: TYX
 
 #_06B1A3: JSR Set_0814_to_FFFF_bank06
@@ -2859,7 +2860,7 @@ ROUTINE_06B1B8:
 
 ;===================================================================================================
 
-ROUTINE_06B1C2:
+SpriteAI_821C:
 #_06B1C2: TYX
 
 #_06B1C3: JSR SetSpriteMode_FF01_bank06
@@ -2876,7 +2877,7 @@ CODE_06B1CC:
 
 ;===================================================================================================
 
-ROUTINE_06B1D5:
+SpriteAI_821E:
 #_06B1D5: TYX
 
 #_06B1D6: JSR ROUTINE_06B117
@@ -2916,7 +2917,7 @@ CODE_06B20C:
 
 ;===================================================================================================
 
-ROUTINE_06B20F:
+SpriteAI_8220:
 #_06B20F: TYX
 
 #_06B210: JSR ROUTINE_06B117
@@ -2958,7 +2959,7 @@ data06B243:
 
 ;===================================================================================================
 
-ROUTINE_06B247:
+SpriteAI_8222:
 #_06B247: TYX
 
 #_06B248: JSR ROUTINE_06B0F8
@@ -2995,7 +2996,7 @@ data06B276:
 
 ;===================================================================================================
 
-ROUTINE_06B27A:
+SpriteAI_8224:
 #_06B27A: TYX
 
 #_06B27B: JSR ROUTINE_06B117
@@ -3052,7 +3053,7 @@ ROUTINE_06B2AA:
 
 ;===================================================================================================
 
-ROUTINE_06B2BC:
+SpriteAI_8218:
 #_06B2BC: TYX
 
 #_06B2BD: LDA.w #$0000
@@ -3072,7 +3073,7 @@ ROUTINE_06B2BC:
 #_06B2DF: LDA.w #$0020
 #_06B2E2: STA.l $7FE812,X
 
-#_06B2E6: JSR ROUTINE_038180_bank06
+#_06B2E6: JSR SetHPto0001_bank06
 
 #_06B2E9: LDA.w #$003A ; SFX 3A
 #_06B2EC: STA.w $04AA
@@ -3081,7 +3082,7 @@ ROUTINE_06B2BC:
 
 ;===================================================================================================
 
-ROUTINE_06B2F2:
+SpriteAI_821A:
 #_06B2F2: TYX
 
 #_06B2F3: LDA.l $7FE81C,X
@@ -3317,7 +3318,7 @@ CODE_06B423:
 
 ;===================================================================================================
 
-ROUTINE_06B425:
+SpriteAI_81FA:
 #_06B425: JSR ROUTINE_038566_bank06
 #_06B428: BNE .exit
 
@@ -3349,7 +3350,7 @@ ROUTINE_06B425:
 
 ;===================================================================================================
 
-ROUTINE_06B45C:
+SpriteAI_81FC:
 #_06B45C: TYX
 
 #_06B45D: JSR Increment_0816_AndCompareTo_0078_bank06
@@ -3365,11 +3366,11 @@ ROUTINE_06B45C:
 #_06B46A: BMI CODE_06B488
 
 #_06B46C: LDA.w #Message_0892D1
-#_06B46F: JSR ROUTINE_038589_bank06
+#_06B46F: JSR Sprite_BeginBank08Dialog_8589_bank06
 
 #_06B472: LDA.w #data00EC26
 #_06B475: JSL ROUTINE_00EBF1_0003
-#_06B479: JSR ROUTINE_038719_bank06
+#_06B479: JSR Set_7E7B38_to_002E_bank06
 #_06B47C: JSR QueueSFX_44
 #_06B47F: JSR Set_7E7A08_to_000D_bank06
 #_06B482: JSR Reset_0816_AndAdvanceAI_bank06
@@ -3414,6 +3415,7 @@ ROUTINE_06B4A8_long:
 ROUTINE_06B4A8:
 #_06B4A8: JSR ROUTINE_0392C0_bank06
 #_06B4AB: PHX
+
 #_06B4AC: STZ.w $19B0
 #_06B4AF: STZ.w $19B6
 #_06B4B2: STZ.w $19B4
@@ -3528,6 +3530,7 @@ ROUTINE_06B545:
 
 #_06B546: LDA.w $19B4
 #_06B549: PHA
+
 #_06B54A: INC A
 #_06B54B: INC A
 #_06B54C: STA.w $19B4
@@ -3540,7 +3543,7 @@ ROUTINE_06B545:
 
 ;===================================================================================================
 
-ROUTINE_06B556:
+SpriteAI_8204:
 #_06B556: TYX
 
 #_06B557: JSR ROUTINE_06B56D
@@ -3587,6 +3590,7 @@ ROUTINE_06B56D:
 
 #_06B584: LDA.l $7E8100,X
 #_06B588: PHX
+
 #_06B589: TAX
 
 #_06B58A: LDA.l $7E5000,X
@@ -3619,7 +3623,7 @@ CODE_06B59F:
 
 ;===================================================================================================
 
-ROUTINE_06B5AF:
+SpriteAI_81FE:
 #_06B5AF: TYX
 
 #_06B5B0: LDA.w #$001E
@@ -3631,7 +3635,7 @@ ROUTINE_06B5AF:
 #_06B5BC: BEQ CODE_06B5C7
 
 #_06B5BE: LDA.w #Message_0892D1
-#_06B5C1: JSR ROUTINE_03857F_bank06
+#_06B5C1: JSR Sprite_SetBank08Message_bank06
 #_06B5C4: JSR Reset_0816_AndAdvanceAI_bank06
 
 CODE_06B5C7:
@@ -3639,13 +3643,13 @@ CODE_06B5C7:
 
 ;===================================================================================================
 
-ROUTINE_06B5CA:
+SpriteAI_8200:
 #_06B5CA: TYX
 
-#_06B5CB: JSR ROUTINE_038574_bank06
+#_06B5CB: JSR Sprite_HandleExistingDialog_bank06
 #_06B5CE: BNE CODE_06B5D6
 
-#_06B5D0: JSR ROUTINE_038721_bank06
+#_06B5D0: JSR Set_7E7B38_to_0016_bank06
 #_06B5D3: JSR AdvanceAIModeUp_bank06
 
 CODE_06B5D6:
@@ -3653,7 +3657,7 @@ CODE_06B5D6:
 
 ;===================================================================================================
 
-ROUTINE_06B5D9:
+SpriteAI_8202:
 #_06B5D9: TYX
 
 #_06B5DA: LDA.w #$0022
@@ -3671,7 +3675,7 @@ CODE_06B5EF:
 
 ;===================================================================================================
 
-ROUTINE_06B5F2:
+SpriteAI_8206:
 #_06B5F2: JSR ROUTINE_06B10E
 #_06B5F5: BCC .continue
 
@@ -3684,7 +3688,7 @@ ROUTINE_06B5F2:
 
 ;===================================================================================================
 
-ROUTINE_06B5FE:
+SpriteAI_8208:
 #_06B5FE: JSR ROUTINE_06B10E
 #_06B601: BCC .continue
 
@@ -3817,7 +3821,7 @@ CODE_06B6B6:
 
 ;===================================================================================================
 
-ROUTINE_06B6BE:
+SpriteAI_820A:
 #_06B6BE: JSR ROUTINE_06B10E
 #_06B6C1: BCC .continue
 
@@ -3862,7 +3866,7 @@ ROUTINE_06B6F4:
 
 ;===================================================================================================
 
-ROUTINE_06B6FA:
+SpriteAI_820C:
 #_06B6FA: JSR ROUTINE_06B10E
 #_06B6FD: BCC .continue
 
@@ -3891,7 +3895,7 @@ CODE_06B71F:
 
 ;===================================================================================================
 
-ROUTINE_06B725:
+SpriteAI_820E:
 #_06B725: JSR ROUTINE_06B10E
 #_06B728: BCC .continue
 
@@ -4066,7 +4070,7 @@ ROUTINE_06B7E8:
 
 ;===================================================================================================
 
-ROUTINE_06B7F2:
+GetRandomBool:
 #_06B7F2: JSR Random_bank06
 #_06B7F5: AND.w #$0001
 
@@ -4096,6 +4100,8 @@ CODE_06B812:
 #_06B818: STA.b $20
 
 #_06B81A: JMP ($0020)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_06B81D: dw ROUTINE_06B849
@@ -4204,6 +4210,8 @@ ROUTINE_06B86E:
 
 #_06B893: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data06B894:
 #_06B894: dw $0060, $0020
 #_06B898: dw $0060, $0020
@@ -4212,7 +4220,7 @@ data06B894:
 
 ;===================================================================================================
 
-ROUTINE_06B8A4:
+SpriteAI_8210:
 #_06B8A4: TYX
 
 #_06B8A5: LDA.w #$000A
@@ -4224,7 +4232,7 @@ ROUTINE_06B8A4:
 
 ;===================================================================================================
 
-ROUTINE_06B8B1:
+SpriteAI_8212:
 #_06B8B1: TYX
 #_06B8B2: TXA
 #_06B8B3: ASL A
@@ -4261,7 +4269,7 @@ CODE_06B8C9:
 
 ;===================================================================================================
 
-ROUTINE_06B8DD:
+SpriteAI_8214:
 #_06B8DD: TYX
 
 #_06B8DE: LDY.w $080A,X
@@ -4284,7 +4292,7 @@ ROUTINE_06B8DD:
 #_06B905: LDA.w $080E,X
 #_06B908: STA.l $7FE814,X
 
-#_06B90C: JSR ROUTINE_038179_bank06
+#_06B90C: JSR SetHPtoFFFF_bank06
 
 #_06B90F: LDA.w #$0026 ; SFX 26
 #_06B912: STA.w $04AA
@@ -4309,7 +4317,7 @@ ROUTINE_06B91F:
 
 ;===================================================================================================
 
-ROUTINE_06B92E:
+SpriteAI_8216:
 #_06B92E: TYX
 
 #_06B92F: LDA.w $174C
@@ -4407,7 +4415,7 @@ ROUTINE_06B9B6:
 
 ;===================================================================================================
 
-ROUTINE_06B9C3:
+SpriteAI_81F4:
 #_06B9C3: TYX
 
 #_06B9C4: LDA.w #$0400
@@ -4430,7 +4438,7 @@ ROUTINE_06B9C3:
 
 ;===================================================================================================
 
-ROUTINE_06B9E7:
+SpriteAI_81F6:
 #_06B9E7: TYX
 
 #_06B9E8: JSR ROUTINE_038194_bank06
@@ -4453,7 +4461,7 @@ ROUTINE_06B9E7:
 
 ;===================================================================================================
 
-ROUTINE_06BA01:
+SpriteAI_81E2:
 #_06BA01: JMP CODE_06BC87
 
 ;===================================================================================================
@@ -4470,7 +4478,7 @@ ROUTINE_06BA04:
 
 ;===================================================================================================
 
-ROUTINE_06BA10:
+SpriteAI_81E4:
 #_06BA10: TYX
 
 #_06BA11: CLC
@@ -4507,7 +4515,7 @@ ROUTINE_06BA3E:
 
 ;===================================================================================================
 
-ROUTINE_06BA47:
+SpriteAI_81E6:
 #_06BA47: JSR ROUTINE_06BA7D
 #_06BA4A: JSR ROUTINE_06BA9E
 
@@ -4631,7 +4639,7 @@ CODE_06BAE8:
 
 ;===================================================================================================
 
-ROUTINE_06BAF8:
+SpriteAI_81E8:
 #_06BAF8: JSR ROUTINE_06BA7D
 #_06BAFB: JSR ROUTINE_06BA9E
 
@@ -4695,7 +4703,7 @@ ROUTINE_06BB47:
 
 ;===================================================================================================
 
-ROUTINE_06BB54:
+SpriteAI_81EA:
 #_06BB54: JSR ROUTINE_06BA7D
 
 #_06BB57: LDY.w #$0002
@@ -4722,7 +4730,7 @@ CODE_06BB79:
 
 ;===================================================================================================
 
-ROUTINE_06BB7C:
+SpriteAI_81EC:
 #_06BB7C: JSR ROUTINE_06BA7D
 
 #_06BB7F: LDA.w #$0008
@@ -4764,7 +4772,7 @@ ROUTINE_06BBAA:
 
 ;===================================================================================================
 
-ROUTINE_06BBAF:
+SpriteAI_81EE:
 #_06BBAF: TYX
 
 #_06BBB0: LDY.w #$0003
@@ -4798,7 +4806,7 @@ CODE_06BBD8:
 
 ;===================================================================================================
 
-ROUTINE_06BBDE:
+SpriteAI_81F0:
 #_06BBDE: JSR ROUTINE_06BA7D
 
 #_06BBE1: LDA.w #$0008
@@ -4825,7 +4833,7 @@ CODE_06BC06:
 
 ;===================================================================================================
 
-ROUTINE_06BC09:
+SpriteAI_81F2:
 #_06BC09: TYX
 
 #_06BC0A: JSR ROUTINE_0383D7_bank06
@@ -4873,7 +4881,7 @@ CODE_06BC52:
 
 ;===================================================================================================
 
-ROUTINE_06BC5B:
+SpriteAI_81F8:
 #_06BC5B: LDY.w #$0178
 #_06BC5E: JSR ROUTINE_039661_bank06
 
@@ -4937,7 +4945,7 @@ ROUTINE_06BC9C:
 
 ;===================================================================================================
 
-ROUTINE_06BCB0:
+SpriteAI_81C4:
 #_06BCB0: TYX
 
 #_06BCB1: CLC
@@ -4986,7 +4994,7 @@ CODE_06BCF0:
 
 ;===================================================================================================
 
-ROUTINE_06BCF9:
+SpriteAI_81C6:
 #_06BCF9: TYX
 
 #_06BCFA: LDA.w #$1F04
@@ -5001,10 +5009,10 @@ CODE_06BD08:
 
 ;===================================================================================================
 
-ROUTINE_06BD0B:
+SpriteAI_81C8:
 #_06BD0B: TYX
 
-#_06BD0C: JSR ROUTINE_06BC5B
+#_06BD0C: JSR SpriteAI_81F8
 #_06BD0F: JSR ROUTINE_06BD95
 
 #_06BD12: LDA.w #$1F02
@@ -5118,7 +5126,7 @@ ROUTINE_06BDAA:
 
 ;===================================================================================================
 
-ROUTINE_06BDC1:
+SpriteAI_81CA:
 #_06BDC1: TYX
 
 #_06BDC2: JSR ROUTINE_0392B7_bank06
@@ -5129,7 +5137,7 @@ ROUTINE_06BDC1:
 #_06BDC9: ADC.w #$0100
 #_06BDCC: BMI CODE_06BDD1
 
-#_06BDCE: JSR ROUTINE_06BC5B
+#_06BDCE: JSR SpriteAI_81F8
 
 CODE_06BDD1:
 #_06BDD1: LDA.w #$1F01
@@ -5154,10 +5162,10 @@ CODE_06BDF3:
 
 ;===================================================================================================
 
-ROUTINE_06BDF6:
+SpriteAI_81CC:
 #_06BDF6: TYX
 
-#_06BDF7: JSR ROUTINE_06BC5B
+#_06BDF7: JSR SpriteAI_81F8
 #_06BDFA: JSR ROUTINE_06BD95
 #_06BDFD: JSR CheckFrameMod16_bank06
 #_06BE00: BNE CODE_06BE08
@@ -5201,7 +5209,7 @@ ROUTINE_06BE33:
 
 ;===================================================================================================
 
-ROUTINE_06BE3C:
+SpriteAI_81CE:
 #_06BE3C: TYX
 
 #_06BE3D: JSR ROUTINE_06BEC5
@@ -5217,7 +5225,7 @@ CODE_06BE4B:
 
 ;===================================================================================================
 
-ROUTINE_06BE4E:
+SpriteAI_81D0:
 #_06BE4E: TYX
 
 #_06BE4F: JSR ROUTINE_06BEC5
@@ -5260,13 +5268,13 @@ ROUTINE_06BE78:
 
 ;===================================================================================================
 
-ROUTINE_06BE84:
+SpriteAI_81D2:
 #_06BE84: TYX
 
 #_06BE85: JSR ROUTINE_06BE78
 #_06BE88: JSR ROUTINE_06BEC5
 #_06BE8B: JSR ROUTINE_06BEEB
-#_06BE8E: JSR ROUTINE_06BC5B
+#_06BE8E: JSR SpriteAI_81F8
 
 #_06BE91: LDA.w #$1F08
 #_06BE94: JSR ROUTINE_038CDF_bank06
@@ -5345,13 +5353,13 @@ ROUTINE_06BEEB:
 
 ;===================================================================================================
 
-ROUTINE_06BEF8:
+SpriteAI_81D4:
 #_06BEF8: TYX
 
 #_06BEF9: JSR ROUTINE_06BE78
 #_06BEFC: JSR ROUTINE_06BEC5
 #_06BEFF: JSR ROUTINE_06BEEB
-#_06BF02: JSR ROUTINE_06BC5B
+#_06BF02: JSR SpriteAI_81F8
 #_06BF05: JSR ROUTINE_03867C_bank06
 #_06BF08: JSR ROUTINE_06BF22
 #_06BF0B: JSR Increment_0816_AndCompareTo_0078_bank06
@@ -5381,7 +5389,7 @@ CODE_06BF28:
 
 ;===================================================================================================
 
-ROUTINE_06BF2E:
+SpriteAI_81D6:
 #_06BF2E: TYX
 
 #_06BF2F: JSR ROUTINE_03839B_bank06
@@ -5458,7 +5466,7 @@ ROUTINE_06BF91:
 #_06BFA6: LDA.w data06BFB0+6,Y
 #_06BFA9: STA.l $7E7A68
 
-#_06BFAD: JMP ROUTINE_0381AB_bank06
+#_06BFAD: JMP PlaySFX_FD_IfNotGameringOver_bank06
 
 data06BFB0:
 #_06BFB0: dw $0078, $0013, $0036, $0030
@@ -5466,7 +5474,7 @@ data06BFB0:
 
 ;===================================================================================================
 
-ROUTINE_06BFC0:
+SpriteAI_81D8:
 #_06BFC0: TYX
 
 #_06BFC1: LDA.w $080A,X
@@ -5487,7 +5495,7 @@ data06BFD8:
 
 ;===================================================================================================
 
-ROUTINE_06BFDE:
+SpriteAI_81DC:
 #_06BFDE: TYX
 
 #_06BFDF: LDY.w $0816,X
@@ -5556,7 +5564,7 @@ CODE_06BFEA:
 
 ;===================================================================================================
 
-ROUTINE_06C087:
+SpriteAI_81DE:
 #_06C087: TYX
 
 #_06C088: LDA.w $080A,X
@@ -5570,7 +5578,7 @@ ROUTINE_06C087:
 
 ;===================================================================================================
 
-ROUTINE_06C09D:
+SpriteAI_81E0:
 #_06C09D: TYX
 
 #_06C09E: LDA.w $1690
@@ -5712,7 +5720,7 @@ CODE_06C151:
 
 ;===================================================================================================
 
-ROUTINE_06C158:
+SpriteAI_81BE:
 #_06C158: TYX
 
 #_06C159: JSR Set_0814_to_FFFF_bank06
@@ -5754,7 +5762,7 @@ ROUTINE_06C180:
 
 ;===================================================================================================
 
-ROUTINE_06C18C:
+SpriteAI_81C0:
 #_06C18C: TYX
 
 #_06C18D: LDA.w #$1A0A
@@ -5796,7 +5804,7 @@ CODE_06C1C2:
 
 ;===================================================================================================
 
-ROUTINE_06C1CC:
+SpriteAI_81B4:
 #_06C1CC: TYX
 
 #_06C1CD: JSR PlaySFX6FEvery32Frames
@@ -5860,7 +5868,7 @@ ROUTINE_06C227:
 
 ;===================================================================================================
 
-ROUTINE_06C231:
+SpriteAI_81B6:
 #_06C231: TYX
 
 #_06C232: JSR ROUTINE_06C74E
@@ -5876,7 +5884,7 @@ CODE_06C240:
 
 ;===================================================================================================
 
-ROUTINE_06C243:
+SpriteAI_81B8:
 #_06C243: TYX
 
 #_06C244: JSR ROUTINE_06C6C8
@@ -5891,7 +5899,7 @@ ROUTINE_06C243:
 
 ;===================================================================================================
 
-ROUTINE_06C256:
+SpriteAI_81BA:
 #_06C256: TYX
 
 #_06C257: JSR ROUTINE_06C6C8
@@ -5924,7 +5932,7 @@ ROUTINE_06C271:
 
 ;===================================================================================================
 
-ROUTINE_06C280:
+SpriteAI_81BC:
 #_06C280: TYX
 
 #_06C281: JSR ROUTINE_06C74E
@@ -5934,7 +5942,7 @@ ROUTINE_06C280:
 
 ;===================================================================================================
 
-ROUTINE_06C28A:
+SpriteAI_81A8:
 #_06C28A: TYX
 
 #_06C28B: LDA.w $080C,X
@@ -5964,7 +5972,7 @@ ROUTINE_06C28A:
 
 ;===================================================================================================
 
-ROUTINE_06C2B5:
+SpriteAI_81AA:
 #_06C2B5: TYX
 
 #_06C2B6: JSR ROUTINE_06C328
@@ -6075,7 +6083,7 @@ CODE_06C33F:
 
 ;===================================================================================================
 
-ROUTINE_06C341:
+SpriteAI_81AC:
 #_06C341: TYX
 
 #_06C342: JSR ROUTINE_06C328
@@ -6109,7 +6117,7 @@ CODE_06C356:
 
 ;===================================================================================================
 
-ROUTINE_06C369:
+SpriteAI_81A0:
 #_06C369: TYX
 
 #_06C36A: LDA.w #$0038 ; SFX 38
@@ -6151,7 +6159,7 @@ CODE_06C39D:
 
 ;===================================================================================================
 
-ROUTINE_06C3A3:
+SpriteAI_81A6:
 #_06C3A3: TYX
 
 #_06C3A4: LDY.w #$0010
@@ -6168,7 +6176,7 @@ ROUTINE_06C3A3:
 
 ;===================================================================================================
 
-ROUTINE_06C3BF:
+SpriteAI_81A2:
 #_06C3BF: TYX
 
 #_06C3C0: LDY.w #$0010
@@ -6192,7 +6200,7 @@ CODE_06C3DA:
 
 ;===================================================================================================
 
-ROUTINE_06C3E3:
+SpriteAI_81A4:
 #_06C3E3: TYX
 
 #_06C3E4: LDY.w #$0030
@@ -6215,7 +6223,7 @@ CODE_06C3FE:
 
 ;===================================================================================================
 
-ROUTINE_06C404:
+SpriteAI_8196:
 #_06C404: TYX
 
 #_06C405: LDY.w $080A,X
@@ -6257,7 +6265,7 @@ data06C43D:
 
 ;===================================================================================================
 
-ROUTINE_06C447:
+SpriteAI_8198:
 #_06C447: TYX
 
 #_06C448: JSR ROUTINE_06C47A
@@ -6321,7 +6329,7 @@ ROUTINE_06C47A:
 
 ;===================================================================================================
 
-ROUTINE_06C495:
+SpriteAI_819A:
 #_06C495: TYX
 
 #_06C496: LDA.w $1710
@@ -6359,7 +6367,7 @@ CODE_06C4C7:
 
 ;===================================================================================================
 
-ROUTINE_06C4CD:
+SpriteAI_819C:
 #_06C4CD: TYX
 
 #_06C4CE: JSR Set_0814_to_FFFF_bank06
@@ -6435,7 +6443,7 @@ ROUTINE_06C52B:
 
 ;===================================================================================================
 
-ROUTINE_06C537:
+SpriteAI_819E:
 #_06C537: TYX
 
 #_06C538: LDA.w $1710
@@ -6453,14 +6461,14 @@ ROUTINE_06C537:
 
 ;===================================================================================================
 
-ROUTINE_06C54D:
+SpriteAI_8192:
 #_06C54D: TYX
 
 #_06C54E: JMP ROUTINE_038A86_bank06
 
 ;===================================================================================================
 
-ROUTINE_06C551:
+SpriteAI_8194:
 #_06C551: TYX
 
 #_06C552: JSR ROUTINE_06C574
@@ -6502,7 +6510,7 @@ ROUTINE_06C574:
 
 ;===================================================================================================
 
-ROUTINE_06C587:
+SpriteAI_8180:
 #_06C587: JSR ROUTINE_038566_bank06
 #_06C58A: BNE .exit
 
@@ -6523,13 +6531,14 @@ ROUTINE_06C587:
 
 #_06C5AB: JSR ROUTINE_06BC9C
 #_06C5AE: JSR SelectVoltaOrBoltaGreeting
-#_06C5B1: JSR ROUTINE_038589_bank06
-#_06C5B4: JSR ROUTINE_038719_bank06
+#_06C5B1: JSR Sprite_BeginBank08Dialog_8589_bank06
+#_06C5B4: JSR Set_7E7B38_to_002E_bank06
 
 #_06C5B7: LDY.w #$0000
 
 CODE_06C5BA:
 #_06C5BA: PHY
+
 #_06C5BB: STY.b $30
 
 #_06C5BD: LDA.w #$8196 ; SPRITE 8196
@@ -6609,7 +6618,7 @@ SelectVoltaOrBoltaGreeting:
 
 ;===================================================================================================
 
-ROUTINE_06C61F:
+SpriteAI_8182:
 #_06C61F: TYX
 
 #_06C620: LDA.w $0830,X
@@ -6653,7 +6662,7 @@ CODE_06C658:
 
 ;===================================================================================================
 
-ROUTINE_06C661:
+SpriteAI_818A:
 #_06C661: TYX
 
 #_06C662: JSR Increment_0816_AndCompareTo_0078_bank06
@@ -6666,7 +6675,7 @@ CODE_06C66A:
 
 ;===================================================================================================
 
-ROUTINE_06C66D:
+SpriteAI_8184:
 #_06C66D: TYX
 
 #_06C66E: JSR ROUTINE_038741_0044_bank06
@@ -6674,7 +6683,7 @@ ROUTINE_06C66D:
 #_06C672: BEQ CODE_06C67D
 
 #_06C674: JSR SelectVoltaOrBoltaGreeting
-#_06C677: JSR ROUTINE_03857F_bank06
+#_06C677: JSR Sprite_SetBank08Message_bank06
 #_06C67A: JSR AdvanceAIModeUp_bank06
 
 CODE_06C67D:
@@ -6682,13 +6691,13 @@ CODE_06C67D:
 
 ;===================================================================================================
 
-ROUTINE_06C680:
+SpriteAI_8186:
 #_06C680: TYX
 
-#_06C681: JSR ROUTINE_038574_bank06
+#_06C681: JSR Sprite_HandleExistingDialog_bank06
 #_06C684: BNE CODE_06C68C
 
-#_06C686: JSR ROUTINE_038721_bank06
+#_06C686: JSR Set_7E7B38_to_0016_bank06
 #_06C689: JSR AdvanceAIModeUp_bank06
 
 CODE_06C68C:
@@ -6696,7 +6705,7 @@ CODE_06C68C:
 
 ;===================================================================================================
 
-ROUTINE_06C68F:
+SpriteAI_8188:
 #_06C68F: TYX
 
 #_06C690: LDA.w #$0022
@@ -6718,7 +6727,7 @@ CODE_06C6AA:
 
 ;===================================================================================================
 
-ROUTINE_06C6AD:
+SpriteAI_818C:
 #_06C6AD: TYX
 
 #_06C6AE: JSR ROUTINE_06C793
@@ -7193,7 +7202,7 @@ ROUTINE_06C922:
 
 ;===================================================================================================
 
-ROUTINE_06C929:
+SpriteAI_818E:
 #_06C929: TYX
 
 #_06C92A: JSR ROUTINE_06C6C8
@@ -7275,7 +7284,7 @@ ROUTINE_06C97D:
 
 ;===================================================================================================
 
-ROUTINE_06C9A1:
+SpriteAI_8190:
 #_06C9A1: TYX
 
 #_06C9A2: JSR ROUTINE_06C6C8
@@ -7347,7 +7356,7 @@ ROUTINE_06C9F0:
 
 ;===================================================================================================
 
-ROUTINE_06CA06:
+SpriteAI_81B0:
 #_06CA06: TYX
 
 #_06CA07: LDA.w $084C,X
@@ -7387,7 +7396,7 @@ CODE_06CA39:
 
 ;===================================================================================================
 
-ROUTINE_06CA3C:
+SpriteAI_81B2:
 #_06CA3C: TYX
 
 #_06CA3D: JSR ROUTINE_06C74E
@@ -7407,7 +7416,7 @@ CODE_06CA54:
 
 ;===================================================================================================
 
-ROUTINE_06CA57:
+SpriteAI_813E:
 #_06CA57: TYX
 
 #_06CA58: JSR ROUTINE_0392C0_bank06
@@ -7432,7 +7441,7 @@ CODE_06CA5B:
 
 ;===================================================================================================
 
-ROUTINE_06CA7D:
+SpriteAI_8140:
 #_06CA7D: TYX
 
 #_06CA7E: LDA.w $0814,X
@@ -7448,7 +7457,7 @@ CODE_06CA89:
 
 ;===================================================================================================
 
-ROUTINE_06CA8F:
+SpriteAI_813A:
 #_06CA8F: TYX
 
 #_06CA90: LDA.l $7E2530
@@ -7456,13 +7465,16 @@ ROUTINE_06CA8F:
 
 #_06CA96: JSR ROUTINE_0392C0_bank06
 #_06CA99: PHX
+
 #_06CA9A: TXY
 
 #_06CA9B: LDA.w $081C,Y
 #_06CA9E: TAX
+
 #_06CA9F: JSR ROUTINE_038641_bank06
 
 #_06CAA2: PLX
+
 #_06CAA3: JMP AdvanceAIModeUp_bank06
 
 .exit
@@ -7470,20 +7482,23 @@ ROUTINE_06CA8F:
 
 ;===================================================================================================
 
-ROUTINE_06CAA7:
+SpriteAI_813C:
 #_06CAA7: TYX
 
 #_06CAA8: DEC.w $080A,X
 #_06CAAB: BNE .exit
 
 #_06CAAD: PHX
+
 #_06CAAE: TXY
 
 #_06CAAF: LDA.w $0806,Y
 #_06CAB2: TAX
+
 #_06CAB3: JSR ROUTINE_038641_bank06
 
 #_06CAB6: PLX
+
 #_06CAB7: JMP ROUTINE_038C85_bank06
 
 .exit
@@ -7491,7 +7506,7 @@ ROUTINE_06CAA7:
 
 ;===================================================================================================
 
-ROUTINE_06CABB:
+SpriteAI_8136:
 #_06CABB: TYX
 
 #_06CABC: LDA.w #$0060
@@ -7499,30 +7514,35 @@ ROUTINE_06CABB:
 #_06CAC2: STZ.w $080A,X
 
 #_06CAC5: JSR ROUTINE_0392C0_bank06
+
 #_06CAC8: PHX
+
 #_06CAC9: TXY
 
 #_06CACA: LDX.w #$E708
 #_06CACD: JSR ROUTINE_038641_bank06
 
 #_06CAD0: PLX
+
 #_06CAD1: JMP AdvanceAIModeUp_bank06
 
 ;===================================================================================================
 
-ROUTINE_06CAD4:
+SpriteAI_8138:
 #_06CAD4: TYX
 
 #_06CAD5: DEC.w $0814,X
 #_06CAD8: BNE .exit
 
 #_06CADA: PHX
+
 #_06CADB: TXY
 
 #_06CADC: LDX.w #$E720
 #_06CADF: JSR ROUTINE_038641_bank06
 
 #_06CAE2: PLX
+
 #_06CAE3: JMP ROUTINE_038C85_bank06
 
 .exit
@@ -7530,7 +7550,7 @@ ROUTINE_06CAD4:
 
 ;===================================================================================================
 
-ROUTINE_06CAE7:
+SpriteAI_8134:
 #_06CAE7: TYX
 
 #_06CAE8: LDA.w #data06CC26
@@ -7540,7 +7560,7 @@ ROUTINE_06CAE7:
 
 ;===================================================================================================
 
-ROUTINE_06CAF1:
+SpriteAI_80C4:
 #_06CAF1: TYX
 
 #_06CAF2: LDA.w #data06CAFB
@@ -7556,7 +7576,7 @@ ROUTINE_06CAF1:
 
 ;===================================================================================================
 
-ROUTINE_06CB15:
+SpriteAI_80C6:
 #_06CB15: JSR ROUTINE_06CB6E
 
 #_06CB18: LDA.w data06CB24+0,Y
@@ -7573,7 +7593,7 @@ data06CB24:
 
 ;===================================================================================================
 
-ROUTINE_06CB34:
+SpriteAI_80C8:
 #_06CB34: TYX
 
 #_06CB35: JSR ROUTINE_06CB92
@@ -7594,7 +7614,7 @@ CODE_06CB4C:
 
 ;===================================================================================================
 
-ROUTINE_06CB4F:
+SpriteAI_8130:
 #_06CB4F: JSR ROUTINE_06CB6E
 
 #_06CB52: LDA.w data06CB5E+0,Y
@@ -7629,7 +7649,7 @@ CODE_06CB76:
 
 ;===================================================================================================
 
-ROUTINE_06CB80:
+SpriteAI_8132:
 #_06CB80: TYX
 
 #_06CB81: JSR ROUTINE_06CB92
@@ -7661,7 +7681,7 @@ ROUTINE_06CB92:
 
 ;===================================================================================================
 
-ROUTINE_06CBA9:
+SpriteAI_812E:
 #_06CBA9: TYX
 
 #_06CBAA: LDA.w #$1B03
@@ -7676,7 +7696,7 @@ CODE_06CBB8:
 
 ;===================================================================================================
 
-ROUTINE_06CBBB:
+SpriteAI_8126:
 #_06CBBB: TYX
 
 #_06CBBC: LDA.w #$1B04
@@ -7748,7 +7768,7 @@ data06CC26:
 
 ;===================================================================================================
 
-ROUTINE_06CC40:
+SpriteAI_8128:
 #_06CC40: TYX
 
 #_06CC41: LDA.w #$0100
@@ -7770,7 +7790,7 @@ ROUTINE_06CC40:
 #_06CC5B: LDA.w #$11E8
 #_06CC5E: STA.w $0806,X
 
-#_06CC61: JSR ROUTINE_038180_bank06
+#_06CC61: JSR SetHPto0001_bank06
 
 #_06CC64: LDA.w #$0000
 #_06CC67: STA.l $7FE818,X
@@ -7788,7 +7808,7 @@ data06CC7A:
 
 ;===================================================================================================
 
-ROUTINE_06CC80:
+SpriteAI_812A:
 #_06CC80: JSR ROUTINE_06A5CA
 #_06CC83: BCC .continue
 
@@ -7840,7 +7860,7 @@ CODE_06CCC6:
 
 ;===================================================================================================
 
-ROUTINE_06CCCE:
+SpriteAI_811E:
 #_06CCCE: TYX
 
 #_06CCCF: CLC
@@ -7870,7 +7890,7 @@ ROUTINE_06CCCE:
 
 ;===================================================================================================
 
-ROUTINE_06CCFC:
+SpriteAI_8120:
 #_06CCFC: TYX
 
 #_06CCFD: LDA.l $7E7A70
@@ -7934,7 +7954,7 @@ CODE_06CD58:
 
 ;===================================================================================================
 
-ROUTINE_06CD62:
+SpriteAI_8122:
 #_06CD62: TYX
 
 #_06CD63: LDA.l $7E7A70
@@ -8013,7 +8033,7 @@ ROUTINE_06CDCB:
 
 ;===================================================================================================
 
-ROUTINE_06CDDD:
+SpriteAI_8124:
 #_06CDDD: TYX
 
 #_06CDDE: LDA.w #$1B02
@@ -8042,7 +8062,7 @@ data06CDFC:
 
 ;===================================================================================================
 
-ROUTINE_06CE10:
+SpriteAI_811A:
 #_06CE10: TYX
 
 #_06CE11: LDA.w $0806,X
@@ -8081,7 +8101,7 @@ data06CE45:
 
 ;===================================================================================================
 
-ROUTINE_06CE55:
+SpriteAI_811C:
 #_06CE55: TYX
 
 #_06CE56: LDA.l $7E7A70
@@ -8250,7 +8270,7 @@ data06CF42:
 
 ;===================================================================================================
 
-ROUTINE_06CF4A:
+SpriteAI_8116:
 #_06CF4A: TYX
 
 #_06CF4B: STZ.w $080A,X
@@ -8309,7 +8329,7 @@ data06CF8E:
 #_06CFAE: dw $0010, data06D1A4
 #_06CFB2: dw $0020, data06D1EE
 #_06CFB6: dw $0028, data06D214
-#_06CFBA: dw $0000, NullPtr
+#_06CFBA: dw $0000, $0000
 #_06CFBE: dw $0008, data06D010
 #_06CFC2: dw $0008, data06D018
 #_06CFC6: dw $0008, data06D020
@@ -8321,9 +8341,9 @@ data06CF8E:
 #_06CFDE: dw $000C, data06D068
 #_06CFE2: dw $000C, data06D07C
 #_06CFE6: dw $000C, data06D090
-#_06CFEA: dw $0000, NullPtr
+#_06CFEA: dw $0000, $0000
 #_06CFEE: dw $0010, data06CFF6
-#_06CFF2: dw $0000, NullPtr
+#_06CFF2: dw $0000, $0000
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -8495,7 +8515,7 @@ data06D214:
 
 ;===================================================================================================
 
-ROUTINE_06D21C:
+SpriteAI_8118:
 #_06D21C: TYX
 
 #_06D21D: LDA.w $0816,X
@@ -8521,7 +8541,7 @@ CODE_06D235:
 
 ;===================================================================================================
 
-ROUTINE_06D239:
+SpriteAI_8112:
 #_06D239: TYX
 
 #_06D23A: CLC
@@ -8545,7 +8565,7 @@ ROUTINE_06D239:
 
 ;===================================================================================================
 
-ROUTINE_06D25A:
+SpriteAI_8114:
 #_06D25A: LDA.w $0816,Y
 #_06D25D: ASL A
 #_06D25E: TAX
@@ -8660,7 +8680,7 @@ ROUTINE_06D2E0:
 
 ;===================================================================================================
 
-ROUTINE_06D2EB:
+SpriteAI_810E:
 #_06D2EB: TYX
 
 #_06D2EC: JSR ROUTINE_0392C0_bank06
@@ -8669,7 +8689,7 @@ ROUTINE_06D2EB:
 
 ;===================================================================================================
 
-ROUTINE_06D2F2:
+SpriteAI_8110:
 #_06D2F2: TYX
 
 #_06D2F3: LDA.w $0804,X
@@ -8685,14 +8705,14 @@ CODE_06D300:
 
 ;===================================================================================================
 
-ROUTINE_06D303:
+SpriteAI_810C:
 #_06D303: JSL ROUTINE_09FD58
 
 #_06D307: JMP ROUTINE_038C85_bank06
 
 ;===================================================================================================
 
-ROUTINE_06D30A:
+SpriteAI_8108:
 #_06D30A: TYX
 
 #_06D30B: LDA.w #$0232
@@ -8711,7 +8731,7 @@ ROUTINE_06D30A:
 
 ;===================================================================================================
 
-ROUTINE_06D324:
+SpriteAI_810A:
 #_06D324: TYX
 
 #_06D325: LDA.w $0804,X
@@ -8737,7 +8757,7 @@ CODE_06D33C:
 
 ;===================================================================================================
 
-ROUTINE_06D34C:
+SpriteAI_8104:
 #_06D34C: TYX
 
 #_06D34D: LDA.l $7E2530
@@ -8762,7 +8782,7 @@ ROUTINE_06D34C:
 
 ;===================================================================================================
 
-ROUTINE_06D369:
+SpriteAI_8106:
 #_06D369: LDA.w $0816,Y
 #_06D36C: CMP.w #$0011
 #_06D36F: BEQ CODE_06D37E
@@ -9324,10 +9344,13 @@ CODE_06D687:
 #_06D68A: BEQ .exit
 
 #_06D68C: PHY
+
 #_06D68D: TAY
 
 #_06D68E: LDA.w $0000,Y
+
 #_06D691: PLY
+
 #_06D692: CMP.b $20
 #_06D694: BEQ CODE_06D69D
 
@@ -9336,7 +9359,10 @@ CODE_06D687:
 #_06D698: INY
 #_06D699: INY
 #_06D69A: INY
+
 #_06D69B: BRA CODE_06D687
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_06D69D:
 #_06D69D: LDA.w ButtonTiles,Y
@@ -10015,6 +10041,7 @@ ROUTINE_06DA6A:
 
 CODE_06DA7B:
 #_06DA7B: JSR Random_bank06
+
 #_06DA7E: INY
 #_06DA7F: CPY.w #$0100
 #_06DA82: BCC CODE_06DA8A
@@ -10033,6 +10060,7 @@ CODE_06DA8A:
 #_06DA95: BCS CODE_06DA7B
 
 #_06DA97: PHX
+
 #_06DA98: TAX
 
 #_06DA99: LDA.l $7E7A76,X
@@ -10041,7 +10069,10 @@ CODE_06DA8A:
 #_06DAA2: BEQ CODE_06DAA7
 
 #_06DAA4: PLX
+
 #_06DAA5: BRA CODE_06DA7B
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_06DAA7:
 #_06DAA7: TXA
@@ -10241,7 +10272,9 @@ ROUTINE_06DBE9:
 #_06DBF1: BCS .exit
 
 #_06DBF3: PHX
+
 #_06DBF4: TAX
+
 #_06DBF5: SEP #$20
 
 #_06DBF7: LDA.l $7E7A76,X
@@ -10249,6 +10282,7 @@ ROUTINE_06DBE9:
 #_06DBFD: STA.l $7E7A76,X
 
 #_06DC01: REP #$20
+
 #_06DC03: PLX
 
 .exit
@@ -10403,7 +10437,7 @@ ROUTINE_06DCC8:
 #_06DCD5: LDA.w #$8116 ; SPRITE 8116
 #_06DCD8: STA.b $26
 
-#_06DCDA: JSR ROUTINE_0396C9_bank06
+#_06DCDA: JSR SpawnSpriteHere_96C9_bank06
 
 .exit
 #_06DCDD: RTS
@@ -10432,7 +10466,7 @@ ROUTINE_06DCE8:
 #_06DCF4: LDA.w #$811E ; SPRITE 811E
 #_06DCF7: STA.b $26
 
-#_06DCF9: JSR ROUTINE_0396C9_bank06
+#_06DCF9: JSR SpawnSpriteHere_96C9_bank06
 
 .exit
 #_06DCFC: RTS
@@ -10453,12 +10487,12 @@ ROUTINE_06DCFD:
 #_06DD0E: LDA.w #$8116 ; SPRITE 8116
 #_06DD11: STA.b $26
 
-#_06DD13: JSR ROUTINE_0396C9_bank06
+#_06DD13: JSR SpawnSpriteHere_96C9_bank06
 
 #_06DD16: LDA.w #$80B0 ; SPRITE 80B0
 #_06DD19: STA.b $26
 
-#_06DD1B: JSR ROUTINE_0396C9_bank06
+#_06DD1B: JSR SpawnSpriteHere_96C9_bank06
 
 .exit
 #_06DD1E: RTS
@@ -10747,7 +10781,7 @@ CODE_06DEA1:
 
 ;===================================================================================================
 
-ROUTINE_06DEA4:
+SpriteAI_8100:
 #_06DEA4: TYX
 
 #_06DEA5: LDA.l $7E2530
@@ -10763,11 +10797,14 @@ ROUTINE_06DEA4:
 
 ;===================================================================================================
 
-ROUTINE_06DEB6:
+SpriteAI_8102:
 #_06DEB6: LDA.w $0816,Y
 #_06DEB9: ASL A
 #_06DEBA: TAX
+
 #_06DEBB: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_06DEBE: dw ROUTINE_06DF52
@@ -10840,6 +10877,7 @@ CODE_06DF20:
 
 CODE_06DF24:
 #_06DF24: PLX
+
 #_06DF25: JMP CODE_06DEE4
 
 ;===================================================================================================
@@ -11077,14 +11115,14 @@ ROUTINE_06E020:
 
 ;===================================================================================================
 
-ROUTINE_06E022:
+SpriteAI_80CA:
 #_06E022: JSR ROUTINE_038566_bank06
-#_06E025: BEQ CODE_06E028
+#_06E025: BEQ .continue
 
 .exit
 #_06E027: RTS
 
-CODE_06E028:
+.continue:
 #_06E028: LDA.w $19CE
 #_06E02B: CMP.w #$0058 ; STATE 58
 #_06E02E: BCC CODE_06E035
@@ -11127,15 +11165,19 @@ CODE_06E035:
 #_06E072: STZ.w $081A,X
 #_06E075: STZ.w $0840,X
 
+;---------------------------------------------------------------------------------------------------
+
 #_06E078: LDA.w #Message_08913B
+
 #_06E07B: JSR AreWeOnLevel9_bank06
-#_06E07E: BNE CODE_06E083
+#_06E07E: BNE .not_level_6
 
 #_06E080: LDA.w #Message_08920F
 
-CODE_06E083:
+.not_level_6:
 #_06E083: JSR BeginBank08ChatWithSprite_bank06
-#_06E086: JSR ROUTINE_038719_bank06
+
+#_06E086: JSR Set_7E7B38_to_002E_bank06
 
 #_06E089: LDA.w #data09FCF2
 #_06E08C: LDY.w #data09FCF2>>16
@@ -11178,29 +11220,31 @@ CODE_06E0B5:
 
 ;===================================================================================================
 
-ROUTINE_06E0D4:
+SpriteAI_80F2:
 #_06E0D4: TYX
 
 #_06E0D5: LDA.l $7E2530
-#_06E0D9: BEQ CODE_06E0DC
+#_06E0D9: BEQ .continue
 
 .exit
 #_06E0DB: RTS
 
-CODE_06E0DC:
+.continue
 #_06E0DC: JSR Set_0814_to_FFFF_bank06
 
 #_06E0DF: LDA.w $19CE
 #_06E0E2: CMP.w #$00B8 ; STATE B8
-#_06E0E5: BNE CODE_06E0F2
+#_06E0E5: BNE .dramatization
 
 #_06E0E7: LDA.l $7E7A4E
 #_06E0EB: CMP.w #$0021
-#_06E0EE: BCC CODE_06E0F2
+#_06E0EE: BCC .dramatization
 
 #_06E0F0: BRA .exit
 
-CODE_06E0F2:
+;---------------------------------------------------------------------------------------------------
+
+.dramatization
 #_06E0F2: LDA.l $7FE81C,X
 #_06E0F6: TAY
 
@@ -11211,7 +11255,7 @@ CODE_06E0F2:
 
 .vectors
 #_06E0FF: dw ROUTINE_06E12A
-#_06E101: dw ROUTINE_06E172
+#_06E101: dw Impy_TatamiCutscene_AssaultPocky
 #_06E103: dw ROUTINE_06E1E4
 #_06E105: dw ROUTINE_06E107
 
@@ -11294,10 +11338,10 @@ ROUTINE_06E15F:
 
 ;===================================================================================================
 
-ROUTINE_06E172:
+Impy_TatamiCutscene_AssaultPocky:
 #_06E172: LDA.w $05A0
 #_06E175: AND.w #$0007
-#_06E178: BNE CODE_06E1A4
+#_06E178: BNE .delay_spark
 
 #_06E17A: LDA.w #$004D ; SFX 4D
 #_06E17D: STA.w $04AA
@@ -11317,9 +11361,11 @@ ROUTINE_06E172:
 #_06E19C: LDA.w #$0038 ; SPRITE 0038
 #_06E19F: STA.b $26
 
-#_06E1A1: JSR ROUTINE_0396D3_bank06
+#_06E1A1: JSR SpawnSpriteCopyingZ_96D3_bank06
 
-CODE_06E1A4:
+;---------------------------------------------------------------------------------------------------
+
+.delay_spark
 #_06E1A4: LDY.w #$0048
 
 #_06E1A7: LDA.w #$0020
@@ -11327,17 +11373,17 @@ CODE_06E1A4:
 
 #_06E1AD: LDA.w #$1115
 #_06E1B0: JSR ROUTINE_06EE89
-#_06E1B3: BNE CODE_06E1E1
+#_06E1B3: BNE .finished
 
 #_06E1B5: JSR Reset_0818_through_081F_bank06
 
 #_06E1B8: LDA.w #$0008
 #_06E1BB: JSR Increment_0816_AndCompareTo_bank06
-#_06E1BE: BCC CODE_06E1C3
+#_06E1BE: BCC .move_pocky
 
 #_06E1C0: JSR ROUTINE_0381D7_bank06
 
-CODE_06E1C3:
+.move_pocky
 #_06E1C3: CLC
 
 #_06E1C4: LDA.w $19F0
@@ -11347,13 +11393,13 @@ CODE_06E1C3:
 #_06E1CD: SBC.w $080E,X
 #_06E1D0: ADC.w #$1000
 #_06E1D3: CMP.w #$1100
-#_06E1D6: BCC CODE_06E1E1
+#_06E1D6: BCC .finished
 
 #_06E1D8: LDA.w $19F0
 #_06E1DB: SBC.w #$0100
 #_06E1DE: STA.w $080E,X
 
-CODE_06E1E1:
+.finished
 #_06E1E1: JMP CODE_06E4D2
 
 ;===================================================================================================
@@ -11421,7 +11467,7 @@ ROUTINE_06E231:
 
 ;===================================================================================================
 
-ROUTINE_06E23D:
+SpriteAI_80F4:
 #_06E23D: TYX
 
 #_06E23E: JSR ROUTINE_038741_0044_bank06
@@ -11433,25 +11479,25 @@ ROUTINE_06E23D:
 #_06E24B: JSR Reset_0816_AndAdvanceAI_bank06
 
 CODE_06E24E:
-#_06E24E: JMP CODE_06E4CC
+#_06E24E: JMP ROUTINE_06E4CF_1134
 
 ;===================================================================================================
 
-ROUTINE_06E251:
+SpriteAI_80F6:
 #_06E251: TYX
 
-#_06E252: JSR ROUTINE_038574_bank06
+#_06E252: JSR Sprite_HandleExistingDialog_bank06
 #_06E255: BNE CODE_06E25D
 
-#_06E257: JSR ROUTINE_038721_bank06
+#_06E257: JSR Set_7E7B38_to_0016_bank06
 #_06E25A: JSR Reset_0816_AndAdvanceAI_bank06
 
 CODE_06E25D:
-#_06E25D: JMP CODE_06E4CC
+#_06E25D: JMP ROUTINE_06E4CF_1134
 
 ;===================================================================================================
 
-ROUTINE_06E260:
+SpriteAI_80F8:
 #_06E260: TYX
 
 #_06E261: LDA.w #$0022
@@ -11475,11 +11521,11 @@ CODE_06E283:
 #_06E283: JSR AskNicelyForSong_1C_bank06
 
 CODE_06E286:
-#_06E286: JMP CODE_06E4CC
+#_06E286: JMP ROUTINE_06E4CF_1134
 
 ;===================================================================================================
 
-ROUTINE_06E289:
+SpriteAI_80FA:
 #_06E289: TYX
 
 #_06E28A: JSR Increment_0816_AndCompareTo_00B4_bank06
@@ -11489,11 +11535,11 @@ ROUTINE_06E289:
 #_06E292: JSR Reset_0816_AndSetAIMode_bank06
 
 CODE_06E295:
-#_06E295: JMP CODE_06E4CC
+#_06E295: JMP ROUTINE_06E4CF_1134
 
 ;===================================================================================================
 
-ROUTINE_06E298:
+SpriteAI_80FC:
 #_06E298: TYX
 
 #_06E299: JSR ROUTINE_06E364
@@ -11563,7 +11609,7 @@ ROUTINE_06E2FA:
 #_06E308: JSR ROUTINE_039385_bank06
 #_06E30B: BNE CODE_06E337
 
-#_06E30D: JSR ROUTINE_0381AB_bank06
+#_06E30D: JSR PlaySFX_FD_IfNotGameringOver_bank06
 #_06E310: JSR AreWeOnLevel9_bank06
 #_06E313: BNE CODE_06E31A
 
@@ -11795,7 +11841,7 @@ CODE_06E41D:
 
 ;===================================================================================================
 
-ROUTINE_06E42E:
+SpriteAI_80FE:
 #_06E42E: TYX
 
 #_06E42F: JSR ROUTINE_06E364
@@ -11831,7 +11877,9 @@ CODE_06E45D:
 
 #_06E460: INC A
 
-CODE_06E461:
+;===================================================================================================
+
+ROUTINE_06E461:
 #_06E461: ORA.w #$1100
 #_06E464: JSR ROUTINE_06EE8F
 
@@ -11884,6 +11932,7 @@ ROUTINE_06E489:
 
 ROUTINE_06E4A5:
 #_06E4A5: JSR ROUTINE_038671_bank06
+
 #_06E4A8: PHX
 
 #_06E4A9: JSR ROUTINE_03A29F_bank06
@@ -11906,15 +11955,18 @@ ROUTINE_06E4A5:
 
 #_06E4CB: RTS
 
-CODE_06E4CC:
+;===================================================================================================
+
+ROUTINE_06E4CF_1134:
 #_06E4CC: LDA.w #$1134
 
-CODE_06E4CF:
+ROUTINE_06E4CF:
 #_06E4CF: JSR ROUTINE_06EE8F
 
-CODE_06E4D2:
-#_06E4D2: LDA.w #$FE00
+;===================================================================================================
 
+ROUTINE_06E4D2:
+#_06E4D2: LDA.w #$FE00
 #_06E4D5: LDY.w #$20B0
 #_06E4D8: JSR ROUTINE_038CAA_bank06
 
@@ -11922,7 +11974,7 @@ CODE_06E4D2:
 
 ;===================================================================================================
 
-ROUTINE_06E4DE:
+SpriteAI_8146:
 #_06E4DE: TYX
 
 #_06E4DF: JSR ROUTINE_06E364
@@ -11946,7 +11998,7 @@ ROUTINE_06E4DE:
 CODE_06E501:
 #_06E501: JSR ROUTINE_06E339
 #_06E504: ADC.w #$0009
-#_06E507: JMP CODE_06E461
+#_06E507: JMP ROUTINE_06E461
 
 CODE_06E50A:
 #_06E50A: JSR Random_bank06
@@ -11958,6 +12010,8 @@ CODE_06E50A:
 #_06E515: STA.b $20
 
 #_06E517: JMP ($0020)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_06E51A: dw ROUTINE_06E52A
@@ -12068,7 +12122,7 @@ ROUTINE_06E591:
 
 ;===================================================================================================
 
-ROUTINE_06E5A0:
+SpriteAI_8148:
 #_06E5A0: TYX
 
 #_06E5A1: JSR ROUTINE_06E364
@@ -12119,7 +12173,7 @@ CODE_06E5F3:
 
 ;===================================================================================================
 
-ROUTINE_06E5F6:
+SpriteAI_814A:
 #_06E5F6: TYX
 
 #_06E5F7: JSR ROUTINE_06E364
@@ -12163,7 +12217,7 @@ CODE_06E63B:
 
 ;===================================================================================================
 
-ROUTINE_06E63E:
+SpriteAI_814C:
 #_06E63E: TYX
 
 #_06E63F: JSR ROUTINE_06E364
@@ -12248,7 +12302,7 @@ CODE_06E695:
 
 ;===================================================================================================
 
-ROUTINE_06E6A7:
+SpriteAI_8288:
 #_06E6A7: TYX
 
 #_06E6A8: LDY.w $080A,X
@@ -12299,7 +12353,7 @@ data06E6EC:
 
 ;===================================================================================================
 
-ROUTINE_06E6F4:
+SpriteAI_828A:
 #_06E6F4: TYX
 
 #_06E6F5: JSR PlaySFX77Every8Frames
@@ -12381,6 +12435,7 @@ CODE_06E724:
 
 ROUTINE_06E76E:
 #_06E76E: PHA
+
 #_06E76F: STA.b $28
 
 #_06E771: STY.b $30
@@ -12402,7 +12457,7 @@ ROUTINE_06E77B:
 
 ;===================================================================================================
 
-ROUTINE_06E782:
+SpriteAI_814E:
 #_06E782: TYX
 
 #_06E783: JSR ROUTINE_06E364
@@ -12520,7 +12575,7 @@ CODE_06E80F:
 
 ;===================================================================================================
 
-ROUTINE_06E81F:
+SpriteAI_8150:
 #_06E81F: TYX
 
 #_06E820: JSR ROUTINE_06E833
@@ -12584,7 +12639,7 @@ CODE_06E879:
 
 ;===================================================================================================
 
-ROUTINE_06E87C:
+SpriteAI_8152:
 #_06E87C: TYX
 
 #_06E87D: JSR ROUTINE_06E2FA
@@ -12605,7 +12660,7 @@ CODE_06E88B:
 
 ;===================================================================================================
 
-ROUTINE_06E897:
+SpriteAI_8154:
 #_06E897: TYX
 
 #_06E898: JSR ROUTINE_06E364
@@ -12634,7 +12689,7 @@ CODE_06E8C6:
 
 ;===================================================================================================
 
-ROUTINE_06E8C9:
+SpriteAI_8156:
 #_06E8C9: TYX
 
 #_06E8CA: JSR ROUTINE_06E364
@@ -12668,7 +12723,7 @@ CODE_06E8FA:
 
 ;===================================================================================================
 
-ROUTINE_06E8FD:
+SpriteAI_8158:
 #_06E8FD: TYX
 
 #_06E8FE: JSR ROUTINE_06E364
@@ -12780,7 +12835,7 @@ ROUTINE_06E984:
 
 ;===================================================================================================
 
-ROUTINE_06E99D:
+SpriteAI_815A:
 #_06E99D: TYX
 
 #_06E99E: JSR ROUTINE_06E364
@@ -12803,7 +12858,7 @@ CODE_06E9C0:
 
 ;===================================================================================================
 
-ROUTINE_06E9C3:
+SpriteAI_815C:
 #_06E9C3: TYX
 
 #_06E9C4: JSR ROUTINE_06E364
@@ -12828,7 +12883,7 @@ CODE_06E9E3:
 
 ;===================================================================================================
 
-ROUTINE_06E9E6:
+SpriteAI_815E:
 #_06E9E6: TYX
 
 #_06E9E7: JSR ROUTINE_06E364
@@ -12854,7 +12909,7 @@ ROUTINE_06E9F8:
 
 ;===================================================================================================
 
-ROUTINE_06EA08:
+SpriteAI_8170:
 #_06EA08: TYX
 
 #_06EA09: JSR ROUTINE_0392B7_bank06
@@ -12961,7 +13016,7 @@ ROUTINE_06EA8F:
 
 ;===================================================================================================
 
-ROUTINE_06EAA8:
+SpriteAI_8172:
 #_06EAA8: TYX
 
 #_06EAA9: JSR ROUTINE_0382C3_bank06
@@ -12989,7 +13044,7 @@ CODE_06EABF:
 
 CODE_06EAD1:
 #_06EAD1: LDA.w #$110D
-#_06EAD4: JMP CODE_06E4CF
+#_06EAD4: JMP ROUTINE_06E4CF
 
 CODE_06EAD7:
 #_06EAD7: JSR ROUTINE_06E833
@@ -13033,7 +13088,7 @@ CODE_06EB08:
 
 ;===================================================================================================
 
-ROUTINE_06EB1B:
+SpriteAI_8174:
 #_06EB1B: TYX
 
 #_06EB1C: LDA.l $7E7B08
@@ -13055,24 +13110,24 @@ CODE_06EB2E:
 #_06EB34: JSR AdvanceAIModeUp_bank06
 
 CODE_06EB37:
-#_06EB37: JMP CODE_06E4CC
+#_06EB37: JMP ROUTINE_06E4CF_1134
 
 ;===================================================================================================
 
-ROUTINE_06EB3A:
+SpriteAI_8176:
 #_06EB3A: TYX
 
-#_06EB3B: JSR ROUTINE_038574_bank06
+#_06EB3B: JSR Sprite_HandleExistingDialog_bank06
 #_06EB3E: BNE CODE_06EB43
 
 #_06EB40: JSR AdvanceAIModeUp_bank06
 
 CODE_06EB43:
-#_06EB43: JMP CODE_06E4CC
+#_06EB43: JMP ROUTINE_06E4CF_1134
 
 ;===================================================================================================
 
-ROUTINE_06EB46:
+SpriteAI_8178:
 #_06EB46: TYX
 
 #_06EB47: LDA.w #$000A
@@ -13083,11 +13138,11 @@ ROUTINE_06EB46:
 #_06EB50: JSR AdvanceAIModeUp_bank06
 
 CODE_06EB53:
-#_06EB53: JMP CODE_06E4CC
+#_06EB53: JMP ROUTINE_06E4CF_1134
 
 ;===================================================================================================
 
-ROUTINE_06EB56:
+SpriteAI_817A:
 #_06EB56: TYX
 
 #_06EB57: JSR ROUTINE_06E339
@@ -13148,7 +13203,7 @@ ROUTINE_06EB97:
 
 ;===================================================================================================
 
-ROUTINE_06EBA1:
+SpriteAI_817E:
 #_06EBA1: TYX
 
 #_06EBA2: JSR ROUTINE_06E339
@@ -13203,7 +13258,7 @@ ROUTINE_06EBD3:
 
 ;===================================================================================================
 
-ROUTINE_06EBEF:
+SpriteAI_8160:
 #_06EBEF: TYX
 
 #_06EBF0: LDA.w #$0001
@@ -13225,7 +13280,7 @@ CODE_06EBFB:
 #_06EC0A: STA.w $081A,X
 #_06EC0D: STZ.w $080A,X
 
-#_06EC10: JSR ROUTINE_038179_bank06
+#_06EC10: JSR SetHPtoFFFF_bank06
 
 #_06EC13: JMP AdvanceAIModeUp_bank06
 
@@ -13275,7 +13330,7 @@ ROUTINE_06EC36:
 
 ;===================================================================================================
 
-ROUTINE_06EC46:
+SpriteAI_8162:
 #_06EC46: TYX
 
 #_06EC47: LDA.w $05A0
@@ -13301,7 +13356,7 @@ ROUTINE_06EC46:
 
 ;===================================================================================================
 
-ROUTINE_06EC75:
+SpriteAI_8164:
 #_06EC75: TYX
 
 #_06EC76: LDA.w #$0001
@@ -13332,7 +13387,7 @@ ROUTINE_06EC9C:
 
 ;===================================================================================================
 
-ROUTINE_06ECA5:
+SpriteAI_8166:
 #_06ECA5: LDA.w $05A0
 #_06ECA8: AND.w #$0007
 #_06ECAB: BNE .skip_sfx
@@ -13566,7 +13621,7 @@ CODE_06EDF0:
 
 ;===================================================================================================
 
-ROUTINE_06EDF3:
+SpriteAI_8168:
 #_06EDF3: TYX
 
 #_06EDF4: LDA.w $080A,X
@@ -13609,7 +13664,7 @@ CODE_06EE23:
 #_06EE32: STA.w $081A,X
 #_06EE35: STZ.w $080A,X
 
-#_06EE38: JSR ROUTINE_038179_bank06
+#_06EE38: JSR SetHPtoFFFF_bank06
 #_06EE3B: JSR SetSpriteMode_FF01_bank06
 
 #_06EE3E: JMP AdvanceAIModeUp_bank06
@@ -13643,7 +13698,7 @@ ROUTINE_06EE51:
 
 ;===================================================================================================
 
-ROUTINE_06EE6A:
+SpriteAI_816A:
 #_06EE6A: TYX
 
 #_06EE6B: LDY.w #$0008
@@ -13740,7 +13795,7 @@ data06EED0:
 
 ;===================================================================================================
 
-ROUTINE_06EF68:
+SpriteAI_80E0:
 #_06EF68: TYX
 
 #_06EF69: LDA.w #$0060
@@ -13761,7 +13816,7 @@ ROUTINE_06EF68:
 
 ;===================================================================================================
 
-ROUTINE_06EF85:
+SpriteAI_80E2:
 #_06EF85: TYX
 
 #_06EF86: CLC
@@ -13809,14 +13864,14 @@ CODE_06EFC3:
 
 ;===================================================================================================
 
-ROUTINE_06EFC7:
-#_06EFC7: JSR ROUTINE_06EFCD
+SpriteAI_80DC:
+#_06EFC7: JSR SpriteAI_80D6
 
 #_06EFCA: JMP .continue
 
 ;===================================================================================================
 
-ROUTINE_06EFCD:
+SpriteAI_80D6:
 #_06EFCD: TYX
 
 #_06EFCE: LDA.w #$0040
@@ -13831,7 +13886,7 @@ ROUTINE_06EFCD:
 
 ;===================================================================================================
 
-ROUTINE_06EFE3:
+SpriteAI_80D8:
 #_06EFE3: TYX
 
 #_06EFE4: LDA.w $081C,X
@@ -13880,7 +13935,7 @@ CODE_06F02C:
 
 ;===================================================================================================
 
-ROUTINE_06F02F:
+SpriteAI_80DA:
 #_06F02F: TYX
 
 #_06F030: LDA.w $081C,X
@@ -13937,7 +13992,7 @@ CODE_06F070:
 #_06F085: INC.w $0818,X
 
 CODE_06F088:
-#_06F088: JSR ROUTINE_0380A0_bank06
+#_06F088: JSR AccelerateAndMoveOnZ_80A0_bank06
 #_06F08B: BMI CODE_06F0BA
 
 #_06F08D: CMP.w #$0001
@@ -14036,7 +14091,7 @@ ROUTINE_06F100:
 
 ;===================================================================================================
 
-ROUTINE_06F124:
+SpriteAI_80DE:
 #_06F124: TYX
 
 #_06F125: LDA.w $05A0
@@ -14081,7 +14136,7 @@ CODE_06F162:
 
 ;===================================================================================================
 
-ROUTINE_06F165:
+SpriteAI_80D0:
 #_06F165: TYX
 
 #_06F166: STZ.w $080A,X
@@ -14099,7 +14154,7 @@ ROUTINE_06F165:
 
 ;===================================================================================================
 
-ROUTINE_06F17F:
+SpriteAI_80D2:
 #_06F17F: TYX
 
 #_06F180: LDA.w $0816,X
@@ -14108,7 +14163,7 @@ ROUTINE_06F17F:
 #_06F185: INC.w $0818,X
 
 CODE_06F188:
-#_06F188: JSR ROUTINE_0380A0_bank06
+#_06F188: JSR AccelerateAndMoveOnZ_80A0_bank06
 #_06F18B: BMI CODE_06F1A7
 
 #_06F18D: CMP.w #$00A0
@@ -14157,7 +14212,7 @@ CODE_06F1A7:
 
 ;===================================================================================================
 
-ROUTINE_06F1CD:
+SpriteAI_80D4:
 #_06F1CD: TYX
 
 #_06F1CE: LDA.w #$003E ; SPRITE 003E
@@ -14167,7 +14222,7 @@ ROUTINE_06F1CD:
 
 ;===================================================================================================
 
-ROUTINE_06F1D5:
+SpriteAI_8092:
 #_06F1D5: TYX
 
 #_06F1D6: LDA.w #$0C05
@@ -14201,7 +14256,7 @@ CODE_06F1FA:
 
 ;===================================================================================================
 
-ROUTINE_06F20D:
+SpriteAI_8094:
 #_06F20D: TYX
 
 #_06F20E: LDA.w #$0C05
@@ -14260,7 +14315,7 @@ CODE_06F26E:
 
 ;===================================================================================================
 
-ROUTINE_06F271:
+SpriteAI_8096:
 #_06F271: TYX
 
 #_06F272: LDA.w $05A0
@@ -14284,7 +14339,7 @@ CODE_06F28E:
 
 ;===================================================================================================
 
-ROUTINE_06F291:
+SpriteAI_8090:
 #_06F291: TYX
 
 #_06F292: JSR ROUTINE_06FC1A
@@ -14507,7 +14562,7 @@ CODE_06F395:
 
 ;===================================================================================================
 
-ROUTINE_06F397:
+SpriteAI_8052:
 #_06F397: TYX
 
 #_06F398: JSR ROUTINE_0392B7_bank06
@@ -14528,10 +14583,10 @@ CODE_06F3B2:
 
 ;===================================================================================================
 
-ROUTINE_06F3B5:
+SpriteAI_8054:
 #_06F3B5: TYX
 
-ROUTINE_06F3B5_alt:
+SpriteAI_8054_alt:
 #_06F3B6: JSR ROUTINE_0392B7_bank06
 
 #_06F3B9: CLC
@@ -14560,19 +14615,19 @@ CODE_06F3DE:
 
 ;===================================================================================================
 
-ROUTINE_06F3EE_807A:
+SpriteAI_8072:
 #_06F3E1: LDA.w #$807A
 #_06F3E4: BRA ROUTINE_06F3EE
 
 ;===================================================================================================
 
-ROUTINE_06F3EE_806C:
+SpriteAI_8064:
 #_06F3E6: LDA.w #$806C
 #_06F3E9: BRA ROUTINE_06F3EE
 
 ;===================================================================================================
 
-ROUTINE_06F3EE_805E:
+SpriteAI_8056:
 #_06F3EB: LDA.w #$805E
 
 ;===================================================================================================
@@ -14619,7 +14674,7 @@ ROUTINE_06F41E:
 
 ;===================================================================================================
 
-ROUTINE_06F427:
+SpriteAI_8058:
 #_06F427: TYX
 
 #_06F428: CLC
@@ -14642,7 +14697,7 @@ CODE_06F443:
 
 ;===================================================================================================
 
-ROUTINE_06F446:
+SpriteAI_805A:
 #_06F446: TYX
 
 #_06F447: JSR ROUTINE_06FA9F
@@ -14664,7 +14719,7 @@ CODE_06F463:
 
 ;===================================================================================================
 
-ROUTINE_06F466:
+SpriteAI_805C:
 #_06F466: TYX
 
 #_06F467: JSR ROUTINE_06FC1A
@@ -14684,7 +14739,7 @@ CODE_06F47D:
 
 ;===================================================================================================
 
-ROUTINE_06F480:
+SpriteAI_805E:
 #_06F480: TYX
 
 #_06F481: JSR ROUTINE_06FC1A
@@ -14703,14 +14758,14 @@ CODE_06F497:
 
 ;===================================================================================================
 
-ROUTINE_06F3B5_dupe:
+SpriteAI_8060:
 #_06F49A: TYX
 
-#_06F49B: JMP ROUTINE_06F3B5_alt
+#_06F49B: JMP SpriteAI_8054_alt
 
 ;===================================================================================================
 
-ROUTINE_06F49E:
+SpriteAI_8062:
 #_06F49E: TYX
 
 #_06F49F: STZ.w $083E,X
@@ -14721,7 +14776,7 @@ ROUTINE_06F49E:
 
 ;===================================================================================================
 
-ROUTINE_06F4A8:
+SpriteAI_8070:
 #_06F4A8: TYX
 
 #_06F4A9: STZ.w $083E,X
@@ -14732,7 +14787,7 @@ ROUTINE_06F4A8:
 
 ;===================================================================================================
 
-ROUTINE_06F4B2:
+SpriteAI_807E:
 #_06F4B2: TYX
 
 #_06F4B3: LDA.w $083E,X
@@ -14753,7 +14808,7 @@ CODE_06F4C6:
 
 ;===================================================================================================
 
-ROUTINE_06F4C9:
+SpriteAI_808E:
 #_06F4C9: TYX
 
 #_06F4CA: STZ.w $083E,X
@@ -14774,7 +14829,7 @@ ROUTINE_06F4C9:
 
 ;===================================================================================================
 
-ROUTINE_06F4E8:
+SpriteAI_8080:
 #_06F4E8: TYX
 
 #_06F4E9: LDA.w $19EE
@@ -14791,7 +14846,7 @@ ROUTINE_06F4E8:
 
 ;===================================================================================================
 
-ROUTINE_06F501:
+SpriteAI_808A:
 #_06F501: TYX
 
 #_06F502: CLC
@@ -14813,7 +14868,7 @@ ROUTINE_06F501:
 
 ;===================================================================================================
 
-ROUTINE_06F51B:
+SpriteAI_8082:
 #_06F51B: TYX
 
 #_06F51C: JSR ROUTINE_06FFBB
@@ -14834,7 +14889,7 @@ CODE_06F52A:
 
 ;===================================================================================================
 
-ROUTINE_06F536:
+SpriteAI_8084:
 #_06F536: TYX
 
 #_06F537: CLC
@@ -14859,7 +14914,7 @@ CODE_06F555:
 
 ;===================================================================================================
 
-ROUTINE_06F558:
+SpriteAI_8086:
 #_06F558: TYX
 
 #_06F559: JSR ROUTINE_06FA9F
@@ -14883,7 +14938,7 @@ CODE_06F578:
 
 ;===================================================================================================
 
-ROUTINE_06F57B:
+SpriteAI_804E:
 #_06F57B: TYX
 
 #_06F57C: LDA.w #$0100
@@ -14896,7 +14951,7 @@ ROUTINE_06F57B:
 
 ;===================================================================================================
 
-ROUTINE_06F58B:
+SpriteAI_8050:
 #_06F58B: TYX
 
 #_06F58C: SEC
@@ -14926,7 +14981,7 @@ CODE_06F5AB:
 
 ;===================================================================================================
 
-ROUTINE_06F5BA:
+SpriteAI_8046:
 #_06F5BA: LDA.w #$FF80
 #_06F5BD: STA.w $0812,Y
 
@@ -14935,7 +14990,7 @@ ROUTINE_06F5BA:
 
 ;===================================================================================================
 
-ROUTINE_06F5C5:
+SpriteAI_804A:
 #_06F5C5: LDA.w #$0080
 #_06F5C8: STA.w $0812,Y
 
@@ -14981,7 +15036,7 @@ CODE_06F5FA:
 
 ;===================================================================================================
 
-ROUTINE_06F606:
+SpriteAI_8040:
 #_06F606: TYX
 
 #_06F607: JSR Reset_0818_through_081F_bank06
@@ -15000,7 +15055,7 @@ ROUTINE_06F606:
 
 ;===================================================================================================
 
-ROUTINE_06F622:
+SpriteAI_8042:
 #_06F622: TYX
 
 #_06F623: CLC
@@ -15065,7 +15120,7 @@ CODE_06F67A:
 
 ;===================================================================================================
 
-ROUTINE_06F686:
+SpriteAI_8044:
 #_06F686: TYX
 
 #_06F687: INC.w $0816,X
@@ -15097,7 +15152,7 @@ CODE_06F6A8:
 
 ;===================================================================================================
 
-ROUTINE_06F6B4:
+SpriteAI_803C:
 #_06F6B4: TYX
 
 #_06F6B5: LDA.w $080A,X
@@ -15110,7 +15165,7 @@ ROUTINE_06F6B4:
 
 ;===================================================================================================
 
-ROUTINE_06F6C4:
+SpriteAI_803E:
 #_06F6C4: TYX
 
 #_06F6C5: SEC
@@ -15136,7 +15191,7 @@ CODE_06F6E3:
 
 ;===================================================================================================
 
-ROUTINE_06F6E7:
+SpriteAI_8038:
 #_06F6E7: TYX
 
 #_06F6E8: LDA.w #$801A ; SPRITE 801A
@@ -15147,7 +15202,7 @@ ROUTINE_06F6E7:
 
 ;===================================================================================================
 
-ROUTINE_06F6F3:
+SpriteAI_803A:
 #_06F6F3: TYX
 
 #_06F6F4: LDA.w #$8026 ; SPRITE 8026
@@ -15178,6 +15233,7 @@ CODE_06F6FD:
 
 CODE_06F723:
 #_06F723: JSR PlaySFX6FEvery32Frames
+
 #_06F726: JSR Random_bank06
 #_06F729: AND.w #$0010
 #_06F72C: STA.w $080A,X
@@ -15198,7 +15254,7 @@ CODE_06F723:
 
 ;===================================================================================================
 
-ROUTINE_06F74D:
+SpriteAI_8032:
 #_06F74D: TYX
 
 #_06F74E: LDA.w $080C,X
@@ -15220,7 +15276,7 @@ ROUTINE_06F74D:
 
 ;===================================================================================================
 
-ROUTINE_06F76D:
+SpriteAI_8034:
 #_06F76D: TYX
 
 #_06F76E: LDA.w $081C,X
@@ -15335,12 +15391,12 @@ ROUTINE_06F7E2:
 
 ;===================================================================================================
 
-ROUTINE_06F7FB:
+SpriteAI_8036:
 #_06F7FB: JMP ROUTINE_038C84_bank06
 
 ;===================================================================================================
 
-ROUTINE_06F7FE:
+SpriteAI_800E:
 #_06F7FE: TYX
 
 #_06F7FF: JSR ROUTINE_0392C0_bank06
@@ -15355,7 +15411,7 @@ ROUTINE_06F7FE:
 
 ;===================================================================================================
 
-ROUTINE_06F80F:
+SpriteAI_8010:
 #_06F80F: TYX
 
 #_06F810: LDA.w $0816,X
@@ -15391,7 +15447,7 @@ CODE_06F823:
 
 ;===================================================================================================
 
-ROUTINE_06F83D:
+SpriteAI_8004:
 #_06F83D: TYX
 
 #_06F83E: JSR ROUTINE_038741_0044_bank06
@@ -15412,14 +15468,14 @@ CODE_06F853:
 
 ;===================================================================================================
 
-ROUTINE_06F856:
+SpriteAI_8006:
 #_06F856: TYX
 
-#_06F857: JSR ROUTINE_038574_bank06
+#_06F857: JSR Sprite_HandleExistingDialog_bank06
 #_06F85A: BNE CODE_06F865
 
 #_06F85C: JSR ROUTINE_038289_bank06
-#_06F85F: JSR ROUTINE_038721_bank06
+#_06F85F: JSR Set_7E7B38_to_0016_bank06
 #_06F862: JSR AdvanceAIModeUp_bank06
 
 CODE_06F865:
@@ -15427,7 +15483,7 @@ CODE_06F865:
 
 ;===================================================================================================
 
-ROUTINE_06F868:
+SpriteAI_8008:
 #_06F868: TYX
 
 #_06F869: LDA.w #$0022
@@ -15457,10 +15513,10 @@ CODE_06F892:
 
 ;===================================================================================================
 
-ROUTINE_06F895:
+SpriteAI_800A:
 #_06F895: TYX
 
-#_06F896: JSR ROUTINE_0382B2_bank06
+#_06F896: JSR Sprite_CacheX_And_Yplus0280_82B2_bank06
 #_06F899: PHX
 
 #_06F89A: LDX.w #$0F00
@@ -15473,8 +15529,8 @@ ROUTINE_06F895:
 #_06F8AB: PLX
 
 #_06F8AC: LDA.w #Message_0890A7
-#_06F8AF: JSR ROUTINE_038589_bank06
-#_06F8B2: JSR ROUTINE_038719_bank06
+#_06F8AF: JSR Sprite_BeginBank08Dialog_8589_bank06
+#_06F8B2: JSR Set_7E7B38_to_002E_bank06
 
 #_06F8B5: LDA.w #$8004 ; SPRITE 8004
 #_06F8B8: JSR Reset_0816_AndSetAIMode_bank06
@@ -15485,7 +15541,7 @@ ROUTINE_06F895:
 
 ;===================================================================================================
 
-ROUTINE_06F8BF:
+SpriteAI_800C:
 #_06F8BF: JSR ROUTINE_038566_bank06
 #_06F8C2: BNE CODE_06F8E1
 
@@ -15530,7 +15586,7 @@ CODE_06F8E1:
 
 ;===================================================================================================
 
-ROUTINE_06F925:
+SpriteAI_8012:
 #_06F925: TYX
 
 #_06F926: LDA.w $0826,X
@@ -15632,7 +15688,7 @@ data06F9C1:
 
 ;===================================================================================================
 
-ROUTINE_06F9C5:
+SpriteAI_8014:
 #_06F9C5: TYX
 
 #_06F9C6: DEC.w $0828,X
@@ -15655,7 +15711,7 @@ CODE_06F9D1:
 
 ;===================================================================================================
 
-ROUTINE_06F9E7:
+SpriteAI_8016:
 #_06F9E7: TYX
 
 #_06F9E8: LDA.w $0816,X
@@ -15727,7 +15783,7 @@ CODE_06FA50:
 
 ;===================================================================================================
 
-ROUTINE_06FA56:
+SpriteAI_8018:
 #_06FA56: TYX
 
 #_06FA57: JSR ROUTINE_06FA9F
@@ -15817,7 +15873,7 @@ ROUTINE_06FADC:
 
 ;===================================================================================================
 
-ROUTINE_06FAE3:
+SpriteAI_801A:
 #_06FAE3: TYX
 
 #_06FAE4: JSR ROUTINE_06F327
@@ -15958,7 +16014,7 @@ data06FBBD:
 
 ;===================================================================================================
 
-ROUTINE_06FBD3:
+SpriteAI_801C:
 #_06FBD3: TYX
 
 #_06FBD4: JSR ROUTINE_06F346
@@ -16061,7 +16117,7 @@ ROUTINE_06FC52:
 
 ;===================================================================================================
 
-ROUTINE_06FC5D:
+SpriteAI_801E:
 #_06FC5D: TYX
 
 #_06FC5E: JSR ROUTINE_06F346
@@ -16140,7 +16196,7 @@ ROUTINE_06FCBB:
 
 ;===================================================================================================
 
-ROUTINE_06FCC0:
+SpriteAI_8020:
 #_06FCC0: TYX
 
 #_06FCC1: JSR ROUTINE_06F327
@@ -16205,7 +16261,7 @@ ROUTINE_06FCFF:
 
 ;===================================================================================================
 
-ROUTINE_06FD1E:
+SpriteAI_802C:
 #_06FD1E: TYX
 
 #_06FD1F: LDY.w #$0008
@@ -16265,7 +16321,7 @@ data06FD6E:
 
 ;===================================================================================================
 
-ROUTINE_06FD7E:
+SpriteAI_802E:
 #_06FD7E: TYX
 
 #_06FD7F: LDY.w #$0008
@@ -16308,7 +16364,7 @@ CODE_06FDA4:
 
 ;===================================================================================================
 
-ROUTINE_06FDBB:
+SpriteAI_8030:
 #_06FDBB: JMP ROUTINE_038C84_bank06
 
 ;===================================================================================================
@@ -16334,7 +16390,7 @@ ROUTINE_06FDBE:
 
 ;===================================================================================================
 
-ROUTINE_06FDD8:
+SpriteAI_8098:
 #_06FDD8: TYX
 
 #_06FDD9: JSR ROUTINE_06F327
@@ -16367,7 +16423,7 @@ ROUTINE_06FDF2:
 
 ;===================================================================================================
 
-ROUTINE_06FE05:
+SpriteAI_809A:
 #_06FE05: TYX
 
 #_06FE06: JSR ROUTINE_06F327
@@ -16408,7 +16464,7 @@ ROUTINE_06FE32:
 
 ;===================================================================================================
 
-ROUTINE_06FE39:
+SpriteAI_8022:
 #_06FE39: TYX
 
 #_06FE3A: JSR ROUTINE_06F327
@@ -16427,7 +16483,7 @@ CODE_06FE50:
 
 ;===================================================================================================
 
-ROUTINE_06FE53:
+SpriteAI_8024:
 #_06FE53: TYX
 
 #_06FE54: JSR ROUTINE_06F327
@@ -16446,7 +16502,7 @@ CODE_06FE6A:
 
 ;===================================================================================================
 
-ROUTINE_06FE6D:
+SpriteAI_8026:
 #_06FE6D: TYX
 
 #_06FE6E: JSR ROUTINE_06F327
@@ -16472,7 +16528,7 @@ CODE_06FE92:
 
 ;===================================================================================================
 
-ROUTINE_06FE95:
+SpriteAI_8028:
 #_06FE95: TYX
 
 #_06FE96: JSR ROUTINE_06F327
@@ -16516,7 +16572,7 @@ CODE_06FED2:
 
 ;===================================================================================================
 
-ROUTINE_06FED5:
+SpriteAI_802A:
 #_06FED5: TYX
 
 #_06FED6: JSR ROUTINE_06F327
@@ -16575,7 +16631,7 @@ ROUTINE_06FF1D:
 
 ;===================================================================================================
 
-ROUTINE_06FF27:
+SpriteAI_8000:
 #_06FF27: TYX
 
 #_06FF28: LDA.l $7E2530
@@ -16617,7 +16673,7 @@ data06FF55:
 
 ;===================================================================================================
 
-ROUTINE_06FF6B:
+SpriteAI_8002:
 #_06FF6B: JSR ROUTINE_038566_bank06
 #_06FF6E: BNE .exit
 

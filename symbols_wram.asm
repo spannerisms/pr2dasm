@@ -56,12 +56,22 @@ UNKNOWN_7E04B8   = $7E04B8
 UNKNOWN_7E04BA   = $7E04BA
 UNKNOWN_7E04BC   = $7E04BC
 UNKNOWN_7E04BD   = $7E04BD
-UNKNOWN_7E04BE   = $7E04BE
+
+; Magic transform timer
+MAGICTM          = $7E04BE
+
+
 UNKNOWN_7E04C0   = $7E04C0
+
+; TODO flags some transfers in bank00
 UNKNOWN_7E04C2   = $7E04C2
 UNKNOWN_7E04C4   = $7E04C4
 UNKNOWN_7E04C6   = $7E04C6
-UNKNOWN_7E04C8   = $7E04C8
+
+; Flags common items doing their regular animation
+ITEMANIM         = $7E04C8
+
+
 UNKNOWN_7E04CA   = $7E04CA
 UNKNOWN_7E04CC   = $7E04CC
 UNKNOWN_7E04CE   = $7E04CE
@@ -180,11 +190,21 @@ UNKNOWN_7E0569   = $7E0569
 UNKNOWN_7E056A   = $7E056A
 UNKNOWN_7E056B   = $7E056B
 UNKNOWN_7E056C   = $7E056C
-UNKNOWN_7E0572   = $7E0572
+
+; Invulnerability flag
+INVULN           = $7E0572
+
 UNKNOWN_7E0578   = $7E0578
+
 UNKNOWN_7E057A   = $7E057A
-UNKNOWN_7E057C   = $7E057C
+
+; Item graphics animation step
+ITEMANIMS        = $7E057C
+
+
 UNKNOWN_7E057E   = $7E057E
+
+
 UNKNOWN_7E0582   = $7E0582
 UNKNOWN_7E058C   = $7E058C
 UNKNOWN_7E058E   = $7E058E
@@ -200,7 +220,9 @@ UNKNOWN_7E059E   = $7E059E
 FRAME            = $7E05A0
 
 UNKNOWN_7E05A2   = $7E05A2
-UNKNOWN_7E05A4   = $7E05A4
+
+; TODO seems to flag showing candles
+CANDLES          = $7E05A4
 
 COLDATAQ         = $7E05A6
 
@@ -221,6 +243,9 @@ TIMER            = $7E05B4
 
 ; BCD score
 SCORE            = $7E05B6
+
+; Seems to flag HUD already being updated and not yet processed
+HUDFLAG          = $7E05BA
 
 UNKNOWN_7E05BE   = $7E05BE
 UNKNOWN_7E05C2   = $7E05C2
@@ -357,7 +382,11 @@ UNKNOWN_7E1800   = $7E1800
 UNKNOWN_7E1840   = $7E1840
 UNKNOWN_7E18CE   = $7E18CE
 UNKNOWN_7E18D0   = $7E18D0
+
+; TODO seems to prevent movement
 UNKNOWN_7E18E0   = $7E18E0
+
+; TODO some sorta partner/cutscene flag?
 UNKNOWN_7E18E2   = $7E18E2
 
 LEVEL            = $7E18E4
@@ -397,8 +426,13 @@ RNGB             = $7E1984
 
 
 UNKNOWN_7E199E   = $7E199E
-UNKNOWN_7E19A0   = $7E19A0
-UNKNOWN_7E19A8   = $7E19A8
+
+; Available partners; FF = not available
+ROSTER           = $7E19A0
+
+; Current partner on partner swap rotation
+SWAPROT          = $7E19A8
+
 UNKNOWN_7E19AA   = $7E19AA
 UNKNOWN_7E19AC   = $7E19AC
 UNKNOWN_7E19AE   = $7E19AE
@@ -419,7 +453,7 @@ UNKNOWN_7E19C8   = $7E19C8
 UNKNOWN_7E19CA   = $7E19CA
 UNKNOWN_7E19CC   = $7E19CC
 
-
+; Pocky's mode
 POCKYACT         = $7E19CE
 
 
@@ -432,7 +466,10 @@ UNKNOWN_7E19DA   = $7E19DA
 UNKNOWN_7E19DC   = $7E19DC
 UNKNOWN_7E19DE   = $7E19DE
 UNKNOWN_7E19E0   = $7E19E0
-UNKNOWN_7E19E2   = $7E19E2
+
+; TODO verify
+IFRAMES          = $7E19E2
+
 UNKNOWN_7E19E4   = $7E19E4
 UNKNOWN_7E19E6   = $7E19E6
 UNKNOWN_7E19E8   = $7E19E8
@@ -508,23 +545,34 @@ OAMQB            = $7E1D20
 
 ;---------------------------------------------------------------------------------------------------
 
-UNKNOWN_7E1F20   = $7E1F20
-UNKNOWN_7E1F22   = $7E1F22
-UNKNOWN_7E1F24   = $7E1F24
-UNKNOWN_7E1F26   = $7E1F26
-UNKNOWN_7E1F28   = $7E1F28
-UNKNOWN_7E1F2A   = $7E1F2A
+; Controller config scratch space
+REMAPSCR0        = $7E1F20
+REMAPSCR2        = $7E1F22
+
+; Adjusted inputs for remapped controllers
+P1JOYREMAP       = $7E1F24
+P2JOYREMAP       = $7E1F26
+P1NEWREMAP       = $7E1F28
+P2NEWREMAP       = $7E1F2A
+
 UNKNOWN_7E1F2C   = $7E1F2C
 UNKNOWN_7E1F2E   = $7E1F2E
 UNKNOWN_7E1F32   = $7E1F32
 UNKNOWN_7E1F34   = $7E1F34
 UNKNOWN_7E1F36   = $7E1F36
-UNKNOWN_7E1F38   = $7E1F38
-UNKNOWN_7E1F50   = $7E1F50
-UNKNOWN_7E1F68   = $7E1F68
+
+; Controller configuration scheme data tables
+P1JREMAP         = $7E1F38
+P2JREMAP         = $7E1F50
+
+; Debug flag that prevents damage. Never set
+NOHURT           = $7E1F68
+
 UNKNOWN_7E1F70   = $7E1F70
-UNKNOWN_7E1F72   = $7E1F72
-UNKNOWN_7E1F74   = $7E1F74
+
+; Controller configuration scheme
+P1JCON           = $7E1F72
+P2JCON           = $7E1F74
 
 ;===================================================================================================
 ;---------------------------------------------------------------------------------------------------
@@ -550,6 +598,12 @@ VMBUFF           = $7E2004
 
 
 ;===================================================================================================
+
+; TODO Something to do with partner
+UNKNOWN_7E2530   = $7E2530
+
+
+;===================================================================================================
 ; Text stuff
 ;===================================================================================================
 MSGMODE          = $7E2550
@@ -567,10 +621,30 @@ CGRAM2           = $7E2A00
 CGRAM3           = $7E2C00
 CGRAMQ           = $7E2E00
 
+
+;===================================================================================================
+
+; TODO HUD STUFF
+UNKNOWN_7E7040   = $7E7040
+
 ;===================================================================================================
 
 ; APU transfer scratch space
 APUSCR           = $7E7A0E
+
+
+;===================================================================================================
+
+; Tutorial stuff
+
+; timer
+TUTTM            = $7E7A50
+
+; goal
+TUTGOAL          = $7E7A52
+
+
+;===================================================================================================
 
 ; background scroll mode
 BGSCR            = $7E7B14

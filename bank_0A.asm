@@ -92,6 +92,7 @@ PrepSongPackTransfer:
 #_0A805E: BEQ .done
 
 #_0A8060: PHX
+
 #_0A8061: TYX
 
 #_0A8062: LDA.l .type,X
@@ -204,6 +205,7 @@ APUTransfer:
 
 .next_byte
 #_0A80D8: XBA
+
 #_0A80D9: LDA.b [$20],Y
 
 #_0A80DB: INY

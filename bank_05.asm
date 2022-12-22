@@ -4239,6 +4239,7 @@ CODE_05D631:
 
 #_05D632: LDA.w $0000,X
 #_05D635: PHA
+
 #_05D636: ADC.b $2C
 #_05D638: STA.b $38
 
@@ -4425,6 +4426,7 @@ CODE_05D71F:
 
 #_05D720: LDA.w $0000,X
 #_05D723: PHA
+
 #_05D724: ADC.b $2C
 #_05D726: STA.b $38
 
@@ -6317,15 +6319,15 @@ data05EA9E:
 #_05EAA8: dw pointers05ED8C
 #_05EAAA: dw pointers05EF06
 #_05EAAC: dw pointers05EF3E
-#_05EAAE: dw NullPtr
-#_05EAB0: dw NullPtr
-#_05EAB2: dw NullPtr
-#_05EAB4: dw NullPtr
+#_05EAAE: dw $0000
+#_05EAB0: dw $0000
+#_05EAB2: dw $0000
+#_05EAB4: dw $0000
 #_05EAB6: dw pointers05F040
 #_05EAB8: dw pointers05F146
 #_05EABA: dw pointers05F146
 #_05EABC: dw pointers05F146
-#_05EABE: dw NullPtr
+#_05EABE: dw $0000
 #_05EAC0: dw pointers05F146
 #_05EAC2: dw pointers05F54E
 #_05EAC4: dw pointers05F564
@@ -8514,77 +8516,135 @@ data05FDCF:
 
 ;===================================================================================================
 
-; TODO
 data05FE0F:
-#_05FE0F: dw $5115 : dl $7E2A40 : dw $FFFF
-#_05FE16: dw $5115 : dl $7E2E40 : dw $FFFF
-#_05FE1D: dw $4B1F : dl $7F8000 : dw $0000
-#_05FE24: dw $071D : dl $7F4000 : dw $FFFF
-#_05FE2B: dw $771F : dl $7F8000 : dw $5780
-#_05FE32: dw $0A1F : dl $7F8000 : dw $5200
+#_05FE0F: db $15, $51 ; read $15:814A for pointer to CompressedData_Palette15F9D2
+#_05FE11: dl $7E2A40 : dw $FFFF ; target address
+
+#_05FE16: db $15, $51 ; read $15:814A for pointer to CompressedData_Palette15F9D2
+#_05FE18: dl $7E2E40 : dw $FFFF ; target address
+
+#_05FE1D: db $1F, $4B ; read $1F:8132 for pointer to data1FD2E2
+#_05FE1F: dl $7F8000 : dw $0000 ; target address, copy to $0000 in VRAM
+
+#_05FE24: db $1D, $07 ; read $1D:8022 for pointer to data1D9F0B
+#_05FE26: dl $7F4000 : dw $FFFF ; target address
+
+#_05FE2B: db $1F, $77 ; read $1F:81E2 for pointer to CompressedData_Empty0300_B
+#_05FE2D: dl $7F8000 : dw $5780 ; target address, copy to $AF00 in VRAM
+
+#_05FE32: db $1F, $0A ; read $1F:802E for pointer to data1F96A9
+#_05FE34: dl $7F8000 : dw $5200 ; target address, copy to $A400 in VRAM
+
 #_05FE39: dw $0000 ; end
 
-;---------------------------------------------------------------------------------------------------
+;===================================================================================================
 
 data05FE3B:
-#_05FE3B: dw $4E1F : dl $7F8000 : dw $3000
-#_05FE42: dw $4E1F : dl $7F8000 : dw $3400
-#_05FE49: dw $141F : dl $7F8000 : dw $3800
-#_05FE50: dw $211F : dl $7FF800 : dw $FFFF
+#_05FE3B: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_05FE3D: dl $7F8000 : dw $3000 ; target address, copy to $6000 in VRAM
+
+#_05FE42: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_05FE44: dl $7F8000 : dw $3400 ; target address, copy to $6800 in VRAM
+
+#_05FE49: db $1F, $14 ; read $1F:8056 for pointer to data1FA5C2
+#_05FE4B: dl $7F8000 : dw $3800 ; target address, copy to $7000 in VRAM
+
+#_05FE50: db $1F, $21 ; read $1F:808A for pointer to data1FB49E
+#_05FE52: dl $7FF800 : dw $FFFF ; target address
+
 #_05FE57: dw $0000 ; end
 
-;---------------------------------------------------------------------------------------------------
+;===================================================================================================
 
 data05FE59:
-#_05FE59: dw $050F : dl $7E2EA0 : dw $FFFF
-#_05FE60: dw $050F : dl $7E2AA0 : dw $FFFF
-#_05FE67: dw $311F : dl $7FF800 : dw $FFFF
+#_05FE59: db $0F, $05 ; read $0F:801A for pointer to CompressedData_Palette_0FFFDA
+#_05FE5B: dl $7E2EA0 : dw $FFFF ; target address
+
+#_05FE60: db $0F, $05 ; read $0F:801A for pointer to CompressedData_Palette_0FFFDA
+#_05FE62: dl $7E2AA0 : dw $FFFF ; target address
+
+#_05FE67: db $1F, $31 ; read $1F:80CA for pointer to data1FC222
+#_05FE69: dl $7FF800 : dw $FFFF ; target address
+
 #_05FE6E: dw $0000 ; end
 
-;---------------------------------------------------------------------------------------------------
+;===================================================================================================
 
 data05FE70:
-#_05FE70: dw $041A : dl $7F8000 : dw $7000
-#_05FE77: dw $641F : dl $7E2F20 : dw $FFFF
-#_05FE7E: dw $641F : dl $7E2B20 : dw $FFFF
+#_05FE70: db $1A, $04 ; read $1A:8016 for pointer to data1AC375
+#_05FE72: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_05FE77: db $1F, $64 ; read $1F:8196 for pointer to CompressedData_Palette1FDD80
+#_05FE79: dl $7E2F20 : dw $FFFF ; target address
+
+#_05FE7E: db $1F, $64 ; read $1F:8196 for pointer to CompressedData_Palette1FDD80
+#_05FE80: dl $7E2B20 : dw $FFFF ; target address
+
 #_05FE85: dw $0000 ; end
 
-;---------------------------------------------------------------------------------------------------
+;===================================================================================================
 
 data05FE87:
-#_05FE87: dw $041A : dl $7F8000 : dw $7000
-#_05FE8E: dw $061B : dl $7F8000 : dw $7400
-#_05FE95: dw $651F : dl $7E2F20 : dw $FFFF
-#_05FE9C: dw $651F : dl $7E2B20 : dw $FFFF
+#_05FE87: db $1A, $04 ; read $1A:8016 for pointer to data1AC375
+#_05FE89: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_05FE8E: db $1B, $06 ; read $1B:801E for pointer to data1BD0FB
+#_05FE90: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
+#_05FE95: db $1F, $65 ; read $1F:819A for pointer to CompressedData_Palette1FDDCB
+#_05FE97: dl $7E2F20 : dw $FFFF ; target address
+
+#_05FE9C: db $1F, $65 ; read $1F:819A for pointer to CompressedData_Palette1FDDCB
+#_05FE9E: dl $7E2B20 : dw $FFFF ; target address
+
 #_05FEA3: dw $0000 ; end
 
-;---------------------------------------------------------------------------------------------------
+;===================================================================================================
 
 data05FEA5:
-#_05FEA5: dw $4E1F : dl $7F8000 : dw $3000
-#_05FEAC: dw $4E1F : dl $7F8000 : dw $3400
-#_05FEB3: dw $0C15 : dl $7F8000 : dw $3120
+#_05FEA5: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_05FEA7: dl $7F8000 : dw $3000 ; target address, copy to $6000 in VRAM
+
+#_05FEAC: db $1F, $4E ; read $1F:813E for pointer to data1FD47B
+#_05FEAE: dl $7F8000 : dw $3400 ; target address, copy to $6800 in VRAM
+
+#_05FEB3: db $15, $0C ; read $15:8036 for pointer to data15C197
+#_05FEB5: dl $7F8000 : dw $3120 ; target address, copy to $6240 in VRAM
+
 #_05FEBA: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data05FEBC:
-#_05FEBC: dw $131D : dl $7F8000 : dw $6E00
+#_05FEBC: db $1D, $13 ; read $1D:8052 for pointer to data1DCA1E
+#_05FEBE: dl $7F8000 : dw $6E00 ; target address, copy to $DC00 in VRAM
 
 ;---------------------------------------------------------------------------------------------------
 
 data05FEC3:
-#_05FEC3: dw $1D1D : dl $7F8000 : dw $7600
-#_05FECA: dw $0D1C : dl $7F8000 : dw $7000
-#_05FED1: dw $8F1F : dl $7E2F20 : dw $FFFF
+#_05FEC3: db $1D, $1D ; read $1D:807A for pointer to data1DE9D5
+#_05FEC5: dl $7F8000 : dw $7600 ; target address, copy to $EC00 in VRAM
+
+#_05FECA: db $1C, $0D ; read $1C:803A for pointer to data1CE435
+#_05FECC: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_05FED1: db $1F, $8F ; read $1F:8242 for pointer to CompressedData_Palette1FE659
+#_05FED3: dl $7E2F20 : dw $FFFF ; target address
+
 #_05FED8: dw $0000 ; end
 
-;---------------------------------------------------------------------------------------------------
+;===================================================================================================
 
 data05FEDA:
-#_05FEDA: dw $1D1D : dl $7F8000 : dw $7600
-#_05FEE1: dw $111C : dl $7F8000 : dw $7000
-#_05FEE8: dw $951F : dl $7E2F20 : dw $FFFF
+#_05FEDA: db $1D, $1D ; read $1D:807A for pointer to data1DE9D5
+#_05FEDC: dl $7F8000 : dw $7600 ; target address, copy to $EC00 in VRAM
+
+#_05FEE1: db $1C, $11 ; read $1C:804A for pointer to data1CFA15
+#_05FEE3: dl $7F8000 : dw $7000 ; target address, copy to $E000 in VRAM
+
+#_05FEE8: db $1F, $95 ; read $1F:825A for pointer to CompressedData_Palette1FE743
+#_05FEEA: dl $7E2F20 : dw $FFFF ; target address
+
 #_05FEEF: dw $0000 ; end
 
 ;===================================================================================================

@@ -14,7 +14,7 @@ org $148000
 #_148016: dw data14B240, $0141
 #_14801A: dw data14BCF3, $0141
 #_14801E: dw data14C76F, $0141
-#_148022: dw data14D1DD, $0141
+#_148022: dw CompressedData_TutorialControllerImage, $0141
 #_148026: dw data14DC3D, $0141
 #_14802A: dw data14E68D, $0141
 #_14802E: dw data14F0C3, $0841
@@ -15513,7 +15513,7 @@ data14C76F:
 
 ;===================================================================================================
 
-data14D1DD:
+CompressedData_TutorialControllerImage:
 #_14D1DD: db $01, $1000 ; copy 4096 bytes
 
 #_14D1E0: dw $3E0A ; block header

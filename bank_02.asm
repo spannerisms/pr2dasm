@@ -408,7 +408,7 @@ ROUTINE_028331:
 
 ;---------------------------------------------------------------------------------------------------
 
-CODE_028344:
+.next
 #_028344: BIT.b $24
 #_028346: BVC CODE_028362
 
@@ -443,6 +443,7 @@ CODE_028365:
 
 CODE_028372:
 #_028372: PHP
+
 #_028373: STA.w $1D00,X
 
 #_028376: LDA.w $0002,Y
@@ -522,7 +523,7 @@ CODE_0283D9:
 #_0283E5: TYA
 #_0283E6: ADC.w #$0006
 #_0283E9: TAY
-#_0283EA: JMP CODE_028344
+#_0283EA: JMP .next
 
 CODE_0283ED:
 #_0283ED: PLP
@@ -536,7 +537,10 @@ CODE_0283ED:
 #_0283FA: TYA
 #_0283FB: ADC.w #$0006
 #_0283FE: TAY
-#_0283FF: JMP CODE_028344
+
+#_0283FF: JMP .next
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_028402:
 #_028402: STX.b $08
@@ -8424,6 +8428,7 @@ CODE_02F13F:
 #_02F15A: ADC.b $22
 #_02F15C: SEC
 #_02F15D: SBC.w #$0F00
+
 #_02F160: JMP CODE_02F184
 
 ;---------------------------------------------------------------------------------------------------
@@ -8442,6 +8447,7 @@ CODE_02F16D:
 #_02F172: ROR A
 #_02F173: SEC
 #_02F174: SBC.b $22
+
 #_02F176: JMP CODE_02F184
 
 ;---------------------------------------------------------------------------------------------------
@@ -8679,6 +8685,7 @@ CODE_02F2B5:
 #_02F2BA: ROR A
 #_02F2BB: SEC
 #_02F2BC: SBC.b $22
+
 #_02F2BE: JMP CODE_02F2CC
 
 ;===================================================================================================
@@ -8724,6 +8731,8 @@ CODE_02F2EA:
 #_02F2EF: LDA.b $20
 #_02F2F1: JMP CODE_02F305
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_02F2F4:
 #_02F2F4: LDA.b $20
 #_02F2F6: CMP.w $0562
@@ -8765,6 +8774,8 @@ CODE_02F310:
 
 #_02F332: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_02F333:
 #_02F333: LDA.w $19F9
 #_02F336: ORA.w $19FB
@@ -8803,6 +8814,7 @@ ROUTINE_02F34E:
 
 ROUTINE_02F35B:
 #_02F35B: PHB
+
 #_02F35C: SEP #$20
 
 #_02F35E: LDA.b #$7E
@@ -9472,6 +9484,7 @@ ROUTINE_02F6AB:
 
 #_02F6DF: LDA.w $7E8000,X
 #_02F6E2: PHX
+
 #_02F6E3: STA.w $7E0000,Y
 
 #_02F6E6: LDX.b $20
@@ -9481,6 +9494,7 @@ ROUTINE_02F6AB:
 
 #_02F6EC: LDA.w $7E8040,X
 #_02F6EF: PHX
+
 #_02F6F0: STA.w $7E0040,Y
 
 #_02F6F3: LDX.b $20
@@ -9490,6 +9504,7 @@ ROUTINE_02F6AB:
 
 #_02F6F9: LDA.w $7E8080,X
 #_02F6FC: PHX
+
 #_02F6FD: STA.w $7E0080,Y
 
 #_02F700: LDX.b $20
@@ -9633,6 +9648,7 @@ ROUTINE_02F788:
 
 #_02F7BC: LDA.w $7E8000,X
 #_02F7BF: PHX
+
 #_02F7C0: STA.w $7E0000,Y
 
 #_02F7C3: LDX.b $20
@@ -9642,6 +9658,7 @@ ROUTINE_02F788:
 
 #_02F7C9: LDA.w $7E8040,X
 #_02F7CC: PHX
+
 #_02F7CD: STA.w $7E0040,Y
 
 #_02F7D0: LDX.b $20
@@ -9651,6 +9668,7 @@ ROUTINE_02F788:
 
 #_02F7D6: LDA.w $7E8080,X
 #_02F7D9: PHX
+
 #_02F7DA: STA.w $7E0080,Y
 
 #_02F7DD: LDX.b $20
@@ -10082,6 +10100,7 @@ ROUTINE_02FA37:
 #_02FA37: CLC
 #_02FA38: ADC.w $056A
 #_02FA3B: PHA
+
 #_02FA3C: ASL A
 
 #_02FA3D: SEP #$20
@@ -10171,6 +10190,7 @@ ROUTINE_02FAB0:
 #_02FAB0: CLC
 #_02FAB1: ADC.w $0564
 #_02FAB4: PHA
+
 #_02FAB5: ASL A
 
 #_02FAB6: SEP #$20
@@ -10261,6 +10281,7 @@ ROUTINE_02FB28:
 #_02FB28: CLC
 #_02FB29: ADC.w $0566
 #_02FB2C: PHA
+
 #_02FB2D: ASL A
 
 #_02FB2E: SEP #$20
@@ -10555,6 +10576,8 @@ SetLevelTimer:
 #_02FE55: PLB
 #_02FE56: RTL
 
+;---------------------------------------------------------------------------------------------------
+
 .timers
 #_02FE57: dw $9999
 #_02FE59: dw $4009
@@ -10568,25 +10591,38 @@ SetLevelTimer:
 
 ;===================================================================================================
 
-; TODO
 data02FE69:
-#_02FE69: dw $011F : dl $7F8000 : dw $3000
-#_02FE70: dw $291F : dl $7F8000 : dw $4000
-#_02FE77: dw $341F : dl $7E2A00 : dw $FFFF
-#_02FE7E: dw $221F : dl $7E2B00 : dw $FFFF
-#_02FE85: dw $721F : dl $7E2A00 : dw $FFFF
+#_02FE69: db $1F, $01 ; read $1F:800A for pointer to data1F84B8
+#_02FE6B: dl $7F8000 : dw $3000 ; target address, copy to $6000 in VRAM
+
+#_02FE70: db $1F, $29 ; read $1F:80AA for pointer to data1FBBD7
+#_02FE72: dl $7F8000 : dw $4000 ; target address, copy to $8000 in VRAM
+
+#_02FE77: db $1F, $34 ; read $1F:80D6 for pointer to CompressedData_Palette1FC463
+#_02FE79: dl $7E2A00 : dw $FFFF ; target address
+
+#_02FE7E: db $1F, $22 ; read $1F:808E for pointer to CompressedData_Palette1FB593
+#_02FE80: dl $7E2B00 : dw $FFFF ; target address
+
+#_02FE85: db $1F, $72 ; read $1F:81CE for pointer to CompressedData_Palette1FE166
+#_02FE87: dl $7E2A00 : dw $FFFF ; target address
+
 #_02FE8C: dw $0000 ; end
 
 ;===================================================================================================
 
 data02FE8E:
-#_02FE8E: dw $1E1D : dl $7F8000 : dw $7400
+#_02FE8E: db $1D, $1E ; read $1D:807E for pointer to data1DECB8
+#_02FE90: dl $7F8000 : dw $7400 ; target address, copy to $E800 in VRAM
+
 #_02FE95: dw $0000 ; end
 
 ;===================================================================================================
 
 data02FE97:
-#_02FE97: dw $831F : dl $7E2FE0 : dw $FFFF
+#_02FE97: db $1F, $83 ; read $1F:8212 for pointer to CompressedData_Palette1FE485
+#_02FE99: dl $7E2FE0 : dw $FFFF ; target address
+
 #_02FE9E: dw $0000 ; end
 
 ;===================================================================================================

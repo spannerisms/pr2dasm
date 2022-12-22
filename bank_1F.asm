@@ -38,39 +38,39 @@ org $1F8000
 #_1F8076: dw data1FAF52, $0621
 #_1F807A: dw data1FB069, $0621
 #_1F807E: dw data1FB17F, $0621
-#_1F8082: dw data1FB293, $0651
-#_1F8086: dw data1FB399, $0521
+#_1F8082: dw CompressedData_Empty1000, $0651
+#_1F8086: dw CompressedData_Palette1FB399, $0521
 #_1F808A: dw data1FB49E, $0251
-#_1F808E: dw data1FB593, $0521
+#_1F808E: dw CompressedData_Palette1FB593, $0521
 #_1F8092: dw data1FB687, $0621
 #_1F8096: dw data1FB776, $0251
 #_1F809A: dw data1FB864, $0621
 #_1F809E: dw data1FB951, $0621
-#_1F80A2: dw data1FBA2C, $0521
+#_1F80A2: dw CompressedData_Palette1FBA2C, $0521
 #_1F80A6: dw data1FBB02, $0251
 #_1F80AA: dw data1FBBD7, $0621
-#_1F80AE: dw data1FBCA9, $0551
-#_1F80B2: dw data1FBD75, $0521
+#_1F80AE: dw CompressedData_Palette1FBCA9, $0551
+#_1F80B2: dw CompressedData_Palette1FBD75, $0521
 #_1F80B6: dw data1FBE41, $0621
 #_1F80BA: dw data1FBF0B, $0621
 #_1F80BE: dw data1FBFD3, $0651
-#_1F80C2: dw data1FC098, $0521
+#_1F80C2: dw CompressedData_Palette1FC098, $0521
 #_1F80C6: dw data1FC15D, $0251
 #_1F80CA: dw data1FC222, $0251
 #_1F80CE: dw data1FC2E5, $0251
 #_1F80D2: dw data1FC3A5, $0621
-#_1F80D6: dw data1FC463, $0521
+#_1F80D6: dw CompressedData_Palette1FC463, $0521
 #_1F80DA: dw data1FC520, $0621
 #_1F80DE: dw data1FC5D5, $0651
 #_1F80E2: dw data1FC689, $0651
-#_1F80E6: dw data1FC738, $0551
+#_1F80E6: dw CompressedData_Palette1FC738, $0551
 #_1F80EA: dw data1FC7E3, $0621
 #_1F80EE: dw data1FC88D, $0651
-#_1F80F2: dw data1FC937, $0521
+#_1F80F2: dw CompressedData_Palette1FC937, $0521
 #_1F80F6: dw data1FC9E0, $0621
 #_1F80FA: dw data1FCA87, $0621
 #_1F80FE: dw data1FCB2D, $0621
-#_1F8102: dw data1FCBCE, $0521
+#_1F8102: dw CompressedData_Palette1FCBCE, $0521
 #_1F8106: dw data1FCC6E, $0621
 #_1F810A: dw data1FCD0E, $0621
 #_1F810E: dw data1FCDAE, $0251
@@ -79,7 +79,7 @@ org $1F8000
 #_1F811A: dw data1FCF7F, $0621
 #_1F811E: dw data1FD017, $0621
 #_1F8122: dw data1FD0AB, $0621
-#_1F8126: dw data1FD13E, $0521
+#_1F8126: dw CompressedData_Palette1FD13E, $0521
 #_1F812A: dw data1FD1CD, $0621
 #_1F812E: dw data1FD258, $0621
 #_1F8132: dw data1FD2E2, $0421
@@ -97,75 +97,75 @@ org $1F8000
 #_1F8162: dw data1FD8FB, $0251
 #_1F8166: dw data1FD966, $0551
 #_1F816A: dw data1FD9CE, $0621
-#_1F816E: dw data1FDA35, $0521
+#_1F816E: dw CompressedData_Palette1FDA35, $0521
 #_1F8172: dw data1FDA9C, $0621
 #_1F8176: dw data1FDAFF, $0621
-#_1F817A: dw data1FDB61, $0521
-#_1F817E: dw data1FDBBE, $0521
-#_1F8182: dw data1FDC09, $0521
-#_1F8186: dw data1FDC54, $0521
-#_1F818A: dw data1FDC9F, $0521
-#_1F818E: dw data1FDCEA, $0521
+#_1F817A: dw CompressedData_Palette1FDB61, $0521
+#_1F817E: dw CompressedData_Palette1FDBBE, $0521
+#_1F8182: dw CompressedData_Palette1FDC09, $0521
+#_1F8186: dw CompressedData_Palette1FDC54, $0521
+#_1F818A: dw CompressedData_Palette1FDC9F, $0521
+#_1F818E: dw CompressedData_Palette1FDCEA, $0521
 #_1F8192: dw data1FDD35, $0551
-#_1F8196: dw data1FDD80, $0551
-#_1F819A: dw data1FDDCB, $0521
+#_1F8196: dw CompressedData_Palette1FDD80, $0551
+#_1F819A: dw CompressedData_Palette1FDDCB, $0521
 #_1F819E: dw data1FDE16, $0521
 #_1F81A2: dw data1FDE61, $0521
-#_1F81A6: dw data1FDEAB, $0521
-#_1F81AA: dw data1FDEF5, $0521
-#_1F81AE: dw data1FDF3E, $0521
+#_1F81A6: dw CompressedData_Palette1FDEAB, $0521
+#_1F81AA: dw CompressedData_Palette1FDEF5, $0521
+#_1F81AE: dw CompressedData_Palette1FDF3E, $0521
 #_1F81B2: dw data1FDF86, $0521
 #_1F81B6: dw data1FDFCD, $0521
-#_1F81BA: dw data1FE014, $0551
-#_1F81BE: dw data1FE05B, $0521
-#_1F81C2: dw data1FE0A1, $0551
-#_1F81C6: dw data1FE0E4, $0521
+#_1F81BA: dw CompressedData_Palette1FE014, $0551
+#_1F81BE: dw CompressedData_Palette1FE05B, $0521
+#_1F81C2: dw CompressedData_Palette1FE0A1, $0551
+#_1F81C6: dw CompressedData_Palette1FE0E4, $0521
 #_1F81CA: dw data1FE126, $0221
-#_1F81CE: dw data1FE166, $0551
-#_1F81D2: dw data1FE1A5, $0521
-#_1F81D6: dw data1FE1E0, $0521
-#_1F81DA: dw data1FE21A, $0521
-#_1F81DE: dw data1FE253, $0251
-#_1F81E2: dw data1FE289, $0251
+#_1F81CE: dw CompressedData_Palette1FE166, $0551
+#_1F81D2: dw CompressedData_Palette1FE1A5, $0521
+#_1F81D6: dw CompressedData_Palette1FE1E0, $0521
+#_1F81DA: dw CompressedData_Palette1FE21A, $0521
+#_1F81DE: dw CompressedData_Empty0300_A, $0251
+#_1F81E2: dw CompressedData_Empty0300_B, $0251
 #_1F81E6: dw data1FE2BF, $0551
-#_1F81EA: dw data1FE2F4, $0521
-#_1F81EE: dw data1FE326, $0521
-#_1F81F2: dw data1FE34D, $0521
-#_1F81F6: dw data1FE374, $0521
-#_1F81FA: dw data1FE39B, $0521
-#_1F81FE: dw data1FE3C2, $0551
-#_1F8202: dw data1FE3E9, $0521
+#_1F81EA: dw CompressedData_Palette1FE2F4, $0521
+#_1F81EE: dw CompressedData_Palette_1FE326, $0521
+#_1F81F2: dw CompressedData_Palette1FE34D, $0521
+#_1F81F6: dw CompressedData_Palette1FE374, $0521
+#_1F81FA: dw CompressedData_Palette1FE39B, $0521
+#_1F81FE: dw CompressedData_Palette1FE3C2, $0551
+#_1F8202: dw CompressedData_Palette1FE3E9, $0521
 #_1F8206: dw data1FE410, $0521
-#_1F820A: dw data1FE437, $0521
-#_1F820E: dw data1FE45E, $0521
-#_1F8212: dw data1FE485, $0551
-#_1F8216: dw data1FE4AC, $0551
-#_1F821A: dw data1FE4D3, $0551
-#_1F821E: dw data1FE4FA, $0521
-#_1F8222: dw data1FE521, $0551
-#_1F8226: dw data1FE548, $0521
-#_1F822A: dw data1FE56F, $0551
-#_1F822E: dw data1FE596, $0551
-#_1F8232: dw data1FE5BD, $0521
-#_1F8236: dw data1FE5E4, $0551
-#_1F823A: dw data1FE60B, $0521
-#_1F823E: dw data1FE632, $0521
-#_1F8242: dw data1FE659, $0551
-#_1F8246: dw data1FE680, $0551
-#_1F824A: dw data1FE6A7, $0521
-#_1F824E: dw data1FE6CE, $0521
-#_1F8252: dw data1FE6F5, $0521
-#_1F8256: dw data1FE71C, $0521
-#_1F825A: dw data1FE743, $0521
-#_1F825E: dw data1FE76A, $0521
-#_1F8262: dw data1FE78D, $0521
-#_1F8266: dw data1FE7AC, $0621
-#_1F826A: dw data1FE7C2, $0551
-#_1F826E: dw data1FE7D7, $0551
-#_1F8272: dw data1FE7EC, $0551
-#_1F8276: dw data1FE801, $0551
+#_1F820A: dw CompressedData_Palette1FE437, $0521
+#_1F820E: dw CompressedData_Palette1FE45E, $0521
+#_1F8212: dw CompressedData_Palette1FE485, $0551
+#_1F8216: dw CompressedData_Palette1FE4AC, $0551
+#_1F821A: dw CompressedData_Palette1FE4D3, $0551
+#_1F821E: dw CompressedData_Palette1FE4FA, $0521
+#_1F8222: dw CompressedData_Palette1FE521, $0551
+#_1F8226: dw CompressedData_Palette1FE548, $0521
+#_1F822A: dw CompressedData_Palette1FE56F, $0551
+#_1F822E: dw CompressedData_Palette1FE596, $0551
+#_1F8232: dw CompressedData_Palette1FE5BD, $0521
+#_1F8236: dw CompressedData_Palette1FE5E4, $0551
+#_1F823A: dw CompressedData_Palette1FE60B, $0521
+#_1F823E: dw CompressedData_Palette1FE632, $0521
+#_1F8242: dw CompressedData_Palette1FE659, $0551
+#_1F8246: dw CompressedData_Palette1FE680, $0551
+#_1F824A: dw CompressedData_Palette_1FE6A7, $0521
+#_1F824E: dw CompressedData_Palette1FE6CE, $0521
+#_1F8252: dw CompressedData_Palette1FE6F5, $0521
+#_1F8256: dw CompressedData_Palette1FE71C, $0521
+#_1F825A: dw CompressedData_Palette1FE743, $0521
+#_1F825E: dw CompressedData_Palette1FE76A, $0521
+#_1F8262: dw CompressedData_Palette1FE78D, $0521
+#_1F8266: dw CompressedData_Empty0100, $0621
+#_1F826A: dw CompressedData_Palette1FE7C2, $0551
+#_1F826E: dw CompressedData_Palette1FE7D7, $0551
+#_1F8272: dw CompressedData_Palette1FE7EC, $0551
+#_1F8276: dw CompressedData_Palette1FE801, $0551
 #_1F827A: dw data1FE815, $0551
-#_1F827E: dw data1FE829, $0521
+#_1F827E: dw CompressedData_Palette_1FE829, $0521
 #_1F8282: dw $FFFF
 
 ;===================================================================================================
@@ -8778,7 +8778,7 @@ data1FB17F:
 
 ;===================================================================================================
 
-data1FB293:
+CompressedData_Empty1000:
 #_1FB293: db $01, $1000 ; copy 4096 bytes
 
 #_1FB296: dw $FFFE ; block header
@@ -8921,7 +8921,7 @@ data1FB293:
 
 ;===================================================================================================
 
-data1FB399:
+CompressedData_Palette1FB399:
 #_1FB399: db $01, $0100 ; copy 256 bytes
 
 #_1FB39C: dw $0000 ; 16 bytes raw
@@ -9262,7 +9262,7 @@ data1FB49E:
 
 ;===================================================================================================
 
-data1FB593:
+CompressedData_Palette1FB593:
 #_1FB593: db $01, $0100 ; copy 256 bytes
 
 #_1FB596: dw $0000 ; 16 bytes raw
@@ -10097,7 +10097,7 @@ data1FB951:
 
 ;===================================================================================================
 
-data1FBA2C:
+CompressedData_Palette1FBA2C:
 #_1FBA2C: db $01, $0100 ; copy 256 bytes
 
 #_1FBA2F: dw $0092 ; block header
@@ -10553,7 +10553,7 @@ data1FBBD7:
 
 ;===================================================================================================
 
-data1FBCA9:
+CompressedData_Palette1FBCA9:
 #_1FBCA9: db $01, $0100 ; copy 256 bytes
 
 #_1FBCAC: dw $0000 ; 16 bytes raw
@@ -10689,7 +10689,7 @@ data1FBCA9:
 
 ;===================================================================================================
 
-data1FBD75:
+CompressedData_Palette1FBD75:
 #_1FBD75: db $01, $0100 ; copy 256 bytes
 
 #_1FBD78: dw $1200 ; block header
@@ -11266,7 +11266,7 @@ data1FBFD3:
 
 ;===================================================================================================
 
-data1FC098:
+CompressedData_Palette1FC098:
 #_1FC098: db $01, $0100 ; copy 256 bytes
 
 #_1FC09B: dw $0030 ; block header
@@ -11952,7 +11952,7 @@ data1FC3A5:
 
 ;===================================================================================================
 
-data1FC463:
+CompressedData_Palette1FC463:
 #_1FC463: db $01, $0100 ; copy 256 bytes
 
 #_1FC466: dw $0030 ; block header
@@ -12426,7 +12426,7 @@ data1FC689:
 
 ;===================================================================================================
 
-data1FC738:
+CompressedData_Palette1FC738:
 #_1FC738: db $01, $0100 ; copy 256 bytes
 
 #_1FC73B: dw $0090 ; block header
@@ -12786,7 +12786,7 @@ data1FC88D:
 
 ;===================================================================================================
 
-data1FC937:
+CompressedData_Palette1FC937:
 #_1FC937: db $01, $0100 ; copy 256 bytes
 
 #_1FC93A: dw $6010 ; block header
@@ -13252,7 +13252,7 @@ data1FCB2D:
 
 ;===================================================================================================
 
-data1FCBCE:
+CompressedData_Palette1FCBCE:
 #_1FCBCE: db $01, $0100 ; copy 256 bytes
 
 #_1FCBD1: dw $0240 ; block header
@@ -14262,7 +14262,7 @@ data1FD0AB:
 
 ;===================================================================================================
 
-data1FD13E:
+CompressedData_Palette1FD13E:
 #_1FD13E: db $01, $00C0 ; copy 192 bytes
 
 #_1FD141: dw $0000 ; 16 bytes raw
@@ -15924,7 +15924,7 @@ data1FD9CE:
 
 ;===================================================================================================
 
-data1FDA35:
+CompressedData_Palette1FDA35:
 #_1FDA35: db $01, $0060 ; copy 96 bytes
 
 #_1FDA38: dw $0000 ; 16 bytes raw
@@ -16135,7 +16135,7 @@ data1FDAFF:
 
 ;===================================================================================================
 
-data1FDB61:
+CompressedData_Palette1FDB61:
 #_1FDB61: db $01, $00A0 ; copy 160 bytes
 
 #_1FDB64: dw $0000 ; 16 bytes raw
@@ -16188,7 +16188,7 @@ data1FDB61:
 
 ;===================================================================================================
 
-data1FDBBE:
+CompressedData_Palette1FDBBE:
 #_1FDBBE: db $01, $0040 ; copy 64 bytes
 
 #_1FDBC1: dw $0000 ; 16 bytes raw
@@ -16209,7 +16209,7 @@ data1FDBBE:
 
 ;===================================================================================================
 
-data1FDC09:
+CompressedData_Palette1FDC09:
 #_1FDC09: db $01, $0040 ; copy 64 bytes
 
 #_1FDC0C: dw $0000 ; 16 bytes raw
@@ -16230,7 +16230,7 @@ data1FDC09:
 
 ;===================================================================================================
 
-data1FDC54:
+CompressedData_Palette1FDC54:
 #_1FDC54: db $01, $0040 ; copy 64 bytes
 
 #_1FDC57: dw $0000 ; 16 bytes raw
@@ -16251,7 +16251,7 @@ data1FDC54:
 
 ;===================================================================================================
 
-data1FDC9F:
+CompressedData_Palette1FDC9F:
 #_1FDC9F: db $01, $0040 ; copy 64 bytes
 
 #_1FDCA2: dw $0000 ; 16 bytes raw
@@ -16272,7 +16272,7 @@ data1FDC9F:
 
 ;===================================================================================================
 
-data1FDCEA:
+CompressedData_Palette1FDCEA:
 #_1FDCEA: db $01, $0040 ; copy 64 bytes
 
 #_1FDCED: dw $0000 ; 16 bytes raw
@@ -16314,7 +16314,7 @@ data1FDD35:
 
 ;===================================================================================================
 
-data1FDD80:
+CompressedData_Palette1FDD80:
 #_1FDD80: db $01, $0040 ; copy 64 bytes
 
 #_1FDD83: dw $0000 ; 16 bytes raw
@@ -16335,7 +16335,7 @@ data1FDD80:
 
 ;===================================================================================================
 
-data1FDDCB:
+CompressedData_Palette1FDDCB:
 #_1FDDCB: db $01, $0040 ; copy 64 bytes
 
 #_1FDDCE: dw $0000 ; 16 bytes raw
@@ -16410,7 +16410,7 @@ data1FDE61:
 
 ;===================================================================================================
 
-data1FDEAB:
+CompressedData_Palette1FDEAB:
 #_1FDEAB: db $01, $0040 ; copy 64 bytes
 
 #_1FDEAE: dw $0000 ; 16 bytes raw
@@ -16445,7 +16445,7 @@ data1FDEAB:
 
 ;===================================================================================================
 
-data1FDEF5:
+CompressedData_Palette1FDEF5:
 #_1FDEF5: db $01, $0040 ; copy 64 bytes
 
 #_1FDEF8: dw $0000 ; 16 bytes raw
@@ -16480,7 +16480,7 @@ data1FDEF5:
 
 ;===================================================================================================
 
-data1FDF3E:
+CompressedData_Palette1FDF3E:
 #_1FDF3E: db $01, $0040 ; copy 64 bytes
 
 #_1FDF41: dw $0000 ; 16 bytes raw
@@ -16587,7 +16587,7 @@ data1FDFCD:
 
 ;===================================================================================================
 
-data1FE014:
+CompressedData_Palette1FE014:
 #_1FE014: db $01, $0040 ; copy 64 bytes
 
 #_1FE017: dw $0000 ; 16 bytes raw
@@ -16617,7 +16617,7 @@ data1FE014:
 
 ;===================================================================================================
 
-data1FE05B:
+CompressedData_Palette1FE05B:
 #_1FE05B: db $01, $0040 ; copy 64 bytes
 
 #_1FE05E: dw $0000 ; 16 bytes raw
@@ -16651,7 +16651,7 @@ data1FE05B:
 
 ;===================================================================================================
 
-data1FE0A1:
+CompressedData_Palette1FE0A1:
 #_1FE0A1: db $01, $0040 ; copy 64 bytes
 
 #_1FE0A4: dw $0000 ; 16 bytes raw
@@ -16677,7 +16677,7 @@ data1FE0A1:
 
 ;===================================================================================================
 
-data1FE0E4:
+CompressedData_Palette1FE0E4:
 #_1FE0E4: db $01, $0040 ; copy 64 bytes
 
 #_1FE0E7: dw $0000 ; 16 bytes raw
@@ -16764,7 +16764,7 @@ data1FE126:
 
 ;===================================================================================================
 
-data1FE166:
+CompressedData_Palette1FE166:
 #_1FE166: db $01, $0040 ; copy 64 bytes
 
 #_1FE169: dw $1002 ; block header
@@ -16823,7 +16823,7 @@ data1FE166:
 
 ;===================================================================================================
 
-data1FE1A5:
+CompressedData_Palette1FE1A5:
 #_1FE1A5: db $01, $0040 ; copy 64 bytes
 
 #_1FE1A8: dw $9480 ; block header
@@ -16868,7 +16868,7 @@ data1FE1A5:
 
 ;===================================================================================================
 
-data1FE1E0:
+CompressedData_Palette1FE1E0:
 #_1FE1E0: db $01, $0040 ; copy 64 bytes
 
 #_1FE1E3: dw $4000 ; block header
@@ -16922,7 +16922,7 @@ data1FE1E0:
 
 ;===================================================================================================
 
-data1FE21A:
+CompressedData_Palette1FE21A:
 #_1FE21A: db $01, $0040 ; copy 64 bytes
 
 #_1FE21D: dw $0000 ; 16 bytes raw
@@ -16952,7 +16952,7 @@ data1FE21A:
 
 ;===================================================================================================
 
-data1FE253:
+CompressedData_Empty0300_A:
 #_1FE253: db $01, $0300 ; copy 768 bytes
 
 #_1FE256: dw $FFFE ; block header
@@ -16985,7 +16985,7 @@ data1FE253:
 
 ;===================================================================================================
 
-data1FE289:
+CompressedData_Empty0300_B:
 #_1FE289: db $01, $0300 ; copy 768 bytes
 
 #_1FE28C: dw $FFFE ; block header
@@ -17066,7 +17066,7 @@ data1FE2BF:
 
 ;===================================================================================================
 
-data1FE2F4:
+CompressedData_Palette1FE2F4:
 #_1FE2F4: db $01, $0040 ; copy 64 bytes
 
 #_1FE2F7: dw $4700 ; block header
@@ -17110,7 +17110,7 @@ data1FE2F4:
 
 ;===================================================================================================
 
-data1FE326:
+CompressedData_Palette_1FE326:
 #_1FE326: db $01, $0020 ; copy 32 bytes
 
 #_1FE329: dw $0000 ; 16 bytes raw
@@ -17123,7 +17123,7 @@ data1FE326:
 
 ;===================================================================================================
 
-data1FE34D:
+CompressedData_Palette1FE34D:
 #_1FE34D: db $01, $0020 ; copy 32 bytes
 
 #_1FE350: dw $0000 ; 16 bytes raw
@@ -17136,7 +17136,7 @@ data1FE34D:
 
 ;===================================================================================================
 
-data1FE374:
+CompressedData_Palette1FE374:
 #_1FE374: db $01, $0020 ; copy 32 bytes
 
 #_1FE377: dw $0000 ; 16 bytes raw
@@ -17149,7 +17149,7 @@ data1FE374:
 
 ;===================================================================================================
 
-data1FE39B:
+CompressedData_Palette1FE39B:
 #_1FE39B: db $01, $0020 ; copy 32 bytes
 
 #_1FE39E: dw $0000 ; 16 bytes raw
@@ -17162,7 +17162,7 @@ data1FE39B:
 
 ;===================================================================================================
 
-data1FE3C2:
+CompressedData_Palette1FE3C2:
 #_1FE3C2: db $01, $0020 ; copy 32 bytes
 
 #_1FE3C5: dw $0000 ; 16 bytes raw
@@ -17175,7 +17175,7 @@ data1FE3C2:
 
 ;===================================================================================================
 
-data1FE3E9:
+CompressedData_Palette1FE3E9:
 #_1FE3E9: db $01, $0020 ; copy 32 bytes
 
 #_1FE3EC: dw $0000 ; 16 bytes raw
@@ -17201,7 +17201,7 @@ data1FE410:
 
 ;===================================================================================================
 
-data1FE437:
+CompressedData_Palette1FE437:
 #_1FE437: db $01, $0020 ; copy 32 bytes
 
 #_1FE43A: dw $0000 ; 16 bytes raw
@@ -17214,7 +17214,7 @@ data1FE437:
 
 ;===================================================================================================
 
-data1FE45E:
+CompressedData_Palette1FE45E:
 #_1FE45E: db $01, $0020 ; copy 32 bytes
 
 #_1FE461: dw $0000 ; 16 bytes raw
@@ -17227,7 +17227,7 @@ data1FE45E:
 
 ;===================================================================================================
 
-data1FE485:
+CompressedData_Palette1FE485:
 #_1FE485: db $01, $0020 ; copy 32 bytes
 
 #_1FE488: dw $0000 ; 16 bytes raw
@@ -17240,7 +17240,7 @@ data1FE485:
 
 ;===================================================================================================
 
-data1FE4AC:
+CompressedData_Palette1FE4AC:
 #_1FE4AC: db $01, $0020 ; copy 32 bytes
 
 #_1FE4AF: dw $0000 ; 16 bytes raw
@@ -17253,7 +17253,7 @@ data1FE4AC:
 
 ;===================================================================================================
 
-data1FE4D3:
+CompressedData_Palette1FE4D3:
 #_1FE4D3: db $01, $0020 ; copy 32 bytes
 
 #_1FE4D6: dw $0000 ; 16 bytes raw
@@ -17266,7 +17266,7 @@ data1FE4D3:
 
 ;===================================================================================================
 
-data1FE4FA:
+CompressedData_Palette1FE4FA:
 #_1FE4FA: db $01, $0020 ; copy 32 bytes
 
 #_1FE4FD: dw $0000 ; 16 bytes raw
@@ -17279,7 +17279,7 @@ data1FE4FA:
 
 ;===================================================================================================
 
-data1FE521:
+CompressedData_Palette1FE521:
 #_1FE521: db $01, $0020 ; copy 32 bytes
 
 #_1FE524: dw $0000 ; 16 bytes raw
@@ -17292,7 +17292,7 @@ data1FE521:
 
 ;===================================================================================================
 
-data1FE548:
+CompressedData_Palette1FE548:
 #_1FE548: db $01, $0020 ; copy 32 bytes
 
 #_1FE54B: dw $0000 ; 16 bytes raw
@@ -17305,7 +17305,7 @@ data1FE548:
 
 ;===================================================================================================
 
-data1FE56F:
+CompressedData_Palette1FE56F:
 #_1FE56F: db $01, $0020 ; copy 32 bytes
 
 #_1FE572: dw $0000 ; 16 bytes raw
@@ -17318,7 +17318,7 @@ data1FE56F:
 
 ;===================================================================================================
 
-data1FE596:
+CompressedData_Palette1FE596:
 #_1FE596: db $01, $0020 ; copy 32 bytes
 
 #_1FE599: dw $0000 ; 16 bytes raw
@@ -17331,7 +17331,7 @@ data1FE596:
 
 ;===================================================================================================
 
-data1FE5BD:
+CompressedData_Palette1FE5BD:
 #_1FE5BD: db $01, $0020 ; copy 32 bytes
 
 #_1FE5C0: dw $0000 ; 16 bytes raw
@@ -17344,7 +17344,7 @@ data1FE5BD:
 
 ;===================================================================================================
 
-data1FE5E4:
+CompressedData_Palette1FE5E4:
 #_1FE5E4: db $01, $0020 ; copy 32 bytes
 
 #_1FE5E7: dw $0000 ; 16 bytes raw
@@ -17357,7 +17357,7 @@ data1FE5E4:
 
 ;===================================================================================================
 
-data1FE60B:
+CompressedData_Palette1FE60B:
 #_1FE60B: db $01, $0020 ; copy 32 bytes
 
 #_1FE60E: dw $0000 ; 16 bytes raw
@@ -17370,7 +17370,7 @@ data1FE60B:
 
 ;===================================================================================================
 
-data1FE632:
+CompressedData_Palette1FE632:
 #_1FE632: db $01, $0020 ; copy 32 bytes
 
 #_1FE635: dw $0000 ; 16 bytes raw
@@ -17383,7 +17383,7 @@ data1FE632:
 
 ;===================================================================================================
 
-data1FE659:
+CompressedData_Palette1FE659:
 #_1FE659: db $01, $0020 ; copy 32 bytes
 
 #_1FE65C: dw $0000 ; 16 bytes raw
@@ -17396,7 +17396,7 @@ data1FE659:
 
 ;===================================================================================================
 
-data1FE680:
+CompressedData_Palette1FE680:
 #_1FE680: db $01, $0020 ; copy 32 bytes
 
 #_1FE683: dw $0000 ; 16 bytes raw
@@ -17409,7 +17409,7 @@ data1FE680:
 
 ;===================================================================================================
 
-data1FE6A7:
+CompressedData_Palette_1FE6A7:
 #_1FE6A7: db $01, $0020 ; copy 32 bytes
 
 #_1FE6AA: dw $0000 ; 16 bytes raw
@@ -17422,7 +17422,7 @@ data1FE6A7:
 
 ;===================================================================================================
 
-data1FE6CE:
+CompressedData_Palette1FE6CE:
 #_1FE6CE: db $01, $0020 ; copy 32 bytes
 
 #_1FE6D1: dw $0000 ; 16 bytes raw
@@ -17435,7 +17435,7 @@ data1FE6CE:
 
 ;===================================================================================================
 
-data1FE6F5:
+CompressedData_Palette1FE6F5:
 #_1FE6F5: db $01, $0020 ; copy 32 bytes
 
 #_1FE6F8: dw $0000 ; 16 bytes raw
@@ -17448,7 +17448,7 @@ data1FE6F5:
 
 ;===================================================================================================
 
-data1FE71C:
+CompressedData_Palette1FE71C:
 #_1FE71C: db $01, $0020 ; copy 32 bytes
 
 #_1FE71F: dw $0000 ; 16 bytes raw
@@ -17461,7 +17461,7 @@ data1FE71C:
 
 ;===================================================================================================
 
-data1FE743:
+CompressedData_Palette1FE743:
 #_1FE743: db $01, $0020 ; copy 32 bytes
 
 #_1FE746: dw $0000 ; 16 bytes raw
@@ -17474,7 +17474,7 @@ data1FE743:
 
 ;===================================================================================================
 
-data1FE76A:
+CompressedData_Palette1FE76A:
 #_1FE76A: db $01, $0020 ; copy 32 bytes
 
 #_1FE76D: dw $8002 ; block header
@@ -17508,7 +17508,7 @@ data1FE76A:
 
 ;===================================================================================================
 
-data1FE78D:
+CompressedData_Palette1FE78D:
 #_1FE78D: db $01, $0040 ; copy 64 bytes
 
 #_1FE790: dw $8600 ; block header
@@ -17536,7 +17536,7 @@ data1FE78D:
 
 ;===================================================================================================
 
-data1FE7AC:
+CompressedData_Empty0100:
 #_1FE7AC: db $01, $0100 ; copy 256 bytes
 
 #_1FE7AF: dw $01FE ; block header
@@ -17552,7 +17552,7 @@ data1FE7AC:
 
 ;===================================================================================================
 
-data1FE7C2:
+CompressedData_Palette1FE7C2:
 #_1FE7C2: db $01, $0020 ; copy 32 bytes
 
 #_1FE7C5: dw $4000 ; block header
@@ -17574,7 +17574,7 @@ data1FE7C2:
 
 ;===================================================================================================
 
-data1FE7D7:
+CompressedData_Palette1FE7D7:
 #_1FE7D7: db $01, $0020 ; copy 32 bytes
 
 #_1FE7DA: dw $4000 ; block header
@@ -17596,7 +17596,7 @@ data1FE7D7:
 
 ;===================================================================================================
 
-data1FE7EC:
+CompressedData_Palette1FE7EC:
 #_1FE7EC: db $01, $0020 ; copy 32 bytes
 
 #_1FE7EF: dw $4000 ; block header
@@ -17618,7 +17618,7 @@ data1FE7EC:
 
 ;===================================================================================================
 
-data1FE801:
+CompressedData_Palette1FE801:
 #_1FE801: db $01, $0020 ; copy 32 bytes
 
 #_1FE804: dw $2000 ; block header
@@ -17660,7 +17660,7 @@ data1FE815:
 
 ;===================================================================================================
 
-data1FE829:
+CompressedData_Palette_1FE829:
 #_1FE829: db $01, $0020 ; copy 32 bytes
 
 #_1FE82C: dw $0002 ; block header

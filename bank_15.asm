@@ -51,10 +51,10 @@ org $158000
 #_1580AA: dw data15DF74, $0741
 #_1580AE: dw data15E041, $0721
 #_1580B2: dw data15E109, $0721
-#_1580B6: dw data15E1D1, $0541
+#_1580B6: dw CompressedData_Palette15E1D1, $0541
 #_1580BA: dw data15E298, $0721
 #_1580BE: dw data15E35F, $0541
-#_1580C2: dw data15E424, $0541
+#_1580C2: dw CompressedData_Palette15E424, $0541
 #_1580C6: dw data15E4E9, $0721
 #_1580CA: dw data15E5AA, $0721
 #_1580CE: dw data15E66A, $0721
@@ -81,14 +81,14 @@ org $158000
 #_158122: dw data15F4E2, $0721
 #_158126: dw data15F574, $0741
 #_15812A: dw data15F603, $0741
-#_15812E: dw data15F68E, $0721
+#_15812E: dw CompressedData_SpriteArrayEmptyState, $0721
 #_158132: dw data15F715, $0721
 #_158136: dw data15F797, $0741
 #_15813A: dw data15F810, $0721
 #_15813E: dw data15F888, $0741
 #_158142: dw data15F8F7, $0741
 #_158146: dw data15F966, $0741
-#_15814A: dw data15F9D2, $0541
+#_15814A: dw CompressedData_Palette15F9D2, $0541
 #_15814E: dw data15FA30, $0741
 #_158152: dw data15FA8E, $0741
 #_158156: dw data15FAEB, $0741
@@ -17925,7 +17925,7 @@ data15E109:
 
 ;===================================================================================================
 
-data15E1D1:
+CompressedData_Palette15E1D1:
 #_15E1D1: db $01, $00C0 ; copy 192 bytes
 
 #_15E1D4: dw $0000 ; 16 bytes raw
@@ -18343,7 +18343,7 @@ data15E35F:
 
 ;===================================================================================================
 
-data15E424:
+CompressedData_Palette15E424:
 #_15E424: db $01, $00C0 ; copy 192 bytes
 
 #_15E427: dw $0000 ; 16 bytes raw
@@ -21596,7 +21596,7 @@ data15F603:
 
 ;===================================================================================================
 
-data15F68E:
+CompressedData_SpriteArrayEmptyState:
 #_15F68E: db $01, $0800 ; copy 2048 bytes
 
 #_15F691: dw $FFFC ; block header
@@ -22217,7 +22217,7 @@ data15F966:
 
 ;===================================================================================================
 
-data15F9D2:
+CompressedData_Palette15F9D2:
 #_15F9D2: db $01, $00C0 ; copy 192 bytes
 
 #_15F9D5: dw $4000 ; block header

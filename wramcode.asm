@@ -1,18 +1,22 @@
+;===================================================================================================
+; This code is written to WRAM before being used by cutscenes.
+; It is decompressed from $12DA58 in ROM.
+;===================================================================================================
 base $7E8000
 
 ;===================================================================================================
 
 ROUTINE_7E8000:
-#_7E8000: JMP ROUTINE_7E8006
+#_7E8000: JMP StoryTimeCutscene_Initialize
 
 ;===================================================================================================
 
 ROUTINE_7E8003:
-#_7E8003: JMP ROUTINE_7E8064
+#_7E8003: JMP StoryTimeCutscene_Main
 
 ;===================================================================================================
 
-ROUTINE_7E8006:
+StoryTimeCutscene_Initialize:
 #_7E8006: PEA.w $0000
 #_7E8009: PLB
 #_7E800A: PLB
@@ -45,7 +49,7 @@ ROUTINE_7E8006:
 #_7E802F: ASL A
 #_7E8030: STA.w $080A
 
-#_7E8033: JSR ROUTINE_7E94C0
+#_7E8033: JSR StoryTimeCutscene_ClearSpriteMemory
 #_7E8036: JSL ROUTINE_00D912_long
 
 #_7E803A: LDA.w #$0000
@@ -71,13 +75,13 @@ ROUTINE_7E8006:
 
 ;===================================================================================================
 
-ROUTINE_7E8064:
+StoryTimeCutscene_Main:
 #_7E8064: LDA.w $0F02
-#_7E8067: BNE CODE_7E8084
+#_7E8067: BNE .just_go
 
 #_7E8069: LDA.w $0546
 #_7E806C: AND.w #$1000
-#_7E806F: BEQ CODE_7E8084
+#_7E806F: BEQ .just_go
 
 #_7E8071: INC.w $0F02
 
@@ -90,7 +94,7 @@ ROUTINE_7E8064:
 #_7E8080: DEC A
 #_7E8081: STA.w $0508
 
-CODE_7E8084:
+.just_go:
 #_7E8084: JSL ROUTINE_00A947_long
 
 #_7E8088: LDA.w $0506
@@ -113,7 +117,7 @@ CODE_7E8084:
 ;===================================================================================================
 
 ROUTINE_7E80E0_decomp_pointers:
-#_7E809E: dw NullPtr
+#_7E809E: dw $0000
 #_7E80A0: dw data0080C5
 #_7E80A2: dw data0080D9
 #_7E80A4: dw data0080ED
@@ -127,7 +131,7 @@ ROUTINE_7E80E0_decomp_pointers:
 ;---------------------------------------------------------------------------------------------------
 
 ROUTINE_7E80E0_vectors:
-#_7E80B2: dw NullPtr
+#_7E80B2: dw $0000
 #_7E80B4: dw ROUTINE_7E81EE
 #_7E80B6: dw ROUTINE_7E8276
 #_7E80B8: dw ROUTINE_7E82ED
@@ -140,7 +144,7 @@ ROUTINE_7E80E0_vectors:
 
 ;===================================================================================================
 
-CutsceneDMAtoVRAM:
+StoryTimeCutscene_DMAtoVRAM:
 #_7E80C6: SEP #$20
 #_7E80C8: REP #$10
 
@@ -185,6 +189,7 @@ ROUTINE_7E80E0:
 #_7E810F: STA.w $0518
 
 #_7E8112: LDX.w $080A
+
 #_7E8115: JSR (ROUTINE_7E80E0_vectors,X)
 
 ;---------------------------------------------------------------------------------------------------
@@ -212,11 +217,10 @@ ROUTINE_7E80E0:
 ROUTINE_7E8135:
 #_7E8135: LDA.w #data7E8432
 #_7E8138: STA.b $20
-
 #_7E813A: LDA.w #data7E8432>>16
 #_7E813D: STA.b $22
 
-#_7E813F: JSL ROUTINE_00FBCB_verylong
+#_7E813F: JSL QuadDataWriter_00FBCB_verylong
 #_7E8143: JSL ROUTINE_00F957_long
 
 #_7E8147: LDA.w #$000F
@@ -262,7 +266,7 @@ ROUTINE_7E815B:
 ;---------------------------------------------------------------------------------------------------
 
 .continue
-#_7E818A: JSL ROUTINE_00FBCB_verylong
+#_7E818A: JSL QuadDataWriter_00FBCB_verylong
 #_7E818E: JSL ROUTINE_00F957_long
 
 #_7E8192: INC.w $0506
@@ -273,7 +277,7 @@ ROUTINE_7E815B:
 ;===================================================================================================
 
 ROUTINE_7E81AC_vectors:
-#_7E8196: dw NullPtr
+#_7E8196: dw $0000
 #_7E8198: dw EXIT_7E879D
 #_7E819A: dw EXIT_7E879D
 #_7E819C: dw EXIT_7E879D
@@ -291,7 +295,7 @@ ROUTINE_7E81AC:
 #_7E81AC: LDX.w $080A
 #_7E81AF: JSR (ROUTINE_7E81AC_vectors,X)
 
-#_7E81B2: JSR CutSceneSprite_ExecuteAll
+#_7E81B2: JSR StoryTimeSprite_ExecuteAll
 #_7E81B5: JSL ROUTINE_00F957_long
 
 #_7E81B9: LDX.w #$0004
@@ -326,7 +330,7 @@ data7E81D0:
 ;===================================================================================================
 
 ROUTINE_7E81E4:
-#_7E81E4: JSR CutSceneSprite_ExecuteAll
+#_7E81E4: JSR StoryTimeSprite_ExecuteAll
 #_7E81E7: JSR CutsceneWindowing_7E952A
 
 #_7E81EA: INC.w $0506
@@ -336,54 +340,54 @@ ROUTINE_7E81E4:
 ;===================================================================================================
 
 ROUTINE_7E81EE:
-#_7E81EE: LDA.w #$8000
+#_7E81EE: LDA.w #data208000
 #_7E81F1: STA.b $20
 
-#_7E81F3: LDA.w #$0020
+#_7E81F3: LDA.w #data208000>>16
 #_7E81F6: LDX.w #$6000
 #_7E81F9: LDY.w #$0400
-#_7E81FC: JSR CutsceneDMAtoVRAM
+#_7E81FC: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E81FF: LDA.w #$9000
+#_7E81FF: LDA.w #data209000
 #_7E8202: STA.b $20
 
-#_7E8204: LDA.w #$0020
+#_7E8204: LDA.w #data209000>>16
 #_7E8207: LDX.w #$6200
 #_7E820A: LDY.w #$0C00
-#_7E820D: JSR CutsceneDMAtoVRAM
+#_7E820D: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E8210: LDA.w #$F100
+#_7E8210: LDA.w #data21F100
 #_7E8213: STA.b $20
 
-#_7E8215: LDA.w #$0021
+#_7E8215: LDA.w #data21F100>>16
 #_7E8218: LDX.w #$6800
 #_7E821B: LDY.w #$0400
-#_7E821E: JSR CutsceneDMAtoVRAM
+#_7E821E: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E8221: LDA.w #$B500
+#_7E8221: LDA.w #data21B500
 #_7E8224: STA.b $20
 
-#_7E8226: LDA.w #$0021
+#_7E8226: LDA.w #data21B500>>16
 #_7E8229: LDX.w #$6A00
 #_7E822C: LDY.w #$0400
-#_7E822F: JSR CutsceneDMAtoVRAM
+#_7E822F: JSR StoryTimeCutscene_DMAtoVRAM
 
 ;---------------------------------------------------------------------------------------------------
 
 #_7E8232: LDA.w #data7E825E
 #_7E8235: LDY.w #data7E825E>>16
 #_7E8238: LDX.w #$0020
-#_7E823B: JSR ROUTINE_7E8960
+#_7E823B: JSR SomeSmallTransfer_7E8960
 
 #_7E823E: LDA.w #data7E8266
 #_7E8241: LDY.w #data7E8266>>16
 #_7E8244: LDX.w #$0040
-#_7E8247: JSR ROUTINE_7E8960
+#_7E8247: JSR SomeSmallTransfer_7E8960
 
 #_7E824A: LDA.w #data7E826E
 #_7E824D: LDY.w #data7E826E>>16
 #_7E8250: LDX.w #$0060
-#_7E8253: JSR ROUTINE_7E8960
+#_7E8253: JSR SomeSmallTransfer_7E8960
 
 #_7E8256: LDA.w #$000A ; SONG 0A
 #_7E8259: JSL RequestSong_verylong
@@ -404,46 +408,46 @@ data7E826E:
 ;===================================================================================================
 
 ROUTINE_7E8276:
-#_7E8276: LDA.w #$8400
+#_7E8276: LDA.w #data208400
 #_7E8279: STA.b $20
 
-#_7E827B: LDA.w #$0020
+#_7E827B: LDA.w #data208400>>16
 #_7E827E: LDX.w #$6000
 #_7E8281: LDY.w #$0400
-#_7E8284: JSR CutsceneDMAtoVRAM
+#_7E8284: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E8287: LDA.w #$8D00
+#_7E8287: LDA.w #data208D00
 #_7E828A: STA.b $20
 
-#_7E828C: LDA.w #$0020
+#_7E828C: LDA.w #data208D00>>16
 #_7E828F: LDX.w #$6400
 #_7E8292: LDY.w #$0400
-#_7E8295: JSR CutsceneDMAtoVRAM
+#_7E8295: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E8298: LDA.w #$9000
+#_7E8298: LDA.w #data209000
 #_7E829B: STA.b $20
 
-#_7E829D: LDA.w #$0020
+#_7E829D: LDA.w #data209000>>16
 #_7E82A0: LDX.w #$6600
 #_7E82A3: LDY.w #$0400
-#_7E82A6: JSR CutsceneDMAtoVRAM
+#_7E82A6: JSR StoryTimeCutscene_DMAtoVRAM
 
 ;---------------------------------------------------------------------------------------------------
 
 #_7E82A9: LDX.w #$0020
 #_7E82AC: LDA.w #data7E82D5
 #_7E82AF: LDY.w #data7E82D5>>16
-#_7E82B2: JSR ROUTINE_7E8960
+#_7E82B2: JSR SomeSmallTransfer_7E8960
 
 #_7E82B5: LDX.w #$0040
 #_7E82B8: LDA.w #data7E82E5
 #_7E82BB: LDY.w #data7E82E5>>16
-#_7E82BE: JSR ROUTINE_7E8960
+#_7E82BE: JSR SomeSmallTransfer_7E8960
 
 #_7E82C1: LDX.w #$00C0
 #_7E82C4: LDA.w #data7E82DD
 #_7E82C7: LDY.w #data7E82DD>>16
-#_7E82CA: JSR ROUTINE_7E8960
+#_7E82CA: JSR SomeSmallTransfer_7E8960
 
 #_7E82CD: LDA.w #$0009 ; SONG 09
 #_7E82D0: JSL RequestSong_verylong
@@ -464,34 +468,34 @@ data7E82E5:
 ;===================================================================================================
 
 ROUTINE_7E82ED:
-#_7E82ED: LDA.w #$8400
+#_7E82ED: LDA.w #data208400
 #_7E82F0: STA.b $20
 
-#_7E82F2: LDA.w #$0020
+#_7E82F2: LDA.w #data208400>>16
 #_7E82F5: LDX.w #$6000
 #_7E82F8: LDY.w #$0400
-#_7E82FB: JSR CutsceneDMAtoVRAM
+#_7E82FB: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E82FE: LDA.w #$8D00
+#_7E82FE: LDA.w #data208D00
 #_7E8301: STA.b $20
 
-#_7E8303: LDA.w #$0020
+#_7E8303: LDA.w #data208D00>>16
 #_7E8306: LDX.w #$6400
 #_7E8309: LDY.w #$0400
-#_7E830C: JSR CutsceneDMAtoVRAM
+#_7E830C: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E830F: LDA.w #$9000
+#_7E830F: LDA.w #data209000
 #_7E8312: STA.b $20
 
-#_7E8314: LDA.w #$0020
+#_7E8314: LDA.w #data209000>>16
 #_7E8317: LDX.w #$6600
 #_7E831A: LDY.w #$0400
-#_7E831D: JSR CutsceneDMAtoVRAM
+#_7E831D: JSR StoryTimeCutscene_DMAtoVRAM
 
 #_7E8320: LDX.w #$0080
 #_7E8323: LDA.w #data7E8334
 #_7E8326: LDY.w #data7E8334>>16
-#_7E8329: JSR ROUTINE_7E8960
+#_7E8329: JSR SomeSmallTransfer_7E8960
 
 #_7E832C: LDA.w #$0006 ; SONG 06
 #_7E832F: JSL RequestSong_verylong
@@ -509,29 +513,29 @@ ROUTINE_7E833C:
 #_7E833C: LDA.w #$0010
 #_7E833F: STA.w $0512
 
-#_7E8342: LDA.w #$8400
+#_7E8342: LDA.w #data208400
 #_7E8345: STA.b $20
 
-#_7E8347: LDA.w #$0020
+#_7E8347: LDA.w #data208400>>16
 #_7E834A: LDX.w #$6000
 #_7E834D: LDY.w #$0400
-#_7E8350: JSR CutsceneDMAtoVRAM
+#_7E8350: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E8353: LDA.w #$8D00
+#_7E8353: LDA.w #data208D00
 #_7E8356: STA.b $20
 
-#_7E8358: LDA.w #$0020
+#_7E8358: LDA.w #data208D00>>16
 #_7E835B: LDX.w #$6400
 #_7E835E: LDY.w #$0400
-#_7E8361: JSR CutsceneDMAtoVRAM
+#_7E8361: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E8364: LDA.w #$9000
+#_7E8364: LDA.w #data209000
 #_7E8367: STA.b $20
 
-#_7E8369: LDA.w #$0020
+#_7E8369: LDA.w #data209000>>16
 #_7E836C: LDX.w #$6600
 #_7E836F: LDY.w #$0400
-#_7E8372: JSR CutsceneDMAtoVRAM
+#_7E8372: JSR StoryTimeCutscene_DMAtoVRAM
 
 #_7E8375: LDA.w #$000A ; SONG 0A
 #_7E8378: JSL RequestSong_verylong
@@ -541,47 +545,47 @@ ROUTINE_7E833C:
 ;===================================================================================================
 
 ROUTINE_7E837D:
-#_7E837D: LDA.w #$8000
+#_7E837D: LDA.w #data208000
 #_7E8380: STA.b $20
 
-#_7E8382: LDA.w #$0020
+#_7E8382: LDA.w #data208000>>16
 #_7E8385: LDX.w #$6000
 #_7E8388: LDY.w #$0400
-#_7E838B: JSR CutsceneDMAtoVRAM
+#_7E838B: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E838E: LDA.w #$9000
+#_7E838E: LDA.w #data209000
 #_7E8391: STA.b $20
 
-#_7E8393: LDA.w #$0020
+#_7E8393: LDA.w #data209000>>16
 #_7E8396: LDX.w #$6200
 #_7E8399: LDY.w #$0C00
-#_7E839C: JSR CutsceneDMAtoVRAM
+#_7E839C: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E839F: LDA.w #$F100
+#_7E839F: LDA.w #data21F100
 #_7E83A2: STA.b $20
 
-#_7E83A4: LDA.w #$0021
+#_7E83A4: LDA.w #data21F100>>16
 #_7E83A7: LDX.w #$6800
 #_7E83AA: LDY.w #$0400
-#_7E83AD: JSR CutsceneDMAtoVRAM
+#_7E83AD: JSR StoryTimeCutscene_DMAtoVRAM
 
-#_7E83B0: LDA.w #$B500
+#_7E83B0: LDA.w #data21B500
 #_7E83B3: STA.b $20
 
-#_7E83B5: LDA.w #$0021
+#_7E83B5: LDA.w #data21B500>>16
 #_7E83B8: LDX.w #$6A00
 #_7E83BB: LDY.w #$0400
-#_7E83BE: JSR CutsceneDMAtoVRAM
+#_7E83BE: JSR StoryTimeCutscene_DMAtoVRAM
 
 #_7E83C1: LDX.w #$00C0
 #_7E83C4: LDA.w #data7E83E1
 #_7E83C7: LDY.w #data7E83E1>>16
-#_7E83CA: JSR ROUTINE_7E8960
+#_7E83CA: JSR SomeSmallTransfer_7E8960
 
 #_7E83CD: LDX.w #$00E0
 #_7E83D0: LDA.w #data7E83E9
 #_7E83D3: LDY.w #data7E83E9>>16
-#_7E83D6: JSR ROUTINE_7E8960
+#_7E83D6: JSR SomeSmallTransfer_7E8960
 
 #_7E83D9: LDA.w #$000A ; SONG 0A
 #_7E83DC: JSL RequestSong_verylong
@@ -592,6 +596,8 @@ ROUTINE_7E837D:
 
 data7E83E1:
 #_7E83E1: dw $08C0, $0500, $0021, $3000
+
+;---------------------------------------------------------------------------------------------------
 
 data7E83E9:
 #_7E83E9: dw $0740, $0500, $001F, $7000
@@ -718,7 +724,7 @@ ROUTINE_7E84AA:
 #_7E84B8: STA.w $0510
 #_7E84BB: STA.w $0514
 
-#_7E84BE: JSR CutSceneSprite_ExecuteAll
+#_7E84BE: JSR StoryTimeSprite_ExecuteAll
 
 #_7E84C1: RTL
 
@@ -756,7 +762,7 @@ ROUTINE_7E84F2:
 #_7E84F2: LDX.w #$0080
 #_7E84F5: LDA.w #data7E8502
 #_7E84F8: LDY.w #data7E8502>>16
-#_7E84FB: JSR ROUTINE_7E8960
+#_7E84FB: JSR SomeSmallTransfer_7E8960
 
 #_7E84FE: INC.w $0508
 
@@ -785,6 +791,7 @@ ROUTINE_7E850B:
 
 .dont_advance
 #_7E851A: LDX.w $080A
+
 #_7E851D: JSR (.vectors,X)
 
 #_7E8520: RTS
@@ -859,7 +866,7 @@ ROUTINE_7E8563:
 #_7E856B: LDX.w #$0140
 #_7E856E: LDA.w #data7E857B
 #_7E8571: LDY.w #data7E857B>>16
-#_7E8574: JSR ROUTINE_7E8960
+#_7E8574: JSR SomeSmallTransfer_7E8960
 
 #_7E8577: INC.w $0508
 
@@ -886,7 +893,7 @@ ROUTINE_7E8584:
 #_7E858C: LDX.w #$00E0
 #_7E858F: LDA.w #data7E859C
 #_7E8592: LDY.w #data7E859C>>16
-#_7E8595: JSR ROUTINE_7E8960
+#_7E8595: JSR SomeSmallTransfer_7E8960
 
 #_7E8598: INC.w $0508
 
@@ -921,7 +928,7 @@ ROUTINE_7E85A5:
 #_7E85BC: LDX.w #$00E0
 #_7E85BF: LDA.w #data7E85CC
 #_7E85C2: LDY.w #data7E85CC>>16
-#_7E85C5: JSR ROUTINE_7E8960
+#_7E85C5: JSR SomeSmallTransfer_7E8960
 
 #_7E85C8: INC.w $0508
 
@@ -1025,6 +1032,8 @@ ROUTINE_7E8644:
 
 #_7E8649: JMP (.vectors,X)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_7E864C: dw ROUTINE_7E8650
 #_7E864E: dw ROUTINE_7E8660
@@ -1096,6 +1105,7 @@ ROUTINE_7E86C9:
 #_7E86E3: LDA.l $7F8000,X
 
 #_7E86E7: LDX.b $20
+
 #_7E86E9: STA.l $7FA002,X
 
 #_7E86ED: INY
@@ -1135,7 +1145,7 @@ ROUTINE_7E86C9:
 #_7E8712: LDA.b #$43
 #_7E8714: STA.w DMAP3
 
-#_7E8717: LDA.b #$21
+#_7E8717: LDA.b #CGADD
 #_7E8719: STA.w BBAD3
 
 #_7E871C: LDX.w #$E000
@@ -1273,7 +1283,6 @@ ROUTINE_7E87A5:
 #_7E87AC: SEC
 #_7E87AD: SBC.w $0518
 #_7E87B0: JSR .shift_left_4
-
 #_7E87B3: STA.b $20
 
 #_7E87B5: LDA.w $080E,X
@@ -1540,15 +1549,15 @@ ROUTINE_7E895C:
 
 ;===================================================================================================
 
-ROUTINE_7E8960:
+SomeSmallTransfer_7E8960:
 #_7E8960: STA.b $34
 #_7E8962: STY.b $36
 
-#_7E8964: JMP .done
+#_7E8964: JMP .transfer
 
 ;===================================================================================================
 
-#ROUTINE_7E8960_search:
+#SomeSmallTransfer_7E8960_search:
 #_7E8967: STA.b $34
 #_7E8969: STY.b $36
 
@@ -1556,7 +1565,7 @@ ROUTINE_7E8960:
 
 .next
 #_7E896E: LDA.w $0810,X
-#_7E8971: BEQ .done
+#_7E8971: BEQ .transfer
 
 #_7E8973: TXA
 #_7E8974: SEC
@@ -1569,7 +1578,7 @@ ROUTINE_7E8960:
 
 ;---------------------------------------------------------------------------------------------------
 
-.done
+.transfer
 #_7E897D: STZ.w $0800,X
 #_7E8980: STZ.w $0802,X
 #_7E8983: STZ.w $0804,X
@@ -1607,15 +1616,18 @@ ROUTINE_7E8960:
 
 #_7E89C0: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 .crash
 #_7E89C1: LDA.w #$FFFF
+
 #_7E89C4: db $00 ; BRK
 
 #_7E89C5: RTS
 
 ;===================================================================================================
 
-CutSceneSprite_ExecuteAll:
+StoryTimeSprite_ExecuteAll:
 #_7E89C6: LDX.w #$0140
 
 .next
@@ -1625,7 +1637,7 @@ CutSceneSprite_ExecuteAll:
 #_7E89CD: BEQ .skip
 #_7E89CF: BMI .skip
 
-#_7E89D1: JSR CutSceneSprite_Execute
+#_7E89D1: JSR StoryTimeSprite_Execute
 
 #_7E89D4: PLX
 #_7E89D5: PHX
@@ -1731,7 +1743,7 @@ CODE_7E8A46:
 
 ;===================================================================================================
 
-CutsceneSpriteMoveRight16:
+StoryTimeSpriteMoveRight16:
 #_7E8A56: LDA.w $080C,X
 #_7E8A59: CLC
 #_7E8A5A: ADC.w #$0010
@@ -1741,7 +1753,7 @@ CutsceneSpriteMoveRight16:
 
 ;===================================================================================================
 
-CutsceneSpriteMoveLeft16:
+StoryTimeSpriteMoveLeft16:
 #_7E8A61: LDA.w $080C,X
 #_7E8A64: SEC
 #_7E8A65: SBC.w #$0010
@@ -1751,7 +1763,7 @@ CutsceneSpriteMoveLeft16:
 
 ;===================================================================================================
 
-CutsceneSpriteMoveDown16:
+StoryTimeSpriteMoveDown16:
 #_7E8A6C: LDA.w $080E,X
 #_7E8A6F: CLC
 #_7E8A70: ADC.w #$0010
@@ -1761,7 +1773,7 @@ CutsceneSpriteMoveDown16:
 
 ;===================================================================================================
 
-CutsceneSpriteMoveUp16:
+StoryTimeSpriteMoveUp16:
 #_7E8A77: LDA.w $080E,X
 #_7E8A7A: SEC
 #_7E8A7B: SBC.w #$0010
@@ -1771,7 +1783,7 @@ CutsceneSpriteMoveUp16:
 
 ;===================================================================================================
 
-CutsceneSpriteMoveRightA:
+StoryTimeSpriteMoveRightA:
 #_7E8A82: CLC
 #_7E8A83: ADC.w $080C,X
 #_7E8A86: STA.w $080C,X
@@ -1780,7 +1792,7 @@ CutsceneSpriteMoveRightA:
 
 ;===================================================================================================
 
-CutsceneSpriteMoveLeftA:
+StoryTimeSpriteMoveLeftA:
 #_7E8A8A: SEC
 #_7E8A8B: STA.b $20
 
@@ -1793,7 +1805,7 @@ CutsceneSpriteMoveLeftA:
 
 ;===================================================================================================
 
-CutsceneSpriteMoveDownA:
+StoryTimeSpriteMoveDownA:
 #_7E8A97: CLC
 #_7E8A98: ADC.w $080E,X
 #_7E8A9B: STA.w $080E,X
@@ -1802,7 +1814,7 @@ CutsceneSpriteMoveDownA:
 
 ;===================================================================================================
 
-CutsceneSpriteMoveUpA:
+StoryTimeSpriteMoveUpA:
 #_7E8A9F: STA.b $20
 
 #_7E8AA1: LDA.w $080E,X
@@ -1814,7 +1826,7 @@ CutsceneSpriteMoveUpA:
 
 ;===================================================================================================
 
-CutSceneSprite_Execute:
+StoryTimeSprite_Execute:
 #_7E8AAB: TXY
 
 #_7E8AAC: LDA.w $0816,X
@@ -1863,16 +1875,16 @@ CutSceneSprite_Execute:
 #_7E8AF5: dw ROUTINE_7E9446
 #_7E8AF7: dw ROUTINE_7E94AD
 #_7E8AF9: dw ROUTINE_7E94BE
-#_7E8AFB: dw NullPtr
-#_7E8AFD: dw NullPtr
-#_7E8AFF: dw NullPtr
-#_7E8A01: dw NullPtr
-#_7E8A03: dw NullPtr
-#_7E8A05: dw NullPtr
-#_7E8A07: dw NullPtr
-#_7E8A09: dw NullPtr
-#_7E8A0B: dw NullPtr
-#_7E8A0D: dw NullPtr
+#_7E8AFB: dw $0000
+#_7E8AFD: dw $0000
+#_7E8AFF: dw $0000
+#_7E8A01: dw $0000
+#_7E8A03: dw $0000
+#_7E8A05: dw $0000
+#_7E8A07: dw $0000
+#_7E8A09: dw $0000
+#_7E8A0B: dw $0000
+#_7E8A0D: dw $0000
 #_7E8B0F: dw EXIT_7E8B15
 #_7E8B11: dw EXIT_7E8B15
 #_7E8B13: dw EXIT_7E8B15
@@ -2645,7 +2657,7 @@ ROUTINE_7E8E7E:
 #_7E8E7E: TYX
 
 #_7E8E7F: LDA.w #$0004
-#_7E8E82: JSR CutsceneSpriteMoveUpA
+#_7E8E82: JSR StoryTimeSpriteMoveUpA
 
 #_7E8E85: CMP.w $081C,X
 #_7E8E88: BCS .exit
@@ -2777,7 +2789,7 @@ ROUTINE_7E8F02:
 #_7E8F02: TYX
 
 #_7E8F03: LDA.w #$0010
-#_7E8F06: JSR CutsceneSpriteMoveDownA
+#_7E8F06: JSR StoryTimeSpriteMoveDownA
 
 #_7E8F09: CMP.w $081C,X
 #_7E8F0C: BCC .exit
@@ -2950,17 +2962,17 @@ ROUTINE_7E8FC2:
 #_7E8FD2: LDX.w #$0080
 #_7E8FD5: LDA.w #data7E9011
 #_7E8FD8: LDY.w #data7E9011>>16
-#_7E8FDB: JSR ROUTINE_7E8960
+#_7E8FDB: JSR SomeSmallTransfer_7E8960
 
 #_7E8FDE: LDX.w #$00A0
 #_7E8FE1: LDA.w #data7E9019
 #_7E8FE4: LDY.w #data7E9019>>16
-#_7E8FE7: JSR ROUTINE_7E8960
+#_7E8FE7: JSR SomeSmallTransfer_7E8960
 
 #_7E8FEA: LDX.w #$00E0
 #_7E8FED: LDA.w #data7E9021
 #_7E8FF0: LDY.w #data7E9021>>16
-#_7E8FF3: JSR ROUTINE_7E8960
+#_7E8FF3: JSR SomeSmallTransfer_7E8960
 
 #_7E8FF6: LDA.w #Message_7E97AA
 #_7E8FF9: LDX.w #Message_7E97AA>>16
@@ -3143,10 +3155,10 @@ ROUTINE_7E90C6:
 #_7E90C6: TYX
 
 #_7E90C7: LDA.w #$0008
-#_7E90CA: JSR CutsceneSpriteMoveUpA
+#_7E90CA: JSR StoryTimeSpriteMoveUpA
 
 #_7E90CD: LDA.w #$000E
-#_7E90D0: JSR CutsceneSpriteMoveLeftA
+#_7E90D0: JSR StoryTimeSpriteMoveLeftA
 
 #_7E90D3: CMP.w #$0980
 #_7E90D6: BCS .exit
@@ -3225,10 +3237,10 @@ ROUTINE_7E9114:
 #_7E9114: TYX
 
 #_7E9115: LDA.w #$0004
-#_7E9118: JSR CutsceneSpriteMoveUpA
+#_7E9118: JSR StoryTimeSpriteMoveUpA
 
 #_7E911B: LDA.w #$000F
-#_7E911E: JSR CutsceneSpriteMoveRightA
+#_7E911E: JSR StoryTimeSpriteMoveRightA
 
 #_7E9121: CMP.w #$0600
 #_7E9124: BCC .exit
@@ -3294,10 +3306,10 @@ ROUTINE_7E9169:
 #_7E9169: TYX
 
 #_7E916A: LDA.w #$0006
-#_7E916D: JSR CutsceneSpriteMoveRightA
+#_7E916D: JSR StoryTimeSpriteMoveRightA
 
 #_7E9170: LDA.w #$0018
-#_7E9173: JSR CutsceneSpriteMoveUpA
+#_7E9173: JSR StoryTimeSpriteMoveUpA
 
 #_7E9176: CMP.w $081E,X
 #_7E9179: BCS EXIT_7E9168
@@ -3317,10 +3329,10 @@ ROUTINE_7E9182:
 #_7E9182: TYX
 
 #_7E9183: LDA.w #$0002
-#_7E9186: JSR CutsceneSpriteMoveRightA
+#_7E9186: JSR StoryTimeSpriteMoveRightA
 
 #_7E9189: LDA.w #$0018
-#_7E918C: JSR CutsceneSpriteMoveDownA
+#_7E918C: JSR StoryTimeSpriteMoveDownA
 
 #_7E918F: CMP.w $081C,X
 #_7E9192: BCC EXIT_7E9181
@@ -3385,10 +3397,10 @@ ROUTINE_7E91CA:
 #_7E91CA: TYX
 
 #_7E91CB: LDA.w #$0006
-#_7E91CE: JSR CutsceneSpriteMoveDownA
+#_7E91CE: JSR StoryTimeSpriteMoveDownA
 
 #_7E91D1: LDA.w #$0008
-#_7E91D4: JSR CutsceneSpriteMoveLeftA
+#_7E91D4: JSR StoryTimeSpriteMoveLeftA
 
 #_7E91D7: CMP.w #$0980
 #_7E91DA: BCS .exit
@@ -3474,7 +3486,7 @@ ROUTINE_7E9228:
 #_7E9228: TYX
 
 #_7E9229: LDA.w #$000B
-#_7E922C: JSR CutsceneSpriteMoveUpA
+#_7E922C: JSR StoryTimeSpriteMoveUpA
 
 #_7E922F: CMP.w #$0100
 #_7E9232: BCS .exit
@@ -3543,7 +3555,7 @@ ROUTINE_7E9267:
 #_7E9267: TYX
 
 #_7E9268: LDA.w #$000A
-#_7E926B: JSR CutsceneSpriteMoveUpA
+#_7E926B: JSR StoryTimeSpriteMoveUpA
 
 #_7E926E: CMP.w #$0700
 #_7E9271: BCS .exit
@@ -3586,7 +3598,7 @@ ROUTINE_7E928F:
 #_7E92A4: LDX.w #$0120
 #_7E92A7: LDA.w #data7E92B5
 #_7E92AA: LDY.w #data7E92B5>>16
-#_7E92AD: JSR ROUTINE_7E8960
+#_7E92AD: JSR SomeSmallTransfer_7E8960
 
 #_7E92B0: PLX
 
@@ -3627,7 +3639,7 @@ ROUTINE_7E92D7:
 #_7E92D7: TYX
 
 #_7E92D8: LDA.w #$000E
-#_7E92DB: JSR CutsceneSpriteMoveUpA
+#_7E92DB: JSR StoryTimeSpriteMoveUpA
 
 #_7E92DE: CMP.w #$0690
 #_7E92E1: BCS .exit
@@ -3777,7 +3789,7 @@ ROUTINE_7E9380:
 #_7E9380: TYX
 
 #_7E9381: LDA.w #$0010
-#_7E9384: JSR CutsceneSpriteMoveDownA
+#_7E9384: JSR StoryTimeSpriteMoveDownA
 
 #_7E9387: CMP.w #$04B0
 #_7E938A: BCC .exit
@@ -3820,7 +3832,7 @@ ROUTINE_7E93B5:
 #_7E93B5: TYX
 
 #_7E93B6: LDA.w #$000B
-#_7E93B9: JSR CutsceneSpriteMoveUpA
+#_7E93B9: JSR StoryTimeSpriteMoveUpA
 
 #_7E93BC: CMP.w #$0100
 #_7E93BF: BCS .exit
@@ -3888,7 +3900,7 @@ ROUTINE_7E93EF:
 #_7E93EF: TYX
 
 #_7E93F0: LDA.w #$000A
-#_7E93F3: JSR CutsceneSpriteMoveUpA
+#_7E93F3: JSR StoryTimeSpriteMoveUpA
 
 #_7E93F6: CMP.w #$0710
 #_7E93F9: BCS .exit
@@ -4086,7 +4098,7 @@ ROUTINE_7E94BE:
 
 ;===================================================================================================
 
-ROUTINE_7E94C0:
+StoryTimeCutscene_ClearSpriteMemory:
 #_7E94C0: LDX.w #$0140
 
 .next

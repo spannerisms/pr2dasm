@@ -3458,128 +3458,128 @@ WaitForAllPortsToBeZero:
 ;===================================================================================================
 
 SFXPointers:
-#_0B92A5: #_13E3: dw data14D7
-#_0B92A7: #_13E5: dw data14E1
-#_0B92A9: #_13E7: dw data14E9
-#_0B92AB: #_13E9: dw data1514
-#_0B92AD: #_13EB: dw data14ED
-#_0B92AF: #_13ED: dw data14FD
-#_0B92B1: #_13EF: dw data1501
-#_0B92B3: #_13F1: dw data1505
-#_0B92B5: #_13F3: dw data150C
-#_0B92B7: #_13F5: dw data1510
-#_0B92B9: #_13F7: dw data1518
-#_0B92BB: #_13F9: dw data1568
-#_0B92BD: #_13FB: dw data1522
-#_0B92BF: #_13FD: dw data1526
-#_0B92C1: #_13FF: dw data152D
-#_0B92C3: #_1401: dw data1534
-#_0B92C5: #_1403: dw data153B
-#_0B92C7: #_1405: dw data153F
-#_0B92C9: #_1407: dw data16C8
-#_0B92CB: #_1409: dw data14E5
-#_0B92CD: #_140B: dw data16CF
-#_0B92CF: #_140D: dw data16D3
-#_0B92D1: #_140F: dw data16DA
-#_0B92D3: #_1411: dw data16EE
-#_0B92D5: #_1413: dw data154B
-#_0B92D7: #_1415: dw data1553
-#_0B92D9: #_1417: dw data14F1
-#_0B92DB: #_1419: dw data14F5
-#_0B92DD: #_141B: dw data14F9
-#_0B92DF: #_141D: dw data16DE
-#_0B92E1: #_141F: dw data16E2
-#_0B92E3: #_1421: dw data16EA
-#_0B92E5: #_1423: dw data16F2
-#_0B92E7: #_1425: dw data16F6
-#_0B92E9: #_1427: dw data158B
-#_0B92EB: #_1429: dw data1577
-#_0B92ED: #_142B: dw data1547
-#_0B92EF: #_142D: dw data154F
-#_0B92F1: #_142F: dw data155A
-#_0B92F3: #_1431: dw data1561
-#_0B92F5: #_1433: dw data1623
-#_0B92F7: #_1435: dw data1573
-#_0B92F9: #_1437: dw data157B
-#_0B92FB: #_1439: dw data157F
-#_0B92FD: #_143B: dw data1583
-#_0B92FF: #_143D: dw data16BD
-#_0B9301: #_143F: dw data1663
-#_0B9303: #_1441: dw data1667
-#_0B9305: #_1443: dw data166B
-#_0B9307: #_1445: dw data16A6
-#_0B9309: #_1447: dw data166F
-#_0B930B: #_1449: dw data1673
-#_0B930D: #_144B: dw data167E
-#_0B930F: #_144D: dw data1682
-#_0B9311: #_144F: dw data168A
-#_0B9313: #_1451: dw data1691
-#_0B9315: #_1453: dw data1698
-#_0B9317: #_1455: dw data16A2
-#_0B9319: #_1457: dw data16AA
-#_0B931B: #_1459: dw data16AE
-#_0B931D: #_145B: dw data16B2
-#_0B931F: #_145D: dw data16B6
-#_0B9321: #_145F: dw data1677
-#_0B9323: #_1461: dw data159B
-#_0B9325: #_1463: dw data159F
-#_0B9327: #_1465: dw data15A3
-#_0B9329: #_1467: dw data15A7
-#_0B932B: #_1469: dw data15AB
-#_0B932D: #_146B: dw data15AF
-#_0B932F: #_146D: dw data15B3
-#_0B9331: #_146F: dw data15B7
-#_0B9333: #_1471: dw data15BB
-#_0B9335: #_1473: dw data15BF
-#_0B9337: #_1475: dw data15C3
-#_0B9339: #_1477: dw data15C7
-#_0B933B: #_1479: dw data15CB
-#_0B933D: #_147B: dw data15CF
-#_0B933F: #_147D: dw data15D3
-#_0B9341: #_147F: dw data15D7
-#_0B9343: #_1481: dw data15DB
-#_0B9345: #_1483: dw data15DF
-#_0B9347: #_1485: dw data15E3
-#_0B9349: #_1487: dw data15E7
-#_0B934B: #_1489: dw data15EB
-#_0B934D: #_148B: dw data15EF
-#_0B934F: #_148D: dw data15F3
-#_0B9351: #_148F: dw data15F7
-#_0B9353: #_1491: dw data15FB
-#_0B9355: #_1493: dw data1686
-#_0B9357: #_1495: dw data1597
-#_0B9359: #_1497: dw data158F
-#_0B935B: #_1499: dw data15FF
-#_0B935D: #_149B: dw data1593
-#_0B935F: #_149D: dw data1603
-#_0B9361: #_149F: dw data1607
-#_0B9363: #_14A1: dw data1543
-#_0B9365: #_14A3: dw data160B
-#_0B9367: #_14A5: dw data162F
-#_0B9369: #_14A7: dw data1587
-#_0B936B: #_14A9: dw data156C
-#_0B936D: #_14AB: dw data16E6
-#_0B936F: #_14AD: dw data160F
-#_0B9371: #_14AF: dw data1617
-#_0B9373: #_14B1: dw data161B
-#_0B9375: #_14B3: dw data161F
-#_0B9377: #_14B5: dw data162B
-#_0B9379: #_14B7: dw data1627
-#_0B937B: #_14B9: dw data1613
-#_0B937D: #_14BB: dw data16C4
-#_0B937F: #_14BD: dw data16FA
-#_0B9381: #_14BF: dw data1633
-#_0B9383: #_14C1: dw data1637
-#_0B9385: #_14C3: dw data163B
-#_0B9387: #_14C5: dw data163F
-#_0B9389: #_14C7: dw data1643
-#_0B938B: #_14C9: dw data1647
-#_0B938D: #_14CB: dw data164B
-#_0B938F: #_14CD: dw data164F
-#_0B9391: #_14CF: dw data1653
-#_0B9393: #_14D1: dw data1657
-#_0B9395: #_14D3: dw data165B
-#_0B9397: #_14D5: dw data165F
+#_0B92A5: #_13E3: dw data14D7 ; 01
+#_0B92A7: #_13E5: dw data14E1 ; 02
+#_0B92A9: #_13E7: dw data14E9 ; 03
+#_0B92AB: #_13E9: dw data1514 ; 04
+#_0B92AD: #_13EB: dw data14ED ; 05
+#_0B92AF: #_13ED: dw data14FD ; 06
+#_0B92B1: #_13EF: dw data1501 ; 07
+#_0B92B3: #_13F1: dw data1505 ; 08
+#_0B92B5: #_13F3: dw data150C ; 09
+#_0B92B7: #_13F5: dw data1510 ; 0A
+#_0B92B9: #_13F7: dw data1518 ; 0B
+#_0B92BB: #_13F9: dw data1568 ; 0C
+#_0B92BD: #_13FB: dw data1522 ; 0D
+#_0B92BF: #_13FD: dw data1526 ; 0E
+#_0B92C1: #_13FF: dw data152D ; 0F
+#_0B92C3: #_1401: dw data1534 ; 10
+#_0B92C5: #_1403: dw data153B ; 11
+#_0B92C7: #_1405: dw data153F ; 12
+#_0B92C9: #_1407: dw data16C8 ; 13
+#_0B92CB: #_1409: dw data14E5 ; 14
+#_0B92CD: #_140B: dw data16CF ; 15
+#_0B92CF: #_140D: dw data16D3 ; 16
+#_0B92D1: #_140F: dw data16DA ; 17
+#_0B92D3: #_1411: dw data16EE ; 18
+#_0B92D5: #_1413: dw data154B ; 19
+#_0B92D7: #_1415: dw data1553 ; 1A
+#_0B92D9: #_1417: dw data14F1 ; 1B
+#_0B92DB: #_1419: dw data14F5 ; 1C
+#_0B92DD: #_141B: dw data14F9 ; 1D
+#_0B92DF: #_141D: dw data16DE ; 1E
+#_0B92E1: #_141F: dw data16E2 ; 1F
+#_0B92E3: #_1421: dw data16EA ; 20
+#_0B92E5: #_1423: dw data16F2 ; 21
+#_0B92E7: #_1425: dw data16F6 ; 22
+#_0B92E9: #_1427: dw data158B ; 23
+#_0B92EB: #_1429: dw data1577 ; 24
+#_0B92ED: #_142B: dw data1547 ; 25
+#_0B92EF: #_142D: dw data154F ; 26
+#_0B92F1: #_142F: dw data155A ; 27
+#_0B92F3: #_1431: dw data1561 ; 28
+#_0B92F5: #_1433: dw data1623 ; 29
+#_0B92F7: #_1435: dw data1573 ; 2A
+#_0B92F9: #_1437: dw data157B ; 2B
+#_0B92FB: #_1439: dw data157F ; 2C
+#_0B92FD: #_143B: dw data1583 ; 2D
+#_0B92FF: #_143D: dw data16BD ; 2E
+#_0B9301: #_143F: dw data1663 ; 2F
+#_0B9303: #_1441: dw data1667 ; 30
+#_0B9305: #_1443: dw data166B ; 31
+#_0B9307: #_1445: dw data16A6 ; 32
+#_0B9309: #_1447: dw data166F ; 33
+#_0B930B: #_1449: dw data1673 ; 34
+#_0B930D: #_144B: dw data167E ; 35
+#_0B930F: #_144D: dw data1682 ; 36
+#_0B9311: #_144F: dw data168A ; 37
+#_0B9313: #_1451: dw data1691 ; 38
+#_0B9315: #_1453: dw data1698 ; 39
+#_0B9317: #_1455: dw data16A2 ; 3A
+#_0B9319: #_1457: dw data16AA ; 3B
+#_0B931B: #_1459: dw data16AE ; 3C
+#_0B931D: #_145B: dw data16B2 ; 3D
+#_0B931F: #_145D: dw data16B6 ; 3E
+#_0B9321: #_145F: dw data1677 ; 3F
+#_0B9323: #_1461: dw data159B ; 40
+#_0B9325: #_1463: dw data159F ; 41
+#_0B9327: #_1465: dw data15A3 ; 42
+#_0B9329: #_1467: dw data15A7 ; 43
+#_0B932B: #_1469: dw data15AB ; 44
+#_0B932D: #_146B: dw data15AF ; 45
+#_0B932F: #_146D: dw data15B3 ; 46
+#_0B9331: #_146F: dw data15B7 ; 47
+#_0B9333: #_1471: dw data15BB ; 48
+#_0B9335: #_1473: dw data15BF ; 49
+#_0B9337: #_1475: dw data15C3 ; 4A
+#_0B9339: #_1477: dw data15C7 ; 4B
+#_0B933B: #_1479: dw data15CB ; 4C
+#_0B933D: #_147B: dw data15CF ; 4D
+#_0B933F: #_147D: dw data15D3 ; 4E
+#_0B9341: #_147F: dw data15D7 ; 4F
+#_0B9343: #_1481: dw data15DB ; 50
+#_0B9345: #_1483: dw data15DF ; 51
+#_0B9347: #_1485: dw data15E3 ; 52
+#_0B9349: #_1487: dw data15E7 ; 53
+#_0B934B: #_1489: dw data15EB ; 54
+#_0B934D: #_148B: dw data15EF ; 55
+#_0B934F: #_148D: dw data15F3 ; 56
+#_0B9351: #_148F: dw data15F7 ; 57
+#_0B9353: #_1491: dw data15FB ; 58
+#_0B9355: #_1493: dw data1686 ; 59
+#_0B9357: #_1495: dw data1597 ; 5A
+#_0B9359: #_1497: dw data158F ; 5B
+#_0B935B: #_1499: dw data15FF ; 5C
+#_0B935D: #_149B: dw data1593 ; 5D
+#_0B935F: #_149D: dw data1603 ; 5E
+#_0B9361: #_149F: dw data1607 ; 5F
+#_0B9363: #_14A1: dw data1543 ; 60
+#_0B9365: #_14A3: dw data160B ; 61
+#_0B9367: #_14A5: dw data162F ; 62
+#_0B9369: #_14A7: dw data1587 ; 63
+#_0B936B: #_14A9: dw data156C ; 64
+#_0B936D: #_14AB: dw data16E6 ; 65
+#_0B936F: #_14AD: dw data160F ; 66
+#_0B9371: #_14AF: dw data1617 ; 67
+#_0B9373: #_14B1: dw data161B ; 68
+#_0B9375: #_14B3: dw data161F ; 69
+#_0B9377: #_14B5: dw data162B ; 6A
+#_0B9379: #_14B7: dw data1627 ; 6B
+#_0B937B: #_14B9: dw data1613 ; 6C
+#_0B937D: #_14BB: dw data16C4 ; 6D
+#_0B937F: #_14BD: dw data16FA ; 6E
+#_0B9381: #_14BF: dw data1633 ; 6F
+#_0B9383: #_14C1: dw data1637 ; 70
+#_0B9385: #_14C3: dw data163B ; 71
+#_0B9387: #_14C5: dw data163F ; 72
+#_0B9389: #_14C7: dw data1643 ; 73
+#_0B938B: #_14C9: dw data1647 ; 74
+#_0B938D: #_14CB: dw data164B ; 75
+#_0B938F: #_14CD: dw data164F ; 76
+#_0B9391: #_14CF: dw data1653 ; 77
+#_0B9393: #_14D1: dw data1657 ; 78
+#_0B9395: #_14D3: dw data165B ; 79
+#_0B9397: #_14D5: dw data165F ; 7A
 
 ;===================================================================================================
 
