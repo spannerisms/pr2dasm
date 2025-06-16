@@ -44,22 +44,22 @@ HandleDialog:
 ;---------------------------------------------------------------------------------------------------
 
 .vectors
-#_088027: dw Dialog_Nothing
-#_088029: dw Dialog_InitializeMessage
-#_08802B: dw Dialog_HandleNextByte
-#_08802D: dw Dialog_WaitForYPress
+#_088027: dw Dialog_00_Nothing
+#_088029: dw Dialog_01_InitializeMessage
+#_08802B: dw Dialog_02_HandleNextByte
+#_08802D: dw Dialog_03_WaitForYPress
 #_08802F: dw Dialog_04
 #_088031: dw Dialog_05
 #_088033: dw Dialog_06
 
 ;===================================================================================================
 
-Dialog_Nothing:
+Dialog_00_Nothing:
 #_088035: RTS
 
 ;===================================================================================================
 
-Dialog_InitializeMessage:
+Dialog_01_InitializeMessage:
 #_088036: LDA.w $7E2554
 #_088039: STA.b $20
 
@@ -78,7 +78,7 @@ Dialog_InitializeMessage:
 #_088050: LDA.w #$0002
 #_088053: STA.w $7E2550
 
-#_088056: JMP Dialog_HandleNextByte
+#_088056: JMP Dialog_02_HandleNextByte
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -220,7 +220,7 @@ ROUTINE_08810B:
 
 ;===================================================================================================
 
-Dialog_HandleNextByte:
+Dialog_02_HandleNextByte:
 #_088128: LDA.l $7E256E
 #_08812C: CMP.w #$00FF
 #_08812F: BEQ .get_next_byte
@@ -883,10 +883,10 @@ ROUTINE_088483:
 
 #_0884BA: LDA.b [$20]
 #_0884BC: AND.w #$00FF
-#_0884BF: BEQ Dialog_WaitForYPress
+#_0884BF: BEQ Dialog_03_WaitForYPress
 
 #_0884C1: CMP.w #$0002
-#_0884C4: BEQ Dialog_WaitForYPress
+#_0884C4: BEQ Dialog_03_WaitForYPress
 
 #_0884C6: ORA.l $7E2552
 
@@ -902,7 +902,7 @@ ROUTINE_088483:
 
 ;===================================================================================================
 
-Dialog_WaitForYPress:
+Dialog_03_WaitForYPress:
 #_0884D8: LDA.w $0538
 #_0884DB: AND.w #$4000
 #_0884DE: BNE .not_pressing_y
@@ -6129,7 +6129,7 @@ ROUTINE_08BD55:
 
 ;===================================================================================================
 
-ROUTINE_08BD65:
+RobustBulkDecompressionAndSetMode40:
 #_08BD65: PHB
 #_08BD66: PHK
 #_08BD67: PLB
@@ -6141,7 +6141,7 @@ ROUTINE_08BD65:
 
 ;===================================================================================================
 
-#ROUTINE_08BD65_bank08:
+#RobustBulkDecompressionAndSetMode40_bank08:
 #_08BD6D: LDY.w #$0008
 
 ;===================================================================================================
@@ -6150,7 +6150,7 @@ ROUTINE_08BD65:
 #_08BD70: STY.b $22
 #_08BD72: STA.b $20
 
-#_08BD74: JSL ROUTINE_00ECEF_long
+#_08BD74: JSL RobustBulkDecompression_long
 
 #_08BD78: LDA.w #$0040 ; MODE 40
 #_08BD7B: STA.w $0500
@@ -6330,7 +6330,7 @@ ROUTINE_08BE27:
 #_08BE4D: JSR ROUTINE_08BDA3_Set04B8
 
 #_08BE50: LDA.w #data08BE5D
-#_08BE53: JSR ROUTINE_08BD65_bank08
+#_08BE53: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08BE56: LDA.w #$0001
 #_08BE59: STA.w $04F4
@@ -6382,7 +6382,7 @@ ROUTINE_08BE82:
 #_08BEA5: JSR ROUTINE_08BDA3_Set04B8
 
 #_08BEA8: LDA.w #data08BEAF
-#_08BEAB: JSR ROUTINE_08BD65_bank08
+#_08BEAB: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 .exit
 #_08BEAE: RTS
@@ -6427,7 +6427,7 @@ ROUTINE_08BEC6:
 #_08BEEC: JSR ROUTINE_08BDA3_Set04B8
 
 #_08BEEF: LDA.w #data08BEF6
-#_08BEF2: JSR ROUTINE_08BD65_bank08
+#_08BEF2: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 .exit
 #_08BEF5: RTS
@@ -6497,7 +6497,7 @@ CODE_08BF44:
 #_08BF65: STA.l $7E7B14
 
 #_08BF69: LDA.w #data08BF9B
-#_08BF6C: JSR ROUTINE_08BD65_bank08
+#_08BF6C: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08BF6F: STZ.w $04F2
 #_08BF72: STZ.b $0E
@@ -6680,7 +6680,7 @@ ROUTINE_08C06D:
 
 #_08C077: TYA
 
-#_08C078: JSR ROUTINE_08BD65_bank08
+#_08C078: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C07B: LDA.w #$0000
 #_08C07E: STA.l $7E7A04
@@ -6753,7 +6753,7 @@ ROUTINE_08C0CC:
 #_08C0D5: BCC .exit
 
 #_08C0D7: LDA.w #data08C294
-#_08C0DA: JSR ROUTINE_08BD65_bank08
+#_08C0DA: JSR RobustBulkDecompressionAndSetMode40_bank08
 #_08C0DD: JSR ROUTINE_08C1B6
 
 #_08C0E0: LDA.w #$000A
@@ -6839,7 +6839,7 @@ ROUTINE_08C146:
 #_08C155: STA.w $1AB0
 
 #_08C158: LDA.w #data08C27D
-#_08C15B: JSR ROUTINE_08BD65_bank08
+#_08C15B: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C15E: INC.w $054E
 
@@ -6912,7 +6912,7 @@ RequestSong02:
 ;===================================================================================================
 
 ROUTINE_08C1B6:
-#_08C1B6: LDA.w #$00FD ; SFX FD
+#_08C1B6: LDA.w #$00FD ; SFX FD - Fade music
 #_08C1B9: STA.w $04A0
 
 #_08C1BC: LDA.w #$0078
@@ -6958,7 +6958,7 @@ ROUTINE_08C1E0:
 #_08C1E9: BCC .exit
 
 #_08C1EB: LDA.w #data08C294
-#_08C1EE: JSR ROUTINE_08BD65_bank08
+#_08C1EE: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C1F1: LDA.w #$000A
 #_08C1F4: STA.l $7E7B00
@@ -7045,7 +7045,7 @@ ROUTINE_08C25A:
 #_08C269: STA.w $1AB0
 
 #_08C26C: LDA.w #data08C27D
-#_08C26F: JSR ROUTINE_08BD65_bank08
+#_08C26F: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C272: JSR Set_04F4_to_FFFF
 
@@ -7143,7 +7143,7 @@ ROUTINE_08C2D1:
 #_08C30C: STA.l $7FE72A
 
 #_08C310: LDA.w #data08C323
-#_08C313: JSR ROUTINE_08BD65_bank08
+#_08C313: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C316: LDA.w #$004E
 #_08C319: JSR ROUTINE_08BD98_Y0101
@@ -7185,7 +7185,7 @@ ROUTINE_08C33A:
 #_08C34E: STA.w $1AE0
 
 #_08C351: LDA.w #data08C37B
-#_08C354: JSR ROUTINE_08BD65_bank08
+#_08C354: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 .exit_a
 #_08C357: RTS
@@ -7245,7 +7245,7 @@ ROUTINE_08C38B:
 #_08C3A5: STA.w $1AD0
 
 #_08C3A8: LDA.w #data08C3BB
-#_08C3AB: JSR ROUTINE_08BD65_bank08
+#_08C3AB: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C3AE: LDA.w #$0052
 #_08C3B1: JSR ROUTINE_08BD98_Y0101
@@ -7287,7 +7287,7 @@ ROUTINE_08C3CB:
 #_08C3E5: STA.w $1AD0
 
 #_08C3E8: LDA.w #data08C3FB
-#_08C3EB: JSR ROUTINE_08BD65_bank08
+#_08C3EB: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C3EE: LDA.w #$0054
 #_08C3F1: JSR ROUTINE_08BD98_Y0101
@@ -7327,7 +7327,7 @@ ROUTINE_08C40B:
 #_08C422: JSR ROUTINE_08BDAE
 
 #_08C425: LDA.w #data08C438
-#_08C428: JSR ROUTINE_08BD65_bank08
+#_08C428: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C42B: LDA.w #$0056
 #_08C42E: JSR ROUTINE_08BD98_Y0000
@@ -7369,7 +7369,7 @@ ROUTINE_08C448:
 #_08C462: STA.w $1AD0
 
 #_08C465: LDA.w #data08C478
-#_08C468: JSR ROUTINE_08BD65_bank08
+#_08C468: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C46B: LDA.w #$0058
 #_08C46E: JSR ROUTINE_08BD98_Y0101
@@ -7484,7 +7484,7 @@ ROUTINE_08C4EB:
 #_08C506: JSR ROUTINE_08D155
 
 #_08C509: LDA.w #data08C53A
-#_08C50C: JSR ROUTINE_08BD65_bank08
+#_08C50C: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C50F: STZ.w $04F2
 #_08C512: STZ.b $0E
@@ -7605,7 +7605,7 @@ ROUTINE_08C5CA:
 
 #_08C5D3: LDA.w #data08D43E
 #_08C5D6: LDY.w #data08D43E>>16
-#_08C5D9: JMP QuadDataWriter_00FBCB_ParameterizedBounce
+#_08C5D9: JMP QuadtableDataWriter_ParameterizedBounce
 
 ;===================================================================================================
 
@@ -7757,7 +7757,7 @@ CODE_08C68A:
 #_08C6A7: STA.l $7E7B14
 
 #_08C6AB: LDA.w #data08C6DE
-#_08C6AE: JSR ROUTINE_08BD65_bank08
+#_08C6AE: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C6B1: STZ.w $04F2
 #_08C6B4: STZ.w $04B8
@@ -7917,7 +7917,7 @@ ROUTINE_08C761:
 #_08C78A: JSR ROUTINE_08BDA3_Set04B8
 
 #_08C78D: LDA.w #data08C794
-#_08C790: JSR ROUTINE_08BD65_bank08
+#_08C790: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 .exit
 #_08C793: RTS
@@ -7957,7 +7957,7 @@ ROUTINE_08C7A4:
 #_08C7C7: JSR ROUTINE_08BDA3_Set04B8
 
 #_08C7CA: LDA.w #data08C7D1
-#_08C7CD: JSR ROUTINE_08BD65_bank08
+#_08C7CD: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 .exit
 #_08C7D0: RTS
@@ -7996,7 +7996,7 @@ ROUTINE_08C7E1:
 #_08C801: JSR ROUTINE_08BD98_Y0101
 
 #_08C804: LDA.w #data08C80B
-#_08C807: JSR ROUTINE_08BD65_bank08
+#_08C807: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 .exit
 #_08C80A: RTS
@@ -8111,7 +8111,7 @@ ROUTINE_08C885:
 #_08C8AB: JSR ROUTINE_08BDA3_Set04B8
 
 #_08C8AE: LDA.w #data08C8B5
-#_08C8B1: JSR ROUTINE_08BD65_bank08
+#_08C8B1: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 .exit
 #_08C8B4: RTS
@@ -8151,7 +8151,7 @@ ROUTINE_08C8C5:
 #_08C8E8: JSR ROUTINE_08BDA3_Set04B8
 
 #_08C8EB: LDA.w #data08C8F2
-#_08C8EE: JSR ROUTINE_08BD65_bank08
+#_08C8EE: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 .exit
 #_08C8F1: RTS
@@ -8333,7 +8333,7 @@ CODE_08C9D6:
 #_08C9E0: JSR ROUTINE_08D53E
 
 #_08C9E3: LDA.w #data08C9F3
-#_08C9E6: JSR ROUTINE_08BD65_bank08
+#_08C9E6: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08C9E9: LDX.w #$0920
 #_08C9EC: JSR ROUTINE_08D53E
@@ -8378,7 +8378,7 @@ CODE_08CA26:
 #_08CA30: JSR ROUTINE_08D53E
 
 #_08CA33: LDA.w #data08CA43
-#_08CA36: JSR ROUTINE_08BD65_bank08
+#_08CA36: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CA39: LDX.w #$0940
 #_08CA3C: JSR ROUTINE_08D53E
@@ -8459,7 +8459,7 @@ CODE_08CA9C:
 #_08CAA6: JSR ROUTINE_08D53E
 
 #_08CAA9: LDA.w #data08CAB6
-#_08CAAC: JSR ROUTINE_08BD65_bank08
+#_08CAAC: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CAAF: LDX.w #$0960
 #_08CAB2: JSR ROUTINE_08D53E
@@ -8499,7 +8499,7 @@ CODE_08CAE2:
 #_08CAEC: JSR ROUTINE_08D53E
 
 #_08CAEF: LDA.w #data08CAFC
-#_08CAF2: JSR ROUTINE_08BD65_bank08
+#_08CAF2: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CAF5: LDX.w #$0980
 #_08CAF8: JSR ROUTINE_08D53E
@@ -8581,7 +8581,7 @@ CODE_08CB5C:
 #_08CB66: JSR ROUTINE_08D53E
 
 #_08CB69: LDA.w #data08CB76
-#_08CB6C: JSR ROUTINE_08BD65_bank08
+#_08CB6C: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CB6F: LDX.w #$09A0
 #_08CB72: JSR ROUTINE_08D53E
@@ -8618,7 +8618,7 @@ CODE_08CB9B:
 #_08CBA5: JSR ROUTINE_08D53E
 
 #_08CBA8: LDA.w #data08CBAF
-#_08CBAB: JSR ROUTINE_08BD65_bank08
+#_08CBAB: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CBAE: RTS
 
@@ -8712,7 +8712,7 @@ ROUTINE_08CC0A:
 #_08CC28: JSR ROUTINE_08CD01
 
 #_08CC2B: LDA.w #data08CE59
-#_08CC2E: JSR ROUTINE_08BD65_bank08
+#_08CC2E: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CC31: LDX.w #$0EE0
 #_08CC34: JSR ROUTINE_08D53E
@@ -8775,7 +8775,7 @@ data08CC62:
 ROUTINE_08BAFCandSpawn1:
 #_08CC86: JSR ROUTINE_08BAFC
 
-#_08CC89: JSL PrepEnemySpawn_long
+#_08CC89: JSL PrepSpriteSpawn_long
 
 #_08CC8D: RTS
 
@@ -8904,7 +8904,7 @@ CODE_08CD4E:
 #_08CD6B: STA.w $1AE0
 
 #_08CD6E: LDA.w #data08CE60
-#_08CD71: JSR ROUTINE_08BD65_bank08
+#_08CD71: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CD74: LDX.w #$0EE0
 #_08CD77: JSR ROUTINE_08D53E
@@ -8970,7 +8970,7 @@ CODE_08CDB5:
 #_08CDCD: JSR ROUTINE_08BD98
 
 #_08CDD0: LDA.w #data08CE7E
-#_08CDD3: JSR ROUTINE_08BD65_bank08
+#_08CDD3: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 .exit_b
 #_08CDD6: RTS
@@ -8979,7 +8979,7 @@ CODE_08CDB5:
 
 ROUTINE_08BAFCandSpawn2:
 #_08CDD7: JSR ROUTINE_08BAFC
-#_08CDDA: JSL PrepEnemySpawn_long
+#_08CDDA: JSL PrepSpriteSpawn_long
 
 #_08CDDE: RTS
 
@@ -9114,7 +9114,7 @@ ROUTINE_08CECD:
 #_08CEE1: STA.w $1AB0
 
 #_08CEE4: LDA.w #data08CF0F
-#_08CEE7: JSR ROUTINE_08BD65_bank08
+#_08CEE7: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CEEA: LDY.w $05BC
 #_08CEED: LDA.w #$0006
@@ -9212,7 +9212,7 @@ ROUTINE_08CF67:
 #_08CF8A: JSR ROUTINE_08BD98
 
 #_08CF8D: LDA.w #data08CF9A
-#_08CF90: JSR ROUTINE_08BD65_bank08
+#_08CF90: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CF93: LDA.w #$0008
 #_08CF96: JMP ROUTINE_08BDA3_Set04B8
@@ -9252,7 +9252,7 @@ ROUTINE_08CFAA:
 #_08CFC7: JSR ROUTINE_08BD98_Y0000
 
 #_08CFCA: LDA.w #data08CFD7
-#_08CFCD: JSR ROUTINE_08BD65_bank08
+#_08CFCD: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08CFD0: LDA.w #$000A
 #_08CFD3: JMP ROUTINE_08BDA3_Set04B8
@@ -9294,7 +9294,7 @@ ROUTINE_08CFE7:
 #_08D009: JSR ROUTINE_08BD98_Y0101
 
 #_08D00C: LDA.w #data08D018
-#_08D00F: JSR ROUTINE_08BD65_bank08
+#_08D00F: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08D012: LDA.w #$000C
 #_08D015: JMP ROUTINE_08BDA3_Set04B8
@@ -9367,7 +9367,7 @@ CODE_08D05F:
 #_08D07C: JSR ROUTINE_08CD01
 
 #_08D07F: LDA.w #data08CE59
-#_08D082: JSR ROUTINE_08BD65_bank08
+#_08D082: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08D085: LDX.w #$0EE0
 #_08D088: JSR ROUTINE_08D53E
@@ -9429,7 +9429,7 @@ data08D0B6:
 
 ROUTINE_08BAFCandSpawn3:
 #_08D0DA: JSR ROUTINE_08BAFC
-#_08D0DD: JSL PrepEnemySpawn_long
+#_08D0DD: JSL PrepSpriteSpawn_long
 
 #_08D0E1: RTS
 
@@ -9525,7 +9525,7 @@ ROUTINE_08D173:
 #_08D193: JSR ROUTINE_08D155
 
 #_08D196: LDA.w #data08D24E
-#_08D199: JSR ROUTINE_08BD65_bank08
+#_08D199: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08D19C: LDA.w #data058373
 #_08D19F: LDY.w #data058373>>16
@@ -9599,7 +9599,7 @@ CODE_08D1CD:
 #_08D202: STA.b $22
 #_08D204: STZ.b $30
 
-#_08D206: JSL PrepEnemySpawnType0C_0396E3_00E8
+#_08D206: JSL PrepSpriteSpawnType0C_0396E3_00E8
 
 #_08D20A: LDX.w #data08D21A
 #_08D20D: JSR CopyArbitraryTable_08BACE
@@ -9607,7 +9607,7 @@ CODE_08D1CD:
 ; TODO WTF??
 #_08D210: LDA.w #data08D462
 #_08D213: LDY.w #data08D462>>16
-#_08D216: JSR QuadDataWriter_00FBCB_ParameterizedBounce
+#_08D216: JSR QuadtableDataWriter_ParameterizedBounce
 
 #_08D219: RTS
 
@@ -9710,7 +9710,7 @@ ROUTINE_08D2C0:
 #_08D2E0: JSR ROUTINE_08D155
 
 #_08D2E3: LDA.w #data08D24E
-#_08D2E6: JSR ROUTINE_08BD65_bank08
+#_08D2E6: JSR RobustBulkDecompressionAndSetMode40_bank08
 
 #_08D2E9: LDA.w #data0583D4
 #_08D2EC: LDY.w #data0583D4>>16
@@ -9742,7 +9742,7 @@ ROUTINE_08D2F9:
 
 #_08D30E: LDA.w #data08D43E
 #_08D311: LDY.w #data08D43E>>16
-#_08D314: JSR QuadDataWriter_00FBCB_ParameterizedBounce
+#_08D314: JSR QuadtableDataWriter_ParameterizedBounce
 
 #_08D317: LDA.w #$0002
 #_08D31A: STA.w $195E
@@ -9778,7 +9778,7 @@ ROUTINE_08D324:
 
 #_08D349: LDA.w #data08D43E
 #_08D34C: LDY.w #data08D43E>>16
-#_08D34F: JSR QuadDataWriter_00FBCB_ParameterizedBounce
+#_08D34F: JSR QuadtableDataWriter_ParameterizedBounce
 
 #_08D352: LDA.w #$0000
 #_08D355: STA.w $195E
@@ -9794,7 +9794,7 @@ ROUTINE_08D324:
 ROUTINE_08D35F:
 #_08D35F: LDA.w #data08D42C
 #_08D362: LDY.w #data08D42C>>16
-#_08D365: BRA QuadDataWriter_00FBCB_ParameterizedBounce_long
+#_08D365: BRA QuadtableDataWriter_ParameterizedBounce_long
 
 ;===================================================================================================
 
@@ -9807,7 +9807,9 @@ ROUTINE_08D367:
 
 #_08D371: LDA.w #data08D3B6
 #_08D374: LDY.w #data08D3B6>>16
-#_08D377: BRA QuadDataWriter_00FBCB_ParameterizedBounce_long
+#_08D377: BRA QuadtableDataWriter_ParameterizedBounce_long
+
+;---------------------------------------------------------------------------------------------------
 
 .pointers
 #_08D379: db data08D3B6
@@ -9817,14 +9819,14 @@ ROUTINE_08D367:
 
 ;===================================================================================================
 
-QuadDataWriter_00FBCB_ParameterizedBounce_long:
+QuadtableDataWriter_ParameterizedBounce_long:
 #_08D381: PHB
 #_08D382: PHK
 #_08D383: PLB
 
 #_08D384: PHX
 
-#_08D385: JSR QuadDataWriter_00FBCB_ParameterizedBounce
+#_08D385: JSR QuadtableDataWriter_ParameterizedBounce
 
 #_08D388: PLX
 
@@ -9833,11 +9835,11 @@ QuadDataWriter_00FBCB_ParameterizedBounce_long:
 
 ;===================================================================================================
 
-QuadDataWriter_00FBCB_ParameterizedBounce:
+QuadtableDataWriter_ParameterizedBounce:
 #_08D38B: STA.b $20
 #_08D38D: STY.b $22
 
-#_08D38F: JSL QuadDataWriter_00FBCB_long
+#_08D38F: JSL QuadtableDataWriter_long
 
 #_08D393: RTS
 
@@ -13623,6 +13625,7 @@ ROUTINE_08EC1B:
 #_08EC26: JSR CopyArbitraryTable_08BACE
 
 #_08EC29: PLX
+
 #_08EC2A: INC.w $054E
 
 #_08EC2D: LDA.w #$001C
@@ -13701,6 +13704,7 @@ data08EC71:
 
 ROUTINE_08ECBB:
 #_08ECBB: TAX
+
 #_08ECBC: PHX
 
 #_08ECBD: JSL ROUTINE_01CFD0
@@ -13715,6 +13719,7 @@ ROUTINE_08ECBB:
 #_08ECD1: INC.w $054E
 
 #_08ECD4: PLX
+
 #_08ECD5: JSR ROUTINE_08ED20
 
 #_08ECD8: LDA.w #$011E ; PARTNER 011E
@@ -13947,6 +13952,7 @@ CODE_08EE04:
 
 ROUTINE_08EE32:
 #_08EE32: TAX
+
 #_08EE33: PHX
 
 #_08EE34: LDX.w #data08EE4D
@@ -14010,7 +14016,7 @@ ROUTINE_08EE9C:
 
 #_08EEAC: LDA.w #$0024
 #_08EEAF: ORA.w #$DA00
-#_08EEB2: JSL ROUTINE_06A2CD
+#_08EEB2: JSL ROUTINE_06A2CD_SomeSpriteSpawn
 
 #_08EEB6: PHX
 
@@ -14058,7 +14064,7 @@ ROUTINE_08EEFA:
 
 #_08EF0A: LDA.w #$0020
 #_08EF0D: ORA.w #$DC00
-#_08EF10: JSL ROUTINE_06A2CD
+#_08EF10: JSL ROUTINE_06A2CD_SomeSpriteSpawn
 
 #_08EF14: PHX
 
@@ -14275,7 +14281,7 @@ ROUTINE_08F026:
 #_08F088: STA.b $26
 
 #_08F08A: LDA.w #$001C
-#_08F08D: JSL ROUTINE_06A2B6
+#_08F08D: JSL ROUTINE_06A2CD_SomeSpriteSpawn_AtPartnerCoordinates
 #_08F091: JSL ROUTINE_01B8F6_long
 
 #_08F095: RTS
@@ -14415,11 +14421,11 @@ ROUTINE_08F144:
 #_08F14D: STY.b $22
 #_08F14F: STA.b $20
 
-#_08F151: JSL ROUTINE_00ECEF_long
+#_08F151: JSL RobustBulkDecompression_long
 
 #_08F155: LDA.w #data08F1AC
 #_08F158: LDY.w #data08F1AC>>16
-#_08F15B: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
+#_08F15B: JSL QuadtableDataWriter_ParameterizedBounce_long
 
 #_08F15F: STZ.w $19C0
 
@@ -14606,7 +14612,7 @@ data08F26E:
 
 ;===================================================================================================
 
-ROUTINE_08F29A:
+DecompressPartnerSpawnFlair:
 #_08F29A: PHB
 #_08F29B: PHK
 #_08F29C: PLB
@@ -14625,7 +14631,7 @@ ROUTINE_08F29A:
 #_08F2A7: STX.w $04FE
 
 #_08F2AA: LDY.w #.pointers>>16
-#_08F2AD: JSL ROUTINE_08BD65
+#_08F2AD: JSL RobustBulkDecompressionAndSetMode40
 
 .exit
 #_08F2B1: RTS

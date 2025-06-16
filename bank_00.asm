@@ -2,15 +2,15 @@ org $008000
 
 ;===================================================================================================
 
-QuadDataWriter_00FBCB_verylong:
-#_008000: JSL QuadDataWriter_00FBCB_long
+QuadtableDataWriter_verylong:
+#_008000: JSL QuadtableDataWriter_long
 
 #_008004: RTL
 
 ;===================================================================================================
 
-BulkDecompressionViaTable_verylong:
-#_008005: JSL BulkDecompressionViaTable_long
+BulkDecompression_verylong:
+#_008005: JSL BulkDecompression_long
 
 #_008009: RTL
 
@@ -51,8 +51,8 @@ ROUTINE_00A947_long:
 
 ;===================================================================================================
 
-ROUTINE_00A974_long:
-#_00801E: JSR ROUTINE_00A974
+ROUTINE_00A974_IRQRelated_long:
+#_00801E: JSR ROUTINE_00A974_IRQRelated
 
 #_008021: RTL
 
@@ -107,15 +107,15 @@ RequestSong_verylong:
 
 ;===================================================================================================
 
-ROUTINE_00A9A8_long:
-#_008043: JSR ROUTINE_00A9A8
+ROUTINE_00A990_ScrollsBG3Up_long:
+#_008043: JSR ROUTINE_00A990_ScrollsBG3Up
 
 #_008046: RTL
 
 ;===================================================================================================
 
-ROUTINE_00A990_long:
-#_008047: JSR ROUTINE_00A990
+ROUTINE_00A990_ScrollsBG3Down_long:
+#_008047: JSR ROUTINE_00A990_ScrollsBG3Down
 
 #_00804A: RTL
 
@@ -576,6 +576,7 @@ MainLoop:
 
 #_008329: JSR (GameModules,X)
 
+; Useless, but good for hooks
 #_00832C: NOP
 #_00832D: NOP
 #_00832E: NOP
@@ -3110,7 +3111,7 @@ PrepareLicenses:
 #_009272: JSR ROUTINE_00D3BD
 
 #_009275: LDX.w #.table
-#_009278: JSR BulkDecompressionViaTable_currentDB
+#_009278: JSR BulkDecompression_currentDB
 
 #_00927B: LDA.w #$000F
 #_00927E: TRB.w $0520
@@ -3120,7 +3121,7 @@ PrepareLicenses:
 
 #_009287: JSR EnableNMIandVIRQandFBlank
 
-#_00928A: JMP AdvanceGameModule_AndSet_54E_56E
+#_00928A: JMP AdvanceGameModule_AndSetDebugFlags
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -3146,7 +3147,7 @@ PrepareLicenses:
 
 LicensingScreens:
 #_0092AD: JSR ResetModuleVariables
-#_0092B0: JSR Set_56E_54E_to_FFFF
+#_0092B0: JSR SetDebugFlagsToFFFF
 
 #_0092B3: LDX.w #$0800
 
@@ -3159,6 +3160,8 @@ LicensingScreens:
 #_0092BD: TAX
 
 #_0092BE: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_0092C1: dw Licensing_FadeIn
@@ -3218,7 +3221,7 @@ Licensing_LoadSeriousFun:
 #_0092FB: JSL InitializeAPU
 
 #_0092FF: LDX.w #.table
-#_009302: JSR BulkDecompressionViaTable_currentDB
+#_009302: JSR BulkDecompression_currentDB
 
 #_009305: INC.w $0506
 
@@ -3402,11 +3405,11 @@ LevelVictory:
 
 #_0093E7: LDA.w #.table
 #_0093EA: LDY.w #.table>>16
-#_0093ED: JSR ROUTINE_00ECEF_ParamterizedYA
+#_0093ED: JSR RobustBulkDecompression_ParamterizedYA
 
 #_0093F0: LDA.w #.some_other_table
 #_0093F3: LDY.w #.some_other_table>>16
-#_0093F6: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
+#_0093F6: JSL QuadtableDataWriter_ParameterizedBounce_long
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -3469,7 +3472,7 @@ LevelEndScreenDim:
 #_00946E: JSR ROUTINE_00F957
 #_009471: JSR ROUTINE_00B016
 
-#_009474: JSR Set_56E_54E_to_FFFF
+#_009474: JSR SetDebugFlagsToFFFF
 
 #_009477: JSR ROUTINE_00E29B
 #_00947A: BNE .done
@@ -3491,8 +3494,8 @@ LevelEndScreenDim:
 #_00949A: STA.l $7E7A3A
 
 #_00949E: JSR ROUTINE_009681
-#_0094A1: JSR ROUTINE_0096AD
-#_0094A4: JSR ROUTINE_0096C6
+#_0094A1: JSR ROUTINE_0096C6_14
+#_0094A4: JSR ROUTINE_0096C6_28
 
 CODE_0094A7:
 #_0094A7: LDX.w #$0000
@@ -3549,7 +3552,7 @@ CODE_0094E5:
 
 CODE_0094FB:
 #_0094FB: JSR ROUTINE_009597
-#_0094FE: JSR ROUTINE_0096AD
+#_0094FE: JSR ROUTINE_0096C6_14
 
 #_009501: BRA .finished
 
@@ -3571,7 +3574,7 @@ CODE_009503:
 
 CODE_00951E:
 #_00951E: JSR ROUTINE_009597
-#_009521: JSR ROUTINE_0096C6
+#_009521: JSR ROUTINE_0096C6_28
 
 #_009524: BRA .finished
 
@@ -3802,7 +3805,7 @@ LevelEndFadeOut:
 #_009655: TRB.w $0536
 #_009658: JSR CopySomeTable_00DE17
 
-#_00965B: JMP Set_56E_54E_to_FFFF
+#_00965B: JMP SetDebugFlagsToFFFF
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -3864,7 +3867,7 @@ ROUTINE_009681:
 
 ;===================================================================================================
 
-ROUTINE_0096AD:
+ROUTINE_0096C6_14:
 #_0096AD: LDA.w #$0014
 #_0096B0: STA.l $7E7A56
 
@@ -3874,11 +3877,11 @@ ROUTINE_0096AD:
 #_0096BD: JSR ROUTINE_009672
 
 #_0096C0: LDA.l $7E7A38
-#_0096C4: BRA CODE_0096DD
+#_0096C4: BRA .fill_numbers
 
 ;===================================================================================================
 
-#ROUTINE_0096C6:
+#ROUTINE_0096C6_28:
 #_0096C6: LDA.w #$0028
 #_0096C9: STA.l $7E7A56
 
@@ -3891,7 +3894,7 @@ ROUTINE_0096AD:
 
 ;===================================================================================================
 
-CODE_0096DD:
+.fill_numbers
 #_0096DD: JSR SplitBCDIntoDigits
 
 #_0096E0: LDX.w #$0000
@@ -4020,7 +4023,7 @@ PrepareOptionsScreen:
 
 #_009784: LDA.w #data00ECAC>>16
 #_009787: LDX.w #data00ECAC
-#_00978A: JSL BulkDecompressionViaTable_long
+#_00978A: JSL BulkDecompression_long
 
 #_00978E: LDA.w #data00F319
 #_009791: LDX.w #data00F319>>16
@@ -4051,7 +4054,7 @@ PrepareOptionsScreen:
 #_0097C8: STZ.w $0506
 #_0097CB: STZ.w $0508
 
-#_0097CE: JMP AdvanceGameModule_AndSet_54E_56E
+#_0097CE: JMP AdvanceGameModule_AndSetDebugFlags
 
 ;===================================================================================================
 
@@ -4193,7 +4196,7 @@ OptionsScreen:
 #_0098A2: LDA.l $7E8000,X
 #_0098A6: STA.l $7E2E04
 
-#_0098AA: JSR Set_56E_54E_to_FFFF
+#_0098AA: JSR SetDebugFlagsToFFFF
 
 #_0098AD: LDA.w $0508
 #_0098B0: ASL A
@@ -4382,6 +4385,7 @@ DrawPockyConfig:
 #_0099A8: LDA.w $1F72
 #_0099AB: ASL A
 #_0099AC: TAY
+
 #_0099AD: PHY
 
 #_0099AE: LDA.w data009A43,Y
@@ -4454,6 +4458,7 @@ DrawPartnerConfig:
 #_009A0F: LDA.w $1F74
 #_009A12: ASL A
 #_009A13: TAY
+
 #_009A14: PHY
 
 #_009A15: LDA.w data009A5B,Y
@@ -5217,7 +5222,7 @@ OptionsScreen_Exit:
 #_009DDD: JSR TestNewInput_Start
 #_009DE0: BEQ .dont_exit
 
-#_009DE2: JSR QueueSFX_FD
+#_009DE2: JSR QuestMusicFadeOut
 
 #_009DE5: LDA.w #$0005
 #_009DE8: STA.w $0508
@@ -5585,7 +5590,7 @@ PreparePasswordScreen:
 #_009F67: LDA.w #$0008
 #_009F6A: TSB.w $0536
 
-#_009F6D: JMP AdvanceGameModule_AndSet_54E_56E
+#_009F6D: JMP AdvanceGameModule_AndSetDebugFlags
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -5692,7 +5697,7 @@ PasswordScreen_04:
 
 #_00A013: JSR CopySomeTable_00DE17
 
-#_00A016: JMP Set_56E_54E_to_FFFF
+#_00A016: JMP SetDebugFlagsToFFFF
 
 .do_nothing
 #_00A019: JSR MatchMosaicToScreenBrightness
@@ -5766,7 +5771,7 @@ PrepareGameOver:
 #_00A082: LDA.w #$0007 ; SONG 07
 #_00A085: JSR RequestSong_bounce
 
-#_00A088: JSR AdvanceGameModule_AndSet_54E_56E
+#_00A088: JSR AdvanceGameModule_AndSetDebugFlags
 
 #_00A08B: JMP CODE_00A116
 
@@ -5813,7 +5818,7 @@ ROUTINE_00A098:
 
 #_00A0D1: LDA.w #.table
 #_00A0D4: LDY.w #.table>>16
-#_00A0D7: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
+#_00A0D7: JSL QuadtableDataWriter_ParameterizedBounce_long
 
 #_00A0DB: JSR GetLevelPassword
 
@@ -5928,11 +5933,11 @@ GameOverAscendMore:
 CODE_00A18C:
 #_00A18C: LDA.w #.table
 #_00A18F: LDY.w #.table>>16
-#_00A192: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
+#_00A192: JSL QuadtableDataWriter_ParameterizedBounce_long
 
 #_00A196: LDA.w #data02FE69
 #_00A199: LDY.w #data02FE69>>16
-#_00A19C: JSR ROUTINE_00ECEF_ParamterizedYA
+#_00A19C: JSR RobustBulkDecompression_ParamterizedYA
 
 #_00A19F: LDA.w #$0340
 #_00A1A2: STA.l $7E7A42
@@ -5999,12 +6004,12 @@ ContinueScreen:
 #_00A20F: JSR ROUTINE_00E29B
 #_00A212: BEQ CODE_00A217
 
-#_00A214: JMP CODE_00A27C
+#_00A214: JMP .finished
 
 CODE_00A217:
 #_00A217: JSR ROUTINE_00F957
 #_00A21A: JSR ROUTINE_00E2FE
-#_00A21D: BCC CODE_00A27C
+#_00A21D: BCC .finished
 
 #_00A21F: JSR TestNewInput_Left
 #_00A222: BEQ CODE_00A230
@@ -6045,24 +6050,24 @@ CODE_00A24C:
 #_00A25D: LDA.w #$0026 ; MODE 26
 #_00A260: STA.w $0500
 
-#_00A263: BRA CODE_00A27C
+#_00A263: BRA .finished
 
 CODE_00A265:
 #_00A265: JSR ROUTINE_00E2E4
 
 #_00A268: LDA.w #.table
 #_00A26B: LDY.w #.table>>16
-#_00A26E: JSR ROUTINE_00ECEF_ParamterizedYA
+#_00A26E: JSR RobustBulkDecompression_ParamterizedYA
 
 #_00A271: LDA.w #$0084 ; MODE 84
 #_00A274: STA.w $0500
 
-#_00A277: BRA CODE_00A27C
+#_00A277: BRA .finished
 
 CODE_00A279:
 #_00A279: JSR ROUTINE_00A282
 
-CODE_00A27C:
+.finished
 #_00A27C: JSR ScrollBG2_ThenSetStuff
 
 #_00A27F: JMP CODE_00A116
@@ -6120,7 +6125,7 @@ ScrollBG2_ThenSetStuff:
 #_00A2C3: INC.w $0514
 #_00A2C6: INC.w $0516
 
-#_00A2C9: JMP Set_56E_54E_to_FFFF
+#_00A2C9: JMP SetDebugFlagsToFFFF
 
 ;===================================================================================================
 
@@ -6128,7 +6133,7 @@ ContinueAfterGameOver:
 #_00A2CC: JSR ROUTINE_00E29B
 #_00A2CF: BNE .finished_here
 
-#_00A2D1: JSR Set_56E_54E_to_FFFF
+#_00A2D1: JSR SetDebugFlagsToFFFF
 
 #_00A2D4: CLC
 
@@ -6221,7 +6226,9 @@ PrepareStoryTime:
 #_00A350: STA.w $0520
 
 #_00A353: STZ.w $0536
+
 #_00A356: STZ.w $0800
+
 #_00A359: STZ.w $0506
 #_00A35C: STZ.w $0508
 
@@ -6240,6 +6247,8 @@ StoryTime:
 #_00A36B: TAX
 
 #_00A36C: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_00A36F: dw ExecuteStoryTime_Skippable
@@ -6338,7 +6347,7 @@ ItsStoryTime_Initialize:
 #_00A3FD: JSR DisableInterruptsAndHDMAbutEnableFBlank
 
 #_00A400: LDX.w #data00A456
-#_00A403: JSR BulkDecompressionViaTable_currentDB
+#_00A403: JSR BulkDecompression_currentDB
 #_00A406: JSR EnableNMIandVIRQandFBlank
 
 #_00A409: INC.w $056E
@@ -6374,7 +6383,7 @@ ItsStoryTime_FadeIn:
 #_00A434: LDA.w #data00A4CA>>16
 #_00A437: STA.b $22
 
-#_00A439: JSR QuadDataWriter_00FBCB
+#_00A439: JSR QuadtableDataWriter
 
 #_00A43C: JSR ROUTINE_00F957
 
@@ -6387,7 +6396,7 @@ ItsStoryTime_FadeIn:
 
 #_00A44F: INC.w $0506
 
-#_00A452: JSR ROUTINE_00A974
+#_00A452: JSR ROUTINE_00A974_IRQRelated
 
 #_00A455: RTS
 
@@ -6533,7 +6542,7 @@ ItsStoryTime_03:
 #_00A566: LDA.w #data00A931>>16
 #_00A569: STA.b $22
 
-#_00A56B: JSR QuadDataWriter_00FBCB
+#_00A56B: JSR QuadtableDataWriter
 #_00A56E: JSR ROUTINE_00F957
 
 #_00A571: LDA.w #Message_08B13F
@@ -6541,7 +6550,7 @@ ItsStoryTime_03:
 #_00A577: JSL SetMessagePointer
 
 #_00A57B: LDX.w #$0004
-#_00A57E: JSR ROUTINE_00A990
+#_00A57E: JSR ROUTINE_00A990_ScrollsBG3Down
 
 #_00A581: LDA.w #$0015
 #_00A584: STA.w $0524
@@ -6555,7 +6564,7 @@ ItsStoryTime_03:
 
 ItsStoryTime_04:
 #_00A58B: LDX.w #$0004
-#_00A58E: JSR ROUTINE_00A990
+#_00A58E: JSR ROUTINE_00A990_ScrollsBG3Down
 #_00A591: JSL HandleDialog
 #_00A595: JSR ROUTINE_00F957
 
@@ -6567,7 +6576,7 @@ ItsStoryTime_04:
 #_00A5A5: LDA.l $7E2550
 #_00A5A9: BNE .exit
 
-#_00A5AB: JSR QueueSFX_FD
+#_00A5AB: JSR QuestMusicFadeOut
 
 #_00A5AE: LDA.w #Message_08B1A7
 #_00A5B1: LDX.w #Message_08B1A7>>16
@@ -6654,7 +6663,7 @@ data00A61A:
 
 ItsStoryTime_05:
 #_00A628: LDX.w #$0004
-#_00A62B: JSR ROUTINE_00A990
+#_00A62B: JSR ROUTINE_00A990_ScrollsBG3Down
 
 #_00A62E: JSL HandleDialog
 
@@ -6666,7 +6675,7 @@ ItsStoryTime_05:
 #_00A63D: LDA.w #data00A73F>>16
 #_00A640: STA.b $22
 
-#_00A642: JSR QuadDataWriter_00FBCB
+#_00A642: JSR QuadtableDataWriter
 #_00A645: JSR ROUTINE_00F957
 
 #_00A648: INC.w $0506
@@ -6693,7 +6702,7 @@ ItsStoryTime_ImpyMusic:
 #_00A668: LDA.w #data00A5CE>>16
 #_00A66B: STA.b $22
 
-#_00A66D: JSR QuadDataWriter_00FBCB
+#_00A66D: JSR QuadtableDataWriter
 
 #_00A670: INC.w $0506
 
@@ -6727,7 +6736,7 @@ ItsStoryTime_ImpyInterrupts:
 #_00A6A3: LDA.w #.table>>16
 #_00A6A6: STA.b $22
 
-#_00A6A8: JSL ROUTINE_00ECEF_long
+#_00A6A8: JSL RobustBulkDecompression_long
 #_00A6AC: JSL ROUTINE_00ED0F_long
 
 #_00A6B0: INC.w $0506
@@ -6822,7 +6831,7 @@ ItsStoryTime_0A:
 #_00A730: LDA.w #data00A751>>16
 #_00A733: STA.b $22
 
-#_00A735: JSR QuadDataWriter_00FBCB
+#_00A735: JSR QuadtableDataWriter
 #_00A738: JSR ROUTINE_00F957
 
 #_00A73B: INC.w $0506
@@ -6864,7 +6873,7 @@ data00A773:
 ;===================================================================================================
 
 ItsStoryTime_FadeSongBeforeFlash:
-#_00A783: JSR QueueSFX_FD
+#_00A783: JSR QuestMusicFadeOut
 
 #_00A786: INC.w $0506
 
@@ -6887,7 +6896,7 @@ ItsStoryTime_BrightFlash:
 #_00A7A3: LDA.w #.table>>16
 #_00A7A6: STA.b $22
 
-#_00A7A8: JSL ROUTINE_00ECEF_long
+#_00A7A8: JSL RobustBulkDecompression_long
 #_00A7AC: JSL ROUTINE_00ED0F_long
 
 #_00A7B0: LDA.w #data00A4FE
@@ -6895,7 +6904,7 @@ ItsStoryTime_BrightFlash:
 #_00A7B5: LDA.w #data00A4FE>>16
 #_00A7B8: STA.b $22
 
-#_00A7BA: JSR QuadDataWriter_00FBCB
+#_00A7BA: JSR QuadtableDataWriter
 
 #_00A7BD: INC.w $0506
 
@@ -6951,7 +6960,7 @@ ItsStoryTime_0E:
 
 CODE_00A80D:
 #_00A80D: LDX.w #$0008
-#_00A810: JSR ROUTINE_00A9A8
+#_00A810: JSR ROUTINE_00A990_ScrollsBG3Up
 #_00A813: CMP.w #$00D4
 #_00A816: BCC .exit
 
@@ -6983,7 +6992,7 @@ ItsStoryTime_0F:
 #_00A83E: LDA.w #data00A931>>16
 #_00A841: STA.b $22
 
-#_00A843: JSR QuadDataWriter_00FBCB
+#_00A843: JSR QuadtableDataWriter
 #_00A846: JSR ROUTINE_00F957
 
 #_00A849: LDA.w #$001F
@@ -6998,7 +7007,7 @@ ItsStoryTime_0F:
 
 ItsStoryTime_10:
 #_00A853: LDX.w #$0008
-#_00A856: JSR ROUTINE_00A9A8
+#_00A856: JSR ROUTINE_00A990_ScrollsBG3Up
 #_00A859: CMP.w #$00D4
 #_00A85C: BCC .exit
 
@@ -7035,7 +7044,7 @@ ItsStoryTime_11:
 
 ItsStoryTime_12:
 #_00A889: LDX.w #$0008
-#_00A88C: JSR ROUTINE_00A990
+#_00A88C: JSR ROUTINE_00A990_ScrollsBG3Down
 
 #_00A88F: INC.w $0506
 
@@ -7045,7 +7054,7 @@ ItsStoryTime_12:
 
 ItsStoryTime_13:
 #_00A893: LDX.w #$0008
-#_00A896: JSR ROUTINE_00A990
+#_00A896: JSR ROUTINE_00A990_ScrollsBG3Down
 #_00A899: JSR ROUTINE_00F957
 
 #_00A89C: LDX.w #$0004
@@ -7066,10 +7075,10 @@ ItsStoryTime_14:
 #_00A8B1: LDA.l $7E2550
 #_00A8B5: BNE .exit
 
-#_00A8B7: JSR QueueSFX_FD
+#_00A8B7: JSR QuestMusicFadeOut
 
 #_00A8BA: LDX.w #$0003
-#_00A8BD: JSR ROUTINE_00A9A8
+#_00A8BD: JSR ROUTINE_00A990_ScrollsBG3Up
 #_00A8C0: CMP.w #$00D4
 #_00A8C3: BCC .exit
 
@@ -7087,7 +7096,7 @@ ItsStoryTime_PrepareToClose:
 #_00A8CF: LDA.w #$0001
 #_00A8D2: TRB.w $0530
 
-#_00A8D5: JSR QueueSFX_FD
+#_00A8D5: JSR QuestMusicFadeOut
 
 #_00A8D8: LDA.w #$0000
 #_00A8DB: STA.l $7E258C
@@ -7188,14 +7197,14 @@ ROUTINE_00A947:
 
 ;===================================================================================================
 
-ROUTINE_00A974_long2:
-#_00A970: JSR ROUTINE_00A974
+ROUTINE_00A974_IRQRelated_long2:
+#_00A970: JSR ROUTINE_00A974_IRQRelated
 
 #_00A973: RTL
 
 ;===================================================================================================
 
-ROUTINE_00A974:
+ROUTINE_00A974_IRQRelated:
 #_00A974: LDA.b $8C
 #_00A976: STA.w VTIMEL
 
@@ -7211,14 +7220,14 @@ ROUTINE_00A974:
 
 ;===================================================================================================
 
-ROUTINE_00A990_long2:
-#_00A98C: JSR ROUTINE_00A990
+ROUTINE_00A990_ScrollsBG3Down_long2:
+#_00A98C: JSR ROUTINE_00A990_ScrollsBG3Down
 
 #_00A98F: RTL
 
 ;===================================================================================================
 
-ROUTINE_00A990:
+ROUTINE_00A990_ScrollsBG3Down:
 #_00A990: STX.b $20
 
 #_00A992: LDA.w $0518
@@ -7236,14 +7245,14 @@ ROUTINE_00A990:
 
 ;===================================================================================================
 
-ROUTINE_00A9A8_long2:
-#_00A9A4: JSR ROUTINE_00A9A8
+ROUTINE_00A990_ScrollsBG3Up_long2:
+#_00A9A4: JSR ROUTINE_00A990_ScrollsBG3Up
 
 #_00A9A7: RTL
 
 ;===================================================================================================
 
-ROUTINE_00A9A8:
+ROUTINE_00A990_ScrollsBG3Up:
 #_00A9A8: STX.b $20
 
 #_00A9AA: LDA.w $0518
@@ -7270,7 +7279,7 @@ MuchAdoAboutNothing:
 
 FadeToStoryCutscene:
 #_00A9C0: LDX.w #.table
-#_00A9C3: JSR BulkDecompressionViaTable_currentDB
+#_00A9C3: JSR BulkDecompression_currentDB
 
 #_00A9C6: INC.w $0500
 
@@ -7320,13 +7329,13 @@ CODE_00A9ED:
 
 #_00A9F9: LDA.w #data08E31A>>16
 #_00A9FC: LDX.w #data08E31A
-#_00A9FF: JSL BulkDecompressionViaTable_long
+#_00A9FF: JSL BulkDecompression_long
 
 #_00AA03: JSL BuildBulkDecompressionTableForLevel
 
 #_00AA07: LDA.w #$0000
 #_00AA0A: LDX.w #$19B0
-#_00AA0D: JSL BulkDecompressionViaTable_long
+#_00AA0D: JSL BulkDecompression_long
 
 #_00AA11: LDA.w #$000F
 #_00AA14: TRB.w $0520
@@ -7337,14 +7346,14 @@ CODE_00A9ED:
 
 #_00AA1D: JSL ROUTINE_08E387
 
-#_00AA21: JMP AdvanceGameModule_AndSet_54E_56E
+#_00AA21: JMP AdvanceGameModule_AndSetDebugFlags
 
 ;===================================================================================================
 
 LevelMap:
 #_00AA24: JSR ResetModuleVariables
 #_00AA27: JSR ROUTINE_00AA41
-#_00AA2A: JSR Set_56E_54E_to_FFFF
+#_00AA2A: JSR SetDebugFlagsToFFFF
 
 #_00AA2D: LDA.w $0506
 #_00AA30: ASL A
@@ -7560,7 +7569,7 @@ LevelMap_05:
 EnterBuilding:
 #_00AB27: JSR ResetModuleVariables
 #_00AB2A: JSR ROUTINE_00AC79
-#_00AB2D: JSR QueueSFX_FD
+#_00AB2D: JSR QuestMusicFadeOut
 #_00AB30: JSR RecoverOAMFromCache
 #_00AB33: JSR ROUTINE_00E29B
 #_00AB36: BNE .exit
@@ -7592,7 +7601,7 @@ EnterBuilding:
 ROUTINE_00AB5D:
 #_00AB5D: PHA
 
-#_00AB5E: JSR BulkDecompressionViaTable_currentDB
+#_00AB5E: JSR BulkDecompression_currentDB
 
 #_00AB61: LDA.w #$2800
 #_00AB64: STA.b $38
@@ -7621,7 +7630,7 @@ ZigZagWipeOut:
 
 #_00AB85: LDA.w #$0004
 #_00AB88: TSB.w $0524
-#_00AB8B: JSR Set_56E_54E_to_FFFF
+#_00AB8B: JSR SetDebugFlagsToFFFF
 #_00AB8E: JSL ROUTINE_00F149
 #_00AB92: TAY
 #_00AB93: BNE .exit
@@ -7693,7 +7702,7 @@ ZigZagWipeIn:
 
 #_00ABF9: STZ.w $051A
 
-#_00ABFC: JSR Set_56E_54E_to_FFFF
+#_00ABFC: JSR SetDebugFlagsToFFFF
 
 .exit
 #_00ABFF: RTS
@@ -7912,7 +7921,7 @@ CODE_00AD16:
 #_00AD32: BRA .exit
 
 CODE_00AD34:
-#_00AD34: JSR QueueSFX_FD
+#_00AD34: JSR QuestMusicFadeOut
 #_00AD37: JSR AdvanceGameModule
 
 .exit
@@ -7941,7 +7950,7 @@ DepartBuilding:
 #_00AD60: LDA.w #$0010
 #_00AD63: STA.w $051A
 
-#_00AD66: JSR Set_56E_54E_to_FFFF
+#_00AD66: JSR SetDebugFlagsToFFFF
 
 #_00AD69: LDA.w #$0F00
 
@@ -8018,7 +8027,7 @@ CODE_00ADA9:
 #_00ADC4: TAX
 
 #_00ADC5: LDA.w #pointers08E0D6>>16
-#_00ADC8: JSL ROUTINE_00DC8C_long
+#_00ADC8: JSL ROUTINE_00DC7E
 
 #_00ADCC: LDY.w #$3000
 #_00ADCF: LDX.w #$3000
@@ -8046,7 +8055,7 @@ CODE_00ADA9:
 #_00ADF9: LDA.l $7E7B26
 #_00ADFD: STA.w $0516
 
-#_00AE00: JSR Set_56E_54E_to_FFFF
+#_00AE00: JSR SetDebugFlagsToFFFF
 
 #_00AE03: LDA.w #$0002
 #_00AE06: LDX.w #data00ABD8
@@ -8097,7 +8106,7 @@ ZigZagWipeBackIn:
 
 #_00AE44: LDA.w #data00EC5E
 #_00AE47: LDY.w #data00EC5E>>16
-#_00AE4A: JSR ROUTINE_00ECEF_ParamterizedYA
+#_00AE4A: JSR RobustBulkDecompression_ParamterizedYA
 
 #_00AE4D: LDA.w #data00E4FB
 #_00AE50: LDX.w #data00E4FB>>16
@@ -8120,7 +8129,7 @@ ReturnFromBuilding:
 
 #_00AE69: STZ.w $051A
 
-#_00AE6C: JSR Set_56E_54E_to_FFFF
+#_00AE6C: JSR SetDebugFlagsToFFFF
 
 #_00AE6F: LDA.w #$0040 ; MODE 40
 #_00AE72: STA.w $0500
@@ -8221,7 +8230,7 @@ ROUTINE_00AEEA:
 
 #_00AF0F: STZ.w $05BA
 
-#_00AF12: JMP AdvanceGameModule_AndSet_54E_56E
+#_00AF12: JMP AdvanceGameModule_AndSetDebugFlags
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -8910,14 +8919,14 @@ SayGoodByeToShop:
 #_00B323: JSR LeaveBuilding_AC69
 
 #_00B326: LDA.l $7E2550
-#_00B32A: BNE CODE_00B354
+#_00B32A: BNE .finished
 
 #_00B32C: LDA.l $7E7A28
-#_00B330: BNE CODE_00B354
+#_00B330: BNE .finished
 
 #_00B332: LDA.l $7E7B38
 #_00B336: CMP.w #$0008
-#_00B339: BEQ CODE_00B348
+#_00B339: BEQ .bang_drum
 
 #_00B33B: JSR ROUTINE_00AC86
 
@@ -8925,17 +8934,19 @@ SayGoodByeToShop:
 #_00B341: TAX
 #_00B342: JSL ROUTINE_05D57A_long
 
-#_00B346: BRA CODE_00B354
+#_00B346: BRA .finished
 
-CODE_00B348:
+.bang_drum
 #_00B348: LDA.w #$0013 ; SFX 13
 #_00B34B: STA.w $04A2
 
 #_00B34E: JSR ROUTINE_00B361
 #_00B351: JSR AdvanceGameModule
 
-CODE_00B354:
+.finished
 #_00B354: JMP HandleShopBG3Scroll
+
+;---------------------------------------------------------------------------------------------------
 
 .pointers
 #_00B357: dw data05E35A
@@ -9656,7 +9667,7 @@ CODE_00B73C:
 #_00B74D: BCS CODE_00B75E
 
 #_00B74F: JSR AdvanceGameModule
-#_00B752: JSR QueueSFX_FD
+#_00B752: JSR QuestMusicFadeOut
 
 #_00B755: STZ.w $194C
 
@@ -9708,7 +9719,7 @@ CODE_00B78A:
 
 #_00B796: LDA.l pointers08E0D6,X
 #_00B79A: LDY.w #pointers08E0D6>>16
-#_00B79D: JMP ROUTINE_00ECEF_ParamterizedYA
+#_00B79D: JMP RobustBulkDecompression_ParamterizedYA
 
 ;===================================================================================================
 
@@ -9764,7 +9775,7 @@ CODE_00B7CF:
 
 #_00B7F0: JSR ROUTINE_00E129
 
-#_00B7F3: JMP AdvanceGameModule_AndSet_54E_56E
+#_00B7F3: JMP AdvanceGameModule_AndSetDebugFlags
 
 .exit
 #_00B7F6: RTS
@@ -9867,11 +9878,13 @@ ROUTINE_00B86E:
 #_00B88F: JSL SetLevelSong
 
 #_00B893: LDX.w $04FE
-#_00B896: JSL ROUTINE_01ACA2_long
+#_00B896: JSL DecompressPartnerSpawnFlair_wrapper_long
 
 #_00B89A: STZ.w $04F4
 
 #_00B89D: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 ; TODO "STATE XX"
 data00B89E:
@@ -10030,7 +10043,7 @@ data00B97C:
 
 ROUTINE_00B990:
 #_00B990: LDX.w #.table
-#_00B993: JSR BulkDecompressionViaTable_currentDB
+#_00B993: JSR BulkDecompression_currentDB
 
 #_00B996: JMP .continue
 
@@ -10154,7 +10167,7 @@ ROUTINE_00BA11:
 
 ROUTINE_00BA4B:
 #_00BA4B: LDX.w data00E55D,Y
-#_00BA4E: JSR BulkDecompressionViaTable_currentDB
+#_00BA4E: JSR BulkDecompression_currentDB
 
 #_00BA51: LDX.w #$0000
 #_00BA54: JSR ROUTINE_00BAB8
@@ -10165,7 +10178,7 @@ ROUTINE_00BA4B:
 ROUTINE_00BA5A:
 #_00BA5A: LDA.w #data00EC98>>16
 #_00BA5D: LDX.w #data00EC98
-#_00BA60: JSL BulkDecompressionViaTable_long
+#_00BA60: JSL BulkDecompression_long
 
 #_00BA64: RTS
 
@@ -10917,7 +10930,7 @@ ROUTINE_00BF54:
 
 #_00BF8D: LDY.w #$0002
 #_00BF90: LDX.w data00E55D,Y
-#_00BF93: JSR BulkDecompressionViaTable_currentDB
+#_00BF93: JSR BulkDecompression_currentDB
 
 #_00BF96: LDX.w #$0000
 #_00BF99: JSR ROUTINE_00BAB8
@@ -10941,7 +10954,7 @@ ROUTINE_00BFB7:
 #_00BFBA: JSR ROUTINE_00C030
 
 #_00BFBD: LDX.w #.table
-#_00BFC0: JSR BulkDecompressionViaTable_currentDB
+#_00BFC0: JSR BulkDecompression_currentDB
 #_00BFC3: JSR ROUTINE_00BA5A
 
 #_00BFC6: LDA.w #$0000
@@ -11549,6 +11562,7 @@ CODE_00C311:
 
 #_00C378: LDA.w data00C38A,Y
 #_00C37B: TAX
+
 #_00C37C: STA.w $04FE
 
 #_00C37F: JSL SpawnInNewPartner_long
@@ -11636,7 +11650,7 @@ LevelWipe:
 #_00C3EA: LDA.w #$0004
 #_00C3ED: TSB.w $0524
 
-#_00C3F0: JSR Set_56E_54E_to_FFFF
+#_00C3F0: JSR SetDebugFlagsToFFFF
 
 #_00C3F3: JSR PlayLevel
 
@@ -11647,7 +11661,7 @@ LevelWipe:
 
 #_00C3FD: LDA.w #data00EC5E
 #_00C400: LDY.w #data00EC5E>>16
-#_00C403: JSR ROUTINE_00ECEF_ParamterizedYA
+#_00C403: JSR RobustBulkDecompression_ParamterizedYA
 #_00C406: JSR AdvanceGameModule
 
 .exit
@@ -12562,7 +12576,7 @@ ROUTINE_00C978:
 
 #_00C98B: PLX
 
-#_00C98C: JSR BulkDecompressionViaTable_currentDB
+#_00C98C: JSR BulkDecompression_currentDB
 
 #_00C98F: LDX.w #$027E
 
@@ -12765,7 +12779,7 @@ ROUTINE_00CABC:
 #_00CABC: STZ.w $04F4
 
 #_00CABF: LDX.w #.table
-#_00CAC2: JSR BulkDecompressionViaTable_currentDB
+#_00CAC2: JSR BulkDecompression_currentDB
 
 #_00CAC5: LDA.w #$8000
 #_00CAC8: LDY.w #$007F
@@ -12835,7 +12849,7 @@ ROUTINE_00CABC:
 
 ROUTINE_00CB33:
 #_00CB33: LDX.w #.table
-#_00CB36: JSR BulkDecompressionViaTable_currentDB
+#_00CB36: JSR BulkDecompression_currentDB
 
 #_00CB39: JSR ROUTINE_00E28E
 
@@ -13145,7 +13159,7 @@ ROUTINE_00CCBC:
 #_00CCCD: PLA
 #_00CCCE: STZ.b $30
 
-#_00CCD0: JSL PrepEnemySpawnType0C_0396E3
+#_00CCD0: JSL PrepSpriteSpawnType0C_0396E3
 
 #_00CCD4: RTS
 
@@ -13202,7 +13216,7 @@ ROUTINE_00CCFA:
 ;===================================================================================================
 ROUTINE_00CD02:
 #_00CD02: JSR ROUTINE_00CCE5
-#_00CD05: JSL PrepEnemySpawnType0C_0396E3_00E8
+#_00CD05: JSL PrepSpriteSpawnType0C_0396E3_00E8
 
 #_00CD09: RTS
 
@@ -13243,7 +13257,7 @@ PrepareTitle:
 
 #_00CD34: LDA.w #data08E2D0>>16
 #_00CD37: LDX.w #data08E2D0
-#_00CD3A: JSL BulkDecompressionViaTable_long
+#_00CD3A: JSL BulkDecompression_long
 
 #_00CD3E: JSR ROUTINE_00E240
 
@@ -13372,7 +13386,7 @@ PrepareTitle:
 #_00CDF7: JSR ROUTINE_00CD0E
 #_00CDFA: JSR EnableNMIandVIRQandFBlank
 
-#_00CDFD: JMP AdvanceGameModule_AndSet_54E_56E
+#_00CDFD: JMP AdvanceGameModule_AndSetDebugFlags
 
 ;===================================================================================================
 
@@ -13480,7 +13494,7 @@ TitleScreen:
 #_00CEA3: JSR ROUTINE_00E23A
 #_00CEA6: JSR TitleScreen_CECE
 
-#_00CEA9: JSR Set_56E_54E_to_FFFF
+#_00CEA9: JSR SetDebugFlagsToFFFF
 
 #_00CEAC: LDA.w $0506
 #_00CEAF: ASL A
@@ -13665,7 +13679,7 @@ CODE_00CFA4:
 
 #_00CFB4: LDA.w #.table
 #_00CFB7: LDY.w #.table>>16
-#_00CFBA: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
+#_00CFBA: JSL QuadtableDataWriter_ParameterizedBounce_long
 
 #_00CFBE: BRA .finished
 
@@ -14145,7 +14159,7 @@ TitleScreen_0B:
 #_00D22D: CMP.w #$0800
 #_00D230: BCC CODE_00D240
 
-#_00D232: JSR QueueSFX_FD
+#_00D232: JSR QuestMusicFadeOut
 
 #_00D235: STZ.w $05E0
 
@@ -14540,8 +14554,9 @@ ROUTINE_00D3EC:
 
 ;===================================================================================================
 
-AdvanceGameModule_AndSet_54E_56E:
+AdvanceGameModule_AndSetDebugFlags:
 #_00D3FA: LDA.w #$0001
+
 #_00D3FD: STA.w $054E
 #_00D400: STA.w $056E
 
@@ -15123,7 +15138,7 @@ Decompress:
 #_00D67C: LSR A
 #_00D67D: TAY
 
-; current WRAM - offset - 1 (carry is guaranteed to not be set)
+; current - offset - 1 (carry is guaranteed to not be set)
 #_00D67E: LDA.b $24
 #_00D680: SBC.b $28
 #_00D682: STA.b $28
@@ -15492,6 +15507,7 @@ CODE_00D855:
 
 #_00D85B: INY
 #_00D85C: INY
+
 #_00D85D: DEX
 #_00D85E: DEX
 #_00D85F: CPX.b $24
@@ -15977,6 +15993,7 @@ CODE_00DADD:
 
 #_00DAE9: DEX
 #_00DAEA: DEX
+
 #_00DAEB: TXA
 #_00DAEC: AND.w #$00FF
 #_00DAEF: BNE CODE_00DAAD
@@ -15996,6 +16013,7 @@ CODE_00DAF6:
 #_00DAFD: SEC
 #_00DAFE: SBC.w #$0010
 #_00DB01: TAX
+
 #_00DB02: CMP.w #$FFF0
 #_00DB05: BCC CODE_00DAAD
 
@@ -16209,19 +16227,19 @@ DecompressToBank7FThing:
 
 ;===================================================================================================
 
-BulkDecompressionViaTable_long:
+BulkDecompression_long:
 #_00DBEA: PHB
 #_00DBEB: PHK
 #_00DBEC: PLB
 
-#_00DBED: JSR BulkDecompressionViaTable
+#_00DBED: JSR BulkDecompression
 
 #_00DBF0: PLB
 #_00DBF1: RTL
 
 ;===================================================================================================
 
-BulkDecompressionViaTable_currentDB:
+BulkDecompression_currentDB:
 #_00DBF2: PHB
 #_00DBF3: PHB
 #_00DBF4: PLA
@@ -16229,7 +16247,7 @@ BulkDecompressionViaTable_currentDB:
 
 ;===================================================================================================
 
-BulkDecompressionViaTable:
+BulkDecompression:
 #_00DBF8: STA.b $36
 #_00DBFA: STX.b $34
 
@@ -16351,12 +16369,12 @@ BulkDecompressionViaTable:
 
 ;===================================================================================================
 
-ROUTINE_00DC8C_long:
+ROUTINE_00DC7E:
 #_00DC7E: PHB
 #_00DC7F: PHK
 #_00DC80: PLB
 
-#_00DC81: JSR ROUTINE_00DC8C
+#_00DC81: JSR .execute
 
 #_00DC84: PLB
 #_00DC85: RTL
@@ -16364,7 +16382,7 @@ ROUTINE_00DC8C_long:
 ;===================================================================================================
 ; TODO unused?
 ;===================================================================================================
-ROUTINE_00DC8C_currentDB:
+#ROUTINE_00DC7E_currentDB:
 #_00DC86: PHB
 #_00DC87: PHB
 #_00DC88: PLA
@@ -16374,7 +16392,7 @@ ROUTINE_00DC8C_currentDB:
 ;===================================================================================================
 ; data tables are basically the same as bulk decompression table;
 ;===================================================================================================
-ROUTINE_00DC8C:
+.execute
 #_00DC8C: STA.b $36
 #_00DC8E: STX.b $34
 
@@ -17156,7 +17174,7 @@ AnimateCommonItems:
 #_00E03A: SBC.w #$000A
 #_00E03D: BCC .exit
 
-.was_zero:
+.was_zero
 #_00E03F: STA.b $20
 
 #_00E041: ASL A
@@ -17514,15 +17532,15 @@ ROUTINE_00E221:
 
 ;===================================================================================================
 
-ROUTINE_00ECEF_ParamterizedYA:
+RobustBulkDecompression_ParamterizedYA:
 #_00E229: STA.b $20
 #_00E22B: STY.b $22
 
-#_00E22D: JMP ROUTINE_00ECEF
+#_00E22D: JMP RobustBulkDecompression
 
 ;===================================================================================================
 
-Set_56E_54E_to_FFFF:
+SetDebugFlagsToFFFF:
 #_00E230: LDA.w #$FFFF
 #_00E233: STA.w $056E
 #_00E236: STA.w $054E
@@ -17614,7 +17632,7 @@ ROUTINE_00E28E:
 #_00E293: LDA.w #data08D450>>16
 #_00E296: STA.b $22
 
-#_00E298: JMP QuadDataWriter_00FBCB
+#_00E298: JMP QuadtableDataWriter
 
 ;===================================================================================================
 
@@ -17649,8 +17667,8 @@ QueueSFX_1E:
 
 ;===================================================================================================
 
-QueueSFX_FD:
-#_00E2B6: LDA.w #$00FD ; SFX FD
+QuestMusicFadeOut:
+#_00E2B6: LDA.w #$00FD ; SFX FD - Fade music
 #_00E2B9: STA.w $04A0
 
 #_00E2BC: RTS
@@ -17762,7 +17780,7 @@ ROUTINE_00E316:
 #_00E322: BPL .indexed
 
 #_00E324: LDA.w #ROUTINE_00E316>>16
-#_00E327: JSL BulkDecompressionViaTable_long
+#_00E327: JSL BulkDecompression_long
 
 #_00E32B: BRA .exit
 
@@ -17852,7 +17870,7 @@ ROUTINE_00E37E:
 #_00E3B2: TAX
 
 #_00E3B3: LDA.w #.transfer_properties>>16
-#_00E3B6: JSL BulkDecompressionViaTable_long
+#_00E3B6: JSL BulkDecompression_long
 
 #_00E3BA: PLX
 
@@ -17860,7 +17878,7 @@ ROUTINE_00E37E:
 #_00E3BE: TAX
 
 #_00E3BF: LDA.w #.transfer_properties>>16
-#_00E3C2: JSL BulkDecompressionViaTable_long
+#_00E3C2: JSL BulkDecompression_long
 
 #_00E3C6: RTS
 
@@ -19158,19 +19176,19 @@ data00ECDE:
 
 ;===================================================================================================
 
-ROUTINE_00ECEF_long:
+RobustBulkDecompression_long:
 #_00ECE7: PHB
 #_00ECE8: PHK
 #_00ECE9: PLB
 
-#_00ECEA: JSR ROUTINE_00ECEF
+#_00ECEA: JSR RobustBulkDecompression
 
 #_00ECED: PLB
 #_00ECEE: RTL
 
 ;===================================================================================================
 
-ROUTINE_00ECEF:
+RobustBulkDecompression:
 #_00ECEF: LDA.b $20
 #_00ECF1: STA.l $7E2540
 
@@ -20559,7 +20577,7 @@ PlayerSelect_00:
 #_00F469: JSR DisableInterruptsAndHDMAbutEnableFBlank
 
 #_00F46C: LDX.w #.table
-#_00F46F: JSR BulkDecompressionViaTable_currentDB
+#_00F46F: JSR BulkDecompression_currentDB
 
 #_00F472: LDA.w #data218400
 #_00F475: LDY.w #data218400>>16
@@ -20605,6 +20623,7 @@ PlayerSelect_00:
 
 #_00F4BF: INC.w $056E
 #_00F4C2: INC.w $054E
+
 #_00F4C5: INC.w $0506
 
 #_00F4C8: RTS
@@ -21943,14 +21962,14 @@ CODE_00FB92:
 
 ;===================================================================================================
 
-QuadDataWriter_00FBCB_long:
-#_00FBC7: JSR QuadDataWriter_00FBCB
+QuadtableDataWriter_long:
+#_00FBC7: JSR QuadtableDataWriter
 
 #_00FBCA: RTL
 
 ;===================================================================================================
 
-QuadDataWriter_00FBCB:
+QuadtableDataWriter:
 #_00FBCB: PHB
 #_00FBCC: PEA.w $7E7E
 #_00FBCF: PLB

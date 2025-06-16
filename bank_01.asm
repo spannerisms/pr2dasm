@@ -95,20 +95,20 @@ ROUTINE_018069:
 #_018069: LDA.w $19FC
 #_01806C: ORA.w $19FE
 #_01806F: AND.w #$0080
-#_018072: BEQ CODE_0180A3
+#_018072: BEQ .fail
 
 #_018074: JSR TestForTutorialLevel
 #_018077: BNE .not_tutorial
 
 #_018079: LDA.w $1AD0
 #_01807C: CMP.w $1AE0
-#_01807F: BNE CODE_0180A3
+#_01807F: BNE .fail
 
 #_018081: LDA.l $7E7A72
 #_018085: CMP.w #$0006
-#_018088: BNE CODE_0180A3
+#_018088: BNE .fail
 
-.not_tutorial:
+.not_tutorial
 #_01808A: LDA.w $05CE
 #_01808D: LSR A
 #_01808E: TAX
@@ -116,7 +116,7 @@ ROUTINE_018069:
 #_01808F: LDA.l data07E8A3,X
 #_018093: AND.w #$00FF
 #_018096: CMP.w #$00FF
-#_018099: BEQ CODE_0180A3
+#_018099: BEQ .fail
 
 #_01809B: STA.w $05CE
 
@@ -126,18 +126,21 @@ ROUTINE_018069:
 
 #_0180A2: RTS
 
-CODE_0180A3:
+.fail
 #_0180A3: CLC
 
 #_0180A4: RTS
 
-CODE_0180A5:
+;---------------------------------------------------------------------------------------------------
+
+ROUTINE_0180A5:
 #_0180A5: STZ.w $19CA
 
 #_0180A8: LDA.w $04E6
 #_0180AB: LDY.w $04E8
-#_0180AE: JSR ROUTINE_019755
-#_0180B1: JSR ROUTINE_01A26D
+#_0180AE: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+
+#_0180B1: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_0180B4: JMP Pocky_9856
 
@@ -285,7 +288,7 @@ ROUTINE_0181D9:
 
 ;===================================================================================================
 
-ROUTINE_0181F1:
+ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000:
 #_0181F1: AND.w #$0FF0
 #_0181F4: ORA.w #$000E
 #_0181F7: TAX
@@ -345,17 +348,17 @@ Pocky_Act:
 #_01823E: STA.w $19FE
 
 #_018241: INC.w $19E2
-#_018244: BNE CODE_018249
+#_018244: BNE .no_overflow
 
 #_018246: DEC.w $19E2
 
-CODE_018249:
+.no_overflow
 #_018249: LDA.w $18E2
-#_01824C: BEQ CODE_018251
+#_01824C: BEQ .act_now
 
 #_01824E: JSR ResetSomePockyStuff_018B34
 
-CODE_018251:
+.act_now
 #_018251: LDX.w $19CE
 #_018254: JSR (PockyVectors,X)
 
@@ -478,9 +481,8 @@ PockyVectors:
 
 Pocky_StateBC:
 #_018330: LDY.w #$0001
-
 #_018333: LDA.w #$004A
-#_018336: JSR ROUTINE_019755
+#_018336: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 
 #_018339: INC.w $19DC
 
@@ -497,9 +499,8 @@ CODE_018347:
 
 Pocky_StateBE:
 #_01834A: LDY.w #$0001
-
 #_01834D: LDA.w #$004B
-#_018350: JSR ROUTINE_019755
+#_018350: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 
 #_018353: INC.w $19DC
 
@@ -516,9 +517,8 @@ CODE_018361:
 
 Pocky_StateC0:
 #_018364: LDY.w #$0001
-
 #_018367: LDA.w #$0043
-#_01836A: JSR ROUTINE_019755
+#_01836A: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_01836D: BNE CODE_01837E
 
 #_01836F: INC.w $19DC
@@ -603,20 +603,20 @@ Pocky_Cutscene_83E9:
 
 #_0183EC: LDA.l $7E7A4C
 #_0183F0: CMP.w $19F0
-#_0183F3: BCC CODE_0183F8
+#_0183F3: BCC .not_at_max_y
 
 #_0183F5: LDY.w #$0025
 
-CODE_0183F8:
+.not_at_max_y
 #_0183F8: TYA
 #_0183F9: STA.l $7E7A4E
 
-#_0183FD: JMP ROUTINE_0185AB
+#_0183FD: JMP ExecutePockyVectorFrom7E7A50
 
 ;===================================================================================================
 
 Pocky_Cutscene_8400:
-#_018400: JSR ROUTINE_0184D9
+#_018400: JSR Increment_7E7A52
 #_018403: CMP.w #$0020
 #_018406: BNE CODE_018414
 
@@ -625,17 +625,17 @@ Pocky_Cutscene_8400:
 
 #_01840E: JSL ROUTINE_00CCD5
 
-#_018412: BRA CODE_01841F
+#_018412: BRA .perform_action
 
 CODE_018414:
 #_018414: CMP.w #$0040
-#_018417: BCC CODE_01841F
+#_018417: BCC .perform_action
 
 #_018419: LDY.w #$001F
 #_01841C: JMP Pocky_Cutscene_8452
 
-CODE_01841F:
-#_01841F: JMP ROUTINE_0185AB
+.perform_action
+#_01841F: JMP ExecutePockyVectorFrom7E7A50
 
 ;===================================================================================================
 
@@ -721,10 +721,10 @@ CODE_018492:
 
 #_01849B: LDY.w data0184AA+2,X
 #_01849E: LDA.w data0184AA+0,X
-#_0184A1: JSR ROUTINE_019755
+#_0184A1: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 
 CODE_0184A4:
-#_0184A4: JSR ROUTINE_01A26D
+#_0184A4: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_0184A7: JMP Pocky_9856
 
@@ -745,7 +745,7 @@ Pocky_Cutscene_84C6:
 #_0184C6: STZ.w $19CC
 #_0184C9: STZ.w $19EC
 
-#_0184CC: JSR ROUTINE_0184D9
+#_0184CC: JSR Increment_7E7A52
 #_0184CF: CMP.w #$0040
 #_0184D2: BCC CODE_0184D7
 
@@ -756,7 +756,7 @@ CODE_0184D7:
 
 ;===================================================================================================
 
-ROUTINE_0184D9:
+Increment_7E7A52:
 #_0184D9: LDA.l $7E7A52
 #_0184DD: INC A
 #_0184DE: STA.l $7E7A52
@@ -766,7 +766,7 @@ ROUTINE_0184D9:
 ;===================================================================================================
 
 Pocky_Cutscene_84E3:
-#_0184E3: JSR ROUTINE_0184D9
+#_0184E3: JSR Increment_7E7A52
 #_0184E6: CMP.w #$0078
 #_0184E9: BCC .do_nothing
 
@@ -782,7 +782,7 @@ Pocky_Cutscene_84E3:
 ;===================================================================================================
 
 #Pocky_Cutscene_84FC:
-#_0184FC: JSR ROUTINE_0184D9
+#_0184FC: JSR Increment_7E7A52
 #_0184FF: CMP.w #$0078
 #_018502: BCC .do_nothing
 
@@ -800,7 +800,7 @@ Pocky_Cutscene_84E3:
 #_018514: STA.l $7E7A4E
 
 .do_nothing
-#_018518: JMP ROUTINE_0185AB
+#_018518: JMP ExecutePockyVectorFrom7E7A50
 
 ;===================================================================================================
 
@@ -812,7 +812,7 @@ Pocky_Cutscene_851B:
 
 CODE_018523:
 #_018523: JSR ROUTINE_01A285_0000
-#_018526: JSR ROUTINE_01A26D
+#_018526: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018529: LDA.w #$8000
 #_01852C: STA.w $19FC
@@ -855,7 +855,7 @@ Pocky_Cutscene_8559:
 #_018561: JSR ROUTINE_018567
 
 CODE_018564:
-#_018564: JMP ROUTINE_0185AB
+#_018564: JMP ExecutePockyVectorFrom7E7A50
 
 ;===================================================================================================
 
@@ -911,10 +911,12 @@ CODE_0185A8:
 
 ;===================================================================================================
 
-ROUTINE_0185AB:
+ExecutePockyVectorFrom7E7A50:
 #_0185AB: LDA.l $7E7A50
 
-CODE_0185AF:
+;===================================================================================================
+
+ExecutePockyVectorInA:
 #_0185AF: TAX
 
 #_0185B0: JMP (PockyVectors,X)
@@ -931,7 +933,7 @@ Pocky_Cutscene_85B9:
 #_0185B9: LDA.l $7E7A50
 #_0185BD: STA.w $19CE
 
-#_0185C0: BRA CODE_0185AF
+#_0185C0: BRA ExecutePockyVectorInA
 
 ;===================================================================================================
 
@@ -959,7 +961,7 @@ CODE_0185DD:
 ;===================================================================================================
 
 Pocky_Cutscene_85DF:
-#_0185DF: JSR ROUTINE_0184D9
+#_0185DF: JSR Increment_7E7A52
 #_0185E2: CMP.w #$0040
 #_0185E5: BCC CODE_0185FE
 
@@ -978,7 +980,7 @@ CODE_0185FB:
 #_0185FB: JMP CODE_01959E
 
 CODE_0185FE:
-#_0185FE: JMP ROUTINE_0185AB
+#_0185FE: JMP ExecutePockyVectorFrom7E7A50
 
 ;===================================================================================================
 
@@ -1033,7 +1035,7 @@ CODE_018645:
 #_01864B: STA.w $19F0
 
 CODE_01864E:
-#_01864E: JSR ROUTINE_01A26D
+#_01864E: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018651: JMP Pocky_9856
 
@@ -1076,7 +1078,7 @@ Pocky_StateB0_B2:
 
 #_01868D: JSR ROUTINE_019F0C
 
-#_018690: JMP CODE_019DA3
+#_018690: JMP .no_toss
 
 ;===================================================================================================
 
@@ -1111,7 +1113,7 @@ CODE_0186B7:
 
 CODE_0186BB:
 #_0186BB: JSR ROUTINE_0186F6
-#_0186BE: JSR ROUTINE_01A26D
+#_0186BE: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_0186C1: JMP Pocky_9856
 
@@ -1128,7 +1130,7 @@ ROUTINE_0186C4:
 
 #_0186D1: PLY
 
-#_0186D2: JSR ROUTINE_019755
+#_0186D2: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 
 #_0186D5: RTS
 
@@ -1275,10 +1277,10 @@ Pocky_MagicMerge_RobedWithEars:
 ;===================================================================================================
 
 Pocky_MagicMerge:
-#_01878A: JSR ROUTINE_019755
+#_01878A: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_01878D: JSR ROUTINE_01A285_0000
 #_018790: JSR ROUTINE_0186F6
-#_018793: JSR ROUTINE_01A26D
+#_018793: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018796: JMP Pocky_9856
 
@@ -1308,7 +1310,7 @@ ROUTINE_0187A9:
 #_0187BA: STA.l $7E7A70
 
 CODE_0187BE:
-#_0187BE: JSR ROUTINE_019C70
+#_0187BE: JSR ROUTINE_019C70_EnableHDMAs
 #_0187C1: JSL ROUTINE_04F926
 
 #_0187C5: STZ.w $19CA
@@ -1328,7 +1330,7 @@ CODE_0187BE:
 #_0187DA: LDA.w #$003C
 #_0187DD: STA.w $194E
 
-#_0187E0: JMP ROUTINE_01AA54
+#_0187E0: JMP ROUTINE_01AA54_ResetsStuff
 
 CODE_0187E3:
 #_0187E3: LDA.w $05CE
@@ -1439,7 +1441,7 @@ CODE_018889:
 #_01888C: JSR ROUTINE_01A285
 
 CODE_01888F:
-#_01888F: JMP ROUTINE_01A26D
+#_01888F: JMP ROUTINE_01A26D_CachesPockyCoordinates
 
 ;===================================================================================================
 
@@ -1500,7 +1502,7 @@ CODE_0188CC:
 
 #_0188EE: LDA.w #.table
 #_0188F1: LDY.w #.table>>16
-#_0188F4: JSL ROUTINE_08BD65
+#_0188F4: JSL RobustBulkDecompressionAndSetMode40
 
 #_0188F8: LDA.w #$FFFF
 #_0188FB: STA.l $7E7A0C
@@ -1509,7 +1511,7 @@ CODE_0188CC:
 #_018902: STA.w $19CE
 
 CODE_018905:
-#_018905: JSR ROUTINE_01A26D
+#_018905: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018908: JMP ROUTINE_019947
 
@@ -1530,7 +1532,7 @@ Pocky_InHeaven:
 #_01891A: STZ.b $28
 
 #_01891C: LDA.w #$810C ; SPRITE 810C
-#_01891F: JSR ROUTINE_018933
+#_01891F: JSR ROUTINE_018933_SpawnSprite
 
 #_018922: STZ.w $19DC
 
@@ -1545,7 +1547,7 @@ Pocky_InHeaven:
 
 ;===================================================================================================
 
-ROUTINE_018933:
+ROUTINE_018933_SpawnSprite:
 #_018933: STA.b $26
 
 #_018935: LDA.w $19EE
@@ -1557,7 +1559,7 @@ ROUTINE_018933:
 #_01893F: LDA.w #$000E
 #_018942: STA.b $24
 
-#_018944: JSL PrepEnemySpawn_long
+#_018944: JSL PrepSpriteSpawn_long
 
 #_018948: RTS
 
@@ -1572,7 +1574,7 @@ Pocky_GameOverDescend:
 
 #_018954: LDA.w #.table
 #_018957: LDY.w #.table>>16
-#_01895A: JSL QuadDataWriter_00FBCB_ParameterizedBounce_long
+#_01895A: JSL QuadtableDataWriter_ParameterizedBounce_long
 
 #_01895E: LDA.w #$0086 ; STATE 86
 #_018961: STA.w $19CE
@@ -1630,7 +1632,7 @@ Pocky_GameOverFade:
 
 #_0189B2: LDA.w #data07E9AB
 #_0189B5: LDY.w #data07E9AB>>16
-#_0189B8: JSL ROUTINE_08BD65
+#_0189B8: JSL RobustBulkDecompressionAndSetMode40
 
 #_0189BC: INC.w $056E
 
@@ -1686,14 +1688,13 @@ Pocky_WalkingTowardsDog:
 
 #_018A03: LDA.w #$0008
 #_018A06: JSR ROUTINE_01A285
-#_018A09: JSR ROUTINE_01A26D
+#_018A09: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018A0C: SEC
-
 #_018A0D: LDA.w $19F0
 #_018A10: SBC.w $05E8
 #_018A13: CMP.w #$0400
-#_018A16: BCS CODE_018A40
+#_018A16: BCS .delay_message
 
 #_018A18: LDX.w #Message_08902C>>16
 #_018A1B: LDA.w #Message_08902C
@@ -1712,7 +1713,7 @@ Pocky_WalkingTowardsDog:
 #_018A3A: LDA.w #$0078 ; STATE 78
 #_018A3D: STA.w $19CE
 
-CODE_018A40:
+.delay_message
 #_018A40: LDY.w #$0001
 
 #_018A43: LDA.w $19CC
@@ -1729,7 +1730,7 @@ Pocky_TheresTheDog:
 #_018A54: LDA.w $05C4
 #_018A57: ADC.w #$1000
 #_018A5A: CMP.w #$1600
-#_018A5D: BCC CODE_018A6B
+#_018A5D: BCC .delay_partner_change
 
 #_018A5F: LDA.w #$013E ; PARTNER 013E
 #_018A62: STA.w $05CE
@@ -1737,14 +1738,14 @@ Pocky_TheresTheDog:
 #_018A65: LDA.w #$007A ; STATE 7A
 #_018A68: STA.w $19CE
 
-CODE_018A6B:
+.delay_partner_change
 #_018A6B: SEC
 
 #_018A6C: LDA.w $0562
 #_018A6F: SBC.w #$0010
 #_018A72: STA.w $0562
 
-#_018A75: JSR ROUTINE_01A26D
+#_018A75: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018A78: LDY.w #$0001
 #_018A7B: LDA.w $19CC
@@ -1758,7 +1759,7 @@ CODE_018A6B:
 ;===================================================================================================
 
 Pocky_TalkingToDog:
-#_018A8C: JSR ROUTINE_01A26D
+#_018A8C: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018A8F: LDY.w #$0001
 #_018A92: LDA.w #$0001
@@ -1780,8 +1781,8 @@ Pocky_AbsorbingDog:
 Pocky_MountingDog:
 #_018AA9: LDY.w #$0017
 #_018AAC: LDA.w #$0007
-#_018AAF: JSR ROUTINE_019755
-#_018AB2: BNE CODE_018AFB
+#_018AAF: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_018AB2: BNE .delay_state_change
 
 #_018AB4: LDA.w #$0008
 #_018AB7: STA.l $7E7A20
@@ -1814,7 +1815,7 @@ Pocky_MountingDog:
 #_018AF5: LDA.w #$0020
 #_018AF8: STA.w $1F2E
 
-CODE_018AFB:
+.delay_state_change
 #_018AFB: JMP Pocky_9856
 
 ;===================================================================================================
@@ -1875,7 +1876,7 @@ ROUTINE_018B41:
 #_018B44: STZ.b $30
 
 #_018B46: LDA.w #$832C ; SPRITE 832C
-#_018B49: JSR ROUTINE_018933
+#_018B49: JSR ROUTINE_018933_SpawnSprite
 
 #_018B4C: LDA.w #$00B4 ; STATE B4
 #_018B4F: STA.w $19CE
@@ -1900,7 +1901,7 @@ Pocky_RidingDog:
 #_018B69: LDA.w #$0008 ; SFX 08
 #_018B6C: STA.w $04A2
 
-#_018B6F: BRA CODE_018BB9
+#_018B6F: BRA ROUTINE_018BB9
 
 CODE_018B71:
 #_018B71: JSR ROUTINE_018007
@@ -1919,7 +1920,7 @@ ROUTINE_018B83:
 #_018B86: STA.w $19CC
 #_018B89: STA.w $19EC
 
-#_018B8C: JSR ROUTINE_01A26D
+#_018B8C: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018B8F: LDA.w $19FC
 #_018B92: AND.w #$4000
@@ -1947,7 +1948,9 @@ CODE_018BB2:
 #_018BB2: LDY.w #$0017
 #_018BB5: JSL ROUTINE_04F828
 
-CODE_018BB9:
+;===================================================================================================
+
+ROUTINE_018BB9:
 #_018BB9: JSR ROUTINE_018BC2
 #_018BBC: JSR ROUTINE_018C7E
 
@@ -1957,10 +1960,10 @@ CODE_018BB9:
 
 ROUTINE_018BC2:
 #_018BC2: LDA.w $19DC
-#_018BC5: BEQ CODE_018BDA
+#_018BC5: BEQ .already_zero
 
 #_018BC7: DEC.w $19DC
-#_018BCA: BNE CODE_018BD8
+#_018BCA: BNE .just_exit
 
 #_018BCC: LDA.w #$FFBA
 #_018BCF: STA.w $19E0
@@ -1968,16 +1971,18 @@ ROUTINE_018BC2:
 #_018BD2: LDA.w #$0008
 #_018BD5: STA.w $194C
 
-CODE_018BD8:
+.just_exit
 #_018BD8: BRA .exit
 
-CODE_018BDA:
+;===================================================================================================
+
+.already_zero
 #_018BDA: LDA.w $19E0
-#_018BDD: BMI CODE_018BE2
+#_018BDD: BMI .skip_increment
 
 #_018BDF: INC.w $194C
 
-CODE_018BE2:
+.skip_increment
 #_018BE2: CLC
 
 #_018BE3: LDA.w $19E0
@@ -1986,19 +1991,19 @@ CODE_018BE2:
 
 #_018BEC: CLC
 #_018BED: ADC.w $19CA
-#_018BF0: BMI CODE_018C03
+#_018BF0: BMI .dont_spawn
 
 #_018BF2: STZ.b $30
 
 #_018BF4: LDA.w #$8328 ; SPRITE 8328
-#_018BF7: JSR ROUTINE_018933
+#_018BF7: JSR ROUTINE_018933_SpawnSprite
 
 #_018BFA: LDA.w #$000A
 #_018BFD: STA.w $19DC
 
 #_018C00: LDA.w #$0000
 
-CODE_018C03:
+.dont_spawn
 #_018C03: STA.w $19CA
 
 .exit
@@ -2021,7 +2026,7 @@ Pocky_ThrowingCardsOnDog:
 #_018C1C: LDA.w #$0008 ; SFX 08
 #_018C1F: STA.w $04A2
 
-#_018C22: JMP CODE_018BB9
+#_018C22: JMP ROUTINE_018BB9
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -2038,7 +2043,7 @@ CODE_018C25:
 
 #_018C3A: LDA.w #$0008
 #_018C3D: JSR ROUTINE_01A285
-#_018C40: JSR ROUTINE_01A26D
+#_018C40: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018C43: LDA.w $19D6
 #_018C46: CMP.w #$0005
@@ -2054,7 +2059,7 @@ CODE_018C25:
 CODE_018C59:
 #_018C59: LDA.w #$0005
 #_018C5C: LDY.w #$0017
-#_018C5F: JSR ROUTINE_019755
+#_018C5F: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_018C62: BNE CODE_018C6A
 
 #_018C64: LDA.w #$0072 ; STATE 72
@@ -2082,14 +2087,14 @@ ROUTINE_018C7E:
 #_018C83: BMI CODE_018C8A
 
 CODE_018C85:
-#_018C85: LDA.w ##data16BC00
+#_018C85: LDA.w #data16BC00
 #_018C88: BRA CODE_018C97
 
 CODE_018C8A:
 #_018C8A: CMP.w #$FFA0
 #_018C8D: BCS CODE_018C94
 
-#_018C8F: LDA.w ##data16B900
+#_018C8F: LDA.w #data16B900
 #_018C92: BRA CODE_018C97
 
 CODE_018C94:
@@ -2100,7 +2105,7 @@ CODE_018C94:
 CODE_018C97:
 #_018C97: STA.b $3C
 
-#_018C99: LDA.w #$0016
+#_018C99: LDA.w #data16BC00>>16
 #_018C9C: STA.b $3E
 
 #_018C9E: LDA.w #$6420
@@ -2169,6 +2174,7 @@ Pocky_Cutscene_RobedWithEars:
 
 Pocky_Cutscene_Main:
 #_018CF1: JSL ROUTINE_04F843
+
 #_018CF5: JSR ROUTINE_01A285_0000
 
 #_018CF8: LDA.w #$0000
@@ -2181,12 +2187,12 @@ Pocky_Cutscene_Main:
 #_018D0A: STA.w $19F8
 
 #_018D0D: JSR ROUTINE_019F0C
-#_018D10: JSR ROUTINE_01A26D
+#_018D10: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018D13: DEC.w $19DE
-#_018D16: BNE CODE_018D37
+#_018D16: BNE .delay
 
-#_018D18: JSR ROUTINE_01AA54
+#_018D18: JSR ROUTINE_01AA54_ResetsStuff
 
 #_018D1B: LDA.w #$00DC
 #_018D1E: TRB.w $0536
@@ -2196,12 +2202,13 @@ Pocky_Cutscene_Main:
 
 #_018D28: LDA.w #$0004
 #_018D2B: TRB.w $0524
+
 #_018D2E: INC.w $056E
 
 #_018D31: LDA.w #$0060 ; MODE 60
 #_018D34: STA.w $0500
 
-CODE_018D37:
+.delay
 #_018D37: JMP Pocky_9856
 
 ;===================================================================================================
@@ -2212,7 +2219,7 @@ Pocky_StartingLevel:
 
 #_018D40: LDA.w #$0008
 #_018D43: JSR ROUTINE_01A285
-#_018D46: JSR ROUTINE_01A26D
+#_018D46: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018D49: LDY.w #$0001
 #_018D4C: LDA.w $19CC
@@ -2222,10 +2229,12 @@ Pocky_StartingLevel:
 #_018D56: JSL ROUTINE_04F828
 
 #_018D5A: LDA.w $0500
-#_018D5D: CMP.w #$003D
+#_018D5D: CMP.w #$003D ; MODE 3D
 #_018D60: BNE CODE_018D65
 
 #_018D62: JMP Pocky_9856
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_018D65:
 #_018D65: CMP.w #$003F
@@ -2243,13 +2252,12 @@ CODE_018D65:
 #_018D7B: STZ.w $19EC
 
 #_018D7E: SEC
-
 #_018D7F: LDA.w $19CE
 #_018D82: SBC.w #$0056 ; STATE 58 (minus 2)
 #_018D85: STA.w $19CE
 
 #_018D88: LDX.w $04FE
-#_018D8B: JSL ROUTINE_01ACA2_long
+#_018D8B: JSL DecompressPartnerSpawnFlair_wrapper_long
 
 #_018D8F: LDA.w #$0000
 #_018D92: STA.l $7E7A0C
@@ -2370,11 +2378,11 @@ ROUTINE_018E3C:
 #_018E3C: LDA.w $194C
 #_018E3F: ADC.w #$1000
 #_018E42: CMP.w #$0E00
-#_018E45: BCS CODE_018E4A
+#_018E45: BCS .dont_reset
 
 #_018E47: STZ.w $19DE
 
-CODE_018E4A:
+.dont_reset
 #_018E4A: LDA.w #$FF00
 #_018E4D: CLC
 #_018E4E: ADC.w $194C
@@ -2442,10 +2450,10 @@ Pocky_Returning_Main:
 #_018EA8: STA.w $19F8
 
 #_018EAB: JSR ROUTINE_019F0C
-#_018EAE: JSR ROUTINE_01A26D
+#_018EAE: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018EB1: DEC.w $19DE
-#_018EB4: BNE CODE_018EC4
+#_018EB4: BNE .delay
 
 #_018EB6: LDA.l $7E7B30
 #_018EBA: SBC.w #$003C
@@ -2454,7 +2462,7 @@ Pocky_Returning_Main:
 #_018EBE: LDA.w .states,Y
 #_018EC1: STA.w $19CE
 
-CODE_018EC4:
+.delay
 #_018EC4: JMP Pocky_9856
 
 ;---------------------------------------------------------------------------------------------------
@@ -2471,7 +2479,8 @@ CODE_018EC4:
 
 Pocky_PatronizingShop:
 #_018ED3: JSR ResetJoypad_and_ResetSomePockyStuff_018B34
-#_018ED6: JSR ROUTINE_019035
+
+#_018ED6: JSR ROUTINE_019035_SomethingWithPalettes
 
 #_018ED9: LDA.w #$FFFF
 #_018EDC: STA.w $05BA
@@ -2494,13 +2503,15 @@ CODE_018EF3:
 
 #_018EF6: JMP Pocky_9856
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_018EF9:
 #_018EF9: LDA.l $7E2530
 #_018EFD: BNE CODE_018EF3
 
 #_018EFF: LDX.w #data07F191
 #_018F02: LDA.w #data07F191>>16
-#_018F05: JSL ROUTINE_00DC8C_long
+#_018F05: JSL ROUTINE_00DC7E
 
 #_018F09: LDA.w #$004E ; MODE 4E
 #_018F0C: STA.w $0500
@@ -2512,7 +2523,7 @@ CODE_018EF9:
 
 #_018F18: JSR ROUTINE_018F29
 #_018F1B: JSR Pocky_9856
-#_018F1E: JSR ROUTINE_01AA54
+#_018F1E: JSR ROUTINE_01AA54_ResetsStuff
 
 #_018F21: LDA.w #$FFFF
 #_018F24: STA.l $7E7B1E
@@ -2524,18 +2535,16 @@ CODE_018EF9:
 ROUTINE_018F29:
 #_018F29: LDA.w $19DE
 #_018F2C: STA.b $20
-
 #_018F2E: STZ.b $22
 
 #_018F30: SEC
-
 #_018F31: LDA.w $0562
 #_018F34: SBC.w $19E0
-#_018F37: BCS CODE_018F3B
+#_018F37: BCS .no_borrow_needed
 
 #_018F39: DEC.b $22
 
-CODE_018F3B:
+.no_borrow_needed
 #_018F3B: ASL.b $22
 #_018F3D: ROR A
 #_018F3E: ASL.b $22
@@ -2546,21 +2555,21 @@ CODE_018F3B:
 #_018F46: ROR A
 #_018F47: CLC
 #_018F48: ADC.b $20
-#_018F4A: BPL CODE_018F53
+#_018F4A: BPL .positive
 
 #_018F4C: CMP.w #$FE00
-#_018F4F: BCC CODE_018F58
+#_018F4F: BCC .use_256
 
-#_018F51: BRA CODE_018F5B
+#_018F51: BRA .set
 
-CODE_018F53:
+.positive
 #_018F53: CMP.w #$0200
-#_018F56: BCC CODE_018F5B
+#_018F56: BCC .set
 
-CODE_018F58:
+.use_256
 #_018F58: LDA.w #$0100
 
-CODE_018F5B:
+.set
 #_018F5B: STA.w $051A
 
 #_018F5E: RTS
@@ -2610,14 +2619,15 @@ Pocky_CoinToss_RobedWithEars:
 
 Pocky_CoinToss_Main:
 #_018F92: JSL ROUTINE_04F843
+
 #_018F96: JSR ResetJoypad_and_ResetSomePockyStuff_018B34
 
 #_018F99: LDA.w #$FFFF
 #_018F9C: STA.w $04F4
 
-#_018F9F: JSR ROUTINE_019035
+#_018F9F: JSR ROUTINE_019035_SomethingWithPalettes
 #_018FA2: JSR ROUTINE_01A285_0000
-#_018FA5: JSR ROUTINE_01A26D
+#_018FA5: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_018FA8: LDA.w #$0000
 #_018FAB: STA.w $19CC
@@ -2630,7 +2640,7 @@ Pocky_CoinToss_Main:
 #_018FB9: STZ.b $28
 
 #_018FBB: LDA.w #$80D0 ; SPRITE 80D0
-#_018FBE: JSR ROUTINE_018933
+#_018FBE: JSR ROUTINE_018933_SpawnSprite
 
 #_018FC1: LDX.w #$0000
 
@@ -2645,9 +2655,9 @@ CODE_018FC4:
 
 #_018FD3: LDA.w #data07F181
 #_018FD6: LDY.w #data07F181>>16
-#_018FD9: JSL ROUTINE_08BD65
+#_018FD9: JSL RobustBulkDecompressionAndSetMode40
 
-#_018FDD: LDA.w #$00FD ; SFX FD
+#_018FDD: LDA.w #$00FD ; SFX FD - Fade music
 #_018FE0: STA.w $04A0
 
 CODE_018FE3:
@@ -2675,10 +2685,10 @@ CODE_018FE3:
 
 #_01900E: LDA.w #data07F163
 #_019011: LDY.w #data07F163>>16
-#_019014: JSL ROUTINE_08BD65
+#_019014: JSL RobustBulkDecompressionAndSetMode40
 
 #_019018: LDX.w #data01902D
-#_01901B: JSR ROUTINE_01AC3F
+#_01901B: JSR ROUTINE_01AC3F_TableCopying
 
 #_01901E: LDA.w #$0048 ; STATE 48
 #_019021: STA.w $19CE
@@ -2691,16 +2701,19 @@ CODE_01902A:
 
 ;---------------------------------------------------------------------------------------------------
 
-#data01902D:
-#_01902D: db $01,$00,$09,$21,$00,$2A,$00,$00
+data01902D:
+#_01902D: dw $0001 : dl BG3SC ; write 1 byte to target
+#_019032: db $2A
+
+#_019033: dw $0000 ; end
 
 ;===================================================================================================
 
-ROUTINE_019035:
+ROUTINE_019035_SomethingWithPalettes:
 #_019035: LDX.w #$0000
 
 .next
-#_019038: LDA.w data019047,X
+#_019038: LDA.w .colors,X
 #_01903B: STA.l $7E2E00,X
 
 #_01903F: INX
@@ -2710,8 +2723,10 @@ ROUTINE_019035:
 
 #_019046: RTS
 
-data019047:
-#_019047: db $00,$00,$E4,$08,$66,$11,$D9,$09
+;---------------------------------------------------------------------------------------------------
+; TODO palettes
+.colors
+#_019047: dw $0000, $08E4, $1166, $09D99
 
 ;===================================================================================================
 
@@ -2761,7 +2776,7 @@ Pocky_SecretSurprise:
 #_019097: STZ.w $19FC
 
 #_01909A: DEC.w $19DC
-#_01909D: BNE CODE_0190AB
+#_01909D: BNE .delay
 
 #_01909F: LDA.w #$003A ; STATE 3A
 #_0190A2: STA.w $19CE
@@ -2769,7 +2784,7 @@ Pocky_SecretSurprise:
 #_0190A5: LDA.w #$0010
 #_0190A8: STA.w $19DC
 
-CODE_0190AB:
+.delay
 #_0190AB: LDA.w $19DE
 #_0190AE: ASL A
 #_0190AF: TAX
@@ -2780,7 +2795,7 @@ CODE_0190AB:
 
 Pocky_CalmingDown:
 #_0190B3: DEC.w $19DC
-#_0190B6: BNE CODE_0190C8
+#_0190B6: BNE .delay
 
 #_0190B8: LDY.w $19DE
 #_0190BB: LDA.w .states,Y
@@ -2790,7 +2805,7 @@ Pocky_CalmingDown:
 #_0190C2: STA.w $19CE
 #_0190C5: STZ.w $19DE
 
-CODE_0190C8:
+.delay
 #_0190C8: JMP Pocky_9856
 
 ;---------------------------------------------------------------------------------------------------
@@ -2829,7 +2844,7 @@ CODE_0190C8:
 
 Pocky_PartnerToss_Skimpy:
 #_0190E7: LDA.w $194C
-#_0190EA: BEQ CODE_019104
+#_0190EA: BEQ .still_tossing
 
 #_0190EC: LDA.w $19EC
 #_0190EF: AND.w #$0007
@@ -2837,20 +2852,20 @@ Pocky_PartnerToss_Skimpy:
 #_0190F3: ADC.w #$0031
 
 #_0190F6: LDY.w #$0002
-#_0190F9: JSR ROUTINE_019755
-#_0190FC: BNE CODE_019104
+#_0190F9: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_0190FC: BNE .still_tossing
 
 #_0190FE: LDA.w #$0004 ; STATE 04
 #_019101: STA.w $19CE
 
-CODE_019104:
-#_019104: JMP Pocky_91A4
+.still_tossing
+#_019104: JMP Pocky_PartnerToss_91A4
 
 ;===================================================================================================
 
 Pocky_PartnerToss_Charmed:
 #_019107: LDA.w $194C
-#_01910A: BEQ CODE_019124
+#_01910A: BEQ .still_tossing
 
 #_01910C: LDA.w $19EC
 #_01910F: AND.w #$0007
@@ -2858,20 +2873,20 @@ Pocky_PartnerToss_Charmed:
 #_019113: ADC.w #$0031
 
 #_019116: LDY.w #$0003
-#_019119: JSR ROUTINE_019755
-#_01911C: BNE CODE_019124
+#_019119: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_01911C: BNE .still_tossing
 
 #_01911E: LDA.w #$0006 ; STATE 06
 #_019121: STA.w $19CE
 
-CODE_019124:
-#_019124: JMP Pocky_91A4
+.still_tossing
+#_019124: JMP Pocky_PartnerToss_91A4
 
 ;===================================================================================================
 
 Pocky_PartnerToss_SkimpyWithEars:
 #_019127: LDA.w $194C
-#_01912A: BEQ CODE_019144
+#_01912A: BEQ .still_tossing
 
 #_01912C: LDA.w $19EC
 #_01912F: AND.w #$0007
@@ -2879,20 +2894,20 @@ Pocky_PartnerToss_SkimpyWithEars:
 #_019133: ADC.w #$0031
 
 #_019136: LDY.w #$0004
-#_019139: JSR ROUTINE_019755
-#_01913C: BNE CODE_019144
+#_019139: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_01913C: BNE .still_tossing
 
 #_01913E: LDA.w #$0008 ; STATE 08
 #_019141: STA.w $19CE
 
-CODE_019144:
-#_019144: JMP Pocky_91A4
+.still_tossing
+#_019144: JMP Pocky_PartnerToss_91A4
 
 ;===================================================================================================
 
 Pocky_PartnerToss_CharmedWithEars:
 #_019147: LDA.w $194C
-#_01914A: BEQ CODE_019164
+#_01914A: BEQ .still_tossing
 
 #_01914C: LDA.w $19EC
 #_01914F: AND.w #$0007
@@ -2900,20 +2915,20 @@ Pocky_PartnerToss_CharmedWithEars:
 #_019153: ADC.w #$0031
 
 #_019156: LDY.w #$0005
-#_019159: JSR ROUTINE_019755
-#_01915C: BNE CODE_019164
+#_019159: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_01915C: BNE .still_tossing
 
 #_01915E: LDA.w #$000A ; STATE 0A
 #_019161: STA.w $19CE
 
-CODE_019164:
-#_019164: JMP Pocky_91A4
+.still_tossing
+#_019164: JMP Pocky_PartnerToss_91A4
 
 ;===================================================================================================
 
 Pocky_PartnerToss_RobedWithEars:
 #_019167: LDA.w $194C
-#_01916A: BEQ CODE_019184
+#_01916A: BEQ .still_tossing
 
 #_01916C: LDA.w $19EC
 #_01916F: AND.w #$0007
@@ -2921,20 +2936,20 @@ Pocky_PartnerToss_RobedWithEars:
 #_019173: ADC.w #$0031
 
 #_019176: LDY.w #$0006
-#_019179: JSR ROUTINE_019755
-#_01917C: BNE CODE_019184
+#_019179: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_01917C: BNE .still_tossing
 
 #_01917E: LDA.w #$000C ; STATE 0C
 #_019181: STA.w $19CE
 
-CODE_019184:
-#_019184: JMP Pocky_91A4
+.still_tossing
+#_019184: JMP Pocky_PartnerToss_91A4
 
 ;===================================================================================================
 
 Pocky_PartnerToss_Robed:
 #_019187: LDA.w $194C
-#_01918A: BEQ Pocky_91A4
+#_01918A: BEQ Pocky_PartnerToss_91A4
 
 #_01918C: LDA.w $19EC
 #_01918F: AND.w #$0007
@@ -2942,17 +2957,17 @@ Pocky_PartnerToss_Robed:
 #_019193: ADC.w #$0031
 
 #_019196: LDY.w #$0001
-#_019199: JSR ROUTINE_019755
-#_01919C: BNE Pocky_91A4
+#_019199: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_01919C: BNE Pocky_PartnerToss_91A4
 
 #_01919E: LDA.w #$0002 ; STATE 02
 #_0191A1: STA.w $19CE
 
 ;===================================================================================================
 
-Pocky_91A4:
+Pocky_PartnerToss_91A4:
 #_0191A4: JSR ROUTINE_01A285_0000
-#_0191A7: JSR ROUTINE_01A26D
+#_0191A7: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_0191AA: JMP Pocky_9856
 
@@ -3007,7 +3022,7 @@ CODE_0191D1:
 #_0191F0: STA.w $19CC
 #_0191F3: STA.w $19EC
 
-#_0191F6: JSR ROUTINE_01A26D
+#_0191F6: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_0191F9: CLC
 
@@ -3038,7 +3053,7 @@ CODE_019218:
 #_019223: BRA .to_next
 
 CODE_019225:
-#_019225: JMP ROUTINE_019231
+#_019225: JMP ROUTINE_019231_RespawnViaLakitu
 
 .to_next_reset
 #_019228: STZ.w $04D8
@@ -3051,7 +3066,7 @@ CODE_019225:
 
 ;===================================================================================================
 
-ROUTINE_019231:
+ROUTINE_019231_RespawnViaLakitu:
 #_019231: LDX.w #$000E
 #_019234: JSR SpawnInNewPartner_preserve_X
 
@@ -3070,16 +3085,16 @@ Pocky_StateC4:
 ;---------------------------------------------------------------------------------------------------
 
 .vectors
-#_019249: dw ROUTINE_0192BA
-#_01924B: dw ROUTINE_019276
-#_01924D: dw ROUTINE_019287
-#_01924F: dw ROUTINE_019298
-#_019251: dw ROUTINE_0192A9
-#_019253: dw ROUTINE_019255
+#_019249: dw Pocky_StateC4_AdvanceSubstate
+#_01924B: dw Pocky_StateC4_02
+#_01924D: dw Pocky_StateC4_04
+#_01924F: dw Pocky_StateC4_06
+#_019251: dw Pocky_StateC4_08
+#_019253: dw Pocky_StateC4_0A
 
 ;===================================================================================================
 
-ROUTINE_019255:
+Pocky_StateC4_0A:
 #_019255: JSR Random_bank01a
 #_019258: AND.w #$0FFF
 #_01925B: ADC.w $0560
@@ -3093,83 +3108,83 @@ ROUTINE_019255:
 #_01926D: JSR ROUTINE_0192FB
 #_019270: BCC .exit
 
-#_019272: JMP ROUTINE_019231
+#_019272: JMP ROUTINE_019231_RespawnViaLakitu
 
 .exit
 #_019275: RTS
 
 ;===================================================================================================
 
-ROUTINE_019276:
-#_019276: JSR ROUTINE_0192C4
-#_019279: BCC CODE_019283
+Pocky_StateC4_02:
+#_019276: JSR ROUTINE_0192D8_X_Negative
+#_019279: BCC .advance
 
 #_01927B: JSR ROUTINE_0192FB
 #_01927E: BCC .exit
 
-#_019280: JMP ROUTINE_019231
+#_019280: JMP ROUTINE_019231_RespawnViaLakitu
 
-CODE_019283:
-#_019283: JSR ROUTINE_0192BA
+.advance
+#_019283: JSR Pocky_StateC4_AdvanceSubstate
 
 .exit
 #_019286: RTS
 
 ;===================================================================================================
 
-ROUTINE_019287:
-#_019287: JSR ROUTINE_0192C9
-#_01928A: BCS CODE_019294
+Pocky_StateC4_04:
+#_019287: JSR ROUTINE_0192D8_X_Positive
+#_01928A: BCS .advance
 
 #_01928C: JSR ROUTINE_0192FB
-#_01928F: BCC .
+#_01928F: BCC .exit
 
-#_019291: JMP ROUTINE_019231
+#_019291: JMP ROUTINE_019231_RespawnViaLakitu
 
-CODE_019294:
-#_019294: JSR ROUTINE_0192BA
+.advance
+#_019294: JSR Pocky_StateC4_AdvanceSubstate
 
 .exit
 #_019297: RTS
 
 ;===================================================================================================
 
-ROUTINE_019298:
-#_019298: JSR ROUTINE_0192CE
-#_01929B: BCC CODE_0192A5
+Pocky_StateC4_06:
+#_019298: JSR ROUTINE_0192D8_Y_Negative
+#_01929B: BCC .advance
 
 #_01929D: JSR ROUTINE_0192FB
 #_0192A0: BCC .exit
 
-#_0192A2: JMP ROUTINE_019231
+#_0192A2: JMP ROUTINE_019231_RespawnViaLakitu
 
-CODE_0192A5:
-#_0192A5: JSR ROUTINE_0192BA
+.advance
+#_0192A5: JSR Pocky_StateC4_AdvanceSubstate
 
 .exit
 #_0192A8: RTS
 
 ;===================================================================================================
 
-ROUTINE_0192A9:
-#_0192A9: JSR ROUTINE_0192D3
-#_0192AC: BCC CODE_0192B6
+Pocky_StateC4_08:
+#_0192A9: JSR ROUTINE_0192D8_Y_Positive
+#_0192AC: BCC .advance
 
 #_0192AE: JSR ROUTINE_0192FB
 #_0192B1: BCC .exit
 
-#_0192B3: JMP ROUTINE_019231
+#_0192B3: JMP ROUTINE_019231_RespawnViaLakitu
 
-CODE_0192B6:
-#_0192B6: JSR ROUTINE_0192BA
+.advance
+#_0192B6: JSR Pocky_StateC4_AdvanceSubstate
 
 .exit
 #_0192B9: RTS
 
 ;===================================================================================================
 
-ROUTINE_0192BA:
-#_0192BA: JSR ROUTINE_0192EE
+Pocky_StateC4_AdvanceSubstate:
+#_0192BA: JSR ROUTINE_0192EE_SetPockyCoords
 
 #_0192BD: INC.w $04DA
 #_0192C0: INC.w $04DA
@@ -3178,31 +3193,31 @@ ROUTINE_0192BA:
 
 ;===================================================================================================
 
-ROUTINE_0192C4:
+ROUTINE_0192D8_X_Negative:
 #_0192C4: LDA.w #$FF80
-#_0192C7: BRA ROUTINE_0192D8
+#_0192C7: BRA ROUTINE_0192D8_X
 
 ;===================================================================================================
 
-ROUTINE_0192C9:
+ROUTINE_0192D8_X_Positive:
 #_0192C9: LDA.w #$0080
-#_0192CC: BRA ROUTINE_0192D8
+#_0192CC: BRA ROUTINE_0192D8_X
 
 ;===================================================================================================
 
-ROUTINE_0192CE:
+ROUTINE_0192D8_Y_Negative:
 #_0192CE: LDA.w #$FF80
-#_0192D1: BRA ROUTINE_0192E3
+#_0192D1: BRA ROUTINE_0192D8_Y
 
 ;===================================================================================================
 
-ROUTINE_0192D3:
+ROUTINE_0192D8_Y_Positive:
 #_0192D3: LDA.w #$0080
-#_0192D6: BRA ROUTINE_0192E3
+#_0192D6: BRA ROUTINE_0192D8_Y
 
 ;===================================================================================================
 
-ROUTINE_0192D8:
+ROUTINE_0192D8_X:
 #_0192D8: CLC
 #_0192D9: ADC.w $19EE
 #_0192DC: STA.w $19EE
@@ -3213,7 +3228,7 @@ ROUTINE_0192D8:
 
 ;===================================================================================================
 
-ROUTINE_0192E3:
+ROUTINE_0192D8_Y:
 #_0192E3: CLC
 #_0192E4: ADC.w $19F0
 #_0192E7: STA.w $19F0
@@ -3224,7 +3239,7 @@ ROUTINE_0192E3:
 
 ;===================================================================================================
 
-ROUTINE_0192EE:
+ROUTINE_0192EE_SetPockyCoords:
 #_0192EE: LDA.w $04DC
 #_0192F1: STA.w $19EE
 
@@ -3236,7 +3251,7 @@ ROUTINE_0192EE:
 ;===================================================================================================
 
 ROUTINE_0192FB:
-#_0192FB: JSR ROUTINE_01A26D
+#_0192FB: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_0192FE: CLC
 
@@ -3246,23 +3261,23 @@ ROUTINE_0192FB:
 
 #_019306: LDA.w $19C2
 #_019309: JSR ROUTINE_01E9AA
-#_01930C: BEQ CODE_01931D
+#_01930C: BEQ .succeed
 
 #_01930E: CMP.w #$0014
-#_019311: BCC CODE_01931F
+#_019311: BCC .fail
 
 #_019313: CMP.w #$001C
-#_019316: BCC CODE_01931D
+#_019316: BCC .succeed
 
 #_019318: CMP.w #$0020
-#_01931B: BNE CODE_01931F
+#_01931B: BNE .fail
 
-CODE_01931D:
+.succeed
 #_01931D: SEC
 
 #_01931E: RTS
 
-CODE_01931F:
+.fail
 #_01931F: CLC
 
 #_019320: RTS
@@ -3274,6 +3289,7 @@ Pocky_CarriedByLakitu:
 #_019324: STZ.w $19FC
 #_019327: STZ.w $19FA
 #_01932A: STZ.w $19FE
+
 #_01932D: STZ.w $190E
 
 #_019330: LDA.w $05CE
@@ -3300,10 +3316,11 @@ ROUTINE_019342_SetPockyState:
 ROUTINE_019342:
 #_019342: STZ.w $194E
 #_019345: STZ.w $19CA
+
 #_019348: STZ.b $28
 
 #_01934A: LDA.w #$0116 ; SPRITE 0116
-#_01934D: JSR ROUTINE_018933
+#_01934D: JSR ROUTINE_018933_SpawnSprite
 
 #_019350: LDA.w $05B4
 #_019353: BNE CODE_019359
@@ -3311,7 +3328,7 @@ ROUTINE_019342:
 #_019355: JSL SetLevelTimer
 
 CODE_019359:
-#_019359: JSR ROUTINE_01AA54
+#_019359: JSR ROUTINE_01AA54_ResetsStuff
 
 #_01935C: JMP ROUTINE_019426
 
@@ -3325,15 +3342,15 @@ Pocky_StateC6:
 
 .continue
 #_019365: DEC.w $194E
-#_019368: BNE CODE_019373
+#_019368: BNE .delay
 
 #_01936A: LDA.w $04EA
-#_01936D: JSR ROUTINE_01941F
+#_01936D: JSR SetStateAndForceDogHPTo3
 
 #_019370: STZ.w $19E2
 
-CODE_019373:
-#_019373: JMP CODE_0180A5
+.delay
+#_019373: JMP ROUTINE_0180A5
 
 ;===================================================================================================
 
@@ -3345,17 +3362,17 @@ Pocky_ReturnFromMagic:
 
 .continue
 #_01937C: DEC.w $194E
-#_01937F: BNE CODE_01938D
+#_01937F: BNE .delay
 
 #_019381: LDA.w $04EA
-#_019384: JSR ROUTINE_01941F
+#_019384: JSR SetStateAndForceDogHPTo3
 
 #_019387: STZ.w $19E2
 
 #_01938A: JSR ROUTINE_019390
 
-CODE_01938D:
-#_01938D: JMP CODE_0180A5
+.delay
+#_01938D: JMP ROUTINE_0180A5
 
 ;===================================================================================================
 
@@ -3393,7 +3410,7 @@ CODE_0193B6:
 
 ;===================================================================================================
 
-ROUTINE_0193B8:
+#ROUTINE_0193B8:
 #_0193B8: STA.w $19CE
 #_0193BB: STA.w $04EA
 
@@ -3434,15 +3451,15 @@ Pocky_Respawn:
 
 .continue
 #_0193FA: DEC.w $194E
-#_0193FD: BNE CODE_019408
+#_0193FD: BNE .delay
 
 #_0193FF: LDA.w $04EA
-#_019402: JSR ROUTINE_01941C
+#_019402: JSR SetStateFrom04EAAndForceDogHPTo3
 
 #_019405: STZ.w $19E2
 
-CODE_019408:
-#_019408: JSR ROUTINE_01A26D
+.delay
+#_019408: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_01940B: JMP Pocky_9856
 
@@ -3453,21 +3470,21 @@ ROUTINE_01940E:
 #_01940F: PHK
 #_019410: PLB
 
-#_019411: JSR ROUTINE_01AA54
+#_019411: JSR ROUTINE_01AA54_ResetsStuff
 #_019414: JSR ROUTINE_019426
-#_019417: JSR ROUTINE_01941C
+#_019417: JSR SetStateFrom04EAAndForceDogHPTo3
 
 #_01941A: PLB
 #_01941B: RTL
 
 ;===================================================================================================
 
-ROUTINE_01941C:
+SetStateFrom04EAAndForceDogHPTo3:
 #_01941C: LDA.w $04EA
 
 ;===================================================================================================
 
-ROUTINE_01941F:
+SetStateAndForceDogHPTo3:
 #_01941F: STA.w $19CE
 
 #_019422: JSR ForceDogHPto3
@@ -3518,7 +3535,7 @@ Pocky_Melee_Skimpy:
 #_01945C: ADC.w #$0019
 
 #_01945F: LDY.w #$0002
-#_019462: JSR ROUTINE_019755
+#_019462: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_019465: BNE CODE_019479
 
 #_019467: LDA.w $194C
@@ -3527,25 +3544,25 @@ Pocky_Melee_Skimpy:
 #_01946C: LDA.w #$0004 ; STATE 04
 #_01946F: STA.w $19CE
 
-#_019472: BRA CODE_01948C
+#_019472: BRA .finished
 
 CODE_019474:
 #_019474: JSR ROUTINE_018023
 
-#_019477: BRA CODE_01948C
+#_019477: BRA .finished
 
 CODE_019479:
 #_019479: LDA.w $19D6
 #_01947C: CMP.w #$0004
-#_01947F: BCC CODE_01948C
+#_01947F: BCC .finished
 
 #_019481: LDA.w $19FC
 #_019484: AND.w #$8000
-#_019487: BEQ CODE_01948C
+#_019487: BEQ .finished
 
 #_019489: STA.w $194C
 
-CODE_01948C:
+.finished
 #_01948C: JMP Pocky_9856
 
 ;===================================================================================================
@@ -3562,7 +3579,7 @@ Pocky_Melee_Charmed:
 #_01949F: ADC.w #$0019
 
 #_0194A2: LDY.w #$0003
-#_0194A5: JSR ROUTINE_019755
+#_0194A5: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_0194A8: BNE CODE_0194BC
 
 #_0194AA: LDA.w $194C
@@ -3571,25 +3588,25 @@ Pocky_Melee_Charmed:
 #_0194AF: LDA.w #$0006 ; STATE 06
 #_0194B2: STA.w $19CE
 
-#_0194B5: BRA CODE_0194CF
+#_0194B5: BRA .finished
 
 CODE_0194B7:
 #_0194B7: JSR ROUTINE_018023
 
-#_0194BA: BRA CODE_0194CF
+#_0194BA: BRA .finished
 
 CODE_0194BC:
 #_0194BC: LDA.w $19D6
 #_0194BF: CMP.w #$0004
-#_0194C2: BCC CODE_0194CF
+#_0194C2: BCC .finished
 
 #_0194C4: LDA.w $19FC
 #_0194C7: AND.w #$8000
-#_0194CA: BEQ CODE_0194CF
+#_0194CA: BEQ .finished
 
 #_0194CC: STA.w $194C
 
-CODE_0194CF:
+.finished
 #_0194CF: JMP Pocky_9856
 
 ;===================================================================================================
@@ -3606,7 +3623,7 @@ Pocky_Melee_SkimpyWithEars:
 #_0194E2: ADC.w #$0019
 
 #_0194E5: LDY.w #$0004
-#_0194E8: JSR ROUTINE_019755
+#_0194E8: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_0194EB: BNE CODE_0194FF
 
 #_0194ED: LDA.w $194C
@@ -3615,25 +3632,25 @@ Pocky_Melee_SkimpyWithEars:
 #_0194F2: LDA.w #$0008 ; STATE 08
 #_0194F5: STA.w $19CE
 
-#_0194F8: BRA CODE_019512
+#_0194F8: BRA .finished
 
 CODE_0194FA:
 #_0194FA: JSR ROUTINE_018023
 
-#_0194FD: BRA CODE_019512
+#_0194FD: BRA .finished
 
 CODE_0194FF:
 #_0194FF: LDA.w $19D6
 #_019502: CMP.w #$0004
-#_019505: BCC CODE_019512
+#_019505: BCC .finished
 
 #_019507: LDA.w $19FC
 #_01950A: AND.w #$8000
-#_01950D: BEQ CODE_019512
+#_01950D: BEQ .finished
 
 #_01950F: STA.w $194C
 
-CODE_019512:
+.finished
 #_019512: JMP Pocky_9856
 
 ;===================================================================================================
@@ -3650,7 +3667,7 @@ Pocky_Melee_CharmedWithEars:
 #_019525: ADC.w #$0019
 
 #_019528: LDY.w #$0005
-#_01952B: JSR ROUTINE_019755
+#_01952B: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_01952E: BNE CODE_019542
 
 #_019530: LDA.w $194C
@@ -3659,25 +3676,25 @@ Pocky_Melee_CharmedWithEars:
 #_019535: LDA.w #$000A ; STATE 0A
 #_019538: STA.w $19CE
 
-#_01953B: BRA CODE_019555
+#_01953B: BRA .finished
 
 CODE_01953D:
 #_01953D: JSR ROUTINE_018023
 
-#_019540: BRA CODE_019555
+#_019540: BRA .finished
 
 CODE_019542:
 #_019542: LDA.w $19D6
 #_019545: CMP.w #$0004
-#_019548: BCC CODE_019555
+#_019548: BCC .finished
 
 #_01954A: LDA.w $19FC
 #_01954D: AND.w #$8000
-#_019550: BEQ CODE_019555
+#_019550: BEQ .finished
 
 #_019552: STA.w $194C
 
-CODE_019555:
+.finished
 #_019555: JMP Pocky_9856
 
 ;===================================================================================================
@@ -3694,7 +3711,7 @@ Pocky_Melee_RobedWithEars:
 #_019568: ADC.w #$0019
 
 #_01956B: LDY.w #$0006
-#_01956E: JSR ROUTINE_019755
+#_01956E: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_019571: BNE CODE_019585
 
 #_019573: LDA.w $194C
@@ -3703,25 +3720,25 @@ Pocky_Melee_RobedWithEars:
 #_019578: LDA.w #$000C ; STATE 0C
 #_01957B: STA.w $19CE
 
-#_01957E: BRA CODE_019598
+#_01957E: BRA .finished
 
 CODE_019580:
 #_019580: JSR ROUTINE_018023
 
-#_019583: BRA CODE_019598
+#_019583: BRA .finished
 
 CODE_019585:
 #_019585: LDA.w $19D6
 #_019588: CMP.w #$0004
-#_01958B: BCC CODE_019598
+#_01958B: BCC .finished
 
 #_01958D: LDA.w $19FC
 #_019590: AND.w #$8000
-#_019593: BEQ CODE_019598
+#_019593: BEQ .finished
 
 #_019595: STA.w $194C
 
-CODE_019598:
+.finished
 #_019598: JMP Pocky_9856
 
 ;===================================================================================================
@@ -3739,7 +3756,7 @@ CODE_01959E:
 #_0195AB: ADC.w #$0019
 
 #_0195AE: LDY.w #$0001
-#_0195B1: JSR ROUTINE_019755
+#_0195B1: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_0195B4: BNE CODE_0195C8
 
 #_0195B6: LDA.w $194C
@@ -3748,25 +3765,25 @@ CODE_01959E:
 #_0195BB: LDA.w #$0002 ; STATE 02
 #_0195BE: STA.w $19CE
 
-#_0195C1: BRA CODE_0195DB
+#_0195C1: BRA .finished
 
 CODE_0195C3:
 #_0195C3: JSR ROUTINE_018023
 
-#_0195C6: BRA CODE_0195DB
+#_0195C6: BRA .finished
 
 CODE_0195C8:
 #_0195C8: LDA.w $19D6
 #_0195CB: CMP.w #$0004
-#_0195CE: BCC CODE_0195DB
+#_0195CE: BCC .finished
 
 #_0195D0: LDA.w $19FC
 #_0195D3: AND.w #$8000
-#_0195D6: BEQ CODE_0195DB
+#_0195D6: BEQ .finished
 
 #_0195D8: STA.w $194C
 
-CODE_0195DB:
+.finished
 #_0195DB: JMP Pocky_9856
 
 ;===================================================================================================
@@ -3790,13 +3807,13 @@ Pocky_Dead:
 
 #_0195F4: LDA.w #$0044
 #_0195F7: LDY.w #$0002
-#_0195FA: JSR ROUTINE_019755
+#_0195FA: JSR ROUTINE_019755_GraphicsMaybeIDKYet
 #_0195FD: BNE CODE_019602
 
 #_0195FF: JMP ROUTINE_019608
 
 CODE_019602:
-#_019602: JSR ROUTINE_01A26D
+#_019602: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_019605: JMP Pocky_9856
 
@@ -3821,7 +3838,7 @@ ROUTINE_019608:
 #_01961C: CMP.w #$000E
 #_01961F: BNE CODE_019624
 
-#_019621: JMP ROUTINE_019231
+#_019621: JMP ROUTINE_019231_RespawnViaLakitu
 
 CODE_019624:
 #_019624: LDA.w $19EE
@@ -3864,13 +3881,13 @@ ROUTINE_019643_NoExtraLives:
 Pocky_Hurt_Skimpy:
 #_01965E: LDA.w #$0045
 #_019661: LDY.w #$0002
-#_019664: JSR ROUTINE_019755
-#_019667: BNE CODE_01966F
+#_019664: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_019667: BNE .delay
 
 #_019669: LDA.w #$001A ; STATE 1A
 #_01966C: JMP ROUTINE_01973C
 
-CODE_01966F:
+.delay
 #_01966F: JMP ROUTINE_0196F3
 
 ;===================================================================================================
@@ -3879,14 +3896,14 @@ Pocky_Hurt_Charmed:
 #_019672: LDA.w #$0045
 
 #_019675: LDY.w #$0003
-#_019678: JSR ROUTINE_019755
-#_01967B: BNE CODE_019686
+#_019678: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_01967B: BNE .delay
 
 #_01967D: LDY.w #$0036
 #_019680: LDA.w #$0002
 #_019683: JMP ROUTINE_019734
 
-CODE_019686:
+.delay
 #_019686: JMP ROUTINE_0196F3
 
 ;===================================================================================================
@@ -3895,14 +3912,14 @@ Pocky_Hurt_SkimpyWithEars:
 #_019689: LDA.w #$0045
 
 #_01968C: LDY.w #$0004
-#_01968F: JSR ROUTINE_019755
-#_019692: BNE CODE_01969D
+#_01968F: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_019692: BNE .delay
 
 #_019694: LDY.w #$0038
 #_019697: LDA.w #$0004
 #_01969A: JMP ROUTINE_019734
 
-CODE_01969D:
+.delay
 #_01969D: JMP ROUTINE_0196F3
 
 ;===================================================================================================
@@ -3911,14 +3928,14 @@ Pocky_Hurt_CharmedWithEars:
 #_0196A0: LDA.w #$0045
 
 #_0196A3: LDY.w #$0005
-#_0196A6: JSR ROUTINE_019755
-#_0196A9: BNE CODE_0196B4
+#_0196A6: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_0196A9: BNE .delay
 
 #_0196AB: LDY.w #$0036
 #_0196AE: LDA.w #$000C
 #_0196B1: JMP ROUTINE_019734
 
-CODE_0196B4:
+.delay
 #_0196B4: JMP ROUTINE_0196F3
 
 ;===================================================================================================
@@ -3927,14 +3944,14 @@ Pocky_Hurt_RobedWithEars:
 #_0196B7: LDA.w #$0039
 
 #_0196BA: LDY.w #$0006
-#_0196BD: JSR ROUTINE_019755
-#_0196C0: BNE CODE_0196CB
+#_0196BD: JSR ROUTINE_019755_GraphicsMaybeIDKYet
+#_0196C0: BNE .delay
 
 #_0196C2: LDY.w #$0034
 #_0196C5: LDA.w #$0008
 #_0196C8: JMP ROUTINE_019734
 
-CODE_0196CB:
+.delay
 #_0196CB: JMP ROUTINE_0196F3
 
 ;===================================================================================================
@@ -3944,7 +3961,7 @@ ROUTINE_0196CE:
 
 #_0196D1: LDA.w #$0039
 #_0196D4: LDY.w #$0001
-#_0196D7: JMP ROUTINE_019755
+#_0196D7: JMP ROUTINE_019755_GraphicsMaybeIDKYet
 
 ;===================================================================================================
 
@@ -3953,16 +3970,17 @@ Pocky_Hurt_Robed:
 #_0196DD: BNE ROUTINE_0196F3
 
 #_0196DF: JSR TestForTutorialLevel
-#_0196E2: BNE CODE_0196EA
+#_0196E2: BNE .not_tutorial
 
 #_0196E4: LDA.w #$0002 ; STATE 02
 #_0196E7: JMP ROUTINE_01973C
 
-CODE_0196EA:
+.not_tutorial
 #_0196EA: LDY.w #$0034
-
 #_0196ED: LDA.w #$0004
 #_0196F0: JMP ROUTINE_019734
+
+;===================================================================================================
 
 ROUTINE_0196F3:
 #_0196F3: JSR ROUTINE_018007
@@ -3993,7 +4011,7 @@ ROUTINE_0196F3:
 #_01971A: PLA
 #_01971B: STA.w $19F8
 
-#_01971E: JSR ROUTINE_01A26D
+#_01971E: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_019721: JMP Pocky_9856
 
@@ -4021,7 +4039,7 @@ ROUTINE_019734:
 
 ;===================================================================================================
 
-ROUTINE_01973C:
+#ROUTINE_01973C:
 #_01973C: STA.w $19CE
 
 #_01973F: STZ.w $19E2
@@ -4040,7 +4058,7 @@ ROUTINE_01973C:
 
 ;===================================================================================================
 
-ROUTINE_019755:
+#ROUTINE_019755_GraphicsMaybeIDKYet:
 #_019755: JSL ROUTINE_04F828
 
 #_019759: LDA.w $19D4
@@ -4057,8 +4075,8 @@ CODE_019760:
 #_019765: STA.b $30
 
 #_019767: LDA.w #$0056 ; SPRITE 0056
-#_01976A: JSR ROUTINE_018933
-#_01976D: JSR ROUTINE_01A26D
+#_01976A: JSR ROUTINE_018933_SpawnSprite
+#_01976D: JSR ROUTINE_01A26D_CachesPockyCoordinates
 
 #_019770: JMP Pocky_9856
 
@@ -4081,18 +4099,18 @@ CODE_01977E:
 CODE_019787:
 #_019787: LDA.w #$0036 ; STATE 36
 #_01978A: JSR Pocky_AttemptPartnerToss
-#_01978D: BCC CODE_019792
+#_01978D: BCC .no_toss
 
 #_01978F: JMP ROUTINE_01982F
 
-CODE_019792:
+.no_toss
 #_019792: LDA.w #$0026 ; STATE 26
 #_019795: JSR Pocky_AttemptMeleeAttack
-#_019798: BCC CODE_01979D
+#_019798: BCC .no_melee
 
 #_01979A: JMP ROUTINE_01982F
 
-CODE_01979D:
+.no_melee
 #_01979D: LDA.w $19FC
 #_0197A0: AND.w #$4000
 #_0197A3: BEQ CODE_0197DE
@@ -4104,12 +4122,12 @@ CODE_01979D:
 #_0197AD: AND.w #$000F
 #_0197B0: BEQ CODE_0197BA
 
-#_0197B2: JSR ROUTINE_01AA67
+#_0197B2: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_0197B5: ADC.w #$003A
 #_0197B8: BRA CODE_0197C0
 
 CODE_0197BA:
-#_0197BA: JSR ROUTINE_01AA67
+#_0197BA: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_0197BD: ADC.w #$0011
 
 CODE_0197C0:
@@ -4182,6 +4200,8 @@ CODE_019822:
 #_01982A: AND.w #$0F00
 #_01982D: BNE CODE_019842
 
+;===================================================================================================
+
 ROUTINE_01982F:
 #_01982F: LDY.w #$0006
 
@@ -4232,15 +4252,15 @@ Pocky_9856:
 
 #_019878: LDA.w $19C4
 #_01987B: LDY.w #$19C0
-#_01987E: JSR ROUTINE_0181F1
+#_01987E: JSR ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
 #_019881: LDA.w $19CE
 #_019884: CMP.w #$0080 ; STATE 80
-#_019887: BNE CODE_01988C
+#_019887: BNE .not_an_angel
 
 #_019889: JMP CODE_01992B
 
-CODE_01988C:
+.not_an_angel
 #_01988C: CLC
 
 #_01988D: LDA.w $19C4
@@ -4312,6 +4332,8 @@ CODE_0198F2:
 
 #_0198F6: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_0198F7:
 #_0198F7: LDA.w $19C8
 #_0198FA: AND.w #$FE00
@@ -4346,6 +4368,8 @@ CODE_019926:
 
 #_01992A: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_01992B:
 #_01992B: LDA.w $18E4
 #_01992E: CMP.w #$000E
@@ -4375,7 +4399,7 @@ ROUTINE_019947:
 
 #_019953: LDA.w $19C4
 #_019956: LDY.w #$19C0
-#_019959: JMP ROUTINE_0181F1
+#_019959: JMP ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
 ;===================================================================================================
 
@@ -4396,18 +4420,18 @@ CODE_019967:
 CODE_019970:
 #_019970: LDA.w #$0034 ; STATE 34
 #_019973: JSR Pocky_AttemptPartnerToss
-#_019976: BCC CODE_01997B
+#_019976: BCC .no_toss
 
 #_019978: JMP ROUTINE_019A18
 
-CODE_01997B:
+.no_toss
 #_01997B: LDA.w #$0024 ; STATE 24
 #_01997E: JSR Pocky_AttemptMeleeAttack
-#_019981: BCC CODE_019986
+#_019981: BCC .no_melee
 
 #_019983: JMP ROUTINE_019A18
 
-CODE_019986:
+.no_melee
 #_019986: LDA.w $19FC
 #_019989: AND.w #$4000
 #_01998C: BEQ CODE_0199C7
@@ -4419,12 +4443,12 @@ CODE_019986:
 #_019996: AND.w #$000F
 #_019999: BEQ CODE_0199A3
 
-#_01999B: JSR ROUTINE_01AA67
+#_01999B: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_01999E: ADC.w #$003A
 #_0199A1: BRA CODE_0199A9
 
 CODE_0199A3:
-#_0199A3: JSR ROUTINE_01AA67
+#_0199A3: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_0199A6: ADC.w #$0011
 
 CODE_0199A9:
@@ -4541,18 +4565,18 @@ CODE_019A4D:
 CODE_019A56:
 #_019A56: LDA.w #$0032 ; STATE 32
 #_019A59: JSR Pocky_AttemptPartnerToss
-#_019A5C: BCC CODE_019A61
+#_019A5C: BCC .no_toss
 
 #_019A5E: JMP ROUTINE_019AFE
 
-CODE_019A61:
+.no_toss
 #_019A61: LDA.w #$0022 ; STATE 22
 #_019A64: JSR Pocky_AttemptMeleeAttack
-#_019A67: BCC CODE_019A6C
+#_019A67: BCC .no_melee
 
 #_019A69: JMP ROUTINE_019AFE
 
-CODE_019A6C:
+.no_melee
 #_019A6C: LDA.w $19FC
 #_019A6F: AND.w #$4000
 #_019A72: BEQ CODE_019AAD
@@ -4564,12 +4588,12 @@ CODE_019A6C:
 #_019A7C: AND.w #$000F
 #_019A7F: BEQ CODE_019A89
 
-#_019A81: JSR ROUTINE_01AA67
+#_019A81: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019A84: ADC.w #$003A
 #_019A87: BRA CODE_019A8F
 
 CODE_019A89:
-#_019A89: JSR ROUTINE_01AA67
+#_019A89: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019A8C: ADC.w #$0011
 
 CODE_019A8F:
@@ -4686,18 +4710,18 @@ CODE_019B33:
 CODE_019B3C:
 #_019B3C: LDA.w #$0030 ; STATE 30
 #_019B3F: JSR Pocky_AttemptPartnerToss
-#_019B42: BCC CODE_019B47
+#_019B42: BCC .no_toss
 
 #_019B44: JMP ROUTINE_019BE4
 
-CODE_019B47:
+.no_toss
 #_019B47: LDA.w #$0020 ; STATE 20
 #_019B4A: JSR Pocky_AttemptMeleeAttack
-#_019B4D: BCC CODE_019B52
+#_019B4D: BCC .no_melee
 
 #_019B4F: JMP ROUTINE_019BE4
 
-CODE_019B52:
+.no_melee
 #_019B52: LDA.w $19FC
 #_019B55: AND.w #$4000
 #_019B58: BEQ CODE_019B93
@@ -4709,12 +4733,12 @@ CODE_019B52:
 #_019B62: AND.w #$000F
 #_019B65: BEQ CODE_019B6F
 
-#_019B67: JSR ROUTINE_01AA67
+#_019B67: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019B6A: ADC.w #$003A
 #_019B6D: BRA CODE_019B75
 
 CODE_019B6F:
-#_019B6F: JSR ROUTINE_01AA67
+#_019B6F: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019B72: ADC.w #$0011
 
 CODE_019B75:
@@ -4863,11 +4887,11 @@ ROUTINE_019C5A:
 #_019C67: STZ.w $18F2
 
 #_019C6A: LDX.w #data019E87
-#_019C6D: JSR ROUTINE_01AC3F
+#_019C6D: JSR ROUTINE_01AC3F_TableCopying
 
 ;===================================================================================================
 
-ROUTINE_019C70:
+ROUTINE_019C70_EnableHDMAs:
 #_019C70: LDA.w #$001C
 #_019C73: TSB.w $0536
 
@@ -4918,18 +4942,18 @@ CODE_019C9E:
 CODE_019CA7:
 #_019CA7: LDA.w #$002E ; STATE 2E
 #_019CAA: JSR Pocky_AttemptPartnerToss
-#_019CAD: BCC CODE_019CB2
+#_019CAD: BCC .no_toss
 
 #_019CAF: JMP ROUTINE_019D47
 
-CODE_019CB2:
+.no_toss
 #_019CB2: LDA.w #$001E ; STATE 1E
 #_019CB5: JSR Pocky_AttemptMeleeAttack
-#_019CB8: BCC CODE_019CBD
+#_019CB8: BCC .no_melee
 
 #_019CBA: JMP ROUTINE_019D47
 
-CODE_019CBD:
+.no_melee
 #_019CBD: LDA.w $19FC
 #_019CC0: AND.w #$4000
 #_019CC3: BEQ CODE_019CFE
@@ -4941,12 +4965,12 @@ CODE_019CBD:
 #_019CCD: AND.w #$000F
 #_019CD0: BEQ CODE_019CDA
 
-#_019CD2: JSR ROUTINE_01AA67
+#_019CD2: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019CD5: ADC.w #$003A
 #_019CD8: BRA CODE_019CE0
 
 CODE_019CDA:
-#_019CDA: JSR ROUTINE_01AA67
+#_019CDA: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019CDD: ADC.w #$0011
 
 CODE_019CE0:
@@ -4979,7 +5003,7 @@ CODE_019D06:
 #_019D06: LDA.w $19D0
 #_019D09: BEQ CODE_019D3A
 
-#_019D0B: JSR ROUTINE_01AA67
+#_019D0B: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019D0E: ADC.w #$0011
 
 CODE_019D11:
@@ -5003,7 +5027,7 @@ CODE_019D28:
 #_019D2D: LDA.w $19D0
 #_019D30: BEQ CODE_019D3A
 
-#_019D32: JSR ROUTINE_01AA67
+#_019D32: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019D35: ADC.w #$003A
 #_019D38: BRA CODE_019D11
 
@@ -5059,7 +5083,7 @@ CODE_019D7C:
 CODE_019D84:
 #_019D84: LDA.w #$002C ; STATE 2C
 #_019D87: JSR Pocky_AttemptPartnerToss
-#_019D8A: BCC CODE_019DA3
+#_019D8A: BCC .no_toss
 
 CODE_019D8C:
 #_019D8C: LDY.w #$0001
@@ -5073,14 +5097,14 @@ CODE_019D8C:
 
 #_019DA0: JMP Pocky_9856
 
-CODE_019DA3:
+.no_toss
 #_019DA3: LDA.w #$001C ; STATE 1C
 #_019DA6: JSR Pocky_AttemptMeleeAttack
-#_019DA9: BCC CODE_019DAE
+#_019DA9: BCC .no_melee
 
 #_019DAB: JMP CODE_019E5B
 
-CODE_019DAE:
+.no_melee
 #_019DAE: JSR TestForTutorialLevel
 #_019DB1: BNE CODE_019DC9
 
@@ -5109,12 +5133,12 @@ CODE_019DC9:
 #_019DD9: AND.w #$000F
 #_019DDC: BEQ CODE_019DE6
 
-#_019DDE: JSR ROUTINE_01AA67
+#_019DDE: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019DE1: ADC.w #$003A
 #_019DE4: BRA CODE_019DEC
 
 CODE_019DE6:
-#_019DE6: JSR ROUTINE_01AA67
+#_019DE6: JSR ROUTINE_01AA67_CacheStateAndReturnMod8
 #_019DE9: ADC.w #$0011
 
 CODE_019DEC:
@@ -5187,6 +5211,8 @@ CODE_019E4E:
 #_019E56: AND.w #$0F00
 #_019E59: BNE CODE_019E6E
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_019E5B:
 #_019E5B: LDY.w #$0001
 
@@ -5217,11 +5243,19 @@ CODE_019E81:
 ;---------------------------------------------------------------------------------------------------
 
 data019E87:
-#_019E87: db $04,$00,$24,$05,$00,$17,$00,$00
-#_019E8F: db $00,$04,$00,$28,$05,$00,$13,$00
-#_019E97: db $00,$00,$02,$00,$30,$21,$00,$12
-#_019E9F: db $53,$04,$00,$23,$21,$00,$00,$00
-#_019EA7: db $20,$00,$00,$00
+#_019E87: dw $0004 : dl $000524 ; write 4 bytes to target
+#_019E8C: db $17, $00, $00, $00
+
+#_019E90: dw $0004 : dl $000528 ; write 4 bytes to target
+#_019E95: db $13, $00, $00, $00
+
+#_019E99: dw $0002 : dl CGWSEL ; write 2 bytes to target
+#_019E9E: db $12, $53
+
+#_019EA0: dw $0004 : dl W12SEL ; write 4 bytes to target
+#_019EA5: db $00, $00, $20, $00
+
+#_019EA9: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -5233,7 +5267,7 @@ ROUTINE_019EAB:
 #_019EB0: LDY.w $18D0,X
 
 #_019EB3: LDA.w $0800,Y
-#_019EB6: BPL CODE_019EDA
+#_019EB6: BPL .skip_x
 
 #_019EB8: LDA.w $19D8
 #_019EBB: BEQ .dont_reset_a
@@ -5255,7 +5289,7 @@ ROUTINE_019EAB:
 #_019ED5: LDA.w $19DA
 #_019ED8: BEQ .dont_reset_b
 
-CODE_019EDA:
+.skip_x
 #_019EDA: LDA.w $19F0
 #_019EDD: SBC.w $080E,Y
 #_019EE0: EOR.w $19DA
@@ -5313,7 +5347,7 @@ ROUTINE_019F0C:
 
 ROUTINE_019F12:
 #_019F12: AND.w #$0F00
-#_019F15: BEQ CODE_019F20
+#_019F15: BEQ .skip
 
 #_019F17: TYA
 #_019F18: AND.w #$0007
@@ -5322,10 +5356,12 @@ ROUTINE_019F12:
 
 #_019F1D: JSR (.vectors,X)
 
-CODE_019F20:
+.skip
 #_019F20: JSR ROUTINE_019EAB
 
 #_019F23: JMP ROUTINE_01A1F1
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_019F26: dw ROUTINE_019F4A
@@ -5442,18 +5478,20 @@ ROUTINE_019FA5:
 
 #_019FA9: LDA.w $0500
 #_019FAC: CMP.w #$0041
-#_019FAF: BCC CODE_019FBA
+#_019FAF: BCC .not_changing_level_area
 
 #_019FB1: CMP.w #$0044
-#_019FB4: BCS CODE_019FBA
+#_019FB4: BCS .not_changing_level_area
 
 #_019FB6: STY.w $19D8
 
 #_019FB9: RTS
 
-CODE_019FBA:
+;---------------------------------------------------------------------------------------------------
+
+.not_changing_level_area
 #_019FBA: TYA
-#_019FBB: BPL CODE_019FCC
+#_019FBB: BPL .positive_movement_x
 
 #_019FBD: SEC
 
@@ -5461,12 +5499,12 @@ CODE_019FBA:
 #_019FC1: SBC.w $0560
 #_019FC4: ADC.w #$1000
 #_019FC7: CMP.b $2C
-#_019FC9: BCS CODE_019FDA
+#_019FC9: BCS .not_at_max
 
 .exit_a
 #_019FCB: RTS
 
-CODE_019FCC:
+.positive_movement_x
 #_019FCC: SEC
 
 #_019FCD: LDA.w $19EE
@@ -5475,7 +5513,7 @@ CODE_019FCC:
 #_019FD6: CMP.b $2E
 #_019FD8: BCS .exit_a
 
-CODE_019FDA:
+.not_at_max
 #_019FDA: STY.w $19D8
 
 #_019FDD: BEQ .exit_a
@@ -5484,11 +5522,11 @@ CODE_019FDA:
 #_019FE0: ASL A
 
 #_019FE1: LDA.w #$0080
-#_019FE4: BCC CODE_019FE9
+#_019FE4: BCC .use_positive
 
 #_019FE6: LDA.w #$FF80
 
-CODE_019FE9:
+.use_positive
 #_019FE9: STA.b $3E
 
 #_019FEB: TYA
@@ -5506,62 +5544,66 @@ CODE_019FE9:
 #_019FFB: ADC.w #$0100
 #_019FFE: TAY
 
+;---------------------------------------------------------------------------------------------------
+
 #_019FFF: LDA.b $3E
 #_01A001: JSR ROUTINE_01E9AA
 
 #_01A004: LDA.b $34
 #_01A006: AND.w #$0009
-#_01A009: BEQ CODE_01A027
+#_01A009: BEQ .something_with_the_flying_partners_a
 
 #_01A00B: AND.w #$0008
-#_01A00E: BEQ CODE_01A022
+#_01A00E: BEQ .set_bit_a
 
 #_01A010: LDA.w $05CE
 #_01A013: CMP.w #$0098 ; PARTNER 0098
-#_01A016: BEQ CODE_01A027
+#_01A016: BEQ .something_with_the_flying_partners_a
 
 #_01A018: CMP.w #$0078 ; PARTNER 0078
-#_01A01B: BEQ CODE_01A027
+#_01A01B: BEQ .something_with_the_flying_partners_a
 
 #_01A01D: CMP.w #$00B8 ; PARTNER 00B8
-#_01A020: BEQ CODE_01A027
+#_01A020: BEQ .something_with_the_flying_partners_a
 
-CODE_01A022:
+.set_bit_a
 #_01A022: LDA.w #$0001
 #_01A025: TSB.b $3C
 
-CODE_01A027:
+.something_with_the_flying_partners_a
 #_01A027: SEC
 
 #_01A028: LDA.w $19C4
 #_01A02B: SBC.w #$0080
 #_01A02E: TAY
 
+;---------------------------------------------------------------------------------------------------
+
 #_01A02F: LDA.b $3E
 #_01A031: JSR ROUTINE_01E9AA
 
 #_01A034: LDA.b $34
 #_01A036: AND.w #$0009
-#_01A039: BEQ CODE_01A057
+#_01A039: BEQ .something_with_the_flying_partners_b
 
 #_01A03B: AND.w #$0008
-#_01A03E: BEQ CODE_01A052
+#_01A03E: BEQ .set_bit_b
 
 #_01A040: LDA.w $05CE
 #_01A043: CMP.w #$0098 ; PARTNER 0098
-#_01A046: BEQ CODE_01A057
+#_01A046: BEQ .something_with_the_flying_partners_b
 
 #_01A048: CMP.w #$0078 ; PARTNER 0078
-#_01A04B: BEQ CODE_01A057
+#_01A04B: BEQ .something_with_the_flying_partners_b
 
 #_01A04D: CMP.w #$00B8 ; PARTNER 00B8
-#_01A050: BEQ CODE_01A057
+#_01A050: BEQ .something_with_the_flying_partners_b
 
-CODE_01A052:
+.set_bit_b
 #_01A052: LDA.w #$0002
 #_01A055: TSB.b $3C
 
-CODE_01A057:
+.something_with_the_flying_partners_b
 #_01A057: LDA.b $3E
 
 #_01A059: LDY.w $19C4
@@ -5569,26 +5611,26 @@ CODE_01A057:
 
 #_01A05F: LDA.b $34
 #_01A061: AND.w #$0009
-#_01A064: BEQ CODE_01A082
+#_01A064: BEQ .something_with_the_flying_partners_c
 
 #_01A066: AND.w #$0008
-#_01A069: BEQ CODE_01A07D
+#_01A069: BEQ .set_bit_c
 
 #_01A06B: LDA.w $05CE
 #_01A06E: CMP.w #$0098 ; PARTNER 0098
-#_01A071: BEQ CODE_01A082
+#_01A071: BEQ .something_with_the_flying_partners_c
 
 #_01A073: CMP.w #$0078 ; PARTNER 0078
-#_01A076: BEQ CODE_01A082
+#_01A076: BEQ .something_with_the_flying_partners_c
 
 #_01A078: CMP.w #$00B8 ; PARTNER 00B8
-#_01A07B: BEQ CODE_01A082
+#_01A07B: BEQ .something_with_the_flying_partners_c
 
-CODE_01A07D:
+.set_bit_c
 #_01A07D: LDA.w #$0004
 #_01A080: TSB.b $3C
 
-CODE_01A082:
+.something_with_the_flying_partners_c
 #_01A082: LDA.b $3C
 #_01A084: BEQ .exit_b
 
@@ -5686,26 +5728,26 @@ CODE_01A0E0:
 
 #_01A0FA: LDA.b $34
 #_01A0FC: AND.w #$0009
-#_01A0FF: BEQ CODE_01A11D
+#_01A0FF: BEQ .something_with_the_flying_partners_a
 
 #_01A101: AND.w #$0008
-#_01A104: BEQ CODE_01A118
+#_01A104: BEQ .set_bit_a
 
 #_01A106: LDA.w $05CE
 #_01A109: CMP.w #$0098 ; PARTNER 0098
-#_01A10C: BEQ CODE_01A11D
+#_01A10C: BEQ .something_with_the_flying_partners_a
 
 #_01A10E: CMP.w #$0078 ; PARTNER 0078
-#_01A111: BEQ CODE_01A11D
+#_01A111: BEQ .something_with_the_flying_partners_a
 
 #_01A113: CMP.w #$00B8 ; PARTNER 00B8
-#_01A116: BEQ CODE_01A11D
+#_01A116: BEQ .something_with_the_flying_partners_a
 
-CODE_01A118:
+.set_bit_a
 #_01A118: LDA.w #$0001
 #_01A11B: TSB.b $3C
 
-CODE_01A11D:
+.something_with_the_flying_partners_a
 #_01A11D: SEC
 
 #_01A11E: LDA.w $19C2
@@ -5716,26 +5758,26 @@ CODE_01A11D:
 
 #_01A129: LDA.b $34
 #_01A12B: AND.w #$0009
-#_01A12E: BEQ CODE_01A14C
+#_01A12E: BEQ .something_with_the_flying_partners_b
 
 #_01A130: AND.w #$0008
-#_01A133: BEQ CODE_01A147
+#_01A133: BEQ .set_bit_b
 
 #_01A135: LDA.w $05CE
 #_01A138: CMP.w #$0098 ; PARTNER 0098
-#_01A13B: BEQ CODE_01A14C
+#_01A13B: BEQ .something_with_the_flying_partners_b
 
 #_01A13D: CMP.w #$0078 ; PARTNER 0078
-#_01A140: BEQ CODE_01A14C
+#_01A140: BEQ .something_with_the_flying_partners_b
 
 #_01A142: CMP.w #$00B8 ; PARTNER 00B8
-#_01A145: BEQ CODE_01A14C
+#_01A145: BEQ .something_with_the_flying_partners_b
 
-CODE_01A147:
+.set_bit_b
 #_01A147: LDA.w #$0002
 #_01A14A: TSB.b $3C
 
-CODE_01A14C:
+.something_with_the_flying_partners_b
 #_01A14C: LDY.b $3E
 
 #_01A14E: LDA.w $19C2
@@ -5743,26 +5785,26 @@ CODE_01A14C:
 
 #_01A154: LDA.b $34
 #_01A156: AND.w #$0009
-#_01A159: BEQ CODE_01A177
+#_01A159: BEQ .something_with_the_flying_partners_c
 
 #_01A15B: AND.w #$0008
-#_01A15E: BEQ CODE_01A172
+#_01A15E: BEQ .set_bit_c
 
 #_01A160: LDA.w $05CE
 #_01A163: CMP.w #$0098 ; PARTNER 0098
-#_01A166: BEQ CODE_01A177
+#_01A166: BEQ .something_with_the_flying_partners_c
 
 #_01A168: CMP.w #$0078 ; PARTNER 0078
-#_01A16B: BEQ CODE_01A177
+#_01A16B: BEQ .something_with_the_flying_partners_c
 
 #_01A16D: CMP.w #$00B8 ; PARTNER 00B8
-#_01A170: BEQ CODE_01A177
+#_01A170: BEQ .something_with_the_flying_partners_c
 
-CODE_01A172:
+.set_bit_c
 #_01A172: LDA.w #$0004
 #_01A175: TSB.b $3C
 
-CODE_01A177:
+.something_with_the_flying_partners_c
 #_01A177: LDA.b $3C
 #_01A179: BEQ .exit_b
 
@@ -5783,6 +5825,8 @@ CODE_01A18D:
 
 .exit_b
 #_01A190: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data01A191:
 #_01A191: db $00,$00,$F0,$FF,$10,$00,$00,$00
@@ -5823,6 +5867,8 @@ ROUTINE_01A1B7:
 #_01A1CB: PLY
 
 #_01A1CC: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data01A1CD:
 #_01A1CD: db $11,$1F,$11,$1F,$11,$1F,$11,$1F
@@ -5913,15 +5959,13 @@ CODE_01A219:
 
 ;===================================================================================================
 
-ROUTINE_01A26D:
+ROUTINE_01A26D_CachesPockyCoordinates:
 #_01A26D: SEC
-
 #_01A26E: LDA.w $19EE
 #_01A271: SBC.w $0560
 #_01A274: STA.w $19C2
 
 #_01A277: SEC
-
 #_01A278: LDA.w $19F0
 #_01A27B: SBC.w $0562
 #_01A27E: STA.w $19C4
@@ -5937,7 +5981,7 @@ ROUTINE_01A285_0000:
 
 ROUTINE_01A285:
 #_01A285: TAY
-#_01A286: BNE CODE_01A291
+#_01A286: BNE .not_zero
 
 #_01A288: STZ.b $10
 #_01A28A: STZ.b $14
@@ -5946,7 +5990,7 @@ ROUTINE_01A285:
 
 #_01A290: RTS
 
-CODE_01A291:
+.not_zero
 #_01A291: LDA.w data01A2AF+0,Y
 #_01A294: ADC.w $19EE
 #_01A297: STA.b $10
@@ -5963,6 +6007,8 @@ CODE_01A291:
 #_01A2AC: STA.b $16
 
 #_01A2AE: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data01A2AF:
 #_01A2AF: dw $0000, $0000, $0000, $0000
@@ -6022,6 +6068,8 @@ CODE_01A342:
 .exit
 #_01A348: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data01A349:
 #_01A349: db $80,$02,$06,$00,$04,$03,$05,$00
 #_01A351: db $00,$01,$07,$00,$00,$00,$00,$00
@@ -6039,16 +6087,15 @@ ROUTINE_01A359:
 #_01A365: CMP.w #$0004
 
 #_01A368: LDA.w $19CC
-#_01A36B: BCC CODE_01A370
+#_01A36B: BCC .decrement
 
 #_01A36D: INC A
+#_01A36E: BRA .set
 
-#_01A36E: BRA CODE_01A371
-
-CODE_01A370:
+.decrement
 #_01A370: DEC A
 
-CODE_01A371:
+.set
 #_01A371: AND.w #$0007
 #_01A374: STA.w $19CC
 
@@ -6079,7 +6126,7 @@ ROUTINE_01A37D:
 
 ROUTINE_01A388:
 #_01A388: LDY.w $18E8
-#_01A38B: BEQ CODE_01A397
+#_01A38B: BEQ .fail
 
 #_01A38D: DEY
 #_01A38E: DEY
@@ -6091,7 +6138,7 @@ ROUTINE_01A388:
 
 #_01A396: RTS
 
-CODE_01A397:
+.fail
 #_01A397: CLC
 
 #_01A398: RTS
@@ -6161,19 +6208,19 @@ ROUTINE_01A3DC:
 
 ;---------------------------------------------------------------------------------------------------
 
-#EXIT_01A3E9:
+.exit
 #_01A3E9: RTS
 
 ;===================================================================================================
 
-ROUTINE_01A3EA:
+#ROUTINE_01A3EA:
 #_01A3EA: JSR ROUTINE_01A388
-#_01A3ED: BCC EXIT_01A3E9
+#_01A3ED: BCC .exit
 
 #_01A3EF: LDA.w $19EC
 
 CODE_01A3F2:
-#_01A3F2: JSR ROUTINE_01A417
+#_01A3F2: JSR ROUTINE_01A417_MovesRelativePocky
 
 #_01A3F5: LDA.w #$0080
 #_01A3F8: STA.w $0180,X
@@ -6183,10 +6230,10 @@ CODE_01A3F2:
 #_01A3FF: ASL A
 #_01A400: TAY
 
-#_01A401: LDA.w data01A507+0,Y
+#_01A401: LDA.w data01A507_OffsetsRelativePocky+0,Y
 #_01A404: STA.w $0380,X
 
-#_01A407: LDA.w data01A507+2,Y
+#_01A407: LDA.w data01A507_OffsetsRelativePocky+2,Y
 #_01A40A: STA.w $03C0,X
 
 #_01A40D: JSR ROUTINE_01A399
@@ -6201,17 +6248,17 @@ ROUTINE_01A414:
 
 ;===================================================================================================
 
-ROUTINE_01A417:
+ROUTINE_01A417_MovesRelativePocky:
 #_01A417: ASL A
 #_01A418: ASL A
 #_01A419: TAY
 
-#_01A41A: LDA.w data01A507+0,Y
+#_01A41A: LDA.w data01A507_OffsetsRelativePocky+0,Y
 #_01A41D: ASL A
 #_01A41E: ADC.w $19EE
 #_01A421: STA.w $0280,X
 
-#_01A424: LDA.w data01A507+2,Y
+#_01A424: LDA.w data01A507_OffsetsRelativePocky+2,Y
 #_01A427: ASL A
 #_01A428: ADC.w $19F0
 #_01A42B: CLC
@@ -6256,17 +6303,29 @@ ROUTINE_01A436:
 .exit
 #_01A468: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data01A469:
-#_01A469: dw $0000, $FFF0, $000B, $FFF5
-#_01A471: dw $0010, $0000, $000B, $000B
-#_01A479: dw $0000, $0010, $FFF5, $000B
-#_01A481: dw $FFF0, $0000, $FFF5, $FFF5
+#_01A469: dw $0000, $FFF0
+#_01A46D: dw $000B, $FFF5
+#_01A471: dw $0010, $0000
+#_01A475: dw $000B, $000B
+#_01A479: dw $0000, $0010
+#_01A47D: dw $FFF5, $000B
+#_01A481: dw $FFF0, $0000
+#_01A485: dw $FFF5, $FFF5
+
+;---------------------------------------------------------------------------------------------------
 
 data01A489:
-#_01A489: dw $0000, $FFA0, $0038, $FFC8
-#_01A491: dw $0060, $0000, $0038, $0038
-#_01A499: dw $0000, $0060, $FFC8, $0038
-#_01A4A1: dw $FFA0, $0000, $FFC8, $FFC8
+#_01A489: dw $0000, $FFA0
+#_01A48D: dw $0038, $FFC8
+#_01A491: dw $0060, $0000
+#_01A495: dw $0038, $0038
+#_01A499: dw $0000, $0060
+#_01A49D: dw $FFC8, $0038
+#_01A4A1: dw $FFA0, $0000
+#_01A4A5: dw $FFC8, $FFC8
 
 ;===================================================================================================
 
@@ -6288,24 +6347,24 @@ ROUTINE_01A4A9:
 #_01A4BF: ADC.w data01A4FF,Y
 #_01A4C2: TAY
 
-#_01A4C3: LDA.w data01A507+0,Y
+#_01A4C3: LDA.w data01A507_OffsetsRelativePocky+0,Y
 #_01A4C6: ASL A
 #_01A4C7: ADC.w $19EE
 #_01A4CA: STA.w $0280,X
 
 #_01A4CD: STZ.w $0240,X
 
-#_01A4D0: LDA.w data01A507+2,Y
+#_01A4D0: LDA.w data01A507_OffsetsRelativePocky+2,Y
 #_01A4D3: ASL A
 #_01A4D4: ADC.w $19F0
 #_01A4D7: CLC
 #_01A4D8: ADC.w $19CA
 #_01A4DB: STA.w $02C0,X
 
-#_01A4DE: LDA.w data01A507+0,Y
+#_01A4DE: LDA.w data01A507_OffsetsRelativePocky+0,Y
 #_01A4E1: STA.w $0380,X
 
-#_01A4E4: LDA.w data01A507+2,Y
+#_01A4E4: LDA.w data01A507_OffsetsRelativePocky+2,Y
 #_01A4E7: STA.w $03C0,X
 
 #_01A4EA: LDA.w #$0080
@@ -6320,26 +6379,42 @@ ROUTINE_01A4A9:
 ;---------------------------------------------------------------------------------------------------
 
 data01A4F7:
-#_01A4F7: db $80,$00,$86,$00,$80,$00,$86,$00
-
-data01A4FF:
-#_01A4FF: db $20,$00,$00,$00,$40,$00,$00,$00
+#_01A4F7: dw $0080, $0086
+#_01A4F7: dw $0080, $0086
 
 ;---------------------------------------------------------------------------------------------------
 
-data01A507:
-#_01A507: dw $0000, $FFA0, $0043, $FFBD
-#_01A50F: dw $0060, $0000, $0043, $0043
-#_01A517: dw $0000, $0060, $FFBD, $0043
-#_01A51F: dw $FFA0, $0000, $FFBD, $FFBD
-#_01A527: dw $FFEE, $FFA2, $0035, $FFB1
-#_01A52F: dw $005E, $FFEE, $004F, $0035
-#_01A537: dw $0012, $005E, $FFCB, $004F
-#_01A53F: dw $FFA2, $0012, $FFB1, $FFCB
-#_01A547: dw $0012, $FFA2, $004F, $FFCB
-#_01A54F: dw $005E, $0012, $0035, $004F
-#_01A557: dw $FFEE, $005E, $FFB1, $0035
-#_01A55F: dw $FFA2, $FFEE, $FFCB, $FFB1
+data01A4FF:
+#_01A4FF: dw $0020, $0000
+#_01A503: dw $0040, $0000
+
+;---------------------------------------------------------------------------------------------------
+
+data01A507_OffsetsRelativePocky:
+#_01A507: dw $0000, $FFA0
+#_01A50B: dw $0043, $FFBD
+#_01A50F: dw $0060, $0000
+#_01A513: dw $0043, $0043
+#_01A517: dw $0000, $0060
+#_01A51B: dw $FFBD, $0043
+#_01A51F: dw $FFA0, $0000
+#_01A523: dw $FFBD, $FFBD
+#_01A527: dw $FFEE, $FFA2
+#_01A52B: dw $0035, $FFB1
+#_01A52F: dw $005E, $FFEE
+#_01A533: dw $004F, $0035
+#_01A537: dw $0012, $005E
+#_01A53B: dw $FFCB, $004F
+#_01A53F: dw $FFA2, $0012
+#_01A543: dw $FFB1, $FFCB
+#_01A547: dw $0012, $FFA2
+#_01A54B: dw $004F, $FFCB
+#_01A54F: dw $005E, $0012
+#_01A553: dw $0035, $004F
+#_01A557: dw $FFEE, $005E
+#_01A55B: dw $FFB1, $0035
+#_01A55F: dw $FFA2, $FFEE
+#_01A563: dw $FFCB, $FFB1
 
 ;===================================================================================================
 
@@ -6352,7 +6427,7 @@ ROUTINE_01A567:
 
 ;===================================================================================================
 
-ROUTINE_01A571:
+ROUTINE_01A571_Get05CCmod7:
 #_01A571: LDA.w $05CC
 #_01A574: AND.w #$0007
 
@@ -6382,26 +6457,26 @@ ROUTINE_01A586:
 
 ;===================================================================================================
 
-ROUTINE_01A590:
+TestForPockyTakingDamage:
 #_01A590: LDA.w $19CE
 #_01A593: CMP.w #$000E ; STATE 0E
-#_01A596: BCC CODE_01A59F
+#_01A596: BCC .fail
 
 #_01A598: CMP.w #$001A ; STATE 1A
-#_01A59B: BCS CODE_01A59F
+#_01A59B: BCS .fail
 
 #_01A59D: SEC
 
 #_01A59E: RTS
 
-CODE_01A59F:
+.fail
 #_01A59F: CLC
 
 #_01A5A0: RTS
 
 ;===================================================================================================
 
-ROUTINE_01A5A1:
+ROUTINE_01A5A1_19FCora19FE:
 #_01A5A1: LDA.w $19FC
 #_01A5A4: ORA.w $19FE
 
@@ -6409,7 +6484,7 @@ ROUTINE_01A5A1:
 
 ;===================================================================================================
 
-ROUTINE_01A5A8:
+Partner_CopyPockyCoordinates:
 #_01A5A8: LDA.w $19EE
 #_01A5AB: STA.w $05E6
 
@@ -6438,7 +6513,7 @@ Check_04CE_and_OddMultiplesOf2:
 ROUTINE_01A5C4_SetPartnerMode:
 #_01A5C4: STA.w $05CE
 
-#_01A5C7: JSR ROUTINE_01A8E2
+#_01A5C7: JSR ROUTINE_01A8E2_TestsDifficulty
 
 #_01A5CA: LDA.w #$FFFF
 #_01A5CD: STA.w $05E4
@@ -6452,7 +6527,7 @@ ROUTINE_01A5C4_SetPartnerMode:
 ROUTINE_01A5D4_SetPartnerMode:
 #_01A5D4: STA.w $05CE
 
-#_01A5D7: JSR ROUTINE_01AAAA
+#_01A5D7: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01A5DA: LDA.w #$0060 ; SFX 60
 #_01A5DD: STA.w $04AA
@@ -6461,13 +6536,13 @@ ROUTINE_01A5D4_SetPartnerMode:
 #_01A5E3: STA.w $05DC
 
 #_01A5E6: LDA.w #$0026
-#_01A5E9: JMP CODE_01DB5F
+#_01A5E9: JMP ROUTINE_01DB5F
 
 ;===================================================================================================
 
 ROUTINE_01A5EC:
 #_01A5EC: LDA.w #$0058
-#_01A5EF: JSR ROUTINE_01E42A
+#_01A5EF: JSR ROUTINE_01E436_IndexInA
 
 #_01A5F2: JMP ROUTINE_01E415
 
@@ -6497,18 +6572,20 @@ CODE_01A60B:
 
 ROUTINE_01A60F:
 #_01A60F: LDA.w $18CE
-#_01A612: BEQ CODE_01A61F
+#_01A612: BEQ .dont_increment
 
 #_01A614: LDA.w $058C
 #_01A617: AND.w #$0F00
-#_01A61A: BEQ CODE_01A61F
+#_01A61A: BEQ .dont_increment
 
 #_01A61C: INC.w $05EC
 
-CODE_01A61F:
+.dont_increment
 #_01A61F: LDA.w $05EC
 
 #_01A622: RTS
+
+;===================================================================================================
 
 ROUTINE_01A623:
 #_01A623: JSL ROUTINE_04F6E1
@@ -6519,12 +6596,12 @@ ROUTINE_01A623:
 
 #_01A630: LDA.w $05C4
 #_01A633: LDY.w #$05C0
-#_01A636: JMP ROUTINE_0181F1
+#_01A636: JMP ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
 ;===================================================================================================
 
 ROUTINE_01A639:
-#_01A639: JSR Reset_18_through_1E
+#_01A639: JSR ROUTINE_01E436_AllZero
 
 #_01A63C: JMP ROUTINE_01E415
 
@@ -6533,7 +6610,7 @@ ROUTINE_01A639:
 ROUTINE_01A63F_SetPartnerMode:
 #_01A63F: STA.w $05CE
 
-#_01A642: JSR ROUTINE_01A8E2
+#_01A642: JSR ROUTINE_01A8E2_TestsDifficulty
 
 #_01A645: LDA.w #$FFFF
 #_01A648: STA.w $05E4
@@ -6549,7 +6626,6 @@ ROUTINE_01A654:
 #_01A654: JSR ROUTINE_01D6F3
 
 #_01A657: SEC
-
 #_01A658: LDA.w $05CA
 #_01A65B: SBC.w #$0100
 #_01A65E: STA.w $05CA
@@ -6571,7 +6647,7 @@ ROUTINE_01A670_SetPartnerMode:
 #_01A673: LDA.w #$0040
 #_01A676: STA.w $05E0
 
-#_01A679: JMP ROUTINE_01A5A8
+#_01A679: JMP Partner_CopyPockyCoordinates
 
 ;===================================================================================================
 
@@ -6648,14 +6724,12 @@ ROUTINE_01A6C2:
 #_01A6D0: TAX
 
 #_01A6D1: CLC
-
-#_01A6D2: LDA.l data07F3A1+0,X
+#_01A6D2: LDA.l SomePockyVelocities_07F3A1+0,X
 #_01A6D6: ADC.w $19EE
 #_01A6D9: STA.w $05E6
 
 #_01A6DC: CLC
-
-#_01A6DD: LDA.l data07F3A1+2,X
+#_01A6DD: LDA.l SomePockyVelocities_07F3A1+2,X
 #_01A6E1: ADC.w $19F0
 #_01A6E4: STA.w $05E8
 
@@ -6672,7 +6746,7 @@ ROUTINE_01A6E8:
 #_01A6F2: LDY.w #$0060
 #_01A6F5: JSR ROUTINE_01E436
 
-#_01A6F8: JMP CODE_01E20C
+#_01A6F8: JMP Partner_Add05D8toCoordinates
 
 ;===================================================================================================
 
@@ -6691,7 +6765,7 @@ ROUTINE_01A6FB:
 
 ;===================================================================================================
 
-ROUTINE_01A70F:
+Pocky_OfficiallyEnterMagicMerge:
 #_01A70F: PHA
 
 #_01A710: LDA.w #$FF80
@@ -6726,7 +6800,7 @@ ROUTINE_01A724:
 #_01A73F: LDA.w #$000E
 #_01A742: STA.b $24
 
-#_01A744: JSL PrepEnemySpawn_long
+#_01A744: JSL PrepSpriteSpawn_long
 
 #_01A748: RTS
 
@@ -6767,7 +6841,7 @@ SetPartnerAWOL:
 
 ;===================================================================================================
 
-ROUTINE_01A777:
+ROUTINE_01A799_Read05CA:
 #_01A777: JSR ROUTINE_01A799
 
 #_01A77A: LDA.w $05CA
@@ -6776,25 +6850,25 @@ ROUTINE_01A777:
 
 ;===================================================================================================
 
-ROUTINE_01A77E:
+TestPockyForDeathOrOccupied_A77E:
 #_01A77E: LDA.w $19CE
 #_01A781: CMP.w #$001A ; STATE 1A
-#_01A784: BEQ CODE_01A797
+#_01A784: BEQ .success
 
 #_01A786: CMP.w #$00BC ; STATE BC
-#_01A789: BEQ CODE_01A797
+#_01A789: BEQ .success
 
 #_01A78B: CMP.w #$00BE ; STATE BE
-#_01A78E: BEQ CODE_01A797
+#_01A78E: BEQ .success
 
 #_01A790: CMP.w #$00C0 ; STATE C0
-#_01A793: BEQ CODE_01A797
+#_01A793: BEQ .success
 
 #_01A795: CLC
 
 #_01A796: RTS
 
-CODE_01A797:
+.success
 #_01A797: SEC
 
 #_01A798: RTS
@@ -6864,9 +6938,9 @@ CODE_01A7ED:
 ROUTINE_01A7F0_SetPartnerMode:
 #_01A7F0: STY.w $05CE
 
-#_01A7F3: JSR Reset_18_through_1E
+#_01A7F3: JSR ROUTINE_01E436_AllZero
 #_01A7F6: JSR ROUTINE_01A9B9
-#_01A7F9: JSR ROUTINE_01AAAA
+#_01A7F9: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01A7FC: RTS
 
@@ -6876,9 +6950,9 @@ ROUTINE_01A7FD:
 #_01A7FD: LDA.w $05C4
 
 #_01A800: LDY.w #$05C0
-#_01A803: JSR ROUTINE_0181F1
+#_01A803: JSR ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
-#_01A806: JMP ROUTINE_01E83E
+#_01A806: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -6951,7 +7025,7 @@ ROUTINE_01A847_SetPartnerMode:
 
 #_01A857: STZ.w $19E2
 
-#_01A85A: JSR ROUTINE_01AAAA
+#_01A85A: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01A85D: STZ.w $05CA
 
@@ -6994,25 +7068,25 @@ ROUTINE_01A88B:
 #_01A890: LDA.w #$0800
 #_01A893: JSR ROUTINE_01B172
 #_01A896: CMP.w #$0100
-#_01A899: BCS CODE_01A89E
+#_01A899: BCS .fail_a
 
 #_01A89B: INC.w $05E2
 
-CODE_01A89E:
+.fail_a
 #_01A89E: CLC
 
 #_01A89F: RTS
 
 CODE_01A8A0:
 #_01A8A0: JSR ROUTINE_01BBB8
-#_01A8A3: BCC CODE_01A8BA
+#_01A8A3: BCC .fail_b
 
 #_01A8A5: LDA.w $05DC
 #_01A8A8: CMP.w #$0300
-#_01A8AB: BCS CODE_01A8BA
+#_01A8AB: BCS .fail_b
 
 #_01A8AD: JSR ROUTINE_0180B7
-#_01A8B0: BCC CODE_01A8BA
+#_01A8B0: BCC .fail_b
 
 #_01A8B2: LDA.w #$001C ; SFX 1C
 #_01A8B5: STA.w $04A6
@@ -7021,7 +7095,7 @@ CODE_01A8A0:
 
 #_01A8B9: RTS
 
-CODE_01A8BA:
+.fail_b
 #_01A8BA: CLC
 
 #_01A8BB: RTS
@@ -7057,7 +7131,7 @@ ROUTINE_01A8C7_SetPartnerMode:
 CODE_01A8D5:
 #_01A8D5: STA.w $05DC
 
-#_01A8D8: JSR ROUTINE_01A8E2
+#_01A8D8: JSR ROUTINE_01A8E2_TestsDifficulty
 
 #_01A8DB: LDA.w #$001A ; SFX 1A
 #_01A8DE: STA.w $04AA
@@ -7066,7 +7140,7 @@ CODE_01A8D5:
 
 ;===================================================================================================
 
-ROUTINE_01A8E2:
+ROUTINE_01A8E2_TestsDifficulty:
 #_01A8E2: LDA.w $0556
 #_01A8E5: AND.w #$0003
 #_01A8E8: TAY
@@ -7077,8 +7151,10 @@ ROUTINE_01A8E2:
 
 #_01A8F2: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data01A8F3:
-#_01A8F3: db $04,$05,$03,$03
+#_01A8F3: db $04, $05, $03, $03
 
 ;===================================================================================================
 
@@ -7105,7 +7181,7 @@ ROUTINE_01A8FF:
 #_01A90B: STA.b $22
 
 #_01A90D: LDY.w #$0008
-#_01A910: JSL ROUTINE_038A58
+#_01A910: JSL SpawnDisappearingSmoke
 
 #_01A914: PLA
 
@@ -7115,26 +7191,26 @@ ROUTINE_01A8FF:
 
 ROUTINE_01A916:
 #_01A916: JSR ROUTINE_01A96E
-#_01A919: BNE CODE_01A934
+#_01A919: BNE .fail
 
 #_01A91B: LDA.w $19CE
 #_01A91E: CMP.w #$0028 ; STATE 28
-#_01A921: BCS CODE_01A934
+#_01A921: BCS .fail
 
 #_01A923: CMP.w #$001A ; STATE 1A
-#_01A926: BEQ CODE_01A934
+#_01A926: BEQ .fail
 
 #_01A928: LDA.w $18E2
-#_01A92B: BNE CODE_01A934
+#_01A92B: BNE .fail
 
 #_01A92D: DEC.w $05DC
-#_01A930: BNE CODE_01A934
+#_01A930: BNE .fail
 
 #_01A932: SEC
 
 #_01A933: RTS
 
-CODE_01A934:
+.fail
 #_01A934: CLC
 
 #_01A935: RTS
@@ -7150,20 +7226,19 @@ ROUTINE_01A936_SetPartnerMode:
 #_01A93F: LDA.w #$000B ; SFX 0B
 #_01A942: STA.w $04AA
 
-#_01A945: JSR ROUTINE_01AAAA
+#_01A945: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01A948: LDX.w $04FE
-
 #_01A94B: JSR SpawnInNewPartner
 
-#_01A94E: JMP CODE_01DB26
+#_01A94E: JMP ROUTINE_01DB26
 
 ;===================================================================================================
 
 ROUTINE_01A951_SetPartnerMode:
 #_01A951: STA.w $05CE
 
-#_01A954: JSR ROUTINE_01A8E2
+#_01A954: JSR ROUTINE_01A8E2_TestsDifficulty
 
 #_01A957: STZ.w $04BA
 
@@ -7177,7 +7252,7 @@ ROUTINE_01A951_SetPartnerMode:
 ;===================================================================================================
 
 ROUTINE_01A964:
-#_01A964: JSR Reset_18_through_1E
+#_01A964: JSR ROUTINE_01E436_AllZero
 #_01A967: JSR ROUTINE_01E415
 
 #_01A96A: LDA.w $05DE
@@ -7199,7 +7274,7 @@ ROUTINE_01A96E:
 
 #_01A982: JSR ROUTINE_01BA72
 #_01A985: JSR ROUTINE_01E415
-#_01A988: JSR Reset_18_through_1E
+#_01A988: JSR ROUTINE_01E436_AllZero
 
 #_01A98B: LDA.w #$0000
 
@@ -7211,7 +7286,7 @@ ROUTINE_01A96E:
 ROUTINE_01A98F:
 #_01A98F: STZ.w $04B2
 
-#_01A992: JSR Reset_18_through_1E
+#_01A992: JSR ROUTINE_01E436_AllZero
 
 #_01A995: CLC
 
@@ -7340,7 +7415,7 @@ ROUTINE_01AA22:
 #_01AA2B: LDA.w #$0008
 #_01AA2E: JSR ROUTINE_01A285
 
-#_01AA31: JMP ROUTINE_01A26D
+#_01AA31: JMP ROUTINE_01A26D_CachesPockyCoordinates
 
 ;===================================================================================================
 
@@ -7350,7 +7425,7 @@ ROUTINE_01AA34:
 #_01AA37: LDA.w #$0008
 #_01AA3A: JSR ROUTINE_01A285
 
-#_01AA3D: JMP ROUTINE_01A26D
+#_01AA3D: JMP ROUTINE_01A26D_CachesPockyCoordinates
 
 ;===================================================================================================
 
@@ -7374,7 +7449,7 @@ ROUTINE_01AA4A:
 
 ;===================================================================================================
 
-ROUTINE_01AA54:
+ROUTINE_01AA54_ResetsStuff:
 #_01AA54: STZ.w $0594
 #_01AA57: STZ.w $0590
 
@@ -7387,7 +7462,7 @@ ROUTINE_01AA54:
 
 ;===================================================================================================
 
-ROUTINE_01AA67:
+ROUTINE_01AA67_CacheStateAndReturnMod8:
 #_01AA67: LDA.w $19EC
 #_01AA6A: STA.w $19CC
 
@@ -7436,7 +7511,7 @@ IncrementPartnerModeTwice:
 
 ;===================================================================================================
 
-ROUTINE_01AAAA:
+ROUTINE_01AAAA_ResetsStuff:
 #_01AAAA: STZ.w $05D0
 #_01AAAD: STZ.w $05D2
 #_01AAB0: STZ.w $05D4
@@ -7590,7 +7665,9 @@ CODE_01AB49:
 
 #_01AB72: LDA.w #$0004
 
-CODE_01AB75:
+;---------------------------------------------------------------------------------------------------
+
+.next
 #_01AB75: PHA
 #_01AB76: PHX
 #_01AB77: PHY
@@ -7674,13 +7751,15 @@ CODE_01ABA8:
 
 #_01ABD3: PLA
 #_01ABD4: DEC A
-#_01ABD5: BNE CODE_01AB75
+#_01ABD5: BNE .next
 
 .exit
 #_01ABD7: PLY
 #_01ABD8: PLX
 
 #_01ABD9: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data01ABDA:
 #_01ABDA: dw $0000, $0000, $0000, $0000
@@ -7726,7 +7805,7 @@ ROUTINE_01AC1A:
 
 ;===================================================================================================
 
-ROUTINE_01AC3F:
+ROUTINE_01AC3F_TableCopying:
 #_01AC3F: LDA.w $0000,X
 #_01AC42: BEQ .exit
 
@@ -7763,7 +7842,7 @@ ROUTINE_01AC3F:
 #_01AC66: BNE .next
 
 #_01AC68: REP #$20
-#_01AC6A: BRA ROUTINE_01AC3F
+#_01AC6A: BRA ROUTINE_01AC3F_TableCopying
 
 .exit
 #_01AC6C: RTS
@@ -7810,12 +7889,12 @@ SpawnInNewPartner_preserve_X_long:
 
 ;===================================================================================================
 
-ROUTINE_01ACA2_long:
+DecompressPartnerSpawnFlair_wrapper_long:
 #_01AC95: PHB
 #_01AC96: PHK
 #_01AC97: PLB
 
-#_01AC98: JSR ROUTINE_01ACA2
+#_01AC98: JSR DecompressPartnerSpawnFlair_wrapper
 
 #_01AC9B: PLB
 #_01AC9C: RTL
@@ -7831,8 +7910,8 @@ SpawnInNewPartner_preserve_X:
 
 ;===================================================================================================
 
-ROUTINE_01ACA2:
-#_01ACA2: JSL ROUTINE_08F29A
+DecompressPartnerSpawnFlair_wrapper:
+#_01ACA2: JSL DecompressPartnerSpawnFlair
 
 #_01ACA6: RTS
 
@@ -7840,6 +7919,8 @@ ROUTINE_01ACA2:
 
 SpawnInNewPartner:
 #_01ACA7: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_01ACAA: dw ROUTINE_01ADD4
@@ -7861,7 +7942,7 @@ ROUTINE_01ACBC:
 
 #_01ACBF: LDA.w #data07F130
 #_01ACC2: LDY.w #data07F130>>16
-#_01ACC5: JSL ROUTINE_08BD65
+#_01ACC5: JSL RobustBulkDecompressionAndSetMode40
 
 #_01ACC9: PLB
 #_01ACCA: RTL
@@ -7877,7 +7958,7 @@ ROUTINE_01ACCB:
 
 #_01ACD2: LDA.w #data07F130>>16
 #_01ACD5: LDX.w #data07F130
-#_01ACD8: JSL ROUTINE_00DC8C_long
+#_01ACD8: JSL ROUTINE_00DC7E
 
 #_01ACDC: PLB
 #_01ACDD: RTL
@@ -7891,30 +7972,30 @@ ROUTINE_01ACDE:
 
 #_01ACE1: LDX.w #$0120
 #_01ACE4: LDY.w #$00E0
-#_01ACE7: JSR ROUTINE_01ACFD
+#_01ACE7: JSR CopyPartnerPaletteToBuffer
 
 #_01ACEA: LDX.w #$0140
 #_01ACED: LDY.w #$0100
-#_01ACF0: JSR ROUTINE_01ACFD
+#_01ACF0: JSR CopyPartnerPaletteToBuffer
 
 #_01ACF3: PLB
 #_01ACF4: RTL
 
 ;===================================================================================================
 
-ROUTINE_01ACFD_long:
+CopyPartnerPaletteToBuffer_long:
 #_01ACF5: PHB
 #_01ACF6: PHK
 #_01ACF7: PLB
 
-#_01ACF8: JSR ROUTINE_01ACFD
+#_01ACF8: JSR CopyPartnerPaletteToBuffer
 
 #_01ACFB: PLB
 #_01ACFC: RTL
 
 ;===================================================================================================
 
-ROUTINE_01ACFD:
+CopyPartnerPaletteToBuffer:
 #_01ACFD: LDA.w #$0010
 
 .next
@@ -7951,6 +8032,7 @@ ROUTINE_01AD1C:
 
 .try_again
 #_01AD1F: LDA.w #$0000
+
 #_01AD22: INY
 #_01AD23: CPY.w #$0010
 #_01AD26: BCS .good_enough
@@ -7980,7 +8062,7 @@ ROUTINE_01AD1C:
 #_01AD43: LDA.w #data01AD79>>16
 #_01AD46: STA.b $22
 
-#_01AD48: JSL ROUTINE_00ECEF_long
+#_01AD48: JSL RobustBulkDecompression_long
 
 #_01AD4C: SEC
 
@@ -8082,7 +8164,7 @@ ROUTINE_01ADD4:
 
 #_01ADD7: LDY.w #$0000
 #_01ADDA: JSR GetPartnerPalette_X01A0
-#_01ADDD: JSR ROUTINE_01AAAA
+#_01ADDD: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01ADE0: LDA.w #data1EBD80
 #_01ADE3: JMP ROUTINE_01AEDB_bank1E
@@ -8120,19 +8202,24 @@ ROUTINE_01ADE6:
 
 #_01AE14: JSL QueueUpVRAMTransfers_long
 
-#_01AE18: LDX.w #data00AE22
-#_01AE1B: JSR ROUTINE_01AC3F
-#_01AE1E: JSR ROUTINE_01AAAA
+#_01AE18: LDX.w #data01AE22
+#_01AE1B: JSR ROUTINE_01AC3F_TableCopying
+
+#_01AE1E: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01AE21: RTS
 
 ;---------------------------------------------------------------------------------------------------
 
 data01AE22:
-#_01AE22: db $08,$00,$00,$2E,$7E,$00,$00,$60
-#_01AE2A: db $00,$11,$01,$B6,$01,$08,$00,$38
-#_01AE32: db $2E,$7E,$00,$00,$67,$00,$B6,$01
-#_01AE3A: db $7F,$4F,$00,$00
+; TODO palettes
+#_01AE22: dw $0008 : dl $7E2E00 ; write 8 bytes to target
+#_01AE27: dw $0000, $0060, $0111, $01B6
+
+#_01AE2F: dw $0008 : dl $7E2E38 ; write 8 bytes to target
+#_01AE34: dw $0000, $0067, $01B6, $4F7F
+
+#_01AE3C: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -8165,7 +8252,7 @@ ROUTINE_01AE3E:
 #_01AE6A: STA.b $3C
 
 #_01AE6C: JSL QueueUpVRAMTransfers_long
-#_01AE70: JSR ROUTINE_01AAAA
+#_01AE70: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01AE73: LDA.w #data1EC580
 #_01AE76: JMP ROUTINE_01AEDB_bank1E
@@ -8177,7 +8264,7 @@ ROUTINE_01AE79:
 
 #_01AE7C: LDY.w #$0060
 #_01AE7F: JSR GetPartnerPalette_X01A0
-#_01AE82: JSR ROUTINE_01AAAA
+#_01AE82: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01AE85: LDA.w #data1EC900
 #_01AE88: JMP ROUTINE_01AEDB_bank1E
@@ -8189,7 +8276,7 @@ ROUTINE_01AE8B:
 
 #_01AE8E: LDY.w #$0080
 #_01AE91: JSR GetPartnerPalette_X01A0
-#_01AE94: JSR ROUTINE_01AAAA
+#_01AE94: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01AE97: LDA.w #data1EC800
 #_01AE9A: JMP ROUTINE_01AEDB_bank1E
@@ -8206,7 +8293,7 @@ ROUTINE_01AE9D:
 #_01AEA9: STA.w $05E2
 
 #_01AEAC: JSR ROUTINE_01CA5B
-#_01AEAF: JSR ROUTINE_01AAAA
+#_01AEAF: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01AEB2: LDA.w #data1EC400
 #_01AEB5: JMP ROUTINE_01AEDB_bank1E
@@ -8225,7 +8312,7 @@ ROUTINE_01AEB8:
 #_01AEC7: LDY.w #$0020
 #_01AECA: LDA.w #$0001
 #_01AECD: JSR ROUTINE_01CA61
-#_01AED0: JSR ROUTINE_01AAAA
+#_01AED0: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01AED3: LDA.w #data1EC4C0
 
@@ -8546,7 +8633,7 @@ Partner_Act:
 #_01B09D: dw PartnerMode_013E                                         ; 0x013E
 #_01B09F: dw PartnerMode_0140                                         ; 0x0140
 #_01B0A1: dw PartnerMode_0142                                         ; 0x0142
-#_01B0A3: dw PartnerMode_0144                                         ; 0x0144
+#_01B0A3: dw SpiritDog_RunToPocky                                     ; 0x0144
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -8559,13 +8646,13 @@ Partner_Act:
 #_01B0AB: dw PartnerMode_014C                                         ; 0x014C
 #_01B0AD: dw PartnerMode_014E                                         ; 0x014E
 #_01B0AF: dw PartnerMode_0150                                         ; 0x0150
-#_01B0B1: dw PartnerMode_0152                                         ; 0x0152
-#_01B0B3: dw PartnerMode_0154                                         ; 0x0154
-#_01B0B5: dw PartnerMode_0156                                         ; 0x0156
-#_01B0B7: dw PartnerMode_0158                                         ; 0x0158
-#_01B0B9: dw PartnerMode_015A                                         ; 0x015A
-#_01B0BB: dw PartnerMode_015C                                         ; 0x015C
-#_01B0BD: dw PartnerMode_015E                                         ; 0x015E
+#_01B0B1: dw Rocky_Mode150                                            ; 0x0152
+#_01B0B3: dw LittleNinja_Mode150                                      ; 0x0154
+#_01B0B5: dw BomberBob_Mode150                                        ; 0x0156
+#_01B0B7: dw Digger_Mode150                                           ; 0x0158
+#_01B0B9: dw Scarecrow_Mode150                                        ; 0x015A
+#_01B0BB: dw Tengy_Mode150                                            ; 0x015C
+#_01B0BD: dw Ottobot_Mode150                                          ; 0x015E
 #_01B0BF: dw PartnerMode_0160                                         ; 0x0160
 #_01B0C1: dw PartnerMode_0162                                         ; 0x0162
 #_01B0C3: dw PartnerMode_00DE                                         ; 0x0164
@@ -8666,7 +8753,7 @@ Ottobot_InitializeToss:
 #_01B132: JSR Partner_InitializeToss
 #_01B135: BNE CODE_01B140
 
-CODE_01B137:
+ROUTINE_01B137:
 #_01B137: LDA.w #$0012
 #_01B13A: LDY.w #$0015
 #_01B13D: JSR ROUTINE_01A799
@@ -8749,27 +8836,27 @@ ROUTINE_01B18C:
 #_01B19F: ADC.w $05E8
 #_01B1A2: STA.w $05E8
 
-#_01B1A5: JMP CODE_01B1A8
+#_01B1A5: JMP .waste_of_three_bytes_and_three_cycles
 
-CODE_01B1A8:
+.waste_of_three_bytes_and_three_cycles
 #_01B1A8: LDA.w $05E6
 #_01B1AB: SBC.w $19EE
-#_01B1AE: BCS CODE_01B1B4
+#_01B1AE: BCS .positive_x
 
 #_01B1B0: EOR.w #$FFFF
 #_01B1B3: INC A
 
-CODE_01B1B4:
+.positive_x
 #_01B1B4: STA.b $20
 
 #_01B1B6: LDA.w $05E8
 #_01B1B9: SBC.w $19F0
-#_01B1BC: BCS CODE_01B1C2
+#_01B1BC: BCS .positive_y
 
 #_01B1BE: EOR.w #$FFFF
 #_01B1C1: INC A
 
-CODE_01B1C2:
+.positive_y
 #_01B1C2: ADC.b $20
 #_01B1C4: ROR A
 
@@ -8855,126 +8942,126 @@ ROUTINE_01B23D:
 
 ;===================================================================================================
 
-PartnerMode_0152:
+Rocky_Mode150:
 #_01B245: JSR ROUTINE_01A639
 
 #_01B248: LDY.w #$0016
 #_01B24B: LDA.w #$0021
 #_01B24E: JSR ROUTINE_01B23D
-#_01B251: BNE CODE_01B259
+#_01B251: BNE .delay
 
 #_01B253: LDA.w #$00E0 ; PARTNER 00E0
 #_01B256: JSR ROUTINE_01A63F_SetPartnerMode
 
-CODE_01B259:
+.delay
 #_01B259: JMP ROUTINE_01E02C
 
 #_01B25C: RTS
 
 ;===================================================================================================
 
-PartnerMode_0154:
+LittleNinja_Mode150:
 #_01B25D: JSR ROUTINE_01A639
 
 #_01B260: LDY.w #$0010
 #_01B263: LDA.w #$0046
 #_01B266: JSR ROUTINE_01B23D
-#_01B269: BNE CODE_01B271
+#_01B269: BNE .delay
 
 #_01B26B: LDA.w #$0002 ; PARTNER 0002
 #_01B26E: JSR ROUTINE_01A63F_SetPartnerMode
 
-CODE_01B271:
+.delay
 #_01B271: JMP ROUTINE_01D952
 
 #_01B274: RTS
 
 ;===================================================================================================
 
-PartnerMode_0156:
+BomberBob_Mode150:
 #_01B275: JSR ROUTINE_01A639
 
 #_01B278: LDY.w #$0012
 #_01B27B: LDA.w #$0009
 #_01B27E: JSR ROUTINE_01B23D
-#_01B281: BNE CODE_01B289
+#_01B281: BNE .delay
 
 #_01B283: LDA.w #$0040 ; PARTNER 0040
 #_01B286: JSR ROUTINE_01A63F_SetPartnerMode
 
-CODE_01B289:
+.delay
 #_01B289: JMP ROUTINE_01D42F
 
 #_01B28C: RTS
 
 ;===================================================================================================
 
-PartnerMode_015A:
+Scarecrow_Mode150:
 #_01B28D: JSR ROUTINE_01A639
 
 #_01B290: LDY.w #$0013
 #_01B293: LDA.w #$0019
 #_01B296: JSR ROUTINE_01B23D
-#_01B299: BNE CODE_01B2A1
+#_01B299: BNE .delay
 
 #_01B29B: LDA.w #$0060 ; PARTNER 0060
 #_01B29E: JSR ROUTINE_01A63F_SetPartnerMode
 
-CODE_01B2A1:
+.delay
 #_01B2A1: JMP ROUTINE_01CEC3
 
 #_01B2A4: RTS
 
 ;===================================================================================================
 
-PartnerMode_015C:
+Tengy_Mode150:
 #_01B2A5: JSR ROUTINE_01A639
 
 #_01B2A8: LDY.w #$0014
 #_01B2AB: LDA.w #$001A
 #_01B2AE: JSR ROUTINE_01B23D
-#_01B2B1: BNE CODE_01B2B9
+#_01B2B1: BNE .delay
 
 #_01B2B3: LDA.w #$0080 ; PARTNER 0080
 #_01B2B6: JSR ROUTINE_01A63F_SetPartnerMode
 
-CODE_01B2B9:
+.delay
 #_01B2B9: JMP ROUTINE_01CA09
 
 #_01B2BC: RTS
 
 ;===================================================================================================
 
-PartnerMode_0158:
+Digger_Mode150:
 #_01B2BD: JSR ROUTINE_01A639
 
 #_01B2C0: LDY.w #$0011
 #_01B2C3: LDA.w #$0034
 #_01B2C6: JSR ROUTINE_01B23D
-#_01B2C9: BNE CODE_01B2D1
+#_01B2C9: BNE .delay
 
 #_01B2CB: LDA.w #$0020 ; PARTNER 0020
 #_01B2CE: JSR ROUTINE_01A63F_SetPartnerMode
 
-CODE_01B2D1:
+.delay
 #_01B2D1: JMP ROUTINE_01C16C
 
 #_01B2D4: RTS
 
 ;===================================================================================================
 
-PartnerMode_015E:
+Ottobot_Mode150:
 #_01B2D5: JSR ROUTINE_01A639
 
 #_01B2D8: LDY.w #$0015
 #_01B2DB: LDA.w #$0009
 #_01B2DE: JSR ROUTINE_01B23D
-#_01B2E1: BNE CODE_01B2E9
+#_01B2E1: BNE .delay
 
 #_01B2E3: LDA.w #$00A0 ; PARTNER 00A0
 #_01B2E6: JSR ROUTINE_01A63F_SetPartnerMode
 
-CODE_01B2E9:
+.delay
 #_01B2E9: JMP ROUTINE_01C16C
 
 #_01B2EC: RTS
@@ -9004,9 +9091,9 @@ ROUTINE_01B2F8:
 
 #_01B307: LDA.w $05C4
 #_01B30A: LDY.w #$05C0
-#_01B30D: JSR ROUTINE_0181F1
+#_01B30D: JSR ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
-#_01B310: JMP ROUTINE_01E83E
+#_01B310: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -9034,9 +9121,12 @@ PartnerMode_013E:
 
 #_01B33E: LDA.w .pointers,Y
 #_01B341: TAX
+
 #_01B342: JSL ROUTINE_05D57A_long
 
 #_01B346: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_01B347:
 #_01B347: LDA.w #$FFFE
@@ -9045,6 +9135,8 @@ CODE_01B347:
 #_01B34E: JSR IncrementPartnerModeTwice
 
 #_01B351: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 .pointers
 #_01B352: dw data05E48E
@@ -9065,12 +9157,12 @@ PartnerMode_0140:
 #_01B368: JSL HandleDialog
 
 #_01B36C: LDA.l $7E2550
-#_01B370: BNE CODE_01B378
+#_01B370: BNE .delay
 
 #_01B372: LDA.w #$0142 ; PARTNER 0142
 #_01B375: STA.w $05CE
 
-CODE_01B378:
+.delay
 #_01B378: LDA.w #$0001
 #_01B37B: LDY.w #$0017
 #_01B37E: JSL ROUTINE_04F6E1
@@ -9088,7 +9180,7 @@ PartnerMode_0142:
 
 #_01B392: LDA.l $7E7B38
 #_01B396: CMP.w #$000A
-#_01B399: BEQ CODE_01B3BA
+#_01B399: BEQ .get_absorbed
 
 #_01B39B: CLC
 #_01B39C: ADC.w #$0002
@@ -9104,14 +9196,17 @@ PartnerMode_0142:
 
 #_01B3B0: LDA.w .pointers,Y
 #_01B3B3: TAX
+
 #_01B3B4: JSL ROUTINE_05D57A_long
 
 #_01B3B8: BRA .exit
 
-CODE_01B3BA:
+;---------------------------------------------------------------------------------------------------
+
+.get_absorbed
 #_01B3BA: LDA.w #data00ECDE
 #_01B3BD: LDY.w #data00ECDE>>16
-#_01B3C0: JSL ROUTINE_08BD65
+#_01B3C0: JSL RobustBulkDecompressionAndSetMode40
 
 #_01B3C4: LDA.w #$007C ; STATE 7C
 #_01B3C7: STA.w $19CE
@@ -9133,7 +9228,7 @@ CODE_01B3BA:
 
 ;===================================================================================================
 
-PartnerMode_0144:
+SpiritDog_RunToPocky:
 #_01B3DA: CLC
 
 #_01B3DB: LDA.w $05E8
@@ -9141,16 +9236,15 @@ PartnerMode_0144:
 #_01B3E1: STA.w $05E8
 
 #_01B3E4: CMP.w $19F0
-#_01B3E7: BCC CODE_01B3F2
+#_01B3E7: BCC .still_being_absorbed
 
 #_01B3E9: JSR IncrementPartnerModeTwice
 
 #_01B3EC: LDA.w #$007E ; STATE 7E
 #_01B3EF: STA.w $19CE
 
-CODE_01B3F2:
+.still_being_absorbed
 #_01B3F2: LDA.w #$0006
-
 #_01B3F5: LDY.w #$0017
 #_01B3F8: JSL ROUTINE_04F6E1
 
@@ -9169,7 +9263,7 @@ PartnerMode_0132:
 #_01B401: JSR ThisRoutineDoesLiterallyNothing
 
 #_01B404: JSL ROUTINE_08D367
-#_01B408: JSR Reset_18_through_1E
+#_01B408: JSR ROUTINE_01E436_AllZero
 
 #_01B40B: LDA.w #$0000
 #_01B40E: STA.l $7EE010
@@ -9189,7 +9283,7 @@ PartnerMode_0132:
 #_01B425: PLA
 
 #_01B426: LDA.w #$0030
-#_01B429: JSL ROUTINE_06A2CD
+#_01B429: JSL ROUTINE_06A2CD_SomeSpriteSpawn
 
 #_01B42D: LDX.w #$0012
 #_01B430: JSR ROUTINE_01E532
@@ -9203,24 +9297,24 @@ PartnerMode_0132:
 
 PartnerMode_0134:
 #_01B43C: JSR ROUTINE_01B81C
-#_01B43F: BNE CODE_01B446
+#_01B43F: BNE .advance
 
 #_01B441: DEC.w $05E0
-#_01B444: BNE CODE_01B44C
+#_01B444: BNE .delay
 
-CODE_01B446:
+.advance
 #_01B446: STZ.w $05E0
 
 #_01B449: JSR IncrementPartnerModeTwice
 
-CODE_01B44C:
+.delay
 #_01B44C: JMP PartnerMode_0138
 
 ;===================================================================================================
 
 PartnerMode_0136:
 #_01B44F: JSR PartnerMode_0138
-#_01B452: JSR Reset_18_through_1E
+#_01B452: JSR ROUTINE_01E436_AllZero
 
 #_01B455: LDA.w $05E0
 #_01B458: BNE .continue
@@ -9257,10 +9351,12 @@ PartnerMode_0138:
 CODE_01B484:
 #_01B484: TAY
 
+;---------------------------------------------------------------------------------------------------
+
 #_01B485: LDX.w #$0000
 
 .next
-#_01B488: LDA.w data01B49C,Y
+#_01B488: LDA.w .colors,Y
 #_01B48B: STA.l $7E2E38,X
 
 #_01B48F: INY
@@ -9276,16 +9372,18 @@ CODE_01B484:
 .exit
 #_01B49B: RTS
 
-data01B49C:
-#_01B49C: db $00,$00,$1F,$00,$1F,$01,$1F,$02
-#_01B4A4: db $00,$00,$1F,$01,$1F,$02,$1F,$00
-#_01B4AC: db $00,$00,$1F,$02,$1F,$00,$1F,$01
+;---------------------------------------------------------------------------------------------------
+; TODO palettes
+.colors
+#_01B49C: dw $0000, $001F, $011F, $021F
+#_01B4A4: dw $0000, $011F, $021F, $001F
+#_01B4AC: dw $0000, $021F, $001F, $011F
 
 ;===================================================================================================
 
 PartnerMode_0128:
 #_01B4B4: JSL ROUTINE_08D367
-#_01B4B8: JSR Reset_18_through_1E
+#_01B4B8: JSR ROUTINE_01E436_AllZero
 
 #_01B4BB: LDA.w #$0000
 #_01B4BE: STA.l $7EE010
@@ -9298,7 +9396,7 @@ PartnerMode_0128:
 #_01B4CE: TXY
 
 .next
-#_01B4CF: LDA.w data01B4E9,Y
+#_01B4CF: LDA.w .colors,Y
 #_01B4D2: STA.l $7E2E38,X
 #_01B4D6: STA.l $7E2A38,X
 
@@ -9311,10 +9409,13 @@ PartnerMode_0128:
 #_01B4E1: BCC .next
 
 #_01B4E3: INC.w $054E
+
 #_01B4E6: JMP IncrementPartnerModeTwice
 
-#data01B4E9:
-#_01B4E9: db $00,$00,$15,$40,$0E,$20,$FF,$7F
+;---------------------------------------------------------------------------------------------------
+; TODO palettes
+.colors
+#_01B4E9: dw $0000, $4015, $200E, $7FFF
 
 ;===================================================================================================
 
@@ -9323,14 +9424,14 @@ PartnerMode_012A:
 
 #_01B4F4: LDA.w $18EC
 #_01B4F7: CMP.w #$0020
-#_01B4FA: BCS CODE_01B503
+#_01B4FA: BCS .continue
 
 #_01B4FC: ADC.w #$0001
 #_01B4FF: STA.w $18EC
 
 #_01B502: RTS
 
-CODE_01B503:
+.continue
 #_01B503: LDX.w #$0014
 #_01B506: JSR ROUTINE_01E532
 
@@ -9350,7 +9451,7 @@ CODE_01B503:
 #_01B522: STA.b $26
 
 #_01B524: LDA.w #$002C
-#_01B527: JSL ROUTINE_06A2CD
+#_01B527: JSL ROUTINE_06A2CD_SomeSpriteSpawn
 
 #_01B52B: LDA.w $05E8
 #_01B52E: STA.w $05DC
@@ -9387,15 +9488,17 @@ ROUTINE_01B53E:
 
 PartnerMode_012C:
 #_01B558: JSR ROUTINE_01B81C
-#_01B55B: BNE CODE_01B562
+#_01B55B: BNE .advance
 
 #_01B55D: DEC.w $05DE
-#_01B560: BNE CODE_01B565
+#_01B560: BNE .delay
 
-CODE_01B562:
+.advance
 #_01B562: JSR IncrementPartnerModeTwice
 
-CODE_01B565:
+;---------------------------------------------------------------------------------------------------
+
+.delay
 #_01B565: LDA.w $05DC
 #_01B568: STA.b $20
 
@@ -9410,15 +9513,15 @@ CODE_01B565:
 
 #_01B57B: RTS
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-PartnerMode_012E:
+#PartnerMode_012E:
 #_01B57C: SEC
 
 #_01B57D: LDA.w $05DC
 #_01B580: SBC.w #$0100
 #_01B583: CMP.w $0562
-#_01B586: BCS CODE_01B590
+#_01B586: BCS .dont_advance
 
 #_01B588: PHA
 
@@ -9428,15 +9531,15 @@ PartnerMode_012E:
 
 #_01B58F: PLA
 
-CODE_01B590:
+.dont_advance
 #_01B590: STA.w $05DC
 
-#_01B593: JMP CODE_01B565
+#_01B593: JMP .delay
 
 ;===================================================================================================
 
 PartnerMode_0130:
-#_01B596: JSR Reset_18_through_1E
+#_01B596: JSR ROUTINE_01E436_AllZero
 
 #_01B599: LDA.w $18EC
 #_01B59C: BMI CODE_01B5A8
@@ -9466,7 +9569,7 @@ ThisRoutineDoesLiterallyNothing:
 
 PartnerMode_011E:
 #_01B5B5: JSL ROUTINE_08D367
-#_01B5B9: JSR Reset_18_through_1E
+#_01B5B9: JSR ROUTINE_01E436_AllZero
 
 #_01B5BC: LDA.w $05E6
 #_01B5BF: AND.w #$FF80
@@ -9479,7 +9582,7 @@ PartnerMode_011E:
 #_01B5CC: STA.b $26
 
 #_01B5CE: LDA.w #$0038
-#_01B5D1: JSL ROUTINE_06A2CD
+#_01B5D1: JSL ROUTINE_06A2CD_SomeSpriteSpawn
 
 #_01B5D5: STZ.w $04D4
 #_01B5D8: STZ.w $05E0
@@ -9495,7 +9598,7 @@ PartnerMode_0120:
 
 #_01B5E7: LDA.w #$0010
 #_01B5EA: JSR ROUTINE_01B67B
-#_01B5ED: BNE CODE_01B5FB
+#_01B5ED: BNE .delay
 
 #_01B5EF: STZ.w $05E2
 
@@ -9503,7 +9606,7 @@ PartnerMode_0120:
 #_01B5F5: JSR ROUTINE_01E532
 #_01B5F8: JSR IncrementPartnerModeTwice
 
-CODE_01B5FB:
+.delay
 #_01B5FB: JMP ROUTINE_01B674
 
 ;===================================================================================================
@@ -9516,9 +9619,12 @@ PartnerMode_0122:
 #_01B606: LDA.w $05E2
 #_01B609: ASL A
 #_01B60A: TAX
+
 #_01B60B: JSR (.vectors,X)
 
 #_01B60E: JMP ROUTINE_01B674
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_01B611: dw ROUTINE_01B619
@@ -9579,6 +9685,8 @@ ROUTINE_01B644:
 #_01B64F: CMP.b $20
 #_01B651: BNE .exit
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_01B653:
 #_01B653: JSR IncrementPartnerModeTwice
 
@@ -9592,19 +9700,19 @@ PartnerMode_0124:
 
 #_01B65A: LDA.w #$005F
 #_01B65D: JSR ROUTINE_01B67B
-#_01B660: BNE CODE_01B668
+#_01B660: BNE .delay
 
 #_01B662: JSR IncrementPartnerModeTwice
 
 #_01B665: INC.w $05E0
 
-CODE_01B668:
+.delay
 #_01B668: JMP ROUTINE_01B674
 
 ;===================================================================================================
 
 PartnerMode_0126:
-#_01B66B: JSR Reset_18_through_1E
+#_01B66B: JSR ROUTINE_01E436_AllZero
 
 #_01B66E: LDA.w #$0088 ; PARTNER 0088
 #_01B671: JMP ROUTINE_01B89E_SetPartnerMode
@@ -9639,7 +9747,7 @@ ROUTINE_01B686:
 #_01B68D: STA.w $05DC
 
 #_01B690: CMP.w #$0018
-#_01B693: BCC ROUTINE_01B69E
+#_01B693: BCC ROUTINE_01B69E_Palettes
 
 #_01B695: LDA.w #$FFF8
 #_01B698: STA.w $05DC
@@ -9648,13 +9756,13 @@ ROUTINE_01B686:
 
 ;===================================================================================================
 
-ROUTINE_01B69E:
+ROUTINE_01B69E_Palettes:
 #_01B69E: TAY
 
 #_01B69F: LDX.w #$0000
 
-CODE_01B6A2:
-#_01B6A2: LDA.w data01B6BD,Y
+.next_color
+#_01B6A2: LDA.w .colors,Y
 #_01B6A5: STA.l $7E2E38,X
 #_01B6A9: STA.l $7E2A38,X
 
@@ -9664,14 +9772,16 @@ CODE_01B6A2:
 #_01B6AF: INX
 #_01B6B0: INX
 #_01B6B1: CPX.w #$0008
-#_01B6B4: BNE CODE_01B6A2
+#_01B6B4: BNE .next_color
 
 #_01B6B6: LDA.w #$0001
 #_01B6B9: STA.w $054E
 
 #_01B6BC: RTS
 
-data01B6BD:
+;---------------------------------------------------------------------------------------------------
+; TODO palette
+.colors
 #_01B6BD: db $00,$00,$71,$01,$38,$1A,$DF,$3B
 #_01B6C5: db $00,$00,$DF,$3B,$71,$01,$38,$1A
 #_01B6CD: db $00,$00,$38,$1A,$DF,$3B,$71,$01
@@ -9702,7 +9812,7 @@ ROUTINE_01B6D5:
 
 ;===================================================================================================
 
-ROUTINE_01B69E_0000:
+ROUTINE_01B69E_Palettes_0000:
 #_01B703: PHB
 #_01B704: PHK
 #_01B705: PLB
@@ -9711,7 +9821,7 @@ ROUTINE_01B69E_0000:
 #_01B707: PHY
 
 #_01B708: LDA.w #$0000
-#_01B70B: JSR ROUTINE_01B69E
+#_01B70B: JSR ROUTINE_01B69E_Palettes
 
 #_01B70E: PLY
 #_01B70F: PLX
@@ -9737,8 +9847,9 @@ PartnerMode_0114:
 #_01B726: STA.b $26
 
 #_01B728: LDA.w #$0028
-#_01B72B: JSL ROUTINE_06A2CD
-#_01B72F: JSR Reset_18_through_1E
+#_01B72B: JSL ROUTINE_06A2CD_SomeSpriteSpawn
+
+#_01B72F: JSR ROUTINE_01E436_AllZero
 
 #_01B732: JMP IncrementPartnerModeTwice
 
@@ -9769,7 +9880,7 @@ PartnerMode_011A:
 ;===================================================================================================
 
 PartnerMode_011C:
-#_01B74A: JSR Reset_18_through_1E
+#_01B74A: JSR ROUTINE_01E436_AllZero
 
 #_01B74D: LDA.w #$01E0
 #_01B750: STA.w $05DC
@@ -9816,7 +9927,9 @@ GetBombingPalette:
 #_01B783: TYX
 
 #_01B784: LDA.l BombingPalettes,X
+
 #_01B788: PLX
+
 #_01B789: STA.l $7E2FA0,X
 #_01B78D: STA.l $7E2BA0,X
 
@@ -9840,7 +9953,7 @@ PartnerMode_010A:
 
 #_01B7A1: LDX.w #$0014
 #_01B7A4: JSR ROUTINE_01E532
-#_01B7A7: JSR Reset_18_through_1E
+#_01B7A7: JSR ROUTINE_01E436_AllZero
 
 #_01B7AA: LDA.w #$0004
 #_01B7AD: STA.w $054C
@@ -9851,11 +9964,11 @@ PartnerMode_010A:
 
 PartnerMode_010C:
 #_01B7B3: LDA.w $054C
-#_01B7B6: BEQ CODE_01B7BB
+#_01B7B6: BEQ .already_zero
 
 #_01B7B8: DEC.w $054C
 
-CODE_01B7BB:
+.already_zero
 #_01B7BB: JMP ROUTINE_01B766
 
 ;===================================================================================================
@@ -9875,7 +9988,7 @@ PartnerMode_0110:
 PartnerMode_0112:
 #_01B7C7: STZ.w $191A
 
-#_01B7CA: JSR Reset_18_through_1E
+#_01B7CA: JSR ROUTINE_01E436_AllZero
 
 #_01B7CD: LDA.w #$01E0
 #_01B7D0: STA.w $05DC
@@ -9884,11 +9997,11 @@ PartnerMode_0112:
 
 #_01B7D6: LDX.w $04FE
 #_01B7D9: CPX.w #$0002
-#_01B7DC: BEQ CODE_01B7E1
+#_01B7DC: BEQ .use_little_ninja
 
 #_01B7DE: LDA.w #$0068 ; PARTNER 0068
 
-CODE_01B7E1:
+.use_little_ninja
 #_01B7E1: STA.w $05CE
 
 #_01B7E4: STZ.w $05CA
@@ -9904,19 +10017,21 @@ CODE_01B7E1:
 
 PartnerMode_0100:
 #_01B7F1: JSL ROUTINE_08D367
-#_01B7F5: JSR Reset_18_through_1E
+
+#_01B7F5: JSR ROUTINE_01E436_AllZero
 
 #_01B7F8: JMP IncrementPartnerModeTwice
 
 ;===================================================================================================
 
 PartnerMode_0102:
-#_01B7FB: JSR Reset_18_through_1E
+#_01B7FB: JSR ROUTINE_01E436_AllZero
+
 #_01B7FE: JSR ROUTINE_01B8F6
 
 #_01B801: DEC.w $05E0
 #_01B804: DEC.w $05DC
-#_01B807: BNE CODE_01B815
+#_01B807: BNE .delay
 
 #_01B809: LDX.w #$0012
 #_01B80C: JSR ROUTINE_01E532
@@ -9925,7 +10040,7 @@ PartnerMode_0102:
 
 #_01B812: JSR IncrementPartnerModeTwice
 
-CODE_01B815:
+.delay
 #_01B815: LDA.w #$FFFF
 #_01B818: STA.w $056E
 
@@ -9947,16 +10062,16 @@ ROUTINE_01B81C:
 
 PartnerMode_0104:
 #_01B82A: LDA.w #$0058
-#_01B82D: JSR ROUTINE_01E42A
+#_01B82D: JSR ROUTINE_01E436_IndexInA
 #_01B830: JSR ROUTINE_01B81C
-#_01B833: BNE CODE_01B83D
+#_01B833: BNE .advance
 
-#_01B835: JSR Reset_18_through_1E
+#_01B835: JSR ROUTINE_01E436_AllZero
 
 #_01B838: DEC.w $05E2
 #_01B83B: BNE .exit
 
-CODE_01B83D:
+.advance
 #_01B83D: STZ.w $05E2
 
 #_01B840: JSR IncrementPartnerModeTwice
@@ -9974,25 +10089,26 @@ CODE_01B83D:
 ;===================================================================================================
 
 PartnerMode_0106:
-#_01B864: JSR Reset_18_through_1E
+#_01B864: JSR ROUTINE_01E436_AllZero
+
 #_01B867: JSR ROUTINE_01B8F6
 
 #_01B86A: INC.w $05E0
 #_01B86D: DEC.w $05DE
-#_01B870: BNE CODE_01B887
+#_01B870: BNE .delay
 
 #_01B872: LDA.w #$0100 ; SPRITE 0100
 #_01B875: STA.b $26
 
 #_01B877: LDA.w #$001E
-#_01B87A: JSL ROUTINE_06A2B6
+#_01B87A: JSL ROUTINE_06A2CD_SomeSpriteSpawn_AtPartnerCoordinates
 
 #_01B87E: LDA.w #$0002
 #_01B881: STA.w $05E2
 
 #_01B884: JSR IncrementPartnerModeTwice
 
-CODE_01B887:
+.delay
 #_01B887: LDA.w #$FFFF
 #_01B88A: STA.w $056E
 
@@ -10001,7 +10117,7 @@ CODE_01B887:
 ;===================================================================================================
 
 PartnerMode_0108:
-#_01B88E: JSR Reset_18_through_1E
+#_01B88E: JSR ROUTINE_01E436_AllZero
 
 #_01B891: DEC.w $05E2
 #_01B894: BEQ .continue
@@ -10129,6 +10245,8 @@ ROUTINE_01B8F6:
 
 #_01B938: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_01B939:
 #_01B939: SEC
 #_01B93A: SBC.w #$0080
@@ -10207,6 +10325,8 @@ ROUTINE_01B989:
 #_01B9C7: STA.l $7EFC09
 
 #_01B9CB: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_01B9CC:
 #_01B9CC: SEC
@@ -10723,17 +10843,17 @@ CODE_01BC91:
 #_01BC91: JSR RunMagicTimer_9SecondsPreloaded
 #_01BC94: BCS CODE_01BCCA
 
-#_01BC96: JSR ROUTINE_01A590
+#_01BC96: JSR TestForPockyTakingDamage
 #_01BC99: BCS CODE_01BCCA
 
-#_01BC9B: CMP.w #$0098
+#_01BC9B: CMP.w #$0098 ; STATE 98
 #_01BC9E: BCC CODE_01BCA5
 
-#_01BCA0: CMP.w #$00B0
+#_01BCA0: CMP.w #$00B0 ; STATE B0
 #_01BCA3: BCC CODE_01BCE5
 
 CODE_01BCA5:
-#_01BCA5: CMP.w #$00BA
+#_01BCA5: CMP.w #$00BA ; STATE BA
 #_01BCA8: BNE CODE_01BCB5
 
 CODE_01BCAA:
@@ -10744,15 +10864,15 @@ CODE_01BCAA:
 #_01BCB3: BRA CODE_01BCDC
 
 CODE_01BCB5:
-#_01BCB5: CMP.w #$003C
+#_01BCB5: CMP.w #$003C ; STATE 3C
 #_01BCB8: BCC CODE_01BCDC
 
-#_01BCBA: CMP.w #$0048
+#_01BCBA: CMP.w #$0048 ; STATE 48
 #_01BCBD: BCC CODE_01BCAA
 
 #_01BCBF: JSR ROUTINE_01DF47
 
-#_01BCC2: LDA.w #$00EC
+#_01BCC2: LDA.w #$00EC ; PARTNER 00EC
 #_01BCC5: JSR ROUTINE_01DF0F
 
 #_01BCC8: BRA CODE_01BCDC
@@ -10779,7 +10899,7 @@ CODE_01BCE5:
 #_01BCE8: JSR TestForTutorialLevel
 #_01BCEB: BEQ CODE_01BD0A
 
-#_01BCED: JSR ROUTINE_01A5A1
+#_01BCED: JSR ROUTINE_01A5A1_19FCora19FE
 #_01BCF0: AND.w #$8000
 #_01BCF3: BEQ CODE_01BD0A
 
@@ -10798,19 +10918,19 @@ CODE_01BD0A:
 #_01BD0A: JSR TestForTutorialLevel
 #_01BD0D: BEQ CODE_01BD43
 
-#_01BD0F: JSR ROUTINE_01A5A1
+#_01BD0F: JSR ROUTINE_01A5A1_19FCora19FE
 #_01BD12: AND.w #$4000
 #_01BD15: BEQ CODE_01BD43
 
 #_01BD17: JSR ROUTINE_01A567
 #_01BD1A: BEQ CODE_01BD24
 
-#_01BD1C: JSR ROUTINE_01A571
+#_01BD1C: JSR ROUTINE_01A571_Get05CCmod7
 #_01BD1F: ADC.w #$002C
 #_01BD22: BRA CODE_01BD2A
 
 CODE_01BD24:
-#_01BD24: JSR ROUTINE_01A571
+#_01BD24: JSR ROUTINE_01A571_Get05CCmod7
 #_01BD27: ADC.w #$0022
 
 CODE_01BD2A:
@@ -10836,7 +10956,7 @@ CODE_01BD43:
 #_01BD48: LDA.w $05D0
 #_01BD4B: BEQ CODE_01BD77
 
-#_01BD4D: JSR ROUTINE_01A571
+#_01BD4D: JSR ROUTINE_01A571_Get05CCmod7
 #_01BD50: ADC.w #$0022
 
 CODE_01BD53:
@@ -10857,7 +10977,7 @@ CODE_01BD6A:
 #_01BD6A: LDA.w $05D0
 #_01BD6D: BEQ CODE_01BD77
 
-#_01BD6F: JSR ROUTINE_01A571
+#_01BD6F: JSR ROUTINE_01A571_Get05CCmod7
 #_01BD72: ADC.w #$002C
 #_01BD75: BRA CODE_01BD53
 
@@ -10894,17 +11014,17 @@ CODE_01BD9F:
 #_01BD9F: JSR RunMagicTimer_9SecondsPreloaded
 #_01BDA2: BCS CODE_01BDD8
 
-#_01BDA4: JSR ROUTINE_01A590
+#_01BDA4: JSR TestForPockyTakingDamage
 #_01BDA7: BCS CODE_01BDD8
 
-#_01BDA9: CMP.w #$0098
+#_01BDA9: CMP.w #$0098 ; STATE 98
 #_01BDAC: BCC CODE_01BDB3
 
-#_01BDAE: CMP.w #$00B0
+#_01BDAE: CMP.w #$00B0 ; STATE B0
 #_01BDB1: BCC CODE_01BDF3
 
 CODE_01BDB3:
-#_01BDB3: CMP.w #$00BA
+#_01BDB3: CMP.w #$00BA ; STATE BA
 #_01BDB6: BNE CODE_01BDC3
 
 CODE_01BDB8:
@@ -10915,10 +11035,10 @@ CODE_01BDB8:
 #_01BDC1: BRA CODE_01BDEA
 
 CODE_01BDC3:
-#_01BDC3: CMP.w #$003C
+#_01BDC3: CMP.w #$003C ; STATE 3C
 #_01BDC6: BCC CODE_01BDEA
 
-#_01BDC8: CMP.w #$0048
+#_01BDC8: CMP.w #$0048 ; STATE 48
 #_01BDCB: BCC CODE_01BDB8
 
 #_01BDCD: JSR ROUTINE_01DF47
@@ -10946,9 +11066,9 @@ CODE_01BDEA:
 #_01BDF0: JMP ROUTINE_01C16C
 
 CODE_01BDF3:
-#_01BDF3: JSR ROUTINE_01DE83
+#_01BDF3: JSR Partner_MakePockySync
 #_01BDF6: JSR ROUTINE_01E415
-#_01BDF9: JSR Reset_18_through_1E
+#_01BDF9: JSR ROUTINE_01E436_AllZero
 
 #_01BDFC: DEC.w $05E0
 #_01BDFF: BNE CODE_01BE07
@@ -10966,7 +11086,6 @@ CODE_01BE07:
 
 CODE_01BE15:
 #_01BE15: LDY.w #$0016
-
 #_01BE18: LDA.w #$002B
 #_01BE1B: JSL ROUTINE_04F6E1
 
@@ -10977,7 +11096,7 @@ CODE_01BE15:
 Rocky_BE22:
 #_01BE22: JSR ROUTINE_01BA91
 
-#_01BE25: JMP ROUTINE_01E83E
+#_01BE25: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -10986,13 +11105,13 @@ PartnerMode_00DE:
 
 #_01BE2B: LDA.w #$002A
 #_01BE2E: LDY.w #$0016
-#_01BE31: JSR ROUTINE_01A777
-#_01BE34: BNE CODE_01BE3C
+#_01BE31: JSR ROUTINE_01A799_Read05CA
+#_01BE34: BNE .delay
 
 #_01BE36: LDY.w #$00E6 ; PARTNER 00E6
 #_01BE39: JSR ROUTINE_01A7F0_SetPartnerMode
 
-CODE_01BE3C:
+.delay
 #_01BE3C: JMP ROUTINE_01A7FD
 
 ;===================================================================================================
@@ -11009,7 +11128,6 @@ Rocky_BE3F:
 
 CODE_01BE50:
 #_01BE50: LDY.w #$0016
-
 #_01BE53: LDA.w #$0035
 #_01BE56: JMP ROUTINE_01A623
 
@@ -11045,7 +11163,7 @@ CODE_01BE7C:
 #_01BE81: BEQ CODE_01BE89
 
 #_01BE83: LDA.w #$00DE ; PARTNER 00DE
-#_01BE86: JMP ROUTINE_01A70F
+#_01BE86: JMP Pocky_OfficiallyEnterMagicMerge
 
 CODE_01BE89:
 #_01BE89: JSR ROUTINE_01A749
@@ -11075,7 +11193,7 @@ CODE_01BEA0:
 #_01BEA3: LDA.w $05D0
 #_01BEA6: BEQ CODE_01BED0
 
-#_01BEA8: JSR ROUTINE_01A571
+#_01BEA8: JSR ROUTINE_01A571_Get05CCmod7
 #_01BEAB: ADC.w #$0022
 #_01BEAE: STA.w $05D0
 
@@ -11103,7 +11221,6 @@ CODE_01BED0:
 
 Rocky_BED3:
 #_01BED3: LDA.w #$0034
-
 #_01BED6: LDY.w #$0016
 #_01BED9: JSR ROUTINE_01A869
 #_01BEDC: BCC CODE_01BEE1
@@ -11116,7 +11233,7 @@ CODE_01BEE1:
 ;===================================================================================================
 
 ROUTINE_01A8C4_Rocky:
-#_01BEE4: LDA.w #$00E8
+#_01BEE4: LDA.w #$00E8 ; PARTNER 00E8
 #_01BEE7: JMP ROUTINE_01A8C4
 
 ;===================================================================================================
@@ -11135,7 +11252,7 @@ Rocky_BEEA:
 #_01BEFD: LDA.w $05EA
 #_01BF00: BNE CODE_01BF0D
 
-#_01BF02: JSR ROUTINE_01AAAA
+#_01BF02: JSR ROUTINE_01AAAA_ResetsStuff
 #_01BF05: JSR ROUTINE_01A9B9
 
 #_01BF08: LDA.w #$00E6 ; PARTNER 00E6
@@ -11153,11 +11270,11 @@ CODE_01BF10:
 #_01BF18: LDA.l $7E7A50
 #_01BF1C: DEC A
 #_01BF1D: CMP.w #$FFFF
-#_01BF20: BNE CODE_01BF25
+#_01BF20: BNE .no_overflow
 
 #_01BF22: LDA.w #$0000
 
-CODE_01BF25:
+.no_overflow
 #_01BF25: STA.l $7E7A50
 
 CODE_01BF29:
@@ -11169,7 +11286,7 @@ Rocky_BF2C:
 #_01BF2C: JSR ROUTINE_01A916
 #_01BF2F: BCC .exit
 
-#_01BF31: LDA.w #$00EA
+#_01BF31: LDA.w #$00EA ; PARTNER 00EA
 #_01BF34: LDX.w #$0010
 #_01BF37: JSR ROUTINE_01A936_SetPartnerMode
 
@@ -11203,7 +11320,7 @@ CODE_01BF58:
 ;===================================================================================================
 
 PartnerMode_014A:
-#_01BF5C: JSR Reset_18_through_1E
+#_01BF5C: JSR ROUTINE_01E436_AllZero
 
 #_01BF5F: LDA.w #$014C ; PARTNER 014C
 #_01BF62: STA.w $05CE
@@ -11223,7 +11340,7 @@ PartnerMode_014A:
 #_01BF79: JSR ROUTINE_01E415
 
 #_01BF7C: LDX.w #$0010
-#_01BF7F: JSR ROUTINE_01ACA2
+#_01BF7F: JSR DecompressPartnerSpawnFlair_wrapper
 
 #_01BF82: STZ.b $28
 
@@ -11239,8 +11356,10 @@ PartnerMode_014A:
 #_01BF93: LDA.w #$000E
 #_01BF96: STA.b $24
 
-#_01BF98: JSL PrepEnemySpawn_long
-#_01BF9C: JSR ROUTINE_01AAAA
+#_01BF98: JSL PrepSpriteSpawn_long
+
+#_01BF9C: JSR ROUTINE_01AAAA_ResetsStuff
+
 #_01BF9F: JSR ROUTINE_01ADD4
 
 #_01BFA2: LDA.w #$0008
@@ -11253,7 +11372,7 @@ PartnerMode_014A:
 ;===================================================================================================
 
 PartnerMode_014C:
-#_01BFAC: JSR Reset_18_through_1E
+#_01BFAC: JSR ROUTINE_01E436_AllZero
 #_01BFAF: JSR ROUTINE_01BA72
 #_01BFB2: JSR ROUTINE_01E415
 
@@ -11267,7 +11386,7 @@ PartnerMode_014C:
 #_01BFC4: DEC.w $05DC
 #_01BFC7: BNE CODE_01BFDB
 
-#_01BFC9: JSR ROUTINE_01A8E2
+#_01BFC9: JSR ROUTINE_01A8E2_TestsDifficulty
 
 #_01BFCC: LDA.w #$FFFF
 #_01BFCF: STA.w $05E4
@@ -11287,12 +11406,12 @@ CODE_01BFDB:
 
 PartnerMode_014E:
 #_01BFDF: LDA.w $05DC
-#_01BFE2: BNE CODE_01BFEA
+#_01BFE2: BNE .delay_change
 
 #_01BFE4: LDA.w #$0150 ; PARTNER 0150
 #_01BFE7: STA.w $05CE
 
-CODE_01BFEA:
+.delay_change
 #_01BFEA: LDY.w #$0016
 
 #_01BFED: LDA.w #$0004
@@ -11321,6 +11440,8 @@ PartnerMode_0150:
 #_01C013: JSR ROUTINE_01C16F
 
 #_01C016: JMP ROUTINE_01C16C
+
+;---------------------------------------------------------------------------------------------------
 
 data01C019:
 #_01C019: db $00,$02,$06,$00,$04,$03,$05,$00
@@ -11387,7 +11508,7 @@ CODE_01C05D:
 
 CODE_01C06B:
 #_01C06B: CMP.w #$0020
-#_01C06E: BCC CODE_01C08B
+#_01C06E: BCC .change_partner
 
 #_01C070: INC.b $34
 #_01C072: TYA
@@ -11410,7 +11531,7 @@ CODE_01C07E:
 
 #_01C08A: RTS
 
-CODE_01C08B:
+.change_partner
 #_01C08B: LDA.w #$00E0 ; PARTNER 00E0
 #_01C08E: STA.w $05CE
 
@@ -11430,7 +11551,7 @@ Rocky_Normal:
 #_01C0A3: JMP ROUTINE_01A5D4_SetPartnerMode
 
 CODE_01C0A6:
-#_01C0A6: JSR ROUTINE_01A77E
+#_01C0A6: JSR TestPockyForDeathOrOccupied_A77E
 #_01C0A9: BCC CODE_01C0B1
 
 #_01C0AB: LDY.w #$00E6 ; PARTNER 00E6
@@ -11482,12 +11603,12 @@ CODE_01C0F2:
 #_01C0F5: AND.w #$0F00
 #_01C0F8: BEQ CODE_01C102
 
-#_01C0FA: JSR ROUTINE_01A571
+#_01C0FA: JSR ROUTINE_01A571_Get05CCmod7
 #_01C0FD: ADC.w #$002C
 #_01C100: BRA CODE_01C108
 
 CODE_01C102:
-#_01C102: JSR ROUTINE_01A571
+#_01C102: JSR ROUTINE_01A571_Get05CCmod7
 #_01C105: ADC.w #$0022
 
 CODE_01C108:
@@ -11513,7 +11634,7 @@ CODE_01C122:
 #_01C127: LDA.w $05D0
 #_01C12A: BEQ CODE_01C159
 
-#_01C12C: JSR ROUTINE_01A571
+#_01C12C: JSR ROUTINE_01A571_Get05CCmod7
 #_01C12F: ADC.w #$0022
 
 CODE_01C132:
@@ -11535,7 +11656,7 @@ CODE_01C14C:
 #_01C14C: LDA.w $05D0
 #_01C14F: BEQ CODE_01C159
 
-#_01C151: JSR ROUTINE_01A571
+#_01C151: JSR ROUTINE_01A571_Get05CCmod7
 #_01C154: ADC.w #$002C
 #_01C157: BRA CODE_01C132
 
@@ -11561,7 +11682,7 @@ ROUTINE_01C16F:
 #_01C16F: STA.b $20
 
 #_01C171: LDY.w #$0016
-#_01C174: JSR ROUTINE_01A571
+#_01C174: JSR ROUTINE_01A571_Get05CCmod7
 #_01C177: ADC.b $20
 #_01C179: JMP ROUTINE_01A799
 
@@ -11572,13 +11693,13 @@ Ottobot_C17C:
 
 #_01C17F: LDA.w #$0012
 #_01C182: LDY.w #$0015
-#_01C185: JSR ROUTINE_01A777
-#_01C188: BNE CODE_01C190
+#_01C185: JSR ROUTINE_01A799_Read05CA
+#_01C188: BNE .delay_change
 
 #_01C18A: LDY.w #$00A6 ; PARTNER 00A6
 #_01C18D: JSR ROUTINE_01A7F0_SetPartnerMode
 
-CODE_01C190:
+.delay_change
 #_01C190: JMP ROUTINE_01A7FD
 
 ;===================================================================================================
@@ -11630,7 +11751,7 @@ CODE_01C1D0:
 #_01C1D5: BEQ CODE_01C1DD
 
 #_01C1D7: LDA.w #$00BA ; PARTNER 00BA
-#_01C1DA: JMP ROUTINE_01A70F
+#_01C1DA: JMP Pocky_OfficiallyEnterMagicMerge
 
 CODE_01C1DD:
 #_01C1DD: JSR ROUTINE_01A749
@@ -11660,7 +11781,7 @@ CODE_01C1F7:
 ;===================================================================================================
 
 ROUTINE_01A8C4_Ottobot:
-#_01C1FA: LDA.w #$00A8
+#_01C1FA: LDA.w #$00A8 ; PARTNER 00A8
 #_01C1FD: JMP ROUTINE_01A8C4
 
 ;===================================================================================================
@@ -11669,7 +11790,7 @@ Ottobot_C200:
 #_01C200: JSR ROUTINE_01A916
 #_01C203: BCC .exit
 
-#_01C205: LDA.w #$00AA
+#_01C205: LDA.w #$00AA ; PARTNER 00AA
 #_01C208: LDX.w #$000C
 #_01C20B: JSR ROUTINE_01A936_SetPartnerMode
 
@@ -11687,14 +11808,14 @@ Ottobot_C20F:
 #_01C21A: JSL ROUTINE_04F6E1
 
 #_01C21E: DEC.w $05DC
-#_01C221: BNE CODE_01C22C
+#_01C221: BNE .delay_change
 
 #_01C223: JSR ROUTINE_01AEB8
 
 #_01C226: LDA.w #$00A0 ; PARTNER 00A0
 #_01C229: JSR ROUTINE_01A951_SetPartnerMode
 
-CODE_01C22C:
+.delay_change
 #_01C22C: JMP ROUTINE_01C508
 
 .exit
@@ -11867,32 +11988,36 @@ CODE_01C304:
 Ottobot_C310:
 #_01C310: JSR ROUTINE_01BA91
 
-#_01C313: JMP ROUTINE_01E83E
+#_01C313: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
 Ottobot_C316:
 #_01C316: JSR ROUTINE_01A88B
-#_01C319: BCC CODE_01C321
+#_01C319: BCC .delay_change
 
 #_01C31B: LDA.w #$00B2 ; PARTNER 00B2
 #_01C31E: STA.w $05CE
 
-CODE_01C321:
+.delay_change
 #_01C321: LDA.w $05E2
 #_01C324: BNE CODE_01C329
 
-#_01C326: JMP CODE_01B137
+#_01C326: JMP ROUTINE_01B137
 
 CODE_01C329:
 #_01C329: JSR ROUTINE_01BBD8
 
-CODE_01C32C:
+;---------------------------------------------------------------------------------------------------
+
+ROUTINE_01C32C:
 #_01C32C: AND.w #$0007
 #_01C32F: CLC
 #_01C330: ADC.w #$0001
 
-CODE_01C333:
+;---------------------------------------------------------------------------------------------------
+
+ROUTINE_01C333:
 #_01C333: LDY.w #$0015
 #_01C336: JSL ROUTINE_04F6E1
 #_01C33A: JSR ROUTINE_01E415
@@ -11903,14 +12028,14 @@ CODE_01C333:
 
 Ottobot_C340:
 #_01C340: JSR ROUTINE_01A654
-#_01C343: BCS CODE_01C34B
+#_01C343: BCS .delay_change
 
 #_01C345: LDA.w #$00B4 ; PARTNER 00B4
 #_01C348: JSR ROUTINE_01A670_SetPartnerMode
 
-CODE_01C34B:
+.delay_change
 #_01C34B: LDA.w $05A0
-#_01C34E: JMP CODE_01C32C
+#_01C34E: JMP ROUTINE_01C32C
 
 ;===================================================================================================
 
@@ -11924,16 +12049,16 @@ Ottobot_C351:
 
 .continue
 #_01C358: CMP.w #$FE60
-#_01C35B: BCC CODE_01C363
+#_01C35B: BCC .delay_change
 
 #_01C35D: LDA.w #$00B6 ; PARTNER 00B6
 #_01C360: JSR ROUTINE_01A809_SetPartnerMode
 
-CODE_01C363:
+.delay_change
 #_01C363: STA.w $05CA
 
 #_01C366: LDA.w #$0036
-#_01C369: JMP CODE_01C333
+#_01C369: JMP ROUTINE_01C333
 
 ;===================================================================================================
 
@@ -11963,13 +12088,13 @@ CODE_01C389:
 #_01C38E: LDA.w $18EC
 #_01C391: BNE CODE_01C39C
 
-#_01C393: LDA.w #$00B8
+#_01C393: LDA.w #$00B8 ; PARTNER 00B8
 #_01C396: JSR ROUTINE_01A83F
 #_01C399: JSR GetLiftablesGraphics
 
 CODE_01C39C:
 #_01C39C: LDA.w #$0037
-#_01C39F: JMP CODE_01C333
+#_01C39F: JMP ROUTINE_01C333
 
 ;===================================================================================================
 
@@ -11989,17 +12114,17 @@ CODE_01C3B5:
 #_01C3B5: JSR RunMagicTimer_9SecondsPreloaded
 #_01C3B8: BCS CODE_01C3EE
 
-#_01C3BA: JSR ROUTINE_01A590
+#_01C3BA: JSR TestForPockyTakingDamage
 #_01C3BD: BCS CODE_01C3EE
 
-#_01C3BF: CMP.w #$0098
+#_01C3BF: CMP.w #$0098 ; STATE 98
 #_01C3C2: BCC CODE_01C3C9
 
-#_01C3C4: CMP.w #$00B0
+#_01C3C4: CMP.w #$00B0 ; STATE B0
 #_01C3C7: BCC CODE_01C409
 
 CODE_01C3C9:
-#_01C3C9: CMP.w #$00BA
+#_01C3C9: CMP.w #$00BA ; STATE BA
 #_01C3CC: BNE CODE_01C3D9
 
 CODE_01C3CE:
@@ -12009,11 +12134,13 @@ CODE_01C3CE:
 
 #_01C3D7: BRA CODE_01C400
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_01C3D9:
-#_01C3D9: CMP.w #$003C
+#_01C3D9: CMP.w #$003C ; STATE 3C
 #_01C3DC: BCC CODE_01C400
 
-#_01C3DE: CMP.w #$0048
+#_01C3DE: CMP.w #$0048 ; STATE 48
 #_01C3E1: BCC CODE_01C3CE
 
 #_01C3E3: JSR ROUTINE_01DF47
@@ -12040,13 +12167,15 @@ CODE_01C400:
 
 #_01C406: JMP CODE_01C465
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_01C409:
 #_01C409: JSR ROUTINE_01DD53
-#_01C40C: JSR ROUTINE_01A5A1
+#_01C40C: JSR ROUTINE_01A5A1_19FCora19FE
 #_01C40F: AND.w #$4000
 #_01C412: BEQ CODE_01C433
 
-#_01C414: JSR ROUTINE_01A571
+#_01C414: JSR ROUTINE_01A571_Get05CCmod7
 #_01C417: ADC.w #$0026
 #_01C41A: CMP.w $05D0
 #_01C41D: BNE CODE_01C42A
@@ -12067,7 +12196,7 @@ CODE_01C433:
 #_01C433: LDA.w $05D0
 #_01C436: BEQ CODE_01C465
 
-#_01C438: JSR ROUTINE_01A571
+#_01C438: JSR ROUTINE_01A571_Get05CCmod7
 #_01C43B: ADC.w #$0026
 
 CODE_01C43E:
@@ -12084,14 +12213,14 @@ CODE_01C43E:
 
 #_01C453: BRA CODE_01C46B
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_01C455:
+; TODO seems to be unreachable
 #_01C455: LDA.w $05D0
 #_01C458: BEQ CODE_01C465
 
 #_01C45A: LDY.w #$0015
-#_01C45D: JSR ROUTINE_01A571
+#_01C45D: JSR ROUTINE_01A571_Get05CCmod7
 #_01C460: ADC.w #$0026
 #_01C463: BRA CODE_01C43E
 
@@ -12124,6 +12253,7 @@ Ottobot_Normal:
 #_01C483: LDY.w #$0020
 #_01C486: LDA.w #$0001
 #_01C489: JSR ROUTINE_01CA61
+
 #_01C48C: JSR ROUTINE_01A5F5
 #_01C48F: JSR ROUTINE_01A5EC
 
@@ -12135,7 +12265,7 @@ Ottobot_Normal:
 #_01C49D: JMP ROUTINE_01A5D4_SetPartnerMode
 
 CODE_01C4A0:
-#_01C4A0: JSR ROUTINE_01A77E
+#_01C4A0: JSR TestPockyForDeathOrOccupied_A77E
 #_01C4A3: BCC CODE_01C4AB
 
 #_01C4A5: LDY.w #$00A6 ; PARTNER 00A6
@@ -12235,9 +12365,9 @@ CODE_01C52C:
 
 #_01C53E: LDA.w $05C4
 #_01C541: LDY.w #$05C0
-#_01C544: JSR ROUTINE_0181F1
+#_01C544: JSR ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
-#_01C547: JMP ROUTINE_01E83E
+#_01C547: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -12271,7 +12401,7 @@ CODE_01C569:
 #_01C56C: LDA.w $05D0
 #_01C56F: BEQ CODE_01C5A1
 
-#_01C571: JSR ROUTINE_01A571
+#_01C571: JSR ROUTINE_01A571_Get05CCmod7
 #_01C574: ADC.w #$002E
 #_01C577: STA.w $05D0
 
@@ -12282,7 +12412,7 @@ CODE_01C569:
 #_01C582: LDA.w #$00A0 ; PARTNER 00A0
 #_01C585: STA.w $05CE
 
-#_01C588: JSR ROUTINE_01AAAA
+#_01C588: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01C58B: BRA CODE_01C5A1
 
@@ -12319,12 +12449,12 @@ Ottobot_C5A4:
 #_01C5BC: JSR ROUTINE_01A9B9
 
 #_01C5BF: LDA.w #$00A6 ; PARTNER 00A6
-#_01C5C2: BRA CODE_01C5C7
+#_01C5C2: BRA .set_mode
 
 CODE_01C5C4:
 #_01C5C4: LDA.w #$00A0 ; PARTNER 00A0
 
-CODE_01C5C7:
+.set_mode
 #_01C5C7: STA.w $05CE
 
 CODE_01C5CA:
@@ -12425,7 +12555,7 @@ CODE_01C63F:
 
 #_01C64B: LDY.w $18E4
 #_01C64E: CPY.w #$000E
-#_01C651: BNE CODE_01C65A
+#_01C651: BNE .go_awol
 
 #_01C653: LDA.w #$0148 ; PARTNER 0148
 #_01C656: STA.w $05CE
@@ -12434,11 +12564,13 @@ CODE_01C63F:
 
 ;---------------------------------------------------------------------------------------------------
 
-CODE_01C65A:
+.go_awol
 #_01C65A: LDX.w $04FE
 #_01C65D: JSR (.vectors,X)
 
 #_01C660: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_01C661:
 #_01C661: SEC
@@ -12520,6 +12652,8 @@ CODE_01C6CD:
 
 #_01C6D3: JMP ROUTINE_01C6D6
 
+;---------------------------------------------------------------------------------------------------
+
 ROUTINE_01C6D6:
 #_01C6D6: JSR ROUTINE_01CA5B
 #_01C6D9: JSR ROUTINE_01E1E4_bounce
@@ -12565,9 +12699,9 @@ CODE_01C70C:
 
 #_01C71E: LDA.w $05C4
 #_01C721: LDY.w #$05C0
-#_01C724: JSR ROUTINE_0181F1
+#_01C724: JSR ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
-#_01C727: JMP ROUTINE_01E83E
+#_01C727: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -12576,13 +12710,13 @@ Tengy_C72A:
 
 #_01C72D: LDA.w #$0019
 #_01C730: LDY.w #$0014
-#_01C733: JSR ROUTINE_01A777
-#_01C736: BNE CODE_01C73E
+#_01C733: JSR ROUTINE_01A799_Read05CA
+#_01C736: BNE .delay_change
 
 #_01C738: LDY.w #$0086 ; PARTNER 0086
 #_01C73B: JSR ROUTINE_01A7F0_SetPartnerMode
 
-CODE_01C73E:
+.delay_change
 #_01C73E: JMP ROUTINE_01A7FD
 
 ;===================================================================================================
@@ -12599,7 +12733,6 @@ Tengy_C741:
 
 CODE_01C752:
 #_01C752: LDY.w #$0014
-
 #_01C755: LDA.w #$001C
 #_01C758: JMP ROUTINE_01A623
 
@@ -12635,7 +12768,7 @@ CODE_01C77E:
 #_01C783: BEQ CODE_01C78B
 
 #_01C785: LDA.w #$009A ; PARTNER 009A
-#_01C788: JMP ROUTINE_01A70F
+#_01C788: JMP Pocky_OfficiallyEnterMagicMerge
 
 CODE_01C78B:
 #_01C78B: JSR ROUTINE_01A749
@@ -12666,7 +12799,7 @@ CODE_01C7A5:
 ;===================================================================================================
 
 ROUTINE_01A8C4_Tengy:
-#_01C7A8: LDA.w #$0088
+#_01C7A8: LDA.w #$0088 ; PARTNER 0088
 #_01C7AB: JMP ROUTINE_01A8C4
 
 ;===================================================================================================
@@ -12675,7 +12808,7 @@ Tengy_C7AE:
 #_01C7AE: JSR ROUTINE_01A916
 #_01C7B1: BCC .exit
 
-#_01C7B3: LDA.w #$008A
+#_01C7B3: LDA.w #$008A ; PARTNER 008A
 #_01C7B6: LDX.w #$000A
 #_01C7B9: JSR ROUTINE_01A936_SetPartnerMode
 
@@ -12695,7 +12828,7 @@ Tengy_C7BD:
 #_01C7CC: DEC.w $05DC
 #_01C7CF: BNE CODE_01C7DD
 
-#_01C7D1: JSR ROUTINE_01A8E2
+#_01C7D1: JSR ROUTINE_01A8E2_TestsDifficulty
 #_01C7D4: JSR ROUTINE_01AE9D
 
 #_01C7D7: LDA.w #$0080 ; PARTNER 0080
@@ -12723,7 +12856,7 @@ Tengy_C7E1:
 #_01C7F1: LDA.w #$0080 ; PARTNER 0080
 #_01C7F4: JSR ROUTINE_01A5C4_SetPartnerMode
 
-#_01C7F7: BRA CODE_01C827
+#_01C7F7: BRA .finished
 
 CODE_01C7F9:
 #_01C7F9: SEC
@@ -12732,7 +12865,7 @@ CODE_01C7F9:
 
 #_01C800: JSR ROUTINE_01DAE7
 
-#_01C803: BRA CODE_01C827
+#_01C803: BRA .finished
 
 CODE_01C805:
 #_01C805: LDA.w $05E2
@@ -12757,7 +12890,9 @@ CODE_01C81D:
 
 #_01C824: JMP ROUTINE_01DAE7
 
-CODE_01C827:
+;---------------------------------------------------------------------------------------------------
+
+.finished
 #_01C827: JSR ROUTINE_01E415
 
 #_01C82A: LDA.w #$0001
@@ -12770,7 +12905,7 @@ CODE_01C827:
 Tengy_C833:
 #_01C833: JSR ROUTINE_01BA91
 
-#_01C836: JMP ROUTINE_01E83E
+#_01C836: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -12865,7 +13000,7 @@ CODE_01C8AC:
 #_01C8B1: LDA.w $18EC
 #_01C8B4: BNE CODE_01C8BC
 
-#_01C8B6: LDA.w #$0098
+#_01C8B6: LDA.w #$0098 ; PARTNER 0098
 #_01C8B9: JSR ROUTINE_01A83F
 
 CODE_01C8BC:
@@ -12888,17 +13023,17 @@ CODE_01C8CF:
 #_01C8CF: JSR RunMagicTimer_9SecondsPreloaded
 #_01C8D2: BCS CODE_01C908
 
-#_01C8D4: JSR ROUTINE_01A590
+#_01C8D4: JSR TestForPockyTakingDamage
 #_01C8D7: BCS CODE_01C908
 
-#_01C8D9: CMP.w #$0098
+#_01C8D9: CMP.w #$0098 ; STATE 98
 #_01C8DC: BCC CODE_01C8E3
 
-#_01C8DE: CMP.w #$00B0
+#_01C8DE: CMP.w #$00B0 ; STATE B0
 #_01C8E1: BCC CODE_01C923
 
 CODE_01C8E3:
-#_01C8E3: CMP.w #$00BA
+#_01C8E3: CMP.w #$00BA ; STATE BA
 #_01C8E6: BNE CODE_01C8F3
 
 CODE_01C8E8:
@@ -12909,10 +13044,10 @@ CODE_01C8E8:
 #_01C8F1: BRA CODE_01C91A
 
 CODE_01C8F3:
-#_01C8F3: CMP.w #$003C
+#_01C8F3: CMP.w #$003C ; STATE 3C
 #_01C8F6: BCC CODE_01C91A
 
-#_01C8F8: CMP.w #$0048
+#_01C8F8: CMP.w #$0048 ; STATE 48
 #_01C8FB: BCC CODE_01C8E8
 
 #_01C8FD: JSR ROUTINE_01DF47
@@ -12942,11 +13077,11 @@ CODE_01C91A:
 CODE_01C923:
 #_01C923: JSR ROUTINE_01DD59
 #_01C926: JSR ROUTINE_01A5EC
-#_01C929: JSR ROUTINE_01A5A1
+#_01C929: JSR ROUTINE_01A5A1_19FCora19FE
 #_01C92C: AND.w #$4000
 #_01C92F: BEQ CODE_01C950
 
-#_01C931: JSR ROUTINE_01A571
+#_01C931: JSR ROUTINE_01A571_Get05CCmod7
 #_01C934: ADC.w #$0011
 #_01C937: CMP.w $05D0
 #_01C93A: BNE CODE_01C947
@@ -12967,7 +13102,7 @@ CODE_01C950:
 #_01C950: LDA.w $05D0
 #_01C953: BEQ CODE_01C97F
 
-#_01C955: JSR ROUTINE_01A571
+#_01C955: JSR ROUTINE_01A571_Get05CCmod7
 #_01C958: ADC.w #$0011
 
 CODE_01C95B:
@@ -13026,11 +13161,13 @@ CODE_01C999:
 #_01C9AA: JMP ROUTINE_01A5D4_SetPartnerMode
 
 CODE_01C9AD:
-#_01C9AD: JSR ROUTINE_01A77E
+#_01C9AD: JSR TestPockyForDeathOrOccupied_A77E
 #_01C9B0: BCC CODE_01C9B8
 
 #_01C9B2: LDY.w #$0086 ; PARTNER 0086
 #_01C9B5: JMP ROUTINE_01A7F0_SetPartnerMode
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_01C9B8:
 #_01C9B8: LDA.w $18CE
@@ -13057,7 +13194,7 @@ CODE_01C9C7:
 #_01C9DC: BEQ CODE_01C9F6
 
 CODE_01C9DE:
-#_01C9DE: JSR ROUTINE_01A571
+#_01C9DE: JSR ROUTINE_01A571_Get05CCmod7
 #_01C9E1: ADC.w #$0011
 #_01C9E4: STA.w $05D0
 
@@ -13082,17 +13219,19 @@ CODE_01CA03:
 #_01CA03: LDA.w #$0001
 #_01CA06: JSR ROUTINE_01CA4E
 
+;===================================================================================================
+
 ROUTINE_01CA09:
 #_01CA09: LDA.w $04CE
-#_01CA0C: BEQ CODE_01CA17
+#_01CA0C: BEQ .continue
 
 #_01CA0E: LDA.w $05A0
 #_01CA11: AND.w #$0002
-#_01CA14: BNE CODE_01CA17
+#_01CA14: BNE .continue
 
 #_01CA16: RTS
 
-CODE_01CA17:
+.continue
 #_01CA17: LDA.w $05E4
 #_01CA1A: CMP.w #$0003
 #_01CA1D: BCS CODE_01CA2D
@@ -13121,9 +13260,9 @@ CODE_01CA30:
 
 #_01CA42: LDA.w $05C4
 #_01CA45: LDY.w #$05C0
-#_01CA48: JSR ROUTINE_0181F1
+#_01CA48: JSR ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
-#_01CA4B: JMP ROUTINE_01E83E
+#_01CA4B: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -13131,8 +13270,9 @@ ROUTINE_01CA4E:
 #_01CA4E: STA.b $20
 
 #_01CA50: LDY.w #$0014
-#_01CA53: JSR ROUTINE_01A571
+#_01CA53: JSR ROUTINE_01A571_Get05CCmod7
 #_01CA56: ADC.b $20
+
 #_01CA58: JMP ROUTINE_01A799
 
 ;===================================================================================================
@@ -13264,9 +13404,9 @@ CODE_01CB00:
 
 #_01CB12: LDA.w $05C4
 #_01CB15: LDY.w #$05C0
-#_01CB18: JSR ROUTINE_0181F1
+#_01CB18: JSR ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
-#_01CB1B: JMP ROUTINE_01E83E
+#_01CB1B: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -13275,13 +13415,13 @@ Scarecrow_CB1E:
 
 #_01CB21: LDA.w #$0043
 #_01CB24: LDY.w #$0013
-#_01CB27: JSR ROUTINE_01A777
-#_01CB2A: BNE CODE_01CB32
+#_01CB27: JSR ROUTINE_01A799_Read05CA
+#_01CB2A: BNE .delay_change
 
 #_01CB2C: LDY.w #$0066 ; PARTNER 0066
 #_01CB2F: JSR ROUTINE_01A7F0_SetPartnerMode
 
-CODE_01CB32:
+.delay_change
 #_01CB32: JMP ROUTINE_01A7FD
 
 ;===================================================================================================
@@ -13298,7 +13438,6 @@ Scarecrow_CB35:
 
 CODE_01CB46:
 #_01CB46: LDY.w #$0013
-
 #_01CB49: LDA.w #$0042
 #_01CB4C: JMP ROUTINE_01A623
 
@@ -13334,7 +13473,7 @@ CODE_01CB72:
 #_01CB77: BEQ CODE_01CB7F
 
 #_01CB79: LDA.w #$007A ; PARTNER 007A
-#_01CB7C: JMP ROUTINE_01A70F
+#_01CB7C: JMP Pocky_OfficiallyEnterMagicMerge
 
 CODE_01CB7F:
 #_01CB7F: JSR ROUTINE_01A749
@@ -13364,7 +13503,7 @@ CODE_01CB99:
 ;===================================================================================================
 
 ROUTINE_01A8C4_Scarecrow:
-#_01CB9C: LDA.w #$0068
+#_01CB9C: LDA.w #$0068 ; PARTNER 0068
 #_01CB9F: JMP ROUTINE_01A8C4
 
 ;===================================================================================================
@@ -13373,7 +13512,7 @@ Scarecrow_CBA2:
 #_01CBA2: JSR ROUTINE_01A916
 #_01CBA5: BCC .exit
 
-#_01CBA7: LDA.w #$006A
+#_01CBA7: LDA.w #$006A ; PARTNER 006A
 #_01CBAA: LDX.w #$0008
 #_01CBAD: JSR ROUTINE_01A936_SetPartnerMode
 
@@ -13393,7 +13532,7 @@ Scarecrow_CBB1:
 #_01CBC0: DEC.w $05DC
 #_01CBC3: BNE CODE_01CBD1
 
-#_01CBC5: JSR ROUTINE_01A8E2
+#_01CBC5: JSR ROUTINE_01A8E2_TestsDifficulty
 #_01CBC8: JSR ROUTINE_01AE8B
 
 #_01CBCB: LDA.w #$0060 ; PARTNER 0060
@@ -13429,7 +13568,7 @@ CODE_01CBF1:
 #_01CBF1: LDA.w $05D0
 #_01CBF4: BEQ CODE_01CC20
 
-#_01CBF6: JSR ROUTINE_01A571
+#_01CBF6: JSR ROUTINE_01A571_Get05CCmod7
 #_01CBF9: ADC.w #$0011
 #_01CBFC: STA.w $05D0
 
@@ -13440,7 +13579,7 @@ CODE_01CBF1:
 #_01CC07: LDA.w #$0060 ; PARTNER 0060
 #_01CC0A: STA.w $05CE
 
-#_01CC0D: JSR ROUTINE_01AAAA
+#_01CC0D: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01CC10: BRA CODE_01CC20
 
@@ -13547,12 +13686,12 @@ CODE_01CC92:
 
 Scarecrow_CC9F:
 #_01CC9F: JSR ROUTINE_01A654
-#_01CCA2: BCS CODE_01CCAA
+#_01CCA2: BCS .delay_change
 
 #_01CCA4: LDA.w #$0074 ; PARTNER 0074
 #_01CCA7: JSR ROUTINE_01A670_SetPartnerMode
 
-CODE_01CCAA:
+.delay_change
 #_01CCAA: LDA.w $05A0
 #_01CCAD: JMP CODE_01CC8B
 
@@ -13567,12 +13706,12 @@ Scarecrow_CCB0:
 
 .continue
 #_01CCB7: CMP.w #$FE60
-#_01CCBA: BCC CODE_01CCC2
+#_01CCBA: BCC .delay_change
 
 #_01CCBC: LDA.w #$0076 ; PARTNER 0076
 #_01CCBF: JSR ROUTINE_01A809_SetPartnerMode
 
-CODE_01CCC2:
+.delay_change
 #_01CCC2: STA.w $05CA
 
 #_01CCC5: LDA.w #$0045
@@ -13606,7 +13745,7 @@ CODE_01CCE8:
 #_01CCED: LDA.w $18EC
 #_01CCF0: BNE CODE_01CCFE
 
-#_01CCF2: LDA.w #$0078
+#_01CCF2: LDA.w #$0078 ; PARTNER 0078
 #_01CCF5: JSR ROUTINE_01A83F
 
 #_01CCF8: STZ.w $05DE
@@ -13689,7 +13828,7 @@ CODE_01CD69:
 
 #_01CD6C: STZ.w $05DE
 
-#_01CD6F: JSR ROUTINE_01AAAA
+#_01CD6F: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01CD72: LDA.w #$0043 ; SFX 43
 #_01CD75: STA.w $04AA
@@ -13724,17 +13863,17 @@ CODE_01CD8E:
 #_01CD9B: JSR ROUTINE_019390
 
 CODE_01CD9E:
-#_01CD9E: JSR ROUTINE_01A590
+#_01CD9E: JSR TestForPockyTakingDamage
 #_01CDA1: BCS CODE_01CDD2
 
-#_01CDA3: CMP.w #$0098
+#_01CDA3: CMP.w #$0098 ; STATE 98
 #_01CDA6: BCC CODE_01CDAD
 
-#_01CDA8: CMP.w #$00B0
+#_01CDA8: CMP.w #$00B0 ; STATE B0
 #_01CDAB: BCC CODE_01CDF3
 
 CODE_01CDAD:
-#_01CDAD: CMP.w #$00BA
+#_01CDAD: CMP.w #$00BA ; STATE BA
 #_01CDB0: BNE CODE_01CDBD
 
 CODE_01CDB2:
@@ -13745,10 +13884,10 @@ CODE_01CDB2:
 #_01CDBB: BRA CODE_01CDEA
 
 CODE_01CDBD:
-#_01CDBD: CMP.w #$003C
+#_01CDBD: CMP.w #$003C ; STATE 3C
 #_01CDC0: BCC CODE_01CDEA
 
-#_01CDC2: CMP.w #$0048
+#_01CDC2: CMP.w #$0048 ; STATE 48
 #_01CDC5: BCC CODE_01CDB2
 
 #_01CDC7: JSR ROUTINE_01DF47
@@ -13767,7 +13906,7 @@ CODE_01CDD2:
 #_01CDDB: LDA.w #$FF80
 #_01CDDE: STA.w $05DC
 
-#_01CDE1: JSR ROUTINE_01AAAA
+#_01CDE1: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01CDE4: STZ.w $05EA
 
@@ -13819,14 +13958,14 @@ CODE_01CE28:
 #_01CE30: STA.w $04AA
 
 CODE_01CE33:
-#_01CE33: JSR ROUTINE_01DE83
+#_01CE33: JSR Partner_MakePockySync
 #_01CE36: JSR ROUTINE_01DD75
 
 #_01CE39: JMP ROUTINE_01E04D
 
 CODE_01CE3C:
 #_01CE3C: JSR ROUTINE_01DD59
-#_01CE3F: JSR Reset_18_through_1E
+#_01CE3F: JSR ROUTINE_01E436_AllZero
 
 #_01CE42: JMP ROUTINE_01E02C
 
@@ -13835,7 +13974,7 @@ CODE_01CE3C:
 Scarecrow_CE45:
 #_01CE45: JSR ROUTINE_01BA91
 
-#_01CE48: JMP ROUTINE_01E83E
+#_01CE48: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -13851,7 +13990,7 @@ Scarecrow_Normal:
 #_01CE5C: JMP ROUTINE_01A5D4_SetPartnerMode
 
 CODE_01CE5F:
-#_01CE5F: JSR ROUTINE_01A77E
+#_01CE5F: JSR TestPockyForDeathOrOccupied_A77E
 #_01CE62: BCC CODE_01CE6A
 
 #_01CE64: LDY.w #$0066 ; PARTNER 0066
@@ -13886,7 +14025,7 @@ CODE_01CE81:
 #_01CE96: BEQ CODE_01CEB0
 
 CODE_01CE98:
-#_01CE98: JSR ROUTINE_01A571
+#_01CE98: JSR ROUTINE_01A571_Get05CCmod7
 #_01CE9B: ADC.w #$0011
 #_01CE9E: STA.w $05D0
 
@@ -13935,7 +14074,7 @@ ROUTINE_01CEDC:
 #_01CEDC: STA.b $20
 
 #_01CEDE: LDY.w #$0013
-#_01CEE1: JSR ROUTINE_01A571
+#_01CEE1: JSR ROUTINE_01A571_Get05CCmod7
 #_01CEE4: ADC.b $20
 #_01CEE6: JMP ROUTINE_01A799
 
@@ -14003,12 +14142,12 @@ CODE_01CF2F:
 
 BomberBob_CF3C:
 #_01CF3C: JSR ROUTINE_01A654
-#_01CF3F: BCS CODE_01CF47
+#_01CF3F: BCS .delay_change
 
 #_01CF41: LDA.w #$0054 ; PARTNER 0054
 #_01CF44: JSR ROUTINE_01A670_SetPartnerMode
 
-CODE_01CF47:
+.delay_change
 #_01CF47: LDA.w $05A0
 #_01CF4A: JMP CODE_01CF28
 
@@ -14023,12 +14162,12 @@ BomberBob_CF4D:
 
 .continue
 #_01CF54: CMP.w #$FE60
-#_01CF57: BCC CODE_01CF5F
+#_01CF57: BCC .delay_change
 
 #_01CF59: LDA.w #$0056 ; PARTNER 0056
 #_01CF5C: JSR ROUTINE_01A809_SetPartnerMode
 
-CODE_01CF5F:
+.delay_change
 #_01CF5F: STA.w $05CA
 
 #_01CF62: LDA.w #$003A
@@ -14118,6 +14257,7 @@ ROUTINE_01CFD0:
 .execute
 #_01CFD8: LDA.w #$00DC
 #_01CFDB: TRB.w $0536
+
 #_01CFDE: SEP #$20
 
 #_01CFE0: LDA.b #$00
@@ -14127,13 +14267,19 @@ ROUTINE_01CFD0:
 
 #_01CFEE: REP #$20
 
-#_01CFF0: LDX.w #data01CFF6
-#_01CFF3: JMP ROUTINE_01AC3F
+#_01CFF0: LDX.w #.table
+#_01CFF3: JMP ROUTINE_01AC3F_TableCopying
 
-#data01CFF6:
-#_01CFF6: db $08,$00,$24,$05,$00,$17,$00,$00
-#_01CFFE: db $00,$00,$00,$00,$00,$02,$00,$30
-#_01D006: db $21,$00,$00,$00,$00,$00
+;---------------------------------------------------------------------------------------------------
+
+.table
+#_01CFF6: dw $0008 : dl $000524 ; write 8 bytes to target
+#_01CFFB: db $17, $00, $00, $00, $00, $00, $00, $00
+
+#_01D003: dw $0002 : dl CGWSEL ; write 2 bytes to target
+#_01D008: db $00, $00
+
+#_01D00A: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -14153,17 +14299,17 @@ CODE_01D01F:
 #_01D01F: JSR RunMagicTimer_9SecondsPreloaded
 #_01D022: BCS CODE_01D058
 
-#_01D024: JSR ROUTINE_01A590
+#_01D024: JSR TestForPockyTakingDamage
 #_01D027: BCS CODE_01D058
 
-#_01D029: CMP.w #$0098
+#_01D029: CMP.w #$0098 ; STATE 98
 #_01D02C: BCC CODE_01D033
 
-#_01D02E: CMP.w #$00B0
+#_01D02E: CMP.w #$00B0 ; STATE B0
 #_01D031: BCC CODE_01D073
 
 CODE_01D033:
-#_01D033: CMP.w #$00BA
+#_01D033: CMP.w #$00BA ; STATE BA
 #_01D036: BNE CODE_01D043
 
 CODE_01D038:
@@ -14174,10 +14320,10 @@ CODE_01D038:
 #_01D041: BRA CODE_01D06A
 
 CODE_01D043:
-#_01D043: CMP.w #$003C
+#_01D043: CMP.w #$003C ; STATE 3C
 #_01D046: BCC CODE_01D06A
 
-#_01D048: CMP.w #$0048
+#_01D048: CMP.w #$0048 ; STATE 48
 #_01D04B: BCC CODE_01D038
 
 #_01D04D: JSR ROUTINE_01DF47
@@ -14265,17 +14411,17 @@ CODE_01D0C8:
 #_01D0C8: JSR RunMagicTimer_9SecondsPreloaded
 #_01D0CB: BCS CODE_01D101
 
-#_01D0CD: JSR ROUTINE_01A590
+#_01D0CD: JSR TestForPockyTakingDamage
 #_01D0D0: BCS CODE_01D101
 
-#_01D0D2: CMP.w #$0098
+#_01D0D2: CMP.w #$0098 ; STATE 98
 #_01D0D5: BCC CODE_01D0DC
 
-#_01D0D7: CMP.w #$00B0
+#_01D0D7: CMP.w #$00B0 ; STATE B0
 #_01D0DA: BCC CODE_01D11C
 
 CODE_01D0DC:
-#_01D0DC: CMP.w #$00BA
+#_01D0DC: CMP.w #$00BA ; STATE BA
 #_01D0DF: BNE CODE_01D0EC
 
 CODE_01D0E1:
@@ -14286,10 +14432,10 @@ CODE_01D0E1:
 #_01D0EA: BRA CODE_01D113
 
 CODE_01D0EC:
-#_01D0EC: CMP.w #$003C
+#_01D0EC: CMP.w #$003C ; STATE 3C
 #_01D0EF: BCC CODE_01D113
 
-#_01D0F1: CMP.w #$0048
+#_01D0F1: CMP.w #$0048 ; STATE 48
 #_01D0F4: BCC CODE_01D0E1
 
 #_01D0F6: JSR ROUTINE_01DF47
@@ -14329,12 +14475,12 @@ CODE_01D12C:
 #_01D12C: LDA.w $05D0
 #_01D12F: BNE CODE_01D136
 
-#_01D131: JSR ROUTINE_01A5A8
+#_01D131: JSR Partner_CopyPockyCoordinates
 
 #_01D134: BRA CODE_01D139
 
 CODE_01D136:
-#_01D136: JSR ROUTINE_01A5A8
+#_01D136: JSR Partner_CopyPockyCoordinates
 
 CODE_01D139:
 #_01D139: JSR Random_bank01a
@@ -14412,17 +14558,17 @@ CODE_01D1AC:
 #_01D1AC: JSR RunMagicTimer_9SecondsPreloaded
 #_01D1AF: BCS CODE_01D1ED
 
-#_01D1B1: JSR ROUTINE_01A590
+#_01D1B1: JSR TestForPockyTakingDamage
 #_01D1B4: BCS CODE_01D1ED
 
-#_01D1B6: CMP.w #$0098
+#_01D1B6: CMP.w #$0098 ; STATE 98
 #_01D1B9: BCC CODE_01D1C0
 
-#_01D1BB: CMP.w #$00B0
+#_01D1BB: CMP.w #$00B0 ; STATE B0
 #_01D1BE: BCC CODE_01D208
 
 CODE_01D1C0:
-#_01D1C0: CMP.w #$00BA
+#_01D1C0: CMP.w #$00BA ; STATE BA
 #_01D1C3: BNE CODE_01D1D0
 
 CODE_01D1C5:
@@ -14433,10 +14579,10 @@ CODE_01D1C5:
 #_01D1CE: BRA CODE_01D1FF
 
 CODE_01D1D0:
-#_01D1D0: CMP.w #$003C
+#_01D1D0: CMP.w #$003C ; STATE 3C
 #_01D1D3: BCC CODE_01D1FF
 
-#_01D1D5: CMP.w #$0048
+#_01D1D5: CMP.w #$0048 ; STATE 48
 #_01D1D8: BCC CODE_01D1C5
 
 #_01D1DA: LDA.w $19E2
@@ -14478,7 +14624,7 @@ CODE_01D208:
 #_01D216: BEQ CODE_01D221
 
 CODE_01D218:
-#_01D218: JSR ROUTINE_01A5A8
+#_01D218: JSR Partner_CopyPockyCoordinates
 #_01D21B: JSR ROUTINE_01A579
 
 #_01D21E: INC.w $05EC
@@ -14496,11 +14642,11 @@ CODE_01D221:
 #_01D231: CMP.w $05F6
 #_01D234: BNE CODE_01D266
 
-#_01D236: JSR ROUTINE_01A5A1
+#_01D236: JSR ROUTINE_01A5A1_19FCora19FE
 #_01D239: AND.w #$4000
 #_01D23C: BEQ CODE_01D266
 
-#_01D23E: JSR ROUTINE_01A571
+#_01D23E: JSR ROUTINE_01A571_Get05CCmod7
 #_01D241: ADC.w #$0031
 #_01D244: CMP.w $05D0
 #_01D247: BNE CODE_01D25D
@@ -14511,7 +14657,7 @@ CODE_01D221:
 
 #_01D251: JSR ROUTINE_01AA4A
 #_01D254: JSR ROUTINE_01A579
-#_01D257: JSR ROUTINE_01A571
+#_01D257: JSR ROUTINE_01A571_Get05CCmod7
 #_01D25A: ADC.w #$0031
 
 CODE_01D25D:
@@ -14556,7 +14702,7 @@ CODE_01D292:
 BomberBob_D295:
 #_01D295: JSR ROUTINE_01BA91
 
-#_01D298: JMP ROUTINE_01E83E
+#_01D298: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -14565,13 +14711,13 @@ BomberBob_D29B:
 
 #_01D29E: LDA.w #$0012
 #_01D2A1: LDY.w #$0012
-#_01D2A4: JSR ROUTINE_01A777
-#_01D2A7: BNE CODE_01D2AF
+#_01D2A4: JSR ROUTINE_01A799_Read05CA
+#_01D2A7: BNE .delay_change
 
 #_01D2A9: LDY.w #$0046 ; PARTNER 0046
 #_01D2AC: JSR ROUTINE_01A7F0_SetPartnerMode
 
-CODE_01D2AF:
+.delay_change
 #_01D2AF: JMP ROUTINE_01A7FD
 
 ;===================================================================================================
@@ -14588,7 +14734,6 @@ BomberBob_D2B2:
 
 CODE_01D2C3:
 #_01D2C3: LDY.w #$0012
-
 #_01D2C6: LDA.w #$0039
 #_01D2C9: JMP ROUTINE_01A623
 
@@ -14624,7 +14769,7 @@ CODE_01D2EF:
 #_01D2F4: BEQ CODE_01D2FC
 
 #_01D2F6: LDA.w #$005A ; PARTNER 005A
-#_01D2F9: JMP ROUTINE_01A70F
+#_01D2F9: JMP Pocky_OfficiallyEnterMagicMerge
 
 CODE_01D2FC:
 #_01D2FC: JSR ROUTINE_01A749
@@ -14655,7 +14800,7 @@ CODE_01D316:
 ;===================================================================================================
 
 ROUTINE_01A8C4_BomberBob:
-#_01D319: LDA.w #$0048
+#_01D319: LDA.w #$0048 ; PARTNER 0048
 #_01D31C: JMP ROUTINE_01A8C4
 
 ;===================================================================================================
@@ -14664,7 +14809,7 @@ BomberBob_D31F:
 #_01D31F: JSR ROUTINE_01A916
 #_01D322: BCC .exit
 
-#_01D324: LDA.w #$004A
+#_01D324: LDA.w #$004A ; PARTNER 004A
 #_01D327: LDX.w #$0006
 #_01D32A: JSR ROUTINE_01A936_SetPartnerMode
 
@@ -14682,15 +14827,15 @@ BomberBob_D32E:
 #_01D339: JSL ROUTINE_04F6E1
 
 #_01D33D: DEC.w $05DC
-#_01D340: BNE CODE_01D34E
+#_01D340: BNE .delay_change
 
-#_01D342: JSR ROUTINE_01A8E2
+#_01D342: JSR ROUTINE_01A8E2_TestsDifficulty
 #_01D345: JSR ROUTINE_01AE79
 
 #_01D348: LDA.w #$0040 ; PARTNER 0040
 #_01D34B: JSR ROUTINE_01A951_SetPartnerMode
 
-CODE_01D34E:
+.delay_change
 #_01D34E: JMP ROUTINE_01D42F
 
 .exit
@@ -14700,7 +14845,7 @@ CODE_01D34E:
 
 ROUTINE_01D352:
 #_01D352: LDA.w #$0058
-#_01D355: JSR ROUTINE_01E42A
+#_01D355: JSR ROUTINE_01E436_IndexInA
 
 #_01D358: JMP ROUTINE_01E415
 
@@ -14741,7 +14886,7 @@ CODE_01D371:
 #_01D389: LDA.w #$0040 ; PARTNER 0040
 #_01D38C: STA.w $05CE
 
-#_01D38F: JSR ROUTINE_01AAAA
+#_01D38F: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01D392: BRA CODE_01D3A2
 
@@ -14770,7 +14915,7 @@ BomberBob_Normal:
 #_01D3B6: JMP ROUTINE_01A5D4_SetPartnerMode
 
 CODE_01D3B9:
-#_01D3B9: JSR ROUTINE_01A77E
+#_01D3B9: JSR TestPockyForDeathOrOccupied_A77E
 #_01D3BC: BCC CODE_01D3C4
 
 #_01D3BE: LDY.w #$0046 ; PARTNER 0046
@@ -14819,7 +14964,7 @@ CODE_01D3FE:
 CODE_01D401:
 #_01D401: STA.w $05E0
 
-#_01D404: JSR ROUTINE_01A571
+#_01D404: JSR ROUTINE_01A571_Get05CCmod7
 #_01D407: ADC.w #$0019
 #_01D40A: STA.w $05D0
 
@@ -14878,7 +15023,7 @@ ROUTINE_01D456:
 #_01D456: STA.b $20
 
 #_01D458: LDY.w #$0012
-#_01D45B: JSR ROUTINE_01A571
+#_01D45B: JSR ROUTINE_01A571_Get05CCmod7
 #_01D45E: ADC.b $20
 #_01D460: JMP ROUTINE_01A799
 
@@ -14917,28 +15062,28 @@ CODE_01D489:
 Digger_22:
 #_01D48C: STZ.w $04B2
 
-#_01D48F: JSR ROUTINE_01DE83
+#_01D48F: JSR Partner_MakePockySync
 #_01D492: JSR ROUTINE_01D5BD
-#_01D495: JSR Reset_18_through_1E
+#_01D495: JSR ROUTINE_01E436_AllZero
 #_01D498: JSR ROUTINE_01E415
 
 #_01D49B: LDA.w #$0031
 #_01D49E: LDY.w #$0011
 #_01D4A1: JSR ROUTINE_01A799
-#_01D4A4: BNE CODE_01D4AF
+#_01D4A4: BNE .delay_change
 
 #_01D4A6: LDA.w #$0024 ; PARTNER 0024
 #_01D4A9: STA.w $05CE
 
 #_01D4AC: STZ.w $05DC
 
-CODE_01D4AF:
+.delay_change
 #_01D4AF: LDA.w #$201E
 #_01D4B2: STA.w $05C8
 
 #_01D4B5: LDA.w $05C4
 #_01D4B8: LDY.w #$05C0
-#_01D4BB: JSR ROUTINE_0181F1
+#_01D4BB: JSR ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
 #_01D4BE: RTS
 
@@ -14948,7 +15093,7 @@ Digger_24:
 #_01D4BF: STZ.w $04B2
 
 #_01D4C2: JSR ROUTINE_01E415
-#_01D4C5: JSR Reset_18_through_1E
+#_01D4C5: JSR ROUTINE_01E436_AllZero
 
 #_01D4C8: STZ.w $05EC
 
@@ -14968,17 +15113,17 @@ CODE_01D4D9:
 #_01D4DF: CMP.w #$0100
 #_01D4E2: BCS CODE_01D518
 
-#_01D4E4: JSR ROUTINE_01A590
+#_01D4E4: JSR TestForPockyTakingDamage
 #_01D4E7: BCS CODE_01D518
 
-#_01D4E9: CMP.w #$0098
+#_01D4E9: CMP.w #$0098 ; STATE 98
 #_01D4EC: BCC CODE_01D4F3
 
-#_01D4EE: CMP.w #$00B0
+#_01D4EE: CMP.w #$00B0 ; STATE B0
 #_01D4F1: BCC CODE_01D533
 
 CODE_01D4F3:
-#_01D4F3: CMP.w #$00BA
+#_01D4F3: CMP.w #$00BA ; STATE BA
 #_01D4F6: BNE CODE_01D503
 
 CODE_01D4F8:
@@ -14989,10 +15134,10 @@ CODE_01D4F8:
 #_01D501: BRA CODE_01D52A
 
 CODE_01D503:
-#_01D503: CMP.w #$003C
+#_01D503: CMP.w #$003C ; STATE 3C
 #_01D506: BCC CODE_01D52A
 
-#_01D508: CMP.w #$0048
+#_01D508: CMP.w #$0048 ; STATE 48
 #_01D50B: BCC CODE_01D4F8
 
 #_01D50D: JSR ROUTINE_01DF47
@@ -15024,7 +15169,7 @@ CODE_01D533:
 #_01D536: CMP.w #$00E0
 #_01D539: BCC CODE_01D540
 
-#_01D53B: JSR ROUTINE_01DE83
+#_01D53B: JSR Partner_MakePockySync
 
 #_01D53E: BRA CODE_01D581
 
@@ -15045,13 +15190,13 @@ CODE_01D540:
 
 #_01D557: CLC
 
-#_01D558: LDA.w data01D59D+0,Y
+#_01D558: LDA.w .offset+0,Y
 #_01D55B: ADC.w $05E6
 #_01D55E: STA.b $20
 
 #_01D560: CLC
 
-#_01D561: LDA.w data01D59D+2,Y
+#_01D561: LDA.w .offset+2,Y
 #_01D564: ADC.w $05E8
 #_01D567: STA.b $22
 
@@ -15067,7 +15212,7 @@ CODE_01D540:
 #_01D578: LDA.w #$000E
 #_01D57B: STA.b $24
 
-#_01D57D: JSL PrepEnemySpawn_long
+#_01D57D: JSL PrepSpriteSpawn_long
 
 CODE_01D581:
 #_01D581: JSR ROUTINE_01D5BD
@@ -15082,9 +15227,11 @@ CODE_01D58E:
 
 #_01D594: LDA.w $05C4
 #_01D597: LDY.w #$05C0
-#_01D59A: JMP ROUTINE_0181F1
+#_01D59A: JMP ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
-data01D59D:
+;---------------------------------------------------------------------------------------------------
+
+.offset
 #_01D59D: dw $0080, $0000
 #_01D5A1: dw $0030, $0030
 #_01D5A5: dw $0000, $0080
@@ -15152,7 +15299,7 @@ Digger_2C:
 #_01D604: JSR ROUTINE_01A916
 #_01D607: BCC .exit
 
-#_01D609: LDA.w #$002E
+#_01D609: LDA.w #$002E ; PARTNER 002E
 #_01D60C: LDX.w #$0004
 #_01D60F: JSR ROUTINE_01A936_SetPartnerMode
 
@@ -15170,14 +15317,14 @@ Digger_2E:
 #_01D61E: JSL ROUTINE_04F6E1
 
 #_01D622: DEC.w $05DC
-#_01D625: BNE CODE_01D630
+#_01D625: BNE .delay_change
 
 #_01D627: JSR ROUTINE_01AE3E
 
 #_01D62A: LDA.w #$0020 ; PARTNER 0020
 #_01D62D: JSR ROUTINE_01A951_SetPartnerMode
 
-CODE_01D630:
+.delay_change
 #_01D630: JMP ROUTINE_01E02C
 
 .exit
@@ -15190,13 +15337,13 @@ Digger_3A:
 
 #_01D637: LDA.w #$0032
 #_01D63A: LDY.w #$0011
-#_01D63D: JSR ROUTINE_01A777
-#_01D640: BNE CODE_01D648
+#_01D63D: JSR ROUTINE_01A799_Read05CA
+#_01D640: BNE .delay_change
 
 #_01D642: LDY.w #$002A ; PARTNER 002A
 #_01D645: JSR ROUTINE_01A7F0_SetPartnerMode
 
-CODE_01D648:
+.delay_change
 #_01D648: JMP ROUTINE_01A7FD
 
 ;===================================================================================================
@@ -15213,7 +15360,6 @@ Digger_3C:
 
 CODE_01D65C:
 #_01D65C: LDY.w #$0011
-
 #_01D65F: LDA.w #$0035
 #_01D662: JMP ROUTINE_01A623
 
@@ -15249,7 +15395,7 @@ CODE_01D688:
 #_01D68D: BEQ CODE_01D695
 
 #_01D68F: LDA.w #$003A ; PARTNER 003A
-#_01D692: JMP ROUTINE_01A70F
+#_01D692: JMP Pocky_OfficiallyEnterMagicMerge
 
 CODE_01D695:
 #_01D695: JSR ROUTINE_01A749
@@ -15267,7 +15413,6 @@ SetPartnerAWOL_Digger:
 
 Digger_2A:
 #_01D6A1: LDA.w #$0033
-
 #_01D6A4: LDY.w #$0011
 #_01D6A7: JSR ROUTINE_01A869
 #_01D6AA: BCC CODE_01D6AF
@@ -15280,7 +15425,7 @@ CODE_01D6AF:
 ;===================================================================================================
 
 ROUTINE_01A8C4_Digger:
-#_01D6B2: LDA.w #$002C
+#_01D6B2: LDA.w #$002C ; PARTNER 002C
 #_01D6B5: JMP ROUTINE_01A8C4
 
 ;===================================================================================================
@@ -15416,17 +15561,17 @@ CODE_01D768:
 #_01D768: JSR RunMagicTimer_9SecondsPreloaded
 #_01D76B: BCS CODE_01D7A1
 
-#_01D76D: JSR ROUTINE_01A590
+#_01D76D: JSR TestForPockyTakingDamage
 #_01D770: BCS CODE_01D7A1
 
-#_01D772: CMP.w #$0098
+#_01D772: CMP.w #$0098 ; STATE 98
 #_01D775: BCC CODE_01D77C
 
-#_01D777: CMP.w #$00B0
+#_01D777: CMP.w #$00B0 ; STATE B0
 #_01D77A: BCC CODE_01D7BC
 
 CODE_01D77C:
-#_01D77C: CMP.w #$00BA
+#_01D77C: CMP.w #$00BA ; STATE BA
 #_01D77F: BNE CODE_01D78C
 
 CODE_01D781:
@@ -15437,10 +15582,10 @@ CODE_01D781:
 #_01D78A: BRA CODE_01D7B3
 
 CODE_01D78C:
-#_01D78C: CMP.w #$003C
+#_01D78C: CMP.w #$003C ; STATE 3C
 #_01D78F: BCC CODE_01D7B3
 
-#_01D791: CMP.w #$0048
+#_01D791: CMP.w #$0048 ; STATE 48
 #_01D794: BCC CODE_01D781
 
 #_01D796: JSR ROUTINE_01DF47
@@ -15469,7 +15614,7 @@ CODE_01D7B3:
 
 CODE_01D7BC:
 #_01D7BC: JSR ROUTINE_01DD53
-#_01D7BF: JSR ROUTINE_01A5A1
+#_01D7BF: JSR ROUTINE_01A5A1_19FCora19FE
 #_01D7C2: AND.w #$8000
 #_01D7C5: BEQ CODE_01D7D6
 
@@ -15482,19 +15627,19 @@ CODE_01D7BC:
 #_01D7D3: JMP CODE_01D842
 
 CODE_01D7D6:
-#_01D7D6: JSR ROUTINE_01A5A1
+#_01D7D6: JSR ROUTINE_01A5A1_19FCora19FE
 #_01D7D9: AND.w #$4000
 #_01D7DC: BEQ CODE_01D80A
 
 #_01D7DE: JSR ROUTINE_01A567
 #_01D7E1: BEQ CODE_01D7EB
 
-#_01D7E3: JSR ROUTINE_01A571
+#_01D7E3: JSR ROUTINE_01A571_Get05CCmod7
 #_01D7E6: ADC.w #$003E
 #_01D7E9: BRA CODE_01D7F1
 
 CODE_01D7EB:
-#_01D7EB: JSR ROUTINE_01A571
+#_01D7EB: JSR ROUTINE_01A571_Get05CCmod7
 #_01D7EE: ADC.w #$0036
 
 CODE_01D7F1:
@@ -15520,7 +15665,7 @@ CODE_01D80A:
 #_01D80F: LDA.w $05D0
 #_01D812: BEQ CODE_01D842
 
-#_01D814: JSR ROUTINE_01A571
+#_01D814: JSR ROUTINE_01A571_Get05CCmod7
 #_01D817: ADC.w #$0036
 
 CODE_01D81A:
@@ -15626,7 +15771,7 @@ CODE_01D89E:
 ROUTINE_01D8AA:
 #_01D8AA: JSR ROUTINE_01BA91
 
-#_01D8AD: JMP ROUTINE_01E83E
+#_01D8AD: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -15643,7 +15788,7 @@ Digger_Normal:
 #_01D8C4: JMP ROUTINE_01A5D4_SetPartnerMode
 
 CODE_01D8C7:
-#_01D8C7: JSR ROUTINE_01A77E
+#_01D8C7: JSR TestPockyForDeathOrOccupied_A77E
 #_01D8CA: BCC CODE_01D8D2
 
 #_01D8CC: LDY.w #$002A ; PARTNER 002A
@@ -15697,7 +15842,7 @@ CODE_01D916:
 #_01D91B: LDA.w $05D0
 #_01D91E: BEQ CODE_01D93F
 
-#_01D920: JSR ROUTINE_01A571
+#_01D920: JSR ROUTINE_01A571_Get05CCmod7
 #_01D923: ADC.w #$0021
 
 CODE_01D926:
@@ -15712,7 +15857,7 @@ CODE_01D932:
 #_01D932: LDA.w $05D0
 #_01D935: BEQ CODE_01D93F
 
-#_01D937: JSR ROUTINE_01A571
+#_01D937: JSR ROUTINE_01A571_Get05CCmod7
 #_01D93A: ADC.w #$0029
 #_01D93D: BRA CODE_01D926
 
@@ -15781,7 +15926,7 @@ ROUTINE_01D993:
 #_01D993: STA.b $20
 
 #_01D995: LDY.w #$0011
-#_01D998: JSR ROUTINE_01A571
+#_01D998: JSR ROUTINE_01A571_Get05CCmod7
 #_01D99B: ADC.b $20
 #_01D99D: JMP ROUTINE_01A799
 
@@ -15869,7 +16014,7 @@ CODE_01DA0F:
 #_01DA0F: JSR ROUTINE_01E415
 
 #_01DA12: LDY.w #$0016
-#_01DA15: JSR ROUTINE_01A571
+#_01DA15: JSR ROUTINE_01A571_Get05CCmod7
 #_01DA18: ADC.w #$0001
 #_01DA1B: JSL ROUTINE_04F6E1
 
@@ -15925,11 +16070,13 @@ CODE_01DA5E:
 
 #_01DA65: JMP ROUTINE_01DAE7
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_01DA68:
 #_01DA68: JSR ROUTINE_01E415
 
 #_01DA6B: LDY.w #$0012
-#_01DA6E: JSR ROUTINE_01A571
+#_01DA6E: JSR ROUTINE_01A571_Get05CCmod7
 #_01DA71: ADC.w #$0001
 #_01DA74: JSL ROUTINE_04F6E1
 
@@ -15939,7 +16086,7 @@ CODE_01DA68:
 
 ROUTINE_01DA7B:
 #_01DA7B: JSR ROUTINE_01E415
-#_01DA7E: JSR Reset_18_through_1E
+#_01DA7E: JSR ROUTINE_01E436_AllZero
 
 #_01DA81: CLC
 
@@ -16054,7 +16201,7 @@ LittleNinja_Recovering:
 #_01DB17: JSR ROUTINE_01A916
 #_01DB1A: BCC .exit
 
-#_01DB1C: LDA.w #$000C
+#_01DB1C: LDA.w #$000C ; PARTNER 000C
 #_01DB1F: LDX.w #$0002
 #_01DB22: JSR ROUTINE_01A936_SetPartnerMode
 
@@ -16063,16 +16210,16 @@ LittleNinja_Recovering:
 
 ;===================================================================================================
 
-CODE_01DB26:
+ROUTINE_01DB26:
 #_01DB26: LDA.w #$0020
 #_01DB29: STA.w $05EE
 
-#_01DB2C: JSR ROUTINE_01AAAA
+#_01DB2C: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01DB2F: STZ.w $05DE
 
 #_01DB32: JSR ROUTINE_01BB28
-#_01DB35: JSR ROUTINE_01A5A8
+#_01DB35: JSR Partner_CopyPockyCoordinates
 
 #_01DB38: LDA.w $19CC
 #_01DB3B: EOR.w #$0004
@@ -16096,7 +16243,7 @@ CODE_01DB26:
 
 #_01DB5C: LDA.w #$0110
 
-CODE_01DB5F:
+ROUTINE_01DB5F:
 #_01DB5F: STA.b $26
 
 #_01DB61: STZ.b $28
@@ -16110,7 +16257,7 @@ CODE_01DB5F:
 #_01DB6D: LDA.w #$000E
 #_01DB70: STA.b $24
 
-#_01DB72: JSL PrepEnemySpawn_long
+#_01DB72: JSL PrepSpriteSpawn_long
 
 #_01DB76: RTS
 
@@ -16131,7 +16278,7 @@ CODE_01DB85:
 ;===================================================================================================
 
 ROUTINE_01A8C4_LittleNinja:
-#_01DB88: LDA.w #$000A
+#_01DB88: LDA.w #$000A ; PARTNER 000A
 #_01DB8B: JMP ROUTINE_01A8C4
 
 ;===================================================================================================
@@ -16213,13 +16360,13 @@ LittleNinja_001A:
 
 #_01DBF5: LDA.w #$0042
 #_01DBF8: LDY.w #$0010
-#_01DBFB: JSR ROUTINE_01A777
-#_01DBFE: BNE CODE_01DC06
+#_01DBFB: JSR ROUTINE_01A799_Read05CA
+#_01DBFE: BNE .delay_change
 
 #_01DC00: LDY.w #$0008 ; PARTNER 0008
 #_01DC03: JSR ROUTINE_01A7F0_SetPartnerMode
 
-CODE_01DC06:
+.delay_change
 #_01DC06: JMP ROUTINE_01A7FD
 
 ;===================================================================================================
@@ -16236,7 +16383,6 @@ LittleNinja_001C:
 
 CODE_01DC1A:
 #_01DC1A: LDY.w #$0010
-
 #_01DC1D: LDA.w #$0041
 #_01DC20: JMP ROUTINE_01A623
 
@@ -16272,7 +16418,7 @@ CODE_01DC46:
 #_01DC4B: BEQ CODE_01DC53
 
 #_01DC4D: LDA.w #$001A ; PARTNER 001A
-#_01DC50: JMP ROUTINE_01A70F
+#_01DC50: JMP Pocky_OfficiallyEnterMagicMerge
 
 CODE_01DC53:
 #_01DC53: JSR ROUTINE_01A749
@@ -16292,7 +16438,7 @@ ROUTINE_01DC5F:
 #_01DC5F: LDA.w #$0025 ; SFX 25
 #_01DC62: STA.w $04AA
 
-#_01DC65: JSR ROUTINE_01AAAA
+#_01DC65: JSR ROUTINE_01AAAA_ResetsStuff
 
 #_01DC68: LDA.w #$000D
 #_01DC6B: STA.l $7E7A08
@@ -16306,12 +16452,12 @@ ROUTINE_01DC5F:
 
 LittleNinja_000E:
 #_01DC78: JSR ROUTINE_01A88B
-#_01DC7B: BCC CODE_01DC83
+#_01DC7B: BCC .delay_change
 
 #_01DC7D: LDA.w #$0010 ; PARTNER 0010
 #_01DC80: STA.w $05CE
 
-CODE_01DC83:
+.delay_change
 #_01DC83: LDA.w $05E2
 #_01DC86: BNE CODE_01DC8B
 
@@ -16336,12 +16482,12 @@ CODE_01DC95:
 
 LittleNinja_0010:
 #_01DCA2: JSR ROUTINE_01A654
-#_01DCA5: BCS CODE_01DCAD
+#_01DCA5: BCS .delay_change
 
 #_01DCA7: LDA.w #$0012 ; PARTNER 0012
 #_01DCAA: JSR ROUTINE_01A670_SetPartnerMode
 
-CODE_01DCAD:
+.delay_change
 #_01DCAD: LDA.w $05A0
 #_01DCB0: JMP CODE_01DC8E
 
@@ -16356,16 +16502,18 @@ LittleNinja_0012:
 
 .continue
 #_01DCBA: CMP.w #$FE60
-#_01DCBD: BCC CODE_01DCC5
+#_01DCBD: BCC .delay_change
 
 #_01DCBF: LDA.w #$0014 ; PARTNER 0014
 #_01DCC2: JSR ROUTINE_01A809_SetPartnerMode
 
-CODE_01DCC5:
+.delay_change
 #_01DCC5: STA.w $05CA
 
 #_01DCC8: LDA.w #$0044
 #_01DCCB: JMP CODE_01DC95
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_01DCCE:
 #_01DCCE: LDA.w #$8134 ; SPRITE 8134
@@ -16384,7 +16532,7 @@ CODE_01DCCE:
 #_01DCE5: LDA.w #$000E
 #_01DCE8: STA.b $24
 
-#_01DCEA: JSL PrepEnemySpawn_long
+#_01DCEA: JSL PrepSpriteSpawn_long
 
 #_01DCEE: RTS
 
@@ -16395,7 +16543,7 @@ LittleNinja_0014:
 #_01DCF2: BNE CODE_01DCF9
 
 #_01DCF4: JSR ROUTINE_01A9D3
-#_01DCF7: BCC CODE_01DD1C
+#_01DCF7: BCC .delay_change
 
 CODE_01DCF9:
 #_01DCF9: INC.w $05E0
@@ -16407,19 +16555,19 @@ CODE_01DCF9:
 
 #_01DD07: JSR ROUTINE_01DD22
 
-#_01DD0A: BRA CODE_01DD1C
+#_01DD0A: BRA .delay_change
 
 CODE_01DD0C:
 #_01DD0C: CMP.w #$0028
-#_01DD0F: BCC CODE_01DD1C
+#_01DD0F: BCC .delay_change
 
 #_01DD11: LDA.w $18EC
-#_01DD14: BNE CODE_01DD1C
+#_01DD14: BNE .delay_change
 
 #_01DD16: LDA.w #$0016 ; PARTNER 0016
 #_01DD19: JSR ROUTINE_01A847_SetPartnerMode
 
-CODE_01DD1C:
+.delay_change
 #_01DD1C: LDA.w #$0045
 #_01DD1F: JMP CODE_01DC95
 
@@ -16437,7 +16585,7 @@ ROUTINE_01DD22:
 #_01DD31: STA.b $22
 
 #_01DD33: LDY.w #$0008
-#_01DD36: JSL ROUTINE_038A58
+#_01DD36: JSL SpawnDisappearingSmoke
 
 #_01DD3A: LDA.w $19EE
 #_01DD3D: ADC.w #$0080
@@ -16450,7 +16598,7 @@ ROUTINE_01DD22:
 #_01DD49: STA.b $22
 
 #_01DD4B: LDY.w #$0008
-#_01DD4E: JSL ROUTINE_038A58
+#_01DD4E: JSL SpawnDisappearingSmoke
 
 #_01DD52: RTS
 
@@ -16476,7 +16624,7 @@ ROUTINE_01DD59:
 #_01DD6C: BEQ .exit
 
 CODE_01DD6E:
-#_01DD6E: JSR ROUTINE_01A5A8
+#_01DD6E: JSR Partner_CopyPockyCoordinates
 #_01DD71: JSR ROUTINE_01DD75
 
 .exit
@@ -16507,17 +16655,17 @@ CODE_01DD8C:
 #_01DD8C: JSR RunMagicTimer_9SecondsPreloaded
 #_01DD8F: BCS .run_magic
 
-#_01DD91: JSR ROUTINE_01A590
+#_01DD91: JSR TestForPockyTakingDamage
 #_01DD94: BCS .run_magic
 
-#_01DD96: CMP.w #$0098
+#_01DD96: CMP.w #$0098 ; STATE 98
 #_01DD99: BCC CODE_01DDA0
 
-#_01DD9B: CMP.w #$00B0
+#_01DD9B: CMP.w #$00B0 ; STATE B0
 #_01DD9E: BCC CODE_01DDE0
 
 CODE_01DDA0:
-#_01DDA0: CMP.w #$00BA
+#_01DDA0: CMP.w #$00BA ; STATE BA
 #_01DDA3: BNE CODE_01DDB0
 
 CODE_01DDA5:
@@ -16528,10 +16676,10 @@ CODE_01DDA5:
 #_01DDAE: BRA CODE_01DDD7
 
 CODE_01DDB0:
-#_01DDB0: CMP.w #$003C
+#_01DDB0: CMP.w #$003C ; STATE 3C
 #_01DDB3: BCC CODE_01DDD7
 
-#_01DDB5: CMP.w #$0048
+#_01DDB5: CMP.w #$0048 ; STATE 48
 #_01DDB8: BCC CODE_01DDA5
 
 #_01DDBA: JSR ROUTINE_01DF47
@@ -16562,7 +16710,7 @@ CODE_01DDD7:
 
 CODE_01DDE0:
 #_01DDE0: JSR ROUTINE_01DD53
-#_01DDE3: JSR ROUTINE_01A5A1
+#_01DDE3: JSR ROUTINE_01A5A1_19FCora19FE
 #_01DDE6: AND.w #$8000
 #_01DDE9: BEQ CODE_01DDF8
 
@@ -16574,19 +16722,19 @@ CODE_01DDE0:
 #_01DDF5: JMP ROUTINE_01E02C
 
 CODE_01DDF8:
-#_01DDF8: JSR ROUTINE_01A5A1
+#_01DDF8: JSR ROUTINE_01A5A1_19FCora19FE
 #_01DDFB: AND.w #$4000
 #_01DDFE: BEQ CODE_01DE2C
 
 #_01DE00: JSR ROUTINE_01A567
 #_01DE03: BEQ CODE_01DE0D
 
-#_01DE05: JSR ROUTINE_01A571
+#_01DE05: JSR ROUTINE_01A571_Get05CCmod7
 #_01DE08: ADC.w #$0029
 #_01DE0B: BRA CODE_01DE13
 
 CODE_01DE0D:
-#_01DE0D: JSR ROUTINE_01A571
+#_01DE0D: JSR ROUTINE_01A571_Get05CCmod7
 #_01DE10: ADC.w #$0021
 
 CODE_01DE13:
@@ -16612,7 +16760,7 @@ CODE_01DE2C:
 #_01DE31: LDA.w $05D0
 #_01DE34: BEQ CODE_01DE60
 
-#_01DE36: JSR ROUTINE_01A571
+#_01DE36: JSR ROUTINE_01A571_Get05CCmod7
 #_01DE39: ADC.w #$0021
 
 CODE_01DE3C:
@@ -16633,7 +16781,7 @@ CODE_01DE53:
 #_01DE53: LDA.w $05D0
 #_01DE56: BEQ CODE_01DE60
 
-#_01DE58: JSR ROUTINE_01A571
+#_01DE58: JSR ROUTINE_01A571_Get05CCmod7
 #_01DE5B: ADC.w #$0029
 #_01DE5E: BRA CODE_01DE3C
 
@@ -16659,13 +16807,13 @@ ROUTINE_01DE76:
 #_01DE76: STA.b $20
 
 #_01DE78: LDY.w #$0010
-#_01DE7B: JSR ROUTINE_01A571
+#_01DE7B: JSR ROUTINE_01A571_Get05CCmod7
 #_01DE7E: ADC.b $20
 #_01DE80: JMP ROUTINE_01A799
 
 ;===================================================================================================
 
-ROUTINE_01DE83:
+Partner_MakePockySync:
 #_01DE83: LDA.w $05E6
 #_01DE86: STA.w $19EE
 
@@ -16728,11 +16876,13 @@ CODE_01DEDB:
 
 #_01DEE1: JMP ROUTINE_01E02C
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_01DEE4:
 #_01DEE4: LDA.w $05CC
 #_01DEE7: PHA
 
-#_01DEE8: JSR ROUTINE_01DE83
+#_01DEE8: JSR Partner_MakePockySync
 
 #_01DEEB: PLA
 #_01DEEC: CMP.w $05CC
@@ -16742,7 +16892,7 @@ CODE_01DEE4:
 
 CODE_01DEF5:
 #_01DEF5: JSR ROUTINE_01A5EC
-#_01DEF8: JSR ROUTINE_01A571
+#_01DEF8: JSR ROUTINE_01A571_Get05CCmod7
 #_01DEFB: ADC.w #$0031
 
 #_01DEFE: LDY.w #$0010
@@ -16822,7 +16972,7 @@ ROUTINE_01DF2A_SetPartnerMode:
 ROUTINE_01DF5A:
 #_01DF5A: JSR ROUTINE_01BA91
 
-#_01DF5D: JMP ROUTINE_01E83E
+#_01DF5D: JMP ROUTINE_01E83E_FillsTheArrayAt0602
 
 ;===================================================================================================
 
@@ -16838,7 +16988,7 @@ LittleNinja_Normal:
 #_01DF71: JMP ROUTINE_01A5D4_SetPartnerMode
 
 CODE_01DF74:
-#_01DF74: JSR ROUTINE_01A77E
+#_01DF74: JSR TestPockyForDeathOrOccupied_A77E
 #_01DF77: BCC CODE_01DF7F
 
 #_01DF79: LDY.w #$0008 ; PARTNER 0008
@@ -16881,12 +17031,12 @@ CODE_01DFB2:
 #_01DFB5: AND.w #$0F00
 #_01DFB8: BEQ CODE_01DFC2
 
-#_01DFBA: JSR ROUTINE_01A571
+#_01DFBA: JSR ROUTINE_01A571_Get05CCmod7
 #_01DFBD: ADC.w #$0029
 #_01DFC0: BRA CODE_01DFC8
 
 CODE_01DFC2:
-#_01DFC2: JSR ROUTINE_01A571
+#_01DFC2: JSR ROUTINE_01A571_Get05CCmod7
 #_01DFC5: ADC.w #$0021
 
 CODE_01DFC8:
@@ -16912,7 +17062,7 @@ CODE_01DFE2:
 #_01DFE7: LDA.w $05D0
 #_01DFEA: BEQ CODE_01E019
 
-#_01DFEC: JSR ROUTINE_01A571
+#_01DFEC: JSR ROUTINE_01A571_Get05CCmod7
 #_01DFEF: ADC.w #$0021
 
 CODE_01DFF2:
@@ -16934,7 +17084,7 @@ CODE_01E00C:
 #_01E00C: LDA.w $05D0
 #_01E00F: BEQ CODE_01E019
 
-#_01E011: JSR ROUTINE_01A571
+#_01E011: JSR ROUTINE_01A571_Get05CCmod7
 #_01E014: ADC.w #$0029
 #_01E017: BRA CODE_01DFF2
 
@@ -16987,7 +17137,7 @@ ROUTINE_01E04D:
 
 #_01E059: LDA.w $05C4
 #_01E05C: LDY.w #$05C0
-#_01E05F: JSR ROUTINE_0181F1
+#_01E05F: JSR ROUTINE_0181F1_SomeFillerFor_7EB000_7EC000
 
 #_01E062: CLC
 
@@ -17180,7 +17330,10 @@ ROUTINE_01E162:
 #_01E176: LDA.w $05F6
 #_01E179: ASL A
 #_01E17A: TAX
+
 #_01E17B: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_01E17E: dw ROUTINE_01E19E
@@ -17270,10 +17423,10 @@ ROUTINE_01E1D8:
 
 ROUTINE_01E1E4:
 #_01E1E4: LDA.w $04B2
-#_01E1E7: BNE CODE_01E20C
+#_01E1E7: BNE Partner_Add05D8toCoordinates
 
 #_01E1E9: LDA.w $18CE
-#_01E1EC: BEQ CODE_01E20C
+#_01E1EC: BEQ Partner_Add05D8toCoordinates
 
 #_01E1EE: SEC
 
@@ -17281,22 +17434,24 @@ ROUTINE_01E1E4:
 #_01E1F2: SBC.w $05E8
 #_01E1F5: STA.b $20
 
-#_01E1F7: BCS CODE_01E1FD
+#_01E1F7: BCS .positive_y
 
 #_01E1F9: EOR.w #$FFFF
 #_01E1FC: INC A
 
-CODE_01E1FD:
+.positive_y:
 #_01E1FD: CMP.w #$0B00
-#_01E200: BCC CODE_01E20C
+#_01E200: BCC Partner_Add05D8toCoordinates
 
 #_01E202: LDA.b $20
 #_01E204: EOR.w $05DA
-#_01E207: BPL CODE_01E20C
+#_01E207: BPL Partner_Add05D8toCoordinates
 
 #_01E209: STZ.w $05DA
 
-CODE_01E20C:
+;===================================================================================================
+
+Partner_Add05D8toCoordinates:
 #_01E20C: CLC
 
 #_01E20D: LDA.w $05E6
@@ -17573,26 +17728,26 @@ CODE_01E35C:
 
 #_01E376: LDA.b $34
 #_01E378: AND.w #$001D
-#_01E37B: BEQ CODE_01E399
+#_01E37B: BEQ .something_with_the_flying_partners_a
 
 #_01E37D: AND.w #$0008
-#_01E380: BEQ CODE_01E394
+#_01E380: BEQ .set_bit_a
 
 #_01E382: LDA.w $05CE
 #_01E385: CMP.w #$0098 ; PARTNER 0098
-#_01E388: BEQ CODE_01E399
+#_01E388: BEQ .something_with_the_flying_partners_a
 
 #_01E38A: CMP.w #$0078 ; PARTNER 0078
-#_01E38D: BEQ CODE_01E399
+#_01E38D: BEQ .something_with_the_flying_partners_a
 
 #_01E38F: CMP.w #$00B8 ; PARTNER 00B8
-#_01E392: BEQ CODE_01E399
+#_01E392: BEQ .something_with_the_flying_partners_a
 
-CODE_01E394:
+.set_bit_a
 #_01E394: LDA.w #$0001
 #_01E397: TSB.b $3C
 
-CODE_01E399:
+.something_with_the_flying_partners_a
 #_01E399: SEC
 
 #_01E39A: LDA.w $05C2
@@ -17603,26 +17758,26 @@ CODE_01E399:
 
 #_01E3A5: LDA.b $34
 #_01E3A7: AND.w #$001D
-#_01E3AA: BEQ CODE_01E3C8
+#_01E3AA: BEQ .something_with_the_flying_partners_b
 
 #_01E3AC: AND.w #$0008
-#_01E3AF: BEQ CODE_01E3C3
+#_01E3AF: BEQ .set_bit_b
 
 #_01E3B1: LDA.w $05CE
 #_01E3B4: CMP.w #$0098 ; PARTNER 0098
-#_01E3B7: BEQ CODE_01E3C8
+#_01E3B7: BEQ .something_with_the_flying_partners_b
 
 #_01E3B9: CMP.w #$0078 ; PARTNER 0078
-#_01E3BC: BEQ CODE_01E3C8
+#_01E3BC: BEQ .something_with_the_flying_partners_b
 
 #_01E3BE: CMP.w #$00B8 ; PARTNER 00B8
-#_01E3C1: BEQ CODE_01E3C8
+#_01E3C1: BEQ .something_with_the_flying_partners_b
 
-CODE_01E3C3:
+.set_bit_b
 #_01E3C3: LDA.w #$0002
 #_01E3C6: TSB.b $3C
 
-CODE_01E3C8:
+.something_with_the_flying_partners_b
 #_01E3C8: LDY.b $3E
 
 #_01E3CA: LDA.w $05C2
@@ -17630,26 +17785,26 @@ CODE_01E3C8:
 
 #_01E3D0: LDA.b $34
 #_01E3D2: AND.w #$001D
-#_01E3D5: BEQ CODE_01E3F3
+#_01E3D5: BEQ .something_with_the_flying_partners_c
 
 #_01E3D7: AND.w #$0008
-#_01E3DA: BEQ CODE_01E3EE
+#_01E3DA: BEQ .set_bit_c
 
 #_01E3DC: LDA.w $05CE
 #_01E3DF: CMP.w #$0098 ; PARTNER 008=98
-#_01E3E2: BEQ CODE_01E3F3
+#_01E3E2: BEQ .something_with_the_flying_partners_c
 
 #_01E3E4: CMP.w #$0078 ; PARTNER 0078
-#_01E3E7: BEQ CODE_01E3F3
+#_01E3E7: BEQ .something_with_the_flying_partners_c
 
 #_01E3E9: CMP.w #$00B8 ; PARTNER 00B8
-#_01E3EC: BEQ CODE_01E3F3
+#_01E3EC: BEQ .something_with_the_flying_partners_c
 
-CODE_01E3EE:
+.set_bit_c
 #_01E3EE: LDA.w #$0004
 #_01E3F1: TSB.b $3C
 
-CODE_01E3F3:
+.something_with_the_flying_partners_c
 #_01E3F3: LDA.b $3C
 #_01E3F5: BEQ .exit_b
 
@@ -17700,13 +17855,13 @@ ROUTINE_01E415:
 
 ;===================================================================================================
 
-ROUTINE_01E42A:
+ROUTINE_01E436_IndexInA:
 #_01E42A: TAY
 #_01E42B: BNE ROUTINE_01E436
 
 ;===================================================================================================
 
-Reset_18_through_1E:
+#ROUTINE_01E436_AllZero:
 #_01E42D: STZ.b $18
 #_01E42F: STZ.b $1C
 #_01E431: STZ.b $1A
@@ -17850,6 +18005,8 @@ ROUTINE_01E532_long:
 ROUTINE_01E532:
 #_01E532: JMP (.vectors,X)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_01E535: dw ROUTINE_01E765
 #_01E537: dw ROUTINE_01E5DD
@@ -17907,8 +18064,6 @@ ROUTINE_01E565:
 #_01E581: JSR ROUTINE_01E66E
 #_01E584: JSR ROUTINE_01E588
 
-;---------------------------------------------------------------------------------------------------
-
 .exit
 #_01E587: RTS
 
@@ -17945,6 +18100,8 @@ ROUTINE_01E5A1:
 #_01E5A9: STA.b $2C
 
 #_01E5AB: BRA .exit
+
+;---------------------------------------------------------------------------------------------------
 
 data01E5AD:
 #_01E5AD: db $00,$03,$80,$03,$00,$00,$80,$00
@@ -18080,6 +18237,7 @@ ROUTINE_01E66E:
 #_01E66F: LDA.w $05F6
 #_01E672: ASL A
 #_01E673: TAY
+
 #_01E674: PLA
 #_01E675: ADC.w data01E6AD,Y
 #_01E678: STA.w $0400,X
@@ -18121,6 +18279,8 @@ CODE_01E6A3:
 #_01E6A9: STA.w $0440,X
 
 #_01E6AC: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data01E6AD:
 #_01E6AD: db $00,$00,$80,$00,$00,$01,$80,$01
@@ -18259,6 +18419,8 @@ ROUTINE_01E765:
 
 #_01E777: BRA CODE_01E7A6
 
+;---------------------------------------------------------------------------------------------------
+
 #data01E779:
 #_01E779: db $00,$03,$80,$03,$00,$00,$80,$00
 #_01E781: db $00,$01,$80,$01,$00,$02,$80,$02
@@ -18385,7 +18547,7 @@ data01E81E:
 
 ;===================================================================================================
 
-ROUTINE_01E83E:
+ROUTINE_01E83E_FillsTheArrayAt0602:
 #_01E83E: LDY.w $0600
 #_01E841: CPY.w #$0100
 #_01E844: BCS .exit
@@ -18462,6 +18624,8 @@ ROUTINE_01E852:
 
 #_01E8A4: JSR (.vectors_a,X)
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_01E8A7:
 #_01E8A7: LDA.w $056C
 #_01E8AA: ASL A
@@ -18522,6 +18686,8 @@ CODE_01E8DB:
 #_01E8F2: STA.b $2E
 
 #_01E8F4: JSR (.vectors_b,X)
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_01E8F7:
 #_01E8F7: LDX.b $30
@@ -18705,6 +18871,7 @@ ROUTINE_01E9AA:
 #_01E9C8: AND.w #$003F
 #_01E9CB: ASL A
 #_01E9CC: TAX
+
 #_01E9CD: TYA
 #_01E9CE: ADC.w $0566
 #_01E9D1: ASL A
@@ -18739,6 +18906,8 @@ ROUTINE_01E9AA:
 #_01E9FA: STA.b $2C
 
 #_01E9FC: JSR (.vectors_a,X)
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_01E9FF:
 #_01E9FF: LDA.w $056C
@@ -18800,6 +18969,8 @@ CODE_01EA33:
 #_01EA4A: STA.b $2E
 
 #_01EA4C: JSR (.vectors_b,X)
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_01EA4F:
 #_01EA4F: LDX.b $30
@@ -19871,6 +20042,8 @@ CODE_01F042:
 
 #_01F050: JMP ($0034)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_01F053: dw EXIT_01F0CA
 #_01F055: dw ROUTINE_01F0F6
@@ -20669,7 +20842,7 @@ CODE_01F4AB:
 #_01F4DC: LDA.w #$000E
 #_01F4DF: STA.b $24
 
-#_01F4E1: JSL PrepEnemySpawn_long
+#_01F4E1: JSL PrepSpriteSpawn_long
 
 CODE_01F4E5:
 #_01F4E5: LDA.w #$0006
@@ -21093,7 +21266,7 @@ ROUTINE_01F6F7:
 
 #_01F751: STA.b $28
 
-#_01F753: JSL PrepEnemySpawn_long
+#_01F753: JSL PrepSpriteSpawn_long
 
 #_01F757: RTS
 
@@ -21149,7 +21322,7 @@ CODE_01F769:
 #_01F79C: LDA.w #$000E
 #_01F79F: STA.b $24
 
-#_01F7A1: JSL PrepEnemySpawn_long
+#_01F7A1: JSL PrepSpriteSpawn_long
 
 #_01F7A5: PLX
 #_01F7A6: JSR ROUTINE_01F890
@@ -21204,7 +21377,7 @@ CODE_01F7D1:
 #_01F7EE: LDA.w #$000C
 #_01F7F1: STA.b $24
 
-#_01F7F3: JSL PrepEnemySpawn_long
+#_01F7F3: JSL PrepSpriteSpawn_long
 
 #_01F7F7: PLX
 
@@ -21781,7 +21954,7 @@ ROUTINE_01FAF6:
 #_01FB19: LDA.w #$0008
 #_01FB1C: STA.b $24
 
-#_01FB1E: JSL PrepEnemySpawn_long
+#_01FB1E: JSL PrepSpriteSpawn_long
 
 #_01FB22: RTS
 
@@ -22175,42 +22348,42 @@ EXIT_01FD02:
 ;===================================================================================================
 
 data01FD03:
-#_01FD03: db $00,$00,$02,$00,$04,$00,$06,$00
-#_01FD0B: db $08,$00,$0A,$00,$0C,$00,$0E,$00
-#_01FD13: db $10,$00,$12,$00,$14,$00,$16,$00
-#_01FD1B: db $18,$00,$1A,$00,$1C,$00,$1E,$00
-#_01FD23: db $20,$00,$22,$00,$24,$00,$26,$00
-#_01FD2B: db $28,$00,$2A,$00,$2C,$00,$2E,$00
-#_01FD33: db $30,$00,$32,$00,$34,$00,$36,$00
-#_01FD3B: db $38,$00,$3A,$00,$3C,$00,$3E,$00
-#_01FD43: db $00,$08,$02,$08,$04,$08,$06,$08
-#_01FD4B: db $08,$08,$0A,$08,$0C,$08,$0E,$08
-#_01FD53: db $10,$08,$12,$08,$14,$08,$16,$08
-#_01FD5B: db $18,$08,$1A,$08,$1C,$08,$1E,$08
-#_01FD63: db $20,$08,$22,$08,$24,$08,$26,$08
-#_01FD6B: db $28,$08,$2A,$08,$2C,$08,$2E,$08
-#_01FD73: db $30,$08,$32,$08,$34,$08,$36,$08
-#_01FD7B: db $38,$08,$3A,$08,$3C,$08,$3E,$08
+#_01FD03: dw $0000, $0002, $0004, $0006
+#_01FD0B: dw $0008, $000A, $000C, $000E
+#_01FD13: dw $0010, $0012, $0014, $0016
+#_01FD1B: dw $0018, $001A, $001C, $001E
+#_01FD23: dw $0020, $0022, $0024, $0026
+#_01FD2B: dw $0028, $002A, $002C, $002E
+#_01FD33: dw $0030, $0032, $0034, $0036
+#_01FD3B: dw $0038, $003A, $003C, $003E
+#_01FD43: dw $0800, $0802, $0804, $0806
+#_01FD4B: dw $0808, $080A, $080C, $080E
+#_01FD53: dw $0810, $0812, $0814, $0816
+#_01FD5B: dw $0818, $081A, $081C, $081E
+#_01FD63: dw $0820, $0822, $0824, $0826
+#_01FD6B: dw $0828, $082A, $082C, $082E
+#_01FD73: dw $0830, $0832, $0834, $0836
+#_01FD7B: dw $0838, $083A, $083C, $083E
 
 ;===================================================================================================
 
 data01FD83:
-#_01FD83: db $00,$00,$40,$00,$80,$00,$C0,$00
-#_01FD8B: db $00,$01,$40,$01,$80,$01,$C0,$01
-#_01FD93: db $00,$02,$40,$02,$80,$02,$C0,$02
-#_01FD9B: db $00,$03,$40,$03,$80,$03,$C0,$03
-#_01FDA3: db $00,$04,$40,$04,$80,$04,$C0,$04
-#_01FDAB: db $00,$05,$40,$05,$80,$05,$C0,$05
-#_01FDB3: db $00,$06,$40,$06,$80,$06,$C0,$06
-#_01FDBB: db $00,$07,$40,$07,$80,$07,$C0,$07
-#_01FDC3: db $00,$10,$40,$10,$80,$10,$C0,$10
-#_01FDCB: db $00,$11,$40,$11,$80,$11,$C0,$11
-#_01FDD3: db $00,$12,$40,$12,$80,$12,$C0,$12
-#_01FDDB: db $00,$13,$40,$13,$80,$13,$C0,$13
-#_01FDE3: db $00,$14,$40,$14,$80,$14,$C0,$14
-#_01FDEB: db $00,$15,$40,$15,$80,$15,$C0,$15
-#_01FDF3: db $00,$16,$40,$16,$80,$16,$C0,$16
-#_01FDFB: db $00,$17,$40,$17,$80,$17,$C0,$17
+#_01FD83: dw $0000, $0040, $0080, $00C0
+#_01FD8B: dw $0100, $0140, $0180, $01C0
+#_01FD93: dw $0200, $0240, $0280, $02C0
+#_01FD9B: dw $0300, $0340, $0380, $03C0
+#_01FDA3: dw $0400, $0440, $0480, $04C0
+#_01FDAB: dw $0500, $0540, $0580, $05C0
+#_01FDB3: dw $0600, $0640, $0680, $06C0
+#_01FDBB: dw $0700, $0740, $0780, $07C0
+#_01FDC3: dw $1000, $1040, $1080, $10C0
+#_01FDCB: dw $1100, $1140, $1180, $11C0
+#_01FDD3: dw $1200, $1240, $1280, $12C0
+#_01FDDB: dw $1300, $1340, $1380, $13C0
+#_01FDE3: dw $1400, $1440, $1480, $14C0
+#_01FDEB: dw $1500, $1540, $1580, $15C0
+#_01FDF3: dw $1600, $1640, $1680, $16C0
+#_01FDFB: dw $1700, $1740, $1780, $17C0
 
 ;===================================================================================================
 

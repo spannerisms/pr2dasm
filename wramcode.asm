@@ -39,7 +39,7 @@ StoryTimeCutscene_Initialize:
 .continue
 #_7E801F: STA.b $22
 
-#_7E8021: LDA.w #$00FD ; SFX FD
+#_7E8021: LDA.w #$00FD ; SFX FD - Fade music
 #_7E8024: STA.l $0004A0
 
 #_7E8028: JSL ResetOBSELandOAM_long
@@ -175,7 +175,7 @@ ROUTINE_7E80E0:
 
 #_7E80F0: LDA.w #data00804B>>16
 #_7E80F3: LDX.w #data00804B
-#_7E80F6: JSL BulkDecompressionViaTable_verylong
+#_7E80F6: JSL BulkDecompression_verylong
 
 #_7E80FA: LDA.w #$0020
 #_7E80FD: STA.w $0512
@@ -200,7 +200,7 @@ ROUTINE_7E80E0:
 #_7E811F: TAX
 
 #_7E8120: LDA.w #data0080C5>>16
-#_7E8123: JSL BulkDecompressionViaTable_verylong
+#_7E8123: JSL BulkDecompression_verylong
 
 #_7E8127: JSL EnableNMIandVIRQandFBlank_long
 
@@ -220,7 +220,7 @@ ROUTINE_7E8135:
 #_7E813A: LDA.w #data7E8432>>16
 #_7E813D: STA.b $22
 
-#_7E813F: JSL QuadDataWriter_00FBCB_verylong
+#_7E813F: JSL QuadtableDataWriter_verylong
 #_7E8143: JSL ROUTINE_00F957_long
 
 #_7E8147: LDA.w #$000F
@@ -231,7 +231,7 @@ ROUTINE_7E8135:
 
 #_7E8153: INC.w $0506
 
-#_7E8156: JSL ROUTINE_00A974_long
+#_7E8156: JSL ROUTINE_00A974_IRQRelated_long
 
 #_7E815A: RTL
 
@@ -266,7 +266,7 @@ ROUTINE_7E815B:
 ;---------------------------------------------------------------------------------------------------
 
 .continue
-#_7E818A: JSL QuadDataWriter_00FBCB_verylong
+#_7E818A: JSL QuadtableDataWriter_verylong
 #_7E818E: JSL ROUTINE_00F957_long
 
 #_7E8192: INC.w $0506
@@ -299,7 +299,7 @@ ROUTINE_7E81AC:
 #_7E81B5: JSL ROUTINE_00F957_long
 
 #_7E81B9: LDX.w #$0004
-#_7E81BC: JSL ROUTINE_00A990_long
+#_7E81BC: JSL ROUTINE_00A990_ScrollsBG3Down_long
 
 #_7E81C0: BNE .exit
 
@@ -782,7 +782,7 @@ EXIT_7E850A:
 
 ROUTINE_7E850B:
 #_7E850B: LDX.w #$0003
-#_7E850E: JSL ROUTINE_00A9A8_long
+#_7E850E: JSL ROUTINE_00A990_ScrollsBG3Up_long
 
 #_7E8512: CMP.w #$00D5
 #_7E8515: BCC .dont_advance
@@ -799,31 +799,31 @@ ROUTINE_7E850B:
 ;---------------------------------------------------------------------------------------------------
 
 .vectors
-#_7E8521: dw ROUTINE_7E853D
-#_7E8523: dw ROUTINE_7E853D
-#_7E8525: dw ROUTINE_7E853D
-#_7E8527: dw ROUTINE_7E853D
-#_7E8529: dw ROUTINE_7E853D
-#_7E852B: dw ROUTINE_7E853D
-#_7E852D: dw ROUTINE_7E853D
-#_7E852F: dw ROUTINE_7E8541
-#_7E8531: dw ROUTINE_7E853D
-#_7E8533: dw ROUTINE_7E853D
-#_7E8535: dw ROUTINE_7E853D
-#_7E8537: dw ROUTINE_7E853D
-#_7E8539: dw ROUTINE_7E853D
-#_7E853B: dw ROUTINE_7E853D
+#_7E8521: dw .just_windowing
+#_7E8523: dw .just_windowing
+#_7E8525: dw .just_windowing
+#_7E8527: dw .just_windowing
+#_7E8529: dw .just_windowing
+#_7E852B: dw .just_windowing
+#_7E852D: dw .just_windowing
+#_7E852F: dw .actual_stuff
+#_7E8531: dw .just_windowing
+#_7E8533: dw .just_windowing
+#_7E8535: dw .just_windowing
+#_7E8537: dw .just_windowing
+#_7E8539: dw .just_windowing
+#_7E853B: dw .just_windowing
 
 ;===================================================================================================
 
-ROUTINE_7E853D:
+.just_windowing:
 #_7E853D: JSR CutsceneWindowing_7E94CF
 
 #_7E8540: RTS
 
 ;===================================================================================================
 
-ROUTINE_7E8541:
+.actual_stuff:
 #_7E8541: JSR ROUTINE_7E8761
 
 #_7E8544: RTS
@@ -1187,7 +1187,7 @@ ROUTINE_7E873E:
 #_7E8747: STA.w $0516
 
 #_7E874A: LDX.w #$0004
-#_7E874D: JSL ROUTINE_00A990_long
+#_7E874D: JSL ROUTINE_00A990_ScrollsBG3Down_long
 
 #_7E8751: BNE .exit
 
@@ -1233,8 +1233,8 @@ ROUTINE_7E8776:
 
 ;===================================================================================================
 
-#_7E8789: db $FF,$03,$E0,$03,$E0,$7F,$00,$7E
-#_7E8791: db $00,$7C,$1F,$7C,$1F,$00,$1F,$02
+#_7E8789: dw $03FF, $03E0, $7FE0, $7E00
+#_7E8791: dw $7C00, $7C1F, $001F, $021F
 
 ;===================================================================================================
 
@@ -4223,7 +4223,7 @@ CutsceneWindowing_7E952A:
 ;===================================================================================================
 
 ROUTINE_7E9585:
-#_7E9585: LDA.w #$00FD ; SFX FD
+#_7E9585: LDA.w #$00FD ; SFX FD - Fade music
 #_7E9588: STA.l $0004A0
 
 #_7E958C: STZ.w $0536

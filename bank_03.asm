@@ -40,30 +40,30 @@ ROUTINE_038002:
 
 ;===================================================================================================
 
-ROUTINE_038038:
+ROUTINE_038038_ChecksPartner:
 #_038038: LDA.l $7E7A48
-#_03803C: BEQ CODE_03804A
+#_03803C: BEQ .check_partner
 
 #_03803E: CMP.w #$7FFF
-#_038041: BEQ CODE_038059
+#_038041: BEQ .fail
 
 #_038043: LDA.w #$0000
 #_038046: STA.l $7E7A48
 
-CODE_03804A:
+.check_partner
 #_03804A: LDA.w $05CE
 #_03804D: CMP.w #$0100 ; PARTNER 0100
-#_038050: BCC CODE_038057
+#_038050: BCC .succeed
 
 #_038052: CMP.w #$013C ; PARTNER 013C
-#_038055: BCC CODE_038059
+#_038055: BCC .fail
 
-CODE_038057:
+.succeed
 #_038057: SEC
 
 #_038058: RTS
 
-CODE_038059:
+.fail
 #_038059: CLC
 
 #_03805A: RTS
@@ -120,7 +120,7 @@ SetHPto1000:
 
 ;===================================================================================================
 
-ROUTINE_038088:
+ROUTINE_038088_Get_7EF816X_8Bit:
 #_038088: LDA.l $7FE816,X
 #_03808C: AND.w #$00FF
 
@@ -128,7 +128,7 @@ ROUTINE_038088:
 
 ;===================================================================================================
 
-ROUTINE_038090:
+ROUTINE_038090_Get_7EF817X_8Bit:
 #_038090: LDA.l $7FE817,X
 #_038094: AND.w #$00FF
 
@@ -136,7 +136,7 @@ ROUTINE_038090:
 
 ;===================================================================================================
 
-ROUTINE_038098:
+ROUTINE_038098_Set_7EF816X_to_0062:
 #_038098: LDA.w #$0062
 #_03809B: STA.l $7FE816,X
 
@@ -159,7 +159,7 @@ AccelerateAndMoveOnZ_80A0:
 
 ;===================================================================================================
 
-ROUTINE_0380B2:
+Sprite_ApplyBossDeath:
 #_0380B2: STA.w $0810,X
 
 #_0380B5: LDA.w #$006A ; SFX 6A
@@ -377,7 +377,7 @@ ROUTINE_038194:
 
 ;===================================================================================================
 
-PlaySFX_FD_IfNotGameringOver:
+FadeOutMusicIfNotGameringOver:
 #_0381AB: LDA.w $19CE
 #_0381AE: CMP.w #$0080 ; STATE 80
 #_0381B1: BCC .not_gameover
@@ -386,7 +386,7 @@ PlaySFX_FD_IfNotGameringOver:
 #_0381B6: BCC .exit
 
 .not_gameover
-#_0381B8: LDA.w #$00FD ; SFX FD
+#_0381B8: LDA.w #$00FD ; SFX FD - Fade music
 #_0381BB: STA.w $04A0
 
 .exit
@@ -433,16 +433,16 @@ ROUTINE_0381E5:
 
 #_0381F6: LDA.w $19CE
 #_0381F9: CMP.w #$00B8 ; STATE B8
-#_0381FC: BEQ CODE_03821E
+#_0381FC: BEQ .false
 
 #_0381FE: CMP.w #$0028 ; STATE 28
-#_038201: BEQ CODE_038220
+#_038201: BEQ .true
 
 #_038203: CMP.w #$002A ; STATE 2A
-#_038206: BEQ CODE_038220
+#_038206: BEQ .true
 
 #_038208: CMP.w #$000E ; STATE 0E
-#_03820B: BCS CODE_038220
+#_03820B: BCS .true
 
 #_03820D: STA.l $7E7A50
 
@@ -452,12 +452,12 @@ ROUTINE_0381E5:
 #_038217: LDA.w #$0000
 #_03821A: STA.l $7E7A52
 
-CODE_03821E:
+.false
 #_03821E: CLC
 
 #_03821F: RTS
 
-CODE_038220:
+.true
 #_038220: SEC
 
 #_038221: RTS
@@ -525,7 +525,7 @@ ROUTINE_038263:
 #_038271: LDA.w #$000E
 #_038274: STA.b $24
 
-#_038276: JMP PrepEnemySpawn
+#_038276: JMP PrepSpriteSpawn
 
 ;===================================================================================================
 
@@ -584,7 +584,7 @@ ROUTINE_0382A7:
 #_0382A7: JSR Sprite_CacheX_And_Yplus0280_82B2
 
 #_0382AA: LDA.w #$00F4 ; SPRITE 00F4
-#_0382AD: JSL PrepEnemySpawnType0C_0396E3
+#_0382AD: JSL PrepSpriteSpawnType0C_0396E3
 
 #_0382B1: RTS
 
@@ -620,7 +620,7 @@ ROUTINE_0382C3:
 
 ;===================================================================================================
 
-ROUTINE_0382D6:
+ROUTINE_0382D6_Clear084E_Increment084Ctwice:
 #_0382D6: STZ.w $084E,X
 
 #_0382D9: INC.w $084C,X
@@ -630,7 +630,7 @@ ROUTINE_0382D6:
 
 ;===================================================================================================
 
-ROUTINE_0382E0:
+ROUTINE_0382E0_Clear084Eand083C:
 #_0382E0: STZ.w $084E,X
 #_0382E3: STZ.w $083C,X
 
@@ -639,14 +639,14 @@ ROUTINE_0382E0:
 ;===================================================================================================
 
 ROUTINE_0382E7:
-#_0382E7: JMP ROUTINE_038301
+#_0382E7: JMP ROUTINE_038301_Clear083C_Increment084Etwice
 
 ;===================================================================================================
 
 ROUTINE_0382EA:
 #_0382EA: JSR ROUTINE_038312
 
-#_0382ED: JMP ROUTINE_038301
+#_0382ED: JMP ROUTINE_038301_Clear083C_Increment084Etwice
 
 ;===================================================================================================
 
@@ -663,17 +663,17 @@ ROUTINE_0382F8_0040:
 ;===================================================================================================
 
 ROUTINE_0382F8:
-#_0382F8: JSR ROUTINE_03830B
+#_0382F8: JSR ROUTINE_03830B_Increment083CandCompare
 #_0382FB: BCS .exit
 
-#_0382FD: JMP ROUTINE_038301
+#_0382FD: JMP ROUTINE_038301_Clear083C_Increment084Etwice
 
 .exit
 #_038300: RTS
 
 ;===================================================================================================
 
-ROUTINE_038301:
+ROUTINE_038301_Clear083C_Increment084Etwice:
 #_038301: STZ.w $083C,X
 
 #_038304: INC.w $084E,X
@@ -683,7 +683,7 @@ ROUTINE_038301:
 
 ;===================================================================================================
 
-ROUTINE_03830B:
+ROUTINE_03830B_Increment083CandCompare:
 #_03830B: INC.w $083C,X
 
 #_03830E: CMP.w $083C,X
@@ -709,7 +709,7 @@ ROUTINE_03831C:
 #_038324: STY.b $26
 
 #_038326: LDA.w $0832,X
-#_038329: BPL CODE_03833D
+#_038329: BPL .positive
 
 #_03832B: LDA.w $080C,X
 #_03832E: ADC.w #$1000
@@ -721,7 +721,7 @@ ROUTINE_03831C:
 
 #_03833B: BRA .exit
 
-CODE_03833D:
+.positive
 #_03833D: LDA.w $080C,X
 #_038340: ADC.w #$1000
 #_038343: SBC.w $0560
@@ -741,7 +741,7 @@ ROUTINE_038351:
 #_038354: STA.b $24
 
 #_038356: LDA.w $0834,X
-#_038359: BPL CODE_03837A
+#_038359: BPL .positive
 
 #_03835B: LDA.w $080E,X
 #_03835E: ADC.w #$1000
@@ -760,7 +760,9 @@ ROUTINE_038351:
 
 #_038378: BRA .exit
 
-CODE_03837A:
+;---------------------------------------------------------------------------------------------------
+
+.positive
 #_03837A: LDA.w $080E,X
 #_03837D: ADC.w #$1000
 #_038380: SBC.w $0562
@@ -784,7 +786,7 @@ CODE_03837A:
 ;===================================================================================================
 
 ROUTINE_03839B:
-#_03839B: JSR ROUTINE_0392B7
+#_03839B: JSR ROUTINE_0392B7_Increment0814_UntilFFFF
 #_03839E: JSR .randomize_offsets
 
 #_0383A1: LDA.w #$001F
@@ -825,7 +827,7 @@ ROUTINE_03839B:
 ;===================================================================================================
 
 ROUTINE_0383D7:
-#_0383D7: JSR ROUTINE_0392B7
+#_0383D7: JSR ROUTINE_0392B7_Increment0814_UntilFFFF
 
 #_0383DA: LDA.w $05A0
 #_0383DD: AND.w #$0003
@@ -855,7 +857,7 @@ ROUTINE_0383D7:
 #_03840E: LDA.w #$000C
 #_038411: STA.b $24
 
-#_038413: JSR PrepEnemySpawn
+#_038413: JSR PrepSpriteSpawn
 
 .exit
 #_038416: RTS
@@ -864,50 +866,51 @@ ROUTINE_0383D7:
 
 ROUTINE_038417:
 #_038417: LDA.w #$0020
-#_03841A: JSR ROUTINE_0392EE
-#_03841D: BEQ CODE_038426
+#_03841A: JSR ROUTINE_0392EE_SomethingWithHitboxes
+#_03841D: BEQ .fail
 
 #_03841F: JSR ROUTINE_039385
-#_038422: BNE CODE_038426
+#_038422: BNE .fail
 
 #_038424: SEC
 
 #_038425: RTS
 
-CODE_038426:
+.fail
 #_038426: CLC
 
 #_038427: RTS
 
 ;===================================================================================================
 
-ROUTINE_038428:
+ROUTINE_038428_SomethingWithPockyCollision:
 #_038428: LDA.w #$0020
 
 #_03842B: PHY
 #_03842C: PHA
 
-#_03842D: JSR ROUTINE_039664
+#_03842D: JSR Sprite_HandlePockyCollision_039664
 
 #_038430: LDA.b $22
-#_038432: BNE CODE_03843F
+#_038432: BNE .already_hit
 
 #_038434: PLA
 #_038435: PLY
-#_038436: JSR ROUTINE_039C2D
+
+#_038436: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_038439: LDA.b $22
-#_03843B: BNE CODE_038441
+#_03843B: BNE .hit
 
 #_03843D: CLC
 
 #_03843E: RTS
 
-CODE_03843F:
+.already_hit
 #_03843F: PLA
 #_038440: PLY
 
-CODE_038441:
+.hit
 #_038441: SEC
 
 #_038442: RTS
@@ -920,7 +923,7 @@ Increment_0816_AndCompareTo_003C:
 
 ;===================================================================================================
 
-Increment_0816_AndCompareTo_0078:
+Increment_0816_Until2Seconds:
 #_038448: LDA.w #$0078
 #_03844B: BRA Increment_0816_AndCompareTo
 
@@ -951,13 +954,13 @@ Increment_0816_AndCompareTo:
 
 ROUTINE_038460:
 #_038460: LDA.l $7FE816,X
-#_038464: BMI CODE_03846F
+#_038464: BMI .dont_increment
 
 #_038466: LDA.l $7FE818,X
 #_03846A: INC A
 #_03846B: STA.l $7FE818,X
 
-CODE_03846F:
+.dont_increment
 #_03846F: CLC
 
 #_038470: LDA.l $7FE816,X
@@ -1018,20 +1021,20 @@ ROUTINE_0384BA:
 #_0384BA: STY.b $24
 
 #_0384BC: TAY
-#_0384BD: BPL CODE_0384C3
+#_0384BD: BPL .positive
 
 #_0384BF: EOR.w #$FFFF
 #_0384C2: INC A
 
-CODE_0384C3:
+.positive
 #_0384C3: CMP.b $24
-#_0384C5: BCC CODE_0384D3
+#_0384C5: BCC .dont_flip
 
 #_0384C7: TYA
 #_0384C8: ASL A
 
 #_0384C9: LDY.b $24
-#_0384CB: BCC CODE_0384D3
+#_0384CB: BCC .dont_flip
 
 #_0384CD: TYA
 #_0384CE: EOR.w #$FFFF
@@ -1039,7 +1042,7 @@ CODE_0384C3:
 
 #_0384D2: RTS
 
-CODE_0384D3:
+.dont_flip
 #_0384D3: TYA
 
 #_0384D4: RTS
@@ -1059,7 +1062,7 @@ ROUTINE_0384D5:
 #_0384E6: STA.b $3E
 
 #_0384E8: JSR AreWeOnLevel1
-#_0384EB: BNE CODE_0384F7
+#_0384EB: BNE .not_tutorial
 
 #_0384ED: LDA.w #$1200
 #_0384F0: STA.b $3C
@@ -1067,7 +1070,7 @@ ROUTINE_0384D5:
 #_0384F2: LDA.w #$1D00
 #_0384F5: STA.b $3E
 
-CODE_0384F7:
+.not_tutorial
 #_0384F7: CLC
 
 #_0384F8: LDA.b $20
@@ -1157,12 +1160,12 @@ NegateIfCarryClear:
 
 ;===================================================================================================
 
-ROUTINE_038566:
+Read7E2530IfMode3F_getslot:
 #_038566: TYX
 
 ;===================================================================================================
 
-ROUTINE_038567:
+Read7E2530IfMode3F:
 #_038567: LDA.w $0500
 #_03856A: CMP.w #$003F
 #_03856D: BNE .exit
@@ -1262,7 +1265,7 @@ Reset_0816_AndDecrementAI_bank:
 Reset_0816_through_081F:
 #_0385C4: STZ.w $0816,X
 
-#_0385C7: JMP Reset_0818_through_081F
+#_0385C7: JMP Reset_0818to081F
 
 ;===================================================================================================
 
@@ -1274,11 +1277,11 @@ CheckFrameMod16:
 
 ;===================================================================================================
 
-ROUTINE_0385D1:
+LevelPossiblyBeaten:
 #_0385D1: LDA.w $04D4
 #_0385D4: BNE .exit
 
-#_0385D6: JSR ROUTINE_038567
+#_0385D6: JSR Read7E2530IfMode3F
 #_0385D9: BNE .exit
 
 #_0385DB: LDA.w $19CE
@@ -1307,7 +1310,7 @@ ROUTINE_0385D1:
 #_038601: LDA.w #$0078
 #_038604: STA.l $7E7A64
 
-#_038608: JSR PlaySFX_FD_IfNotGameringOver
+#_038608: JSR FadeOutMusicIfNotGameringOver
 
 #_03860B: LDA.w #$0086 ; MODE 86
 #_03860E: STA.w $0500
@@ -1326,7 +1329,7 @@ Set_0814_to_FFFF:
 
 ;===================================================================================================
 
-ROUTINE_03861D:
+ROUTINE_03861D_Set_0814_from_1714:
 #_03861D: LDA.w $1714
 #_038620: STA.w $0814,X
 
@@ -1334,7 +1337,7 @@ ROUTINE_03861D:
 
 ;===================================================================================================
 
-ROUTINE_038624:
+ROUTINE_038624_Set_0804_from_170A:
 #_038624: LDA.w $170A
 #_038627: STA.w $080A,X
 
@@ -1379,7 +1382,7 @@ ROUTINE_038641:
 
 ;===================================================================================================
 
-ROUTINE_038650:
+ROUTINE_038650_SpawnsSprite8134:
 #_038650: LDA.w #$8134 ; SPRITE 8134
 #_038653: STA.b $26
 
@@ -1411,7 +1414,7 @@ CacheMyCoordinatesIn20:
 
 ;===================================================================================================
 
-ROUTINE_038671:
+ROUTINE_038671_CachePockyCoordsIn20:
 #_038671: LDA.w $19EE
 #_038674: STA.b $20
 
@@ -1422,7 +1425,7 @@ ROUTINE_038671:
 
 ;===================================================================================================
 
-ROUTINE_03867C:
+ROUTINE_038686_AbsoluteDeltaSpritePosition_UsingPockyCoords:
 #_03867C: LDA.w $19EE
 #_03867F: STA.b $20
 
@@ -1431,33 +1434,35 @@ ROUTINE_03867C:
 
 ;===================================================================================================
 
-ROUTINE_038686:
+ROUTINE_038686_AbsoluteDeltaSpritePosition:
 #_038686: LDA.w $080C,X
 #_038689: SBC.b $20
 #_03868B: STA.b $28
-#_03868D: BPL CODE_038693
+#_03868D: BPL .positive_x
 
 #_03868F: EOR.w #$FFFF
 #_038692: INC A
 
-CODE_038693:
+.positive_x
 #_038693: STA.b $24
 
 #_038695: LDA.w $080E,X
 #_038698: SBC.b $22
 #_03869A: STA.b $2A
-#_03869C: BPL CODE_0386A2
+#_03869C: BPL .positive_y
 
 #_03869E: EOR.w #$FFFF
 #_0386A1: INC A
 
-CODE_0386A2:
+.positive_y
 #_0386A2: STA.b $26
 
 #_0386A4: ADC.b $24
 #_0386A6: ROR A
 
 #_0386A7: RTS
+
+;===================================================================================================
 
 ROUTINE_0386A8:
 #_0386A8: LDA.w #$3000
@@ -1523,7 +1528,7 @@ ROUTINE_0386EC:
 
 ;===================================================================================================
 
-ROUTINE_038702:
+ROUTINE_038702_DoesDialog:
 #_038702: PHX
 #_038703: PHY
 #_038704: PHA
@@ -1562,7 +1567,7 @@ Set_7E7B38_to_0016:
 
 ;===================================================================================================
 
-ROUTINE_038729:
+ROUTINE_038729_DoesDialog:
 #_038729: PHX
 
 #_03872A: JSL HandleDialog
@@ -1589,6 +1594,8 @@ ROUTINE_038741_0014:
 
 ROUTINE_038741_0044:
 #_03873E: LDA.w #$0044
+
+;===================================================================================================
 
 ROUTINE_038741:
 #_038741: STA.b $20
@@ -1674,7 +1681,7 @@ ROUTINE_038797:
 
 ;===================================================================================================
 
-ROUTINE_0387AD:
+ROUTINE_0387AD_TreasureSpawn:
 #_0387AD: TXY
 
 #_0387AE: JSR CacheMyCoordinatesIn20
@@ -1683,6 +1690,7 @@ ROUTINE_0387AD:
 #_0387B5: AND.w #$000F
 #_0387B8: ASL A
 #_0387B9: TAX
+
 #_0387BA: CPX.w #$0012
 #_0387BD: BCC .no_overflow
 
@@ -1690,6 +1698,8 @@ ROUTINE_0387AD:
 
 .no_overflow
 #_0387C2: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_0387C5: dw SpawnTreasure_RandomCoins
@@ -1728,13 +1738,15 @@ SpawnTreasure_RandomCoins:
 #_0387F0: LDA.w #$000E
 #_0387F3: STA.b $24
 
-#_0387F5: JSR PrepEnemySpawn
+#_0387F5: JSR PrepSpriteSpawn
 
 #_0387F8: PLY
 #_0387F9: DEY
 #_0387FA: BNE .next_coin
 
 #_0387FC: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 .coins
 #_0387FD: db $66
@@ -1808,7 +1820,7 @@ SpawnTreasure_Power:
 ;===================================================================================================
 
 SetSpawnTreasure:
-#_03882F: JMP PrepEnemySpawnMyCoordinates
+#_03882F: JMP PrepSpriteSpawnMyCoordinates
 
 ;===================================================================================================
 
@@ -1856,6 +1868,8 @@ ROUTINE_03885A:
 #_03885A: LDA.w #$2000
 #_03885D: STA.w $0808,X
 
+;===================================================================================================
+
 ROUTINE_038860:
 #_038860: SEC
 
@@ -1869,6 +1883,8 @@ ROUTINE_038860:
 #_03886E: SBC.w $0562
 #_038871: STA.w $0804,X
 
+;===================================================================================================
+
 ROUTINE_038874:
 #_038874: CLC
 #_038875: TXA
@@ -1876,11 +1892,12 @@ ROUTINE_038874:
 #_038879: TAY
 
 #_03887A: LDA.w $0804,X
-#_03887D: JMP CODE_038DF6
+#_03887D: JMP ROUTINE_038DF6
+
+;===================================================================================================
 
 ROUTINE_038880:
 #_038880: LDA.w #$FE00
-
 #_038883: LDY.w #$20B2
 #_038886: JSR ROUTINE_038CAA
 #_038889: JSR ROUTINE_0392C0
@@ -1893,18 +1910,21 @@ ROUTINE_038880:
 
 CODE_038896:
 #_038896: LDY.w #$0050
-
 #_038899: LDA.w #$000E
-#_03889C: JSR ROUTINE_039664
+#_03889C: JSR Sprite_HandlePockyCollision_039664
 
 CODE_03889F:
 #_03889F: JMP ROUTINE_038874
 
-CODE_0388A2:
+;===================================================================================================
+
+ROUTINE_0388A2:
 #_0388A2: LDA.w #$2000
 #_0388A5: STA.w $0808,X
 
 #_0388A8: BRA ROUTINE_038860
+
+;===================================================================================================
 
 ROUTINE_0388AA:
 #_0388AA: LDA.w #$3000
@@ -1912,9 +1932,13 @@ ROUTINE_0388AA:
 
 #_0388B0: BRA ROUTINE_038860
 
+;===================================================================================================
+
 ROUTINE_0388B2:
 #_0388B2: LDA.w #$2000
 #_0388B5: STA.w $0808,X
+
+;===================================================================================================
 
 ROUTINE_0388B8:
 #_0388B8: LDA.w $0814,X
@@ -2052,7 +2076,7 @@ CODE_03897F:
 
 ;===================================================================================================
 
-ROUTINE_038983:
+ROUTINE_038983_ExecuteRoutineIfSomething:
 #_038983: STA.b $20
 
 #_038985: LDA.w $0560
@@ -2061,10 +2085,10 @@ ROUTINE_038983:
 #_03898E: EOR.w #$FFFF
 #_038991: INC A
 #_038992: CMP.w #$0D80
-#_038995: BCC CODE_0389B3
+#_038995: BCC .execute
 
 #_038997: CMP.w #$2280
-#_03899A: BCS CODE_0389B3
+#_03899A: BCS .execute
 
 #_03899C: LDA.w $0562
 #_03899F: SBC.w #$1000
@@ -2072,19 +2096,19 @@ ROUTINE_038983:
 #_0389A5: EOR.w #$FFFF
 #_0389A8: INC A
 #_0389A9: CMP.w #$0D80
-#_0389AC: BCC CODE_0389B3
+#_0389AC: BCC .execute
 
 #_0389AE: CMP.w #$2080
-#_0389B1: BCC CODE_0389BA
+#_0389B1: BCC .fail
 
-CODE_0389B3:
+.execute
 #_0389B3: JSR .call_routine
 
 #_0389B6: LDA.w #$0000
 
 #_0389B9: RTS
 
-CODE_0389BA:
+.fail
 #_0389BA: LDA.w #$0001
 
 #_0389BD: RTS
@@ -2148,27 +2172,29 @@ CODE_038A0B:
 
 #_038A0E: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_038A0F:
 #_038A0F: LDA.l $7FE81E,X
 #_038A13: CLC
 #_038A14: ADC.w #$0100
-#_038A17: BCC CODE_038A1C
+#_038A17: BCC .under_256
 
 #_038A19: SBC.w #$0100
 
-CODE_038A1C:
+.under_256
 #_038A1C: STA.l $7FE81E,X
 
 #_038A20: BRA CODE_038A0B
 
 ;===================================================================================================
 
-ROUTINE_038A25_0020:
-#_038A22: LDA.w #$0020
+ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX:
+#_038A22: LDA.w #$0020 ; SPRITE 0020
 
 ;===================================================================================================
 
-ROUTINE_038A25:
+ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates_WithSFX:
 #_038A25: PHA
 
 #_038A26: LDA.w #$0054 ; SFX 54
@@ -2178,7 +2204,7 @@ ROUTINE_038A25:
 
 ;===================================================================================================
 
-ROUTINE_038A2D:
+ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates:
 #_038A2D: STA.b $26
 
 #_038A2F: LDA.w $080C,X
@@ -2192,15 +2218,15 @@ ROUTINE_038A2D:
 
 ;===================================================================================================
 
-PrepEnemySpawnType0C_Preloaded_038A3E:
+ROUTINE_038A3E_SpawnSpriteMode0C:
 #_038A3E: LDA.w #$000C
 #_038A41: STA.b $24
 
-#_038A43: JMP PrepEnemySpawn
+#_038A43: JMP PrepSpriteSpawn
 
 ;===================================================================================================
 
-ROUTINE_038A46:
+SpawnDisappearingSmoke_AtSpriteCoordinates:
 #_038A46: PHB
 #_038A47: PHK
 #_038A48: PLB
@@ -2212,16 +2238,18 @@ ROUTINE_038A46:
 #_038A51: STA.b $22
 
 #_038A53: LDY.w #$0010
-#_038A56: BRA CODE_038A5B
+#_038A56: BRA .spawn_more_smoke
 
 ;===================================================================================================
 
-ROUTINE_038A58:
+#SpawnDisappearingSmoke:
 #_038A58: PHB
 #_038A59: PHK
 #_038A5A: PLB
 
-CODE_038A5B:
+;===================================================================================================
+
+.spawn_more_smoke
 #_038A5B: PHY
 
 #_038A5C: TYA
@@ -2239,11 +2267,11 @@ CODE_038A5B:
 #_038A6F: LDA.w #$000E
 #_038A72: STA.b $24
 
-#_038A74: JSR PrepEnemySpawn
+#_038A74: JSR PrepSpriteSpawn
 
 #_038A77: PLY
 #_038A78: DEY
-#_038A79: BNE CODE_038A5B
+#_038A79: BNE .spawn_more_smoke
 
 #_038A7B: PLB
 #_038A7C: RTL
@@ -2253,12 +2281,14 @@ CODE_038A5B:
 ROUTINE_038A7D:
 #_038A7D: STZ.w $080A,X
 
+;===================================================================================================
+
 ROUTINE_038A80:
 #_038A80: JSR Set_0814_to_FFFF
 
 #_038A83: STZ.w $0816,X
 
-#_038A86: JSR Reset_0818_through_081F
+#_038A86: JSR Reset_0818to081F
 
 ;===================================================================================================
 
@@ -2278,7 +2308,7 @@ AdvanceAIModeDown:
 
 ;===================================================================================================
 
-ROUTINE_038A97:
+ROUTINE_038A97_Increment_081E_WrapAroundAtParameterA:
 #_038A97: INC.w $081E,X
 
 #_038A9A: CMP.w $081E,X
@@ -2291,7 +2321,7 @@ ROUTINE_038A97:
 
 ;===================================================================================================
 
-ROUTINE_038AA3:
+ROUTINE_038AA3_Add_0812_ToCoordinates_XY:
 #_038AA3: CLC
 
 #_038AA4: LDA.w $080C,X
@@ -2327,7 +2357,7 @@ ROUTINE_038AB8:
 
 ;===================================================================================================
 
-ROUTINE_038AD2:
+ROUTINE_038AD2_Add_081C_ToCoordinates_XY:
 #_038AD2: CLC
 
 #_038AD3: LDA.w $080C,X
@@ -2363,20 +2393,20 @@ ROUTINE_038AE7:
 
 ;===================================================================================================
 
-ROUTINE_038B01:
+ROUTINE_038B01_Add_Address20_ToCoordinates_XY:
 #_038B01: CLC
-
 #_038B02: LDA.b $20
 #_038B04: ADC.w $080C,X
 #_038B07: STA.w $080C,X
 
 #_038B0A: CLC
-
 #_038B0B: LDA.b $22
 #_038B0D: ADC.w $080E,X
 #_038B10: STA.w $080E,X
 
 #_038B13: RTS
+
+;===================================================================================================
 
 ROUTINE_038B14:
 #_038B14: JSR ROUTINE_0392C0
@@ -2438,7 +2468,7 @@ CODE_038B62:
 
 ;===================================================================================================
 
-ROUTINE_038B69:
+ROUTINE_038B73_MyCoordinates:
 #_038B69: LDA.w $0818,X
 #_038B6C: STA.b $20
 
@@ -2495,7 +2525,7 @@ ROUTINE_038BAD:
 #_038BAD: JSR Sprite_CacheX_And_Yplus0280_82B2
 
 #_038BB0: LDA.w #$00FA ; SPRITE 00FA
-#_038BB3: JSL PrepEnemySpawnType0C_0396E3
+#_038BB3: JSL PrepSpriteSpawnType0C_0396E3
 
 #_038BB7: RTS
 
@@ -2504,7 +2534,7 @@ ROUTINE_038BAD:
 ROUTINE_038BB8:
 #_038BB8: PHA
 
-#_038BB9: JSR ROUTINE_038BE0
+#_038BB9: JSR ROUTINE_038BE0_SomeTableCopy
 
 #_038BBC: PLA
 #_038BBD: STA.b $3C
@@ -2540,7 +2570,7 @@ ROUTINE_038BB8:
 
 ;===================================================================================================
 
-ROUTINE_038BE0:
+ROUTINE_038BE0_SomeTableCopy:
 #_038BE0: LDA.w $0000,X
 #_038BE3: BEQ .exit
 
@@ -2565,7 +2595,7 @@ ROUTINE_038BE0:
 
 #_038BFC: SEP #$20
 
-CODE_038BFE:
+.next_byte
 #_038BFE: LDA.w $0000,X
 #_038C01: STA.b [$20],Y
 
@@ -2574,17 +2604,17 @@ CODE_038BFE:
 #_038C04: INY
 
 #_038C05: DEC.b $24
-#_038C07: BNE CODE_038BFE
+#_038C07: BNE .next_byte
 
 #_038C09: REP #$20
-#_038C0B: BRA ROUTINE_038BE0
+#_038C0B: BRA ROUTINE_038BE0_SomeTableCopy
 
 .exit
 #_038C0D: RTS
 
 ;===================================================================================================
 
-ROUTINE_038C0E:
+ROUTINE_038C0E_SomeTableCopy:
 #_038C0E: LDA.w $0000,X
 #_038C11: BEQ .exit
 
@@ -2609,7 +2639,7 @@ ROUTINE_038C0E:
 
 #_038C2A: SEP #$20
 
-CODE_038C2C:
+.next_byte
 #_038C2C: LDA.w $0000,X
 #_038C2F: STA.b [$34],Y
 
@@ -2618,10 +2648,10 @@ CODE_038C2C:
 #_038C32: INY
 
 #_038C33: DEC.b $38
-#_038C35: BNE CODE_038C2C
+#_038C35: BNE .next_byte
 
 #_038C37: REP #$20
-#_038C39: BRA ROUTINE_038C0E
+#_038C39: BRA ROUTINE_038C0E_SomeTableCopy
 
 .exit
 #_038C3B: RTS
@@ -2776,7 +2806,7 @@ ROUTINE_038CBD:
 
 ;===================================================================================================
 
-Reset_0818_through_081F:
+Reset_0818to081F:
 #_038CD2: STZ.w $081C,X
 #_038CD5: STZ.w $081E,X
 #_038CD8: STZ.w $0818,X
@@ -2840,6 +2870,7 @@ ROUTINE_038D08:
 
 #_038D0E: AND.w #$00FF
 #_038D11: TAY
+
 #_038D12: PLA
 #_038D13: AND.w #$00FF
 #_038D16: CMP.w $0818,X
@@ -2896,7 +2927,7 @@ ROUTINE_038D55:
 #_038D5A: STY.b $2A
 
 #_038D5C: LDA.w $081C,X
-#_038D5F: BEQ CODE_038D6B
+#_038D5F: BEQ .do_it
 
 #_038D61: CMP.w #$FFFF
 #_038D64: BEQ .exit
@@ -2904,7 +2935,9 @@ ROUTINE_038D55:
 #_038D66: DEC.w $081C,X
 #_038D69: BNE .exit
 
-CODE_038D6B:
+;---------------------------------------------------------------------------------------------------
+
+.do_it
 #_038D6B: PHX
 
 #_038D6C: LDA.b $2A
@@ -2914,7 +2947,7 @@ CODE_038D6B:
 #_038D70: LDA.l data05EA9E,X
 #_038D74: STA.b $20
 
-#_038D76: LDA.w #$0005
+#_038D76: LDA.w #data05EA9E>>16
 #_038D79: STA.b $22
 #_038D7B: STA.b $26
 
@@ -2931,7 +2964,9 @@ CODE_038D6B:
 #_038D89: ASL A
 #_038D8A: ASL A
 
-CODE_038D8B:
+;---------------------------------------------------------------------------------------------------
+
+.next
 #_038D8B: TAY
 
 #_038D8C: LDA.b [$24],Y
@@ -2940,6 +2975,7 @@ CODE_038D8B:
 #_038D90: STA.w $081C,X
 
 #_038D93: INC.w $081E,X
+
 #_038D96: INY
 #_038D97: INY
 
@@ -2966,7 +3002,7 @@ CODE_038D8B:
 
 ;---------------------------------------------------------------------------------------------------
 
-data038DB4:
+#data038DB4:
 #_038DB4: dw $0063
 #_038DB6: dw $006B
 #_038DB8: dw $0073
@@ -2977,7 +3013,7 @@ data038DB4:
 CODE_038DBC:
 #_038DBC: STA.w $081E,X
 
-#_038DBF: JMP CODE_038D8B
+#_038DBF: JMP .next
 
 ;===================================================================================================
 
@@ -2986,7 +3022,7 @@ ROUTINE_038DC2:
 
 ;===================================================================================================
 
-ROUTINE_038DC5:
+ROUTINE_038DC8_3000:
 #_038DC5: LDA.w #$3000
 
 ;===================================================================================================
@@ -3026,14 +3062,14 @@ CODE_038DF4:
 
 ;---------------------------------------------------------------------------------------------------
 
-CODE_038DF6:
+ROUTINE_038DF6:
 #_038DF6: AND.w #$0FF0
 #_038DF9: ORA.w #$000E
 #_038DFC: TAX
 
 .next
 #_038DFD: LDA.l $7EB000,X
-#_038E01: BEQ CODE_038E0B
+#_038E01: BEQ .fill_loop
 
 #_038E03: DEX
 #_038E04: DEX
@@ -3044,7 +3080,7 @@ CODE_038DF6:
 
 ;---------------------------------------------------------------------------------------------------
 
-CODE_038E0B:
+.fill_loop
 #_038E0B: TYA
 #_038E0C: STA.l $7EB000,X
 
@@ -3057,7 +3093,7 @@ CODE_038E0B:
 
 #_038E19: LDA.l $7EC000,X
 #_038E1D: INC A
-#_038E1E: BEQ CODE_038E0B
+#_038E1E: BEQ .fill_loop
 
 #_038E20: STA.l $7EC000,X
 
@@ -3313,40 +3349,42 @@ CODE_038EC6:
 ;===================================================================================================
 
 data038F6B:
-#_038F6B: db $00,$00,$02,$00,$04,$00,$06,$00
-#_038F73: db $08,$00,$0A,$00,$0C,$00,$0E,$00
-#_038F7B: db $10,$00,$12,$00,$14,$00,$16,$00
-#_038F83: db $18,$00,$1A,$00,$1C,$00,$1E,$00
-#_038F8B: db $20,$00,$22,$00,$24,$00,$26,$00
-#_038F93: db $28,$00,$2A,$00,$2C,$00,$2E,$00
-#_038F9B: db $30,$00,$32,$00,$34,$00,$36,$00
-#_038FA3: db $38,$00,$3A,$00,$3C,$00,$3E,$00
-#_038FAB: db $00,$08,$02,$08,$04,$08,$06,$08
-#_038FB3: db $08,$08,$0A,$08,$0C,$08,$0E,$08
-#_038FBB: db $10,$08,$12,$08,$14,$08,$16,$08
-#_038FC3: db $18,$08,$1A,$08,$1C,$08,$1E,$08
-#_038FCB: db $20,$08,$22,$08,$24,$08,$26,$08
-#_038FD3: db $28,$08,$2A,$08,$2C,$08,$2E,$08
-#_038FDB: db $30,$08,$32,$08,$34,$08,$36,$08
-#_038FE3: db $38,$08,$3A,$08,$3C,$08,$3E,$08
+#_038F6B: dw $0000, $0002, $0004, $0006
+#_038F73: dw $0008, $000A, $000C, $000E
+#_038F7B: dw $0010, $0012, $0014, $0016
+#_038F83: dw $0018, $001A, $001C, $001E
+#_038F8B: dw $0020, $0022, $0024, $0026
+#_038F93: dw $0028, $002A, $002C, $002E
+#_038F9B: dw $0030, $0032, $0034, $0036
+#_038FA3: dw $0038, $003A, $003C, $003E
+#_038FAB: dw $0800, $0802, $0804, $0806
+#_038FB3: dw $0808, $080A, $080C, $080E
+#_038FBB: dw $0810, $0812, $0814, $0816
+#_038FC3: dw $0818, $081A, $081C, $081E
+#_038FCB: dw $0820, $0822, $0824, $0826
+#_038FD3: dw $0828, $082A, $082C, $082E
+#_038FDB: dw $0830, $0832, $0834, $0836
+#_038FE3: dw $0838, $083A, $083C, $083E
+
+;---------------------------------------------------------------------------------------------------
 
 data038FEB:
-#_038FEB: db $00,$00,$40,$00,$80,$00,$C0,$00
-#_038FF3: db $00,$01,$40,$01,$80,$01,$C0,$01
-#_038FFB: db $00,$02,$40,$02,$80,$02,$C0,$02
-#_039003: db $00,$03,$40,$03,$80,$03,$C0,$03
-#_03900B: db $00,$04,$40,$04,$80,$04,$C0,$04
-#_039013: db $00,$05,$40,$05,$80,$05,$C0,$05
-#_03901B: db $00,$06,$40,$06,$80,$06,$C0,$06
-#_039023: db $00,$07,$40,$07,$80,$07,$C0,$07
-#_03902B: db $00,$10,$40,$10,$80,$10,$C0,$10
-#_039033: db $00,$11,$40,$11,$80,$11,$C0,$11
-#_03903B: db $00,$12,$40,$12,$80,$12,$C0,$12
-#_039043: db $00,$13,$40,$13,$80,$13,$C0,$13
-#_03904B: db $00,$14,$40,$14,$80,$14,$C0,$14
-#_039053: db $00,$15,$40,$15,$80,$15,$C0,$15
-#_03905B: db $00,$16,$40,$16,$80,$16,$C0,$16
-#_039063: db $00,$17,$40,$17,$80,$17,$C0,$17
+#_038FEB: dw $0000, $0040, $0080, $00C0
+#_038FF3: dw $0100, $0140, $0180, $01C0
+#_038FFB: dw $0200, $0240, $0280, $02C0
+#_039003: dw $0300, $0340, $0380, $03C0
+#_03900B: dw $0400, $0440, $0480, $04C0
+#_039013: dw $0500, $0540, $0580, $05C0
+#_03901B: dw $0600, $0640, $0680, $06C0
+#_039023: dw $0700, $0740, $0780, $07C0
+#_03902B: dw $1000, $1040, $1080, $10C0
+#_039033: dw $1100, $1140, $1180, $11C0
+#_03903B: dw $1200, $1240, $1280, $12C0
+#_039043: dw $1300, $1340, $1380, $13C0
+#_03904B: dw $1400, $1440, $1480, $14C0
+#_039053: dw $1500, $1540, $1580, $15C0
+#_03905B: dw $1600, $1640, $1680, $16C0
+#_039063: dw $1700, $1740, $1780, $17C0
 
 ;===================================================================================================
 
@@ -3435,7 +3473,7 @@ ROUTINE_0390A5:
 
 #_0390C9: PHY
 
-#_0390CA: JSR PrepEnemySpawn
+#_0390CA: JSR PrepSpriteSpawn
 
 #_0390CD: PLY
 #_0390CE: PLA
@@ -3532,7 +3570,7 @@ ROUTINE_039108:
 
 #_039132: PHY
 
-#_039133: JSR PrepEnemySpawn
+#_039133: JSR PrepSpriteSpawn
 
 #_039136: PLY
 #_039137: PLA
@@ -3574,7 +3612,7 @@ ROUTINE_039140:
 #_039163: LDA.w #$000C
 #_039166: STA.b $24
 
-#_039168: JSR PrepEnemySpawn
+#_039168: JSR PrepSpriteSpawn
 
 #_03916B: PLB
 #_03916C: RTL
@@ -3601,7 +3639,7 @@ SpawnSprite00A2_AtMyCoordinates:
 #_039184: LDA.w #$000C
 #_039187: STA.b $24
 
-#_039189: JSR PrepEnemySpawn
+#_039189: JSR PrepSpriteSpawn
 
 #_03918C: PLB
 #_03918D: RTL
@@ -3619,7 +3657,7 @@ SpawnSprite00A2:
 #_039196: LDA.w #$000C
 #_039199: STA.b $24
 
-#_03919B: JSR PrepEnemySpawn
+#_03919B: JSR PrepSpriteSpawn
 
 #_03919E: PLB
 #_03919F: RTL
@@ -3648,7 +3686,7 @@ SpawnSplitFlyingCollectionSparkles:
 
 ;===================================================================================================
 
-PrepEnemySpawnMyCoordinates:
+PrepSpriteSpawnMyCoordinates:
 #_0391BA: STA.b $26
 
 #_0391BC: LDA.w $080C,X
@@ -3663,16 +3701,16 @@ PrepEnemySpawnMyCoordinates:
 #_0391CB: LDA.w #$000C
 #_0391CE: STA.b $24
 
-#_0391D0: JMP PrepEnemySpawn
+#_0391D0: JMP PrepSpriteSpawn
 
 ;===================================================================================================
 
-PrepEnemySpawn_long:
+PrepSpriteSpawn_long:
 #_0391D3: PHB
 #_0391D4: PHK
 #_0391D5: PLB
 
-#_0391D6: JSR PrepEnemySpawn
+#_0391D6: JSR PrepSpriteSpawn
 
 #_0391D9: PLB
 #_0391DA: RTL
@@ -3682,7 +3720,7 @@ PrepEnemySpawn_long:
 ;   $20 - X coordinate
 ;   $24 - spawn vector index
 ;===================================================================================================
-PrepEnemySpawn:
+PrepSpriteSpawn:
 #_0391DB: PHX
 
 #_0391DC: LDA.b $0E
@@ -3727,24 +3765,24 @@ PrepEnemySpawn:
 ;---------------------------------------------------------------------------------------------------
 
 .vectors
-#_03920D: dw PrepEnemySpawn_NothingSpecial                  ; 00
-#_03920F: dw PrepEnemySpawn_SmokeAnimIThink                 ; 02
-#_039211: dw PrepEnemySpawn_Sprite0090                      ; 04
-#_039213: dw PrepEnemySpawn_MoreSmokeThings                 ; 06
-#_039215: dw PrepEnemySpawn_ParameterizedIDandHPandZ        ; 08
-#_039217: dw PrepEnemySpawn_KeyAnimation                    ; 0A
-#_039219: dw PrepEnemySpawn_ParameterizedIDsameasHP         ; 0C
-#_03921B: dw PrepEnemySpawn_ParameterizedGFXandIDsameHP     ; 0E
-#_03921D: dw PrepEnemySpawn_ParameterizedIDandGFXandHPandZ  ; 10
+#_03920D: dw PrepSpriteSpawn_NothingSpecial                  ; 00
+#_03920F: dw PrepSpriteSpawn_SmokeAnimIThink                 ; 02
+#_039211: dw PrepSpriteSpawn_Sprite0090                      ; 04
+#_039213: dw PrepSpriteSpawn_MoreSmokeThings                 ; 06
+#_039215: dw PrepSpriteSpawn_ParameterizedIDandHPandZ        ; 08
+#_039217: dw PrepSpriteSpawn_KeyAnimation                    ; 0A
+#_039219: dw PrepSpriteSpawn_ParameterizedIDsameasHP         ; 0C
+#_03921B: dw PrepSpriteSpawn_ParameterizedGFXandIDsameHP     ; 0E
+#_03921D: dw PrepSpriteSpawn_ParameterizedIDandGFXandHPandZ  ; 10
 
 ;===================================================================================================
 
-PrepEnemySpawn_NothingSpecial:
+PrepSpriteSpawn_NothingSpecial:
 #_03921F: RTS
 
 ;===================================================================================================
 
-PrepEnemySpawn_SmokeAnimIThink:
+PrepSpriteSpawn_SmokeAnimIThink:
 #_039220: LDA.w #$0040
 #_039223: STA.w $0816,Y
 
@@ -3759,7 +3797,7 @@ PrepEnemySpawn_SmokeAnimIThink:
 
 ;===================================================================================================
 
-PrepEnemySpawn_ItsAlive:
+PrepSpriteSpawn_ItsAlive:
 #_039238: LDA.w #$8001
 #_03923B: STA.w $0800,Y
 
@@ -3767,7 +3805,7 @@ PrepEnemySpawn_ItsAlive:
 
 ;===================================================================================================
 
-PrepEnemySpawn_Sprite0090:
+PrepSpriteSpawn_Sprite0090:
 #_03923F: LDA.b $26
 #_039241: STA.w $081E,Y
 
@@ -3778,20 +3816,20 @@ PrepEnemySpawn_Sprite0090:
 #_03924D: LDA.b $28
 #_03924F: STA.w $0808,Y
 
-#_039252: BRA PrepEnemySpawn_ItsAlive
+#_039252: BRA PrepSpriteSpawn_ItsAlive
 
 ;===================================================================================================
 
-PrepEnemySpawn_MoreSmokeThings:
+PrepSpriteSpawn_MoreSmokeThings:
 #_039254: LDA.w #$0020 ; SPRITE 0020
 #_039257: STA.w $0810,Y
 #_03925A: STA.w $0812,Y
 
-#_03925D: BRA PrepEnemySpawn_ParameterizedZ
+#_03925D: BRA PrepSpriteSpawn_ParameterizedZ
 
 ;===================================================================================================
 
-PrepEnemySpawn_KeyAnimation:
+PrepSpriteSpawn_KeyAnimation:
 #_03925F: LDA.b $26
 #_039261: STA.w $081C,Y
 
@@ -3799,11 +3837,11 @@ PrepEnemySpawn_KeyAnimation:
 #_039267: STA.w $0810,Y
 #_03926A: STA.w $0812,Y
 
-#_03926D: BRA PrepEnemySpawn_ItsAlive
+#_03926D: BRA PrepSpriteSpawn_ItsAlive
 
 ;===================================================================================================
 
-PrepEnemySpawn_ParameterizedIDandHPandZ:
+PrepSpriteSpawn_ParameterizedIDandHPandZ:
 #_03926F: LDA.b $28
 #_039271: STA.w $0812,Y
 
@@ -3815,35 +3853,35 @@ PrepEnemySpawn_ParameterizedIDandHPandZ:
 
 ;===================================================================================================
 
-PrepEnemySpawn_ParameterizedZ:
+PrepSpriteSpawn_ParameterizedZ:
 #_03927E: LDA.b $30
 #_039280: STA.w $080A,Y
 
-#_039283: BRA PrepEnemySpawn_ItsAlive
+#_039283: BRA PrepSpriteSpawn_ItsAlive
 
 ;===================================================================================================
 
-PrepEnemySpawn_ParameterizedIDsameasHP:
+PrepSpriteSpawn_ParameterizedIDsameasHP:
 #_039285: LDA.b $26
 #_039287: STA.w $0810,Y
 #_03928A: STA.w $0812,Y
 
-#_03928D: BRA PrepEnemySpawn_ParameterizedZ
+#_03928D: BRA PrepSpriteSpawn_ParameterizedZ
 
 ;===================================================================================================
 
-PrepEnemySpawn_ParameterizedGFXandIDsameHP:
+PrepSpriteSpawn_ParameterizedGFXandIDsameHP:
 #_03928F: LDA.b $28
 #_039291: STA.w $0806,Y
 
 #_039294: LDA.b $2C
 #_039296: STA.w $081C,Y
 
-#_039299: JMP PrepEnemySpawn_ParameterizedIDsameasHP
+#_039299: JMP PrepSpriteSpawn_ParameterizedIDsameasHP
 
 ;===================================================================================================
 
-PrepEnemySpawn_ParameterizedIDandGFXandHPandZ:
+PrepSpriteSpawn_ParameterizedIDandGFXandHPandZ:
 #_03929C: LDA.b $26
 #_03929E: STA.w $0810,Y
 
@@ -3859,11 +3897,11 @@ PrepEnemySpawn_ParameterizedIDandGFXandHPandZ:
 #_0392B0: LDA.b $2E
 #_0392B2: STA.w $080A,Y
 
-#_0392B5: BRA PrepEnemySpawn_ItsAlive
+#_0392B5: BRA PrepSpriteSpawn_ItsAlive
 
 ;===================================================================================================
 
-ROUTINE_0392B7:
+ROUTINE_0392B7_Increment0814_UntilFFFF:
 #_0392B7: INC.w $0814,X
 #_0392BA: BNE .exit
 
@@ -3910,7 +3948,7 @@ ROUTINE_0392D5:
 
 ;===================================================================================================
 
-ROUTINE_0392EE:
+ROUTINE_0392EE_SomethingWithHitboxes:
 #_0392EE: STA.w $1F36
 
 #_0392F1: SEC
@@ -4268,7 +4306,7 @@ ROUTINE_0394C6:
 #_0394D0: LDA.w #$000E
 #_0394D3: STA.b $24
 
-#_0394D5: JMP PrepEnemySpawn
+#_0394D5: JMP PrepSpriteSpawn
 
 ;===================================================================================================
 
@@ -4364,7 +4402,7 @@ ROUTINE_039535:
 #_039538: LDA.w #$000C
 #_03953B: STA.b $24
 
-#_03953D: JSR PrepEnemySpawn
+#_03953D: JSR PrepSpriteSpawn
 
 #_039540: PLY
 
@@ -4636,7 +4674,7 @@ AddToScore:
 
 ;===================================================================================================
 
-ROUTINE_039664:
+Sprite_HandlePockyCollision_039664:
 #_039664: STA.b $24
 #_039666: STZ.b $22
 
@@ -4725,16 +4763,16 @@ SpawnSpriteCopyingZ_96D3:
 #_0396D8: LDA.w #$000E
 #_0396DB: STA.b $24
 
-#_0396DD: JMP PrepEnemySpawn
+#_0396DD: JMP PrepSpriteSpawn
 
 ;===================================================================================================
 
-PrepEnemySpawnType0C_0396E3_00D6:
+PrepSpriteSpawnType0C_0396E3_00D6:
 #_0396E0: LDA.w #$00D6 ; SPRITE 00D6
 
 ;===================================================================================================
 
-PrepEnemySpawnType0C_0396E3:
+PrepSpriteSpawnType0C_0396E3:
 #_0396E3: PHB
 #_0396E4: PHK
 #_0396E5: PLB
@@ -4744,34 +4782,34 @@ PrepEnemySpawnType0C_0396E3:
 #_0396E8: LDA.w #$000C
 #_0396EB: STA.b $24
 
-#_0396ED: JSR PrepEnemySpawn
+#_0396ED: JSR PrepSpriteSpawn
 
 #_0396F0: PLB
 #_0396F1: RTL
 
 ;===================================================================================================
 
-PrepEnemySpawnType0C_0396E3_00DC:
+PrepSpriteSpawnType0C_0396E3_00DC:
 #_0396F2: LDA.w #$00DC ; SPRITE 00DC
-#_0396F5: BRA PrepEnemySpawnType0C_0396E3
+#_0396F5: BRA PrepSpriteSpawnType0C_0396E3
 
 ;===================================================================================================
 
-PrepEnemySpawnType0C_0396E3_00E8:
+PrepSpriteSpawnType0C_0396E3_00E8:
 #_0396F7: LDA.w #$00E8 ; SPRITE 00E8
-#_0396FA: BRA PrepEnemySpawnType0C_0396E3
+#_0396FA: BRA PrepSpriteSpawnType0C_0396E3
 
 ;===================================================================================================
 
-PrepEnemySpawnType0C_0396E3_00E2:
+PrepSpriteSpawnType0C_0396E3_00E2:
 #_0396FC: LDA.w #$00E2 ; SPRITE 00E2
-#_0396FF: BRA PrepEnemySpawnType0C_0396E3
+#_0396FF: BRA PrepSpriteSpawnType0C_0396E3
 
 ;===================================================================================================
 
-PrepEnemySpawnType0C_0396E3_00EE:
+PrepSpriteSpawnType0C_0396E3_00EE:
 #_039701: LDA.w #$00EE ; SPRITE 00EE
-#_039704: BRA PrepEnemySpawnType0C_0396E3
+#_039704: BRA PrepSpriteSpawnType0C_0396E3
 
 ;===================================================================================================
 
@@ -4904,7 +4942,7 @@ SpriteCollision_EnemyHug:
 
 #_039794: STA.w $0810,X
 
-#_039797: JSR Reset_0818_through_081F
+#_039797: JSR Reset_0818to081F
 
 #_03979A: STZ.w $080A,X
 #_03979D: STZ.w $0816,X
@@ -5202,7 +5240,7 @@ SpriteCollision_Chest:
 #_039904: STA.b $22
 #_039906: STZ.b $30
 
-#_039908: JSL PrepEnemySpawnType0C_0396E3_00E2
+#_039908: JSL PrepSpriteSpawnType0C_0396E3_00E2
 
 #_03990C: BRA .exit
 
@@ -5243,7 +5281,7 @@ SpawnKeyAnimation:
 #_039937: LDA.w #$000A
 #_03993A: STA.b $24
 
-#_03993C: JMP PrepEnemySpawn
+#_03993C: JMP PrepSpriteSpawn
 
 ;===================================================================================================
 
@@ -5526,7 +5564,7 @@ SpriteCollision_Charm:
 SpriteCollision_PartnerChange:
 #_039A82: TAX
 
-#_039A83: JSR ROUTINE_038567
+#_039A83: JSR Read7E2530IfMode3F
 #_039A86: BNE .not_grabbable
 
 #_039A88: LDA.w $04D0
@@ -5872,7 +5910,7 @@ CODE_039C23:
 
 ;===================================================================================================
 
-ROUTINE_039C2D:
+ROUTINE_039C2D_SomethingWithHittingASprite:
 #_039C2D: STA.b $24
 #_039C2F: STZ.b $22
 
@@ -6243,7 +6281,7 @@ CODE_039DE0:
 #_039E19: LDA.w $05CA
 #_039E1C: STA.b $30
 
-#_039E1E: JSR PrepEnemySpawnType0C_Preloaded_038A3E
+#_039E1E: JSR ROUTINE_038A3E_SpawnSpriteMode0C
 
 #_039E21: JMP CODE_039E5F
 
@@ -7565,14 +7603,14 @@ CODE_03A645:
 #_03A67F: TYA
 #_03A680: STA.b $30
 
-#_03A682: JSR PrepEnemySpawn
+#_03A682: JSR PrepSpriteSpawn
 
 #_03A685: LDA.b $30
 #_03A687: STA.w $0816,Y
 
 #_03A68A: TYX
 
-#_03A68B: JSR Reset_0818_through_081F
+#_03A68B: JSR Reset_0818to081F
 
 #_03A68E: TXY
 
@@ -7636,7 +7674,7 @@ SpriteAI_0204:
 #_03A724: LDA.w $0816,X
 #_03A727: STA.b $30
 
-#_03A729: JSR PrepEnemySpawn
+#_03A729: JSR PrepSpriteSpawn
 
 #_03A72C: LDA.w #$020C ; SPRITE 020C
 #_03A72F: STA.w $0810,X
@@ -8120,13 +8158,13 @@ CODE_03A9E6:
 
 ROUTINE_03A9ED:
 #_03A9ED: LDY.w #$0040
-#_03A9F0: JSR ROUTINE_0392EE
+#_03A9F0: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03A9F3: BEQ CODE_03AA04
 
 #_03A9F5: JSR ROUTINE_039385
 #_03A9F8: BNE CODE_03AA04
 
-#_03A9FA: JSR ROUTINE_038A25_0020
+#_03A9FA: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03A9FD: LDA.w #$020A ; SPRITE 020A
 #_03AA00: STA.w $0810,X
@@ -8137,11 +8175,11 @@ CODE_03AA04:
 #_03AA04: LDY.w #$0040
 
 #_03AA07: LDA.w #$0020
-#_03AA0A: JSR ROUTINE_039664
+#_03AA0A: JSR Sprite_HandlePockyCollision_039664
 
 #_03AA0D: LDY.w #$0040
 #_03AA10: LDA.w #$0020
-#_03AA13: JSR ROUTINE_039C2D
+#_03AA13: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03AA16: RTS
 
@@ -8157,7 +8195,7 @@ SpriteAI_0210:
 ;===================================================================================================
 
 ROUTINE_03AA1E:
-#_03AA1E: JSR Reset_0818_through_081F
+#_03AA1E: JSR Reset_0818to081F
 
 #_03AA21: LDA.w #$0D32
 #_03AA24: STA.w $0806,X
@@ -8186,7 +8224,7 @@ SpriteAI_0212:
 #_03AA48: STA.w $0800,X
 
 #_03AA4B: LDY.w #$0040
-#_03AA4E: JSR ROUTINE_0392EE
+#_03AA4E: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03AA51: BEQ CODE_03AA56
 
 #_03AA53: JSR ROUTINE_039385
@@ -8195,13 +8233,13 @@ CODE_03AA56:
 #_03AA56: LDA.w $04F4
 #_03AA59: BEQ CODE_03AA61
 
-#_03AA5B: JSR ROUTINE_038A25_0020
+#_03AA5B: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03AA5E: JMP ROUTINE_03B43C
 
 CODE_03AA61:
 #_03AA61: LDA.w #ROUTINE_03B43C
-#_03AA64: JSR ROUTINE_038983
+#_03AA64: JSR ROUTINE_038983_ExecuteRoutineIfSomething
 #_03AA67: BNE CODE_03AA6A
 
 #_03AA69: RTS
@@ -8350,13 +8388,13 @@ SpriteAI_0214:
 #_03AB28: STA.w $0800,X
 
 #_03AB2B: LDY.w #$0048
-#_03AB2E: JSR ROUTINE_0392EE
+#_03AB2E: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03AB31: BEQ CODE_03AB3E
 
 #_03AB33: JSR ROUTINE_039385
 #_03AB36: BNE CODE_03AB3E
 
-#_03AB38: JSR ROUTINE_038A25_0020
+#_03AB38: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03AB3B: JMP ROUTINE_03B40F
 
@@ -8378,7 +8416,7 @@ CODE_03AB5C:
 #_03AB5C: LDA.w $04F4
 #_03AB5F: BEQ CODE_03AB67
 
-#_03AB61: JSR ROUTINE_038A25_0020
+#_03AB61: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03AB64: JMP ROUTINE_03B43C
 
@@ -8465,19 +8503,19 @@ CODE_03ABEE:
 #_03ABEE: LDA.w $04F4
 #_03ABF1: BEQ CODE_03ABF9
 
-#_03ABF3: JSR ROUTINE_038A25_0020
+#_03ABF3: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03ABF6: JMP ROUTINE_03B43C
 
 CODE_03ABF9:
 #_03ABF9: LDY.w #$0048
-#_03ABFC: JSR ROUTINE_0392EE
+#_03ABFC: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03ABFF: BEQ CODE_03AC0C
 
 #_03AC01: JSR ROUTINE_039385
 #_03AC04: BNE CODE_03AC0C
 
-#_03AC06: JSR ROUTINE_038A25_0020
+#_03AC06: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03AC09: JMP ROUTINE_03B40F
 
@@ -8485,11 +8523,11 @@ CODE_03AC0C:
 #_03AC0C: LDY.w #$0048
 
 #_03AC0F: LDA.w #$0020
-#_03AC12: JSR ROUTINE_039664
+#_03AC12: JSR Sprite_HandlePockyCollision_039664
 
 #_03AC15: LDY.w #$0048
 #_03AC18: LDA.w #$0020
-#_03AC1B: JSR ROUTINE_039C2D
+#_03AC1B: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03AC1E: LDA.w #$0603
 #_03AC21: JSR ROUTINE_038D44_BothParametersInA
@@ -8522,19 +8560,19 @@ CODE_03AC46:
 #_03AC4C: LDA.w $04F4
 #_03AC4F: BEQ CODE_03AC57
 
-#_03AC51: JSR ROUTINE_038A25_0020
+#_03AC51: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03AC54: JMP ROUTINE_03B43C
 
 CODE_03AC57:
 #_03AC57: LDY.w #$0048
-#_03AC5A: JSR ROUTINE_0392EE
+#_03AC5A: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03AC5D: BEQ CODE_03AC6A
 
 #_03AC5F: JSR ROUTINE_039385
 #_03AC62: BNE CODE_03AC6A
 
-#_03AC64: JSR ROUTINE_038A25_0020
+#_03AC64: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03AC67: JMP ROUTINE_03B40F
 
@@ -8542,11 +8580,11 @@ CODE_03AC6A:
 #_03AC6A: LDY.w #$0048
 
 #_03AC6D: LDA.w #$0020
-#_03AC70: JSR ROUTINE_039664
+#_03AC70: JSR Sprite_HandlePockyCollision_039664
 
 #_03AC73: LDY.w #$0048
 #_03AC76: LDA.w #$0020
-#_03AC79: JSR ROUTINE_039C2D
+#_03AC79: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03AC7C: JMP ROUTINE_0388B2
 
@@ -8586,13 +8624,13 @@ CODE_03ACB3:
 
 ROUTINE_03ACB6:
 #_03ACB6: LDY.w #$0050
-#_03ACB9: JSR ROUTINE_0392EE
+#_03ACB9: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03ACBC: BEQ CODE_03ACC9
 
 #_03ACBE: JSR ROUTINE_039385
 #_03ACC1: BNE CODE_03ACC9
 
-#_03ACC3: JSR ROUTINE_038A25_0020
+#_03ACC3: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03ACC6: JMP ROUTINE_03B40F
 
@@ -8600,11 +8638,11 @@ CODE_03ACC9:
 #_03ACC9: LDY.w #$0048
 
 #_03ACCC: LDA.w #$0020
-#_03ACCF: JSR ROUTINE_039664
+#_03ACCF: JSR Sprite_HandlePockyCollision_039664
 
 #_03ACD2: LDY.w #$0048
 #_03ACD5: LDA.w #$0020
-#_03ACD8: JSR ROUTINE_039C2D
+#_03ACD8: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03ACDB: JMP ROUTINE_0388B2
 
@@ -8639,7 +8677,7 @@ SpriteAI_021C:
 
 #_03AD0A: PHY
 
-#_03AD0B: JSL PrepEnemySpawn_long
+#_03AD0B: JSL PrepSpriteSpawn_long
 
 #_03AD0F: PLY
 
@@ -8742,13 +8780,13 @@ CODE_03ADA0:
 
 CODE_03ADA6:
 #_03ADA6: LDY.w #$0048
-#_03ADA9: JSR ROUTINE_0392EE
+#_03ADA9: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03ADAC: BEQ CODE_03ADB9
 
 #_03ADAE: JSR ROUTINE_039385
 #_03ADB1: BNE CODE_03ADB9
 
-#_03ADB3: JSR ROUTINE_038A25_0020
+#_03ADB3: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03ADB6: JMP ROUTINE_03B40F
 
@@ -8756,11 +8794,11 @@ CODE_03ADB9:
 #_03ADB9: LDY.w #$0038
 
 #_03ADBC: LDA.w #$0022
-#_03ADBF: JSR ROUTINE_039664
+#_03ADBF: JSR Sprite_HandlePockyCollision_039664
 
 #_03ADC2: LDY.w #$0038
 #_03ADC5: LDA.w #$0022
-#_03ADC8: JSR ROUTINE_039C2D
+#_03ADC8: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03ADCB: LDA.w $080E,X
 #_03ADCE: CLC
@@ -8855,19 +8893,19 @@ CODE_03AE5D:
 #_03AE5D: LDA.w $04F4
 #_03AE60: BEQ CODE_03AE68
 
-#_03AE62: JSR ROUTINE_038A25_0020
+#_03AE62: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03AE65: JMP ROUTINE_03B43C
 
 CODE_03AE68:
 #_03AE68: LDY.w #$0048
-#_03AE6B: JSR ROUTINE_0392EE
+#_03AE6B: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03AE6E: BEQ CODE_03AE7B
 
 #_03AE70: JSR ROUTINE_039385
 #_03AE73: BNE CODE_03AE7B
 
-#_03AE75: JSR ROUTINE_038A25_0020
+#_03AE75: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03AE78: JMP ROUTINE_03B40F
 
@@ -8875,14 +8913,14 @@ CODE_03AE7B:
 #_03AE7B: LDY.w #$0040
 
 #_03AE7E: LDA.w #$0020
-#_03AE81: JSR ROUTINE_039664
+#_03AE81: JSR Sprite_HandlePockyCollision_039664
 
 #_03AE84: LDY.w #$0040
 #_03AE87: LDA.w #$0020
-#_03AE8A: JSR ROUTINE_039C2D
+#_03AE8A: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03AE8D: LDA.w #ROUTINE_03B43C
-#_03AE90: JSR ROUTINE_038983
+#_03AE90: JSR ROUTINE_038983_ExecuteRoutineIfSomething
 #_03AE93: BNE CODE_03AE96
 
 #_03AE95: RTS
@@ -8897,7 +8935,7 @@ ROUTINE_03AE99:
 
 #_03AE9A: STZ.w $080A,X
 
-#_03AE9D: JMP CODE_03BD07
+#_03AE9D: JMP ROUTINE_03BD07
 
 ;===================================================================================================
 
@@ -8910,10 +8948,12 @@ SpriteAI_0232:
 #_03AEA7: LDY.w #data03AEAD>>16
 #_03AEAA: JMP ROUTINE_0390D7
 
+;---------------------------------------------------------------------------------------------------
+
 data03AEAD:
-#_03AEAD: db $02,$00,$00,$00,$00,$00,$48,$02
-#_03AEB5: db $01,$00,$00,$00,$00,$02,$48,$02
-#_03AEBD: db $01,$00
+#_03AEAD: dw $0002 ; spawn 2 sprites
+#_03AEAF: dw $0000, $0000, $0248, $0001 ; SPRITE 0248
+#_03AEB7: dw $0000, $0200, $0248, $0001 ; SPRITE 0248
 
 ;===================================================================================================
 
@@ -8926,10 +8966,12 @@ SpriteAI_0272:
 #_03AEC6: LDY.w #data03AECC>>16
 #_03AEC9: JMP ROUTINE_0390D7
 
+;---------------------------------------------------------------------------------------------------
+
 data03AECC:
-#_03AECC: db $02,$00,$40,$FE,$00,$00,$48,$02
-#_03AED4: db $01,$00,$C0,$01,$00,$00,$48,$02
-#_03AEDC: db $01,$00
+#_03AECC: dw $0002 ; spawn 2 sprites
+#_03AECE: dw $FE40, $0000, $0248, $0001 ; SPRITE 0248
+#_03AED6: dw $01C0, $0000, $0248, $0001 ; SPRITE 0248
 
 ;===================================================================================================
 
@@ -8942,10 +8984,12 @@ SpriteAI_0274:
 #_03AEE5: LDY.w #data03AEEB>>16
 #_03AEE8: JMP ROUTINE_0390D7
 
+;---------------------------------------------------------------------------------------------------
+
 data03AEEB:
-#_03AEEB: db $02,$00,$00,$00,$40,$FE,$48,$02
-#_03AEF3: db $01,$00,$00,$00,$C0,$01,$48,$02
-#_03AEFB: db $01,$00
+#_03AEEB: dw $0002 ; spawn 2 sprites
+#_03AEED: dw $0000, $FE40, $0248, $0001 ; SPRITE 0248
+#_03AEF5: dw $0000, $01C0, $0248, $0001 ; SPRITE 0248
 
 ;===================================================================================================
 
@@ -8958,12 +9002,16 @@ SpriteAI_0276:
 #_03AF04: LDY.w #data03AF0A>>16
 #_03AF07: JMP ROUTINE_0390D7
 
+;---------------------------------------------------------------------------------------------------
+
 data03AF0A:
-#_03AF0A: db $02,$00,$80,$FF,$80,$FF,$48,$02
-#_03AF12: db $01,$00,$80,$FF,$80,$00,$48,$02
-#_03AF1A: db $01,$00,$80,$00,$80,$FF,$48,$02
-#_03AF22: db $01,$00,$80,$00,$80,$00,$48,$02
-#_03AF2A: db $01,$00
+#_03AF0A: dw $0002 ; spawn 2 sprites
+#_03AF0C: dw $FF80, $FF80, $0248, $0001 ; SPRITE 0248
+#_03AF14: dw $FF80, $0080, $0248, $0001 ; SPRITE 0248
+
+; TODO unused?
+#_03AF1C: dw $0080, $FF80, $0248, $0001 ; SPRITE 0248
+#_03AF24: dw $0080, $0080, $0248, $0001 ; SPRITE 0248
 
 ;===================================================================================================
 
@@ -8976,10 +9024,12 @@ SpriteAI_0278:
 #_03AF33: LDY.w #data03AF39>>16
 #_03AF36: JMP ROUTINE_0390D7
 
+;---------------------------------------------------------------------------------------------------
+
 data03AF39:
-#_03AF39: db $02, $00, $00, $00, $00, $00, $48, $02
-#_03AF41: db $01, $00, $E0, $00, $E0, $00, $48, $02
-#_03AF49: db $01, $00
+#_03AF39: dw $0002 ; spawn 2 sprites
+#_03AF3B: dw $0000, $0000, $0248, $0001 ; SPRITE 0248
+#_03AF43: dw $00E0, $00E0, $0248, $0001 ; SPRITE 0248
 
 ;===================================================================================================
 
@@ -8993,7 +9043,7 @@ SpriteAI_0234:
 ;===================================================================================================
 
 ROUTINE_03AF52:
-#_03AF52: JSL ROUTINE_09B010
+#_03AF52: JSL ROUTINE_09B014_long
 #_03AF56: JSR ROUTINE_03AF9D
 
 #_03AF59: LDA.w data03AF91,Y
@@ -9008,7 +9058,7 @@ ROUTINE_03AF52:
 #_03AF6B: STA.l $7FE812,X
 
 #_03AF6F: LDA.w #$00C0
-#_03AF72: JSL ROUTINE_09AC87
+#_03AF72: JSL ROUTINE_09AC8B_long
 
 #_03AF76: LDA.w #$003C
 #_03AF79: STA.w $0816,X
@@ -9021,8 +9071,12 @@ ROUTINE_03AF52:
 
 #_03AF8A: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03AF8B:
-#_03AF8B: db $05,$00,$06,$00,$04,$00
+#_03AF8B: dw $0005
+#_03AF8D: dw $0006
+#_03AF8F: dw $0004
 
 data03AF91:
 #_03AF91: db $F6,$0D,$F7,$0D,$F2,$0D,$F3,$0D
@@ -9150,6 +9204,8 @@ CODE_03B032:
 
 CODE_03B039:
 #_03B039: JMP ROUTINE_03B1CA
+
+;---------------------------------------------------------------------------------------------------
 
 data03B03C:
 #_03B03C: db $07,$00,$0F,$00,$03,$00
@@ -9366,6 +9422,8 @@ ROUTINE_03B16E:
 
 #_03B177: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03B178:
 #_03B178: db $F8,$0D,$F9,$0D,$F4,$0D,$F5,$0D
 
@@ -9418,6 +9476,8 @@ CODE_03B1B4:
 
 #_03B1C3: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03B1C4:
 #_03B1C4: db $A0,$01,$80,$01,$00,$02
 
@@ -9425,13 +9485,13 @@ data03B1C4:
 
 ROUTINE_03B1CA:
 #_03B1CA: LDY.w #$0048
-#_03B1CD: JSR ROUTINE_0392EE
+#_03B1CD: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03B1D0: BEQ CODE_03B1DD
 
 #_03B1D2: JSR ROUTINE_039385
 #_03B1D5: BNE CODE_03B1DD
 
-#_03B1D7: JSR ROUTINE_038A25_0020
+#_03B1D7: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03B1DA: JMP ROUTINE_03B40F
 
@@ -9439,11 +9499,11 @@ CODE_03B1DD:
 #_03B1DD: LDY.w #$0040
 
 #_03B1E0: LDA.w #$0020
-#_03B1E3: JSR ROUTINE_039664
+#_03B1E3: JSR Sprite_HandlePockyCollision_039664
 
 #_03B1E6: LDY.w #$0040
 #_03B1E9: LDA.w #$0020
-#_03B1EC: JSR ROUTINE_039C2D
+#_03B1EC: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03B1EF: LDA.w #ROUTINE_03B43C
 #_03B1F2: JSR ROUTINE_03A2AE
@@ -9485,11 +9545,13 @@ SpriteAI_0236:
 #_03B221: LDY.w #data03B22A>>16
 #_03B224: JSR ROUTINE_0390D7
 
-#_03B227: JMP CODE_03BD07
+#_03B227: JMP ROUTINE_03BD07
+
+;---------------------------------------------------------------------------------------------------
 
 data03B22A:
-#_03B22A: db $01,$00,$00,$00,$00,$00,$10,$02
-#_03B232: db $00,$00
+#_03B22A: dw $0001 ; spawn 1 sprite
+#_03B22C: dw $0000, $0000, $0210, $0000 ; SPRITE 0210
 
 ;===================================================================================================
 
@@ -9502,12 +9564,14 @@ SpriteAI_023A:
 #_03B23B: LDY.w #data03B244>>16
 #_03B23E: JSR ROUTINE_0390D7
 
-#_03B241: JMP CODE_03BD07
+#_03B241: JMP ROUTINE_03BD07
+
+;---------------------------------------------------------------------------------------------------
 
 data03B244:
-#_03B244: db $02,$00,$00,$FF,$00,$00,$10,$02
-#_03B24C: db $00,$00,$00,$01,$00,$00,$10,$02
-#_03B254: db $00,$00
+#_03B244: dw $0002 ; spawn 2 sprites
+#_03B246: dw $FF00, $0000, $0210, $0000 ; SPRITE 0210
+#_03B24E: dw $0100, $0000, $0210, $0000 ; SPRITE 0210
 
 ;===================================================================================================
 
@@ -9519,7 +9583,7 @@ SpriteAI_0238:
 
 #_03B25C: LDA.l $7FE816,X
 #_03B260: AND.w #$00FF
-#_03B263: JSR PrepEnemySpawnMyCoordinates
+#_03B263: JSR PrepSpriteSpawnMyCoordinates
 
 #_03B266: JMP ROUTINE_038C85
 
@@ -9549,13 +9613,15 @@ SpriteAI_023C:
 #_03B285: LDY.w #data03B28E>>16
 #_03B288: JSR ROUTINE_0390D7
 
-#_03B28B: JMP CODE_03BD07
+#_03B28B: JMP ROUTINE_03BD07
+
+;---------------------------------------------------------------------------------------------------
 
 data03B28E:
-#_03B28E: db $03,$00,$00,$00,$00,$00,$10,$02
-#_03B296: db $00,$00,$C0,$FE,$00,$00,$10,$02
-#_03B29E: db $00,$00,$40,$01,$00,$00,$10,$02
-#_03B2A6: db $00,$00
+#_03B28E: dw $0003 ; spawn 3 sprites
+#_03B290: dw $0000, $0000, $0210, $0000 ; SPRITE 0210
+#_03B298: dw $FEC0, $0000, $0210, $0000 ; SPRITE 0210
+#_03B2A0: dw $0140, $0000, $0210, $0000 ; SPRITE 0210
 
 ;===================================================================================================
 
@@ -9568,13 +9634,15 @@ SpriteAI_023E:
 #_03B2AF: LDY.w #data03B2B8>>16
 #_03B2B2: JSR ROUTINE_0390D7
 
-#_03B2B5: JMP CODE_03BD07
+#_03B2B5: JMP ROUTINE_03BD07
+
+;---------------------------------------------------------------------------------------------------
 
 data03B2B8:
-#_03B2B8: db $03,$00,$00,$00,$60,$FE,$10,$02
-#_03B2C0: db $00,$00,$00,$00,$00,$00,$10,$02
-#_03B2C8: db $00,$00,$00,$00,$A0,$01,$10,$02
-#_03B2D0: db $00,$00
+#_03B2B8: dw $0003 ; spawn 3 sprites
+#_03B2BA: dw $0000, $FE60, $0210, $0000 ; SPRITE 0210
+#_03B2C2: dw $0000, $0000, $0210, $0000 ; SPRITE 0210
+#_03B2CA: dw $0000, $01A0, $0210, $0000 ; SPRITE 0210
 
 ;===================================================================================================
 
@@ -9656,8 +9724,8 @@ CODE_03B350:
 #_03B359: CMP.w #$0005
 #_03B35C: BEQ CODE_03B372
 
-#_03B35E: LDA.w #data00B385
-#_03B361: LDY.w #$0003
+#_03B35E: LDA.w #data03B385
+#_03B361: LDY.w #data03B385>>16
 #_03B364: JSR ROUTINE_0390D7
 
 #_03B367: INC.w $0818,X
@@ -9682,8 +9750,8 @@ CODE_03B37B:
 ;---------------------------------------------------------------------------------------------------
 
 data03B385:
-#_03B385: db $01,$00,$00,$00,$00,$00,$44,$02
-#_03B38D: db $00,$00
+#_03B385: dw $0001 ; spawn 1 sprite
+#_03B387: dw $0000, $0000, $0244, $0000 ; SPRITE 0244
 
 ;===================================================================================================
 
@@ -10046,9 +10114,11 @@ ROUTINE_03B585:
 
 #_03B59B: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03B59C:
-#_03B59C: db $01,$00,$00,$00,$00,$00,$26,$02
-#_03B5A4: db $01,$00
+#_03B59C: dw $0001 ; spawn 1 sprite
+#_03B59E: dw $0000, $0000, $0226, $0001 ; SPRITE 0226
 
 ;===================================================================================================
 
@@ -10088,16 +10158,17 @@ SpriteAI_025C:
 
 CODE_03B5D3:
 #_03B5D3: LDA.w #data03B5DD
-
 #_03B5D6: LDY.w #data03B5DD>>16
 #_03B5D9: JSR ROUTINE_0390D7
 
 .exit
 #_03B5DC: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03B5DD:
-#_03B5DD: db $01,$00,$00,$00,$00,$00,$5E,$02
-#_03B5E5: db $01,$00
+#_03B5DD: dw $0001 ; spawn 1 sprite
+#_03B5DF: dw $0000, $0000, $025E, $0001 ; SPRITE 025E
 
 ;===================================================================================================
 
@@ -10188,13 +10259,13 @@ ROUTINE_03B64F_long:
 
 ROUTINE_03B64F:
 #_03B64F: LDY.w #$0040
-#_03B652: JSR ROUTINE_0392EE
+#_03B652: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03B655: BEQ CODE_03B666
 
 #_03B657: JSR ROUTINE_039385
 #_03B65A: BNE CODE_03B666
 
-#_03B65C: JSR ROUTINE_038A25_0020
+#_03B65C: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 #_03B65F: JSR ROUTINE_038C85
 
 #_03B662: LDA.w $0800,X
@@ -10207,11 +10278,11 @@ CODE_03B666:
 #_03B666: LDY.w #$0030
 
 #_03B669: LDA.w #$0020
-#_03B66C: JSR ROUTINE_039664
+#_03B66C: JSR Sprite_HandlePockyCollision_039664
 
 #_03B66F: LDY.w #$0030
 #_03B672: LDA.w #$0020
-#_03B675: JSR ROUTINE_039C2D
+#_03B675: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 #_03B678: JSR ROUTINE_03894A
 #_03B67B: BNE .continue
 
@@ -10232,7 +10303,7 @@ CODE_03B666:
 SpriteAI_0226:
 #_03B68A: TYX
 
-#_03B68B: JSL ROUTINE_09B010
+#_03B68B: JSL ROUTINE_09B014_long
 #_03B68F: STA.l $7FE818,X
 
 #_03B693: LDA.w #$0D70
@@ -10305,13 +10376,13 @@ SpriteAI_022A:
 
 ROUTINE_03B6F9:
 #_03B6F9: LDY.w #$0040
-#_03B6FC: JSR ROUTINE_0392EE
+#_03B6FC: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03B6FF: BEQ CODE_03B70C
 
 #_03B701: JSR ROUTINE_039385
 #_03B704: BNE CODE_03B70C
 
-#_03B706: JSR ROUTINE_038A25_0020
+#_03B706: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03B709: JMP ROUTINE_03B40F
 
@@ -10321,11 +10392,11 @@ CODE_03B70C:
 #_03B70C: LDY.w #$0030
 
 #_03B70F: LDA.w #$0020
-#_03B712: JSR ROUTINE_039664
+#_03B712: JSR Sprite_HandlePockyCollision_039664
 
 #_03B715: LDY.w #$0030
 #_03B718: LDA.w #$0020
-#_03B71B: JSR ROUTINE_039C2D
+#_03B71B: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03B71E: LDA.w #ROUTINE_03B43C
 #_03B721: JSR ROUTINE_03A2AE
@@ -10358,11 +10429,13 @@ SpriteAI_0262:
 #_03B742: LDY.w #data03B74B>>16
 #_03B745: JSR ROUTINE_0390D7
 
-#_03B748: JMP CODE_03BD07
+#_03B748: JMP ROUTINE_03BD07
+
+;---------------------------------------------------------------------------------------------------
 
 data03B74B:
-#_03B74B: db $01,$00,$00,$00,$00,$00,$66,$02
-#_03B753: db $01,$00
+#_03B74B: dw $0001 ; spawn 1 sprite
+#_03B74D: dw $0000, $0000, $0266, $0001 ; SPRITE 0266
 
 ;===================================================================================================
 
@@ -10375,19 +10448,21 @@ SpriteAI_0256:
 #_03B75C: LDY.w #data03B765>>16
 #_03B75F: JSR ROUTINE_0390D7
 
-#_03B762: JMP CODE_03BD07
+#_03B762: JMP ROUTINE_03BD07
+
+;---------------------------------------------------------------------------------------------------
 
 data03B765:
-#_03B765: db $02,$00,$00,$FE,$00,$00,$66,$02
-#_03B76D: db $01,$00,$00,$02,$00,$00,$66,$02
-#_03B775: db $01,$00
+#_03B765: dw $0002 ; spawn 2 sprites
+#_03B767: dw $FE00, $0000, $0266, $0001 ; SPRITE 0266
+#_03B76F: dw $0200, $0000, $0266, $0001 ; SPRITE 0266
 
 ;===================================================================================================
 
 SpriteAI_0264:
 #_03B777: TYX
 
-#_03B778: JSL ROUTINE_09B010
+#_03B778: JSL ROUTINE_09B014_long
 
 #_03B77C: LDA.w $0800,X
 #_03B77F: ORA.w #$FF01
@@ -10416,6 +10491,8 @@ SpriteAI_0264:
 #_03B7B1: STA.w $0812,X
 
 #_03B7B4: JMP AdvanceAIModeUp
+
+;---------------------------------------------------------------------------------------------------
 
 data03B7B7:
 #_03B7B7: db $00,$00,$00,$00,$02,$00
@@ -10481,7 +10558,10 @@ CODE_03B7FB:
 
 #_03B80F: INC.w $0810,X
 #_03B812: INC.w $0810,X
+
 #_03B815: JMP ROUTINE_03B1CA
+
+;---------------------------------------------------------------------------------------------------
 
 data03B818:
 #_03B818: db $E6,$0D,$E7,$0D,$E6,$0D,$E7,$0D
@@ -10571,8 +10651,8 @@ CODE_03B883:
 ;---------------------------------------------------------------------------------------------------
 
 data03B899:
-#_03B899: db $14,$00,$28,$00,$3C,$00,$50,$00
-#_03B8A1: db $06,$00,$04,$00,$02,$00,$00,$00
+#_03B899: dw $0014, $0028, $003C, $0050
+#_03B8A1: dw $0006, $0004, $0002, $0000
 
 ;===================================================================================================
 
@@ -10653,6 +10733,8 @@ SpriteAI_026E:
 CODE_03B914:
 #_03B914: JMP ROUTINE_03B1CA
 
+;---------------------------------------------------------------------------------------------------
+
 data03B917:
 #_03B917: db $EA,$0D,$EB,$0D,$EA,$0D,$EB,$0D
 
@@ -10681,34 +10763,38 @@ SpriteAI_027C:
 CODE_03B935:
 #_03B935: JSR ROUTINE_0390D7
 
-#_03B938: JMP CODE_03BD07
+#_03B938: JMP ROUTINE_03BD07
+
+;---------------------------------------------------------------------------------------------------
 
 data03B93B:
-#_03B93B: db $03,$00,$00,$FE,$00,$00,$80,$02
-#_03B943: db $01,$00,$00,$00,$00,$00,$80,$02
-#_03B94B: db $01,$00,$00,$02,$00,$00,$80,$02
-#_03B953: db $01,$00
+#_03B93B: dw $0003 ; spawn 3 sprites
+#_03B93D: dw $FE00, $0000, $0280, $0001 ; SPRITE 0280
+#_03B945: dw $0000, $0000, $0280, $0001 ; SPRITE 0280
+#_03B94D: dw $0200, $0000, $0280, $0001 ; SPRITE 0280
 
 ;===================================================================================================
 
-SpriteAI_027E:
+#SpriteAI_027E:
 #_03B955: TYX
 
 #_03B956: LDA.w #data03B95F
 #_03B959: LDY.w #data03B95F>>16
 #_03B95C: JMP CODE_03B935
 
+;---------------------------------------------------------------------------------------------------
+
 data03B95F:
-#_03B95F: db $02,$00,$00,$FF,$00,$00,$80,$02
-#_03B967: db $01,$00,$00,$01,$00,$00,$80,$02
-#_03B96F: db $01,$00
+#_03B95F: dw $0002 ; spawn 2 sprites
+#_03B961: dw $FF00, $0000, $0280, $0001 ; SPRITE 0280
+#_03B969: dw $0100, $0000, $0280, $0001 ; SPRITE 0280
 
 ;===================================================================================================
 
 SpriteAI_0280:
 #_03B971: TYX
 
-#_03B972: JSL ROUTINE_09B010
+#_03B972: JSL ROUTINE_09B014_long
 
 #_03B976: LDA.w $080C,X
 #_03B979: CMP.w $19EE
@@ -10964,6 +11050,8 @@ CODE_03BAF3:
 CODE_03BAFE:
 #_03BAFE: JMP CODE_03BBA3
 
+;---------------------------------------------------------------------------------------------------
+
 data03BB01:
 #_03BB01: db $00,$04,$06,$08,$0A,$08,$0A
 
@@ -11042,7 +11130,7 @@ CODE_03BB5B:
 
 CODE_03BB5F:
 #_03BB5F: LDY.w #$0050
-#_03BB62: JSR ROUTINE_0392EE
+#_03BB62: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03BB65: BEQ CODE_03BB8F
 
 #_03BB67: JSR ROUTINE_039385
@@ -11059,11 +11147,11 @@ CODE_03BB78:
 
 #_03BB7B: LDY.w #$0160
 #_03BB7E: LDA.w #$0020
-#_03BB81: JSR ROUTINE_039664
+#_03BB81: JSR Sprite_HandlePockyCollision_039664
 
 #_03BB84: LDY.w #$0160
 #_03BB87: LDA.w #$0020
-#_03BB8A: JSR ROUTINE_039C2D
+#_03BB8A: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03BB8D: BRA CODE_03BBBD
 
@@ -11071,11 +11159,11 @@ CODE_03BB8F:
 #_03BB8F: LDY.w #$0050
 
 #_03BB92: LDA.w #$0020
-#_03BB95: JSR ROUTINE_039664
+#_03BB95: JSR Sprite_HandlePockyCollision_039664
 
 #_03BB98: LDY.w #$0050
 #_03BB9B: LDA.w #$0020
-#_03BB9E: JSR ROUTINE_039C2D
+#_03BB9E: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03BBA1: BRA CODE_03BBBD
 
@@ -11112,20 +11200,20 @@ SpriteAI_0290:
 #_03BBCD: LDY.w #data03BBD6>>16
 #_03BBD0: JSR ROUTINE_0390D7
 
-#_03BBD3: JMP CODE_03BD07
+#_03BBD3: JMP ROUTINE_03BD07
 
 ;---------------------------------------------------------------------------------------------------
 
 data03BBD6:
-#_03BBD6: db $01,$00,$00,$00,$00,$00,$94,$02
-#_03BBDE: db $01,$00
+#_03BBD6: dw $0001 ; spawn 1 sprite
+#_03BBD8: dw $0000, $0000, $0294, $0001 ; SPRITE 0294
 
 ;===================================================================================================
 
 SpriteAI_0292:
 #_03BBE0: TYX
 
-#_03BBE1: JSL ROUTINE_09B010
+#_03BBE1: JSL ROUTINE_09B014_long
 
 #_03BBE5: JMP AdvanceAIModeUp
 
@@ -11238,8 +11326,8 @@ SpriteAI_029C:
 #_03BC6E: LDA.w #$004B ; SFX 4B
 #_03BC71: STA.l $0004AA
 
-#_03BC75: LDA.w #$BCBB
-#_03BC78: LDY.w #$0003
+#_03BC75: LDA.w #data03BCBB
+#_03BC78: LDY.w #data03BCBB>>16
 #_03BC7B: JSR ROUTINE_0390D7
 
 #_03BC7E: LDA.w $081C,X
@@ -11272,13 +11360,19 @@ CODE_03BC9C:
 
 #_03BCA8: JMP ROUTINE_03B1CA
 
+;---------------------------------------------------------------------------------------------------
+
 data03BCAB:
-#_03BCAB: db $0D,$00,$12,$00,$1A,$00,$30,$00
+#_03BCAB: dw $000D, $0012, $001A, $0030
 
 data03BCB3:
-#_03BCB3: db $9A,$0F,$9C,$0F,$9E,$0F,$A0,$0F
-#_03BCBB: db $01,$00,$00,$00,$00,$00,$E8,$83
-#_03BCC3: db $01,$00
+#_03BCB3: dw $0F9A, $0F9C, $0F9E, $0FA0
+
+;---------------------------------------------------------------------------------------------------
+
+data03BCBB:
+#_03BCBB: dw $0001 ; spawn 1 sprite
+#_03BCBD: dw $0000, $0000, $83E8, $0001 ; SPRITE 83E8
 
 ;===================================================================================================
 
@@ -11332,7 +11426,7 @@ CODE_03BD01:
 CODE_03BD04:
 #_03BD04: JMP ROUTINE_03B1CA
 
-CODE_03BD07:
+ROUTINE_03BD07:
 #_03BD07: LDA.w #$0062
 #_03BD0A: STA.l $7FE816,X
 
@@ -11375,10 +11469,10 @@ SpriteAI_0014:
 #_03BD3A: LDA.w #$000C
 #_03BD3D: STA.b $24
 
-#_03BD3F: JSR PrepEnemySpawn
+#_03BD3F: JSR PrepSpriteSpawn
 
 CODE_03BD42:
-#_03BD42: JSR ROUTINE_038B69
+#_03BD42: JSR ROUTINE_038B73_MyCoordinates
 #_03BD45: BCS .exit
 
 #_03BD47: RTS
@@ -11418,7 +11512,7 @@ SpriteAI_0088:
 #_03BD6C: LDA.w $04F4
 #_03BD6F: BEQ CODE_03BD76
 
-#_03BD71: JSR ROUTINE_038A25_0020
+#_03BD71: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03BD74: BRA CODE_03BD9B
 
@@ -11426,21 +11520,21 @@ CODE_03BD76:
 #_03BD76: LDY.w #$0008
 
 #_03BD79: LDA.w #$0022
-#_03BD7C: JSR ROUTINE_039664
+#_03BD7C: JSR Sprite_HandlePockyCollision_039664
 
 #_03BD7F: LDY.w #$0008
 #_03BD82: LDA.w #$0022
-#_03BD85: JSR ROUTINE_039C2D
+#_03BD85: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03BD88: LDY.w #$0048
-#_03BD8B: JSR ROUTINE_0392EE
+#_03BD8B: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03BD8E: BEQ CODE_03BD9F
 
 #_03BD90: JSR ROUTINE_039385
 #_03BD93: BNE CODE_03BD9F
 
 #_03BD95: LDA.w #$0026 ; SPRITE 0026
-#_03BD98: JSR ROUTINE_038A25
+#_03BD98: JSR ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates_WithSFX
 
 CODE_03BD9B:
 #_03BD9B: JMP ROUTINE_038C85
@@ -11449,15 +11543,15 @@ CODE_03BD9B:
 #_03BD9E: RTS
 
 CODE_03BD9F:
-#_03BD9F: JSR ROUTINE_038B69
+#_03BD9F: JSR ROUTINE_038B73_MyCoordinates
 #_03BDA2: BCS .exit
 
-#_03BDA4: JMP ROUTINE_038DC5
+#_03BDA4: JMP ROUTINE_038DC8_3000
 
 ;===================================================================================================
 
 SpriteAI_008A:
-#_03BDA7: JSR ROUTINE_038090
+#_03BDA7: JSR ROUTINE_038090_Get_7EF817X_8Bit
 
 #_03BDAA: SEC
 #_03BDAB: SBC.w #$0044
@@ -11501,6 +11595,7 @@ CODE_03BDD5:
 
 #_03BDD8: LDA.w #$01C2
 #_03BDDB: STA.w $0806,X
+
 #_03BDDE: STZ.w $081E,X
 #_03BDE1: STZ.w $080A,X
 
@@ -11512,12 +11607,12 @@ CODE_03BDD5:
 
 #_03BDF0: LDY.w #$0078
 #_03BDF3: LDA.w #$0008
-#_03BDF6: JSR ROUTINE_039664
+#_03BDF6: JSR Sprite_HandlePockyCollision_039664
 
 #_03BDF9: LDA.w $081E,X
 #_03BDFC: BEQ CODE_03BE38
 
-#_03BDFE: JSR ROUTINE_038088
+#_03BDFE: JSR ROUTINE_038088_Get_7EF816X_8Bit
 #_03BE01: STA.w $081E,X
 #_03BE04: BEQ CODE_03BE29
 
@@ -11554,13 +11649,15 @@ CODE_03BE29:
 #_03BE35: JMP AdvanceAIModeUp
 
 CODE_03BE38:
-#_03BE38: JSR ROUTINE_038088
+#_03BE38: JSR ROUTINE_038088_Get_7EF816X_8Bit
 #_03BE3B: BEQ .exit
 
 #_03BE3D: JMP ROUTINE_038860
 
 .exit
 #_03BE40: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data03BE41:
 #_03BE41: db $05,$00,$03,$00,$04,$00,$06,$00
@@ -11619,7 +11716,7 @@ CODE_03BE87:
 #_03BE94: LDA.w #$0010
 #_03BE97: STA.w $19DE
 
-#_03BE9A: JSR ROUTINE_038090
+#_03BE9A: JSR ROUTINE_038090_Get_7EF817X_8Bit
 #_03BE9D: STA.l $7E7B28
 
 #_03BEA1: JMP ROUTINE_038C85
@@ -11668,7 +11765,7 @@ CODE_03BEB0:
 #_03BEE1: JSR Set_18E2_to_FFFF
 #_03BEE4: STA.w $1F70
 
-#_03BEE7: JSR ROUTINE_038090
+#_03BEE7: JSR ROUTINE_038090_Get_7EF817X_8Bit
 #_03BEEA: STA.l $7E7B28
 
 #_03BEEE: CLC
@@ -11694,7 +11791,7 @@ CODE_03BF0C:
 
 #_03BF0F: LDY.w #$0078
 #_03BF12: LDA.w #$0008
-#_03BF15: JSR ROUTINE_039664
+#_03BF15: JSR Sprite_HandlePockyCollision_039664
 
 #_03BF18: LDA.w $081E,X
 #_03BF1B: BNE .exit
@@ -11763,7 +11860,7 @@ CODE_03BF5B:
 
 #_03BF69: LDY.w #$0040
 #_03BF6C: LDA.w #$001C
-#_03BF6F: JSR ROUTINE_0392EE
+#_03BF6F: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03BF72: BEQ CODE_03BF7B
 
 #_03BF74: JSR ROUTINE_039390
@@ -11777,7 +11874,7 @@ CODE_03BF7B:
 
 #_03BF80: LDY.w #$0048
 #_03BF83: LDA.w #$001C
-#_03BF86: JSR ROUTINE_039C2D
+#_03BF86: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03BF89: LDA.b $22
 #_03BF8B: BNE CODE_03BF9A
@@ -11786,7 +11883,7 @@ CODE_03BF8D:
 #_03BF8D: LDY.w #$0040
 
 #_03BF90: LDA.w #$001C
-#_03BF93: JSR ROUTINE_039664
+#_03BF93: JSR Sprite_HandlePockyCollision_039664
 
 #_03BF96: LDA.b $22
 #_03BF98: BEQ CODE_03BFB8
@@ -11974,7 +12071,7 @@ CODE_03C08D:
 
 CODE_03C09D:
 #_03C09D: JSR ROUTINE_03C0D3
-#_03C0A0: JSR ROUTINE_038686
+#_03C0A0: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition
 #_03C0A3: CMP.w #$0080
 #_03C0A6: BCS ROUTINE_03C0B9
 
@@ -12169,7 +12266,7 @@ ROUTINE_03C185:
 #_03C1A4: LDA.w data03C27D,Y
 #_03C1A7: STA.w $05CE
 
-#_03C1AA: JSR ROUTINE_038650
+#_03C1AA: JSR ROUTINE_038650_SpawnsSprite8134
 
 #_03C1AD: LDA.w #$0038
 #_03C1B0: STA.w $05DC
@@ -12205,7 +12302,7 @@ ROUTINE_03C185:
 #_03C1DE: LDA.w #$000E
 #_03C1E1: STA.b $24
 
-#_03C1E3: JSL PrepEnemySpawn_long
+#_03C1E3: JSL PrepSpriteSpawn_long
 
 .exit
 #_03C1E7: RTS
@@ -12312,6 +12409,8 @@ CODE_03C273:
 
 #_03C27C: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03C27D:
 #_03C27D: db $52,$01,$54,$01,$58,$01,$56,$01
 #_03C285: db $5A,$01,$5C,$01,$5E,$01,$5E,$01
@@ -12399,7 +12498,7 @@ SpriteAI_010C:
 
 #_03C2F8: STZ.w $080A,X
 
-#_03C2FB: JSR Reset_0818_through_081F
+#_03C2FB: JSR Reset_0818to081F
 
 #_03C2FE: JMP AdvanceAIModeUp
 
@@ -12438,7 +12537,7 @@ SpriteAI_010E:
 #_03C331: JMP ROUTINE_038C85
 
 CODE_03C334:
-#_03C334: JSR ROUTINE_038AA3
+#_03C334: JSR ROUTINE_038AA3_Add_0812_ToCoordinates_XY
 #_03C337: JSR ROUTINE_0392D5
 #_03C33A: PHX
 
@@ -12697,7 +12796,7 @@ SpriteAI_0116:
 #_03C4E1: LDA.w #$000B ; SFX 0B
 #_03C4E4: STA.w $04A2
 
-#_03C4E7: JSR Reset_0818_through_081F
+#_03C4E7: JSR Reset_0818to081F
 
 #_03C4EA: STZ.w $0808,X
 
@@ -12796,7 +12895,7 @@ SpriteAI_00D2:
 
 #_03C58E: LDY.w #$0008
 #_03C591: LDA.w #$0002
-#_03C594: JSR ROUTINE_039664
+#_03C594: JSR Sprite_HandlePockyCollision_039664
 
 #_03C597: LDA.w $081A,X
 #_03C59A: BEQ CODE_03C5A9
@@ -12902,7 +13001,7 @@ SpriteAI_00BC:
 #_03C622: LDA.w #$000E
 #_03C625: STA.b $24
 
-#_03C627: JSL PrepEnemySpawn_long
+#_03C627: JSL PrepSpriteSpawn_long
 
 #_03C62B: CLC
 
@@ -12930,8 +13029,8 @@ SpriteAI_00BE:
 #_03C647: JMP ROUTINE_038C85
 
 CODE_03C64A:
-#_03C64A: JSR ROUTINE_038088
-#_03C64D: JSR PrepEnemySpawnMyCoordinates
+#_03C64A: JSR ROUTINE_038088_Get_7EF816X_8Bit
+#_03C64D: JSR PrepSpriteSpawnMyCoordinates
 
 #_03C650: JMP ROUTINE_038C85
 
@@ -12968,14 +13067,19 @@ SpriteAI_00C0:
 ;---------------------------------------------------------------------------------------------------
 
 data03C681:
-#_03C681: db $06,$00,$00,$00,$00,$00,$B6,$00
-#_03C689: db $80,$FF,$00,$01,$B6,$00,$80,$00
-#_03C691: db $00,$01,$B6,$00,$00,$FF,$00,$02
-#_03C699: db $B6,$00,$00,$00,$00,$02,$B6,$00
-#_03C6A1: db $00,$01,$00,$02,$B6,$00,$80,$FE
-#_03C6A9: db $00,$03,$B6,$00,$80,$FF,$00,$03
-#_03C6B1: db $B6,$00,$80,$00,$00,$03,$B6,$00
-#_03C6B9: db $80,$01,$00,$03,$B6,$00
+#_03C681: dw $0006 ; spawn 6 sprites
+#_03C683: dw $0000, $0000, $00B6 ; SPRITE 00B6
+#_03C689: dw $FF80, $0100, $00B6 ; SPRITE 00B6
+#_03C68F: dw $0080, $0100, $00B6 ; SPRITE 00B6
+#_03C695: dw $FF00, $0200, $00B6 ; SPRITE 00B6
+#_03C69B: dw $0000, $0200, $00B6 ; SPRITE 00B6
+#_03C6A1: dw $0100, $0200, $00B6 ; SPRITE 00B6
+
+; TODO unused?
+#_03C6A7: dw $FE80, $0300, $00B6 ; SPRITE 00B6
+#_03C6AD: dw $FF80, $0300, $00B6 ; SPRITE 00B6
+#_03C6B3: dw $0080, $0300, $00B6 ; SPRITE 00B6
+#_03C6B9: dw $0180, $0300, $00B6 ; SPRITE 00B6
 
 ;===================================================================================================
 
@@ -12985,8 +13089,8 @@ SpriteAI_00C2:
 #_03C6C0: LDA.w $0816,X
 #_03C6C3: BNE .exit
 
-#_03C6C5: JSR ROUTINE_038088
-#_03C6C8: JSR PrepEnemySpawnMyCoordinates
+#_03C6C5: JSR ROUTINE_038088_Get_7EF816X_8Bit
+#_03C6C8: JSR PrepSpriteSpawnMyCoordinates
 
 #_03C6CB: JMP ROUTINE_038C85
 
@@ -13008,8 +13112,8 @@ SpriteAI_00C6:
 #_03C6D5: LDA.w $0816,X
 #_03C6D8: BNE .exit
 
-#_03C6DA: JSR ROUTINE_038088
-#_03C6DD: JSR PrepEnemySpawnMyCoordinates
+#_03C6DA: JSR ROUTINE_038088_Get_7EF816X_8Bit
+#_03C6DD: JSR PrepSpriteSpawnMyCoordinates
 
 #_03C6E0: JMP ROUTINE_038C85
 
@@ -13078,7 +13182,7 @@ ROUTINE_03C735:
 #_03C739: BEQ .exit
 
 #_03C73B: LDA.w #ROUTINE_03C797
-#_03C73E: JSR ROUTINE_038983
+#_03C73E: JSR ROUTINE_038983_ExecuteRoutineIfSomething
 #_03C741: BEQ .exit
 
 #_03C743: CLC
@@ -13110,7 +13214,7 @@ ROUTINE_03C762:
 #_03C766: BEQ .exit
 
 #_03C768: LDA.w #ROUTINE_03C797
-#_03C76B: JSR ROUTINE_038983
+#_03C76B: JSR ROUTINE_038983_ExecuteRoutineIfSomething
 #_03C76E: BEQ .exit
 
 #_03C770: LDA.l $7FE814,X
@@ -13137,7 +13241,7 @@ ROUTINE_03C785:
 #_03C789: BEQ .exit
 
 #_03C78B: LDA.w #ROUTINE_03C797
-#_03C78E: JSR ROUTINE_038983
+#_03C78E: JSR ROUTINE_038983_ExecuteRoutineIfSomething
 #_03C791: BEQ .exit
 
 #_03C793: JMP CODE_03C7AC
@@ -13197,17 +13301,17 @@ ROUTINE_03C7D9:
 #_03C7D9: LDY.w #$0008
 
 #_03C7DC: LDA.w #$0020
-#_03C7DF: JSR ROUTINE_039664
+#_03C7DF: JSR Sprite_HandlePockyCollision_039664
 
 #_03C7E2: LDY.w #$0008
 #_03C7E5: LDA.w #$0020
-#_03C7E8: JSR ROUTINE_039C2D
+#_03C7E8: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 ;===================================================================================================
 
 ROUTINE_03C7EB:
 #_03C7EB: LDY.w #$0050
-#_03C7EE: JSR ROUTINE_0392EE
+#_03C7EE: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03C7F1: BEQ CODE_03C7FB
 
 #_03C7F3: JSR ROUTINE_039385
@@ -13256,6 +13360,8 @@ SpriteAI_00B6:
 
 #_03C838: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03C839:
 #_03C839: db $00,$00,$0C,$0F,$12,$15
 
@@ -13288,15 +13394,15 @@ CODE_03C84B:
 
 #_03C865: LDY.w #$0008
 #_03C868: LDA.w #$0020
-#_03C86B: JSR ROUTINE_039664
+#_03C86B: JSR Sprite_HandlePockyCollision_039664
 
 #_03C86E: LDY.w #$0008
 #_03C871: LDA.w #$0020
-#_03C874: JSR ROUTINE_039C2D
+#_03C874: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 CODE_03C877:
 #_03C877: LDY.w #$0050
-#_03C87A: JSR ROUTINE_0392EE
+#_03C87A: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03C87D: BEQ CODE_03C888
 
 #_03C87F: JSR ROUTINE_039385
@@ -13383,6 +13489,8 @@ CODE_03C8CA:
 .exit
 #_03C8EA: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03C8EB:
 #_03C8EB: dw ROUTINE_03CB54 : db $00,$00
 #_03C8EF: dw ROUTINE_03CB12 : db $30,$00
@@ -13436,7 +13544,7 @@ data03C8EB:
 ;===================================================================================================
 
 ROUTINE_03C9AB:
-#_03C9AB: JSR ROUTINE_038A25_0020
+#_03C9AB: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03C9AE: LDY.w $0816,X
 #_03C9B1: LDA.w $081E,Y
@@ -13628,15 +13736,17 @@ ROUTINE_03CA74:
 
 #_03CA96: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03CA97:
-#_03CA97: db $05,$0D,$05,$0D,$0D,$0D,$02,$0D
-#_03CA9F: db $02,$0D,$02,$0D,$0C,$0D,$04,$0D
-#_03CAA7: db $04,$0D,$04,$0D,$0A,$0D,$08,$0D
-#_03CAAF: db $08,$0D,$08,$0D,$0B,$0D,$05,$0D
-#_03CAB7: db $07,$0D,$07,$0D,$0D,$0D,$03,$0D
-#_03CABF: db $03,$0D,$03,$0D,$0C,$0D,$06,$0D
-#_03CAC7: db $06,$0D,$06,$0D,$0A,$0D,$09,$0D
-#_03CACF: db $09,$0D,$09,$0D,$0B,$0D,$07,$0D
+#_03CA97: dw $0D05, $0D05, $0D0D, $0D02
+#_03CA9F: dw $0D02, $0D02, $0D0C, $0D04
+#_03CAA7: dw $0D04, $0D04, $0D0A, $0D08
+#_03CAAF: dw $0D08, $0D08, $0D0B, $0D05
+#_03CAB7: dw $0D07, $0D07, $0D0D, $0D03
+#_03CABF: dw $0D03, $0D03, $0D0C, $0D06
+#_03CAC7: dw $0D06, $0D06, $0D0A, $0D09
+#_03CACF: dw $0D09, $0D09, $0D0B, $0D07
 
 ;===================================================================================================
 
@@ -13693,7 +13803,7 @@ ROUTINE_03CB03:
 #_03CB03: JSR ROUTINE_03CB29
 
 #_03CB06: LDA.w #ROUTINE_03C797
-#_03CB09: JSR ROUTINE_038983
+#_03CB09: JSR ROUTINE_038983_ExecuteRoutineIfSomething
 #_03CB0C: BNE .continue
 
 #_03CB0E: RTS
@@ -13718,7 +13828,7 @@ ROUTINE_03CB19:
 #_03CB1A: JSR ROUTINE_03CB29
 
 #_03CB1D: LDA.w #ROUTINE_03C797
-#_03CB20: JSR ROUTINE_038983
+#_03CB20: JSR ROUTINE_038983_ExecuteRoutineIfSomething
 #_03CB23: BNE .continue
 
 #_03CB25: RTS
@@ -13961,7 +14071,7 @@ CODE_03CC2A:
 #_03CC57: RTS
 
 CODE_03CC58:
-#_03CC58: JSR ROUTINE_038AD2
+#_03CC58: JSR ROUTINE_038AD2_Add_081C_ToCoordinates_XY
 
 #_03CC5B: LDA.w $05A0
 #_03CC5E: AND.w #$0003
@@ -14021,7 +14131,7 @@ CODE_03CC9B:
 
 #_03CCA6: LDY.w #$0040
 #_03CCA9: LDA.w #$001E
-#_03CCAC: JSR ROUTINE_0392EE
+#_03CCAC: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03CCAF: BEQ CODE_03CCB9
 
 #_03CCB1: JSR ROUTINE_039390
@@ -14033,7 +14143,7 @@ CODE_03CCB9:
 #_03CCB9: LDY.w #$0008
 
 #_03CCBC: LDA.w #$000A
-#_03CCBF: JSR ROUTINE_039664
+#_03CCBF: JSR Sprite_HandlePockyCollision_039664
 
 #_03CCC2: LDA.b $22
 #_03CCC4: BEQ CODE_03CCC9
@@ -14597,7 +14707,7 @@ ROUTINE_03CFEA:
 
 #_03CFF7: LDY.w #$0058
 #_03CFFA: LDA.w #$0024
-#_03CFFD: JSR ROUTINE_039664
+#_03CFFD: JSR Sprite_HandlePockyCollision_039664
 
 #_03D000: LDA.w #$FC00
 #_03D003: LDY.w #$201C
@@ -14873,7 +14983,7 @@ CODE_03D161:
 #_03D18E: BRA CODE_03D19C
 
 CODE_03D190:
-#_03D190: JSR ROUTINE_038AA3
+#_03D190: JSR ROUTINE_038AA3_Add_0812_ToCoordinates_XY
 
 #_03D193: LDA.w #$FE00
 #_03D196: LDY.w #$301C
@@ -14933,7 +15043,7 @@ SpriteAI_0044:
 
 #_03D1E5: JSR ROUTINE_03D1EB
 
-#_03D1E8: JMP ROUTINE_038650
+#_03D1E8: JMP ROUTINE_038650_SpawnsSprite8134
 
 ;===================================================================================================
 
@@ -15007,11 +15117,11 @@ CODE_03D24A:
 #_03D24A: LDY.w #$0050
 
 #_03D24D: LDA.w #$000C
-#_03D250: JSR ROUTINE_039664
+#_03D250: JSR Sprite_HandlePockyCollision_039664
 
 CODE_03D253:
 #_03D253: LDY.w #$0050
-#_03D256: JSR ROUTINE_0392EE
+#_03D256: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03D259: BEQ CODE_03D27A
 
 #_03D25B: JSR ROUTINE_039385
@@ -15026,7 +15136,7 @@ CODE_03D253:
 #_03D26A: LDA.w #$0006
 #_03D26D: STA.b $24
 
-#_03D26F: JSL PrepEnemySpawn_long
+#_03D26F: JSL PrepSpriteSpawn_long
 
 #_03D273: LDA.w #$0004 ; SPRITE 0004
 #_03D276: STA.w $0810,X
@@ -15047,7 +15157,7 @@ SpriteAI_004A:
 
 #_03D284: LDY.w #$0050
 #_03D287: LDA.w #$0024
-#_03D28A: JSR ROUTINE_039664
+#_03D28A: JSR Sprite_HandlePockyCollision_039664
 
 #_03D28D: JMP ROUTINE_038874
 
@@ -15074,8 +15184,8 @@ SpriteAI_004C:
 #_03D2AC: STA.b $22
 
 #_03D2AE: LDY.w #$0002
-#_03D2B1: JSL ROUTINE_038A58
-#_03D2B5: JSR ROUTINE_0387AD
+#_03D2B1: JSL SpawnDisappearingSmoke
+#_03D2B5: JSR ROUTINE_0387AD_TreasureSpawn
 
 #_03D2B8: LDA.w $0818,X
 
@@ -15148,7 +15258,7 @@ SpriteAI_0050:
 #_03D319: STA.w $081A,X
 #_03D31C: STA.l $7FE812,X
 
-#_03D320: JMP ROUTINE_038650
+#_03D320: JMP ROUTINE_038650_SpawnsSprite8134
 
 ;===================================================================================================
 
@@ -15192,7 +15302,7 @@ SpriteAI_0054:
 #_03D34D: LDY.w #$0050
 
 #_03D350: LDA.w #$000E
-#_03D353: JSR ROUTINE_039664
+#_03D353: JSR Sprite_HandlePockyCollision_039664
 
 #_03D356: LDA.w $081A,X
 #_03D359: BPL CODE_03D35E
@@ -15230,8 +15340,8 @@ CODE_03D36A:
 #_03D385: LDY.w #$0001
 
 CODE_03D388:
-#_03D388: JSL ROUTINE_038A58
-#_03D38C: JSR ROUTINE_0387AD
+#_03D388: JSL SpawnDisappearingSmoke
+#_03D38C: JSR ROUTINE_0387AD_TreasureSpawn
 
 #_03D38F: JMP ROUTINE_038C85
 
@@ -15316,7 +15426,7 @@ CODE_03D3EE:
 
 #_03D3F9: LDY.w #$0040
 #_03D3FC: LDA.w #$001A
-#_03D3FF: JSR ROUTINE_0392EE
+#_03D3FF: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03D402: BEQ CODE_03D40C
 
 #_03D404: JSR ROUTINE_039390
@@ -15328,7 +15438,7 @@ CODE_03D40C:
 #_03D40C: LDY.w #$0008
 
 #_03D40F: LDA.w #$001A
-#_03D412: JSR ROUTINE_039664
+#_03D412: JSR Sprite_HandlePockyCollision_039664
 
 #_03D415: LDA.b $22
 #_03D417: BEQ CODE_03D41C
@@ -15399,7 +15509,7 @@ CODE_03D464:
 
 #_03D46F: LDY.w #$0040
 #_03D472: LDA.w #$0018
-#_03D475: JSR ROUTINE_0392EE
+#_03D475: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03D478: BEQ CODE_03D482
 
 #_03D47A: JSR ROUTINE_039390
@@ -15411,7 +15521,7 @@ CODE_03D482:
 #_03D482: LDY.w #$0040
 
 #_03D485: LDA.w #$0018
-#_03D488: JSR ROUTINE_039664
+#_03D488: JSR Sprite_HandlePockyCollision_039664
 
 #_03D48B: LDA.b $22
 #_03D48D: BEQ CODE_03D492
@@ -15525,7 +15635,7 @@ CODE_03D4EB:
 
 CODE_03D51F:
 #_03D51F: LDA.w #$00A8 ; SPRITE 00A8
-#_03D522: JSR ROUTINE_038A2D
+#_03D522: JSR ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates
 #_03D525: JSR ROUTINE_038C85
 
 #_03D528: BRA CODE_03D575
@@ -15561,7 +15671,7 @@ CODE_03D550:
 #_03D553: STZ.w $081E,X
 
 CODE_03D556:
-#_03D556: JSR ROUTINE_038AD2
+#_03D556: JSR ROUTINE_038AD2_Add_081C_ToCoordinates_XY
 #_03D559: JSR ROUTINE_0392C0
 
 #_03D55C: LDY.w $0804,X
@@ -15605,7 +15715,7 @@ CODE_03D589:
 
 #_03D594: LDY.w #$0040
 #_03D597: LDA.w #$0016
-#_03D59A: JSR ROUTINE_0392EE
+#_03D59A: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03D59D: BEQ CODE_03D5A7
 
 #_03D59F: JSR ROUTINE_039390
@@ -15617,7 +15727,7 @@ CODE_03D5A7:
 #_03D5A7: LDY.w #$0040
 
 #_03D5AA: LDA.w #$0016
-#_03D5AD: JSR ROUTINE_039664
+#_03D5AD: JSR Sprite_HandlePockyCollision_039664
 
 #_03D5B0: LDA.b $22
 #_03D5B2: BEQ CODE_03D5B7
@@ -15731,7 +15841,7 @@ CODE_03D634:
 
 #_03D63F: LDY.w #$0040
 #_03D642: LDA.w #$0014
-#_03D645: JSR ROUTINE_0392EE
+#_03D645: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03D648: BEQ CODE_03D652
 
 #_03D64A: JSR ROUTINE_039390
@@ -15743,7 +15853,7 @@ CODE_03D652:
 #_03D652: LDY.w #$0040
 
 #_03D655: LDA.w #$0014
-#_03D658: JSR ROUTINE_039664
+#_03D658: JSR Sprite_HandlePockyCollision_039664
 
 #_03D65B: LDA.b $22
 #_03D65D: BEQ CODE_03D662
@@ -15835,7 +15945,7 @@ SpriteAI_006A:
 
 #_03D6CC: LDY.w #$0040
 #_03D6CF: LDA.w #$0012
-#_03D6D2: JSR ROUTINE_0392EE
+#_03D6D2: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03D6D5: BEQ CODE_03D6DF
 
 #_03D6D7: JSR ROUTINE_039390
@@ -15849,7 +15959,7 @@ CODE_03D6DF:
 
 #_03D6E4: LDY.w #$0048
 #_03D6E7: LDA.w #$0012
-#_03D6EA: JSR ROUTINE_039C2D
+#_03D6EA: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03D6ED: LDA.b $22
 #_03D6EF: BNE CODE_03D70B
@@ -15858,7 +15968,7 @@ CODE_03D6F1:
 #_03D6F1: LDY.w #$0040
 
 #_03D6F4: LDA.w #$0012
-#_03D6F7: JSR ROUTINE_039664
+#_03D6F7: JSR Sprite_HandlePockyCollision_039664
 
 #_03D6FA: LDA.b $22
 #_03D6FC: BNE CODE_03D70B
@@ -15918,6 +16028,8 @@ CODE_03D73E:
 #_03D741: STA.w $0808,X
 
 #_03D744: JMP ROUTINE_038860
+
+;---------------------------------------------------------------------------------------------------
 
 data03D747:
 #_03D747: db $40,$0D,$42,$0D,$42,$0D,$40,$0D
@@ -16007,6 +16119,8 @@ CODE_03D7C6:
 
 #_03D7D2: JMP AdvanceAIModeUp
 
+;---------------------------------------------------------------------------------------------------
+
 data03D7D5:
 #_03D7D5: db $F0,$FF,$00,$00,$10,$00,$00,$00
 #_03D7DD: db $F0,$FF,$00,$00,$F8,$FF,$00,$00
@@ -16017,6 +16131,7 @@ SpriteAI_0064:
 #_03D7E5: TYX
 
 #_03D7E6: INC.w $04CA
+
 #_03D7E9: JSR ROUTINE_03D85A
 #_03D7EC: BEQ .exit
 
@@ -16051,7 +16166,7 @@ SpriteAI_0064:
 
 #_03D81B: LDY.w #$0040
 #_03D81E: LDA.w #$0010
-#_03D821: JSR ROUTINE_0392EE
+#_03D821: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03D824: BEQ CODE_03D82B
 
 #_03D826: JSR ROUTINE_039390
@@ -16063,7 +16178,7 @@ CODE_03D82B:
 
 #_03D830: LDY.w #$0048
 #_03D833: LDA.w #$0010
-#_03D836: JSR ROUTINE_039C2D
+#_03D836: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03D839: LDA.b $22
 #_03D83B: BNE CODE_03D857
@@ -16072,7 +16187,7 @@ CODE_03D83D:
 #_03D83D: LDY.w #$0048
 
 #_03D840: LDA.w #$0010
-#_03D843: JSR ROUTINE_039664
+#_03D843: JSR Sprite_HandlePockyCollision_039664
 
 #_03D846: LDA.b $22
 #_03D848: BNE CODE_03D857
@@ -16153,7 +16268,7 @@ ROUTINE_03D8AE:
 
 #ROUTINE_03D8B6:
 #_03D8B6: LDA.w #$00A8 ; SPRITE 00A8
-#_03D8B9: JSR ROUTINE_038A2D
+#_03D8B9: JSR ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -16180,7 +16295,7 @@ CODE_03D8D2:
 #_03D8D5: ORA.w $081E,X
 #_03D8D8: BEQ CODE_03D921
 
-#_03D8DA: JSR ROUTINE_038AD2
+#_03D8DA: JSR ROUTINE_038AD2_Add_081C_ToCoordinates_XY
 #_03D8DD: JSR ROUTINE_0388D4
 
 #_03D8E0: LDA.b $20
@@ -16236,11 +16351,15 @@ CODE_03D921:
 
 #_03D92C: BRA CODE_03D91D
 
+;---------------------------------------------------------------------------------------------------
+
 vectors03D92E:
 #_03D92E: dw ROUTINE_03D8C4
 #_03D930: dw ROUTINE_03D8AE
 #_03D932: dw ROUTINE_03D8B6
 #_03D934: dw ROUTINE_03D8AE
+
+;---------------------------------------------------------------------------------------------------
 
 data03D936:
 #_03D936: db $00,$00,$00,$00,$00,$00,$00,$00
@@ -16314,7 +16433,7 @@ CODE_03D9AE:
 SpriteAI_0026:
 #_03D9B1: TYX
 
-#_03D9B2: JSR Reset_0818_through_081F
+#_03D9B2: JSR Reset_0818to081F
 
 #_03D9B5: LDA.w #$0028 ; SPRITE 0028
 #_03D9B8: STA.w $0810,X
@@ -16348,7 +16467,7 @@ SpriteAI_002A:
 SpriteAI_008C:
 #_03D9D2: TYX
 
-#_03D9D3: JSR Reset_0818_through_081F
+#_03D9D3: JSR Reset_0818to081F
 
 #_03D9D6: JMP AdvanceAIModeUp
 
@@ -16364,7 +16483,7 @@ SpriteAI_008E:
 #_03D9E2: JMP ROUTINE_038C85
 
 CODE_03D9E5:
-#_03D9E5: JSR ROUTINE_038AA3
+#_03D9E5: JSR ROUTINE_038AA3_Add_0812_ToCoordinates_XY
 
 #_03D9E8: JMP ROUTINE_0386A8
 
@@ -16373,7 +16492,7 @@ CODE_03D9E5:
 SpriteAI_0020:
 #_03D9EB: TYX
 
-#_03D9EC: JSR Reset_0818_through_081F
+#_03D9EC: JSR Reset_0818to081F
 
 #_03D9EF: JMP AdvanceAIModeUp
 
@@ -16827,6 +16946,8 @@ SpriteAI_00F0:
 CODE_03DC09:
 #_03DC09: LDY.w #$0018
 
+;===================================================================================================
+
 CODE_03DC0C:
 #_03DC0C: LDA.w #$FFFF
 #_03DC0F: STA.w $0808,X
@@ -16920,7 +17041,7 @@ CODE_03DC7E:
 
 ;===================================================================================================
 
-SpriteAI_00F8:
+#SpriteAI_00F8:
 #_03DC84: TYX
 
 #_03DC85: JSR ROUTINE_038632
@@ -16971,7 +17092,7 @@ CODE_03DCB5:
 #_03DCB5: LDA.w #$FFFF
 #_03DCB8: STA.w $0808,X
 
-#_03DCBB: LDA.w data03DCCC,Y
+#_03DCBB: LDA.w .pointers,Y
 #_03DCBE: STA.w $0814,X
 
 #_03DCC1: LDA.w $0808,X
@@ -16982,7 +17103,9 @@ CODE_03DCB5:
 CODE_03DCC9:
 #_03DCC9: JMP ROUTINE_03DADB
 
-data03DCCC:
+;---------------------------------------------------------------------------------------------------
+
+.pointers
 #_03DCCC: dw data05DE7E
 #_03DCCE: dw data05DE7E
 #_03DCD0: dw data05DE8E
@@ -17156,12 +17279,13 @@ SpriteAI_011A:
 
 #_03DD9D: LDA.w #$0120 ; SPRITE 0120
 #_03DDA0: STA.b $26
+
 #_03DDA2: STX.b $30
 
 #_03DDA4: LDA.w #$000C
 #_03DDA7: STA.b $24
 
-#_03DDA9: JSR PrepEnemySpawn
+#_03DDA9: JSR PrepSpriteSpawn
 
 #_03DDAC: LDA.w #$0100
 #_03DDAF: STA.w $0518
@@ -17269,6 +17393,7 @@ CODE_03DE30:
 CODE_03DE3C:
 #_03DE3C: LDA.w #$0100
 #_03DE3F: STA.w $0518
+
 #_03DE42: STA.w $056E
 
 #_03DE45: LDA.w #$010E ; PARTNER 010E
@@ -17290,10 +17415,19 @@ ROUTINE_03DE51:
 #_03DE5B: AND.w #$00FF
 #_03DE5E: JMP CODE_03DE81
 
-#data03DE61:
-#_03DE61: db $04,$00,$24,$05,$00,$17,$00,$00
-#_03DE69: db $00,$02,$00,$30,$21,$00,$02,$00
-#_03DE71: db $01,$00,$09,$21,$00,$29,$00,$00
+;===================================================================================================
+
+data03DE61:
+#_03DE61: dw $0004 : dl $000524 ; copy 4 bytes to target
+#_03DE66: db $17, $00, $00, $00
+
+#_03DE6A: dw $0002 : dl CGWSEL ; copy 2 bytes to target
+#_03DE6F: db $02, $00
+
+#_03DE71: dw $0001 : dl BG3SC ; copy 1 byte to target
+#_03DE76: db $29
+
+#_03DE77: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -17481,7 +17615,7 @@ CODE_03DF41:
 #_03DF55: PHX
 
 #_03DF56: LDX.w #data03DE61
-#_03DF59: JSR ROUTINE_038BE0
+#_03DF59: JSR ROUTINE_038BE0_SomeTableCopy
 
 #_03DF5C: INC.w $054E
 
@@ -17519,7 +17653,7 @@ SpriteAI_0122:
 
 #_03DF85: LDA.w $05A0
 #_03DF88: AND.w #$0007
-#_03DF8B: BNE CODE_03DFAF
+#_03DF8B: BNE .no_spawn
 
 #_03DF8D: JSR Random
 #_03DF90: AND.w #$02F0
@@ -17537,9 +17671,9 @@ SpriteAI_0122:
 #_03DFA7: LDA.w #$000C
 #_03DFAA: STA.b $24
 
-#_03DFAC: JSR PrepEnemySpawn
+#_03DFAC: JSR PrepSpriteSpawn
 
-CODE_03DFAF:
+.no_spawn
 #_03DFAF: JSR ROUTINE_0392D5
 
 #_03DFB2: LDY.w $0816,X
@@ -17593,7 +17727,7 @@ SpriteAI_0124:
 SpriteAI_0126:
 #_03DFF5: TYX
 
-#_03DFF6: JSR Reset_0818_through_081F
+#_03DFF6: JSR Reset_0818to081F
 
 #_03DFF9: LDA.w $080A,X
 #_03DFFC: STA.w $0816,X
@@ -17727,7 +17861,7 @@ SpriteAI_012A:
 #_03E0C4: LDA.w #$000C
 #_03E0C7: STA.b $24
 
-#_03E0C9: JSR PrepEnemySpawn
+#_03E0C9: JSR PrepSpriteSpawn
 
 #_03E0CC: RTS
 
@@ -17741,7 +17875,9 @@ ROUTINE_03E0CD:
 #_03E0D1: LDA.w #$0100
 #_03E0D4: STA.w $04D2
 #_03E0D7: STA.w $081C,X
+
 #_03E0DA: STA.w $051A
+
 #_03E0DD: STA.w $056E
 
 #_03E0E0: JMP ROUTINE_03DCFB
@@ -17960,14 +18096,16 @@ SpriteAI_012E:
 #_03E1FA: TYX
 
 #_03E1FB: JSR ROUTINE_03E20C
+
 #_03E1FE: PHX
 
 #_03E1FF: LDX.w #data03DE61
-#_03E202: JSR ROUTINE_038BE0
+#_03E202: JSR ROUTINE_038BE0_SomeTableCopy
 
 #_03E205: INC.w $054E
 
 #_03E208: PLX
+
 #_03E209: JMP ROUTINE_038C85
 
 ;===================================================================================================
@@ -18005,7 +18143,7 @@ SpriteAI_0130:
 #_03E236: TYX
 
 #_03E237: JSL ROUTINE_08D367
-#_03E23B: JSR Reset_0818_through_081F
+#_03E23B: JSR Reset_0818to081F
 
 #_03E23E: LDA.w $080A,X
 #_03E241: STA.w $0816,X
@@ -18146,7 +18284,7 @@ CODE_03E2D4:
 #_03E309: LDA.w #$000E
 #_03E30C: STA.b $24
 
-#_03E30E: JSL PrepEnemySpawn_long
+#_03E30E: JSL PrepSpriteSpawn_long
 
 CODE_03E312:
 #_03E312: LDA.w $05E0
@@ -18166,7 +18304,7 @@ CODE_03E312:
 #_03E32C: PHX
 
 #_03E32D: LDX.w #data03DE61
-#_03E330: JSR ROUTINE_038BE0
+#_03E330: JSR ROUTINE_038BE0_SomeTableCopy
 
 #_03E333: INC.w $054E
 
@@ -18229,7 +18367,7 @@ SpriteAI_013A:
 #_03E386: LDA.w #$000E
 #_03E389: STA.b $24
 
-#_03E38B: JSL PrepEnemySpawn_long
+#_03E38B: JSL PrepSpriteSpawn_long
 
 #_03E38F: RTS
 
@@ -18242,14 +18380,14 @@ SpriteAI_013C:
 
 #_03E394: LDA.w $054C
 #_03E397: CMP.w #$0005
-#_03E39A: BCC CODE_03E3A4
+#_03E39A: BCC .delay
 
 #_03E39C: JSR ROUTINE_038632
 #_03E39F: BCS .exit
 
 #_03E3A1: JSR AdvanceAIModeUp
 
-CODE_03E3A4:
+.delay
 #_03E3A4: JMP ROUTINE_03DCFB
 
 .exit
@@ -18305,7 +18443,7 @@ CODE_03E3DF:
 #_03E3E2: PHX
 
 #_03E3E3: LDX.w #data03DE61
-#_03E3E6: JSR ROUTINE_038BE0
+#_03E3E6: JSR ROUTINE_038BE0_SomeTableCopy
 
 #_03E3E9: INC.w $054E
 
@@ -18385,7 +18523,7 @@ CODE_03E430:
 
 ;===================================================================================================
 
-SpriteAI_014C:
+#SpriteAI_014C:
 #_03E43F: TYX
 
 #_03E440: LDA.w #$011C
@@ -18421,14 +18559,14 @@ ROUTINE_03E45A:
 #_03E45E: BCS .exit
 
 #_03E460: LDA.w $0806,X
-#_03E463: BEQ CODE_03E469
+#_03E463: BEQ .advance
 
 #_03E465: JSR ROUTINE_03DCFB
 
 .exit
 #_03E468: RTS
 
-CODE_03E469:
+.advance
 #_03E469: LDA.b $20
 #_03E46B: STA.w $0818,X
 
@@ -18478,7 +18616,7 @@ CODE_03E490:
 #_03E4A4: PHX
 
 #_03E4A5: LDX.w #data03DE61
-#_03E4A8: JSR ROUTINE_038BE0
+#_03E4A8: JSR ROUTINE_038BE0_SomeTableCopy
 
 #_03E4AB: INC.w $054E
 
@@ -18495,7 +18633,7 @@ CODE_03E490:
 SpriteAI_0150:
 #_03E4B7: TYX
 
-#_03E4B8: JSR ROUTINE_038567
+#_03E4B8: JSR Read7E2530IfMode3F
 #_03E4BB: BNE .exit
 
 #_03E4BD: LDY.w $0816,X
@@ -18518,6 +18656,8 @@ SpriteAI_0150:
 
 .exit
 #_03E4E3: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data03E4E4:
 #_03E4E4: dw $0280, $AD00
@@ -18591,7 +18731,7 @@ CODE_03E551:
 #_03E560: BCS CODE_03E56B
 
 #_03E562: JSR Set_7E7A08_to_000D
-#_03E565: JSR ROUTINE_038A25_0020
+#_03E565: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 #_03E568: JSR AdvanceAIModeUp
 
 CODE_03E56B:
@@ -18619,11 +18759,11 @@ SpriteAI_0154:
 
 #_03E585: CLC
 
-#_03E586: LDA.w data03E5A7+0,Y
+#_03E586: LDA.w .velocity+0,Y
 #_03E589: ADC.w $080C,X
 #_03E58C: STA.w $080C,X
 
-#_03E58F: LDA.w data03E5A7+2,Y
+#_03E58F: LDA.w .velocity+2,Y
 #_03E592: ADC.w $080E,X
 #_03E595: STA.w $080E,X
 
@@ -18638,7 +18778,9 @@ SpriteAI_0154:
 .exit
 #_03E5A6: RTS
 
-data03E5A7:
+;---------------------------------------------------------------------------------------------------
+
+.velocity
 #_03E5A7: dw $FF80, $FFE0
 #_03E5AB: dw $0080, $FFE0
 #_03E5AF: dw $FF80, $0020
@@ -18649,7 +18791,7 @@ data03E5A7:
 SpriteAI_0156:
 #_03E5B7: TYX
 
-#_03E5B8: JSR ROUTINE_038567
+#_03E5B8: JSR Read7E2530IfMode3F
 #_03E5BB: BNE .exit
 
 #_03E5BD: LDA.w #$0029 ; SFX 29
@@ -18670,20 +18812,20 @@ SpriteAI_0158:
 
 #_03E5CE: LDY.w #$0008
 #_03E5D1: LDA.w #$0020
-#_03E5D4: JSR ROUTINE_039664
+#_03E5D4: JSR Sprite_HandlePockyCollision_039664
 
 #_03E5D7: LDY.w #$0050
 #_03E5DA: LDA.w #$0020
-#_03E5DD: JSR ROUTINE_039C2D
+#_03E5DD: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03E5E0: LDY.w #$0068
-#_03E5E3: JSR ROUTINE_0392EE
+#_03E5E3: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03E5E6: BEQ .exit
 
 #_03E5E8: JSR ROUTINE_039385
 #_03E5EB: BNE .exit
 
-#_03E5ED: JSR ROUTINE_038A25_0020
+#_03E5ED: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03E5F0: LDA.w #$0000
 #_03E5F3: STA.w $0816,X
@@ -18702,7 +18844,7 @@ SpriteAI_0158:
 SpriteAI_015A:
 #_03E604: TYX
 
-#_03E605: JSR ROUTINE_038038
+#_03E605: JSR ROUTINE_038038_ChecksPartner
 #_03E608: BCC .exit
 
 #_03E60A: LDA.w $05A0
@@ -18759,7 +18901,7 @@ ROUTINE_03E684_long:
 
 ;===================================================================================================
 
-ROUTINE_03E65E:
+ROUTINE_03E65E_Set0816to017B:
 #_03E65E: PHB
 #_03E65F: PHK
 #_03E660: PLB
@@ -18772,7 +18914,7 @@ ROUTINE_03E65E:
 
 ;===================================================================================================
 
-ROUTINE_03E669:
+ROUTINE_03E669_Set0816to0046:
 #_03E669: PHB
 #_03E66A: PHK
 #_03E66B: PLB
@@ -18785,7 +18927,7 @@ ROUTINE_03E669:
 
 ;===================================================================================================
 
-ROUTINE_03E674:
+ROUTINE_03E674_Set0816to00E9or0057:
 #_03E674: PHB
 #_03E675: PHK
 #_03E676: PLB
@@ -18798,8 +18940,11 @@ ROUTINE_03E674:
 #_03E67E: PLB
 #_03E67F: RTL
 
+;===================================================================================================
+
 data03E680:
-#_03E680: db $57,$00,$E9,$00
+#_03E682: dw $00E9
+#_03E680: dw $0057
 
 ;===================================================================================================
 
@@ -18929,7 +19074,7 @@ CODE_03E713:
 #_03E720: LDA.w #$000C
 #_03E723: STA.b $24
 
-#_03E725: JSR PrepEnemySpawn
+#_03E725: JSR PrepSpriteSpawn
 
 #_03E728: PLY
 
@@ -19505,13 +19650,15 @@ CODE_03EC8D:
 #_03ECC7: PHX
 
 #_03ECC8: LDX.w #data03ED06
-#_03ECCB: JSR ROUTINE_038C0E
+#_03ECCB: JSR ROUTINE_038C0E_SomeTableCopy
 
 #_03ECCE: PLX
-#_03ECCF: JSL PrepEnemySpawn_long
+#_03ECCF: JSL PrepSpriteSpawn_long
 
 .exit
 #_03ECD3: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data03ECD4:
 #_03ECD4: db $50,$5B,$66,$71,$7C,$87,$92,$9D
@@ -19529,8 +19676,10 @@ data03ECF6:
 ;===================================================================================================
 
 data03ED06:
-#_03ED06: db $08,$00,$24,$00,$00,$10,$00,$62
-#_03ED0E: db $01,$C6,$0E,$01,$00,$00,$00
+#_03ED06: dw $0008 : dl $000024 ; copy 8 bytes to target
+#_03ED0B: db $10, $00, $62, $01, $C6, $0E, $01, $00
+
+#_03ED13: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -19606,7 +19755,7 @@ SpriteAI_0164:
 #_03ED65: JSR AdvanceAIModeUp
 
 CODE_03ED68:
-#_03ED68: JMP CODE_0388A2
+#_03ED68: JMP ROUTINE_0388A2
 
 ;===================================================================================================
 
@@ -19627,7 +19776,7 @@ SpriteAI_0166:
 #_03ED82: LDA.w #$0D20
 #_03ED85: STA.w $0806,X
 
-#_03ED88: JSR Reset_0818_through_081F
+#_03ED88: JSR Reset_0818to081F
 #_03ED8B: JSR AdvanceAIModeUp
 
 CODE_03ED8E:
@@ -19686,7 +19835,7 @@ CODE_03EDC5:
 #_03EDE6: LDA.w data03EE19,Y
 #_03EDE9: STA.w $080A,X
 
-#_03EDEC: JSR Reset_0818_through_081F
+#_03EDEC: JSR Reset_0818to081F
 
 #_03EDEF: JSR Random
 #_03EDF2: AND.w #$0007
@@ -19708,6 +19857,8 @@ CODE_03EE0B:
 
 CODE_03EE0E:
 #_03EE0E: JMP ROUTINE_0388AA
+
+;---------------------------------------------------------------------------------------------------
 
 data03EE11:
 #_03EE11: db $80,$05,$80,$04
@@ -19741,7 +19892,7 @@ CODE_03EE31:
 #_03EE39: JSR ROUTINE_038CDF
 #_03EE3C: BNE CODE_03EE58
 
-#_03EE3E: JSR Reset_0818_through_081F
+#_03EE3E: JSR Reset_0818to081F
 
 #_03EE41: JSR Random
 #_03EE44: AND.w #$0003
@@ -19803,7 +19954,7 @@ CODE_03EE90:
 #_03EE93: STA.w $04AA
 
 #_03EE96: JSR AdvanceAIModeUp
-#_03EE99: JSR Reset_0818_through_081F
+#_03EE99: JSR Reset_0818to081F
 
 #_03EE9C: LDA.w #$FFF0
 
@@ -19838,7 +19989,7 @@ SpriteAI_016E:
 #_03EEC6: JSR ROUTINE_038CDF
 #_03EEC9: BNE CODE_03EED4
 
-#_03EECB: JSR Reset_0818_through_081F
+#_03EECB: JSR Reset_0818to081F
 
 #_03EECE: LDA.w #$0174 ; SPRITE 0174
 #_03EED1: STA.w $0810,X
@@ -19928,7 +20079,7 @@ CODE_03EF3D:
 #_03EF46: BRA CODE_03EF4D
 
 CODE_03EF48:
-#_03EF48: JSR Reset_0818_through_081F
+#_03EF48: JSR Reset_0818to081F
 
 #_03EF4B: BRA CODE_03EF16
 
@@ -20056,23 +20207,23 @@ SpriteAI_017A:
 #_03F000: LDY.w #$0008
 
 #_03F003: LDA.w #$0020
-#_03F006: JSR ROUTINE_039664
+#_03F006: JSR Sprite_HandlePockyCollision_039664
 
 #_03F009: LDY.w #$0008
 #_03F00C: LDA.w #$0020
-#_03F00F: JSR ROUTINE_039C2D
+#_03F00F: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 ;===================================================================================================
 
 ROUTINE_03F012:
 #_03F012: LDY.w #$0050
-#_03F015: JSR ROUTINE_0392EE
+#_03F015: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03F018: BEQ CODE_03F025
 
 #_03F01A: JSR ROUTINE_039385
 #_03F01D: BNE CODE_03F025
 
-#_03F01F: JSR ROUTINE_038A25_0020
+#_03F01F: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 #_03F022: JSR ROUTINE_038C85
 
 CODE_03F025:
@@ -20086,7 +20237,7 @@ ROUTINE_03F029:
 #_03F029: LDA.w $04F4
 #_03F02C: BEQ CODE_03F036
 
-#_03F02E: JSR ROUTINE_038A25_0020
+#_03F02E: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 #_03F031: JSR ROUTINE_038242
 
 #_03F034: SEC
@@ -20099,13 +20250,13 @@ CODE_03F036:
 #_03F03C: BEQ CODE_03F051
 
 #_03F03E: LDY.w #$0050
-#_03F041: JSR ROUTINE_0392EE
+#_03F041: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03F044: BEQ CODE_03F053
 
 #_03F046: JSR ROUTINE_039385
 #_03F049: BNE CODE_03F053
 
-#_03F04B: JSR ROUTINE_038A25_0020
+#_03F04B: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 #_03F04E: JSR ROUTINE_038236
 
 CODE_03F051:
@@ -20149,7 +20300,7 @@ ROUTINE_03F065:
 #_03F078: LDA.w data03F245,Y
 #_03F07B: STA.w $0806,X
 
-#_03F07E: JSR Reset_0818_through_081F
+#_03F07E: JSR Reset_0818to081F
 
 #_03F081: RTS
 
@@ -20179,7 +20330,7 @@ SpriteAI_0188:
 
 #_03F0A0: LDY.w #$0008
 #_03F0A3: LDA.w #$0028
-#_03F0A6: JSR ROUTINE_039664
+#_03F0A6: JSR Sprite_HandlePockyCollision_039664
 
 #_03F0A9: LDA.b $22
 #_03F0AB: BNE .exit
@@ -20289,7 +20440,7 @@ SpriteAI_0190:
 #_03F13D: STA.w $0816,X
 
 #_03F140: JSR ROUTINE_0386EC
-#_03F143: JSR Reset_0818_through_081F
+#_03F143: JSR Reset_0818to081F
 
 #_03F146: JMP AdvanceAIModeUp
 
@@ -20385,7 +20536,7 @@ SpriteAI_0194:
 #_03F1C2: STA.l $7FE812,X
 
 #_03F1C6: JSR ROUTINE_03F2E6
-#_03F1C9: JSR Reset_0818_through_081F
+#_03F1C9: JSR Reset_0818to081F
 #_03F1CC: JSR AdvanceAIModeUp
 
 CODE_03F1CF:
@@ -20409,11 +20560,11 @@ SpriteAI_0196:
 
 #_03F1E2: LDY.w #$0008
 #_03F1E5: LDA.w #$0028
-#_03F1E8: JSR ROUTINE_039C2D
+#_03F1E8: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03F1EB: LDY.w #$0008
 #_03F1EE: LDA.w #$0028
-#_03F1F1: JSR ROUTINE_039664
+#_03F1F1: JSR Sprite_HandlePockyCollision_039664
 
 #_03F1F4: LDA.b $22
 #_03F1F6: BNE .exit
@@ -20454,7 +20605,6 @@ SpriteAI_0196:
 
 CODE_03F238:
 #_03F238: LDA.w #$FE00
-
 #_03F23B: LDY.w #$201C
 #_03F23E: JSR ROUTINE_038CAA
 
@@ -20463,11 +20613,13 @@ CODE_03F238:
 .exit
 #_03F244: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03F245:
-#_03F245: db $4B,$0D,$4B,$0D,$4B,$0D,$4B,$0D
-#_03F24D: db $4A,$0D,$4A,$0D,$4A,$0D,$4A,$0D
-#_03F255: db $4A,$0D,$4E,$0D,$4E,$0D,$4E,$0D
-#_03F25D: db $4F,$0D,$4F,$0D,$4F,$0D,$4B,$0D
+#_03F245: dw $0D4B, $0D4B, $0D4B, $0D4B
+#_03F24D: dw $0D4A, $0D4A, $0D4A, $0D4A
+#_03F255: dw $0D4A, $0D4E, $0D4E, $0D4E
+#_03F25D: dw $0D4F, $0D4F, $0D4F, $0D4B
 
 ;===================================================================================================
 
@@ -20518,11 +20670,11 @@ SpriteAI_0198:
 
 #_03F296: LDY.w #$0008
 #_03F299: LDA.w #$0028
-#_03F29C: JSR ROUTINE_039C2D
+#_03F29C: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03F29F: LDY.w #$0008
 #_03F2A2: LDA.w #$0028
-#_03F2A5: JSR ROUTINE_039664
+#_03F2A5: JSR Sprite_HandlePockyCollision_039664
 
 #_03F2A8: LDA.b $22
 #_03F2AA: BEQ CODE_03F2AD
@@ -20550,7 +20702,7 @@ CODE_03F2AD:
 #_03F2C8: LDA.w #$0010
 #_03F2CB: STA.w $0816,X
 
-#_03F2CE: JSR Reset_0818_through_081F
+#_03F2CE: JSR Reset_0818to081F
 #_03F2D1: JSR AdvanceAIModeDown
 
 #_03F2D4: LDA.w #$0000
@@ -20574,11 +20726,13 @@ ROUTINE_03F2E6:
 
 #_03F2EF: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03F2F0:
-#_03F2F0: db $49,$0D,$49,$0D,$49,$0D,$49,$0D
-#_03F2F8: db $48,$0D,$48,$0D,$48,$0D,$48,$0D
-#_03F300: db $48,$0D,$4C,$0D,$4C,$0D,$4C,$0D
-#_03F308: db $4D,$0D,$4D,$0D,$4D,$0D,$49,$0D
+#_03F2F0: dw $0D49, $0D49, $0D49, $0D49
+#_03F2F8: dw $0D48, $0D48, $0D48, $0D48
+#_03F300: dw $0D48, $0D4C, $0D4C, $0D4C
+#_03F308: dw $0D4D, $0D4D, $0D4D, $0D49
 
 ;===================================================================================================
 
@@ -20694,7 +20848,7 @@ SpriteAI_019A:
 #_03F3AB: LDA.w $04F4
 #_03F3AE: BEQ CODE_03F3B9
 
-#_03F3B0: JSR ROUTINE_038A25_0020
+#_03F3B0: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 #_03F3B3: JSR ROUTINE_038242
 
 #_03F3B6: JMP ROUTINE_03F4B7
@@ -20722,7 +20876,7 @@ CODE_03F3B9:
 
 #_03F3DA: LDY.w #$0058
 #_03F3DD: LDA.w #$0020
-#_03F3E0: JSR ROUTINE_039664
+#_03F3E0: JSR Sprite_HandlePockyCollision_039664
 
 #_03F3E3: BRA CODE_03F446
 
@@ -20820,6 +20974,8 @@ CODE_03F473:
 CODE_03F484:
 #_03F484: JMP ROUTINE_038860
 
+;---------------------------------------------------------------------------------------------------
+
 data03F487:
 #_03F487: dw $0060, $0050
 #_03F48B: dw $FF60, $0030
@@ -20829,6 +20985,8 @@ data03F487:
 #_03F49B: dw $00A0, $FFB0
 #_03F49F: dw $00D0, $0000
 #_03F4A3: dw $00A0, $0030
+
+;---------------------------------------------------------------------------------------------------
 
 data03F4A7:
 #_03F4A7: db $07,$07,$08,$07,$09,$07,$0A,$07
@@ -20865,7 +21023,7 @@ SpriteAI_019C:
 #_03F4DC: LDA.w #$0020
 #_03F4DF: STA.w $0816,X
 
-#_03F4E2: JSR Reset_0818_through_081F
+#_03F4E2: JSR Reset_0818to081F
 #_03F4E5: JSR AdvanceAIModeUp
 
 #_03F4E8: LDA.w #$0000
@@ -20892,7 +21050,7 @@ SpriteAI_019E:
 
 #_03F504: LDY.w #$0008
 #_03F507: LDA.w #$0028
-#_03F50A: JSR ROUTINE_039C2D
+#_03F50A: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 #_03F50D: LDA.w #$0701
 #_03F510: JSR ROUTINE_038D44_BothParametersInA
@@ -20937,7 +21095,10 @@ CODE_03F544:
 #_03F544: LDA.l $7FE818,X
 #_03F548: ASL A
 #_03F549: TAX
+
 #_03F54A: JMP (.vectors,X)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_03F54D: dw ROUTINE_03F633
@@ -21034,7 +21195,7 @@ ROUTINE_03F5B4:
 
 ;===================================================================================================
 
-ROUTINE_03F5CD:
+#ROUTINE_03F5CD:
 #_03F5CD: TYX
 
 CODE_03F5CE:
@@ -21196,7 +21357,7 @@ ROUTINE_03F667:
 
 ;===================================================================================================
 
-ROUTINE_03F672:
+#ROUTINE_03F672:
 #_03F672: LDA.l $7FE818,X
 #_03F676: INC A
 #_03F677: STA.l $7FE818,X
@@ -21238,8 +21399,13 @@ ROUTINE_03F683:
 
 #_03F6A5: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03F6A6:
-#_03F6A6: db $4A,$F8,$7C,$F7,$79,$F8,$22,$F8
+#_03F6A6: dw $F84A
+#_03F6A8: dw $F77C
+#_03F6AA: dw $F879
+#_03F6AC: dw $F822
 
 ;===================================================================================================
 
@@ -21429,7 +21595,7 @@ CODE_03F78E:
 #_03F78E: LDA.w $04F4
 #_03F791: BEQ CODE_03F799
 
-#_03F793: JSR ROUTINE_038A25_0020
+#_03F793: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03F796: JMP ROUTINE_03FB04
 
@@ -21451,18 +21617,18 @@ CODE_03F7AD:
 
 #_03F7B3: LDY.w #$0008
 #_03F7B6: LDA.w #$0020
-#_03F7B9: JSR ROUTINE_039664
+#_03F7B9: JSR Sprite_HandlePockyCollision_039664
 
 #_03F7BC: LDY.w #$0008
 #_03F7BF: LDA.w #$0020
-#_03F7C2: JSR ROUTINE_039C2D
+#_03F7C2: JSR ROUTINE_039C2D_SomethingWithHittingASprite
 
 CODE_03F7C5:
 #_03F7C5: LDA.l $7FE81E,X
 #_03F7C9: BEQ CODE_03F800
 
 #_03F7CB: LDY.w #$0050
-#_03F7CE: JSR ROUTINE_0392EE
+#_03F7CE: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03F7D1: BEQ CODE_03F7FB
 
 #_03F7D3: JSR ROUTINE_039385
@@ -21480,12 +21646,12 @@ CODE_03F7C5:
 #_03F7E8: BCC CODE_03F7F8
 
 CODE_03F7EA:
-#_03F7EA: JSR ROUTINE_03867C
+#_03F7EA: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_UsingPockyCoords
 #_03F7ED: CMP.w #$0200
 #_03F7F0: BCC CODE_03F7F8
 
 #_03F7F2: LDA.w #$0086 ; SPRITE 0086
-#_03F7F5: JSR ROUTINE_038A2D
+#_03F7F5: JSR ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates
 
 CODE_03F7F8:
 #_03F7F8: JSR ROUTINE_03FAF7
@@ -21505,9 +21671,19 @@ CODE_03F800:
 .exit
 #_03F80C: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03F80D:
-#_03F80D: db $DC,$0C,$DE,$0C,$DF,$0C,$DD,$0C
-#_03F815: db $BB,$60
+#_03F80D: dw $0CDC
+#_03F80F: dw $0CDE
+#_03F811: dw $0CDF
+#_03F813: dw $0CDD
+
+;===================================================================================================
+
+ROUTINE_03F815:
+#_03F815: TYX
+#_03F816: RTS
 
 ;===================================================================================================
 
@@ -21537,8 +21713,13 @@ ROUTINE_03F822:
 
 #_03F834: JMP CODE_03F78E
 
+;---------------------------------------------------------------------------------------------------
+
 data03F837:
-#_03F837: db $E0,$0C,$E2,$0C,$E3,$0C,$E1,$0C
+#_03F837: dw $0CE0
+#_03F839: dw $0CE2
+#_03F83B: dw $0CE3
+#_03F83D: dw $0CE1
 
 ;===================================================================================================
 
@@ -21574,8 +21755,12 @@ CODE_03F856:
 
 #_03F865: JMP CODE_03F78E
 
+;---------------------------------------------------------------------------------------------------
+
 data03F868:
-#_03F868: db $E5,$0C,$E7,$0C,$E9,$0C
+#_03F868: dw $0CE5
+#_03F86A: dw $0CE7
+#_03F86C: dw $0CE9
 
 ;===================================================================================================
 
@@ -21611,8 +21796,12 @@ CODE_03F885:
 
 #_03F894: JMP CODE_03F78E
 
+;---------------------------------------------------------------------------------------------------
+
 data03F897:
-#_03F897: db $E4,$0C,$E6,$0C,$E8,$0C
+#_03F897: dw $0CE4
+#_03F899: dw $0CE6
+#_03F89B: dw $0CE8
 
 ;===================================================================================================
 
@@ -21701,7 +21890,7 @@ CODE_03F907:
 #_03F907: LDA.w #$0086
 #_03F90A: STA.l $7FE81C,X
 
-#_03F90E: JMP ROUTINE_038A2D
+#_03F90E: JMP ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates
 
 ;===================================================================================================
 
@@ -22071,7 +22260,7 @@ SpriteAI_01CE:
 ;===================================================================================================
 
 ROUTINE_03FAF7:
-#_03FAF7: JSR ROUTINE_038A25_0020
+#_03FAF7: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX
 
 #_03FAFA: LDY.w $0816,X
 #_03FAFD: LDA.w $081E,Y
@@ -22106,7 +22295,7 @@ CODE_03FB1C:
 ROUTINE_03FB23:
 #_03FB23: STZ.w $080A,X
 
-#_03FB26: JMP ROUTINE_038098
+#_03FB26: JMP ROUTINE_038098_Set_7EF816X_to_0062
 
 ;===================================================================================================
 
@@ -22140,8 +22329,8 @@ SpriteAI_01D2:
 #_03FB4D: JMP ROUTINE_038C85
 
 CODE_03FB50:
-#_03FB50: JSR ROUTINE_038088
-#_03FB53: JSR PrepEnemySpawnMyCoordinates
+#_03FB50: JSR ROUTINE_038088_Get_7EF816X_8Bit
+#_03FB53: JSR PrepSpriteSpawnMyCoordinates
 
 #_03FB56: JMP ROUTINE_038C85
 
@@ -22223,7 +22412,7 @@ SpriteAI_01E0:
 #_03FB9C: SBC.w $080E,X
 #_03FB9F: BCC CODE_03FBA7
 
-#_03FBA1: LDA.w #data00FBAE
+#_03FBA1: LDA.w #data03FBAE
 #_03FBA4: JMP ROUTINE_03FB87
 
 CODE_03FBA7:
@@ -22238,63 +22427,98 @@ CODE_03FBA7:
 ;===================================================================================================
 
 data03FBAE:
-#_03FBAE: db $03, $00, $00, $00, $00, $00, $C0, $01
-#_03FBB6: db $00, $FE, $00, $00, $C0, $01, $00, $02
-#_03FBBE: db $00, $00, $C0, $01
+#_03FBAE: dw $0003 ; spawn 3 sprites
+#_03FBB0: dw $0000, $0000, $01C0 ; SPRITE 01C0
+#_03FBB6: dw $FE00, $0000, $01C0 ; SPRITE 01C0
+#_03FBBC: dw $0200, $0000, $01C0 ; SPRITE 01C0
 
 ;---------------------------------------------------------------------------------------------------
 
 data03FBC2:
-#_03FBC2: db $03, $00, $00, $00, $00, $00, $C4, $01
-#_03FBCA: db $00, $FE, $00, $00, $C4, $01, $00, $02
-#_03FBD2: db $00, $00, $C4, $01, $03, $00, $00, $00
-#_03FBDA: db $00, $00, $C8, $01, $00, $00, $00, $FE
-#_03FBE2: db $C8, $01, $00, $00, $00, $02, $C8, $01
+#_03FBC2: dw $0003 ; spawn 3 sprites
+#_03FBC4: dw $0000, $0000, $01C4 ; SPRITE 01C4
+#_03FBCA: dw $FE00, $0000, $01C4 ; SPRITE 01C4
+#_03FBD0: dw $0200, $0000, $01C4 ; SPRITE 01C4
+
+;---------------------------------------------------------------------------------------------------
+
+data03FBD6:
+#_03FBD6: dw $0003 ; spawn 3 sprites
+#_03FBD8: dw $0000, $0000, $01C8 ; SPRITE 01C8
+#_03FBDE: dw $0000, $FE00, $01C8 ; SPRITE 01C8
+#_03FBE4: dw $0000, $0200, $01C8 ; SPRITE 01C8
 
 ;---------------------------------------------------------------------------------------------------
 
 data03FBEA:
-#_03FBEA: db $03, $00, $00, $00, $00, $00, $CC, $01
-#_03FBF2: db $00, $00, $00, $FE, $CC, $01, $00, $00
-#_03FBFA: db $00, $02, $CC, $01
+#_03FBEA: dw $0003 ; spawn 3 sprites
+#_03FBEC: dw $0000, $0000, $01CC ; SPRITE 01CC
+#_03FBF2: dw $0000, $FE00, $01CC ; SPRITE 01CC
+#_03FBF8: dw $0000, $0200, $01CC ; SPRITE 01CC
 
 ;---------------------------------------------------------------------------------------------------
 
 data03FBFE:
-#_03FBFE: db $03, $00, $00, $00, $00, $00, $C8, $01
-#_03FC06: db $00, $FE, $00, $00, $C8, $01, $00, $02
-#_03FC0E: db $00, $00, $C8, $01
+#_03FBFE: dw $0003 ; spawn 3 sprites
+#_03FC00: dw $0000, $0000, $01C8 ; SPRITE 01C8
+#_03FC06: dw $FE00, $0000, $01C8 ; SPRITE 01C8
+#_03FC0C: dw $0200, $0000, $01C8 ; SPRITE 01C8
 
 ;---------------------------------------------------------------------------------------------------
 
 data03FC12:
-#_03FC12: db $03, $00, $00, $00, $00, $00, $CC, $01
-#_03FC1A: db $00, $FE, $00, $00, $CC, $01, $00, $02
-#_03FC22: db $00, $00, $CC, $01, $03, $00, $00, $00
-#_03FC2A: db $00, $00, $C0, $01, $00, $00, $00, $FE
-#_03FC32: db $C0, $01, $00, $00, $00, $02, $C0, $01
-#_03FC3A: db $03, $00, $00, $00, $00, $00, $C4, $01
-#_03FC42: db $00, $00, $00, $FE, $C4, $01, $00, $00
-#_03FC4A: db $00, $02, $C4, $01, $03, $00, $00, $00
-#_03FC52: db $00, $00, $B8, $01, $00, $FE, $00, $00
-#_03FC5A: db $B8, $01, $00, $02, $00, $00, $B8, $01
-#_03FC62: db $03, $00, $00, $00, $00, $00, $BC, $01
-#_03FC6A: db $00, $FE, $00, $00, $BC, $01, $00, $02
-#_03FC72: db $00, $00, $BC, $01
+#_03FC12: dw $0003 ; spawn 3 sprites
+#_03FC14: dw $0000, $0000, $01CC ; SPRITE 01CC
+#_03FC1A: dw $FE00, $0000, $01CC ; SPRITE 01CC
+#_03FC20: dw $0200, $0000, $01CC ; SPRITE 01CC
+
+;---------------------------------------------------------------------------------------------------
+
+data03FC26:
+#_03FC26: dw $0003 ; spawn 3 sprites
+#_03FC28: dw $0000, $0000, $01C0 ; SPRITE 01C0
+#_03FC2E: dw $0000, $FE00, $01C0 ; SPRITE 01C0
+#_03FC34: dw $0000, $0200, $01C0 ; SPRITE 01C0
+
+;---------------------------------------------------------------------------------------------------
+
+data03FC3A:
+#_03FC3A: dw $0003 ; spawn 3 sprites
+#_03FC3C: dw $0000, $0000, $01C4 ; SPRITE 01C4
+#_03FC42: dw $0000, $FE00, $01C4 ; SPRITE 01C4
+#_03FC48: dw $0000, $0200, $01C4 ; SPRITE 01C4
+
+;---------------------------------------------------------------------------------------------------
+
+data03FC4E:
+#_03FC4E: dw $0003 ; spawn 3 sprites
+#_03FC50: dw $0000, $0000, $01B8 ; SPRITE 01B8
+#_03FC56: dw $FE00, $0000, $01B8 ; SPRITE 01B8
+#_03FC5C: dw $0200, $0000, $01B8 ; SPRITE 01B8
+
+;---------------------------------------------------------------------------------------------------
+
+data03FC62:
+#_03FC62: dw $0003 ; spawn 3 sprites
+#_03FC64: dw $0000, $0000, $01BC ; SPRITE 01BC
+#_03FC6A: dw $FE00, $0000, $01BC ; SPRITE 01BC
+#_03FC70: dw $0200, $0000, $01BC ; SPRITE 01BC
 
 ;---------------------------------------------------------------------------------------------------
 
 data03FC76:
-#_03FC76: db $03, $00, $00, $00, $00, $00, $B0, $01
-#_03FC7E: db $00, $00, $00, $FE, $B0, $01, $00, $00
-#_03FC86: db $00, $02, $B0, $01
+#_03FC76: dw $0003 ; spawn 3 sprites
+#_03FC78: dw $0000, $0000, $01B0 ; SPRITE 01B0
+#_03FC7E: dw $0000, $FE00, $01B0 ; SPRITE 01B0
+#_03FC84: dw $0000, $0200, $01B0 ; SPRITE 01B0
 
 ;---------------------------------------------------------------------------------------------------
 
 data03FC8A:
-#_03FC8A: db $03, $00, $00, $00, $00, $00, $B4, $01
-#_03FC92: db $00, $00, $00, $FE, $B4, $01, $00, $00
-#_03FC9A: db $00, $02, $B4, $01
+#_03FC8A: dw $0003 ; spawn 3 sprites
+#_03FC8C: dw $0000, $0000, $01B4 ; SPRITE 01B4
+#_03FC92: dw $0000, $FE00, $01B4 ; SPRITE 01B4
+#_03FC98: dw $0000, $0200, $01B4 ; SPRITE 01B4
 
 ;===================================================================================================
 
@@ -22302,11 +22526,13 @@ SpriteAI_01E4:
 #_03FC9E: LDA.w #data03FCA4
 #_03FCA1: JMP ROUTINE_03FCC1
 
-#data03FCA4:
-#_03FCA4: db $03,$00,$00,$00,$00,$00,$86,$01
-#_03FCAC: db $00,$01,$00,$FE,$00,$00,$86,$01
-#_03FCB4: db $80,$01,$00,$02,$00,$00,$86,$01
-#_03FCBC: db $80,$00
+;---------------------------------------------------------------------------------------------------
+
+data03FCA4:
+#_03FCA4: dw $0003 ; spawn 3 sprites
+#_03FCA6: dw $0000, $0000, $0186, $0100 ; SPRITE 0186
+#_03FCAE: dw $FE00, $0000, $0186, $0180 ; SPRITE 0186
+#_03FCB6: dw $0200, $0000, $0186, $0080 ; SPRITE 0186
 
 ;===================================================================================================
 
@@ -22322,23 +22548,25 @@ ROUTINE_03FCC1:
 
 #_03FCC3: STZ.w $080A,X
 
-#_03FCC6: JSR ROUTINE_038098
+#_03FCC6: JSR ROUTINE_038098_Set_7EF816X_to_0062
 
 #_03FCC9: PLA
 #_03FCCA: JSR ROUTINE_0390D7
 
 #_03FCCD: JMP AdvanceAIModeUp
 
-#data03FCD0:
-#_03FCD0: db $03,$00,$00,$00,$00,$00,$F0,$01
-#_03FCD8: db $00,$02,$00,$00,$00,$FE,$F0,$01
-#_03FCE0: db $80,$02,$00,$00,$00,$02,$F0,$01
-#_03FCE8: db $80,$01
+;---------------------------------------------------------------------------------------------------
+
+data03FCD0:
+#_03FCD0: dw $0003 ; spawn 3 sprites
+#_03FCD2: dw $0000, $0000, $01F0, $0200 ; SPRITE 01F0
+#_03FCDA: dw $0000, $FE00, $01F0, $0280 ; SPRITE 01F0
+#_03FCE2: dw $0000, $0200, $01F0, $0180 ; SPRITE 01F0
 
 ;===================================================================================================
 
 SpriteAI_01EC:
-#_03FCEA: LDA.w #data00FD14
+#_03FCEA: LDA.w #data03FD14
 #_03FCED: JMP ROUTINE_03FCC1
 
 ;===================================================================================================
@@ -22361,8 +22589,8 @@ SpriteAI_01E6:
 #_03FD07: JMP ROUTINE_038C85
 
 CODE_03FD0A:
-#_03FD0A: JSR ROUTINE_038088
-#_03FD0D: JSR PrepEnemySpawnMyCoordinates
+#_03FD0A: JSR ROUTINE_038088_Get_7EF816X_8Bit
+#_03FD0D: JSR PrepSpriteSpawnMyCoordinates
 
 #_03FD10: JMP ROUTINE_038C85
 
@@ -22372,10 +22600,10 @@ CODE_03FD0A:
 ;---------------------------------------------------------------------------------------------------
 
 data03FD14:
-#_03FD14: db $03,$00,$00,$00,$00,$00,$F2,$01
-#_03FD1C: db $00,$00,$00,$00,$00,$FE,$F2,$01
-#_03FD24: db $80,$03,$00,$00,$00,$02,$F2,$01
-#_03FD2C: db $80,$00
+#_03FD14: dw $0003 ; spawn 3 sprites
+#_03FD16: dw $0000, $0000, $01F2, $0000 ; SPRITE 01F2
+#_03FD1E: dw $0000, $FE00, $01F2, $0380 ; SPRITE 01F2
+#_03FD26: dw $0000, $0200, $01F2, $0080 ; SPRITE 01F2
 
 ;===================================================================================================
 
@@ -22408,7 +22636,7 @@ ROUTINE_03FD3E:
 #_03FD45: PLA
 
 #_03FD46: JSR ROUTINE_03F065
-#_03FD49: JSR ROUTINE_038098
+#_03FD49: JSR ROUTINE_038098_Set_7EF816X_to_0062
 
 #_03FD4C: LDA.w #$0188 ; SPRITE 0188
 #_03FD4F: STA.w $0810,X
@@ -22422,9 +22650,9 @@ SpriteAI_01F4:
 
 #_03FD54: STZ.w $080A,X
 
-#_03FD57: JSR ROUTINE_038098
+#_03FD57: JSR ROUTINE_038098_Set_7EF816X_to_0062
 
-#_03FD5A: LDA.w #data00FD67
+#_03FD5A: LDA.w #data03FD67
 #_03FD5D: JSR ROUTINE_0390D7
 
 #_03FD60: LDA.w #$01EA ; SPRITE 01EA
@@ -22435,8 +22663,8 @@ SpriteAI_01F4:
 ;---------------------------------------------------------------------------------------------------
 
 data03FD67:
-#_03FD67: db $01,$00,$00,$00,$00,$00,$90,$01
-#_03FD6F: db $00,$00
+#_03FD67: dw $0001 ; spawn 1 sprite
+#_03FD69: dw $0000, $0000, $0190, $0000 ; SPRITE 0190
 
 ;===================================================================================================
 
@@ -22506,8 +22734,13 @@ CODE_03FDC1:
 .exit
 #_03FDC5: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03FDC6:
-#_03FDC6: db $E2,$0F,$E4,$0F,$E2,$0F,$E6,$0F
+#_03FDC6: dw $0FE2
+#_03FDC8: dw $0FE4
+#_03FDCA: dw $0FE2
+#_03FDCC: dw $0FE6
 
 ;===================================================================================================
 
@@ -22533,9 +22766,11 @@ SpriteAI_0182:
 #_03FDEB: LDA.w #$000C
 #_03FDEE: STA.b $24
 
-#_03FDF0: JSL PrepEnemySpawn_long
+#_03FDF0: JSL PrepSpriteSpawn_long
 
 #_03FDF4: JMP Reset_0816_AndAdvanceAI_bank
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_03FDF7:
 #_03FDF7: PHX
@@ -22543,6 +22778,7 @@ CODE_03FDF7:
 #_03FDF8: JSR ROUTINE_03FE83
 
 #_03FDFB: PLX
+
 #_03FDFC: JMP CODE_03FE3D
 
 ;===================================================================================================
@@ -22573,11 +22809,13 @@ CODE_03FE17:
 CODE_03FE20:
 #_03FE20: JMP CODE_03FE3D
 
-#data03FE23:
-#_03FE23: db $03,$00,$00,$00,$00,$00,$7C,$01
-#_03FE2B: db $C0,$FF,$00,$00,$00,$00,$7C,$01
-#_03FE33: db $00,$00,$00,$00,$00,$00,$7C,$01
-#_03FE3B: db $40,$00
+;---------------------------------------------------------------------------------------------------
+
+data03FE23:
+#_03FE23: dw $0003 ; spawn 3 sprites
+#_03FE25: dw $0000, $0000, $017C, $FFC0 ; SPRITE 017C
+#_03FE2D: dw $0000, $0000, $017C, $0000 ; SPRITE 017C
+#_03FE35: dw $0000, $0000, $017C, $0040 ; SPRITE 017C
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -22623,6 +22861,7 @@ SpriteAI_01F6:
 #_03FE6E: STA.w $0812,X
 #_03FE71: STA.w $081E,X
 #_03FE74: STA.w $081C,X
+
 #_03FE77: STZ.w $081A,X
 #_03FE7A: STZ.w $0816,X
 #_03FE7D: STZ.w $080A,X
@@ -22633,7 +22872,7 @@ SpriteAI_01F6:
 
 ROUTINE_03FE83:
 #_03FE83: LDY.w #$0050
-#_03FE86: JSR ROUTINE_0392EE
+#_03FE86: JSR ROUTINE_0392EE_SomethingWithHitboxes
 #_03FE89: BEQ CODE_03FE90
 
 #_03FE8B: JSR ROUTINE_039385
@@ -22756,6 +22995,8 @@ ROUTINE_03FF32:
 
 #_03FF3B: JMP ($0020)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_03FF3E: dw ROUTINE_03FF58
 #_03FF40: dw ROUTINE_03FF67
@@ -22811,13 +23052,38 @@ ROUTINE_03FF76:
 .exit
 #_03FF84: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data03FF85:
 #_03FF85: db $DC,$0F,$DE,$0F,$E0,$0F,$DE,$0F
-#_03FF8D: db $BC,$1A,$08,$F0,$08,$98,$3A,$3A
-#_03FF95: db $3A,$3A,$9D,$1A,$08,$B9,$A7,$FF
-#_03FF9D: db $9D,$16,$08,$B9,$A9,$FF,$9D,$18
-#_03FFA5: db $08,$60,$E0,$FF,$03,$00,$C0,$FF
-#_03FFAD: db $03,$00
+
+;===================================================================================================
+
+ROUTINE_03FF8D:
+#_03FF8D: LDY.w $081A,X
+#_03FF90: BEQ .zero
+
+#_03FF92: TYA
+#_03FF93: DEC
+#_03FF94: DEC
+#_03FF95: DEC
+#_03FF96: DEC
+#_03FF97: STA.w $081A,X
+
+.zero
+#_03FF9A: LDA.w data03FFA7+0,Y
+#_03FF9D: STA.w $0816,X
+
+#_03FFA0: LDA.w data03FFA7+2,Y
+#_03FFA3: STA
+
+#_03FFA6: RTS
+
+;---------------------------------------------------------------------------------------------------
+
+data03FFA7:
+#_03FFA7: dw $FFE0, $0003
+#_03FFAB: dw $FFC0, $0003
 
 ;===================================================================================================
 
@@ -22835,22 +23101,22 @@ ROUTINE_03FFB7_long:
 
 ROUTINE_03FFB7:
 #_03FFB7: LDA.w $081A,X
-#_03FFBA: BEQ CODE_03FFC0
+#_03FFBA: BEQ .dont_decrement
 
 #_03FFBC: DEC A
 #_03FFBD: STA.w $081A,X
 
-CODE_03FFC0:
+.dont_decrement
 #_03FFC0: AND.w #$FFFC
 #_03FFC3: TAY
 
-#_03FFC4: BRA CODE_03FFD3
+#_03FFC4: BRA .zero
 
 ;===================================================================================================
 
 ROUTINE_03FFC6:
 #_03FFC6: LDY.w $081A,X
-#_03FFC9: BEQ CODE_03FFD3
+#_03FFC9: BEQ .zero
 
 #_03FFCB: TYA
 #_03FFCC: DEC A
@@ -22859,13 +23125,15 @@ ROUTINE_03FFC6:
 #_03FFCF: DEC A
 #_03FFD0: STA.w $081A,X
 
-CODE_03FFD3:
+.zero
 #_03FFD3: PHX
 
 #_03FFD4: TYX
 
 #_03FFD5: LDA.l data04FDFD+0,X
+
 #_03FFD9: PLX
+
 #_03FFDA: STA.w $0816,X
 
 #_03FFDD: PHX
@@ -22873,7 +23141,9 @@ CODE_03FFD3:
 #_03FFDE: TYX
 
 #_03FFDF: LDA.l data04FDFD+2,X
+
 #_03FFE3: PLX
+
 #_03FFE4: STA.w $0818,X
 
 #_03FFE7: RTS

@@ -88,7 +88,10 @@ UNKNOWN_7E04E0   = $7E04E0
 UNKNOWN_7E04E4   = $7E04E4
 UNKNOWN_7E04E6   = $7E04E6
 UNKNOWN_7E04E8   = $7E04E8
+
+; TODO seems to cache state
 UNKNOWN_7E04EA   = $7E04EA
+
 UNKNOWN_7E04EC   = $7E04EC
 UNKNOWN_7E04EE   = $7E04EE
 UNKNOWN_7E04F0   = $7E04F0
@@ -97,7 +100,9 @@ UNKNOWN_7E04F4   = $7E04F4
 UNKNOWN_7E04F6   = $7E04F6
 UNKNOWN_7E04FA   = $7E04FA
 UNKNOWN_7E04FC   = $7E04FC
-UNKNOWN_7E04FE   = $7E04FE
+
+; Partner ID
+PTID             = $7E04FE
 
 ;===================================================================================================
 
@@ -165,6 +170,8 @@ PTINP            = $7E0548
 
 UNKNOWN_7E054A   = $7E054A
 UNKNOWN_7E054C   = $7E054C
+
+; TODO debug flag
 UNKNOWN_7E054E   = $7E054E
 
 ; scratch used during NMI
@@ -179,8 +186,11 @@ UNKNOWN_7E0558   = $7E0558
 UNKNOWN_7E0559   = $7E0559
 UNKNOWN_7E055A   = $7E055A
 UNKNOWN_7E055E   = $7E055E
+
+; TODO seems used for coordinate changes or offsets relative pocky
 UNKNOWN_7E0560   = $7E0560
 UNKNOWN_7E0562   = $7E0562
+
 UNKNOWN_7E0564   = $7E0564
 UNKNOWN_7E0565   = $7E0565
 UNKNOWN_7E0566   = $7E0566
@@ -190,6 +200,9 @@ UNKNOWN_7E0569   = $7E0569
 UNKNOWN_7E056A   = $7E056A
 UNKNOWN_7E056B   = $7E056B
 UNKNOWN_7E056C   = $7E056C
+
+; TODO debug flag
+UNKNOWN_7E056C   = $7E056E
 
 ; Invulnerability flag
 INVULN           = $7E0572
@@ -270,8 +283,12 @@ UNKNOWN_7E05DE   = $7E05DE
 UNKNOWN_7E05E0   = $7E05E0
 UNKNOWN_7E05E2   = $7E05E2
 UNKNOWN_7E05E4   = $7E05E4
-UNKNOWN_7E05E6   = $7E05E6
-UNKNOWN_7E05E8   = $7E05E8
+
+; Partner coordinates
+PTX              = $7E05E6
+PTY              = $7E05E8
+
+
 UNKNOWN_7E05EA   = $7E05EA
 UNKNOWN_7E05EC   = $7E05EC
 UNKNOWN_7E05EE   = $7E05EE
@@ -284,6 +301,8 @@ UNKNOWN_7E05F6   = $7E05F6
 
 UNKNOWN_7E0600   = $7E0600
 UNKNOWN_7E0602   = $7E0602
+
+
 UNKNOWN_7E0700   = $7E0700
 
 ;---------------------------------------------------------------------------------------------------
@@ -340,41 +359,12 @@ UNKNOWN_7E081F   = $7E081F
 
 ;---------------------------------------------------------------------------------------------------
 
+; TODO Related to cutscenes in some way
 UNKNOWN_7E0A00   = $7E0A00
-UNKNOWN_7E1044   = $7E1044
-UNKNOWN_7E1510   = $7E1510
-UNKNOWN_7E1610   = $7E1610
-UNKNOWN_7E168A   = $7E168A
-UNKNOWN_7E1690   = $7E1690
-UNKNOWN_7E16E0   = $7E16E0
-UNKNOWN_7E16EC   = $7E16EC
-UNKNOWN_7E16EE   = $7E16EE
-UNKNOWN_7E16F0   = $7E16F0
-UNKNOWN_7E1706   = $7E1706
-UNKNOWN_7E1708   = $7E1708
-UNKNOWN_7E170A   = $7E170A
-UNKNOWN_7E170C   = $7E170C
-UNKNOWN_7E170E   = $7E170E
-UNKNOWN_7E1710   = $7E1710
-UNKNOWN_7E1712   = $7E1712
-UNKNOWN_7E1714   = $7E1714
-UNKNOWN_7E1716   = $7E1716
-UNKNOWN_7E171E   = $7E171E
-UNKNOWN_7E174C   = $7E174C
-UNKNOWN_7E1752   = $7E1752
-UNKNOWN_7E1754   = $7E1754
-UNKNOWN_7E1756   = $7E1756
-UNKNOWN_7E1758   = $7E1758
-UNKNOWN_7E175A   = $7E175A
-UNKNOWN_7E175C   = $7E175C
-UNKNOWN_7E1762   = $7E1762
-UNKNOWN_7E1764   = $7E1764
-UNKNOWN_7E1766   = $7E1766
-UNKNOWN_7E1768   = $7E1768
-UNKNOWN_7E1782   = $7E1782
-UNKNOWN_7E1784   = $7E1784
-UNKNOWN_7E178E   = $7E178E
-UNKNOWN_7E1792   = $7E1792
+
+;---------------------------------------------------------------------------------------------------
+
+; There are a bunch of hardcoded checks inside here for various sprites for whatever reason
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -418,6 +408,8 @@ UNKNOWN_7E194E   = $7E194E
 UNKNOWN_7E1954   = $7E1954
 UNKNOWN_7E1958   = $7E1958
 UNKNOWN_7E195E   = $7E195E
+;---------------------------------------------------------------------------------------------------
+
 UNKNOWN_7E1980   = $7E1980
 
 ; RNG stuff
@@ -451,7 +443,9 @@ UNKNOWN_7E19C4   = $7E19C4
 UNKNOWN_7E19C6   = $7E19C6
 UNKNOWN_7E19C8   = $7E19C8
 UNKNOWN_7E19CA   = $7E19CA
-UNKNOWN_7E19CC   = $7E19CC
+
+
+DIRECTION        = $7E19CC
 
 ; Pocky's mode
 POCKYACT         = $7E19CE
@@ -640,8 +634,19 @@ APUSCR           = $7E7A0E
 ; timer
 TUTTM            = $7E7A50
 
+; cutcene auto act
+CUTACT           = $7E7A4E
+
+; vector to call for pocky's main action 
+CUTPA            = $7E7A50
+
 ; goal
 TUTGOAL          = $7E7A52
+
+
+
+; something tutorual TODO
+UNKNOWN_7E7B16   = $7E7A72
 
 
 ;===================================================================================================

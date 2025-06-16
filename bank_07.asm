@@ -7053,14 +7053,14 @@ ROUTINE_07EA0F:
 #_07EA10: PHK
 #_07EA11: PLB
 
-#_07EA12: JSR .run_vector
+#_07EA12: JSR .execute
 
 #_07EA15: PLB
 #_07EA16: RTL
 
 ;---------------------------------------------------------------------------------------------------
 
-.run_vector
+.execute
 #_07EA17: LDX.w $04B8
 #_07EA1A: JSR (.vectors,X)
 
@@ -7253,19 +7253,19 @@ ROUTINE_07EADC:
 
 #_07EAE1: LDA.w $0560
 #_07EAE4: CMP.w $0000,Y
-#_07EAE7: BCS CODE_07EB36
+#_07EAE7: BCS .skip
 
 #_07EAE9: ADC.w #$1000
 #_07EAEC: CMP.w $0000,Y
-#_07EAEF: BCC CODE_07EB36
+#_07EAEF: BCC .skip
 
 #_07EAF1: LDA.w $0562
 #_07EAF4: CMP.w $0002,Y
-#_07EAF7: BCS CODE_07EB36
+#_07EAF7: BCS .skip
 
 #_07EAF9: ADC.w #$0D80
 #_07EAFC: CMP.w $0002,Y
-#_07EAFF: BCC CODE_07EB36
+#_07EAFF: BCC .skip
 
 #_07EB01: LDA.w $0006,Y
 #_07EB04: AND.w #$000F
@@ -7277,7 +7277,7 @@ ROUTINE_07EADC:
 
 #_07EB10: LDA.l $7E7A10,X
 #_07EB14: AND.b $28
-#_07EB16: BNE CODE_07EB36
+#_07EB16: BNE .skip
 
 #_07EB18: PHY
 
@@ -7297,7 +7297,7 @@ ROUTINE_07EADC:
 
 #_07EB35: PLY
 
-CODE_07EB36:
+.skip
 #_07EB36: CLC
 #_07EB37: TYA
 #_07EB38: ADC.w #$0008
@@ -7314,14 +7314,14 @@ ROUTINE_07EB3F:
 #_07EB40: PHK
 #_07EB41: PLB
 
-#_07EB42: JSR .run_vector
+#_07EB42: JSR .execute
 
 #_07EB45: PLB
 #_07EB46: RTL
 
 ;---------------------------------------------------------------------------------------------------
 
-.run_vector
+.execute
 #_07EB47: LDX.w $04B8
 #_07EB4A: JSR (.vectors,X)
 
@@ -7716,14 +7716,14 @@ ROUTINE_07EDA0:
 #_07EDA1: PHK
 #_07EDA2: PLB
 
-#_07EDA3: JSR .run_vector
+#_07EDA3: JSR .execute
 
 #_07EDA6: PLB
 #_07EDA7: RTL
 
 ;---------------------------------------------------------------------------------------------------
 
-.run_vector
+.execute
 #_07EDA8: LDX.w $04B8
 #_07EDAB: JSR (.vectors,X)
 
@@ -7912,14 +7912,14 @@ ROUTINE_07EE74:
 #_07EE75: PHK
 #_07EE76: PLB
 
-#_07EE77: JSR .run_vector
+#_07EE77: JSR .execute
 
 #_07EE7A: PLB
 #_07EE7B: RTL
 
 ;---------------------------------------------------------------------------------------------------
 
-.run_vector
+.execute
 #_07EE7C: LDX.w $04B8
 #_07EE7F: JSR (.vectors,X)
 
@@ -8197,7 +8197,7 @@ ROUTINE_07EFB3:
 #_07EFCE: LDA.w #$000E
 #_07EFD1: STA.b $24
 
-#_07EFD3: JSL PrepEnemySpawn_long
+#_07EFD3: JSL PrepSpriteSpawn_long
 
 #_07EFD7: RTS
 
@@ -8509,7 +8509,7 @@ data07F381:
 
 ;===================================================================================================
 
-data07F3A1:
+SomePockyVelocities_07F3A1:
 #_07F3A1: dw $0080, $FF00
 #_07F3A5: dw $0080, $FF00
 #_07F3A9: dw $0100, $FF80
@@ -8572,6 +8572,7 @@ data07F3A1:
 PrepareForTheEpilogue:
 #_07F481: LDA.w #$0000
 #_07F484: STA.w $0520
+
 #_07F487: STZ.w $0524
 #_07F48A: STZ.w $0526
 
@@ -8650,11 +8651,11 @@ Epilogue_00:
 
 #_07F505: LDA.w #data00804B>>16
 #_07F508: LDX.w #data00804B
-#_07F50B: JSL BulkDecompressionViaTable_verylong
+#_07F50B: JSL BulkDecompression_verylong
 
 #_07F50F: LDA.w #.table>>16
 #_07F512: LDX.w #.table
-#_07F515: JSL BulkDecompressionViaTable_verylong
+#_07F515: JSL BulkDecompression_verylong
 #_07F519: JSL EnableNMIandVIRQandFBlank_long
 
 #_07F51D: LDA.w #$001F
@@ -8662,23 +8663,25 @@ Epilogue_00:
 
 #_07F523: LDA.w #data00A4CA
 #_07F526: STA.b $20
-
 #_07F528: LDA.w #data00A4CA>>16
 #_07F52B: STA.b $22
 
-#_07F52D: JSL QuadDataWriter_00FBCB_verylong
+#_07F52D: JSL QuadtableDataWriter_verylong
+
 #_07F531: JSL ROUTINE_00F957_long
 
 #_07F535: LDA.w #Message_07F92F
 #_07F538: LDX.w #Message_07F92F>>16
 #_07F53B: JSL SetMessagePointer_long
-#_07F53F: JSL ROUTINE_00A974_long
+
+#_07F53F: JSL ROUTINE_00A974_IRQRelated_long
 
 #_07F543: LDA.w #$0018 ; SONG 18
 #_07F546: JSL RequestSong_verylong
 
 #_07F54A: INC.w $056E
 #_07F54D: INC.w $054E
+
 #_07F550: INC.w $0506
 
 #_07F553: RTS
@@ -8735,13 +8738,13 @@ ROUTINE_07F5A4:
 #_07F5A9: LDA.w #data00A931>>16
 #_07F5AC: STA.b $22
 
-#_07F5AE: JSL QuadDataWriter_00FBCB_verylong
+#_07F5AE: JSL QuadtableDataWriter_verylong
 
 #_07F5B2: RTS
 
 ;===================================================================================================
 
-ROUTINE_07F5B3:
+Epilogue_HandleDialogUntilAdvance:
 #_07F5B3: JSL HandleDialog_long
 
 #_07F5B7: LDA.l $7E2550
@@ -8754,17 +8757,18 @@ ROUTINE_07F5B3:
 
 ;===================================================================================================
 
-ROUTINE_07F5C1:
+Epilogue_ScrollBG3Down:
 #_07F5C1: LDX.w #$0004
-#_07F5C4: JSL ROUTINE_00A990_long
+#_07F5C4: JSL ROUTINE_00A990_ScrollsBG3Down_long
 
 #_07F5C8: RTS
 
 ;===================================================================================================
 
-ROUTINE_07F5C9:
+Epilogue_ScrollBG3Up:
 #_07F5C9: LDX.w #$0004
-#_07F5CC: JSL ROUTINE_00A9A8_long
+
+#_07F5CC: JSL ROUTINE_00A990_ScrollsBG3Up_long
 #_07F5D0: CMP.w #$00D4
 
 #_07F5D3: RTS
@@ -8806,14 +8810,14 @@ Epilogue_02:
 
 Epilogue_03:
 #_07F602: JSL ROUTINE_00F957_long
-#_07F606: JSR ROUTINE_07F5C1
+#_07F606: JSR Epilogue_ScrollBG3Down
 
-#_07F609: JMP ROUTINE_07F5B3
+#_07F609: JMP Epilogue_HandleDialogUntilAdvance
 
 ;===================================================================================================
 
 Epilogue_04:
-#_07F60C: JSR ROUTINE_07F5C9
+#_07F60C: JSR Epilogue_ScrollBG3Up
 #_07F60F: BCC .exit
 
 #_07F611: JSR ROUTINE_07F5A4
@@ -8823,7 +8827,8 @@ Epilogue_04:
 #_07F619: LDA.w #.table>>16
 #_07F61C: STA.b $22
 
-#_07F61E: JSL ROUTINE_00ECEF_long
+#_07F61E: JSL RobustBulkDecompression_long
+
 #_07F622: JSL ROUTINE_00ED0F_long
 
 #_07F626: INC.w $0506
@@ -8847,6 +8852,7 @@ Epilogue_04:
 Epilogue_05:
 #_07F63A: LDX.w #$07D0
 
+; wastes 9999 cycles
 .delay
 #_07F63D: DEX
 #_07F63E: BNE .delay
@@ -8867,7 +8873,6 @@ Epilogue_05:
 ;===================================================================================================
 
 Epilogue_06:
-
 #_07F654: DEC.w $0800
 #_07F657: BNE .exit
 
@@ -8880,7 +8885,8 @@ Epilogue_06:
 
 Epilogue_07:
 #_07F65D: JSL ROUTINE_00F957_long
-#_07F661: JSR ROUTINE_07F5C1
+
+#_07F661: JSR Epilogue_ScrollBG3Down
 #_07F664: CMP.w #$0000
 #_07F667: BNE .exit
 
@@ -8898,12 +8904,12 @@ Epilogue_07:
 Epilogue_08:
 #_07F677: JSL ROUTINE_00F957_long
 
-#_07F67B: JMP ROUTINE_07F5B3
+#_07F67B: JMP Epilogue_HandleDialogUntilAdvance
 
 ;===================================================================================================
 
 Epilogue_09:
-#_07F67E: JSR ROUTINE_07F5C9
+#_07F67E: JSR Epilogue_ScrollBG3Up
 #_07F681: BCC .exit
 
 #_07F683: JSR ROUTINE_07F5A4
@@ -8917,7 +8923,7 @@ Epilogue_09:
 #_07F695: LDA.w #.table>>16
 #_07F698: STA.b $22
 
-#_07F69A: JSL ROUTINE_00ECEF_long
+#_07F69A: JSL RobustBulkDecompression_long
 #_07F69E: JSL ROUTINE_00ED0F_long
 
 #_07F6A2: INC.w $0506
@@ -8944,6 +8950,7 @@ Epilogue_09:
 Epilogue_0A:
 #_07F6BD: LDX.w #$07D0
 
+; wastes 9999 cycles
 .delay
 #_07F6C0: DEX
 #_07F6C1: BNE .delay
@@ -8970,8 +8977,10 @@ Epilogue_0A:
 
 Epilogue_0B:
 #_07F6E5: JSL HandleDialog_long
+
 #_07F6E9: JSL ROUTINE_00F957_long
-#_07F6ED: JSR ROUTINE_07F5C1
+
+#_07F6ED: JSR Epilogue_ScrollBG3Down
 
 #_07F6F0: CMP.w #$0000
 #_07F6F3: BNE .exit
@@ -8986,12 +8995,12 @@ Epilogue_0B:
 Epilogue_0C:
 #_07F6F9: JSL ROUTINE_00F957_long
 
-#_07F6FD: JMP ROUTINE_07F5B3
+#_07F6FD: JMP Epilogue_HandleDialogUntilAdvance
 
 ;===================================================================================================
 
 Epilogue_0D:
-#_07F700: JSR ROUTINE_07F5C9
+#_07F700: JSR Epilogue_ScrollBG3Up
 #_07F703: BCC .exit
 
 #_07F705: INC.w $0506
@@ -9002,7 +9011,6 @@ Epilogue_0D:
 ;===================================================================================================
 
 Epilogue_0E:
-
 #_07F709: DEC.w $0520
 
 #_07F70C: LDA.w $0520
@@ -9034,7 +9042,7 @@ Epilogue_0F:
 
 #_07F734: LDA.w #.table>>16
 #_07F737: LDX.w #.table
-#_07F73A: JSL BulkDecompressionViaTable_verylong
+#_07F73A: JSL BulkDecompression_verylong
 
 #_07F73E: PHB
 #_07F73F: PEA.w $7E7E
@@ -9066,6 +9074,7 @@ Epilogue_0F:
 
 #_07F765: LDA.w #$0180
 #_07F768: STA.w $0810
+
 #_07F76B: STZ.w $0514
 #_07F76E: STZ.w $0516
 
@@ -9268,17 +9277,17 @@ CODE_07F8A9:
 Epilogue_10:
 #_07F8AE: LDA.b $00
 #_07F8B0: AND.w #$000F
-#_07F8B3: BNE CODE_07F8C3
+#_07F8B3: BNE .dont_advance
 
 #_07F8B5: INC.w $0520
 
 #_07F8B8: LDA.w $0520
 #_07F8BB: CMP.w #$000F
-#_07F8BE: BCC CODE_07F8C3
+#_07F8BE: BCC .dont_advance
 
 #_07F8C0: INC.w $0506
 
-CODE_07F8C3:
+.dont_advance
 #_07F8C3: JSR ROUTINE_07F803
 
 ;===================================================================================================
@@ -9289,6 +9298,7 @@ ROUTINE_07F8C6:
 #_07F8CB: BNE CODE_07F8DE
 
 #_07F8CD: INC.w $0510
+
 #_07F8D0: DEC.w $0810
 
 #_07F8D3: LDA.w $0510
@@ -9303,6 +9313,7 @@ CODE_07F8DE:
 #_07F8E3: BNE .exit
 
 #_07F8E5: DEC.w $0514
+
 #_07F8E8: INC.w $0812
 
 .exit
@@ -9312,7 +9323,9 @@ CODE_07F8DE:
 
 Epilogue_11:
 #_07F8EC: JSR ROUTINE_07F803
+
 #_07F8EF: JSL HandleDialog_long
+
 #_07F8F3: JSR ROUTINE_07F8C6
 
 #_07F8F6: LDA.w $0510
@@ -9328,12 +9341,13 @@ Epilogue_11:
 
 Epilogue_12:
 #_07F902: JSR ROUTINE_07F803
+
 #_07F905: JSL HandleDialog_long
 
 #_07F909: LDA.l $7E2550
 #_07F90D: BNE .exit
 
-#_07F90F: LDA.w #$00FD ; SFX FD
+#_07F90F: LDA.w #$00FD ; SFX FD - Fade music
 #_07F912: STA.w $04A0
 
 #_07F915: LDA.w #$0078

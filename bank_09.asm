@@ -300,16 +300,16 @@ ROUTINE_09A4FA:
 ROUTINE_09A505:
 #_09A505: STZ.b $3E
 
-CODE_09A507:
+.next
 #_09A507: LDA.w $081A,X
 #_09A50A: ASL A
 
 #_09A50B: LDA.w #$0100
-#_09A50E: BCC CODE_09A513
+#_09A50E: BCC .positive
 
 #_09A510: LDA.w #$FF00
 
-CODE_09A513:
+.positive
 #_09A513: STA.b $3C
 
 #_09A515: CLC
@@ -402,7 +402,7 @@ CODE_09A59C:
 #_09A59E: LDA.l $7FE81A,X
 #_09A5A2: STA.w $081A,X
 
-#_09A5A5: JMP CODE_09A507
+#_09A5A5: JMP .next
 
 ;===================================================================================================
 
@@ -608,10 +608,10 @@ ROUTINE_09A677:
 
 #_09A68D: LDY.w #$0000
 
-CODE_09A690:
+.next
 #_09A690: LDA.b ($3C),Y
 #_09A692: CMP.w #$7FFF
-#_09A695: BEQ CODE_09A6D5
+#_09A695: BEQ .done
 
 #_09A697: CLC
 #_09A698: ADC.w $0802,X
@@ -663,9 +663,9 @@ CODE_09A6BC:
 .to_next
 #_09A6D1: INY
 #_09A6D2: INY
-#_09A6D3: BRA CODE_09A690
+#_09A6D3: BRA .next
 
-CODE_09A6D5:
+.done
 #_09A6D5: LDA.w #$0000
 
 #_09A6D8: RTS
@@ -693,67 +693,75 @@ data09A6EB:
 SpriteAI_83B0:
 #_09A6F5: TYX
 
-#_09A6F6: LDA.w #data09A6FF
-#_09A6F9: LDY.w #data09A6FF>>16
+#_09A6F6: LDA.w #.spawn_table
+#_09A6F9: LDY.w #.spawn_table>>16
 #_09A6FC: JMP ROUTINE_09A775
 
-data09A6FF:
-#_09A6FF: db $03,$00,$A0,$FE,$00,$00,$BA,$83
-#_09A707: db $01,$00,$00,$00,$00,$00,$BA,$83
-#_09A70F: db $01,$00,$60,$01,$00,$00,$BA,$83
-#_09A717: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09A6FF: dw $0003 ; spawn 3 sprites
+#_09A701: dw $FEA0, $0000, $83BA, $0001 ; SPRITE 83BA
+#_09A709: dw $0000, $0000, $83BA, $0001 ; SPRITE 83BA
+#_09A711: dw $0160, $0000, $83BA, $0001 ; SPRITE 83BA
 
 ;===================================================================================================
 
 SpriteAI_83B2:
 #_09A719: TYX
 
-#_09A71A: LDA.w #data09A723
-#_09A71D: LDY.w #data09A723>>16
+#_09A71A: LDA.w #.spawn_table
+#_09A71D: LDY.w #.spawn_table>>16
 #_09A720: JMP ROUTINE_09A775
 
-data09A723:
-#_09A723: db $03,$00,$00,$00,$80,$FE,$BA,$83
-#_09A72B: db $01,$00,$00,$00,$00,$00,$BA,$83
-#_09A733: db $01,$00,$00,$00,$80,$01,$BA,$83
-#_09A73B: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09A723: dw $0003 ; spawn 3 sprites
+#_09A725: dw $0000, $FE80, $83BA, $0001 ; SPRITE 83BA
+#_09A72D: dw $0000, $0000, $83BA, $0001 ; SPRITE 83BA
+#_09A735: dw $0000, $0180, $83BA, $0001 ; SPRITE 83BA
 
 ;===================================================================================================
 
 SpriteAI_83B4:
 #_09A73D: TYX
 
-#_09A73E: LDA.w #data09A747
-#_09A741: LDY.w #data09A747>>16
+#_09A73E: LDA.w #.spawn_table
+#_09A741: LDY.w #.spawn_table>>16
 #_09A744: JMP ROUTINE_09A775
 
-data09A747:
-#_09A747: db $02,$00,$40,$FF,$00,$00,$C8,$83
-#_09A74F: db $01,$00,$C0,$00,$00,$00,$C8,$83
-#_09A757: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09A747: dw $0002 ; spawn 2 sprites
+#_09A749: dw $FF40, $0000, $83C8, $0001 ; SPRITE 83C8
+#_09A751: dw $00C0, $0000, $83C8, $0001 ; SPRITE 83C8
 
 ;===================================================================================================
 
 SpriteAI_83B6:
 #_09A759: TYX
 
-#_09A75A: LDA.w #data09A763
-#_09A75D: LDY.w #data09A763>>16
+#_09A75A: LDA.w #.spawn_table
+#_09A75D: LDY.w #.spawn_table>>16
 #_09A760: JMP ROUTINE_09A775
 
 ;---------------------------------------------------------------------------------------------------
 
-data09A763:
-#_09A763: db $02,$00,$00,$00,$40,$FF,$C8,$83
-#_09A76B: db $01,$00,$00,$00,$C0,$00,$C8,$83
-#_09A773: db $01,$00
+.spawn_table
+#_09A763: dw $0002 ; spawn 2 sprites
+#_09A765: dw $0000, $FF40, $83C8, $0001 ; SPRITE 83C8
+#_09A76D: dw $0000, $00C0, $83C8, $0001 ; SPRITE 83C8
 
 ;===================================================================================================
 
 ROUTINE_09A775:
 #_09A775: JSR ROUTINE_0390D7_bank09
 
-CODE_09A778:
+;===================================================================================================
+
+ROUTINE_09A778:
 #_09A778: LDA.w #$0062
 #_09A77B: STA.l $7FE816,X
 
@@ -797,8 +805,10 @@ SpriteAI_83B8:
 
 #_09A7C5: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09A7C8:
-#_09A7C8: db $03,$02,$05
+#_09A7C8: db $03, $02, $05
 
 ;===================================================================================================
 
@@ -829,9 +839,9 @@ SpriteAI_83BC:
 #_09A7F7: JSR AdvanceAIModeUp_bank09
 
 CODE_09A7FA:
-#_09A7FA: JMP CODE_09A7FD
+#_09A7FA: JMP ROUTINE_09A7FD
 
-CODE_09A7FD:
+ROUTINE_09A7FD:
 #_09A7FD: LDA.l $7FE81E,X
 #_09A801: TAY
 
@@ -839,8 +849,9 @@ CODE_09A7FD:
 #_09A805: STA.b $24
 
 #_09A807: LDA.w .pointers,Y
-#_09A80A: LDY.w #$0009
+#_09A80A: LDY.w #.pointers>>16
 #_09A80D: JSR ROUTINE_09B5F5
+
 #_09A810: TXY
 
 #_09A811: JSR ROUTINE_09A4FA
@@ -859,25 +870,37 @@ CODE_09A7FD:
 ;---------------------------------------------------------------------------------------------------
 
 data09A822:
-#_09A822: db $0C, $08, $04, $08, $2E, $08, $04, $08
+#_09A822: db $0C, $08
+#_09A824: db $04, $08
+#_09A826: db $2E, $08
+#_09A828: db $04, $08
 #_09A82A: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09A82B:
-#_09A82B: db $09, $08, $03, $08, $0B, $08, $03, $08
+#_09A82B: db $09, $08
+#_09A82D: db $03, $08
+#_09A82F: db $0B, $08
+#_09A831: db $03, $08
 #_09A833: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09A834:
-#_09A834: db $06, $08, $00, $08, $2C, $08, $00, $08
+#_09A834: db $06, $08
+#_09A836: db $00, $08
+#_09A838: db $2C, $08
+#_09A83A: db $00, $08
 #_09A83C: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09A83D:
-#_09A83D: db $08, $08, $02, $08, $0A, $08, $02, $08
+#_09A83D: db $08, $08
+#_09A83F: db $02, $08
+#_09A841: db $0A, $08
+#_09A843: db $02, $08
 #_09A845: db $FF
 
 ;===================================================================================================
@@ -950,7 +973,7 @@ CODE_09A8A0:
 ROUTINE_09A8A2:
 #_09A8A2: JSL ROUTINE_03AF9D_long
 
-CODE_09A8A6:
+ROUTINE_09A8A6:
 #_09A8A6: LDA.b $20
 #_09A8A8: CMP.b $22
 #_09A8AA: BCS CODE_09A8BA
@@ -1003,27 +1026,27 @@ ROUTINE_09A8CB:
 #_09A8DD: SEC
 #_09A8DE: SBC.w $080C,X
 #_09A8E1: STA.b $24
-#_09A8E3: BPL CODE_09A8E9
+#_09A8E3: BPL .positive_x
 
 #_09A8E5: EOR.w #$FFFF
 #_09A8E8: INC A
 
-CODE_09A8E9:
+.positive_x
 #_09A8E9: STA.b $20
 
 #_09A8EB: LDA.b $36
 #_09A8ED: SEC
 #_09A8EE: SBC.w $080E,X
 #_09A8F1: STA.b $26
-#_09A8F3: BPL CODE_09A8F9
+#_09A8F3: BPL .positive_y
 
 #_09A8F5: EOR.w #$FFFF
 #_09A8F8: INC A
 
-CODE_09A8F9:
+.positive_y
 #_09A8F9: STA.b $22
 
-#_09A8FB: JMP CODE_09A8A6
+#_09A8FB: JMP ROUTINE_09A8A6
 
 ;===================================================================================================
 
@@ -1043,6 +1066,8 @@ CODE_09A90C:
 
 #_09A90F: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09A910:
 #_09A910: db $0C,$00,$02,$00,$0A,$00,$04,$00
 
@@ -1061,17 +1086,17 @@ SpriteAI_83BE:
 #_09A929: STA.b $24
 
 #_09A92B: LDA.w .pointers,Y
-#_09A92E: LDY.w #$0009
+#_09A92E: LDY.w #.pointers>>16
 #_09A931: JSR ROUTINE_09B5F5
 #_09A934: CMP.w #$FFFF
 #_09A937: BEQ CODE_09A958
 
 #_09A939: LDA.w $081E,X
 #_09A93C: CMP.w #$0003
-#_09A93F: BNE CODE_09A98B
+#_09A93F: BNE .finished
 
 #_09A941: JSR ROUTINE_09A5DC
-#_09A944: BEQ CODE_09A98B
+#_09A944: BEQ .finished
 
 #_09A946: LDA.w #$005C ; SFX 5C
 #_09A949: STA.l $0004AA
@@ -1080,7 +1105,7 @@ SpriteAI_83BE:
 #_09A950: LDY.w #data09A9AE>>16
 #_09A953: JSR ROUTINE_039099_bank09
 
-#_09A956: BRA CODE_09A98B
+#_09A956: BRA .finished
 
 CODE_09A958:
 #_09A958: LDA.w #$0008
@@ -1097,7 +1122,7 @@ CODE_09A958:
 #_09A96F: JSR ROUTINE_09A9B8
 #_09A972: JSR AdvanceAIModeUp_bank09
 
-#_09A975: BRA CODE_09A98B
+#_09A975: BRA .finished
 
 CODE_09A977:
 #_09A977: LDA.b $00
@@ -1110,7 +1135,7 @@ CODE_09A977:
 
 #_09A988: JSR AdvanceAIModeDown_bank09
 
-CODE_09A98B:
+.finished
 #_09A98B: TXY
 
 #_09A98C: JSR ROUTINE_09A846
@@ -1128,32 +1153,38 @@ CODE_09A98B:
 ;---------------------------------------------------------------------------------------------------
 
 data09A99A:
-#_09A99A: db $1E, $10, $20, $10, $FF
+#_09A99A: db $1E, $10
+#_09A99C: db $20, $10
+#_09A99E: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09A99F:
-#_09A99F: db $1B, $10, $1D, $10, $FF
+#_09A99F: db $1B, $10
+#_09A9A1: db $1D, $10
+#_09A9A3: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09A9A4:
-#_09A9A4: db $16, $10, $18, $10, $FF
+#_09A9A4: db $16, $10
+#_09A9A6: db $18, $10
+#_09A9A8: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09A9A9:
-#_09A9A9: db $1A, $10, $1C, $10, $FF
+#_09A9A9: db $1A, $10
+#_09A9AB: db $1C, $10
+#_09A9AD: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09A9AE:
-#_09A9AE: db $01, $00, $80, $FF
+#_09A9AE: dw $0001 ; spawn 1 sprite
+#_09A9B0: dw $FF80, $FFA0, $83C2 ; SPRITE 83C2
 
-;---------------------------------------------------------------------------------------------------
-; TODO ??
-data09A9B2:
-#_09A9B2: db $A0, $FF, $C2, $83, $01, $00
+#_09A9B6: dw $0001
 
 ;===================================================================================================
 
@@ -1197,7 +1228,9 @@ SpriteAI_83C0:
 #_09A9F2: STA.w $081C,X
 
 CODE_09A9F5:
-#_09A9F5: JMP CODE_09A7FD
+#_09A9F5: JMP ROUTINE_09A7FD
+
+;---------------------------------------------------------------------------------------------------
 
 data09A9F8:
 #_09A9F8: db $04,$00,$06,$00,$00,$00,$02,$00
@@ -1239,12 +1272,16 @@ SpriteAI_83C2:
 
 #_09AA43: JMP AdvanceAIModeUp_bank09
 
-#data09AA46:
+;---------------------------------------------------------------------------------------------------
+
+data09AA46:
 #_09AA46: db $01,$00,$00,$01,$00,$00,$C6,$83
 #_09AA4E: db $01,$00
 
 data09AA50:
-#_09AA50: db $60,$01,$20,$01,$C0,$01
+#_09AA50: dw $0160
+#_09AA52: dw $0120
+#_09AA54: dw $01C0
 
 ;===================================================================================================
 
@@ -1291,11 +1328,15 @@ CODE_09AA82:
 #_09AA9B: JMP ROUTINE_09AEF6
 
 CODE_09AA9E:
-#_09AA9E: JMP CODE_09AE59
+#_09AA9E: JMP ROUTINE_09AE59
 
-#data09AAA1:
-#_09AAA1: db $01,$00,$00,$00,$00,$00,$3A,$84
-#_09AAA9: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+data09AAA1:
+#_09AAA1: dw $0001 ; spawn 1 sprite
+#_09AAA3: dw $0000, $0000, $843A ; SPRITE 843A
+
+#_09AAA9: dw $0001
 
 ;===================================================================================================
 
@@ -1321,7 +1362,7 @@ SpriteAI_83CA:
 #_09AAC2: TYX
 
 #_09AAC3: DEC.w $081C,X
-#_09AAC6: BNE CODE_09AAF2
+#_09AAC6: BNE ROUTINE_09AAF2
 
 #_09AAC8: DEC.w $0816,X
 #_09AACB: BNE CODE_09AADB
@@ -1333,7 +1374,7 @@ SpriteAI_83CA:
 
 #_09AAD6: JSR AdvanceAIModeUp_bank09
 
-#_09AAD9: BRA CODE_09AAF2
+#_09AAD9: BRA ROUTINE_09AAF2
 
 CODE_09AADB:
 #_09AADB: JSR ROUTINE_09ACAE
@@ -1347,7 +1388,7 @@ CODE_09AADB:
 #_09AAEB: JSR ROUTINE_09A8A2
 #_09AAEE: STA.l $7FE81E,X
 
-CODE_09AAF2:
+ROUTINE_09AAF2:
 #_09AAF2: LDA.l $7FE81E,X
 #_09AAF6: TAY
 
@@ -1355,7 +1396,7 @@ CODE_09AAF2:
 #_09AAFA: STA.b $24
 
 #_09AAFC: LDA.w .pointers,Y
-#_09AAFF: LDY.w #$0009
+#_09AAFF: LDY.w #.pointers>>16
 #_09AB02: JSR ROUTINE_09B5F5
 #_09AB05: TXY
 
@@ -1375,29 +1416,53 @@ CODE_09AAF2:
 ;---------------------------------------------------------------------------------------------------
 
 data09AB17:
-#_09AB17: db $0C, $08, $04, $08, $2E, $08, $04, $08
-#_09AB1F: db $0C, $08, $04, $08, $2E, $08, $04, $08
+#_09AB17: db $0C, $08
+#_09AB19: db $04, $08
+#_09AB1B: db $2E, $08
+#_09AB1D: db $04, $08
+#_09AB1F: db $0C, $08
+#_09AB21: db $04, $08
+#_09AB23: db $2E, $08
+#_09AB25: db $04, $08
 #_09AB27: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09AB28:
-#_09AB28: db $15, $08, $11, $08, $15, $08, $11, $08
-#_09AB30: db $15, $08, $25, $08, $15, $08, $25, $08
-#_09AB38: db $FF
+#_09AB17: db $0C, $08
+#_09AB19: db $04, $08
+#_09AB1B: db $2E, $08
+#_09AB1D: db $04, $08
+#_09AB1F: db $0C, $08
+#_09AB21: db $04, $08
+#_09AB23: db $2E, $08
+#_09AB25: db $04, $08
+#_09AB27: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09AB39:
-#_09AB39: db $12, $08, $0E, $08, $30, $08, $0E, $08
-#_09AB41: db $12, $08, $22, $08, $30, $08, $22, $08
+#_09AB39: db $12, $08
+#_09AB3B: db $0E, $08
+#_09AB3D: db $30, $08
+#_09AB3F: db $0E, $08
+#_09AB41: db $12, $08
+#_09AB43: db $22, $08
+#_09AB45: db $30, $08
+#_09AB47: db $22, $08
 #_09AB49: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09AB4A:
-#_09AB4A: db $14, $08, $10, $08, $14, $08, $10, $08
-#_09AB52: db $14, $08, $24, $08, $14, $08, $24, $08
+#_09AB4A: db $14, $08
+#_09AB4C: db $10, $08
+#_09AB4E: db $14, $08
+#_09AB50: db $10, $08
+#_09AB52: db $14, $08
+#_09AB54: db $24, $08
+#_09AB56: db $14, $08
+#_09AB58: db $24, $08
 #_09AB5A: db $FF
 
 ;===================================================================================================
@@ -1412,7 +1477,7 @@ SpriteAI_83CC:
 #_09AB65: TAY
 
 #_09AB66: LDA.w .pointers,Y
-#_09AB69: LDY.w #$0009
+#_09AB69: LDY.w #.pointers>>16
 #_09AB6C: JSR ROUTINE_09B5F5
 #_09AB6F: CMP.w #$FFFF
 #_09AB72: BNE CODE_09AB86
@@ -1431,8 +1496,11 @@ CODE_09AB86:
 
 #_09AB89: JMP ROUTINE_09AD06
 
-#data09AB8C:
-#_09AB8C: db $01,$00,$00,$00,$00,$00,$4A,$84
+;---------------------------------------------------------------------------------------------------
+
+data09AB8C:
+#_09AB8C: dw $0001 ; spawn 1 sprite
+#_09AB8E: dw $0000, $0000, $844A ; SPRITE 844A
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -1445,26 +1513,50 @@ CODE_09AB86:
 ;---------------------------------------------------------------------------------------------------
 
 data09AB9C:
-#_09AB9C: db $04, $04, $04, $04, $04, $04, $04, $04
-#_09ABA4: db $04, $04, $04, $04, $04, $04, $FF
+#_09AB9C: db $04, $04
+#_09AB9E: db $04, $04
+#_09ABA0: db $04, $04
+#_09ABA2: db $04, $04
+#_09ABA4: db $04, $04
+#_09ABA6: db $04, $04
+#_09ABA8: db $04, $04
+#_09ABAA: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09ABAB:
-#_09ABAB: db $25, $04, $11, $04, $25, $04, $11, $04
-#_09ABB3: db $25, $04, $11, $04, $25, $04, $FF
+#_09ABAB: db $25, $04
+#_09ABAD: db $11, $04
+#_09ABAF: db $25, $04
+#_09ABB1: db $11, $04
+#_09ABB3: db $25, $04
+#_09ABB5: db $11, $04
+#_09ABB7: db $25, $04
+#_09ABB9: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09ABBA:
-#_09ABBA: db $22, $04, $0E, $04, $22, $04, $0E, $04
-#_09ABC2: db $22, $04, $0E, $04, $22, $04, $FF
+#_09ABBA: db $22, $04
+#_09ABBC: db $0E, $04
+#_09ABBE: db $22, $04
+#_09ABC0: db $0E, $04
+#_09ABC2: db $22, $04
+#_09ABC4: db $0E, $04
+#_09ABC6: db $22, $04
+#_09ABC8: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09ABC9:
-#_09ABC9: db $24, $04, $10, $04, $24, $04, $10, $04
-#_09ABD1: db $24, $04, $10, $04, $24, $04, $FF
+#_09ABC9: db $24, $04
+#_09ABCB: db $10, $04
+#_09ABCD: db $24, $04
+#_09ABCF: db $10, $04
+#_09ABD1: db $24, $04
+#_09ABD3: db $10, $04
+#_09ABD5: db $24, $04
+#_09ABD7: db $FF
 
 ;===================================================================================================
 
@@ -1586,7 +1678,7 @@ ROUTINE_09AC4C:
 
 ;===================================================================================================
 
-ROUTINE_09AC87:
+ROUTINE_09AC8B_long:
 #_09AC87: JSR ROUTINE_09AC8B
 
 #_09AC8A: RTL
@@ -1607,7 +1699,7 @@ CODE_09AC91:
 #_09AC94: STA.b $20
 
 #_09AC96: LDA.b $2C
-#_09AC98: JSR ROUTINE_09A07D
+#_09AC98: JSR ROUTINE_03A07D_bank09
 
 #_09AC9B: LDA.b $20
 #_09AC9D: STA.w $0818,X
@@ -1619,7 +1711,7 @@ CODE_09AC91:
 
 ;===================================================================================================
 
-ROUTINE_09ACA6:
+#ROUTINE_09ACA6:
 #_09ACA6: STA.b $34
 
 #_09ACA8: PHX
@@ -1652,6 +1744,8 @@ CODE_09ACBC:
 
 #_09ACCC: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09ACCD:
 #_09ACCD: db $00,$00,$0A,$00,$00,$00,$F6,$FF
 
@@ -1673,6 +1767,8 @@ ROUTINE_09ACDD:
 
 #_09ACF5: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09ACF6:
 #_09ACF6: db $F0,$FF,$10,$00,$F0,$FF,$10,$00
 
@@ -1683,19 +1779,19 @@ data09ACFE:
 
 ROUTINE_09AD06:
 #_09AD06: LDY.w #$0048
-#_09AD09: JSR ROUTINE_0392EE_bank09
+#_09AD09: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
 #_09AD0C: BEQ CODE_09AD19
 
 #_09AD0E: JSR ROUTINE_039385_bank09
 #_09AD11: BNE CODE_09AD19
 
-#_09AD13: JSR ROUTINE_038A25_0020_bank09
+#_09AD13: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 
-#_09AD16: JMP CODE_09AED0
+#_09AD16: JMP ROUTINE_09AED0
 
 CODE_09AD19:
 #_09AD19: LDY.w #$0040
-#_09AD1C: JSR ROUTINE_038428_bank09
+#_09AD1C: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09AD1F: LDA.w #ROUTINE_09AEDC
 #_09AD22: JSR ROUTINE_03A2AE_bank09
@@ -1705,42 +1801,44 @@ CODE_09AD19:
 
 CODE_09AD28:
 #_09AD28: LDA.w #$FF00
-
 #_09AD2B: LDY.w #$201C
 #_09AD2E: JSR ROUTINE_038CAA_bank09
 
 #_09AD31: JMP ROUTINE_0388B8_bank09
 
-CODE_09AD34:
+;===================================================================================================
+
+ROUTINE_09AD34:
 #_09AD34: LDY.w #$0048
-#_09AD37: JSR ROUTINE_0392EE_bank09
+#_09AD37: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
 #_09AD3A: BEQ CODE_09AD47
 
 #_09AD3C: JSR ROUTINE_039385_bank09
 #_09AD3F: BNE CODE_09AD47
 
-#_09AD41: JSR ROUTINE_038A25_0020_bank09
+#_09AD41: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 
 #_09AD44: JMP ROUTINE_09AEF6
 
 CODE_09AD47:
 #_09AD47: LDY.w #$0030
-
 #_09AD4A: LDA.w #$0020
-#_09AD4D: JSR ROUTINE_039664_bank09
+#_09AD4D: JSR Sprite_HandlePockyCollision_039664_bank09
 
 #_09AD50: LDY.w #$0030
 #_09AD53: LDA.w #$0020
-#_09AD56: JSR ROUTINE_039C2D_bank09
+#_09AD56: JSR ROUTINE_039C2D_SomethingWithHittingASprite_bank09
 
-CODE_09AD59:
+;===================================================================================================
+
+ROUTINE_09AD59:
 #_09AD59: LDA.w #ROUTINE_09AEF6
-#_09AD5C: JSR ROUTINE_038983_bank09
-#_09AD5F: BNE CODE_09AD62
+#_09AD5C: JSR ROUTINE_038983_ExecuteRoutineIfSomething_bank09
+#_09AD5F: BNE ROUTINE_09AD62
 
 #_09AD61: RTS
 
-CODE_09AD62:
+ROUTINE_09AD62:
 #_09AD62: LDA.w $18E4
 #_09AD65: CMP.w #$000E
 #_09AD68: BNE CODE_09AD6D
@@ -1749,35 +1847,35 @@ CODE_09AD62:
 
 CODE_09AD6D:
 #_09AD6D: LDA.w #$FF00
-
 #_09AD70: LDY.w #$201C
 #_09AD73: JSR ROUTINE_038CAA_bank09
 
 #_09AD76: JMP ROUTINE_0388B8_bank09
 
-CODE_09AD79:
+;===================================================================================================
+
+ROUTINE_09AD79:
 #_09AD79: LDY.w #$0048
-#_09AD7C: JSR ROUTINE_0392EE_bank09
-#_09AD7F: BEQ CODE_09AD8C
+#_09AD7C: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
+#_09AD7F: BEQ ROUTINE_09AD8C
 
 #_09AD81: JSR ROUTINE_039385_bank09
-#_09AD84: BNE CODE_09AD8C
+#_09AD84: BNE ROUTINE_09AD8C
 
-#_09AD86: JSR ROUTINE_038A25_0020_bank09
+#_09AD86: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 
-#_09AD89: JMP CODE_09AED0
+#_09AD89: JMP ROUTINE_09AED0
 
-CODE_09AD8C:
+ROUTINE_09AD8C:
 #_09AD8C: LDY.w #$0040
-
 #_09AD8F: LDA.w #$0020
-#_09AD92: JSR ROUTINE_039664_bank09
+#_09AD92: JSR Sprite_HandlePockyCollision_039664_bank09
 
 #_09AD95: LDY.w #$0040
 #_09AD98: LDA.w #$0020
-#_09AD9B: JSR ROUTINE_039C2D_bank09
+#_09AD9B: JSR ROUTINE_039C2D_SomethingWithHittingASprite_bank09
 
-CODE_09AD9E:
+ROUTINE_09AD9E:
 #_09AD9E: JSR ROUTINE_09B447
 
 #_09ADA1: LDA.w #ROUTINE_09AEDC
@@ -1789,16 +1887,18 @@ CODE_09AD9E:
 CODE_09ADAA:
 #_09ADAA: JMP ROUTINE_0388B2_bank09
 
-CODE_09ADAD:
+;===================================================================================================
+
+ROUTINE_09ADAD:
 #_09ADAD: JSR ROUTINE_09B447
 
 #_09ADB0: LDY.w #$0040
 #_09ADB3: LDA.w #$0020
-#_09ADB6: JSR ROUTINE_039664_bank09
+#_09ADB6: JSR Sprite_HandlePockyCollision_039664_bank09
 
 #_09ADB9: LDY.w #$0040
 #_09ADBC: LDA.w #$0020
-#_09ADBF: JSR ROUTINE_039C2D_bank09
+#_09ADBF: JSR ROUTINE_039C2D_SomethingWithHittingASprite_bank09
 
 #_09ADC2: LDA.w #ROUTINE_09AEDC
 #_09ADC5: JSR ROUTINE_03A2AE_bank09
@@ -1809,61 +1909,63 @@ CODE_09ADAD:
 CODE_09ADCB:
 #_09ADCB: JMP ROUTINE_0388B2_bank09
 
-CODE_09ADCE:
+;===================================================================================================
+
+ROUTINE_09ADCE:
 #_09ADCE: LDY.w #$0048
-#_09ADD1: JSR ROUTINE_0392EE_bank09
+#_09ADD1: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
 #_09ADD4: BEQ CODE_09ADE1
 
 #_09ADD6: JSR ROUTINE_039385_bank09
 #_09ADD9: BNE CODE_09ADE1
 
-#_09ADDB: JSR ROUTINE_038A25_0020_bank09
+#_09ADDB: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 
-#_09ADDE: JMP CODE_09AED0
+#_09ADDE: JMP ROUTINE_09AED0
 
 CODE_09ADE1:
 #_09ADE1: LDY.w #$0040
-
 #_09ADE4: LDA.w #$0020
-#_09ADE7: JSR ROUTINE_039664_bank09
+#_09ADE7: JSR Sprite_HandlePockyCollision_039664_bank09
 
-CODE_09ADEA:
+ROUTINE_09ADEA:
 #_09ADEA: JSR ROUTINE_09B447
 
 #_09ADED: LDA.w #ROUTINE_09AEDC
-#_09ADF0: JSR ROUTINE_038983_bank09
-#_09ADF3: BNE CODE_09ADF6
+#_09ADF0: JSR ROUTINE_038983_ExecuteRoutineIfSomething_bank09
+#_09ADF3: BNE ROUTINE_09ADF6
 
 #_09ADF5: RTS
 
-CODE_09ADF6:
-#_09ADF6: JMP CODE_09AD62
+ROUTINE_09ADF6:
+#_09ADF6: JMP ROUTINE_09AD62
 
-CODE_09ADF9:
+;===================================================================================================
+
+ROUTINE_09ADF9:
 #_09ADF9: LDY.w #$0010
-
 #_09ADFC: LDA.w #$0022
-#_09ADFF: JSR ROUTINE_039664_bank09
+#_09ADFF: JSR Sprite_HandlePockyCollision_039664_bank09
 
 #_09AE02: LDY.w #$0010
 #_09AE05: LDA.w #$0022
-#_09AE08: JSR ROUTINE_039C2D_bank09
+#_09AE08: JSR ROUTINE_039C2D_SomethingWithHittingASprite_bank09
 
 #_09AE0B: LDY.w #$0048
-#_09AE0E: JSR ROUTINE_0392EE_bank09
+#_09AE0E: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
 #_09AE11: BEQ CODE_09AE21
 
 #_09AE13: JSR ROUTINE_039385_bank09
 #_09AE16: BNE CODE_09AE21
 
 #_09AE18: LDA.w #$0026 ; SPRITE 0026
-#_09AE1B: JSR ROUTINE_038A25_bank09
+#_09AE1B: JSR ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates_WithSFX_bank09
 
 #_09AE1E: JMP ROUTINE_09AEF6
 
 CODE_09AE21:
 #_09AE21: LDA.w #ROUTINE_09AEF6
-#_09AE24: JSR ROUTINE_038983_bank09
+#_09AE24: JSR ROUTINE_038983_ExecuteRoutineIfSomething_bank09
 #_09AE27: BNE CODE_09AE2A
 
 #_09AE29: RTS
@@ -1875,15 +1977,15 @@ CODE_09AE2A:
 
 ROUTINE_09AE2D:
 #_09AE2D: LDY.w #$0048
-#_09AE30: JSR ROUTINE_0392EE_bank09
+#_09AE30: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
 #_09AE33: BEQ CODE_09AE40
 
 #_09AE35: JSR ROUTINE_039385_bank09
 #_09AE38: BNE CODE_09AE40
 
-#_09AE3A: JSR ROUTINE_038A25_0020_bank09
+#_09AE3A: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 
-#_09AE3D: JMP CODE_09AED0
+#_09AE3D: JMP ROUTINE_09AED0
 
 CODE_09AE40:
 #_09AE40: LDA.b $00
@@ -1891,7 +1993,7 @@ CODE_09AE40:
 #_09AE45: BNE CODE_09AE4D
 
 #_09AE47: LDY.w #$0040
-#_09AE4A: JSR ROUTINE_038428_bank09
+#_09AE4A: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 CODE_09AE4D:
 #_09AE4D: LDA.w #$FF00
@@ -1901,31 +2003,33 @@ CODE_09AE4D:
 
 #_09AE56: JMP ROUTINE_0388B8_bank09
 
-CODE_09AE59:
+;===================================================================================================
+
+ROUTINE_09AE59:
 #_09AE59: LDY.w #$0010
 
 #_09AE5C: LDA.w #$0022
-#_09AE5F: JSR ROUTINE_039664_bank09
+#_09AE5F: JSR Sprite_HandlePockyCollision_039664_bank09
 
 #_09AE62: LDY.w #$0010
 #_09AE65: LDA.w #$0022
-#_09AE68: JSR ROUTINE_039C2D_bank09
+#_09AE68: JSR ROUTINE_039C2D_SomethingWithHittingASprite_bank09
 
 #_09AE6B: LDY.w #$0048
-#_09AE6E: JSR ROUTINE_0392EE_bank09
+#_09AE6E: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
 #_09AE71: BEQ CODE_09AE81
 
 #_09AE73: JSR ROUTINE_039385_bank09
 #_09AE76: BNE CODE_09AE81
 
 #_09AE78: LDA.w #$0026 ; SPRITE 0026
-#_09AE7B: JSR ROUTINE_038A25_bank09
+#_09AE7B: JSR ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates_WithSFX_bank09
 
 #_09AE7E: JMP ROUTINE_09AEF6
 
 CODE_09AE81:
 #_09AE81: LDA.w #ROUTINE_09AEF6
-#_09AE84: JSR ROUTINE_038983_bank09
+#_09AE84: JSR ROUTINE_038983_ExecuteRoutineIfSomething_bank09
 #_09AE87: BNE CODE_09AE8A
 
 #_09AE89: RTS
@@ -1937,30 +2041,32 @@ CODE_09AE8A:
 
 #_09AE93: JMP ROUTINE_0388B8_bank09
 
-CODE_09AE96:
+;===================================================================================================
+
+ROUTINE_09AE96:
 #_09AE96: LDY.w #$0020
 
 #_09AE99: LDA.w #$0020
-#_09AE9C: JSR ROUTINE_039664_bank09
+#_09AE9C: JSR Sprite_HandlePockyCollision_039664_bank09
 
 #_09AE9F: LDY.w #$0020
 #_09AEA2: LDA.w #$0020
-#_09AEA5: JSR ROUTINE_039C2D_bank09
+#_09AEA5: JSR ROUTINE_039C2D_SomethingWithHittingASprite_bank09
 
 #_09AEA8: LDY.w #$0048
-#_09AEAB: JSR ROUTINE_0392EE_bank09
+#_09AEAB: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
 #_09AEAE: BEQ CODE_09AEBB
 
 #_09AEB0: JSR ROUTINE_039385_bank09
 #_09AEB3: BNE CODE_09AEBB
 
-#_09AEB5: JSR ROUTINE_038A25_0020_bank09
+#_09AEB5: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 
-#_09AEB8: JMP CODE_09AED0
+#_09AEB8: JMP ROUTINE_09AED0
 
 CODE_09AEBB:
 #_09AEBB: LDA.w #ROUTINE_09AEDC
-#_09AEBE: JSR ROUTINE_038983_bank09
+#_09AEBE: JSR ROUTINE_038983_ExecuteRoutineIfSomething_bank09
 #_09AEC1: BNE CODE_09AEC4
 
 #_09AEC3: RTS
@@ -1972,13 +2078,17 @@ CODE_09AEC4:
 
 #_09AECD: JMP ROUTINE_0388B8_bank09
 
-CODE_09AED0:
+;===================================================================================================
+
+ROUTINE_09AED0:
 #_09AED0: LDA.l $7FE81C,X
 #_09AED4: TAY
 
 #_09AED5: LDA.w $081E,Y
 #_09AED8: DEC A
 #_09AED9: STA.w $081E,Y
+
+;===================================================================================================
 
 ROUTINE_09AEDC:
 #_09AEDC: LDA.l $7FE81C,X
@@ -1994,6 +2104,8 @@ ROUTINE_09AEDC:
 
 #_09AEF0: LDA.w $080E,X
 #_09AEF3: STA.w $080E,Y
+
+;===================================================================================================
 
 ROUTINE_09AEF6:
 #_09AEF6: JSR ROUTINE_038C85_bank09
@@ -2033,16 +2145,18 @@ SpriteAI_83D2:
 #_09AF22: AND.w #$003F
 #_09AF25: BNE .exit
 
-#_09AF27: LDA.w #data09AF31
-#_09AF2A: LDY.w #data09AF31>>16
+#_09AF27: LDA.w #.spawn_table
+#_09AF2A: LDY.w #.spawn_table>>16
 #_09AF2D: JSR ROUTINE_0390D7_bank09
 
 .exit
 #_09AF30: RTS
 
-#data09AF31:
-#_09AF31: db $01,$00,$80,$00,$00,$00,$D4,$83
-#_09AF39: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09AF31: dw $0001 ; spawn 1 sprite
+#_09AF33: dw $0080, $0000, $83D4, $0001 ; SPRITE 83D4
 
 ;===================================================================================================
 
@@ -2057,7 +2171,9 @@ SpriteAI_83D4:
 #_09AF45: LDA.w #$0018
 #_09AF48: STA.w $0818,X
 
-CODE_09AF4B:
+;===================================================================================================
+
+ROUTINE_09AF4B:
 #_09AF4B: LDA.w #$000A
 #_09AF4E: STA.w $081A,X
 #_09AF51: STZ.w $081C,X
@@ -2110,7 +2226,7 @@ CODE_09AF8F:
 CODE_09AF97:
 #_09AF97: JSR ROUTINE_09A5A8
 
-#_09AF9A: JMP CODE_09AD34
+#_09AF9A: JMP ROUTINE_09AD34
 
 ;===================================================================================================
 
@@ -2140,16 +2256,18 @@ SpriteAI_83DA:
 #_09AFBB: AND.w #$003F
 #_09AFBE: BNE .exit
 
-#_09AFC0: LDA.w #data09AFCA
-#_09AFC3: LDY.w #data09AFCA>>16
+#_09AFC0: LDA.w #.spawn_table
+#_09AFC3: LDY.w #.spawn_table>>16
 #_09AFC6: JSR ROUTINE_0390D7_bank09
 
 .exit
 #_09AFC9: RTS
 
-#data09AFCA:
-#_09AFCA: db $01,$00,$80,$00,$00,$00,$DC,$83
-#_09AFD2: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09AFCA: dw $0001 ; spawn 1 sprite
+#_09AFCC: dw $0080, $0000, $83DC, $0001 ; SPRITE 83DC
 
 ;===================================================================================================
 
@@ -2191,11 +2309,11 @@ SpriteAI_83DC:
 #_09B007: LDA.w #$FFE8
 #_09B00A: STA.w $0818,X
 
-#_09B00D: JMP CODE_09AF4B
+#_09B00D: JMP ROUTINE_09AF4B
 
 ;===================================================================================================
 
-ROUTINE_09B010:
+ROUTINE_09B014_long:
 #_09B010: JSR ROUTINE_09B014
 
 #_09B013: RTL
@@ -2250,16 +2368,18 @@ SpriteAI_83DE:
 
 #_09B05E: JSR ROUTINE_09B0C0
 
-#_09B061: LDA.w #data09B06A
-#_09B064: LDY.w #data09B06A>>16
+#_09B061: LDA.w #.spawn_table
+#_09B064: LDY.w #.spawn_table>>16
 #_09B067: JMP ROUTINE_0390D7_bank09
 
-#data09B06A:
-#_09B06A: db $04,$00,$00,$00,$00,$00,$E0,$83
-#_09B072: db $01,$00,$00,$00,$00,$00,$E0,$83
-#_09B07A: db $1E,$00,$00,$00,$00,$00,$E0,$83
-#_09B082: db $3C,$00,$00,$00,$00,$00,$E0,$83
-#_09B08A: db $5A,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09B06A: dw $0004 ; spawn 4 sprites
+#_09B06C: dw $0000, $0000, $83E0, $0001 ; SPRITE 83E0
+#_09B074: dw $0000, $0000, $83E0, $001E ; SPRITE 83E0
+#_09B07C: dw $0000, $0000, $83E0, $003C ; SPRITE 83E0
+#_09B084: dw $0000, $0000, $83E0, $005A ; SPRITE 83E0
 
 ;===================================================================================================
 
@@ -2282,15 +2402,17 @@ SpriteAI_83E2:
 
 #_09B09A: JSR ROUTINE_09B0C0
 
-#_09B09D: LDA.w #data09B0A6
-#_09B0A0: LDY.w #data09B0A6>>16
+#_09B09D: LDA.w #.spawn_table
+#_09B0A0: LDY.w #.spawn_table>>16
 #_09B0A3: JMP ROUTINE_0390D7_bank09
 
-#data09B0A6:
-#_09B0A6: db $03,$00,$80,$FD,$00,$00,$E0,$83
-#_09B0AE: db $01,$00,$00,$00,$00,$00,$E0,$83
-#_09B0B6: db $01,$00,$80,$02,$00,$00,$E0,$83
-#_09B0BE: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09B0A6: dw $0003 ; spawn 3 sprites
+#_09B0A8: dw $FD80, $0000, $83E0, $0001 ; SPRITE 83E0
+#_09B0B0: dw $0000, $0000, $83E0, $0001 ; SPRITE 83E0
+#_09B0B8: dw $0280, $0000, $83E0, $0001 ; SPRITE 83E0
 
 ;===================================================================================================
 
@@ -2300,7 +2422,7 @@ ROUTINE_09B0C0:
 #_09B0C4: SBC.w #$0100
 #_09B0C7: STA.w $080E,X
 
-#_09B0CA: JMP CODE_09A778
+#_09B0CA: JMP ROUTINE_09A778
 
 ;===================================================================================================
 
@@ -2317,6 +2439,7 @@ SpriteAI_83E4:
 
 #_09B0DD: LDA.w #$FF00
 #_09B0E0: STA.w $080A,X
+
 #_09B0E3: STZ.w $081C,X
 #_09B0E6: STZ.w $081E,X
 
@@ -2344,7 +2467,7 @@ SpriteAI_83E6:
 #_09B103: STA.b $20
 
 #_09B105: LDA.b $2C
-#_09B107: JSR ROUTINE_09A07D
+#_09B107: JSR ROUTINE_03A07D_bank09
 
 #_09B10A: LDA.b $20
 #_09B10C: STA.w $0818,X
@@ -2358,10 +2481,14 @@ CODE_09B118:
 #_09B118: JSR ROUTINE_09B127
 #_09B11B: JSR ROUTINE_09A5A8
 
-#_09B11E: JMP CODE_09ADCE
+#_09B11E: JMP ROUTINE_09ADCE
+
+;---------------------------------------------------------------------------------------------------
 
 data09B121:
-#_09B121: db $00,$03,$80,$02,$40,$04
+#_09B121: dw $0300
+#_09B123: dw $0280
+#_09B125: dw $0440
 
 ;===================================================================================================
 
@@ -2426,6 +2553,8 @@ CODE_09B17D:
 
 #_09B184: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09B187:
 #_09B187: db $1C,$00,$15,$00,$30,$00
 
@@ -2440,7 +2569,6 @@ SpriteAI_83EA:
 #_09B194: LDA.b $00
 #_09B196: AND.w #$0004
 
-CODE_09B199:
 #_09B199: CLC
 #_09B19A: ADC.w $081E,X
 
@@ -2458,14 +2586,14 @@ CODE_09B199:
 #_09B1AF: CMP.w #$0014
 #_09B1B2: BCS CODE_09B1BA
 
-#_09B1B4: JSR ROUTINE_038A25_0020_bank09
+#_09B1B4: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 
 #_09B1B7: JMP ROUTINE_09AEF6
 
 CODE_09B1BA:
 #_09B1BA: JSR ROUTINE_09A5A8
 
-#_09B1BD: JMP CODE_09ADF9
+#_09B1BD: JMP ROUTINE_09ADF9
 
 data09B1C0:
 #_09B1C0: db $A2,$0F,$A3,$0F,$A4,$0F,$A5,$0F
@@ -2510,15 +2638,15 @@ SpriteAI_83EC:
 
 #_09B1EE: JSR ROUTINE_09B0C0
 
-#_09B1F1: LDA.w #data09B1FA
-#_09B1F4: LDY.w #data09B1FA>>16
+#_09B1F1: LDA.w #.spawn_table
+#_09B1F4: LDY.w #.spawn_table>>16
 #_09B1F7: JMP ROUTINE_0390D7_bank09
 
 ;---------------------------------------------------------------------------------------------------
 
-data09B1FA:
-#_09B1FA: db $01,$00,$00,$00,$00,$00,$EE,$83
-#_09B202: db $01,$00
+.spawn_table
+#_09B1FA: dw $0001 ; spawn 1 sprite
+#_09B1FC: dw $0000, $0000, $83EE, $0001 ; SPRITE 83EE
 
 ;===================================================================================================
 
@@ -2587,7 +2715,7 @@ CODE_09B263:
 #_09B266: JSR ROUTINE_09A5A8
 #_09B269: JSR ROUTINE_09B447
 
-#_09B26C: JMP CODE_09ADF6
+#_09B26C: JMP ROUTINE_09ADF6
 
 ;===================================================================================================
 
@@ -2605,11 +2733,11 @@ SpriteAI_83F2:
 #_09B27F: LDA.w #$0EF4
 #_09B282: STA.b $24
 
-#_09B284: LDA.w #$B2CA
-#_09B287: LDY.w #$0009
+#_09B284: LDA.w #data09B2CA
+#_09B287: LDY.w #data09B2CA>>16
 #_09B28A: JSR ROUTINE_09B5F5
 
-#_09B28D: JMP CODE_09B397
+#_09B28D: JMP ROUTINE_09B397
 
 ;===================================================================================================
 
@@ -2638,16 +2766,29 @@ CODE_09B2B3:
 #_09B2B3: LDA.w #$0EF4
 #_09B2B6: STA.b $24
 
-#_09B2B8: LDA.w #$B2CA
-#_09B2BB: LDY.w #$0009
+#_09B2B8: LDA.w #data09B2CA
+#_09B2BB: LDY.w #data09B2CA>>16
 #_09B2BE: JSR ROUTINE_09B5F5
 
-#_09B2C1: JMP CODE_09B397
+#_09B2C1: JMP ROUTINE_09B397
+
+;---------------------------------------------------------------------------------------------------
 
 data09B2C4:
-#_09B2C4: db $01,$00,$01,$00,$01,$00,$00,$06
-#_09B2CC: db $02,$06,$04,$06,$02,$06,$00,$06
-#_09B2D4: db $03,$06,$05,$06,$03,$06,$00,$06
+#_09B2C4: dw $0001, $0001, $0001
+
+;===================================================================================================
+
+data09B2CA:
+#_09B2CA: db $00, $06
+#_09B2CC: db $02, $06
+#_09B2CE: db $04, $06
+#_09B2D0: db $02, $06
+#_09B2D2: db $00, $06
+#_09B2D4: db $03, $06
+#_09B2D6: db $05, $06
+#_09B2D8: db $03, $06
+#_09B2DA: db $00, $06
 #_09B2DC: db $FF
 
 ;===================================================================================================
@@ -2658,8 +2799,8 @@ SpriteAI_83F6:
 #_09B2DE: LDA.w #$0EF4
 #_09B2E1: STA.b $24
 
-#_09B2E3: LDA.w #$B2CA
-#_09B2E6: LDY.w #$0009
+#_09B2E3: LDA.w #data09B2CA
+#_09B2E6: LDY.w #data09B2CA>>16
 #_09B2E9: JSR ROUTINE_09B5F5
 #_09B2EC: CMP.w #$FFFF
 #_09B2EF: BNE CODE_09B32B
@@ -2693,13 +2834,16 @@ SpriteAI_83F6:
 #_09B328: STA.w $0810,X
 
 CODE_09B32B:
-#_09B32B: JMP CODE_09B397
+#_09B32B: JMP ROUTINE_09B397
 
-#data09B32E:
-#_09B32E: db $04,$00,$00,$00,$40,$00,$00,$84
-#_09B336: db $00,$00,$40,$00,$3E,$84,$00,$00
-#_09B33E: db $40,$00,$40,$84,$00,$00,$40,$00
-#_09B346: db $42,$84
+;---------------------------------------------------------------------------------------------------
+
+data09B32E:
+#_09B32E: dw $0004 ; spawn 4 sprites
+#_09B330: dw $0000, $0040, $8400 ; SPRITE 8400
+#_09B336: dw $0000, $0040, $843E ; SPRITE 843E
+#_09B33C: dw $0000, $0040, $8440 ; SPRITE 8440
+#_09B342: dw $0000, $0040, $8442 ; SPRITE 8442
 
 ;===================================================================================================
 
@@ -2707,7 +2851,7 @@ SpriteAI_83F8:
 #_09B348: TYX
 
 #_09B349: DEC.w $081C,X
-#_09B34C: BNE CODE_09B390
+#_09B34C: BNE .delay
 
 #_09B34E: PHX
 
@@ -2719,12 +2863,12 @@ SpriteAI_83F8:
 #_09B356: STA.b $20
 
 #_09B358: LDA.b $2C
-#_09B35A: JSR ROUTINE_09A07D
+#_09B35A: JSR ROUTINE_03A07D_bank09
 
 #_09B35D: LDA.l $7FE812,X
 #_09B361: EOR.w #$FFFF
 #_09B364: STA.l $7FE812,X
-#_09B368: BEQ CODE_09B37A
+#_09B368: BEQ .dont_flip
 
 #_09B36A: LDA.b $20
 #_09B36C: EOR.w #$FFFF
@@ -2736,7 +2880,7 @@ SpriteAI_83F8:
 #_09B377: INC A
 #_09B378: STA.b $22
 
-CODE_09B37A:
+.dont_flip
 #_09B37A: LDA.b $20
 #_09B37C: STA.w $0818,X
 
@@ -2749,20 +2893,22 @@ CODE_09B37A:
 #_09B38A: LDA.w #$83F6 ; SPRITE 83F6
 #_09B38D: STA.w $0810,X
 
-CODE_09B390:
-#_09B390: JMP CODE_09B397
+.delay
+#_09B390: JMP ROUTINE_09B397
 
 ;===================================================================================================
 
 SpriteAI_83FA:
 #_09B393: TYX
 
-#_09B394: JMP CODE_09B397
+#_09B394: JMP ROUTINE_09B397
 
-CODE_09B397:
+;===================================================================================================
+
+ROUTINE_09B397:
 #_09B397: JSR ROUTINE_09A5A8
 
-#_09B39A: JMP CODE_09ADCE
+#_09B39A: JMP ROUTINE_09ADCE
 
 ;===================================================================================================
 
@@ -2795,8 +2941,12 @@ SpriteAI_8400:
 
 #_09B3CE: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09B3CF:
-#_09B3CF: db $2A,$00,$1E,$00,$3C,$00
+#_09B3CF: dw $002A
+#_09B3D1: dw $001E
+#_09B3D3: dw $003C
 
 ;===================================================================================================
 
@@ -2853,7 +3003,7 @@ CODE_09B406:
 #_09B413: STA.b $20
 
 #_09B415: LDA.w $081E,X
-#_09B418: JSR ROUTINE_09A04D
+#_09B418: JSR ROUTINE_03A04D_bank09
 
 #_09B41B: DEC.w $081C,X
 #_09B41E: BNE CODE_09B423
@@ -2861,17 +3011,23 @@ CODE_09B406:
 #_09B420: JSR AdvanceAIModeUp_bank09
 
 CODE_09B423:
-#_09B423: BRA CODE_09B431
-
-data09B425:
-#_09B425: db $08,$00,$07,$00,$09,$00
-
-data09B42B:
-#_09B42B: db $0D,$00,$06,$00,$10,$00
+#_09B423: BRA ROUTINE_09B431
 
 ;---------------------------------------------------------------------------------------------------
 
-CODE_09B431:
+data09B425:
+#_09B425: dw $0008
+#_09B427: dw $0007
+#_09B429: dw $0009
+
+data09B42B:
+#_09B42B: dw $000D
+#_09B42D: dw $0006
+#_09B42F: dw $0010
+
+;===================================================================================================
+
+ROUTINE_09B431:
 #_09B431: LDA.b $00
 #_09B433: AND.w #$0004
 #_09B436: LSR A
@@ -2881,14 +3037,14 @@ CODE_09B431:
 
 #_09B43E: JSR ROUTINE_09A5A8
 
-#_09B441: JMP CODE_09ADAD
+#_09B441: JMP ROUTINE_09ADAD
 
 ;===================================================================================================
 
 SpriteAI_8404:
 #_09B444: TYX
 
-#_09B445: BRA CODE_09B431
+#_09B445: BRA ROUTINE_09B431
 
 ;===================================================================================================
 
@@ -2919,7 +3075,7 @@ ROUTINE_09B45C:
 #_09B46D: STA.w $0804,X
 
 #_09B470: LDA.w #ROUTINE_09AEDC
-#_09B473: JSR ROUTINE_038983_bank09
+#_09B473: JSR ROUTINE_038983_ExecuteRoutineIfSomething_bank09
 #_09B476: BNE .continue
 
 #_09B478: RTS
@@ -2936,13 +3092,15 @@ ROUTINE_09B45C:
 SpriteAI_8406:
 #_09B485: TYX
 
-#_09B486: LDA.w #data09B48F
-#_09B489: LDY.w #data09B48F>>16
+#_09B486: LDA.w #.spawn_table
+#_09B489: LDY.w #.spawn_table>>16
 #_09B48C: JMP ROUTINE_09A775
 
-#data09B48F:
-#_09B48F: db $01,$00,$00,$00,$00,$00,$08,$84
-#_09B497: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09B48F: dw $0001 ; spawn 1 sprite
+#_09B491: dw $0000, $0000, $8408, $0001 ; SPRITE 8408
 
 ;===================================================================================================
 
@@ -2958,6 +3116,7 @@ SpriteAI_8408:
 
 #_09B4AB: LDA.w #$0060
 #_09B4AE: STA.w $080A,X
+
 #_09B4B1: STZ.w $0816,X
 
 #_09B4B4: JMP AdvanceAIModeUp_bank09
@@ -2967,20 +3126,20 @@ SpriteAI_8408:
 SpriteAI_840A:
 #_09B4B7: TYX
 
-#_09B4B8: JSR ROUTINE_03867C_bank09
+#_09B4B8: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_UsingPockyCoords_bank09
 #_09B4BB: CMP.w #$0480
-#_09B4BE: BCS CODE_09B4C9
+#_09B4BE: BCS .delay
 
 #_09B4C0: LDA.w #$0026
 #_09B4C3: STA.w $081C,X
 
 #_09B4C6: JSR AdvanceAIModeUp_bank09
 
-CODE_09B4C9:
+.delay
 #_09B4C9: LDA.w #$FFFF
 #_09B4CC: STA.w $0814,X
 
-#_09B4CF: JMP CODE_09ADAD
+#_09B4CF: JMP ROUTINE_09ADAD
 
 ;===================================================================================================
 
@@ -3001,7 +3160,7 @@ CODE_09B4E2:
 #_09B4E2: STA.w $0806,X
 
 #_09B4E5: DEC.w $081C,X
-#_09B4E8: BNE CODE_09B503
+#_09B4E8: BNE .delay
 
 #_09B4EA: JSL ROUTINE_03AF9D_long
 #_09B4EE: AND.w #$0002
@@ -3013,10 +3172,11 @@ CODE_09B4E2:
 #_09B4FB: STA.l $7FE814,X
 
 #_09B4FF: JSR AdvanceAIModeUp_bank09
+
 #_09B502: TXY
 
-CODE_09B503:
-#_09B503: JMP CODE_09ADAD
+.delay
+#_09B503: JMP ROUTINE_09ADAD
 
 ;===================================================================================================
 
@@ -3034,7 +3194,7 @@ SpriteAI_8410:
 #_09B510: TYX
 
 #_09B511: DEC.w $081C,X
-#_09B514: BNE CODE_09B52B
+#_09B514: BNE .delay
 
 #_09B516: JSR ROUTINE_09ACDD
 
@@ -3042,15 +3202,15 @@ SpriteAI_8410:
 
 #_09B51C: LDA.w $0816,X
 #_09B51F: CMP.w #$000D
-#_09B522: BCC CODE_09B527
+#_09B522: BCC .dont_act
 
 #_09B524: JSR SpriteAI_83FC
 
-CODE_09B527:
+.dont_act
 #_09B527: JSR AdvanceAIModeDown_bank09
 #_09B52A: TXY
 
-CODE_09B52B:
+.delay
 #_09B52B: JMP ROUTINE_09AD06
 
 ;===================================================================================================
@@ -3098,29 +3258,36 @@ CODE_09B568:
 ;---------------------------------------------------------------------------------------------------
 
 data09B573:
-#_09B573: db $03,$00,$04,$00,$05,$00,$1B,$00
+#_09B573: dw $0003
+#_09B575: dw $0004
+#_09B577: dw $0005
+#_09B579: dw $001B
 
 data09B57B:
-#_09B57B: db $03,$00,$14,$00,$00,$00
+#_09B57B: dw $0003
+#_09B57D: dw $0014
+#_09B57F: dw $0000
 
 data09B581:
-#_09B581: db $7E,$12,$7F,$12,$7A,$12,$7B,$12
+#_09B581: dw $127E, $127F, $127A, $127B
 
 data09B589:
-#_09B589: db $80,$12,$81,$12,$7C,$12,$7D,$12
+#_09B589: dw $1280, $1281, $127C, $127D
 
 ;===================================================================================================
 
 SpriteAI_8412:
 #_09B591: TYX
 
-#_09B592: LDA.w #data09B59B
-#_09B595: LDY.w #data09B59B>>16
+#_09B592: LDA.w #.spawn_table
+#_09B595: LDY.w #.spawn_table>>16
 #_09B598: JMP ROUTINE_09A775
 
-#data09B59B:
-#_09B59B: db $01,$00,$00,$00,$00,$00,$14,$84
-#_09B5A3: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09B59B: dw $0001 ; spawn 1 sprite
+#_09B59D: dw $0000, $0000, $8414, $0001 ; SPRITE 8414
 
 ;===================================================================================================
 
@@ -3155,8 +3322,10 @@ SpriteAI_8416:
 .exit
 #_09B5CB: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09B5CC:
-#_09B5CC: db $1E,$00,$32,$00,$50,$00,$5A,$00
+#_09B5CC: dw $001E, $0032, $0050, $005A
 
 ;===================================================================================================
 
@@ -3182,7 +3351,7 @@ SpriteAI_8418:
 
 ;===================================================================================================
 
-ROUTINE_09B5F1:
+ROUTINE_09B5F5_long:
 #_09B5F1: JSR ROUTINE_09B5F5
 
 #_09B5F4: RTL
@@ -3284,27 +3453,47 @@ CODE_09B66D:
 #_09B673: CMP.w #$0500
 #_09B676: BCC CODE_09B67B
 
-#_09B678: JMP CODE_09AD79
+#_09B678: JMP ROUTINE_09AD79
 
 CODE_09B67B:
-#_09B67B: JMP CODE_09AD8C
+#_09B67B: JMP ROUTINE_09AD8C
 
 ;---------------------------------------------------------------------------------------------------
 
 data09B67E:
-#_09B67E: db $00,$03,$01,$03,$00,$03,$01,$03
-#_09B686: db $02,$06,$04,$0A,$06,$0A,$04,$0A
-#_09B68E: db $06,$0A,$08,$04,$0A,$04,$08,$04
-#_09B696: db $0A,$04,$08,$04,$0A,$04,$08,$04
-#_09B69E: db $0A,$04,$08,$04,$0A,$04,$06,$01
-#_09B6A6: db $06,$09,$04,$0A,$02,$06,$00,$06
+#_09B67E: db $00, $03
+#_09B680: db $01, $03
+#_09B682: db $00, $03
+#_09B684: db $01, $03
+#_09B686: db $02, $06
+#_09B688: db $04, $0A
+#_09B68A: db $06, $0A
+#_09B68C: db $04, $0A
+#_09B68E: db $06, $0A
+#_09B690: db $08, $04
+#_09B692: db $0A, $04
+#_09B694: db $08, $04
+#_09B696: db $0A, $04
+#_09B698: db $08, $04
+#_09B69A: db $0A, $04
+#_09B69C: db $08, $04
+#_09B69E: db $0A, $04
+#_09B6A0: db $08, $04
+#_09B6A2: db $0A, $04
+#_09B6A4: db $06, $01
+#_09B6A6: db $06, $09
+#_09B6A8: db $04, $0A
+#_09B6AA: db $02, $06
+#_09B6AC: db $00, $06
 #_09B6AE: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09B6AF:
-#_09B6AF: db $01,$00,$00,$00,$00,$01,$1C
-#_09B6B6: db $84,$01,$00
+#_09B6AF: dw $0001 ; spawn 1 sprite
+#_09B6B1: dw $0000, $0100, $841C ; SPRITE 841C
+
+#_09B6B7: dw $0001
 
 ;===================================================================================================
 
@@ -3353,7 +3542,7 @@ SpriteAI_841E:
 #_09B6FA: STA.b $20
 
 #_09B6FC: LDA.b $2C
-#_09B6FE: JSR ROUTINE_09A07D
+#_09B6FE: JSR ROUTINE_03A07D_bank09
 
 #_09B701: LDA.b $20
 #_09B703: STA.w $0818,X
@@ -3380,10 +3569,14 @@ CODE_09B722:
 CODE_09B72A:
 #_09B72A: JSR ROUTINE_09A5A8
 
-#_09B72D: JMP CODE_09ADF9
+#_09B72D: JMP ROUTINE_09ADF9
+
+;---------------------------------------------------------------------------------------------------
 
 data09B730:
-#_09B730: db $90,$03,$10,$03,$00,$05
+#_09B730: dw $0390
+#_09B732: dw $0310
+#_09B734: dw $0500
 
 ;===================================================================================================
 
@@ -3418,13 +3611,13 @@ CODE_09B757:
 CODE_09B75F:
 #_09B75F: JSR ROUTINE_09A5A8
 
-#_09B762: JMP CODE_09ADF9
+#_09B762: JMP ROUTINE_09ADF9
 
 ;===================================================================================================
 
 ROUTINE_09B765:
 #_09B765: LDA.w #data09B776
-#_09B768: LDY.w #$0009
+#_09B768: LDY.w #data09B776>>16
 #_09B76B: JSR ROUTINE_039099_bank09
 
 #_09B76E: LDA.w #$0005
@@ -3434,9 +3627,13 @@ ROUTINE_09B765:
 
 #_09B775: RTS
 
-#data09B776:
-#_09B776: db $01,$00,$00,$00,$00,$00,$22,$84
-#_09B77E: db $01,$00
+;---------------------------------------------------------------------------------------------------
+
+data09B776:
+#_09B776: dw $0001 ; spawn 1 sprite
+#_09B778: dw $0000, $0000, $8422 ; SPRITE 8422
+
+#_09B77E: dw $0001
 
 ;===================================================================================================
 
@@ -3473,26 +3670,35 @@ SpriteAI_8424:
 CODE_09B7AD:
 #_09B7AD: JSR ROUTINE_09A5A8
 
-#_09B7B0: JMP CODE_09ADF9
+#_09B7B0: JMP ROUTINE_09ADF9
 
-#data09B7B3:
-#_09B7B3: db $0C,$02,$0E,$02,$10,$02,$12,$02
-#_09B7BB: db $14,$02,$16,$02,$FF
+;---------------------------------------------------------------------------------------------------
+
+data09B7B3:
+#_09B7B3: db $0C, $02
+#_09B7B5: db $0E, $02
+#_09B7B7: db $10, $02
+#_09B7B9: db $12, $02
+#_09B7BB: db $14, $02
+#_09B7BD: db $16, $02
+#_09B7BF: db $FF
 
 ;===================================================================================================
 
 SpriteAI_842A:
 #_09B7C0: TYX
 
-#_09B7C1: LDA.w #data09B7CA
-#_09B7C4: LDY.w #data09B7CA>>16
+#_09B7C1: LDA.w #.spawn_table
+#_09B7C4: LDY.w #.spawn_table>>16
 #_09B7C7: JMP ROUTINE_09A775
 
-#data09B7CA:
-#_09B7CA: db $03,$00,$00,$00,$00,$00,$2E,$84
-#_09B7D2: db $01,$00,$00,$00,$00,$00,$2E,$84
-#_09B7DA: db $13,$00,$00,$00,$00,$00,$2E,$84
-#_09B7E2: db $25,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09B7CA: dw $0003 ; spawn 3 sprites
+#_09B7CC: dw $0000, $0000, $842E, $0001 ; SPRITE 842E
+#_09B7D4: dw $0000, $0000, $842E, $0013 ; SPRITE 842E
+#_09B7DC: dw $0000, $0000, $842E, $0025 ; SPRITE 842E
 
 ;===================================================================================================
 
@@ -3526,11 +3732,13 @@ SpriteAI_842C:
 
 #_09B812: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09B815:
-#_09B815: db $00,$08,$00,$08,$00,$08,$00,$F8
+#_09B815: dw $0800, $0800, $0800, $F800
 
 data09B81D:
-#_09B81D: db $D6,$FF,$D6,$FF,$D6,$FF,$2A,$00
+#_09B81D: dw $FFD6, $FFD6, $FFD6, $002A
 
 ;===================================================================================================
 
@@ -3566,7 +3774,7 @@ SpriteAI_8430:
 #_09B853: LDA.w #$0001
 #_09B856: STA.w $081C,X
 
-#_09B859: JMP CODE_09ADEA
+#_09B859: JMP ROUTINE_09ADEA
 
 CODE_09B85C:
 #_09B85C: LDA.w #$0049 ; SFX 49
@@ -3582,10 +3790,15 @@ CODE_09B85C:
 #_09B872: JSR AdvanceAIModeUp_bank09
 #_09B875: JSR ROUTINE_09A5A8
 
-#_09B878: JMP CODE_09ADEA
+#_09B878: JMP ROUTINE_09ADEA
 
-#data09B87B:
-#_09B87B: db $0C,$06,$0E,$06,$10,$06,$FF
+;---------------------------------------------------------------------------------------------------
+
+data09B87B:
+#_09B87B: db $0C, $06
+#_09B87D: db $0E, $06
+#_09B87F: db $10, $06
+#_09B881: db $FF
 
 ;===================================================================================================
 
@@ -3599,10 +3812,21 @@ ROUTINE_09B882:
 
 #_09B890: RTS
 
-#data09B891:
-#_09B891: db $00,$02,$01,$02,$02,$02,$03,$02
-#_09B899: db $04,$02,$05,$02,$06,$04,$07,$03
-#_09B8A1: db $00,$02,$01,$02,$00,$02,$01,$02
+;---------------------------------------------------------------------------------------------------
+
+data09B891:
+#_09B891: db $00, $02
+#_09B893: db $01, $02
+#_09B895: db $02, $02
+#_09B897: db $03, $02
+#_09B899: db $04, $02
+#_09B89B: db $05, $02
+#_09B89D: db $06, $04
+#_09B89F: db $07, $03
+#_09B8A1: db $00, $02
+#_09B8A3: db $01, $02
+#_09B8A5: db $00, $02
+#_09B8A7: db $01, $02
 #_09B8A9: db $FF
 
 ;===================================================================================================
@@ -3616,8 +3840,8 @@ SpriteAI_8432:
 #_09B8B1: CMP.w #$0602
 #_09B8B4: BNE CODE_09B8BF
 
-#_09B8B6: LDA.w #$B906
-#_09B8B9: LDY.w #$0009
+#_09B8B6: LDA.w #data09B906
+#_09B8B9: LDY.w #data09B906>>16
 #_09B8BC: JSR ROUTINE_039099_bank09
 
 CODE_09B8BF:
@@ -3651,15 +3875,28 @@ CODE_09B8F3:
 #_09B8F3: LDA.w #$FFC4
 #_09B8F6: JSR ROUTINE_09AC13
 
-#_09B8F9: JMP CODE_09ADEA
+#_09B8F9: JMP ROUTINE_09ADEA
 
-#data09B8FC:
-#_09B8FC: db $01,$00,$00,$00,$00,$00,$34,$84
-#_09B904: db $00,$00,$01,$00,$00,$00,$00,$00
-#_09B90C: db $44,$84
+;---------------------------------------------------------------------------------------------------
+
+data09B8FC:
+#_09B8FC: dw $0001 ; spawn 1 sprite
+#_09B8FE: dw $0000, $0000, $8434 ; SPRITE 8434
+
+#_09B904: dw $0000
+
+;---------------------------------------------------------------------------------------------------
+
+data09B906:
+#_09B906: dw $0001 ; spawn 1 sprite
+#_09B908: dw $0000, $0000, $8444 ; SPRITE 8444
+
+;---------------------------------------------------------------------------------------------------
 
 data09B90E:
-#_09B90E: db $C8,$00,$2C,$01,$78,$00
+#_09B90E: dw $00C8
+#_09B910: dw $012C
+#_09B912: dw $0078
 
 ;===================================================================================================
 
@@ -3696,10 +3933,15 @@ SpriteAI_8436:
 #_09B942: JMP ROUTINE_09AEF6
 
 CODE_09B945:
-#_09B945: JMP CODE_09ADAD
+#_09B945: JMP ROUTINE_09ADAD
 
-#data09B948:
-#_09B948: db $10,$06,$0E,$06,$0C,$06,$FF
+;---------------------------------------------------------------------------------------------------
+
+data09B948:
+#_09B948: db $10, $06
+#_09B94A: db $0E, $06
+#_09B94C: db $0C, $06
+#_09B94E: db $FF
 
 ;===================================================================================================
 
@@ -3731,7 +3973,7 @@ SpriteAI_843C:
 #_09B971: JMP ROUTINE_09AEF6
 
 CODE_09B974:
-#_09B974: JMP CODE_09AD9E
+#_09B974: JMP ROUTINE_09AD9E
 
 ;===================================================================================================
 
@@ -3766,14 +4008,18 @@ SpriteAI_8444:
 
 #_09B9A9: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09B9AC:
-#_09B9AC: db $0D,$00,$F3,$FF,$0F,$00,$F1,$FF
+#_09B9AC: dw $000D, $FFF3, $000F, $FFF1
 
 data09B9B4:
-#_09B9B4: db $08,$00,$F0,$FF,$EE,$FF,$14,$00
+#_09B9B4: dw $0008, $FFF0, $FFEE, $0014
 
 data09B9BC:
-#_09B9BC: db $AA,$00,$6E,$00,$C8,$00
+#_09B9BC: dw $00AA
+#_09B9BE: dw $006E
+#_09B9C0: dw $00C8
 
 ;===================================================================================================
 
@@ -3863,15 +4109,18 @@ CODE_09BA2C:
 #_09BA3E: LDA.w $0816,X
 #_09BA41: BEQ CODE_09BA46
 
-#_09BA43: JMP CODE_09AD34
+#_09BA43: JMP ROUTINE_09AD34
 
 CODE_09BA46:
 #_09BA46: JSR ROUTINE_09B447
 
-#_09BA49: JMP CODE_09AD59
+#_09BA49: JMP ROUTINE_09AD59
+
+;---------------------------------------------------------------------------------------------------
 
 data09BA4C:
-#_09BA4C: db $B4,$11,$B6,$11
+#_09BA4C: dw $11B4
+#_09BA4E: dw $11B6
 
 ;===================================================================================================
 
@@ -3892,7 +4141,7 @@ CODE_09BA59:
 #_09BA65: BIT.w $081C,X
 #_09BA68: BEQ .exit
 
-#_09BA6A: JMP CODE_09AD34
+#_09BA6A: JMP ROUTINE_09AD34
 
 .exit
 #_09BA6D: RTS
@@ -3957,14 +4206,16 @@ SpriteAI_844A:
 
 #_09BAD1: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09BAD4:
-#_09BAD4: db $00,$00,$F0,$00,$00,$00,$10,$FF
+#_09BAD4: dw $0000, $00F0, $0000, $FF10
 
 data09BADC:
-#_09BADC: db $00,$FF,$30,$00,$20,$01,$30,$00
+#_09BADC: dw $FF00, $0030, $0120, $0030
 
 data09BAE4:
-#_09BAE4: db $00,$01,$00,$00,$00,$04,$00,$02
+#_09BAE4: dw $0100, $0000, $0400, $0200
 
 ;===================================================================================================
 
@@ -3986,7 +4237,7 @@ CODE_09BAFD:
 #_09BB03: AND.w data09BB46,Y
 #_09BB06: BNE CODE_09BB32
 
-#_09BB08: JSL ROUTINE_06E3E7_long
+#_09BB08: JSL ROUTINE_06E3EA_PockyCoordinates_long
 
 #_09BB0C: CLC
 
@@ -4002,7 +4253,7 @@ CODE_09BAFD:
 
 CODE_09BB21:
 #_09BB21: LDA.l $7FE81A,X
-#_09BB25: JSR ROUTINE_09A07D
+#_09BB25: JSR ROUTINE_03A07D_bank09
 
 #_09BB28: LDA.b $20
 #_09BB2A: STA.w $0818,X
@@ -4022,10 +4273,14 @@ CODE_09BB32:
 #_09BB40: JSR AdvanceAIModeUp_bank09
 
 CODE_09BB43:
-#_09BB43: JMP CODE_09ADF9
+#_09BB43: JMP ROUTINE_09ADF9
+
+;---------------------------------------------------------------------------------------------------
 
 data09BB46:
-#_09BB46: db $03,$00,$07,$00,$03,$00
+#_09BB46: dw $0003
+#_09BB48: dw $0007
+#_09BB4A: dw $0003
 
 ;===================================================================================================
 
@@ -4044,7 +4299,7 @@ CODE_09BB58:
 #_09BB5A: AND.w #$0001
 #_09BB5D: BNE .exit
 
-#_09BB5F: JMP CODE_09AE59
+#_09BB5F: JMP ROUTINE_09AE59
 
 .exit
 #_09BB62: RTS
@@ -4069,38 +4324,44 @@ SpriteAI_8450:
 #_09BB7A: STA.w $081C,X
 
 CODE_09BB7D:
-#_09BB7D: JMP CODE_09AAF2
+#_09BB7D: JMP ROUTINE_09AAF2
+
+;---------------------------------------------------------------------------------------------------
 
 data09BB80:
-#_09BB80: db $04,$00,$06,$00,$00,$00,$02,$00
+#_09BB80: dw $0004, $0006, $0000, $0002
 
 ;===================================================================================================
 
 SpriteAI_8452:
 #_09BB88: TYX
 
-#_09BB89: LDA.w #data09BB92
-#_09BB8C: LDY.w #data09BB92>>16
+#_09BB89: LDA.w #.spawn_table
+#_09BB8C: LDY.w #.spawn_table>>16
 #_09BB8F: JMP ROUTINE_09A775
 
-#data09BB92:
-#_09BB92: db $02,$00,$00,$00,$20,$FE,$56,$84
-#_09BB9A: db $20,$00,$00,$00,$E0,$01,$56,$84
-#_09BBA2: db $20,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09BB92: dw $0002 ; spawn 2 sprites
+#_09BB94: dw $0000, $FE20, $8456, $0020 ; SPRITE 8456
+#_09BB9C: dw $0000, $01E0, $8456, $0020 ; SPRITE 8456
 
 ;===================================================================================================
 
 SpriteAI_8454:
 #_09BBA4: TYX
 
-#_09BBA5: LDA.w #data09BBAE
-#_09BBA8: LDY.w #data09BBAE>>16
+#_09BBA5: LDA.w #.spawn_table
+#_09BBA8: LDY.w #.spawn_table>>16
 #_09BBAB: JMP ROUTINE_09A775
 
-#data09BBAE:
-#_09BBAE: db $02,$00,$00,$FF,$00,$00,$56,$84
-#_09BBB6: db $00,$00,$00,$01,$00,$00,$56,$84
-#_09BBBE: db $00,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09BBAE: dw $0002 ; spawn 2 sprites
+#_09BBB0: dw $FF00, $0000, $8456, $0000 ; SPRITE 8456
+#_09BBB8: dw $0100, $0000, $8456, $0000 ; SPRITE 8456
 
 ;===================================================================================================
 
@@ -4182,7 +4443,7 @@ ROUTINE_09BC0C:
 #_09BC16: TAY
 
 #_09BC17: LDA.w .pointers,Y
-#_09BC1A: LDY.w #$0009
+#_09BC1A: LDY.w #.pointers>>16
 #_09BC1D: JSR ROUTINE_09B5F5
 #_09BC20: CMP.w #$FFFF
 #_09BC23: BNE CODE_09BC37
@@ -4202,8 +4463,8 @@ CODE_09BC37:
 #_09BC3A: CMP.w #$0204
 #_09BC3D: BNE .exit
 
-#_09BC3F: LDA.w #$BC87
-#_09BC42: LDY.w #$0009
+#_09BC3F: LDA.w #data09BC87
+#_09BC42: LDY.w #data09BC87>>16
 #_09BC45: JSR ROUTINE_039099_bank09
 
 .exit
@@ -4212,10 +4473,13 @@ CODE_09BC37:
 ;---------------------------------------------------------------------------------------------------
 
 data09BC49:
-#_09BC49: db $4B,$00,$5A,$00,$3E,$00
+#_09BC49: dw $004B
+#_09BC4B: dw $005A
+#_09BC4D: dw $003E
 
 ;---------------------------------------------------------------------------------------------------
 
+.pointers
 #_09BC4F: dw data09BC5F
 #_09BC51: dw data09BC68
 #_09BC53: dw data09BC68
@@ -4228,31 +4492,46 @@ data09BC49:
 ;---------------------------------------------------------------------------------------------------
 
 data09BC5F:
-#_09BC5F: db $0D, $0A, $0F, $0A, $11, $0A, $0D, $0A
+#_09BC5F: db $0D, $0A
+#_09BC61: db $0F, $0A
+#_09BC63: db $11, $0A
+#_09BC65: db $0D, $0A
 #_09BC67: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09BC68:
-#_09BC68: db $15, $0A, $15, $0A, $17, $0A, $17, $0A
-#_09BC70: db $09, $03, $FF
+#_09BC68: db $15, $0A
+#_09BC6A: db $15, $0A
+#_09BC6C: db $17, $0A
+#_09BC6E: db $17, $0A
+#_09BC70: db $09, $03
+#_09BC72: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09BC73:
-#_09BC73: db $0C, $0A, $0E, $0A, $10, $0A, $0C, $0A
+#_09BC73: db $0C, $0A
+#_09BC75: db $0E, $0A
+#_09BC77: db $10, $0A
+#_09BC79: db $0C, $0A
 #_09BC7B: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09BC7C:
-#_09BC7C: db $14, $0A, $14, $0A, $16, $0A, $16, $0A
-#_09BC84: db $08, $03, $FF
+#_09BC7C: db $14, $0A
+#_09BC7E: db $14, $0A
+#_09BC80: db $16, $0A
+#_09BC82: db $16, $0A
+#_09BC84: db $08, $03
+#_09BC86: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
-; TODO ???
-#_09BC87: db $01, $00, $00, $00, $00, $00, $64, $84
+data09BC87:
+#_09BC87: dw $0001 ; spawn 1 sprite
+#_09BC89: dw $0000, $0000, $8464 ; SPRITE 8464
 
 ;===================================================================================================
 
@@ -4260,7 +4539,7 @@ SpriteAI_845E:
 #_09BC8F: TYX
 
 #_09BC90: DEC.w $081C,X
-#_09BC93: BNE CODE_09BCA8
+#_09BC93: BNE .delay
 
 #_09BC95: LDA.w #$0008
 #_09BC98: STA.w $081E,X
@@ -4271,7 +4550,7 @@ SpriteAI_845E:
 #_09BCA2: LDA.w #$845C ; SPRITE 845C
 #_09BCA5: STA.w $0810,X
 
-CODE_09BCA8:
+.delay
 #_09BCA8: JSR ROUTINE_09C234
 #_09BCAB: BNE .continue
 
@@ -4337,21 +4616,33 @@ SpriteAI_8464:
 
 #_09BD0D: JMP AdvanceAIModeUp_bank09
 
-#data09BD10:
-#_09BD10: db $08,$00,$20,$00,$20,$00,$0C,$00
-#_09BD18: db $F4,$FF,$E0,$FF,$E0,$FF,$F8,$FF
-#_09BD20: db $0E,$00,$26,$00,$26,$00,$12,$00
-#_09BD28: db $EE,$FF,$DA,$FF,$DA,$FF,$F2,$FF
+;---------------------------------------------------------------------------------------------------
 
-#data09BD30:
-#_09BD30: db $DE,$FF,$F5,$FF,$0B,$00,$20,$00
-#_09BD38: db $20,$00,$0B,$00,$F5,$FF,$DE,$FF
-#_09BD40: db $D8,$FF,$EE,$FF,$12,$00,$26,$00
-#_09BD48: db $26,$00,$12,$00,$EE,$FF,$D8,$FF
+data09BD10:
+#_09BD10: dw $0008, $0020, $0020, $000C
+#_09BD18: dw $FFF4, $FFE0, $FFE0, $FFF8
+
+data09BD20:
+#_09BD20: dw $000E, $0026, $0026, $0012
+#_09BD28: dw $FFEE, $FFDA, $FFDA, $FFF2
+
+;---------------------------------------------------------------------------------------------------
+
+data09BD30:
+#_09BD30: dw $FFDE, $FFF5, $000B, $0020
+#_09BD38: dw $0020, $000B, $FFF5, $FFDE
+
+data09BD40:
+#_09BD40: dw $FFD8, $FFEE, $0012, $0026
+#_09BD48: dw $0026, $0012, $FFEE, $FFD8
+
+;---------------------------------------------------------------------------------------------------
 
 data09BD50:
-#_09BD50: db $C0,$00,$C0,$00,$C0,$00,$C0,$00
-#_09BD58: db $40,$FF,$40,$FF,$40,$FF,$40,$FF
+#_09BD50: dw $00C0, $00C0, $00C0, $00C0
+#_09BD58: dw $FF40, $FF40, $FF40, $FF40
+
+;---------------------------------------------------------------------------------------------------
 
 data09BD60:
 #_09BD60: dw data09BD10
@@ -4379,7 +4670,7 @@ SpriteAI_8466:
 CODE_09BD7D:
 #_09BD7D: JSR ROUTINE_09A5A8
 
-#_09BD80: JMP CODE_09ADF9
+#_09BD80: JMP ROUTINE_09ADF9
 
 ;===================================================================================================
 
@@ -4429,25 +4720,25 @@ ROUTINE_09BDBB:
 
 #_09BDC6: RTS
 
-CODE_09BDC7:
+ROUTINE_09BDC7:
 #_09BDC7: LDY.w #$0048
-#_09BDCA: JSR ROUTINE_0392EE_bank09
-#_09BDCD: BEQ CODE_09BDE0
+#_09BDCA: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
+#_09BDCD: BEQ ROUTINE_09BDE0
 
 #_09BDCF: JSR ROUTINE_039385_bank09
-#_09BDD2: BNE CODE_09BDE0
+#_09BDD2: BNE ROUTINE_09BDE0
 
 #_09BDD4: LDA.w #$0020
 #_09BDD7: STA.w $081E,X
 
-#_09BDDA: JSR ROUTINE_038A25_0020_bank09
+#_09BDDA: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 #_09BDDD: JSR AdvanceAIModeUp_bank09
 
-CODE_09BDE0:
+ROUTINE_09BDE0:
 #_09BDE0: LDY.w #$0040
-#_09BDE3: JSR ROUTINE_038428_bank09
+#_09BDE3: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
-CODE_09BDE6:
+ROUTINE_09BDE6:
 #_09BDE6: LDA.w #ROUTINE_09AEDC
 #_09BDE9: JSR ROUTINE_03A2AE_bank09
 #_09BDEC: BNE .continue
@@ -4469,13 +4760,15 @@ CODE_09BDE6:
 SpriteAI_8468:
 #_09BE01: TYX
 
-#_09BE02: LDA.w #data09BE0B
-#_09BE05: LDY.w #data09BE0B>>16
+#_09BE02: LDA.w #.spawn_table
+#_09BE05: LDY.w #.spawn_table>>16
 #_09BE08: JMP ROUTINE_09A775
 
-#data09BE0B:
-#_09BE0B: db $01,$00,$00,$00,$00,$00,$6A,$84
-#_09BE13: db $00,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09BE0B: dw $0001 ; spawn 1 sprite
+#_09BE0D: dw $0000, $0000, $846A, $0000 ; SPRITE 846A
 
 ;===================================================================================================
 
@@ -4501,11 +4794,17 @@ SpriteAI_846A:
 
 #_09BE38: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09BE3B:
-#_09BE3B: db $12,$00,$14,$00,$0C,$00
+#_09BE3B: dw $0012
+#_09BE3D: dw $0014
+#_09BE3F: dw $000C
 
 data09BE41:
-#_09BE41: db $0A,$00,$06,$00,$0E,$00
+#_09BE41: dw $000A
+#_09BE43: dw $0006
+#_09BE45: dw $000E
 
 ;===================================================================================================
 
@@ -4551,21 +4850,21 @@ CODE_09BE75:
 #_09BE89: STA.b $24
 
 #_09BE8B: LDA.w .pointers,Y
-#_09BE8E: LDY.w #$0009
+#_09BE8E: LDY.w #.pointers>>16
 #_09BE91: JSR ROUTINE_09B5F5
 
 CODE_09BE94:
 #_09BE94: JSR ROUTINE_09A5A8
 
-#_09BE97: JMP CODE_09BDC7
+#_09BE97: JMP ROUTINE_09BDC7
 
 ;---------------------------------------------------------------------------------------------------
 
 data09BE9A:
-#_09BE9A: db $00,$00,$0C,$00,$00,$00,$F4,$FF
+#_09BE9A: dw $0000, $000C, $0000, $FFF4
 
 data09BEA2:
-#_09BEA2: db $F4,$FF,$00,$00,$0C,$00,$00,$00
+#_09BEA2: dw $FFF4, $0000, $000C, $0000
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -4578,19 +4877,28 @@ data09BEA2:
 ;---------------------------------------------------------------------------------------------------
 
 data09BEB2:
-#_09BEB2: db $00, $08, $02, $08, $00, $08, $04, $08
+#_09BEB2: db $00, $08
+#_09BEB4: db $02, $08
+#_09BEB6: db $00, $08
+#_09BEB8: db $04, $08
 #_09BEBA: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09BEBB:
-#_09BEBB: db $08, $08, $0A, $08, $08, $08, $0C, $08
+#_09BEBB: db $08, $08
+#_09BEBD: db $0A, $08
+#_09BEBF: db $08, $08
+#_09BEC1: db $0C, $08
 #_09BEC3: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09BEC4:
-#_09BEC4: db $09, $08, $0B, $08, $09, $08, $0D, $08
+#_09BEC4: db $09, $08
+#_09BEC6: db $0B, $08
+#_09BEC8: db $09, $08
+#_09BECA: db $0D, $08
 #_09BECC: db $FF
 
 ;===================================================================================================
@@ -4605,7 +4913,7 @@ SpriteAI_846E:
 #_09BED6: STA.b $24
 
 #_09BED8: LDA.w .pointers,Y
-#_09BEDB: LDY.w #$0009
+#_09BEDB: LDY.w #.pointers>>16
 #_09BEDE: JSR ROUTINE_09B5F5
 
 #_09BEE1: LDA.w $081E,X
@@ -4623,8 +4931,8 @@ CODE_09BEF0:
 #_09BEF8: LDA.w #$FFFF
 #_09BEFB: STA.w $0814,X
 
-#_09BEFE: LDA.w #$BF52
-#_09BF01: LDY.w #$0009
+#_09BEFE: LDA.w #data09BF52
+#_09BF01: LDY.w #data09BF52>>16
 #_09BF04: JSR ROUTINE_039099_bank09
 
 #_09BF07: LDA.l $7FE81E,X
@@ -4651,10 +4959,16 @@ CODE_09BEF0:
 #_09BF2F: JSR AdvanceAIModeUp_bank09
 
 CODE_09BF32:
-#_09BF32: JMP CODE_09BDE0
+#_09BF32: JMP ROUTINE_09BDE0
+
+;---------------------------------------------------------------------------------------------------
 
 data09BF35:
-#_09BF35: db $04,$00,$02,$00,$05,$00
+#_09BF35: dw $0004
+#_09BF37: dw $0002
+#_09BF39: dw $0005
+
+;---------------------------------------------------------------------------------------------------
 
 .pointers
 #_09BF3B: dw data09BF43
@@ -4665,30 +4979,40 @@ data09BF35:
 ;---------------------------------------------------------------------------------------------------
 
 data09BF43:
-#_09BF43: db $00, $36, $06, $64, $FF
+#_09BF43: db $00, $36
+#_09BF45: db $06, $64
+#_09BF47: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09BF48:
-#_09BF48: db $08, $36, $0E, $64, $FF
+#_09BF48: db $08, $36
+#_09BF4A: db $0E, $64
+#_09BF4C: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09BF4D:
-#_09BF4D: db $09, $36, $0F, $64, $FF
+#_09BF4D: db $09, $36
+#_09BF4F: db $0F, $64
+#_09BF51: db $FF
+
 
 ;---------------------------------------------------------------------------------------------------
-; TODO ???
-#_09BF42: db $01, $00, $00
-#_09BF55: db $00, $00, $00, $74, $84, $00, $00
+
+data09BF52:
+#_09BF52: dw $0001 ; spawn 1 sprite
+#_09BF54: dw $0000, $0000, $8474 ; SPRITE 8474
+
+#_09BF5A: dw $0000
 
 ;---------------------------------------------------------------------------------------------------
 
 data09BF5C:
-#_09BF5C: db $00,$00,$00,$01,$00,$00,$00,$FF
+#_09BF5C: dw $0000, $0100, $0000, $FF00
 
 data09BF64:
-#_09BF64: db $00,$01,$00,$00,$00,$01,$00,$00
+#_09BF64: dw $0100, $0000, $0100, $0000
 
 ;===================================================================================================
 
@@ -4725,7 +5049,7 @@ CODE_09BF95:
 #_09BF98: JSR ROUTINE_09A5A8
 #_09BF9B: JSR ROUTINE_09B447
 
-#_09BF9E: JMP CODE_09BDE6
+#_09BF9E: JMP ROUTINE_09BDE6
 
 ;===================================================================================================
 
@@ -4735,7 +5059,7 @@ SpriteAI_8472:
 #_09BFA2: DEC.w $081C,X
 #_09BFA5: BNE CODE_09BFAA
 
-#_09BFA7: JMP CODE_09AED0
+#_09BFA7: JMP ROUTINE_09AED0
 
 CODE_09BFAA:
 #_09BFAA: LDA.w $081C,X
@@ -4819,11 +5143,13 @@ CODE_09C013:
 .continue
 #_09C021: JMP ROUTINE_09AD06
 
+;---------------------------------------------------------------------------------------------------
+
 data09C024:
-#_09C024: db $08,$00,$10,$00,$F8,$FF,$F0,$FF
+#_09C024: dw $0008, $0010, $FFF8, $FFF0
 
 data09C02C:
-#_09C02C: db $08,$00,$10,$00,$F8,$FF,$F0,$FF
+#_09C02C: dw $0008, $0010, $FFF8, $FFF0
 
 ;===================================================================================================
 
@@ -4843,7 +5169,7 @@ SpriteAI_8474:
 
 #_09C049: JSR AdvanceAIModeUp_bank09
 
-#_09C04C: JMP CODE_09BDE0
+#_09C04C: JMP ROUTINE_09BDE0
 
 ;===================================================================================================
 
@@ -4853,7 +5179,7 @@ SpriteAI_8476:
 #_09C050: DEC.w $081C,X
 #_09C053: BNE CODE_09C05B
 
-#_09C055: JSR ROUTINE_038A25_0020_bank09
+#_09C055: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 
 #_09C058: JMP ROUTINE_09AEF6
 
@@ -4862,7 +5188,7 @@ CODE_09C05B:
 #_09C05E: AND.w #$0001
 #_09C061: BNE .exit
 
-#_09C063: JMP CODE_09BDE0
+#_09C063: JMP ROUTINE_09BDE0
 
 .exit
 #_09C066: RTS
@@ -4904,11 +5230,14 @@ SpriteAI_847A:
 .exit
 #_09C095: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09C096:
-#_09C096: db $28,$00,$28,$00,$28,$00,$7C,$01
+#_09C096: dw $0028, $0028, $0028, $017C
 
 data09C09E:
-#_09C09E: db $01,$00,$00,$00,$00,$00,$7C,$84
+#_09C09E: dw $0001 ; spawn 1 sprite
+#_09C0A0: dw $0000, $0000, $847C ; SPRITE 847C
 
 ;===================================================================================================
 
@@ -4938,22 +5267,30 @@ SpriteAI_847C:
 
 #_09C0CC: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09C0CF:
-#_09C0CF: db $18,$00,$E8,$FF,$24,$00,$DC,$FF
+#_09C0CF: dw $0018, $FFE8, $0024, $FFDC
 
 data09C0D7:
-#_09C0D7: db $50,$00,$3C,$00,$28,$00,$14,$00
+#_09C0D7: dw $0050, $003C, $0028, $0014
 
 ;===================================================================================================
 
 data09C0DF:
-#_09C0DF: db $00,$08,$02,$08,$00,$08,$04,$08
+#_09C0DF: db $00, $08
+#_09C0E1: db $02, $08
+#_09C0E3: db $00, $08
+#_09C0E5: db $04, $08
 #_09C0E7: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C0E8:
-#_09C0E8: db $01,$08,$03,$08,$01,$08,$05,$08
+#_09C0E8: db $01, $08
+#_09C0EA: db $03, $08
+#_09C0EC: db $01, $08
+#_09C0EE: db $05, $08
 #_09C0F0: db $FF
 
 ;---------------------------------------------------------------------------------------------------
@@ -4981,7 +5318,7 @@ CODE_09C103:
 #_09C106: STA.b $24
 
 #_09C108: LDA.w pointers09C0F1,Y
-#_09C10B: LDY.w #$0009
+#_09C10B: LDY.w #pointers09C0F1>>16
 #_09C10E: JSR ROUTINE_09B5F5
 #_09C111: CMP.w #$FFFF
 #_09C114: BNE CODE_09C11D
@@ -5006,7 +5343,7 @@ CODE_09C11D:
 CODE_09C135:
 #_09C135: JSR ROUTINE_09A5A8
 
-#_09C138: JMP CODE_09AD34
+#_09C138: JMP ROUTINE_09AD34
 
 ;===================================================================================================
 
@@ -5015,7 +5352,7 @@ SpriteAI_8480:
 
 #_09C13C: JSR ROUTINE_09C142
 
-#_09C13F: JMP CODE_09AD34
+#_09C13F: JMP ROUTINE_09AD34
 
 ;===================================================================================================
 
@@ -5033,7 +5370,7 @@ CODE_09C151:
 #_09C151: LDA.w #data09C17A
 
 CODE_09C154:
-#_09C154: LDY.w #$0009
+#_09C154: LDY.w #data09C17F>>16
 #_09C157: JSR ROUTINE_09B5F5
 #_09C15A: CMP.w #$FFFF
 #_09C15D: BNE CODE_09C168
@@ -5055,16 +5392,25 @@ CODE_09C168:
 .exit
 #_09C179: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09C17A:
-#_09C17A: db $06,$0A,$08,$0A,$FF
+#_09C17A: db $06, $0A
+#_09C17C: db $08, $0A
+#_09C17E: db $FF
+
+;---------------------------------------------------------------------------------------------------
 
 data09C17F:
-#_09C17F: db $0A,$0A,$0C
-#_09C182: db $0A,$FF
+#_09C17F: db $0A, $0A
+#_09C181: db $0C, $0A
+#_09C183: db $FF
+
+;---------------------------------------------------------------------------------------------------
 
 data09C184:
-#_09C184: db $01,$00,$00,$00,$00,$00
-#_09C18A: db $82,$84
+#_09C184: dw $0001 ; spawn 1 sprite
+#_09C186: dw $0000, $0000, $8482 ; SPRITE 8482
 
 ;===================================================================================================
 
@@ -5105,11 +5451,17 @@ CODE_09C1B4:
 
 #_09C1C1: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09C1C4:
-#_09C1C4: db $D8,$FF,$DE,$FF,$CC,$FF
+#_09C1C4: dw $FFD8
+#_09C1C6: dw $FFDE
+#_09C1C8: dw $FFCC
 
 data09C1CA:
-#_09C1CA: db $28,$00,$22,$00,$34,$00
+#_09C1CA: dw $0028
+#_09C1CC: dw $0022
+#_09C1CE: dw $0034
 
 ;===================================================================================================
 
@@ -5130,21 +5482,23 @@ SpriteAI_8484:
 #_09C1DB: ADC.w $080E,X
 #_09C1DE: STA.w $080E,X
 
-#_09C1E1: JMP CODE_09ADF9
+#_09C1E1: JMP ROUTINE_09ADF9
 
 ;===================================================================================================
 
 SpriteAI_8486:
 #_09C1E4: TYX
 
-#_09C1E5: LDA.w #data09C1EE
-#_09C1E8: LDY.w #data09C1EE>>16
+#_09C1E5: LDA.w #.spawn_table
+#_09C1E8: LDY.w #.spawn_table>>16
 #_09C1EB: JMP ROUTINE_09A775
 
-#data09C1EE:
-#_09C1EE: db $02,$00,$C0,$FE,$00,$00,$88,$84
-#_09C1F6: db $00,$00,$40,$01,$00,$00,$88,$84
-#_09C1FE: db $00,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09C1EE: dw $0002 ; spawn 2 sprites
+#_09C1F0: dw $FEC0, $0000, $8488, $0000 ; SPRITE 8488
+#_09C1F8: dw $0140, $0000, $8488, $0000 ; SPRITE 8488
 
 ;===================================================================================================
 
@@ -5260,8 +5614,7 @@ SpriteAI_848C:
 
 #_09C297: LDY.w $0816,X
 #_09C29A: LDA.w .pointers,Y
-
-#_09C29D: LDY.w #$0009
+#_09C29D: LDY.w #.pointers>>16
 #_09C2A0: JSR ROUTINE_09B5F5
 #_09C2A3: CMP.w #$FFFF
 #_09C2A6: BNE CODE_09C2B1
@@ -5310,67 +5663,77 @@ CODE_09C2D5:
 ;---------------------------------------------------------------------------------------------------
 
 data09C2E7:
-#_09C2E7: db $0A, $0A, $0C, $0A
+#_09C2E7: db $0A, $0A
+#_09C2E9: db $0C, $0A
 #_09C2EB: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C2EC:
-#_09C2EC: db $00, $0A, $12, $0A
+#_09C2EC: db $00, $0A
+#_09C2EE: db $12, $0A
 #_09C2F0: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C2F1:
-#_09C2F1: db $06, $0A, $08, $0A
+#_09C2F1: db $06, $0A
+#_09C2F3: db $08, $0A
 #_09C2F5: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C2F6:
-#_09C2F6: db $01, $0A, $13, $0A
+#_09C2F6: db $01, $0A
+#_09C2F8: db $13, $0A
 #_09C2FA: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C2FB:
-#_09C2FB: db $01, $00, $00, $00, $00, $00, $82, $84
+#_09C2FB: dw $0001 ; spawn 1 sprite
+#_09C2FD: dw $0000, $0000, $8482 ; SPRITE 8482
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C303:
-#_09C303: db $01, $00, $00, $00, $00, $00, $AE
+#_09C303: dw $0001 ; spawn 1 sprite
+#_09C305: dw $0000, $0000, $84AE ; SPRITE 84AE
 
 ;===================================================================================================
 
 SpriteAI_848E:
 #_09C30B: TYX
 
-#_09C30C: LDA.w #data09C315
-#_09C30F: LDY.w #data09C315>>16
+#_09C30C: LDA.w #.spawn_table
+#_09C30F: LDY.w #.spawn_table>>16
 #_09C312: JMP ROUTINE_09A775
 
-#data09C315:
-#_09C315: db $04,$00,$00,$00,$C0,$FD,$92,$84
-#_09C31D: db $00,$00,$00,$00,$40,$FF,$92,$84
-#_09C325: db $00,$00,$00,$00,$C0,$00,$92,$84
-#_09C32D: db $00,$00,$00,$00,$40,$02,$92,$84
-#_09C335: db $00,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09C315: dw $0004 ; spawn 4 sprites
+#_09C317: dw $0000, $FDC0, $8492, $0000 ; SPRITE 8492
+#_09C31F: dw $0000, $FF40, $8492, $0000 ; SPRITE 8492
+#_09C327: dw $0000, $00C0, $8492, $0000 ; SPRITE 8492
+#_09C32F: dw $0000, $0240, $8492, $0000 ; SPRITE 8492
 
 ;===================================================================================================
 
 SpriteAI_8490:
 #_09C337: TYX
 
-#_09C338: LDA.w #data09C341
-#_09C33B: LDY.w #data09C341>>16
+#_09C338: LDA.w #.spawn_table
+#_09C33B: LDY.w #.spawn_table>>16
 #_09C33E: JMP ROUTINE_09A775
 
-#data09C341:
-#_09C341: db $03,$00,$80,$FE,$00,$00,$92,$84
-#_09C349: db $00,$00,$00,$00,$00,$00,$92,$84
-#_09C351: db $00,$00,$80,$01,$00,$00,$92,$84
-#_09C359: db $00,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09C341: dw $0003 ; spawn 3 sprites
+#_09C343: dw $FE80, $0000, $8492, $0000 ; SPRITE 8492
+#_09C34B: dw $0000, $0000, $8492, $0000 ; SPRITE 8492
+#_09C353: dw $0180, $0000, $8492, $0000 ; SPRITE 8492
 
 ;===================================================================================================
 
@@ -5477,7 +5840,7 @@ SpriteAI_849A:
 #_09C3F4: LDA.w $04F4
 #_09C3F7: BEQ CODE_09C3FF
 
-#_09C3F9: JSR ROUTINE_038A25_0020_bank09
+#_09C3F9: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 
 #_09C3FC: JMP ROUTINE_09AEDC
 
@@ -5488,8 +5851,8 @@ CODE_09C3FF:
 #_09C404: LDA.l $7FE81E,X
 #_09C408: TAY
 
-#_09C409: LDA.w data09C42A,Y
-#_09C40C: LDY.w #$0009
+#_09C409: LDA.w .pointers,Y
+#_09C40C: LDY.w #.pointers>>16
 #_09C40F: JSR ROUTINE_09B5F5
 
 #_09C412: DEC.w $081C,X
@@ -5506,7 +5869,9 @@ CODE_09C424:
 
 #_09C427: JMP ROUTINE_09AD06
 
-data09C42A:
+;---------------------------------------------------------------------------------------------------
+
+.pointers
 #_09C42A: dw data09C432
 #_09C42C: dw data09C43B
 #_09C42E: dw data09C440
@@ -5515,27 +5880,33 @@ data09C42A:
 ;---------------------------------------------------------------------------------------------------
 
 data09C432:
-#_09C432: db $00, $0C, $02, $0C
-#_09C436: db $00, $0C, $03, $0C
+#_09C432: db $00, $0C
+#_09C434: db $02, $0C
+#_09C436: db $00, $0C
+#_09C438: db $03, $0C
 #_09C43A: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C43B:
-#_09C43B: db $09, $0C, $0B, $0C
+#_09C43B: db $09, $0C
+#_09C43D: db $0B, $0C
 #_09C43F: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C440:
-#_09C440: db $04, $0C, $06, $0C
-#_09C434: db $04, $0C, $07, $0C
+#_09C440: db $04, $0C
+#_09C442: db $06, $0C
+#_09C444: db $04, $0C
+#_09C446: db $07, $0C
 #_09C448: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C449:
-#_09C449: db $08, $0C, $0A, $0C
+#_09C449: db $08, $0C
+#_09C44B: db $0A, $0C
 #_09C44D: db $FF
 
 ;===================================================================================================
@@ -5543,14 +5914,16 @@ data09C449:
 SpriteAI_84A6:
 #_09C44E: TYX
 
-#_09C44F: LDA.w #data09C458
-#_09C452: LDY.w #data09C458>>16
+#_09C44F: LDA.w #.spawn_table
+#_09C452: LDY.w #.spawn_table>>16
 #_09C455: JMP ROUTINE_09A775
 
-#data09C458:
-#_09C458: db $02,$00,$00,$00,$80,$FE,$A8,$84
-#_09C460: db $00,$00,$00,$00,$80,$01,$A8,$84
-#_09C468: db $00,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09C458: dw $0002 ; spawn 2 sprites
+#_09C45A: dw $0000, $FE80, $84A8, $0000 ; SPRITE 84A8
+#_09C462: dw $0000, $0180, $84A8, $0000 ; SPRITE 84A8
 
 ;===================================================================================================
 
@@ -5600,7 +5973,7 @@ CODE_09C4A1:
 #_09C4A4: STA.b $24
 
 #_09C4A6: LDA.w pointers09C0F1,Y
-#_09C4A9: LDY.w #$0009
+#_09C4A9: LDY.w #pointers09C0F1>>16
 #_09C4AC: JSR ROUTINE_09B5F5
 #_09C4AF: CMP.w #$FFFF
 #_09C4B2: BNE CODE_09C4BB
@@ -5625,7 +5998,9 @@ CODE_09C4CF:
 
 #_09C4D2: JMP ROUTINE_09AD06
 
-#data09C4D5:
+;---------------------------------------------------------------------------------------------------
+
+data09C4D5:
 #_09C4D5: db $00,$08,$02,$08,$00,$08,$04,$08
 #_09C4DD: db $FF
 
@@ -5646,7 +6021,7 @@ CODE_09C4ED:
 #_09C4F0: STA.b $24
 
 #_09C4F2: LDA.w .pointers,Y
-#_09C4F5: LDY.w #$0009
+#_09C4F5: LDY.w #.pointers>>16
 #_09C4F8: JSR ROUTINE_09B5F5
 #_09C4FB: CMP.w #$FFFF
 #_09C4FE: BNE CODE_09C509
@@ -5661,8 +6036,8 @@ CODE_09C509:
 #_09C50C: CMP.w #$0102
 #_09C50F: BNE CODE_09C51A
 
-#_09C511: LDA.w #$C52B
-#_09C514: LDY.w #$0009
+#_09C511: LDA.w #data09C52B
+#_09C514: LDY.w #data09C52B>>16
 #_09C517: JSR ROUTINE_039099_bank09
 
 CODE_09C51A:
@@ -5677,15 +6052,22 @@ CODE_09C51A:
 ;---------------------------------------------------------------------------------------------------
 
 data09C521:
-#_09C521: db $01, $0A, $13, $0A, $FF
+#_09C521: db $01, $0A
+#_09C523: db $13, $0A
+#_09C525: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C526:
-#_09C526: db $00, $0A, $12, $0A, $FF
+#_09C526: db $00, $0A
+#_09C528: db $12, $0A
+#_09C52A: db $FF
 
-; TODO ???
-#_09C52B: db $01, $00, $00, $00, $00, $00, $AE, $84
+;---------------------------------------------------------------------------------------------------
+
+data09C52B:
+#_09C52B: dw $0001 ; spawn 1 sprite
+#_09C52D: dw $0000, $0000, $84AE ; SPRITE 84AE
 
 ;===================================================================================================
 
@@ -5727,11 +6109,13 @@ CODE_09C55E:
 
 #_09C56B: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09C56E:
-#_09C56E: db $D8,$FF,$DE,$FF,$CB,$FF
+#_09C56E: dw $FFD8, $FFDE, $FFCB
 
 data09C574:
-#_09C574: db $28,$00,$22,$00,$35,$00
+#_09C574: dw $0028, $0022, $0035
 
 ;===================================================================================================
 
@@ -5743,20 +6127,22 @@ SpriteAI_84B0:
 #_09C57F: ADC.w $080C,X
 #_09C582: STA.w $080C,X
 
-#_09C585: JMP CODE_09ADF9
+#_09C585: JMP ROUTINE_09ADF9
 
 ;===================================================================================================
 
 SpriteAI_84B8:
 #_09C588: TYX
 
-#_09C589: LDA.w #data09C592
-#_09C58C: LDY.w #data09C592>>16
+#_09C589: LDA.w #.spawn_table
+#_09C58C: LDY.w #.spawn_table>>16
 #_09C58F: JMP ROUTINE_09A775
 
-#data09C592:
-#_09C592: db $01,$00,$00,$00,$00,$00,$BA,$84
-#_09C59A: db $00,$00
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table
+#_09C592: dw $0001 ; spawn 1 sprite
+#_09C594: dw $0000, $0000, $84BA, $0000 ; SPRITE 84BA
 
 ;===================================================================================================
 
@@ -5778,8 +6164,10 @@ SpriteAI_84BA:
 
 #_09C5B6: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09C5B9:
-#_09C5B9: db $07,$00,$03,$00,$09,$00
+#_09C5B9: dw $0007, $0003, $0009
 
 ;===================================================================================================
 
@@ -5802,8 +6190,10 @@ ROUTINE_09C5CB:
 
 #_09C5D2: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09C5D3:
-#_09C5D3: db $F0,$11,$F1,$11,$EA,$11,$EB,$11
+#_09C5D3: dw $11F0, $11F1, $11EA, $11EB
 
 ;===================================================================================================
 
@@ -5825,7 +6215,7 @@ CODE_09C5EA:
 
 #_09C5F2: JSR ROUTINE_09B447
 
-#_09C5F5: JMP CODE_09ADF6
+#_09C5F5: JMP ROUTINE_09ADF6
 
 .exit
 #_09C5F8: RTS
@@ -5856,10 +6246,12 @@ SpriteAI_84C0:
 #_09C620: JSR AdvanceAIModeUp_bank09
 
 CODE_09C623:
-#_09C623: JMP CODE_09AE96
+#_09C623: JMP ROUTINE_09AE96
+
+;---------------------------------------------------------------------------------------------------
 
 data09C626:
-#_09C626: db $02,$00,$04,$00,$02,$00
+#_09C626: dw $0002, $0004, $0002
 
 ;===================================================================================================
 
@@ -5873,7 +6265,7 @@ SpriteAI_84C2:
 #_09C636: TAY
 
 #_09C637: LDA.w .pointers,Y
-#_09C63A: LDY.w #$0009
+#_09C63A: LDY.w #.pointers>>16
 #_09C63D: JSR ROUTINE_09B5F5
 
 #_09C640: LDA.w #$FFE3
@@ -5902,7 +6294,7 @@ SpriteAI_84C2:
 CODE_09C66E:
 #_09C66E: JSR ROUTINE_09A505
 
-#_09C671: JMP CODE_09AE96
+#_09C671: JMP ROUTINE_09AE96
 
 #_09C674: RTS
 
@@ -5917,27 +6309,35 @@ CODE_09C66E:
 ;---------------------------------------------------------------------------------------------------
 
 data09C67D:
-#_09C67D: db $08, $08, $06, $08, $FF
+#_09C67D: db $08, $08
+#_09C67F: db $06, $08
+#_09C681: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C682:
-#_09C682: db $09, $08, $07, $08, $FF
+#_09C682: db $09, $08
+#_09C684: db $07, $08
+#_09C686: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C687:
-#_09C687: db $02, $08, $00, $08, $FF
+#_09C687: db $02, $08
+#_09C689: db $00, $08
+#_09C68B: db $FF
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C68C:
-#_09C68C: db $03, $08, $01, $08, $FF
+#_09C68C: db $03, $08
+#_09C68E: db $01, $08
+#_09C690: db $FF
 
 ;===================================================================================================
 
 data09C691:
-#_09C691: db $F4,$11,$F5,$11,$EE,$11,$EF,$11
+#_09C691: dw $11F4, $11F5, $11EE, $11EF
 
 ;===================================================================================================
 
@@ -5979,10 +6379,13 @@ CODE_09C6C8:
 #_09C6D6: JSR ROUTINE_039099_bank09
 
 CODE_09C6D9:
-#_09C6D9: JMP CODE_09AE96
+#_09C6D9: JMP ROUTINE_09AE96
 
-#data09C6DC:
-#_09C6DC: db $01,$00,$00,$00,$00,$00,$CE,$84
+;---------------------------------------------------------------------------------------------------
+
+data09C6DC:
+#_09C6DC: dw $0001 ; spawn 1 sprite
+#_09C6DE: dw $0000, $0000, $84CE ; SPRITE 84CE
 
 ;===================================================================================================
 
@@ -6037,14 +6440,16 @@ SpriteAI_84CE:
 
 #_09C72C: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09C72F:
-#_09C72F: db $E4,$FF,$1C,$00,$E4,$FF,$1C,$00
+#_09C72F: dw $FFE4, $001C, $FFE4, $001C
 
 data09C737:
-#_09C737: db $E4,$FF,$E4,$FF,$1C,$00,$1C,$00
+#_09C737: dw $FFE4, $FFE4, $001C, $001C
 
 data09C73F:
-#_09C73F: db $A0,$00,$78,$00,$F0,$00
+#_09C73F: dw $00A0, $0078, $00F0
 
 ;===================================================================================================
 
@@ -6056,7 +6461,7 @@ SpriteAI_84D0:
 #_09C74C: STA.w $0806,X
 
 #_09C74F: DEC.w $081C,X
-#_09C752: BNE CODE_09C760
+#_09C752: BNE ROUTINE_09C760
 
 #_09C754: LDA.w #$001E
 #_09C757: STA.w $081C,X
@@ -6064,7 +6469,7 @@ SpriteAI_84D0:
 #_09C75A: INC.w $0816,X
 #_09C75D: JSR AdvanceAIModeUp_bank09
 
-CODE_09C760:
+ROUTINE_09C760:
 #_09C760: LDA.w $081A,X
 #_09C763: ASL A
 
@@ -6126,7 +6531,7 @@ CODE_09C7AB:
 #_09C7B8: BEQ .exit
 
 CODE_09C7BA:
-#_09C7BA: JMP CODE_09ADF9
+#_09C7BA: JMP ROUTINE_09ADF9
 
 .exit
 #_09C7BD: RTS
@@ -6146,7 +6551,7 @@ SpriteAI_84D2:
 #_09C7CA: RTS
 
 CODE_09C7CB:
-#_09C7CB: JMP CODE_09C760
+#_09C7CB: JMP ROUTINE_09C760
 
 ;===================================================================================================
 
@@ -6174,7 +6579,7 @@ ROUTINE_09C7CE:
 
 #_09C7E9: TAX
 
-#_09C7EA: JSR ROUTINE_038BE0_bank09
+#_09C7EA: JSR ROUTINE_038BE0_SomeTableCopy_bank09
 
 #_09C7ED: LDY.w #$0002
 
@@ -6250,26 +6655,34 @@ CODE_09C82B:
 ;---------------------------------------------------------------------------------------------------
 
 data09C83D:
-#_09C83D: db $07, $00, $38, $00, $00, $E0, $64, $40
-#_09C845: db $80, $00, $FD, $16, $00, $00
+#_09C83D: dw $0007 : dl $000038 ; copy 7 bytes to target
+#_09C842: db $E0, $64, $40, $80, $00, $FD, $16
+
+#_09C849: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C84B:
-#_09C84B: db $07, $00, $38, $00, $00, $E0, $64, $40
-#_09C853: db $80, $40, $FD, $16, $00, $00
+#_09C84B: dw $0007 : dl $000038 ; copy 7 bytes to target
+#_09C850: db $E0, $64, $40, $80, $40, $FD, $16
+
+#_09C857: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C859:
-#_09C859: db $07, $00, $38, $00, $00, $E0, $64, $40
-#_09C861: db $80, $80, $FD, $16, $00, $00
+#_09C859: dw $0007 : dl $000038 ; copy 7 bytes to target
+#_09C85E: db $E0, $64, $40, $80, $80, $FD, $16
+
+#_09C865: dw $0000 ; end
 
 ;---------------------------------------------------------------------------------------------------
 
 data09C867:
-#_09C867: db $07, $00, $38, $00, $00, $E0, $64, $40
-#_09C86F: db $80, $C0, $FD, $16, $00, $00
+#_09C867: dw $0007 : dl $000038 ; copy 7 bytes to target
+#_09C86C: db $E0, $64, $40, $80, $C0, $FD, $16
+
+#_09C873: dw $0000 ; end
 
 ;===================================================================================================
 
@@ -6291,7 +6704,7 @@ ROUTINE_09C875:
 #_09C881: DEC A
 #_09C882: BNE CODE_09C88C
 
-#_09C884: LDA.w #data09C8DD
+#_09C884: LDA.w #.spawn_table_a
 #_09C887: JSR ROUTINE_0390FC_bank09
 
 #_09C88A: BRA CODE_09C895
@@ -6300,36 +6713,38 @@ CODE_09C88C:
 #_09C88C: JSR Random_bank09
 #_09C88F: ROR A
 
-#_09C890: LDA.w #data09C8DD
+#_09C890: LDA.w #.spawn_table_a
 #_09C893: BCS CODE_09C898
 
 CODE_09C895:
-#_09C895: LDA.w #data09C89B
+#_09C895: LDA.w #.spawn_table_b
 
 CODE_09C898:
 #_09C898: JMP ROUTINE_0390FC_bank09
 
 ;---------------------------------------------------------------------------------------------------
 
-data09C89B:
-#_09C89B: db $08,$00,$00,$FC,$00,$01,$12,$00
-#_09C8A3: db $40,$00,$00,$FC,$00,$01,$12,$00
-#_09C8AB: db $C0,$00,$00,$FC,$00,$01,$12,$00
-#_09C8B3: db $40,$01,$00,$FC,$00,$01,$12,$00
-#_09C8BB: db $C0,$01,$80,$04,$00,$01,$12,$00
-#_09C8C3: db $40,$00,$80,$04,$00,$01,$12,$00
-#_09C8CB: db $C0,$00,$80,$04,$00,$01,$12,$00
-#_09C8D3: db $40,$01,$80,$04,$00,$01,$12,$00
-#_09C8DB: db $C0,$01
+.spawn_table_b
+#_09C89B: dw $0008 ; spawn 8 sprites
+#_09C89D: dw $FC00, $0100, $0012, $0040 ; SPRITE 0012
+#_09C8A5: dw $FC00, $0100, $0012, $00C0 ; SPRITE 0012
+#_09C8AD: dw $FC00, $0100, $0012, $0140 ; SPRITE 0012
+#_09C8B5: dw $FC00, $0100, $0012, $01C0 ; SPRITE 0012
+#_09C8BD: dw $0480, $0100, $0012, $0040 ; SPRITE 0012
+#_09C8C5: dw $0480, $0100, $0012, $00C0 ; SPRITE 0012
+#_09C8CD: dw $0480, $0100, $0012, $0140 ; SPRITE 0012
+#_09C8D5: dw $0480, $0100, $0012, $01C0 ; SPRITE 0012
 
-data09C8DD:
-#_09C8DD: db $06,$00,$00,$FC,$00,$01
-#_09C8E3: db $12,$00,$80,$00,$00,$FC,$00,$01
-#_09C8EB: db $12,$00,$00,$01,$00,$FC,$00,$01
-#_09C8F3: db $12,$00,$80,$01,$80,$04,$00,$01
-#_09C8FB: db $12,$00,$80,$00,$80,$04,$00,$01
-#_09C903: db $12,$00,$00,$01,$80,$04,$00,$01
-#_09C90B: db $12,$00,$80,$01
+;---------------------------------------------------------------------------------------------------
+
+.spawn_table_a
+#_09C8DD: dw $0006 ; spawn 6 sprites
+#_09C8DF: dw $FC00, $0100, $0012, $0080 ; SPRITE 0012
+#_09C8E7: dw $FC00, $0100, $0012, $0100 ; SPRITE 0012
+#_09C8EF: dw $FC00, $0100, $0012, $0180 ; SPRITE 0012
+#_09C8F7: dw $0480, $0100, $0012, $0080 ; SPRITE 0012
+#_09C8FF: dw $0480, $0100, $0012, $0100 ; SPRITE 0012
+#_09C907: dw $0480, $0100, $0012, $0180 ; SPRITE 0012
 
 ;===================================================================================================
 
@@ -6337,20 +6752,21 @@ ROUTINE_09C90F:
 #_09C90F: STZ.b $24
 #_09C911: STA.b $22
 
-CODE_09C913:
+.next
 #_09C913: LDA.w $0000,Y
-#_09C916: BEQ CODE_09C931
+#_09C916: BEQ .end
 
 #_09C918: CMP.b $22
-#_09C91A: BCS CODE_09C923
+#_09C91A: BCS .found
 
 #_09C91C: INC.b $24
+
 #_09C91E: INY
 #_09C91F: INY
 #_09C920: INY
-#_09C921: BRA CODE_09C913
+#_09C921: BRA .next
 
-CODE_09C923:
+.found
 #_09C923: LDA.w $0002,Y
 #_09C926: AND.w #$00FF
 #_09C929: CLC
@@ -6361,7 +6777,7 @@ CODE_09C923:
 
 #_09C930: RTS
 
-CODE_09C931:
+.end
 #_09C931: SEC
 
 #_09C932: RTS
@@ -6373,13 +6789,13 @@ SpriteAI_83AC:
 
 #_09C934: LDA.w #$00B4
 #_09C937: JSR Increment_0816_AndCompareTo_bank09
-#_09C93A: BCC CODE_09C942
+#_09C93A: BCC .delay
 
 #_09C93C: LDA.w #$8394 ; SPRITE 8394
 #_09C93F: JSR Reset_0816_AndSetAIMode_bank09
 
-CODE_09C942:
-#_09C942: JMP ROUTINE_09CD12
+.delay
+#_09C942: JMP ROUTINE_09CD15_1902
 
 ;===================================================================================================
 
@@ -6393,6 +6809,8 @@ SpriteAI_83AA:
 #_09C94E: STA.b $20
 
 #_09C950: JMP ($0020)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_09C953: dw ROUTINE_09C963
@@ -6409,7 +6827,7 @@ SpriteAI_83AA:
 ROUTINE_09C963:
 #_09C963: LDA.w $19CE
 #_09C966: CMP.w #$0028 ; STATE 28
-#_09C969: BEQ CODE_09C997
+#_09C969: BEQ .delay
 
 #_09C96B: LDA.w #$8032 ; SPRITE 8032
 #_09C96E: STA.b $26
@@ -6430,9 +6848,11 @@ ROUTINE_09C963:
 #_09C98E: LDA.w #$000C
 #_09C991: STA.b $24
 
-#_09C993: JSL PrepEnemySpawn_long_bank09
+#_09C993: JSL PrepSpriteSpawn_long_bank09
 
-CODE_09C997:
+;---------------------------------------------------------------------------------------------------
+
+.delay
 #_09C997: JSR Set_0814_to_FFFF_bank09
 
 #_09C99A: LDA.w #$00F0
@@ -6445,10 +6865,10 @@ CODE_09C997:
 #_09C9A8: JSL ROUTINE_06EA8F_long
 #_09C9AC: JSR ROUTINE_0381D7_bank09
 
-#_09C9AF: JMP ROUTINE_09CD12
+#_09C9AF: JMP ROUTINE_09CD15_1902
 
 CODE_09C9B2:
-#_09C9B2: JMP CODE_09D2CD
+#_09C9B2: JMP ROUTINE_09CD15_1909
 
 ;===================================================================================================
 
@@ -6469,14 +6889,14 @@ CODE_09C9C7:
 #_09C9CE: LDA.l $7FE814,X
 #_09C9D2: JSR ROUTINE_0384D5_bank09
 #_09C9D5: JSR ROUTINE_0382C3_bank09
-#_09C9D8: JSR ROUTINE_038686_bank09
+#_09C9D8: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_bank09
 #_09C9DB: CMP.w #$0040
 #_09C9DE: BCS CODE_09C9E3
 
 #_09C9E0: JSR ROUTINE_0381D7_bank09
 
 CODE_09C9E3:
-#_09C9E3: JMP ROUTINE_09CD12
+#_09C9E3: JMP ROUTINE_09CD15_1902
 
 ;===================================================================================================
 
@@ -6496,7 +6916,7 @@ ROUTINE_09C9E6
 #_09CA00: JSR ROUTINE_0381D7_bank09
 
 CODE_09CA03:
-#_09CA03: JMP ROUTINE_09CD12
+#_09CA03: JMP ROUTINE_09CD15_1902
 
 ;===================================================================================================
 
@@ -6511,41 +6931,51 @@ ROUTINE_09CA06:
 #_09CA15: PHX
 
 #_09CA16: LDX.w #data09CA1E
-#_09CA19: JSR ROUTINE_038BE0_bank09
+#_09CA19: JSR ROUTINE_038BE0_SomeTableCopy_bank09
 
 #_09CA1C: PLX
 
 #_09CA1D: RTS
 
-#data09CA1E:
-#_09CA1E: db $0A,$00,$22,$05,$00,$09,$00,$17
-#_09CA26: db $00,$00,$00,$17,$00,$17,$00,$05
-#_09CA2E: db $00,$23,$21,$00,$00,$00,$20,$80
-#_09CA36: db $7F,$02,$00,$30,$21,$00,$10,$33
-#_09CA3E: db $02,$00,$A6,$05,$00,$E0,$00,$00
-#_09CA46: db $00
+;---------------------------------------------------------------------------------------------------
+
+data09CA1E:
+#_09CA1E: dw $000A : dl $000522 ; copy 10 bytes to target
+#_09CA23: db $09, $00, $17, $00, $00, $00, $17, $00
+#_09CA2B: db $17, $00
+
+#_09CA2D: dw $0005 : dl W12SEL ; copy 5 bytes to target
+#_09CA32: db $00, $00, $20, $80, $7F
+
+#_09CA37: dw $0002 : dl CGWSEL ; copy 2 bytes to target
+#_09CA3C: db $10, $33
+
+#_09CA3E: dw $0002 : dl $0005A6 ; copy 2 bytes to target
+#_09CA43: db $E0, $00
+
+#_09CA45: dw $0000 ; end
 
 ;===================================================================================================
 
 ROUTINE_09CA47:
 #_09CA47: LDA.w #$00F0
 #_09CA4A: JSR Increment_0816_AndCompareTo_bank09
-#_09CA4D: BCC CODE_09CA52
+#_09CA4D: BCC ROUTINE_09CA52
 
 #_09CA4F: JSR ROUTINE_0381D7_bank09
 
-CODE_09CA52:
+ROUTINE_09CA52:
 #_09CA52: LDA.w #$190B
 #_09CA55: JSR ROUTINE_038CDF_bank09
 
-#_09CA58: JMP CODE_09DECB
+#_09CA58: JMP ROUTINE_09DECB
 
 ;===================================================================================================
 
 ROUTINE_09CA5B:
 #_09CA5B: JSR ROUTINE_09CA61
 
-#_09CA5E: JMP CODE_09CA52
+#_09CA5E: JMP ROUTINE_09CA52
 
 ;===================================================================================================
 
@@ -6619,7 +7049,7 @@ ROUTINE_09CAB0:
 #_09CABE: STA.w $0816,X
 
 CODE_09CAC1:
-#_09CAC1: JMP CODE_09CA52
+#_09CAC1: JMP ROUTINE_09CA52
 
 ;===================================================================================================
 
@@ -6646,7 +7076,7 @@ ROUTINE_09CAD9:
 #_09CADC: JSR Increment_0816_AndCompareTo_bank09
 #_09CADF: BCC .exit
 
-#_09CAE1: JSR ROUTINE_0385D1_bank09
+#_09CAE1: JSR LevelPossiblyBeaten_bank09
 
 .exit
 #_09CAE4: RTS
@@ -6700,11 +7130,11 @@ SpriteAI_83A2:
 #_09CB26: BCS CODE_09CB57
 
 #_09CB28: LDA.w $1710
-#_09CB2B: CMP.w #$83AC
+#_09CB2B: CMP.w #$83AC ; SPRITE 83AC
 #_09CB2E: BEQ CODE_09CB57
 
 #_09CB30: LDY.w #$0020
-#_09CB33: JSR ROUTINE_038428_bank09
+#_09CB33: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09CB36: LDY.w #$0020
 #_09CB39: JSR ROUTINE_038417_bank09
@@ -6727,7 +7157,7 @@ CODE_09CB57:
 #_09CB57: LDA.w #$1914
 #_09CB5A: JSR ROUTINE_038CDF_bank09
 
-#_09CB5D: JMP CODE_09D678
+#_09CB5D: JMP ROUTINE_09D678
 
 ;===================================================================================================
 
@@ -6739,6 +7169,8 @@ ROUTINE_09CB60:
 #_09CB68: STA.b $20
 
 #_09CB6A: JMP ($0020)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_09CB6D: dw ROUTINE_09CBCE
@@ -6774,9 +7206,11 @@ ROUTINE_09CB83:
 #_09CB97: JSR ROUTINE_0381D7_bank09
 
 CODE_09CB9A:
-#_09CB9A: JMP CODE_09CB9D
+#_09CB9A: JMP ROUTINE_09CB9D
 
-CODE_09CB9D:
+;---------------------------------------------------------------------------------------------------
+
+ROUTINE_09CB9D:
 #_09CB9D: LDA.l $7FE81A,X
 #_09CBA1: STA.b $20
 
@@ -6786,7 +7220,7 @@ CODE_09CB9D:
 #_09CBA8: ADC.w $1752
 #_09CBAB: STA.l $7FE818,X
 
-#_09CBAF: JSR ROUTINE_09A07D
+#_09CBAF: JSR ROUTINE_03A07D_bank09
 
 #_09CBB2: CLC
 
@@ -6819,7 +7253,7 @@ ROUTINE_09CBCE:
 #_09CBD6: JSR ROUTINE_0381D7_bank09
 
 CODE_09CBD9:
-#_09CBD9: JMP CODE_09CB9D
+#_09CBD9: JMP ROUTINE_09CB9D
 
 ;===================================================================================================
 
@@ -6840,14 +7274,14 @@ ROUTINE_09CBDC:
 CODE_09CBEE:
 #_09CBEE: STA.l $7FE81A,X
 
-#_09CBF2: JMP CODE_09CB9D
+#_09CBF2: JMP ROUTINE_09CB9D
 
 ;===================================================================================================
 
 SpriteAI_8388:
 #_09CBF5: TYX
 
-#_09CBF6: JSR ROUTINE_038567_bank09
+#_09CBF6: JSR Read7E2530IfMode3F_bank09
 #_09CBF9: BNE .exit
 
 #_09CBFB: LDA.w $19CE
@@ -6859,7 +7293,7 @@ SpriteAI_8388:
 
 #_09CC09: LDA.w #data09CC23
 #_09CC0C: LDY.w #data09CC23>>16
-#_09CC0F: JSL ROUTINE_08BD65
+#_09CC0F: JSL RobustBulkDecompressionAndSetMode40
 
 #_09CC13: STZ.w $081E,X
 
@@ -6892,7 +7326,7 @@ SpriteAI_838A:
 #_09CC33: BNE CODE_09CC3F
 
 #_09CC35: LDA.w #$0002
-#_09CC38: JSL ROUTINE_03E674
+#_09CC38: JSL ROUTINE_03E674_Set0816to00E9or0057
 
 #_09CC3C: JMP ROUTINE_09E25A
 
@@ -6916,7 +7350,7 @@ CODE_09CC5C:
 #_09CC5C: JSR ROUTINE_0381F6_bank09
 #_09CC5F: BCS .exit
 
-#_09CC61: LDA.w #data09CC87
+#_09CC61: LDA.w #.spawn_table
 #_09CC64: JSR ROUTINE_0390D7_bank09
 
 #_09CC67: LDA.w #$9000
@@ -6938,10 +7372,10 @@ CODE_09CC5C:
 
 ;---------------------------------------------------------------------------------------------------
 
-data09CC87:
-#_09CC87: db $02,$00,$00,$FF,$00,$00,$96,$83
-#_09CC8F: db $00,$00,$00,$01,$00,$00,$96,$83
-#_09CC97: db $00,$04
+.spawn_table
+#_09CC87: dw $0002 ; spawn 2 sprites
+#_09CC89: dw $FF00, $0000, $8396, $0000 ; SPRITE 8396
+#_09CC91: dw $0100, $0000, $8396, $0400 ; SPRITE 8396
 
 ;===================================================================================================
 
@@ -6973,7 +7407,7 @@ SpriteAI_838C:
 #_09CCC3: LDA.w #$FFFF
 #_09CCC6: STA.w $18E2
 
-#_09CCC9: BRA ROUTINE_09CD12
+#_09CCC9: BRA ROUTINE_09CD15_1902
 
 CODE_09CCCB:
 #_09CCCB: LDA.w #$9400
@@ -6991,7 +7425,7 @@ CODE_09CCCB:
 CODE_09CCE2:
 #_09CCE2: LDA.w $19CE
 #_09CCE5: CMP.w #$00B8 ; STATE B8
-#_09CCE8: BEQ ROUTINE_09CD12
+#_09CCE8: BEQ ROUTINE_09CD15_1902
 
 #_09CCEA: JSR ROUTINE_0382C3_bank09
 
@@ -7006,7 +7440,7 @@ CODE_09CCE2:
 
 #_09CD03: JSR AdvanceAIModeUp_bank09
 
-#_09CD06: BRA ROUTINE_09CD12
+#_09CD06: BRA ROUTINE_09CD15_1902
 
 CODE_09CD08:
 #_09CD08: CLC
@@ -7017,16 +7451,20 @@ CODE_09CD08:
 
 ;===================================================================================================
 
-ROUTINE_09CD12:
+ROUTINE_09CD15_1902:
 #_09CD12: LDA.w #$1902
 
-CODE_09CD15:
+;===================================================================================================
+
+ROUTINE_09CD15:
 #_09CD15: JSR ROUTINE_038CDF_bank09
 
-CODE_09CD18:
+;===================================================================================================
+
+ROUTINE_09CD18:
 #_09CD18: JSR ROUTINE_09CD1E
 
-#_09CD1B: JMP CODE_09DECB
+#_09CD1B: JMP ROUTINE_09DECB
 
 ;===================================================================================================
 
@@ -7050,17 +7488,17 @@ SpriteAI_838E:
 
 #_09CD2D: LDA.w #$001E
 #_09CD30: JSR Increment_0816_AndCompareTo_bank09
-#_09CD33: BCC CODE_09CD41
+#_09CD33: BCC .delay
 
 #_09CD35: LDA.w #$0044
 #_09CD38: JSR ROUTINE_038741_bank09
 #_09CD3B: TAY
-#_09CD3C: BEQ CODE_09CD41
+#_09CD3C: BEQ .delay
 
 #_09CD3E: JSR AdvanceAIModeUp_bank09
 
-CODE_09CD41:
-#_09CD41: JMP ROUTINE_09CD12
+.delay
+#_09CD41: JMP ROUTINE_09CD15_1902
 
 ;===================================================================================================
 
@@ -7068,15 +7506,15 @@ SpriteAI_8390:
 #_09CD44: TYX
 
 #_09CD45: JSR Sprite_HandleExistingDialog_bank09
-#_09CD48: BNE CODE_09CD54
+#_09CD48: BNE .still_talking
 
 #_09CD4A: LDA.w #$0016
 #_09CD4D: STA.l $7E7B38
 
 #_09CD51: JSR AdvanceAIModeUp_bank09
 
-CODE_09CD54:
-#_09CD54: JMP ROUTINE_09CD12
+.still_talking
+#_09CD54: JMP ROUTINE_09CD15_1902
 
 ;===================================================================================================
 
@@ -7086,17 +7524,17 @@ SpriteAI_8392:
 #_09CD58: LDA.w #$0022
 #_09CD5B: JSR ROUTINE_03876C_bank09
 #_09CD5E: TAY
-#_09CD5F: BEQ CODE_09CD89
+#_09CD5F: BEQ .delay
 
 #_09CD61: JSR Sprite_CacheX_And_Yplus0280_82B2_bank09
 
 #_09CD64: LDA.w #$00F4 ; SPRITE 00F4
-#_09CD67: JSL PrepEnemySpawnType0C_0396E3_bank09
+#_09CD67: JSL PrepSpriteSpawnType0C_0396E3_bank09
 
-#_09CD6B: LDA.w #$CD8C
+#_09CD6B: LDA.w #.spawn_table
 #_09CD6E: JSR ROUTINE_0390D7_bank09
 
-#_09CD71: LDA.w data09CD8C
+#_09CD71: LDA.w .spawn_table
 #_09CD74: STA.w $0854,X
 
 #_09CD77: LDA.w #$0005
@@ -7107,24 +7545,24 @@ SpriteAI_8392:
 #_09CD83: LDA.w #$83AC ; SPRITE 83AC
 #_09CD86: JSR Reset_0816_AndSetAIMode_bank09
 
-CODE_09CD89:
-#_09CD89: JMP ROUTINE_09CD12
+.delay
+#_09CD89: JMP ROUTINE_09CD15_1902
 
 ;---------------------------------------------------------------------------------------------------
 
-data09CD8C:
-#_09CD8C: db $05,$00,$00,$00,$00,$00,$A0,$83
-#_09CD94: db $CD,$00,$00,$00,$00,$00,$A0,$83
-#_09CD9C: db $9A,$01,$00,$00,$00,$00,$A0,$83
-#_09CDA4: db $67,$02,$00,$00,$00,$00,$A0,$83
-#_09CDAC: db $34,$03,$00,$00,$00,$00,$A0,$83
-#_09CDB4: db $01,$04
+.spawn_table
+#_09CD8C: dw $0005 ; spawn 5 sprites
+#_09CD8E: dw $0000, $0000, $83A0, $00CD ; SPRITE 83A0
+#_09CD96: dw $0000, $0000, $83A0, $019A ; SPRITE 83A0
+#_09CD9E: dw $0000, $0000, $83A0, $0267 ; SPRITE 83A0
+#_09CDA6: dw $0000, $0000, $83A0, $0334 ; SPRITE 83A0
+#_09CDAE: dw $0000, $0000, $83A0, $0401 ; SPRITE 83A0
 
 ;===================================================================================================
 
 ROUTINE_09CDB6:
 #_09CDB6: LDY.w #$0048
-#_09CDB9: JSR ROUTINE_038428_bank09
+#_09CDB9: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09CDBC: LDY.w #$0048
 #_09CDBF: JSR ROUTINE_038417_bank09
@@ -7149,7 +7587,7 @@ ROUTINE_09CDB6:
 #_09CDE5: JSR ROUTINE_09CB7B
 #_09CDE8: PHX
 
-#_09CDE9: JSR ROUTINE_09CD12
+#_09CDE9: JSR ROUTINE_09CD15_1902
 
 #_09CDEC: PLX
 
@@ -7171,14 +7609,14 @@ SpriteAI_8394:
 .continue
 #_09CDF6: JSR ROUTINE_09E4A5
 
-#_09CDF9: JMP CODE_09D3C7
+#_09CDF9: JMP ROUTINE_09D3C7
 
 ;===================================================================================================
 
 ROUTINE_09CDFC:
 #_09CDFC: LDA.w $1710
-#_09CDFF: CMP.w #$83AA
-#_09CE02: BNE CODE_09CE0D
+#_09CDFF: CMP.w #$83AA ; SPRITE 83AA
+#_09CE02: BNE .fail
 
 #_09CE04: JSL ROUTINE_06F7B8
 #_09CE08: JSR ROUTINE_038C85_bank09
@@ -7187,7 +7625,7 @@ ROUTINE_09CDFC:
 
 #_09CE0C: RTS
 
-CODE_09CE0D:
+.fail
 #_09CE0D: CLC
 
 #_09CE0E: RTS
@@ -7227,6 +7665,8 @@ SpriteAI_8398:
 
 #_09CE39: JMP ($0020)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_09CE3C: dw ROUTINE_09D0F1
 #_09CE3E: dw ROUTINE_09D106
@@ -7258,7 +7698,7 @@ ROUTINE_09CE60:
 #_09CE6A: ASL A
 #_09CE6B: ASL A
 #_09CE6C: ASL A
-#_09CE6D: JSR ROUTINE_09A07D
+#_09CE6D: JSR ROUTINE_03A07D_bank09
 
 #_09CE70: LDA.b $20
 #_09CE72: STA.l $7FE818,X
@@ -7275,7 +7715,7 @@ ROUTINE_09CE60:
 
 ROUTINE_09CE85:
 #_09CE85: LDY.w #$0008
-#_09CE88: JSR ROUTINE_038428_bank09
+#_09CE88: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 #_09CE8B: JSR Set_0814_to_FFFF_bank09
 
 #_09CE8E: LDA.l $7FE818,X
@@ -7287,12 +7727,12 @@ ROUTINE_09CE85:
 #_09CE9A: JSR ROUTINE_038B73_bank09
 
 #_09CE9D: LDA.w #$1114
-#_09CEA0: JMP CODE_09D140
+#_09CEA0: JMP ROUTINE_09D140
 
 ;===================================================================================================
 
 ROUTINE_09CEA3:
-#_09CEA3: JSR ROUTINE_09D0FA
+#_09CEA3: JSR ROUTINE_09D0FA_Clear7FE802and7FE804
 
 #_09CEA6: LDA.w #$1010
 #_09CEA9: STA.w $0812,X
@@ -7356,7 +7796,7 @@ CODE_09CEFE:
 #_09CF04: LDA.w #$0200
 #_09CF07: JSR ROUTINE_09D9B8
 
-#_09CF0A: JMP CODE_09D1AB
+#_09CF0A: JMP ROUTINE_09D1AB
 
 ;===================================================================================================
 
@@ -7373,6 +7813,8 @@ ROUTINE_09CF0D:
 #_09CF20: STA.b $22
 
 #_09CF22: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data09CF23:
 #_09CF23: dw $FE80, $FD80
@@ -7391,8 +7833,10 @@ ROUTINE_09CF2B:
 
 #_09CF3A: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09CF3B:
-#_09CF3B: db $39,$3B,$3C,$3A,$38,$36,$34,$37
+#_09CF3B: db $39, $3B, $3C, $3A, $38, $36, $34, $37
 
 ;===================================================================================================
 
@@ -7405,18 +7849,18 @@ ROUTINE_09CF43:
 
 #_09CF4F: LDA.w #$0004
 #_09CF52: JSR Increment_0816_AndCompareTo_bank09
-#_09CF55: BCC CODE_09CF71
+#_09CF55: BCC ROUTINE_09CF71
 
 #_09CF57: CMP.w #$0010
 #_09CF5A: BCS CODE_09CF68
 
-#_09CF5C: JSR ROUTINE_03867C_bank09
+#_09CF5C: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_UsingPockyCoords_bank09
 
 #_09CF5F: LDA.b $26
 #_09CF61: CMP.w #$0080
 #_09CF64: BCC CODE_09CF68
 
-#_09CF66: BRA CODE_09CF71
+#_09CF66: BRA ROUTINE_09CF71
 
 CODE_09CF68:
 #_09CF68: LDA.w #$003B ; SFX 3B
@@ -7424,7 +7868,7 @@ CODE_09CF68:
 
 #_09CF6E: JSR ROUTINE_0381D7_bank09
 
-CODE_09CF71:
+ROUTINE_09CF71:
 #_09CF71: LDA.l $7FE818,X
 #_09CF75: STA.w $0806,X
 
@@ -7456,7 +7900,7 @@ CODE_09CF90:
 
 #_09CF9D: JSR ROUTINE_09CF2B
 
-#_09CFA0: JMP CODE_09CF71
+#_09CFA0: JMP ROUTINE_09CF71
 
 CODE_09CFA3:
 #_09CFA3: LDA.w #$1912
@@ -7500,7 +7944,7 @@ ROUTINE_09CFCB:
 
 CODE_09CFD9:
 #_09CFD9: LDY.w #$0008
-#_09CFDC: JSR ROUTINE_038428_bank09
+#_09CFDC: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09CFDF: LDY.w #$0080
 #_09CFE2: JSR ROUTINE_038417_bank09
@@ -7514,15 +7958,15 @@ CODE_09CFD9:
 #_09CFF3: JSL ROUTINE_06F7B8
 
 #_09CFF7: LDA.w #$0008
-#_09CFFA: JMP ROUTINE_09D211
+#_09CFFA: JMP ROUTINE_09D211_Set7FE81CandClear0816
 
 CODE_09CFFD:
 #_09CFFD: LDA.w $1710
-#_09D000: CMP.w #$839A
+#_09D000: CMP.w #$839A ; SPRITE 839A
 #_09D003: BNE CODE_09D00D
 
 #_09D005: LDA.w #$0004
-#_09D008: JSR ROUTINE_09D211
+#_09D008: JSR ROUTINE_09D211_Set7FE81CandClear0816
 
 #_09D00B: BRA CODE_09D02A
 
@@ -7534,7 +7978,7 @@ CODE_09D00D:
 #_09D017: JSL ROUTINE_02FE0D
 #_09D01B: STA.l $7FE814,X
 
-#_09D01F: JSL ROUTINE_06E3E7_long
+#_09D01F: JSL ROUTINE_06E3EA_PockyCoordinates_long
 
 #_09D023: LDA.l $7FE814,X
 #_09D027: JSR ROUTINE_0384D5_bank09
@@ -7551,7 +7995,7 @@ CODE_09D02A:
 
 CODE_09D03A:
 #_09D03A: TYA
-#_09D03B: JMP CODE_09D140
+#_09D03B: JMP ROUTINE_09D140
 
 ;===================================================================================================
 
@@ -7616,7 +8060,7 @@ ROUTINE_09D080:
 #_09D08E: BRA CODE_09D09A
 
 CODE_09D090:
-#_09D090: JSR ROUTINE_03867C_bank09
+#_09D090: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_UsingPockyCoords_bank09
 
 #_09D093: LDA.b $26
 #_09D095: CMP.w #$0080
@@ -7638,21 +8082,23 @@ CODE_09D0A3:
 
 #_09D0AD: BRA CODE_09D077
 
-#data09D0AF:
-#_09D0AF: db $08,$00,$00,$00,$00,$00,$96,$83
-#_09D0B7: db $10,$00,$00,$00,$00,$00,$96,$83
-#_09D0BF: db $10,$08,$00,$00,$00,$00,$96,$83
-#_09D0C7: db $10,$10,$00,$00,$00,$00,$96,$83
-#_09D0CF: db $10,$18,$00,$00,$00,$00,$96,$83
-#_09D0D7: db $10,$20,$00,$00,$00,$00,$96,$83
-#_09D0DF: db $10,$28,$00,$00,$00,$00,$96,$83
-#_09D0E7: db $10,$30,$00,$00,$00,$00,$96,$83
-#_09D0EF: db $10,$38
+;---------------------------------------------------------------------------------------------------
+
+data09D0AF:
+#_09D0AF: dw $0008 ; spawn 8 sprites
+#_09D0B1: dw $0000, $0000, $8396, $0010 ; SPRITE 8396
+#_09D0B9: dw $0000, $0000, $8396, $0810 ; SPRITE 8396
+#_09D0C1: dw $0000, $0000, $8396, $1010 ; SPRITE 8396
+#_09D0C9: dw $0000, $0000, $8396, $1810 ; SPRITE 8396
+#_09D0D1: dw $0000, $0000, $8396, $2010 ; SPRITE 8396
+#_09D0D9: dw $0000, $0000, $8396, $2810 ; SPRITE 8396
+#_09D0E1: dw $0000, $0000, $8396, $3010 ; SPRITE 8396
+#_09D0E9: dw $0000, $0000, $8396, $3810 ; SPRITE 8396
 
 ;===================================================================================================
 
 ROUTINE_09D0F1:
-#_09D0F1: JSR ROUTINE_09D0FA
+#_09D0F1: JSR ROUTINE_09D0FA_Clear7FE802and7FE804
 
 #_09D0F4: STZ.w $080A,X
 
@@ -7660,7 +8106,7 @@ ROUTINE_09D0F1:
 
 ;===================================================================================================
 
-ROUTINE_09D0FA:
+ROUTINE_09D0FA_Clear7FE802and7FE804:
 #_09D0FA: LDA.w #$0000
 #_09D0FD: STA.l $7FE802,X
 #_09D101: STA.l $7FE804,X
@@ -7708,26 +8154,29 @@ CODE_09D121:
 CODE_09D13D:
 #_09D13D: LDA.w #$111E
 
-CODE_09D140:
+ROUTINE_09D140:
 #_09D140: STA.w $0806,X
 
 #_09D143: JMP ROUTINE_0388B2_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09D146:
-#_09D146: db $00,$00,$08,$00
+#_09D146: dw $0000
+#_09D148: dw $0008
 
 ;===================================================================================================
 
 ROUTINE_09D14A:
 #_09D14A: LDA.w $1710
-#_09D14D: CMP.w #$839A
+#_09D14D: CMP.w #$839A ; SPRITE 839A
 #_09D150: BNE CODE_09D163
 
 #_09D152: LDA.l $7FE81E,X
 #_09D156: BEQ CODE_09D160
 
 #_09D158: LDA.w #$000A
-#_09D15B: JSR ROUTINE_09D211
+#_09D15B: JSR ROUTINE_09D211_Set7FE81CandClear0816
 
 #_09D15E: BRA CODE_09D163
 
@@ -7736,39 +8185,39 @@ CODE_09D160:
 
 CODE_09D163:
 #_09D163: LDA.w #$112A
-#_09D166: BRA CODE_09D140
+#_09D166: BRA ROUTINE_09D140
 
 ;===================================================================================================
 
 ROUTINE_09D168:
 #_09D168: LDA.w $05A0
 #_09D16B: AND.w #$000F
-#_09D16E: BNE CODE_09D176
+#_09D16E: BNE .skip_sfx
 
 #_09D170: LDA.w #$0026 ; SFX 26
 #_09D173: STA.w $04AA
 
-CODE_09D176:
+.skip_sfx
 #_09D176: JSR ROUTINE_09D1B4
-#_09D179: JSR ROUTINE_038686_bank09
+#_09D179: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_bank09
 #_09D17C: CMP.w #$0060
 #_09D17F: BCS CODE_09D19F
 
 #_09D181: JSR ROUTINE_09D1B4
-#_09D184: JSR ROUTINE_038686_bank09
+#_09D184: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_bank09
 #_09D187: CMP.w #$0100
-#_09D18A: BCS CODE_09D1AB
+#_09D18A: BCS ROUTINE_09D1AB
 
 #_09D18C: LDA.w #$001E
 #_09D18F: JSR Increment_0816_AndCompareTo_bank09
-#_09D192: BCC CODE_09D1AB
+#_09D192: BCC ROUTINE_09D1AB
 
 #_09D194: JSR ROUTINE_0381D7_bank09
 
-#_09D197: LDA.w #$839C
+#_09D197: LDA.w #$839C ; SPRITE 839C
 #_09D19A: STA.w $1710
 
-#_09D19D: BRA CODE_09D1AB
+#_09D19D: BRA ROUTINE_09D1AB
 
 CODE_09D19F:
 #_09D19F: JSR ROUTINE_09D1B4
@@ -7777,7 +8226,7 @@ CODE_09D19F:
 #_09D1A5: LDA.w #$0200
 #_09D1A8: JSR ROUTINE_09D9B8
 
-CODE_09D1AB:
+ROUTINE_09D1AB:
 #_09D1AB: LDA.w #$1910
 #_09D1AE: JSR ROUTINE_038CDF_bank09
 
@@ -7789,17 +8238,19 @@ ROUTINE_09D1B4:
 #_09D1B4: LDA.l $7FE81E,X
 #_09D1B8: TAY
 
-#_09D1B9: LDA.w data09D1CA+0,Y
+#_09D1B9: LDA.w .offset+0,Y
 #_09D1BC: ADC.w $170C
 #_09D1BF: STA.b $20
 
-#_09D1C1: LDA.w data09D1CA+2,Y
+#_09D1C1: LDA.w .offset+2,Y
 #_09D1C4: ADC.w $170E
 #_09D1C7: STA.b $22
 
 #_09D1C9: RTS
 
-data09D1CA:
+;---------------------------------------------------------------------------------------------------
+
+.offset
 #_09D1CA: dw $FF00, $FF00
 #_09D1CE: dw $0100, $FF00
 
@@ -7813,10 +8264,10 @@ ROUTINE_09D1D2:
 #_09D1DB: STA.w $080E,X
 
 #_09D1DE: LDA.w $1710
-#_09D1E1: CMP.w #$83A4
+#_09D1E1: CMP.w #$83A4 ; SPRITE 83A4
 #_09D1E4: BEQ CODE_09D1F0
 
-#_09D1E6: CMP.w #$839A
+#_09D1E6: CMP.w #$839A ; SPRITE 839A
 #_09D1E9: BNE .exit
 
 #_09D1EB: LDA.w #$0004
@@ -7826,7 +8277,7 @@ CODE_09D1F0:
 #_09D1F0: LDA.w #$0014
 
 CODE_09D1F3:
-#_09D1F3: JSR ROUTINE_09D211
+#_09D1F3: JSR ROUTINE_09D211_Set7FE81CandClear0816
 
 .exit
 #_09D1F6: RTS
@@ -7839,11 +8290,11 @@ ROUTINE_09D1F7:
 #_09D1FD: BNE CODE_09D20E
 
 #_09D1FF: LDA.w $1710
-#_09D202: CMP.w #$839A
+#_09D202: CMP.w #$839A ; SPRITE 839A
 #_09D205: BEQ .exit
 
 #_09D207: LDA.w #$0008
-#_09D20A: JSR ROUTINE_09D211
+#_09D20A: JSR ROUTINE_09D211_Set7FE81CandClear0816
 
 .exit
 #_09D20D: RTS
@@ -7853,8 +8304,9 @@ CODE_09D20E:
 
 ;===================================================================================================
 
-ROUTINE_09D211:
+ROUTINE_09D211_Set7FE81CandClear0816:
 #_09D211: STA.l $7FE81C,X
+
 #_09D215: STZ.w $0816,X
 
 #_09D218: RTS
@@ -7863,7 +8315,7 @@ ROUTINE_09D211:
 
 ROUTINE_09D219:
 #_09D219: LDY.w #$0168
-#_09D21C: JSR ROUTINE_038428_bank09
+#_09D21C: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 #_09D21F: JSR Set_0814_to_FFFF_bank09
 #_09D222: JSR SetHPtoFFFF_bank09
 
@@ -7877,7 +8329,7 @@ ROUTINE_09D219:
 #_09D232: JSR ROUTINE_038B73_bank09
 
 #_09D235: LDA.w #$1120
-#_09D238: JMP CODE_09D140
+#_09D238: JMP ROUTINE_09D140
 
 ;===================================================================================================
 
@@ -7904,11 +8356,10 @@ SpriteAI_83A8:
 
 CODE_09D258:
 #_09D258: LDA.w #$1903
-#_09D25B: JMP CODE_09CD15
+#_09D25B: JMP ROUTINE_09CD15
 
 CODE_09D25E:
 #_09D25E: LDY.w #$0001
-
 #_09D261: LDA.w #$1904
 #_09D264: JSR ROUTINE_038CF0_bank09
 #_09D267: BNE CODE_09D26C
@@ -7923,12 +8374,14 @@ CODE_09D26C:
 #_09D272: JSR Reset_0816_AndSetAIMode_bank09
 
 CODE_09D275:
-#_09D275: JMP CODE_09CD18
+#_09D275: JMP ROUTINE_09CD18
 
-#data09D278:
-#_09D278: db $02,$00,$80,$FE,$80,$FD,$96,$83
-#_09D280: db $07,$00,$80,$01,$80,$FD,$96,$83
-#_09D288: db $07,$04
+;---------------------------------------------------------------------------------------------------
+
+data09D278:
+#_09D278: dw $0002 ; spawn 2 sprites
+#_09D27A: dw $FE80, $FD80, $8396, $0007 ; SPRITE 8396
+#_09D282: dw $0180, $FD80, $8396, $0407 ; SPRITE 8396
 
 ;===================================================================================================
 
@@ -7947,7 +8400,7 @@ SpriteAI_83A4:
 
 #_09D29C: JSR ROUTINE_038A80_bank09
 
-#_09D29F: JMP CODE_09CD18
+#_09D29F: JMP ROUTINE_09CD18
 
 ;===================================================================================================
 
@@ -7968,8 +8421,10 @@ SpriteAI_83A6:
 
 #_09D2B3: JMP ($0020)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
-#_09D2B6: dw ROUTINE_09D2C2
+#_09D2B6: dw ROUTINE_09D2C5_001E
 #_09D2B8: dw ROUTINE_09D2D3
 #_09D2BA: dw ROUTINE_09D2ED
 #_09D2BC: dw ROUTINE_09D2F3
@@ -7978,18 +8433,22 @@ SpriteAI_83A6:
 
 ;===================================================================================================
 
-ROUTINE_09D2C2:
+ROUTINE_09D2C5_001E:
 #_09D2C2: LDA.w #$001E
 
-CODE_09D2C5:
+;===================================================================================================
+
+ROUTINE_09D2C5:
 #_09D2C5: JSR Increment_0816_AndCompareTo_bank09
-#_09D2C8: BCC CODE_09D2CD
+#_09D2C8: BCC ROUTINE_09CD15_1909
 
 #_09D2CA: JSR ROUTINE_0381D7_bank09
 
-CODE_09D2CD:
+;===================================================================================================
+
+ROUTINE_09CD15_1909:
 #_09D2CD: LDA.w #$1909
-#_09D2D0: JMP CODE_09CD15
+#_09D2D0: JMP ROUTINE_09CD15
 
 ;===================================================================================================
 
@@ -8010,13 +8469,13 @@ CODE_09D2E4:
 #_09D2E7: JSR ROUTINE_0381D7_bank09
 
 CODE_09D2EA:
-#_09D2EA: JMP CODE_09CD18
+#_09D2EA: JMP ROUTINE_09CD18
 
 ;===================================================================================================
 
 ROUTINE_09D2ED:
 #_09D2ED: LDA.w #$0078
-#_09D2F0: JMP CODE_09D2C5
+#_09D2F0: JMP ROUTINE_09D2C5
 
 ;===================================================================================================
 
@@ -8037,7 +8496,7 @@ CODE_09D304:
 #_09D307: JSR ROUTINE_0381D7_bank09
 
 CODE_09D30A:
-#_09D30A: JMP CODE_09CD18
+#_09D30A: JMP ROUTINE_09CD18
 
 ;===================================================================================================
 
@@ -8050,11 +8509,11 @@ ROUTINE_09D30D:
 
 CODE_09D318:
 #_09D318: LDA.w #$1901
-#_09D31B: JMP CODE_09CD15
+#_09D31B: JMP ROUTINE_09CD15
 
 ;===================================================================================================
 
-ROUTINE_09D31E:
+#ROUTINE_09D31E:
 #_09D31E: LDA.w #$8394 ; SPRITE 8394
 #_09D321: JSR Reset_0816_AndSetAIMode_bank09
 
@@ -8072,7 +8531,7 @@ SpriteAI_839A:
 
 .continue
 #_09D32D: LDA.w #$1905
-#_09D330: JMP CODE_09CD15
+#_09D330: JMP ROUTINE_09CD15
 
 ;===================================================================================================
 
@@ -8090,8 +8549,9 @@ SpriteAI_839C:
 
 #_09D340: LDA.w #$0200
 #_09D343: JSR ROUTINE_09D9B8
+
 #_09D346: JSR ROUTINE_09D360
-#_09D349: JSR ROUTINE_038686_bank09
+#_09D349: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_bank09
 #_09D34C: CMP.w #$0080
 #_09D34F: BCS CODE_09D35A
 
@@ -8102,7 +8562,7 @@ SpriteAI_839C:
 
 CODE_09D35A:
 #_09D35A: LDA.w #$1906
-#_09D35D: JMP CODE_09CD15
+#_09D35D: JMP ROUTINE_09CD15
 
 ;===================================================================================================
 
@@ -8152,15 +8612,17 @@ CODE_09D396:
 #_09D39C: JSR Reset_0816_AndSetAIMode_bank09
 
 CODE_09D39F:
-#_09D39F: JMP CODE_09CD18
+#_09D39F: JMP ROUTINE_09CD18
 
 CODE_09D3A2:
 #_09D3A2: LDA.w #$1907
-#_09D3A5: JMP CODE_09CD15
+#_09D3A5: JMP ROUTINE_09CD15
+
+;---------------------------------------------------------------------------------------------------
 
 data09D3A8:
-#_09D3A8: db $01,$00,$40,$FF,$80,$02,$96,$83
-#_09D3B0: db $06,$00
+#_09D3A8: dw $0001 ; spawn 1 sprite
+#_09D3AA: dw $FF40, $0280, $8396, $0006 ; SPRITE 8396
 
 ;===================================================================================================
 
@@ -8183,8 +8645,9 @@ ROUTINE_09D3B2:
 
 #_09D3C6: RTS
 
-CODE_09D3C7:
+ROUTINE_09D3C7:
 #_09D3C7: INC.w $0840,X
+
 #_09D3CA: STZ.w $083E,X
 
 #_09D3CD: LDY.w $084C,X
@@ -8192,6 +8655,8 @@ CODE_09D3C7:
 #_09D3D3: STA.b $20
 
 #_09D3D5: JMP ($0020)
+
+;---------------------------------------------------------------------------------------------------
 
 .vectors
 #_09D3D8: dw ROUTINE_09D3DC
@@ -8208,7 +8673,7 @@ ROUTINE_09D3DC:
 #_09D3E7: BNE CODE_09D3EC
 
 CODE_09D3E9:
-#_09D3E9: JMP ROUTINE_0382D6_bank09
+#_09D3E9: JMP ROUTINE_0382D6_Clear084E_Increment084Ctwice_bank09
 
 CODE_09D3EC:
 #_09D3EC: LDA.w $0858,X
@@ -8216,17 +8681,17 @@ CODE_09D3EC:
 
 #_09D3F1: STZ.w $0858,X
 
-#_09D3F4: JMP CODE_09D2CD
+#_09D3F4: JMP ROUTINE_09CD15_1909
 
 CODE_09D3F7:
-#_09D3F7: JMP ROUTINE_09CD12
+#_09D3F7: JMP ROUTINE_09CD15_1902
 
 ;===================================================================================================
 
 ROUTINE_09D3FA:
 #_09D3FA: PHX
 
-#_09D3FB: JSR ROUTINE_09CD12
+#_09D3FB: JSR ROUTINE_09CD15_1902
 
 #_09D3FE: PLX
 
@@ -8236,6 +8701,8 @@ ROUTINE_09D3FA:
 
 #_09D407: JMP ($0020)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_09D40A: dw ROUTINE_0382F8_0080_bank09
 #_09D40C: dw ROUTINE_09E187_839A
@@ -8243,7 +8710,7 @@ ROUTINE_09D3FA:
 #_09D410: dw ROUTINE_09E187_83A4
 #_09D412: dw ROUTINE_0382F8_0080_bank09
 #_09D414: dw ROUTINE_09E187_83A8
-#_09D416: dw ROUTINE_0382E0_bank09
+#_09D416: dw ROUTINE_0382E0_Clear084Eand083C_bank09
 
 ;===================================================================================================
 
@@ -8268,7 +8735,9 @@ ROUTINE_09E187_83A8:
 SpriteAI_837A:
 #_09D42A: TYX
 
-CODE_09D42B:
+;===================================================================================================
+
+ROUTINE_09D42B:
 #_09D42B: STZ.w $080A,X
 
 #_09D42E: LDA.w #$0062
@@ -8286,10 +8755,11 @@ CODE_09D42B:
 ;---------------------------------------------------------------------------------------------------
 
 data09D444:
-#_09D444: db $04,$00,$00,$00,$00,$00,$7C,$83
-#_09D44C: db $00,$00,$00,$00,$7C,$83,$00,$00
-#_09D454: db $00,$00,$7C,$83,$00,$00,$00,$00
-#_09D45C: db $7C,$83
+#_09D444: dw $0004 ; spawn 4 sprites
+#_09D446: dw $0000, $0000, $837C ; SPRITE 837C
+#_09D44C: dw $0000, $0000, $837C ; SPRITE 837C
+#_09D452: dw $0000, $0000, $837C ; SPRITE 837C
+#_09D458: dw $0000, $0000, $837C ; SPRITE 837C
 
 ;===================================================================================================
 
@@ -8309,7 +8779,7 @@ SpriteAI_8386:
 #_09D469: BNE CODE_09D475
 
 #_09D46B: LDA.w #$0000
-#_09D46E: JSL ROUTINE_03E674
+#_09D46E: JSL ROUTINE_03E674_Set0816to00E9or0057
 
 #_09D472: JMP ROUTINE_09E25A
 
@@ -8324,7 +8794,7 @@ CODE_09D475:
 #_09D484: TAY
 #_09D485: BNE .exit
 
-#_09D487: JMP CODE_09D42B
+#_09D487: JMP ROUTINE_09D42B
 
 .exit
 #_09D48A: RTS
@@ -8347,7 +8817,7 @@ SpriteAI_837C:
 #_09D49E: TAY
 
 #_09D49F: LDA.w data09D4C5-2,Y
-#_09D4A2: JSR ROUTINE_09A07D
+#_09D4A2: JSR ROUTINE_03A07D_bank09
 
 #_09D4A5: LDA.b $20
 #_09D4A7: STA.w $0818,X
@@ -8367,6 +8837,8 @@ SpriteAI_837C:
 
 #_09D4C2: JMP AdvanceAIModeUp_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09D4C5:
 #_09D4C5: db $C0,$00,$40,$01,$80,$00,$80,$01
 
@@ -8381,7 +8853,7 @@ SpriteAI_837E:
 #_09D4D3: LDA.w $081A,X
 #_09D4D6: STA.b $22
 
-#_09D4D8: JSR ROUTINE_038B01_bank09
+#_09D4D8: JSR ROUTINE_038B01_Add_Address20_ToCoordinates_XY_bank09
 #_09D4DB: JSR ROUTINE_09D514
 
 #_09D4DE: LDY.w #data09D509
@@ -8410,10 +8882,12 @@ CODE_09D4F8:
 #_09D503: BCS .exit
 
 CODE_09D505:
-#_09D505: JMP CODE_09D678
+#_09D505: JMP ROUTINE_09D678
 
 .exit
 #_09D508: RTS
+
+;---------------------------------------------------------------------------------------------------
 
 data09D509:
 #_09D509: db $04,$00,$0C,$08,$00,$0A,$0C,$00
@@ -8462,12 +8936,14 @@ CODE_09D545:
 #_09D545: JSR ROUTINE_09D7A6
 #_09D548: BCS .exit
 
-#_09D54A: JMP CODE_09D678
+#_09D54A: JMP ROUTINE_09D678
 
 .exit
 #_09D54D: RTS
 
-#data09D54E:
+;---------------------------------------------------------------------------------------------------
+
+data09D54E:
 #_09D54E: db $02,$00,$02,$05,$00,$04,$09,$00
 #_09D556: db $06,$29,$00,$08,$00,$00
 
@@ -8491,9 +8967,11 @@ SpriteAI_8382:
 #_09D572: JMP ROUTINE_038242_bank09
 
 CODE_09D575:
-#_09D575: JMP CODE_09D678
+#_09D575: JMP ROUTINE_09D678
 
-#data09D578:
+;---------------------------------------------------------------------------------------------------
+
+data09D578:
 #_09D578: db $10,$00,$00,$14,$00,$0A,$18,$00
 #_09D580: db $0C,$00,$00
 
@@ -8572,10 +9050,13 @@ SpriteAI_8360:
 
 #_09D5E7: RTS
 
-#data09D5E8:
-#_09D5E8: db $03,$00,$00,$00,$00,$00,$62,$83
-#_09D5F0: db $00,$00,$00,$FE,$62,$83,$00,$00
-#_09D5F8: db $00,$02,$62,$83
+;---------------------------------------------------------------------------------------------------
+
+data09D5E8:
+#_09D5E8: dw $0003 ; spawn 3 sprites
+#_09D5EA: dw $0000, $0000, $8362 ; SPRITE 8362
+#_09D5F0: dw $0000, $FE00, $8362 ; SPRITE 8362
+#_09D5F6: dw $0000, $0200, $8362 ; SPRITE 8362
 
 ;===================================================================================================
 
@@ -8638,23 +9119,25 @@ SpriteAI_8364:
 #_09D649: BPL CODE_09D653
 
 #_09D64B: CMP.w #$1D00
-#_09D64E: BCS CODE_09D65E
+#_09D64E: BCS ROUTINE_09D65E
 
 #_09D650: BRA CODE_09D658
 
 .exit
 #_09D652: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 CODE_09D653:
 #_09D653: CMP.w #$1300
-#_09D656: BCC CODE_09D65E
+#_09D656: BCC ROUTINE_09D65E
 
 CODE_09D658:
 #_09D658: STZ.w $081A,X
 
 #_09D65B: JSR AdvanceAIModeUp_bank09
 
-CODE_09D65E:
+ROUTINE_09D65E:
 #_09D65E: LDY.w #$1182
 
 #_09D661: LDA.w $081C,X
@@ -8673,7 +9156,7 @@ CODE_09D667:
 #_09D673: ADC.b $20
 #_09D675: STA.w $0806,X
 
-CODE_09D678:
+ROUTINE_09D678:
 #_09D678: LDY.w #$201C
 
 #_09D67B: LDA.w #$FE00
@@ -8701,14 +9184,14 @@ SpriteAI_8366:
 
 #_09D69E: LDA.w $081A,X
 #_09D6A1: CMP.w #$0014
-#_09D6A4: BCC CODE_09D6AC
+#_09D6A4: BCC .delay
 
 #_09D6A6: STZ.w $081A,X
 
 #_09D6A9: JSR AdvanceAIModeUp_bank09
 
-CODE_09D6AC:
-#_09D6AC: JMP CODE_09D678
+.delay
+#_09D6AC: JMP ROUTINE_09D678
 
 .exit
 #_09D6AF: RTS
@@ -8744,16 +9227,18 @@ CODE_09D6D1:
 #_09D6D6: BNE CODE_09D6E1
 
 #_09D6D8: LDY.w $081C,X
-#_09D6DB: LDA.w #$8376
+#_09D6DB: LDA.w #$8376 ; SPRITE 8376
 #_09D6DE: JSR ROUTINE_038263_bank09
 
 CODE_09D6E1:
-#_09D6E1: JMP CODE_09D678
+#_09D6E1: JMP ROUTINE_09D678
 
 .exit
 #_09D6E4: RTS
 
-#data09D6E5:
+;---------------------------------------------------------------------------------------------------
+
+data09D6E5:
 #_09D6E5: db $20,$00,$00,$21,$00,$02,$31,$00
 #_09D6ED: db $02,$00,$00
 
@@ -8791,7 +9276,7 @@ SpriteAI_836C:
 #_09D717: JSR ROUTINE_09D7A6_0008
 #_09D71A: BCS .exit
 
-#_09D71C: JSR ROUTINE_03867C_bank09
+#_09D71C: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_UsingPockyCoords_bank09
 #_09D71F: CMP.w #$0200
 #_09D722: BCS CODE_09D731
 
@@ -8804,7 +9289,7 @@ SpriteAI_836C:
 #_09D72E: JSR AdvanceAIModeUp_bank09
 
 CODE_09D731:
-#_09D731: JMP CODE_09D65E
+#_09D731: JMP ROUTINE_09D65E
 
 .exit
 #_09D734: RTS
@@ -8854,12 +9339,14 @@ CODE_09D76C:
 
 #_09D771: JSR ROUTINE_09D783
 
-#_09D774: JMP CODE_09D678
+#_09D774: JMP ROUTINE_09D678
 
 .exit
 #_09D777: RTS
 
-#data09D778:
+;---------------------------------------------------------------------------------------------------
+
+data09D778:
 #_09D778: db $10,$00,$00,$14,$00,$08,$1C,$00
 #_09D780: db $0A,$00,$00
 
@@ -8889,7 +9376,7 @@ SpriteAI_8374:
 #_09D79A: JSR ROUTINE_0389C1_bank09
 #_09D79D: BEQ .exit
 
-#_09D79F: JMP CODE_09D65E
+#_09D79F: JMP ROUTINE_09D65E
 
 .exit
 #_09D7A2: RTS
@@ -8903,31 +9390,30 @@ ROUTINE_09D7A6_0008:
 
 ROUTINE_09D7A6:
 #_09D7A6: LDA.w #$0020
-#_09D7A9: JSR ROUTINE_039664_bank09
+#_09D7A9: JSR Sprite_HandlePockyCollision_039664_bank09
 
 #_09D7AC: LDY.w #$0050
 #_09D7AF: LDA.w #$0020
-#_09D7B2: JSR ROUTINE_0392EE_bank09
-#_09D7B5: BEQ CODE_09D7C4
+#_09D7B2: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
+#_09D7B5: BEQ .fail
 
 #_09D7B7: JSR ROUTINE_039385_bank09
-#_09D7BA: BNE CODE_09D7C4
+#_09D7BA: BNE .fail
 
-#_09D7BC: JSR ROUTINE_038A25_0020_bank09
+#_09D7BC: JSR ROUTINE_038A3E_SpawnSpriteMode0C_0020_AtMyCoordinates_WithSFX_bank09
 #_09D7BF: JSR ROUTINE_038236_bank09
 
 #_09D7C2: SEC
 
 #_09D7C3: RTS
 
-CODE_09D7C4:
+.fail
 #_09D7C4: CLC
 
 #_09D7C5: RTS
 
 ;===================================================================================================
 
-SpriteAI_8352_Set16Bit:
 #_09D7C6: REP #$10
 
 ;===================================================================================================
@@ -8939,7 +9425,7 @@ SpriteAI_8352:
 #_09D7CC: JSR Increment_0816_AndCompareTo_bank09
 #_09D7CF: BCC CODE_09D805
 
-#_09D7D1: JSR ROUTINE_038567_bank09
+#_09D7D1: JSR Read7E2530IfMode3F_bank09
 #_09D7D4: BNE CODE_09D805
 
 #_09D7D6: LDA.w $05A0
@@ -8969,7 +9455,7 @@ CODE_09D805:
 #_09D805: JSR Set_0814_to_FFFF_bank09
 
 #_09D808: LDA.w #$1E01
-#_09D80B: JMP CODE_09DEC5
+#_09D80B: JMP ROUTINE_09DEC5
 
 ;===================================================================================================
 
@@ -8978,17 +9464,17 @@ SpriteAI_8354:
 
 #_09D80F: LDA.w #$001E
 #_09D812: JSR Increment_0816_AndCompareTo_bank09
-#_09D815: BCC CODE_09D823
+#_09D815: BCC .delay
 
 #_09D817: LDA.w #$0044
 #_09D81A: JSR ROUTINE_038741_bank09
 #_09D81D: TAY
-#_09D81E: BEQ CODE_09D823
+#_09D81E: BEQ .delay
 
 #_09D820: JSR AdvanceAIModeUp_bank09
 
-CODE_09D823:
-#_09D823: JMP CODE_09DEC8
+.delay
+#_09D823: JMP ROUTINE_09DEC809D678
 
 ;===================================================================================================
 
@@ -8996,15 +9482,15 @@ SpriteAI_8356:
 #_09D826: TYX
 
 #_09D827: JSR Sprite_HandleExistingDialog_bank09
-#_09D82A: BNE CODE_09D836
+#_09D82A: BNE .delay
 
 #_09D82C: LDA.w #$0016
 #_09D82F: STA.l $7E7B38
 
 #_09D833: JSR AdvanceAIModeUp_bank09
 
-CODE_09D836:
-#_09D836: JMP CODE_09DEC8
+.delay
+#_09D836: JMP ROUTINE_09DEC809D678
 
 ;===================================================================================================
 
@@ -9014,7 +9500,7 @@ SpriteAI_8358:
 #_09D83A: LDA.w #$0022
 #_09D83D: JSR ROUTINE_03876C_bank09
 #_09D840: TAY
-#_09D841: BEQ CODE_09D855
+#_09D841: BEQ .delay
 
 #_09D843: JSR ROUTINE_0382A7_bank09
 #_09D846: JSR AskNicelyForSong_1C_bank09
@@ -9024,8 +9510,8 @@ SpriteAI_8358:
 #_09D84F: LDA.w #$83AE ; SPRITE 83AE
 #_09D852: JSR Reset_0816_AndSetAIMode_bank09
 
-CODE_09D855:
-#_09D855: JMP CODE_09DEC8
+.delay
+#_09D855: JMP ROUTINE_09DEC809D678
 
 ;===================================================================================================
 
@@ -9036,13 +9522,13 @@ SpriteAI_83AE:
 
 #_09D85D: LDA.w #$00B4
 #_09D860: JSR Increment_0816_AndCompareTo_bank09
-#_09D863: BCC CODE_09D86B
+#_09D863: BCC .delay
 
 #_09D865: LDA.w #$8336 ; SPRITE 8336
 #_09D868: JSR Reset_0816_AndSetAIMode_bank09
 
-CODE_09D86B:
-#_09D86B: JMP CODE_09DEC8
+.delay
+#_09D86B: JMP ROUTINE_09DEC809D678
 
 ;===================================================================================================
 
@@ -9069,8 +9555,8 @@ SpriteAI_8340:
 
 ROUTINE_09D890:
 #_09D890: LDA.w $1710
-#_09D893: CMP.w #$835E
-#_09D896: BNE CODE_09D8A0
+#_09D893: CMP.w #$835E ; SPRITE 835E
+#_09D896: BNE .fail
 
 #_09D898: LDA.w #$000E
 #_09D89B: JSR ROUTINE_09DD32
@@ -9079,7 +9565,7 @@ ROUTINE_09D890:
 
 #_09D89F: RTS
 
-CODE_09D8A0:
+.fail
 #_09D8A0: CLC
 
 #_09D8A1: RTS
@@ -9088,23 +9574,23 @@ CODE_09D8A0:
 
 ROUTINE_09D8A2:
 #_09D8A2: LDA.w $1784
-#_09D8A5: BEQ CODE_09D8B4
+#_09D8A5: BEQ .succeed
 
 #_09D8A7: LDA.l $7FE81E,X
 #_09D8AB: INC A
 #_09D8AC: STA.l $7FE81E,X
 
 #_09D8B0: ROR A
-#_09D8B1: BCC CODE_09D8B6
+#_09D8B1: BCC .fail
 
 #_09D8B3: RTS
 
-CODE_09D8B4:
+.succeed
 #_09D8B4: SEC
 
 #_09D8B5: RTS
 
-CODE_09D8B6:
+.fail
 #_09D8B6: CLC
 
 #_09D8B7: RTS
@@ -9124,7 +9610,7 @@ SpriteAI_8342:
 #_09D8C2: BCS CODE_09D8CA
 
 #_09D8C4: LDY.w #$0008
-#_09D8C7: JSR ROUTINE_038428_bank09
+#_09D8C7: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 CODE_09D8CA:
 #_09D8CA: LDA.w $175A
@@ -9151,7 +9637,7 @@ CODE_09D8E2:
 #_09D8EA: STA.b $22
 
 #_09D8EC: JSR ROUTINE_09D8F5
-#_09D8EF: JSR ROUTINE_09DD21
+#_09D8EF: JSR ROUTINE_09DD21_PutCoordsIn1752
 
 #_09D8F2: JMP ROUTINE_0386A8_bank09
 
@@ -9159,7 +9645,7 @@ CODE_09D8E2:
 
 ROUTINE_09D8F5:
 #_09D8F5: LDA.w $1756
-#_09D8F8: BNE CODE_09D912
+#_09D8F8: BNE .dont_move
 
 #_09D8FA: LDA.w $0818,X
 #_09D8FD: ADC.b $20
@@ -9171,11 +9657,13 @@ ROUTINE_09D8F5:
 #_09D907: ROR A
 #_09D908: STA.b $22
 
-#_09D90A: JSR ROUTINE_038686_bank09
+#_09D90A: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_bank09
 #_09D90D: CMP.w $1762
-#_09D910: BCC ROUTINE_09D927
+#_09D910: BCC ROUTINE_09D927_CachesCoordinatesIn0818
 
-CODE_09D912:
+;---------------------------------------------------------------------------------------------------
+
+.dont_move
 #_09D912: STZ.w $1756
 
 #_09D915: LDA.w $080C,X
@@ -9190,7 +9678,7 @@ CODE_09D912:
 
 ;===================================================================================================
 
-ROUTINE_09D927:
+ROUTINE_09D927_CachesCoordinatesIn0818:
 #_09D927: LDA.w $080C,X
 #_09D92A: STA.w $0818,X
 
@@ -9207,12 +9695,12 @@ ROUTINE_09D934:
 #_09D93A: STA.b $20
 
 #_09D93C: SBC.w $080C,X
-#_09D93F: BCS CODE_09D945
+#_09D93F: BCS .positive_x
 
 #_09D941: EOR.w #$FFFF
 #_09D944: INC A
 
-CODE_09D945:
+.positive_x
 #_09D945: STA.b $24
 
 #_09D947: LDA.w $1754
@@ -9220,12 +9708,12 @@ CODE_09D945:
 #_09D94D: STA.b $22
 
 #_09D94F: SBC.w $080E,X
-#_09D952: BCS CODE_09D958
+#_09D952: BCS .positive_y
 
 #_09D954: EOR.w #$FFFF
 #_09D957: INC A
 
-CODE_09D958:
+.positive_y
 #_09D958: ADC.b $24
 #_09D95A: ROR A
 
@@ -9246,19 +9734,20 @@ SpriteAI_8344:
 
 #_09D966: JSR ROUTINE_09D934
 #_09D969: CMP.w #$0080
-#_09D96C: BCS CODE_09D974
+#_09D96C: BCS .delay
 
 #_09D96E: INC.w $1758
+
 #_09D971: JSR AdvanceAIModeDown_bank09
 
-CODE_09D974:
+.delay
 #_09D974: JSR ROUTINE_09D995
 
 #_09D977: JMP ROUTINE_0386A8_bank09
 
 ;===================================================================================================
 
-ROUTINE_09D97A:
+ROUTINE_09D989_Negative:
 #_09D97A: STA.w $175E
 
 #_09D97D: SEC
@@ -9266,17 +9755,17 @@ ROUTINE_09D97A:
 #_09D97E: LDA.w #$0000
 #_09D981: SBC.w $1762
 #_09D984: SBC.w #$0020
-#_09D987: BRA CODE_09D992
+#_09D987: BRA .set
 
 ;===================================================================================================
 
-ROUTINE_09D989:
+#ROUTINE_09D989_Positive:
 #_09D989: STA.w $175E
 
 #_09D98C: LDA.w $1762
 #_09D98F: ADC.w #$0020
 
-CODE_09D992:
+.set
 #_09D992: STA.w $1760
 
 ;===================================================================================================
@@ -9284,10 +9773,11 @@ CODE_09D992:
 ROUTINE_09D995:
 #_09D995: JSR ROUTINE_09D9A4
 #_09D998: JSR ROUTINE_03A29F_bank09
-#_09D99B: JSR ROUTINE_09D9B8_0800
-#_09D99E: JSR ROUTINE_09D927
 
-#_09D9A1: JMP ROUTINE_09DD21
+#_09D99B: JSR ROUTINE_09D9B8_0800
+#_09D99E: JSR ROUTINE_09D927_CachesCoordinatesIn0818
+
+#_09D9A1: JMP ROUTINE_09DD21_PutCoordsIn1752
 
 ;===================================================================================================
 
@@ -9313,9 +9803,9 @@ ROUTINE_09D9B8:
 #_09D9B8: STA.b $20
 
 #_09D9BA: LDA.b $2C
-#_09D9BC: JSR ROUTINE_09A07D
+#_09D9BC: JSR ROUTINE_03A07D_bank09
 
-#_09D9BF: JMP ROUTINE_038B01_bank09
+#_09D9BF: JMP ROUTINE_038B01_Add_Address20_ToCoordinates_XY_bank09
 
 ;===================================================================================================
 
@@ -9327,9 +9817,10 @@ SpriteAI_834A:
 
 #_09D9C8: JMP ROUTINE_038C85_bank09
 
+;===================================================================================================
+
 ROUTINE_09D9CB:
 #_09D9CB: LDA.w #$1E09
-
 #_09D9CE: LDY.w #$0009
 #_09D9D1: JSR ROUTINE_038CF0_bank09
 #_09D9D4: BNE CODE_09D9DC
@@ -9339,7 +9830,7 @@ ROUTINE_09D9CB:
 
 CODE_09D9DC:
 #_09D9DC: TYA
-#_09D9DD: BNE CODE_09DA06
+#_09D9DD: BNE .finished
 
 #_09D9DF: LDA.w #$0020
 #_09D9E2: JSR Increment_0816_AndCompareTo_bank09
@@ -9356,17 +9847,17 @@ CODE_09D9EA:
 #_09D9F5: BCS CODE_09D9FD
 
 #_09D9F7: LDY.w #$0198
-#_09D9FA: JSR ROUTINE_038428_bank09
+#_09D9FA: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 CODE_09D9FD:
 #_09D9FD: LDA.w $05A0
 #_09DA00: AND.w #$0002
-#_09DA03: BNE CODE_09DA06
+#_09DA03: BNE .finished
 
 #_09DA05: RTS
 
-CODE_09DA06:
-#_09DA06: JMP CODE_09DA9E
+.finished
+#_09DA06: JMP ROUTINE_09DA9E
 
 ;===================================================================================================
 
@@ -9443,7 +9934,7 @@ CODE_09DA67:
 #_09DA6D: LDA.l $7FE81A,X
 #_09DA71: STA.b $22
 
-#_09DA73: JSR ROUTINE_038B01_bank09
+#_09DA73: JSR ROUTINE_038B01_Add_Address20_ToCoordinates_XY_bank09
 #_09DA76: JSR ROUTINE_038460_bank09
 
 #_09DA79: CLC
@@ -9470,7 +9961,7 @@ CODE_09DA98:
 CODE_09DA9B:
 #_09DA9B: STA.w $080A,X
 
-CODE_09DA9E:
+ROUTINE_09DA9E:
 #_09DA9E: LDY.w #$201C
 
 #_09DAA1: LDA.w #$FE00
@@ -9485,12 +9976,12 @@ ROUTINE_09DAAA:
 
 #_09DAAB: LDA.w $19EE
 #_09DAAE: SBC.w $170C
-#_09DAB1: BCS CODE_09DAB7
+#_09DAB1: BCS .positive
 
 #_09DAB3: EOR.w #$FFFF
 #_09DAB6: INC A
 
-CODE_09DAB7:
+.positive
 #_09DAB7: CMP.w #$0200
 
 #_09DABA: RTS
@@ -9531,10 +10022,10 @@ ROUTINE_09DAC3:
 #_09DAE2: EOR.w #$0200
 #_09DAE5: BRA CODE_09DAEA
 
-;---------------------------------------------------------------------------------------------------
-
 CODE_09DAE7:
 #_09DAE7: JSR ROUTINE_09DABB
+
+;---------------------------------------------------------------------------------------------------
 
 CODE_09DAEA:
 #_09DAEA: PHA
@@ -9543,7 +10034,7 @@ CODE_09DAEA:
 #_09DAEE: STA.b $20
 
 #_09DAF0: PLA
-#_09DAF1: JSR ROUTINE_09A07D
+#_09DAF1: JSR ROUTINE_03A07D_bank09
 
 #_09DAF4: LDA.b $20
 #_09DAF6: STA.l $7FE812,X
@@ -9608,7 +10099,7 @@ SpriteAI_8346:
 #_09DB46: BCS CODE_09DB4E
 
 #_09DB48: LDY.w #$0008
-#_09DB4B: JSR ROUTINE_038428_bank09
+#_09DB4B: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 CODE_09DB4E:
 #_09DB4E: LDA.w $1764
@@ -9618,7 +10109,7 @@ CODE_09DB4E:
 
 CODE_09DB56:
 #_09DB56: LDA.w $1710
-#_09DB59: CMP.w #$8336
+#_09DB59: CMP.w #$8336 ; SPRITE 8336
 #_09DB5C: BNE CODE_09DB6F
 
 #_09DB5E: LDA.w $175A
@@ -9640,12 +10131,12 @@ CODE_09DB6F:
 #_09DB7D: BCC CODE_09DB87
 
 #_09DB7F: LDA.w #$0200
-#_09DB82: JSR ROUTINE_09D989
+#_09DB82: JSR ROUTINE_09D989_Positive
 
 #_09DB85: BRA CODE_09DBAC
 
 CODE_09DB87:
-#_09DB87: JSR ROUTINE_09DBB9
+#_09DB87: JSR TestForSprite833E
 #_09DB8A: BNE CODE_09DB9C
 
 #_09DB8C: JSR ROUTINE_09D934
@@ -9653,7 +10144,7 @@ CODE_09DB87:
 #_09DB92: BCC CODE_09DB9C
 
 #_09DB94: LDA.w #$0080
-#_09DB97: JSR ROUTINE_09D97A
+#_09DB97: JSR ROUTINE_09D989_Negative
 
 #_09DB9A: BRA CODE_09DBAC
 
@@ -9665,7 +10156,7 @@ CODE_09DB9C:
 #_09DBA4: STA.b $22
 
 #_09DBA6: JSR ROUTINE_09D8F5
-#_09DBA9: JSR ROUTINE_09DD21
+#_09DBA9: JSR ROUTINE_09DD21_PutCoordsIn1752
 
 CODE_09DBAC:
 #_09DBAC: LDY.w $1766
@@ -9682,9 +10173,9 @@ CODE_09DBAC:
 
 ;===================================================================================================
 
-ROUTINE_09DBB9:
+TestForSprite833E:
 #_09DBB9: LDA.w $1710
-#_09DBBC: CMP.w #$833E
+#_09DBBC: CMP.w #$833E ; SPRITE 833E
 
 #_09DBBF: RTS
 
@@ -9697,7 +10188,7 @@ SpriteAI_8350:
 #_09DBC4: BNE CODE_09DBCE
 
 #_09DBC6: LDA.w $1710
-#_09DBC9: CMP.w #$8336
+#_09DBC9: CMP.w #$8336 ; SPRITE 8336
 #_09DBCC: BNE CODE_09DBD4
 
 CODE_09DBCE:
@@ -9706,7 +10197,7 @@ CODE_09DBCE:
 #_09DBD1: JMP ROUTINE_038C85_bank09
 
 CODE_09DBD4:
-#_09DBD4: JSR ROUTINE_09DBB9
+#_09DBD4: JSR TestForSprite833E
 #_09DBD7: BNE CODE_09DBE9
 
 #_09DBD9: LDY.w #$0014
@@ -9725,7 +10216,7 @@ CODE_09DBE9:
 #_09DBF2: TAY
 
 CODE_09DBF3:
-#_09DBF3: JSR ROUTINE_09DCF3
+#_09DBF3: JSR ROUTINE_09DCF3_GetOffsetFromCoordsIn1752
 #_09DBF6: PHX
 
 #_09DBF7: LDY.w $1766
@@ -9746,7 +10237,7 @@ CODE_09DBFC:
 #_09DC10: BCC CODE_09DC1F
 
 #_09DC12: LDA.w #$FE00
-#_09DC15: JSR ROUTINE_09D989
+#_09DC15: JSR ROUTINE_09D989_Positive
 #_09DC18: PHX
 
 #_09DC19: JSR ROUTINE_0386A8_bank09
@@ -9756,7 +10247,7 @@ CODE_09DBFC:
 
 CODE_09DC1F:
 #_09DC1F: LDA.w $1710
-#_09DC22: CMP.w #$833E
+#_09DC22: CMP.w #$833E ; SPRITE 833E
 #_09DC25: BNE CODE_09DC37
 
 #_09DC27: JSR ROUTINE_09D934
@@ -9764,7 +10255,7 @@ CODE_09DC1F:
 #_09DC2D: BCC CODE_09DC37
 
 #_09DC2F: LDA.w #$FF80
-#_09DC32: JSR ROUTINE_09D97A
+#_09DC32: JSR ROUTINE_09D989_Negative
 
 #_09DC35: BRA CODE_09DC47
 
@@ -9776,7 +10267,7 @@ CODE_09DC37:
 #_09DC3F: STA.b $22
 
 #_09DC41: JSR ROUTINE_09D8F5
-#_09DC44: JSR ROUTINE_09DD21
+#_09DC44: JSR ROUTINE_09DD21_PutCoordsIn1752
 
 CODE_09DC47:
 #_09DC47: JSR ROUTINE_0386A8_bank09
@@ -9793,12 +10284,14 @@ CODE_09DC51:
 
 #_09DC52: RTS
 
+;---------------------------------------------------------------------------------------------------
+
 data09DC53:
 #_09DC53: db $0C,$10,$10,$10
 
 ;===================================================================================================
 
-ROUTINE_09DC57:
+BecomeSprite8336:
 #_09DC57: LDA.w #$8336 ; SPRITE 8336
 #_09DC5A: STA.w $0810,X
 
@@ -9809,16 +10302,16 @@ ROUTINE_09DC57:
 SpriteAI_8334:
 #_09DC5E: TYX
 
-#_09DC5F: JSR ROUTINE_038567_bank09
+#_09DC5F: JSR Read7E2530IfMode3F_bank09
 #_09DC62: BNE .exit
 
 #_09DC64: JSR ROUTINE_038289_bank09
 
 #_09DC67: LDA.w #data09DCC8
 #_09DC6A: LDY.w #data09DCC8>>16
-#_09DC6D: JSL ROUTINE_08BD65
+#_09DC6D: JSL RobustBulkDecompressionAndSetMode40
 
-#_09DC71: JSR ROUTINE_09DD21
+#_09DC71: JSR ROUTINE_09DD21_PutCoordsIn1752
 #_09DC74: JSR ROUTINE_09DCDF
 #_09DC77: JSR ROUTINE_0382C3_bank09
 
@@ -9827,6 +10320,7 @@ SpriteAI_8334:
 
 #_09DC80: LDA.w #$002E
 #_09DC83: STA.l $7E7B38
+
 #_09DC87: STZ.w $084E,X
 #_09DC8A: STZ.w $084C,X
 #_09DC8D: STZ.w $0840,X
@@ -9854,7 +10348,7 @@ SpriteAI_8334:
 #_09DCBB: LDA.w #$FFFF
 #_09DCBE: STA.w $18E2
 
-#_09DCC1: LDA.w #$8352
+#_09DCC1: LDA.w #$8352 ; SPRITE 8352
 #_09DCC4: JMP Reset_0816_AndSetAIMode_bank09
 
 .exit
@@ -9885,7 +10379,7 @@ ROUTINE_09DCDF:
 #_09DCE7: PHY
 
 #_09DCE8: LDA.w #$8340 ; SPRITE 8340
-#_09DCEB: JSR ROUTINE_038A2D_bank09
+#_09DCEB: JSR ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates_bank09
 
 #_09DCEE: PLY
 #_09DCEF: DEY
@@ -9895,20 +10389,22 @@ ROUTINE_09DCDF:
 
 ;===================================================================================================
 
-ROUTINE_09DCF3:
+ROUTINE_09DCF3_GetOffsetFromCoordsIn1752:
 #_09DCF3: INC.w $1756
 
-#_09DCF6: LDA.w data09DD09+0,Y
+#_09DCF6: LDA.w .offset+0,Y
 #_09DCF9: ADC.w $080C,X
 #_09DCFC: STA.w $1752
 
-#_09DCFF: LDA.w data09DD09+2,Y
+#_09DCFF: LDA.w .offset+2,Y
 #_09DD02: ADC.w $080E,X
 #_09DD05: STA.w $1754
 
 #_09DD08: RTS
 
-data09DD09:
+;---------------------------------------------------------------------------------------------------
+
+.offset
 #_09DD09: dw $02C0, $FE00
 #_09DD0D: dw $0180, $FC80
 #_09DD11: dw $0100, $0080
@@ -9918,7 +10414,7 @@ data09DD09:
 
 ;===================================================================================================
 
-ROUTINE_09DD21:
+ROUTINE_09DD21_PutCoordsIn1752:
 #_09DD21: LDA.w $080C,X
 #_09DD24: STA.w $1752
 
@@ -9959,6 +10455,8 @@ SpriteAI_835E:
 
 #_09DD4B: JMP ($0020)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
 #_09DD4E: dw ROUTINE_09DDCA
 #_09DD50: dw ROUTINE_09DE26
@@ -9983,7 +10481,7 @@ ROUTINE_09DD5E:
 #_09DD6F: JMP ROUTINE_038C85_bank09
 
 CODE_09DD72:
-#_09DD72: JMP CODE_09DA9E
+#_09DD72: JMP ROUTINE_09DA9E
 
 ;===================================================================================================
 
@@ -9998,9 +10496,9 @@ ROUTINE_09DD75:
 #_09DD84: STA.b $20
 
 #_09DD86: LDA.w $081C,X
-#_09DD89: JSR ROUTINE_09A07D
-#_09DD8C: JSR ROUTINE_038B01_bank09
-#_09DD8F: JSR Reset_0818_through_081F_bank09
+#_09DD89: JSR ROUTINE_03A07D_bank09
+#_09DD8C: JSR ROUTINE_038B01_Add_Address20_ToCoordinates_XY_bank09
+#_09DD8F: JSR Reset_0818to081F_bank09
 
 #_09DD92: LDA.w #$1046
 #_09DD95: STA.w $0806,X
@@ -10026,7 +10524,7 @@ ROUTINE_09DD9B:
 CODE_09DDAF:
 #_09DDAF: STA.w $080A,X
 
-#_09DDB2: JMP CODE_09DA9E
+#_09DDB2: JMP ROUTINE_09DA9E
 
 ;===================================================================================================
 
@@ -10040,7 +10538,7 @@ ROUTINE_09DDB5:
 #_09DDC1: JMP ROUTINE_038C85_bank09
 
 CODE_09DDC4:
-#_09DDC4: JMP CODE_09DA9E
+#_09DDC4: JMP ROUTINE_09DA9E
 
 ;===================================================================================================
 
@@ -10052,28 +10550,30 @@ ROUTINE_09D9CB_bounce:
 ROUTINE_09DDCA:
 #_09DDCA: LDA.w #$003C
 #_09DDCD: JSR Increment_0816_AndCompareTo_bank09
-#_09DDD0: BCC CODE_09DDDB
+#_09DDD0: BCC ROUTINE_09DDDB
 
 #_09DDD2: LDY.w #data09DDE4
 #_09DDD5: JSR ROUTINE_09D3B2
 #_09DDD8: JSR ROUTINE_0381D7_bank09
 
-CODE_09DDDB:
+ROUTINE_09DDDB:
 #_09DDDB: LDA.w #$1040
 #_09DDDE: STA.w $0806,X
 
-#_09DDE1: JMP CODE_09DECB
+#_09DDE1: JMP ROUTINE_09DECB
 
-#data09DDE4:
-#_09DDE4: db $08,$00,$00,$00,$00,$00,$5C,$83
-#_09DDEC: db $00,$80,$00,$00,$00,$00,$5C,$83
-#_09DDF4: db $80,$80,$00,$00,$00,$00,$5C,$83
-#_09DDFC: db $00,$81,$00,$00,$00,$00,$5C,$83
-#_09DE04: db $80,$81,$00,$00,$00,$00,$5C,$83
-#_09DE0C: db $00,$82,$00,$00,$00,$00,$5C,$83
-#_09DE14: db $80,$82,$00,$00,$00,$00,$5C,$83
-#_09DE1C: db $00,$83,$00,$00,$00,$00,$5C,$83
-#_09DE24: db $80,$83
+;---------------------------------------------------------------------------------------------------
+
+data09DDE4:
+#_09DDE4: dw $0008 ; spawn 8 sprites
+#_09DDE6: dw $0000, $0000, $835C, $8000 ; SPRITE 835C
+#_09DDEE: dw $0000, $0000, $835C, $8080 ; SPRITE 835C
+#_09DDF6: dw $0000, $0000, $835C, $8100 ; SPRITE 835C
+#_09DDFE: dw $0000, $0000, $835C, $8180 ; SPRITE 835C
+#_09DE06: dw $0000, $0000, $835C, $8200 ; SPRITE 835C
+#_09DE0E: dw $0000, $0000, $835C, $8280 ; SPRITE 835C
+#_09DE16: dw $0000, $0000, $835C, $8300 ; SPRITE 835C
+#_09DE1E: dw $0000, $0000, $835C, $8380 ; SPRITE 835C
 
 ;===================================================================================================
 
@@ -10101,7 +10601,7 @@ CODE_09DE43:
 #_09DE4B: JSR ROUTINE_0381D7_bank09
 
 CODE_09DE4E:
-#_09DE4E: JMP CODE_09DDDB
+#_09DE4E: JMP ROUTINE_09DDDB
 
 ;===================================================================================================
 
@@ -10117,7 +10617,7 @@ ROUTINE_09DE51:
 #_09DE65: JSR Increment_0816_AndCompareTo_bank09
 #_09DE68: BCC CODE_09DE78
 
-#_09DE6A: JSR ROUTINE_0385D1_bank09
+#_09DE6A: JSR LevelPossiblyBeaten_bank09
 
 #_09DE6D: BRA CODE_09DE78
 
@@ -10127,13 +10627,13 @@ CODE_09DE6F:
 #_09DE75: STA.w $080A,X
 
 CODE_09DE78:
-#_09DE78: JMP CODE_09DDDB
+#_09DE78: JMP ROUTINE_09DDDB
 
 ;===================================================================================================
 
 ROUTINE_09DE7B:
 #_09DE7B: LDY.w #$0178
-#_09DE7E: JSR ROUTINE_038428_bank09
+#_09DE7E: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09DE81: LDY.w #$0170
 #_09DE84: JSR ROUTINE_038417_bank09
@@ -10142,10 +10642,10 @@ ROUTINE_09DE7B:
 #_09DE89: JSR Set_7E7A08_to_000D_bank09
 
 #_09DE8C: LDA.w #$0000
-#_09DE8F: JSR ROUTINE_09D211
+#_09DE8F: JSR ROUTINE_09D211_Set7FE81CandClear0816
 
 #_09DE92: LDA.w #$835E ; SPRITE 835E
-#_09DE95: JSR ROUTINE_0380B2_bank09
+#_09DE95: JSR Sprite_ApplyBossDeath_bank09
 
 #_09DE98: LDY.w #$0003
 #_09DE9B: LDA.w #$5000
@@ -10169,7 +10669,7 @@ SpriteAI_8336:
 
 .continue
 #_09DEAD: LDY.w #$0000
-#_09DEB0: JSR ROUTINE_09DCF3
+#_09DEB0: JSR ROUTINE_09DCF3_GetOffsetFromCoordsIn1752
 
 #_09DEB3: STZ.w $1784
 
@@ -10179,18 +10679,25 @@ SpriteAI_8336:
 #_09DEBC: LDY.w #$0010
 #_09DEBF: JSR ROUTINE_09DF98
 
-CODE_09DEC2:
+;===================================================================================================
+
+ROUTINE_09DEC5_1E02:
 #_09DEC2: LDA.w #$1E02
 
-CODE_09DEC5:
+;===================================================================================================
+
+ROUTINE_09DEC5:
 #_09DEC5: JSR ROUTINE_038CDF_bank09
 
-CODE_09DEC8:
+;===================================================================================================
+
+ROUTINE_09DEC809D678:
 #_09DEC8: JSR ROUTINE_09DED7
 
-CODE_09DECB:
-#_09DECB: LDY.w #$20BE
+;===================================================================================================
 
+ROUTINE_09DECB:
+#_09DECB: LDY.w #$20BE
 #_09DECE: LDA.w #$FE00
 #_09DED1: JSR ROUTINE_038CAA_bank09
 
@@ -10233,8 +10740,10 @@ ROUTINE_09DED7:
 #_09DF07: STA.b $28
 
 #_09DF09: LDY.w #$0000
-#_09DF0C: LDA.w #$834C
+#_09DF0C: LDA.w #$834C ; SPRITE 83C4
 #_09DF0F: JMP ROUTINE_038263_bank09
+
+;===================================================================================================
 
 data09DF12:
 #_09DF12: db $23,$23,$20,$22,$22,$22,$22,$23
@@ -10287,8 +10796,8 @@ SpriteAI_8338:
 
 CODE_09DF52:
 #_09DF52: LDY.w #$0000
-#_09DF55: JSR ROUTINE_09DCF3
-#_09DF58: JSR ROUTINE_03867C_bank09
+#_09DF55: JSR ROUTINE_09DCF3_GetOffsetFromCoordsIn1752
+#_09DF58: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_UsingPockyCoords_bank09
 #_09DF5B: CMP.w #$0200
 #_09DF5E: BCC CODE_09DF68
 
@@ -10297,7 +10806,7 @@ CODE_09DF52:
 #_09DF66: BCC CODE_09DF6B
 
 CODE_09DF68:
-#_09DF68: JSR ROUTINE_09DC57
+#_09DF68: JSR BecomeSprite8336
 
 CODE_09DF6B:
 #_09DF6B: LDA.l $7FE812,X
@@ -10321,7 +10830,7 @@ CODE_09DF88:
 #_09DF88: LDA.w #$0040
 #_09DF8B: JSL ROUTINE_06E489_long
 
-#_09DF8F: JMP CODE_09DEC2
+#_09DF8F: JMP ROUTINE_09DEC5_1E02
 
 ;===================================================================================================
 
@@ -10418,7 +10927,7 @@ SpriteAI_833A:
 #_09E002: STA.b $20
 
 #_09E004: LDA.b $2C
-#_09E006: JSR ROUTINE_09A07D
+#_09E006: JSR ROUTINE_03A07D_bank09
 
 #_09E009: LDA.b $20
 #_09E00B: STA.w $175E
@@ -10446,16 +10955,16 @@ CODE_09E024:
 #_09E02D: STY.w $1784
 
 CODE_09E030:
-#_09E030: JSR ROUTINE_09DCF3
+#_09E030: JSR ROUTINE_09DCF3_GetOffsetFromCoordsIn1752
 
 #_09E033: PLY
 #_09E034: TYA
 #_09E035: BNE CODE_09E03A
 
-#_09E037: JSR ROUTINE_09DC57
+#_09E037: JSR BecomeSprite8336
 
 CODE_09E03A:
-#_09E03A: JMP CODE_09DEC8
+#_09E03A: JMP ROUTINE_09DEC809D678
 
 ;===================================================================================================
 
@@ -10475,7 +10984,7 @@ SpriteAI_833E:
 #_09E04D: STA.w $1762
 
 #_09E050: LDY.w #$0004
-#_09E053: JSR ROUTINE_09DCF3
+#_09E053: JSR ROUTINE_09DCF3_GetOffsetFromCoordsIn1752
 
 #_09E056: LDY.w #$0002
 #_09E059: LDA.w #$1E06
@@ -10516,12 +11025,12 @@ CODE_09E08B:
 #_09E091: INC.w $175C
 
 #_09E094: LDY.w #$0008
-#_09E097: JSR ROUTINE_09DCF3
+#_09E097: JSR ROUTINE_09DCF3_GetOffsetFromCoordsIn1752
 
 #_09E09A: BRA CODE_09E09C
 
 CODE_09E09C:
-#_09E09C: JMP CODE_09DEC8
+#_09E09C: JMP ROUTINE_09DEC809D678
 
 ;===================================================================================================
 
@@ -10580,7 +11089,7 @@ CODE_09E0EB:
 #_09E0EB: LDA.w data09E103,Y
 #_09E0EE: AND.w #$00FF
 #_09E0F1: TAY
-#_09E0F2: JSR ROUTINE_09DCF3
+#_09E0F2: JSR ROUTINE_09DCF3_GetOffsetFromCoordsIn1752
 
 #_09E0F5: LDA.w $1762
 #_09E0F8: CMP.w #$0020
@@ -10589,7 +11098,7 @@ CODE_09E0EB:
 #_09E0FD: JSR ROUTINE_09E107
 
 CODE_09E100:
-#_09E100: JMP CODE_09DEC8
+#_09E100: JMP ROUTINE_09DEC809D678
 
 ;---------------------------------------------------------------------------------------------------
 
@@ -10599,8 +11108,8 @@ data09E103:
 ;===================================================================================================
 
 ROUTINE_09E107:
-#_09E107: JSR ROUTINE_09DC57
-#_09E10A: JSR Reset_0818_through_081F_bank09
+#_09E107: JSR BecomeSprite8336
+#_09E10A: JSR Reset_0818to081F_bank09
 
 #_09E10D: STZ.w $175A
 #_09E110: STZ.w $1758
@@ -10626,7 +11135,7 @@ SpriteAI_835A:
 
 #_09E127: LDA.w #$00F0
 #_09E12A: JSR Increment_0816_AndCompareTo_bank09
-#_09E12D: BCC CODE_09E138
+#_09E12D: BCC .delay
 
 #_09E12F: JSR ROUTINE_09DCDF
 
@@ -10634,8 +11143,8 @@ SpriteAI_835A:
 
 #_09E135: JSR ROUTINE_09E107
 
-CODE_09E138:
-#_09E138: JMP CODE_09DEC8
+.delay
+#_09E138: JMP ROUTINE_09DEC809D678
 
 ;===================================================================================================
 
@@ -10649,18 +11158,20 @@ ROUTINE_09E13B:
 
 #_09E149: JMP ($0020)
 
+;---------------------------------------------------------------------------------------------------
+
 .vectors
-#_09E14C: dw ROUTINE_09E153
-#_09E14E: dw ROUTINE_09E150
+#_09E14C: dw .theyre_all_the_same_damn_thing
+#_09E14E: dw .why_does_this
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_09E150:
-#_09E150: JMP ROUTINE_09E153
+.why_does_this
+#_09E150: JMP .theyre_all_the_same_damn_thing
 
-;===================================================================================================
+;---------------------------------------------------------------------------------------------------
 
-ROUTINE_09E153:
+.theyre_all_the_same_damn_thing
 #_09E153: LDY.w $084E,X
 
 #_09E156: LDA.w .vectors,Y
@@ -10681,21 +11192,21 @@ ROUTINE_09E153:
 #_09E16C: dw ROUTINE_09E187_8338
 #_09E16E: dw ROUTINE_09E174
 #_09E170: dw ROUTINE_09E1B3
-#_09E172: dw ROUTINE_0382E0_bank09
+#_09E172: dw ROUTINE_0382E0_Clear084Eand083C_bank09
 
 ;===================================================================================================
 
 ROUTINE_09E174:
-#_09E174: JSR ROUTINE_03867C_bank09
+#_09E174: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_UsingPockyCoords_bank09
 
 #_09E177: LDA.b $24
 #_09E179: CMP.w #$0200
 #_09E17C: BCC .only_once
 
-#_09E17E: JSR ROUTINE_038301_bank09
+#_09E17E: JSR ROUTINE_038301_Clear083C_Increment084Etwice_bank09
 
 .only_once
-#_09E181: JMP ROUTINE_038301_bank09
+#_09E181: JMP ROUTINE_038301_Clear083C_Increment084Etwice_bank09
 
 ;===================================================================================================
 
@@ -10707,13 +11218,13 @@ ROUTINE_09E187_8338:
 ROUTINE_09E187:
 #_09E187: STA.w $0810,X
 
-#_09E18A: JSR Reset_0818_through_081F_bank09
+#_09E18A: JSR Reset_0818to081F_bank09
 
 #_09E18D: STZ.w $0816,X
 
 #_09E190: INC.w $083E,X
 
-#_09E193: JMP ROUTINE_038301_bank09
+#_09E193: JMP ROUTINE_038301_Clear083C_Increment084Etwice_bank09
 
 ;===================================================================================================
 
@@ -10736,7 +11247,7 @@ ROUTINE_09E196:
 
 ROUTINE_09E1B3:
 #_09E1B3: LDA.w #$8350 ; SPRITE 8350
-#_09E1B6: JSR ROUTINE_038A2D_bank09
+#_09E1B6: JSR ROUTINE_038A3E_SpawnSpriteMode0C_AtMyCoordinates_bank09
 
 #_09E1B9: STZ.w $1766
 #_09E1BC: STZ.w $1758
@@ -10772,7 +11283,7 @@ SpriteAI_8332:
 
 #_09E1E3: LDY.w #$0058
 #_09E1E6: LDA.w #$0006
-#_09E1E9: JSR ROUTINE_039664_bank09
+#_09E1E9: JSR Sprite_HandlePockyCollision_039664_bank09
 
 #_09E1EC: LDA.w $081E,X
 #_09E1EF: BEQ .exit_b
@@ -10824,7 +11335,7 @@ CODE_09E233:
 #_09E23B: INC.w $081E,X
 #_09E23E: STZ.w $05D0
 
-#_09E241: JSL ROUTINE_03E669
+#_09E241: JSL ROUTINE_03E669_Set0816to0046
 #_09E245: JSR ROUTINE_09E25A
 
 .exit_a
@@ -10836,7 +11347,7 @@ CODE_09E249:
 #_09E250: TAY
 #_09E251: BNE .exit_b
 
-#_09E253: JSR ROUTINE_0387AD_bank09
+#_09E253: JSR ROUTINE_0387AD_TreasureSpawn_bank09
 
 #_09E256: JMP ROUTINE_038C85_bank09
 
@@ -10951,7 +11462,7 @@ ROUTINE_09E2CD:
 #_09E2E5: STA.b $20
 #_09E2E7: STA.l $7FE81C,X
 
-#_09E2EB: JMP CODE_09E36D
+#_09E2EB: JMP ROUTINE_09E36D
 
 ;===================================================================================================
 
@@ -10983,13 +11494,13 @@ CODE_09E303:
 
 CODE_09E314:
 #_09E314: LDA.w #$1C0A
-#_09E317: JMP CODE_09E3F2
+#_09E317: JMP ROUTINE_09E3F2
 
 ;===================================================================================================
 
 ROUTINE_09E31A:
 #_09E31A: LDA.w #$0020
-#_09E31D: JSR ROUTINE_0392EE_bank09
+#_09E31D: JSR ROUTINE_0392EE_SomethingWithHitboxes_bank09
 #_09E320: BEQ CODE_09E338
 
 #_09E322: JSR ROUTINE_039385_bank09
@@ -11048,9 +11559,9 @@ CODE_09E367:
 #_09E367: STA.b $20
 #_09E369: STA.l $7FE81C,X
 
-CODE_09E36D:
+ROUTINE_09E36D:
 #_09E36D: LDA.l $7FE81A,X
-#_09E371: JSR ROUTINE_09A07D
+#_09E371: JSR ROUTINE_03A07D_bank09
 
 #_09E374: CLC
 
@@ -11112,7 +11623,7 @@ SpriteAI_8300:
 SpriteAI_8302:
 #_09E3CA: TYX
 
-#_09E3CB: JSR ROUTINE_09E520
+#_09E3CB: JSR ROUTINE_09E520_SpawnsThreeOfSprite831E
 
 #_09E3CE: CLC
 
@@ -11137,14 +11648,14 @@ SpriteAI_8302:
 CODE_09E3EF:
 #_09E3EF: LDA.w #$1C01
 
-CODE_09E3F2:
+ROUTINE_09E3F2:
 #_09E3F2: JSR ROUTINE_038D39_bank09
 
 #_09E3F5: JMP ROUTINE_0388B2_bank09
 
 ;===================================================================================================
 
-ROUTINE_09E3F8:
+ROUTINE_09E3F8_SpawnsFourOfSprite8310:
 #_09E3F8: LDA.w $05A0
 #_09E3FB: AND.w #$0007
 #_09E3FE: BNE .exit
@@ -11155,17 +11666,17 @@ ROUTINE_09E3F8:
 #_09E405: ADC.w #$0080
 #_09E408: STA.l $7FE812,X
 
-#_09E40C: JSR ROUTINE_09E419
-#_09E40F: JSR ROUTINE_09E419
-#_09E412: JSR ROUTINE_09E419
-#_09E415: JSR ROUTINE_09E419
+#_09E40C: JSR .spawn_one
+#_09E40F: JSR .spawn_one
+#_09E412: JSR .spawn_one
+#_09E415: JSR .spawn_one
 
 .exit
 #_09E418: RTS
 
 ;===================================================================================================
 
-ROUTINE_09E419:
+.spawn_one
 #_09E419: PHA
 
 #_09E41A: STA.b $30
@@ -11196,14 +11707,14 @@ ROUTINE_09E428:
 #_09E438: LDA.w #$000E
 #_09E43B: STA.b $24
 
-#_09E43D: JMP PrepEnemySpawn_bank09
+#_09E43D: JMP PrepSpriteSpawn_bank09
 
 ;===================================================================================================
 
 SpriteAI_8304:
 #_09E440: TYX
 
-#_09E441: JSR ROUTINE_09E520
+#_09E441: JSR ROUTINE_09E520_SpawnsThreeOfSprite831E
 
 #_09E444: LDA.w #$1C02
 #_09E447: JSR ROUTINE_038CDF_bank09
@@ -11219,10 +11730,10 @@ CODE_09E44F:
 SpriteAI_8306:
 #_09E452: TYX
 
-#_09E453: JSR ROUTINE_09E520
+#_09E453: JSR ROUTINE_09E520_SpawnsThreeOfSprite831E
 
 #_09E456: LDY.w #$0058
-#_09E459: JSR ROUTINE_038428_bank09
+#_09E459: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09E45C: LDY.w #$0058
 #_09E45F: JSR ROUTINE_09E31A
@@ -11262,7 +11773,7 @@ CODE_09E490:
 #_09E490: JSR ROUTINE_09E4A5
 
 #_09E493: LDA.w #$1C03
-#_09E496: JMP CODE_09E3F2
+#_09E496: JMP ROUTINE_09E3F2
 
 ;===================================================================================================
 
@@ -11270,7 +11781,7 @@ ROUTINE_09E499:
 #_09E499: LDA.w #$0046 ; SFX 46
 #_09E49C: STA.w $04AA
 
-#_09E49F: LDA.w #$830C
+#_09E49F: LDA.w #$830C ; SPRITE 830C
 #_09E4A2: JMP Reset_0816_AndSetAIMode_bank09
 
 ;===================================================================================================
@@ -11336,7 +11847,7 @@ CODE_09E505:
 #_09E50D: ADC.b $22
 #_09E50F: STA.b $22
 
-#_09E511: JSR ROUTINE_038686_bank09
+#_09E511: JSR ROUTINE_038686_AbsoluteDeltaSpritePosition_bank09
 
 #_09E514: LDA.w #$0001
 #_09E517: LDY.w #$0020
@@ -11346,19 +11857,18 @@ CODE_09E505:
 
 ;===================================================================================================
 
-ROUTINE_09E520:
+ROUTINE_09E520_SpawnsThreeOfSprite831E:
 #_09E520: LDA.w $05A0
 #_09E523: AND.w #$000F
 #_09E526: BNE .exit
 
-#_09E528: JSR .subroutine_thing
-#_09E52B: JSR .subroutine_thing
-#_09E52E: JSR .subroutine_thing
+#_09E528: JSR .spawn_one
+#_09E52B: JSR .spawn_one
+#_09E52E: JSR .spawn_one
 
 ;---------------------------------------------------------------------------------------------------
 
-; TODO
-.subroutine_thing
+.spawn_one
 #_09E531: STZ.b $30
 
 #_09E533: LDA.w #$831E ; SPRITE 831E
@@ -11372,10 +11882,10 @@ ROUTINE_09E520:
 SpriteAI_830A:
 #_09E53A: TYX
 
-#_09E53B: JSR ROUTINE_09E520
+#_09E53B: JSR ROUTINE_09E520_SpawnsThreeOfSprite831E
 
 #_09E53E: LDY.w #$0058
-#_09E541: JSR ROUTINE_038428_bank09
+#_09E541: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09E544: LDY.w #$0058
 #_09E547: JSR ROUTINE_09E31A
@@ -11386,41 +11896,41 @@ SpriteAI_830A:
 .continue
 #_09E54D: LDA.w #$00B4
 #_09E550: JSR Increment_0816_AndCompareTo_bank09
-#_09E553: BCC CODE_09E560
+#_09E553: BCC .delay
 
 #_09E555: LDA.w #$8306 ; SPRITE 8306
 #_09E558: JSR Reset_0816_AndSetAIMode_bank09
-#_09E55B: JSR Reset_0818_through_081F_bank09
+#_09E55B: JSR Reset_0818to081F_bank09
 
-#_09E55E: BRA CODE_09E589
+#_09E55E: BRA .finished
 
-CODE_09E560:
+.delay
 #_09E560: LDA.w #$1C04
 #_09E563: LDY.w #$0005
 #_09E566: JSR ROUTINE_038CF0_bank09
-#_09E569: BNE CODE_09E589
+#_09E569: BNE .finished
 
 #_09E56B: LDA.w #$0000
-#_09E56E: JSR ROUTINE_09E58C
+#_09E56E: JSR .spawn_one
 
 #_09E571: LDA.w #$0010
-#_09E574: JSR ROUTINE_09E58C
+#_09E574: JSR .spawn_one
 
 #_09E577: LDA.w #$FFF0
-#_09E57A: JSR ROUTINE_09E58C
+#_09E57A: JSR .spawn_one
 
 #_09E57D: LDA.w #$0020
-#_09E580: JSR ROUTINE_09E58C
+#_09E580: JSR .spawn_one
 
 #_09E583: LDA.w #$FFE0
-#_09E586: JSR ROUTINE_09E58C
+#_09E586: JSR .spawn_one
 
-CODE_09E589:
+.finished
 #_09E589: JMP ROUTINE_0388B2_bank09
 
 ;===================================================================================================
 
-ROUTINE_09E58C:
+.spawn_one
 #_09E58C: STA.b $30
 
 #_09E58E: LDA.w #$8324 ; SPRITE 8324
@@ -11431,10 +11941,10 @@ ROUTINE_09E58C:
 SpriteAI_8308:
 #_09E594: TYX
 
-#_09E595: JSR ROUTINE_09E520
+#_09E595: JSR ROUTINE_09E520_SpawnsThreeOfSprite831E
 
 #_09E598: LDY.w #$0058
-#_09E59B: JSR ROUTINE_038428_bank09
+#_09E59B: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09E59E: LDY.w #$0058
 #_09E5A1: JSR ROUTINE_09E31A
@@ -11484,7 +11994,7 @@ CODE_09E5C5:
 
 CODE_09E5E9:
 #_09E5E9: LDA.w #$1C09
-#_09E5EC: JMP CODE_09E3F2
+#_09E5EC: JMP ROUTINE_09E3F2
 
 ;===================================================================================================
 
@@ -11503,7 +12013,7 @@ ROUTINE_09E5EF:
 #_09E600: LDA.w #$000E
 #_09E603: STA.b $24
 
-#_09E605: JMP PrepEnemySpawn_bank09
+#_09E605: JMP PrepSpriteSpawn_bank09
 
 ;===================================================================================================
 
@@ -11514,7 +12024,7 @@ SpriteAI_8314:
 #_09E60C: STA.b $20
 
 #_09E60E: LDA.w $0806,X
-#_09E611: JSR ROUTINE_09A07D
+#_09E611: JSR ROUTINE_03A07D_bank09
 
 #_09E614: LDA.b $20
 #_09E616: STA.l $7FE818,X
@@ -11535,7 +12045,7 @@ SpriteAI_8316:
 #_09E62A: JSR SetHPtoFFFF_bank09
 
 #_09E62D: LDY.w #$0010
-#_09E630: JSR ROUTINE_038428_bank09
+#_09E630: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09E633: LDA.l $7FE818,X
 #_09E637: STA.b $20
@@ -11546,7 +12056,7 @@ SpriteAI_8316:
 #_09E63F: JSR ROUTINE_038B73_bank09
 
 #_09E642: LDA.w #$1C0B
-#_09E645: JMP CODE_09E3F2
+#_09E645: JMP ROUTINE_09E3F2
 
 ;===================================================================================================
 
@@ -11587,8 +12097,10 @@ SpriteAI_8318:
 
 #_09E68E: JMP ROUTINE_038A80_bank09
 
+;---------------------------------------------------------------------------------------------------
+
 data09E691:
-#_09E691: db $00,$06,$00,$07,$00,$08,$00,$09
+#_09E691: dw $0600, $0700, $0800, $0900
 
 ;===================================================================================================
 
@@ -11618,7 +12130,7 @@ CODE_09E6BA:
 #_09E6BA: STA.w $080A,X
 
 CODE_09E6BD:
-#_09E6BD: JMP CODE_09E6E5
+#_09E6BD: JMP ROUTINE_09E6E5
 
 ;===================================================================================================
 
@@ -11628,11 +12140,11 @@ SpriteAI_831C:
 #_09E6C1: JSR Set_0814_to_FFFF_bank09
 
 #_09E6C4: LDY.w #$0080
-#_09E6C7: JSR ROUTINE_038428_bank09
+#_09E6C7: JSR ROUTINE_038428_SomethingWithPockyCollision_bank09
 
 #_09E6CA: LDA.w #$003C
 #_09E6CD: JSR Increment_0816_AndCompareTo_bank09
-#_09E6D0: BCC CODE_09E6E5
+#_09E6D0: BCC ROUTINE_09E6E5
 
 #_09E6D2: BNE CODE_09E6DA
 
@@ -11642,11 +12154,11 @@ SpriteAI_831C:
 CODE_09E6DA:
 #_09E6DA: LDA.w #$1C06
 #_09E6DD: JSR ROUTINE_038CDF_bank09
-#_09E6E0: BNE CODE_09E6E5
+#_09E6E0: BNE ROUTINE_09E6E5
 
 #_09E6E2: JMP ROUTINE_038C85_bank09
 
-CODE_09E6E5:
+ROUTINE_09E6E5:
 #_09E6E5: LDY.w #$201C
 
 #_09E6E8: LDA.w #$FE00
@@ -11659,8 +12171,8 @@ CODE_09E6E5:
 SpriteAI_830C:
 #_09E6F1: TYX
 
-#_09E6F2: JSR ROUTINE_09E520
-#_09E6F5: JSR ROUTINE_09E3F8
+#_09E6F2: JSR ROUTINE_09E520_SpawnsThreeOfSprite831E
+#_09E6F5: JSR ROUTINE_09E3F8_SpawnsFourOfSprite8310
 
 #_09E6F8: LDA.w #$1C05
 #_09E6FB: JSR ROUTINE_038CDF_bank09
@@ -11688,12 +12200,12 @@ CODE_09E719:
 SpriteAI_830E:
 #_09E71C: TYX
 
-#_09E71D: JSR ROUTINE_09E520
-#_09E720: JSR ROUTINE_09E3F8
+#_09E71D: JSR ROUTINE_09E520_SpawnsThreeOfSprite831E
+#_09E720: JSR ROUTINE_09E3F8_SpawnsFourOfSprite8310
 
 #_09E723: LDA.w #$1C02
 #_09E726: JSR ROUTINE_038CDF_bank09
-#_09E729: BNE CODE_09E738
+#_09E729: BNE .delay
 
 #_09E72B: LDA.w #$0100
 #_09E72E: STA.l $7FE81A,X
@@ -11701,7 +12213,7 @@ SpriteAI_830E:
 #_09E732: LDA.w #$8308 ; SPRITE 8308
 #_09E735: JSR Reset_0816_AndSetAIMode_bank09
 
-CODE_09E738:
+.delay
 #_09E738: JMP ROUTINE_0388B2_bank09
 
 #_09E73B: RTS
@@ -11788,14 +12300,14 @@ SpriteAI_8326:
 #_09E7A8: SBC.w $0562
 #_09E7AB: ADC.w #$1000
 #_09E7AE: CMP.w #$0E00
-#_09E7B1: BCS CODE_09E7B9
+#_09E7B1: BCS .delay
 
 #_09E7B3: LDA.w #$8318 ; SPRITE 8318
 #_09E7B6: STA.w $0810,X
 
-CODE_09E7B9:
+.delay
 #_09E7B9: LDA.w #$1C08
-#_09E7BC: JMP CODE_09E3F2
+#_09E7BC: JMP ROUTINE_09E3F2
 
 ;===================================================================================================
 
@@ -11809,7 +12321,7 @@ ROUTINE_09E7BF:
 #_09E7CD: LDX.w #data09E7DD>>16
 #_09E7D0: STX.b $22
 
-#_09E7D2: JSL ROUTINE_00ECEF_long
+#_09E7D2: JSL RobustBulkDecompression_long
 
 #_09E7D6: INC.w $0500
 
@@ -11940,6 +12452,7 @@ ROUTINE_09E870:
 CODE_09E880:
 #_09E880: LDA.l $7E7A04
 #_09E884: TAX
+
 #_09E885: JMP (.vectors,X)
 
 .exit
@@ -12001,7 +12514,7 @@ CODE_09E880:
 #_09E8EC: dw ROUTINE_09EC42
 #_09E8EE: dw ROUTINE_09EC66
 #_09E8F0: dw ROUTINE_09ECCE
-#_09E8F2: dw ROUTINE_09ECE7
+#_09E8F2: dw EXIT_09ECE7
 #_09E8F4: dw ROUTINE_08F360_FD5E
 #_09E8F6: dw ROUTINE_08F360_FED4
 #_09E8F8: dw ROUTINE_09F14B_F938
@@ -12038,7 +12551,7 @@ ROUTINE_09E900:
 #_09E92E: ASL A
 #_09E92F: STA.l $7E7A04
 
-#_09E933: LDA.w #$00FD ; SFX FD
+#_09E933: LDA.w #$00FD ; SFX FD - Fade music
 #_09E936: STA.w $04A0
 
 #_09E939: LDA.w #$0078
@@ -12076,6 +12589,8 @@ CODE_09E95D:
 .exit
 #_09E96D: PLB
 #_09E96E: RTL
+
+;---------------------------------------------------------------------------------------------------
 
 data09E96F
 #_09E96F: dw $0800, $5000, $0000
@@ -12197,7 +12712,7 @@ ROUTINE_09EBCF:
 #_09EBE2: BRA .exit
 
 CODE_09EBE4:
-#_09EBE4: JSR ROUTINE_09EFF6
+#_09EBE4: JSR ROUTINE_09EFF6_Decrement7E7A64
 #_09EBE7: BNE .exit
 
 #_09EBE9: LDA.w #$001D ; SONG 1D
@@ -12212,7 +12727,7 @@ CODE_09EBE4:
 #_09EC01: STA.b $20
 #_09EC03: STY.b $22
 
-#_09EC05: JSL ROUTINE_08BD65
+#_09EC05: JSL RobustBulkDecompressionAndSetMode40
 
 #_09EC09: LDA.w #$0060
 #_09EC0C: STA.l $7E7A04
@@ -12256,7 +12771,7 @@ ROUTINE_09EC29:
 ;===================================================================================================
 
 ROUTINE_09EC42:
-#_09EC42: JSR ROUTINE_09EFF6
+#_09EC42: JSR ROUTINE_09EFF6_Decrement7E7A64
 #_09EC45: BNE .exit
 
 #_09EC47: LDA.l $7E2530
@@ -12291,7 +12806,7 @@ ROUTINE_09EC66:
 #_09EC79: BRA .exit
 
 CODE_09EC7B:
-#_09EC7B: JSR ROUTINE_09EFF6
+#_09EC7B: JSR ROUTINE_09EFF6_Decrement7E7A64
 #_09EC7E: BNE .exit
 
 #_09EC80: LDA.w #$0014
@@ -12303,7 +12818,7 @@ CODE_09EC7B:
 #_09EC91: STA.b $20
 #_09EC93: STY.b $22
 
-#_09EC95: JSL ROUTINE_08BD65
+#_09EC95: JSL RobustBulkDecompressionAndSetMode40
 
 #_09EC99: LDA.w #$0066
 #_09EC9C: STA.l $7E7A04
@@ -12339,7 +12854,7 @@ data09ECA2:
 
 ROUTINE_09ECCE:
 #_09ECCE: LDA.l $7E2530
-#_09ECD2: BNE CODE_09ECE5
+#_09ECD2: BNE .exit
 
 #_09ECD4: INC.w $054E
 
@@ -12349,12 +12864,12 @@ ROUTINE_09ECCE:
 #_09ECDE: LDA.w #$0068
 #_09ECE1: STA.l $7E7A04
 
-CODE_09ECE5:
-#_09ECE5: BRA ROUTINE_09ECE7
+.exit
+#_09ECE5: BRA EXIT_09ECE7
 
 ;===================================================================================================
 
-ROUTINE_09ECE7:
+EXIT_09ECE7:
 #_09ECE7: PLB
 #_09ECE8: RTL
 
@@ -12513,7 +13028,7 @@ ROUTINE_09ED62:
 #_09ED90: ASL A
 #_09ED91: STA.l $7E7A04
 
-#_09ED95: LDA.w #$00FD ; SFX FD
+#_09ED95: LDA.w #$00FD ; SFX FD - Fade music
 #_09ED98: STA.w $04A0
 
 #_09ED9B: LDA.w #$0078
@@ -12551,6 +13066,8 @@ CODE_09EDBF:
 .exit
 #_09EDCF: PLB
 #_09EDD0: RTL
+
+;---------------------------------------------------------------------------------------------------
 
 data09EDD1:
 #_09EDD1: dw $0800, $2160, $0000
@@ -12637,7 +13154,7 @@ ROUTINE_09EF5F:
 #_09EF72: BRA .exit
 
 CODE_09EF74:
-#_09EF74: JSR ROUTINE_09EFF6
+#_09EF74: JSR ROUTINE_09EFF6_Decrement7E7A64
 #_09EF77: BNE .exit
 
 #_09EF79: LDA.w #$001D ; SONG 1D
@@ -12652,7 +13169,7 @@ CODE_09EF74:
 #_09EF91: STA.b $20
 #_09EF93: STY.b $22
 
-#_09EF95: JSL ROUTINE_08BD65
+#_09EF95: JSL RobustBulkDecompressionAndSetMode40
 
 #_09EF99: LDA.w #$0034
 #_09EF9C: STA.l $7E7A04
@@ -12696,7 +13213,7 @@ ROUTINE_09EFB9:
 ;===================================================================================================
 
 ROUTINE_09EFD2:
-#_09EFD2: JSR ROUTINE_09EFF6
+#_09EFD2: JSR ROUTINE_09EFF6_Decrement7E7A64
 #_09EFD5: BNE .exit
 
 #_09EFD7: LDA.l $7E2530
@@ -12717,7 +13234,7 @@ ROUTINE_09EFD2:
 
 ;===================================================================================================
 
-ROUTINE_09EFF6:
+ROUTINE_09EFF6_Decrement7E7A64:
 #_09EFF6: LDA.l $7E7A64
 #_09EFFA: DEC A
 #_09EFFB: STA.l $7E7A64
@@ -12740,7 +13257,7 @@ ROUTINE_09F000:
 #_09F013: BRA .exit
 
 CODE_09F015:
-#_09F015: JSR ROUTINE_09EFF6
+#_09F015: JSR ROUTINE_09EFF6_Decrement7E7A64
 #_09F018: BNE .exit
 
 #_09F01A: LDA.w #$003A
@@ -12755,7 +13272,7 @@ CODE_09F015:
 #_09F032: STA.b $20
 #_09F034: STY.b $22
 
-#_09F036: JSL ROUTINE_08BD65
+#_09F036: JSL RobustBulkDecompressionAndSetMode40
 
 .exit
 #_09F03A: PLB
@@ -13518,21 +14035,20 @@ ROUTINE_09FBE0:
 
 ;===================================================================================================
 
-; TODO states
 PostDamagePockyStates:
-#_09FC02: db $0E,$0E,$10,$12,$14,$16,$18,$0E
-#_09FC0A: db $10,$12,$14,$16,$18,$1A,$0E,$10
-#_09FC12: db $12,$14,$16,$18,$FF,$FF,$0E,$10
-#_09FC1A: db $12,$14,$16,$18,$FF,$FF,$0E,$10
-#_09FC22: db $12,$14,$16,$18,$FF,$0E,$10,$12
-#_09FC2A: db $14,$16,$18,$FF,$0E,$10,$12,$14
-#_09FC32: db $16,$18,$0E,$10,$12,$14,$16,$18
-#_09FC3A: db $70,$72,$74,$FF,$FF,$FF,$FF,$FF
-#_09FC42: db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
-#_09FC4A: db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
-#_09FC52: db $FF,$FF,$0E,$10,$12,$14,$16,$18
-#_09FC5A: db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
-#_09FC62: db $FF,$FF
+#_09FC02: db $0E, $0E, $10, $12, $14, $16, $18, $0E
+#_09FC0A: db $10, $12, $14, $16, $18, $1A, $0E, $10
+#_09FC12: db $12, $14, $16, $18, $FF, $FF, $0E, $10
+#_09FC1A: db $12, $14, $16, $18, $FF, $FF, $0E, $10
+#_09FC22: db $12, $14, $16, $18, $FF, $0E, $10, $12
+#_09FC2A: db $14, $16, $18, $FF, $0E, $10, $12, $14
+#_09FC32: db $16, $18, $0E, $10, $12, $14, $16, $18
+#_09FC3A: db $70, $72, $74, $FF, $FF, $FF, $FF, $FF
+#_09FC42: db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+#_09FC4A: db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+#_09FC52: db $FF, $FF, $0E, $10, $12, $14, $16, $18
+#_09FC5A: db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+#_09FC62: db $FF, $FF
 
 ;===================================================================================================
 
@@ -13616,6 +14132,7 @@ ROUTINE_09FC7F:
 #_09FCB3: ASL A
 #_09FCB4: ASL A
 #_09FCB5: ASL A
+
 #_09FCB6: CLC
 #_09FCB7: ADC.b $24
 #_09FCB9: TAX
@@ -13626,16 +14143,19 @@ ROUTINE_09FC7F:
 #_09FCBF: STA.b $26
 
 #_09FCC1: LDA.b $20
+
 #_09FCC3: LSR A
 #_09FCC4: LSR A
 #_09FCC5: LSR A
 #_09FCC6: LSR A
+
 #_09FCC7: AND.w #$01FF
 #_09FCCA: LSR A
 #_09FCCB: LSR A
 #_09FCCC: LSR A
 #_09FCCD: LSR A
 #_09FCCE: LSR A
+
 #_09FCCF: ASL A
 #_09FCD0: STA.b $24
 
@@ -13644,22 +14164,26 @@ ROUTINE_09FC7F:
 #_09FCD5: LSR A
 #_09FCD6: LSR A
 #_09FCD7: LSR A
+
 #_09FCD8: AND.w #$01FF
 #_09FCDB: LSR A
 #_09FCDC: LSR A
 #_09FCDD: LSR A
 #_09FCDE: LSR A
 #_09FCDF: LSR A
+
 #_09FCE0: ASL A
 #_09FCE1: ASL A
 #_09FCE2: ASL A
 #_09FCE3: ASL A
 #_09FCE4: ASL A
+
 #_09FCE5: CLC
 #_09FCE6: ADC.b $24
 #_09FCE8: CLC
 #_09FCE9: ADC.b $26
 #_09FCEB: TAX
+
 #_09FCEC: PLA
 #_09FCED: STA.l $7F2000,X
 
@@ -13722,6 +14246,8 @@ ROUTINE_09FD2D:
 #_09FD36: PLB
 #_09FD37: RTL
 
+;---------------------------------------------------------------------------------------------------
+
 .pointers
 #_09FD38: dw data05DC4A
 #_09FD3A: dw data05DC4A
@@ -13765,8 +14291,11 @@ ROUTINE_09FD58:
 #_09FD76: PLB
 #_09FD77: RTL
 
+;---------------------------------------------------------------------------------------------------
+
 data09FD78:
-#_09FD78: db $01,$00,$00,$08,$00,$00,$08,$81
+#_09FD78: dw $0001 ; spawn 1 sprite
+#_09FD7A: dw $0800, $0000, $8108 ; SPRITE 8108
 
 ;===================================================================================================
 
@@ -13779,7 +14308,7 @@ ROUTINE_09FD80:
 
 #_09FD84: STZ.w $080A,X
 
-#_09FD87: LDA.w #data09FD99
+#_09FD87: LDA.w #.spawn_table
 #_09FD8A: JSR ROUTINE_0390D7_bank09
 
 #_09FD8D: LDA.w #$0018
@@ -13792,83 +14321,87 @@ ROUTINE_09FD80:
 
 ;---------------------------------------------------------------------------------------------------
 
-data09FD99:
-#_09FD99: db $04,$00,$00,$00,$00,$00,$C8,$00
-#_09FDA1: db $00,$00,$00,$00,$00,$00,$C8,$00
-#_09FDA9: db $00,$01,$00,$00,$00,$00,$C8,$00
-#_09FDB1: db $00,$02,$00,$00,$00,$00,$C8,$00
-#_09FDB9: db $00,$03,$00,$00,$00,$00,$00,$00
-#_09FDC1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FDC9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FDD1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FDD9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FDE1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FDE9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FDF1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FDF9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE01: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE09: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE11: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE19: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE21: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE29: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE31: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE39: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE41: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE49: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE51: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE59: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE61: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE69: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE71: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE79: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE81: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE89: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE91: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FE99: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEA1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEA9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEB1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEB9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEC1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEC9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FED1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FED9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEE1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEE9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEF1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FEF9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF01: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF09: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF11: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF19: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF21: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF29: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF31: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF39: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF41: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF49: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF51: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF59: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF61: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF69: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF71: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF79: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF81: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF89: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF91: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FF99: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFA1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFA9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFB1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFB9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFC1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFC9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFD1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFD9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFE1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFE9: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFF1: db $00,$00,$00,$00,$00,$00,$00,$00
-#_09FFF9: db $00,$00,$00,$00,$00,$00,$00
+.spawn_table
+#_09FD99: dw $0004 ; spawn 4 sprites
+#_09FD9B: dw $0000, $0000, $00C8, $0000 ; SPRITE 00C8
+#_09FDA3: dw $0000, $0000, $00C8, $0100 ; SPRITE 00C8
+#_09FDAB: dw $0000, $0000, $00C8, $0200 ; SPRITE 00C8
+#_09FDB3: dw $0000, $0000, $00C8, $0300 ; SPRITE 00C8
+
+;===================================================================================================
+
+#_09FDBB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FDC3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FDCB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FDD3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FDDB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FDE3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FDEB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FDF3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FDFB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE03: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE0B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE13: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE1B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE23: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE2B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE33: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE3B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE43: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE4B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE53: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE5B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE63: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE6B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE73: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE7B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE83: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE8B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE93: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FE9B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEA3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEAB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEB3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEBB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEC3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FECB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FED3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEDB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEE3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEEB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEF3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FEFB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF03: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF0B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF13: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF1B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF23: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF2B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF33: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF3B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF43: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF4B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF53: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF5B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF63: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF6B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF73: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF7B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF83: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF8B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF93: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FF9B: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFA3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFAB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFB3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFBB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFC3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFCB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFD3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFDB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFE3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFEB: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFF3: db $00, $00, $00, $00, $00, $00, $00, $00
+#_09FFFB: db $00, $00, $00, $00, $00
 
 ;===================================================================================================
